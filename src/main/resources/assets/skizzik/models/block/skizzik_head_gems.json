@@ -1,0 +1,8 @@
+{
+  "parent": "skizzik:custom/skizzik_head_gems",
+  "textures": {
+    "all": "skizzik:blocks/skizzik_head_gems",
+    "particle": "skizzik:blocks/skizzik_head_gems",
+    "3": "skizzik:blocks/skizzik_head_gems"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/brown_gem_block",
+    "up": "skizzik:blocks/brown_gem_block",
+    "north": "skizzik:blocks/brown_gem_block",
+    "east": "skizzik:blocks/brown_gem_block",
+    "south": "skizzik:blocks/brown_gem_block",
+    "west": "skizzik:blocks/brown_gem_block",
+    "particle": "skizzik:blocks/brown_gem_block"
+  }
+}

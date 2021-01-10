@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "2": "skizzik_head"
+      },
+      "name": "default"
+    }
+  }
+}

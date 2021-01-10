@@ -1,0 +1,3133 @@
+{
+  "id_map": {},
+  "mod_elements": [
+    {
+      "name": "CommandBlock",
+      "type": "block",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "command_block"
+    },
+    {
+      "name": "CommandBlockRecipe",
+      "type": "recipe",
+      "sortid": 59,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "command_block_recipe"
+    },
+    {
+      "name": "TemplateTab",
+      "type": "tab",
+      "sortid": 60,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_tab"
+    },
+    {
+      "name": "BlackGem",
+      "type": "item",
+      "sortid": 30,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "black_gem"
+    },
+    {
+      "name": "BlueGem",
+      "type": "item",
+      "sortid": 31,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "blue_gem"
+    },
+    {
+      "name": "BrownGem",
+      "type": "item",
+      "sortid": 32,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "brown_gem"
+    },
+    {
+      "name": "YellowGem",
+      "type": "item",
+      "sortid": 33,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "yellow_gem"
+    },
+    {
+      "name": "OrangeGem",
+      "type": "item",
+      "sortid": 34,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "orange_gem"
+    },
+    {
+      "name": "GreenGem",
+      "type": "item",
+      "sortid": 35,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "green_gem"
+    },
+    {
+      "name": "PinkGem",
+      "type": "item",
+      "sortid": 36,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pink_gem"
+    },
+    {
+      "name": "RainbowGem",
+      "type": "item",
+      "sortid": 29,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem"
+    },
+    {
+      "name": "RainbowOre",
+      "type": "block",
+      "sortid": 4,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_ore"
+    },
+    {
+      "name": "BlackGemRecipe",
+      "type": "recipe",
+      "sortid": 61,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "black_gem_recipe"
+    },
+    {
+      "name": "BlueGemRecipe",
+      "type": "recipe",
+      "sortid": 62,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "blue_gem_recipe"
+    },
+    {
+      "name": "BrownGemRecipe",
+      "type": "recipe",
+      "sortid": 63,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "brown_gem_recipe"
+    },
+    {
+      "name": "YellowGemRecipe",
+      "type": "recipe",
+      "sortid": 64,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "yellow_gem_recipe"
+    },
+    {
+      "name": "OrangeGemRecipe",
+      "type": "recipe",
+      "sortid": 65,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "orange_gem_recipe"
+    },
+    {
+      "name": "GreenGemRecipe",
+      "type": "recipe",
+      "sortid": 66,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "green_gem_recipe"
+    },
+    {
+      "name": "PinkGemRecipe",
+      "type": "recipe",
+      "sortid": 67,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pink_gem_recipe"
+    },
+    {
+      "name": "RainbowGemRecipe",
+      "type": "recipe",
+      "sortid": 68,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe"
+    },
+    {
+      "name": "RainbowGemRecipe2",
+      "type": "recipe",
+      "sortid": 69,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe_2"
+    },
+    {
+      "name": "RainbowGemRecipe3",
+      "type": "recipe",
+      "sortid": 70,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe_3"
+    },
+    {
+      "name": "RainbowGemRecipe4",
+      "type": "recipe",
+      "sortid": 71,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe_4"
+    },
+    {
+      "name": "RainbowGemRecipe5",
+      "type": "recipe",
+      "sortid": 72,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe_5"
+    },
+    {
+      "name": "RainbowGemRecipe6",
+      "type": "recipe",
+      "sortid": 73,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe_6"
+    },
+    {
+      "name": "RainbowGemRecipe7",
+      "type": "recipe",
+      "sortid": 74,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_recipe_7"
+    },
+    {
+      "name": "RainbowGemBlock",
+      "type": "block",
+      "sortid": 6,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_block"
+    },
+    {
+      "name": "RainbowSword",
+      "type": "tool",
+      "sortid": 42,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_sword"
+    },
+    {
+      "name": "RainbowSwordRightClickedOnBlock",
+      "type": "procedure",
+      "sortid": 77,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_sword_right_clicked_on_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RainbowGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 78,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_gem_block_recipe"
+    },
+    {
+      "name": "RainbowSwordRecipe",
+      "type": "recipe",
+      "sortid": 79,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_sword_recipe"
+    },
+    {
+      "name": "CandyIngot",
+      "type": "item",
+      "sortid": 37,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_ingot"
+    },
+    {
+      "name": "CandyNugget",
+      "type": "item",
+      "sortid": 38,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_nugget"
+    },
+    {
+      "name": "Candy",
+      "type": "armor",
+      "sortid": 48,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy",
+      "metadata": {
+        "eh": true,
+        "el": true,
+        "eb": true,
+        "ec": true
+      }
+    },
+    {
+      "name": "CandyGrass",
+      "type": "block",
+      "sortid": 19,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_grass"
+    },
+    {
+      "name": "Bambooplantableon",
+      "type": "tag",
+      "sortid": 80,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "bambooplantableon"
+    },
+    {
+      "name": "Endermanholdable",
+      "type": "tag",
+      "sortid": 81,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "endermanholdable"
+    },
+    {
+      "name": "Validspawn",
+      "type": "tag",
+      "sortid": 82,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "validspawn"
+    },
+    {
+      "name": "Candyrack",
+      "type": "block",
+      "sortid": 20,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candyrack"
+    },
+    {
+      "name": "CandyLog",
+      "type": "block",
+      "sortid": 15,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_log"
+    },
+    {
+      "name": "Logs",
+      "type": "tag",
+      "sortid": 83,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "logs"
+    },
+    {
+      "name": "CandyLeaves",
+      "type": "block",
+      "sortid": 14,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_leaves"
+    },
+    {
+      "name": "Leaves",
+      "type": "tag",
+      "sortid": 84,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "leaves"
+    },
+    {
+      "name": "CandyOre",
+      "type": "block",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_ore"
+    },
+    {
+      "name": "CandyPlains",
+      "type": "biome",
+      "sortid": 85,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_plains"
+    },
+    {
+      "name": "CandyPigItIsStruckByLightning",
+      "type": "procedure",
+      "sortid": 86,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_pig_it_is_struck_by_lightning",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandyPig",
+      "type": "mob",
+      "sortid": 49,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_pig"
+    },
+    {
+      "name": "CandySword",
+      "type": "tool",
+      "sortid": 43,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_sword"
+    },
+    {
+      "name": "CandyPickaxe",
+      "type": "tool",
+      "sortid": 45,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_pickaxe"
+    },
+    {
+      "name": "CandyAxe",
+      "type": "tool",
+      "sortid": 44,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_axe"
+    },
+    {
+      "name": "CandyShovel",
+      "type": "tool",
+      "sortid": 46,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_shovel"
+    },
+    {
+      "name": "CandyHoe",
+      "type": "tool",
+      "sortid": 47,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_hoe"
+    },
+    {
+      "name": "CandySwordRecipe",
+      "type": "recipe",
+      "sortid": 87,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_sword_recipe"
+    },
+    {
+      "name": "CandyPickaxeRecipe",
+      "type": "recipe",
+      "sortid": 88,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_pickaxe_recipe"
+    },
+    {
+      "name": "CandyAxeRecipe",
+      "type": "recipe",
+      "sortid": 89,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_axe_recipe"
+    },
+    {
+      "name": "CandyShovelRecipe",
+      "type": "recipe",
+      "sortid": 90,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_shovel_recipe"
+    },
+    {
+      "name": "CandyHoeRecipe",
+      "type": "recipe",
+      "sortid": 91,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_hoe_recipe"
+    },
+    {
+      "name": "CandyIngotRecipe",
+      "type": "recipe",
+      "sortid": 92,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_ingot_recipe"
+    },
+    {
+      "name": "CandyIngotRecipe2",
+      "type": "recipe",
+      "sortid": 93,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_ingot_recipe_2"
+    },
+    {
+      "name": "CandyNuggetRecipe",
+      "type": "recipe",
+      "sortid": 94,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_nugget_recipe"
+    },
+    {
+      "name": "CandyHelmetRecipe",
+      "type": "recipe",
+      "sortid": 95,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_helmet_recipe"
+    },
+    {
+      "name": "CandyChestplateRecipe",
+      "type": "recipe",
+      "sortid": 96,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_chestplate_recipe"
+    },
+    {
+      "name": "CandyLegginsRecipe",
+      "type": "recipe",
+      "sortid": 97,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_leggins_recipe"
+    },
+    {
+      "name": "CandyBootsRecipe",
+      "type": "recipe",
+      "sortid": 98,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_boots_recipe"
+    },
+    {
+      "name": "Skizzik1",
+      "type": "mob",
+      "sortid": 99,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1"
+    },
+    {
+      "name": "Skizzik2",
+      "type": "mob",
+      "sortid": 100,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_2"
+    },
+    {
+      "name": "Skizzik3",
+      "type": "mob",
+      "sortid": 101,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_3"
+    },
+    {
+      "name": "Skizzik4",
+      "type": "mob",
+      "sortid": 102,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_4"
+    },
+    {
+      "name": "Skizzik5",
+      "type": "mob",
+      "sortid": 103,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5"
+    },
+    {
+      "name": "CorruptedBlock",
+      "type": "block",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corrupt_block"
+    },
+    {
+      "name": "CorruptionPotionExpires",
+      "type": "procedure",
+      "sortid": 104,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corruption_potion_expires",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Corruption",
+      "type": "potion",
+      "sortid": 105,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corruption"
+    },
+    {
+      "name": "CorruptedBlockEntityCollidesInTheBlock",
+      "type": "procedure",
+      "sortid": 106,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corrupt_block_entity_collides_in_the_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandyCane",
+      "type": "food",
+      "sortid": 40,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_cane"
+    },
+    {
+      "name": "SkizzikHead",
+      "type": "block",
+      "sortid": 27,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_head"
+    },
+    {
+      "name": "SkizzikHeadGems",
+      "type": "block",
+      "sortid": 28,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_head_gems"
+    },
+    {
+      "name": "SkizzikHeadRecipe",
+      "type": "recipe",
+      "sortid": 107,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_head_recipe"
+    },
+    {
+      "name": "SkizzikHeadGemsRecipe",
+      "type": "recipe",
+      "sortid": 108,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_head_gems_recipe"
+    },
+    {
+      "name": "Skizzik1EntityDies",
+      "type": "procedure",
+      "sortid": 109,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik1PlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 110,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik1EntityIsHurt",
+      "type": "procedure",
+      "sortid": 111,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1_entity_is_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik1OnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 112,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik1ThisEntityKillsAnotherOne",
+      "type": "procedure",
+      "sortid": 113,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1_this_entity_kills_another_one",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzie",
+      "type": "mob",
+      "sortid": 51,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzie"
+    },
+    {
+      "name": "KaBoomSkizzie",
+      "type": "mob",
+      "sortid": 52,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "ka_boom_skizzie"
+    },
+    {
+      "name": "MinigunSkizzie",
+      "type": "mob",
+      "sortid": 53,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "minigun_skizzie"
+    },
+    {
+      "name": "WitchSkizzie",
+      "type": "mob",
+      "sortid": 54,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "witch_skizzie"
+    },
+    {
+      "name": "CorruptedSkizzie",
+      "type": "mob",
+      "sortid": 55,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corrupt_skizzie"
+    },
+    {
+      "name": "SkizzieEntityDies",
+      "type": "procedure",
+      "sortid": 114,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzie_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 115,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizziePlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 116,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzie_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "KaBoomSkizziePlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 117,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "ka_boom_skizzie_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Minigun",
+      "type": "gun",
+      "sortid": 118,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "minigun"
+    },
+    {
+      "name": "WitchSkizziePlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 119,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "witch_skizzie_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CorruptedSkizzieOnEntityTickUpdate",
+      "type": "procedure",
+      "sortid": 120,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corrupt_skizzie_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CorruptedSkizziePlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 121,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corrupt_skizzie_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizzoOnEntityTickUpdate",
+      "type": "procedure",
+      "sortid": 122,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzo_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizzoPlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 123,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzo_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizzoOnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 124,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzo_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzo",
+      "type": "mob",
+      "sortid": 50,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzo"
+    },
+    {
+      "name": "FriendlySkizzie",
+      "type": "mob",
+      "sortid": 56,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_skizzie"
+    },
+    {
+      "name": "FriendlyMinigunSkizzie",
+      "type": "mob",
+      "sortid": 57,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_minigun_skizzie"
+    },
+    {
+      "name": "FriendlyWitchSkizziePlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 125,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_witch_skizzie_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FriendlyWitchSkizzie",
+      "type": "mob",
+      "sortid": 58,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_witch_skizzie"
+    },
+    {
+      "name": "StoneSkizzie",
+      "type": "block",
+      "sortid": 3,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "stone_skizzie"
+    },
+    {
+      "name": "KaBoomSkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 126,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "ka_boom_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MinigunSkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 127,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "minigun_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WitchSkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 128,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "witch_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FriendlyMinigunSkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 129,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_minigun_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FriendlySkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 130,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CorruptedSkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 131,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "corrupt_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizLauncherBulletHitsBlock",
+      "type": "procedure",
+      "sortid": 132,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher_bullet_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizLauncherBulletHitsPlayer",
+      "type": "procedure",
+      "sortid": 133,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher_bullet_hits_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizLauncher",
+      "type": "gun",
+      "sortid": 134,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher"
+    },
+    {
+      "name": "Skizzik2EntityDies",
+      "type": "procedure",
+      "sortid": 135,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_2_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik2EntityIsHurt",
+      "type": "procedure",
+      "sortid": 136,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_2_entity_is_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik2ThisEntityKillsAnotherOne",
+      "type": "procedure",
+      "sortid": 137,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_2_this_entity_kills_another_one",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik3EntityDies",
+      "type": "procedure",
+      "sortid": 138,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_3_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik3EntityIsHurt",
+      "type": "procedure",
+      "sortid": 139,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_3_entity_is_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik3ThisEntityKillsAnotherOne",
+      "type": "procedure",
+      "sortid": 140,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_3_this_entity_kills_another_one",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik3PlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 141,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_3_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizLauncher2BulletHitsBlock",
+      "type": "procedure",
+      "sortid": 142,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher_2_bullet_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizLauncher2BulletHitsPlayer",
+      "type": "procedure",
+      "sortid": 143,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher_2_bullet_hits_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizLauncher2",
+      "type": "gun",
+      "sortid": 144,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher_2"
+    },
+    {
+      "name": "Skizzik4EntityDies",
+      "type": "procedure",
+      "sortid": 145,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_4_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik4EntityIsHurt",
+      "type": "procedure",
+      "sortid": 146,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_4_entity_is_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik4ThisEntityKillsAnotherOne",
+      "type": "procedure",
+      "sortid": 147,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_4_this_entity_kills_another_one",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik4PlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 148,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_4_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik5EntityDies",
+      "type": "procedure",
+      "sortid": 149,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik5EntityIsHurt",
+      "type": "procedure",
+      "sortid": 150,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5_entity_is_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik5ThisEntityKillsAnotherOne",
+      "type": "procedure",
+      "sortid": 151,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5_this_entity_kills_another_one",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik5PlayerCollidesWithThisEntity",
+      "type": "procedure",
+      "sortid": 152,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5_player_collides_with_this_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizHeadLauncher3BulletHitsBlock",
+      "type": "procedure",
+      "sortid": 153,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_head_launcher_3_bullet_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizHeadLauncher3BulletHitsPlayer",
+      "type": "procedure",
+      "sortid": 154,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_head_launcher_3_bullet_hits_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkizHeadLauncher3",
+      "type": "gun",
+      "sortid": 155,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skiz_launcher_3"
+    },
+    {
+      "name": "Skizzik3OnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 156,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_3_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik2OnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 157,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_2_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik4OnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 158,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_4_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skizzik5OnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 159,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InactiveSkizzikEntityDies",
+      "type": "procedure",
+      "sortid": 160,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "inactive_skizzik_entity_dies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InactiveSkizzik",
+      "type": "mob",
+      "sortid": 161,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "inactive_skizzik"
+    },
+    {
+      "name": "SkizzikHeadGemsBlockAdded",
+      "type": "procedure",
+      "sortid": 162,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_head_gems_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gems",
+      "type": "tag",
+      "sortid": 163,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "gems"
+    },
+    {
+      "name": "Skizzik1OnEntityTickUpdate",
+      "type": "procedure",
+      "sortid": 164,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_1_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PinkGemBlock",
+      "type": "block",
+      "sortid": 13,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pink_gem_block"
+    },
+    {
+      "name": "GreenGemBlock",
+      "type": "block",
+      "sortid": 12,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "green_gem_block"
+    },
+    {
+      "name": "OrangeGemBlock",
+      "type": "block",
+      "sortid": 11,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "orange_gem_block"
+    },
+    {
+      "name": "YellowGemBlock",
+      "type": "block",
+      "sortid": 10,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "yellow_gem_block"
+    },
+    {
+      "name": "BrownGemBlock",
+      "type": "block",
+      "sortid": 9,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "brown_gem_block"
+    },
+    {
+      "name": "BlueGemBlock",
+      "type": "block",
+      "sortid": 8,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "blue_gem_block"
+    },
+    {
+      "name": "BlackGemBlock",
+      "type": "block",
+      "sortid": 7,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "black_gem_block"
+    },
+    {
+      "name": "BlackGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 165,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "black_gem_block_recipe"
+    },
+    {
+      "name": "BlueGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 166,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "blue_gem_block_recipe"
+    },
+    {
+      "name": "BrownGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 167,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "brown_gem_block_recipe"
+    },
+    {
+      "name": "YellowGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 168,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "yellow_gem_block_recipe"
+    },
+    {
+      "name": "OrangeGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 169,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "orange_gem_block_recipe"
+    },
+    {
+      "name": "GreenGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 170,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "green_gem_block_recipe"
+    },
+    {
+      "name": "PinkGemBlockRecipe",
+      "type": "recipe",
+      "sortid": 171,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pink_gem_block_recipe"
+    },
+    {
+      "name": "BlackGemRecipe2",
+      "type": "recipe",
+      "sortid": 172,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "black_gem_recipe_2"
+    },
+    {
+      "name": "BlueGemRecipe2",
+      "type": "recipe",
+      "sortid": 173,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "blue_gem_recipe_2"
+    },
+    {
+      "name": "BrownGemRecipe2",
+      "type": "recipe",
+      "sortid": 174,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "brown_gem_recipe_2"
+    },
+    {
+      "name": "YellowGemRecipe2",
+      "type": "recipe",
+      "sortid": 175,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "yellow_gem_recipe_2"
+    },
+    {
+      "name": "OrangeGemRecipe2",
+      "type": "recipe",
+      "sortid": 176,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "orange_gem_recipe_2"
+    },
+    {
+      "name": "GreenGemRecipe2",
+      "type": "recipe",
+      "sortid": 177,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "green_gem_recipe_2"
+    },
+    {
+      "name": "PinkGemRecipe2",
+      "type": "recipe",
+      "sortid": 178,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pink_gem_recipe_2"
+    },
+    {
+      "name": "RidableSkizzies",
+      "type": "procedure",
+      "sortid": 179,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "ridable_skizzies",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandyPlanks",
+      "type": "block",
+      "sortid": 21,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_planks"
+    },
+    {
+      "name": "Planks",
+      "type": "tag",
+      "sortid": 180,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "planks"
+    },
+    {
+      "name": "Plank",
+      "type": "tag",
+      "sortid": 181,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "plank"
+    },
+    {
+      "name": "CandyDoor",
+      "type": "block",
+      "sortid": 25,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_door"
+    },
+    {
+      "name": "CandyDoorRecipe",
+      "type": "recipe",
+      "sortid": 182,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_door_recipe"
+    },
+    {
+      "name": "CandyTrapdoor",
+      "type": "block",
+      "sortid": 26,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_trapdoor"
+    },
+    {
+      "name": "CandyTrapdoorRecipe",
+      "type": "recipe",
+      "sortid": 183,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_trapdoor_recipe"
+    },
+    {
+      "name": "CandySlab",
+      "type": "block",
+      "sortid": 23,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_slab"
+    },
+    {
+      "name": "CandyStairs",
+      "type": "block",
+      "sortid": 22,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_stairs"
+    },
+    {
+      "name": "CandyPlanksRecipe",
+      "type": "recipe",
+      "sortid": 184,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_planks_recipe"
+    },
+    {
+      "name": "CandyFence",
+      "type": "block",
+      "sortid": 24,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_fence"
+    },
+    {
+      "name": "Fence",
+      "type": "tag",
+      "sortid": 185,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "fence"
+    },
+    {
+      "name": "CandyCanePlant",
+      "type": "plant",
+      "sortid": 186,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_cane_plant"
+    },
+    {
+      "name": "StrippedCandyLog",
+      "type": "block",
+      "sortid": 17,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "stripped_candy_log"
+    },
+    {
+      "name": "CandyPlanksRecipe2",
+      "type": "recipe",
+      "sortid": 188,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_planks_recipe_2"
+    },
+    {
+      "name": "CandySlabRecipe",
+      "type": "recipe",
+      "sortid": 189,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_slab_recipe"
+    },
+    {
+      "name": "CandyStairsRecipe",
+      "type": "recipe",
+      "sortid": 190,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_stairs_recipe"
+    },
+    {
+      "name": "CandyFenceRecipe",
+      "type": "recipe",
+      "sortid": 191,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_fence_recipe"
+    },
+    {
+      "name": "CandyLogOnBlockRightClicked",
+      "type": "procedure",
+      "sortid": 192,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_log_on_block_right_clicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandyWood",
+      "type": "block",
+      "sortid": 16,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_wood"
+    },
+    {
+      "name": "StrippedCandyWood",
+      "type": "block",
+      "sortid": 18,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "stripped_candy_wood"
+    },
+    {
+      "name": "CandyPlanksRecipe3",
+      "type": "recipe",
+      "sortid": 193,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_planks_recipe_3"
+    },
+    {
+      "name": "CandyPlanksRecipe4",
+      "type": "recipe",
+      "sortid": 194,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_planks_recipe_4"
+    },
+    {
+      "name": "Skizzik",
+      "type": "achievement",
+      "sortid": 199,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik"
+    },
+    {
+      "name": "OutOfIdeas",
+      "type": "achievement",
+      "sortid": 202,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "out_of_ideas"
+    },
+    {
+      "name": "RainbowOreLoot",
+      "type": "loottable",
+      "sortid": 205,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_ore_loot"
+    },
+    {
+      "name": "CandyLeavesLoot",
+      "type": "loottable",
+      "sortid": 206,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_leaves_loot"
+    },
+    {
+      "name": "CandyCanePlantLoot",
+      "type": "loottable",
+      "sortid": 207,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_cane_plant_loot"
+    },
+    {
+      "name": "Skizzik5Loot",
+      "type": "loottable",
+      "sortid": 208,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_5_loot"
+    },
+    {
+      "name": "CandyPigLoot",
+      "type": "loottable",
+      "sortid": 209,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_pig_loot"
+    },
+    {
+      "name": "CandyCaneRightClickedInAir",
+      "type": "procedure",
+      "sortid": 210,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_cane_right_clicked_in_air",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FriendlyWitchSkizzieRightClickedOnEntity",
+      "type": "procedure",
+      "sortid": 211,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "friendly_witch_skizzie_right_clicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandyIngotRecipe3",
+      "type": "recipe",
+      "sortid": 212,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_ingot_recipe_3"
+    },
+    {
+      "name": "CandyFenceGate",
+      "type": "block",
+      "sortid": 213,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_fence_gate"
+    },
+    {
+      "name": "CandyFenceGateRecipe",
+      "type": "recipe",
+      "sortid": 213,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "candy_fence_gate_recipe"
+    },
+    {
+      "name": "BrokenCommandBlock",
+      "type": "block",
+      "sortid": 214,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "broken_command_block"
+    },
+    {
+      "name": "DeactivatedCommandBlock",
+      "type": "block",
+      "sortid": 215,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "deactivated_command_block"
+    },
+    {
+      "name": "DeactivatedCommandBlockRecipe",
+      "type": "recipe",
+      "sortid": 216,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "deactivated_command_block_recipe"
+    },
+    {
+      "name": "CommandBlockRecipe2",
+      "type": "recipe",
+      "sortid": 217,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "command_block_recipe_2"
+    },
+    {
+      "name": "SkizzikBone",
+      "type": "item",
+      "sortid": 218,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_bone"
+    },
+    {
+      "name": "SkizzikLeather",
+      "type": "item",
+      "sortid": 218,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh"
+    },
+    {
+      "name": "SkizzikLeatherBlock",
+      "type": "block",
+      "sortid": 218,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_block"
+    },
+    {
+      "name": "PlatinumIngot",
+      "type": "item",
+      "sortid": 219,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "platinum_ingot"
+    },
+    {
+      "name": "SkizzikBoneRecipe",
+      "type": "recipe",
+      "sortid": 219,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_bone_recipe"
+    },
+    {
+      "name": "RawSkizzikFlesh",
+      "type": "item",
+      "sortid": 220,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "raw_skizzik_flesh"
+    },
+    {
+      "name": "RawSkizzikFleshRecipe",
+      "type": "recipe",
+      "sortid": 221,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "raw_skizzik_flesh_recipe"
+    },
+    {
+      "name": "SkizzikFleshRecipe",
+      "type": "recipe",
+      "sortid": 220,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_recipe"
+    },
+    {
+      "name": "SkizzikFleshRecipe2",
+      "type": "recipe",
+      "sortid": 222,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_recipe_2"
+    },
+    {
+      "name": "SkizzikFleshRecipe3",
+      "type": "recipe",
+      "sortid": 223,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_recipe_3"
+    },
+    {
+      "name": "SkizzikFleshBlockRecipe",
+      "type": "recipe",
+      "sortid": 224,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_block_recipe"
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [
+    {
+      "name": "item.rainbow_sword.shoot",
+      "files": [
+        "item.rainbow_sword.shoot"
+      ],
+      "category": "player"
+    },
+    {
+      "name": "item.minigun.shoot",
+      "files": [
+        "item.minigun.shoot"
+      ],
+      "category": "player"
+    },
+    {
+      "name": "music.skizzik.battle",
+      "files": [
+        "music.skizzik.battle"
+      ],
+      "category": "music"
+    }
+  ],
+  "language_map": {
+    "en_us": {
+      "item.skizzik.skizzik_5_spawn_egg": "Skizzik - Stage 5 Spawn Egg",
+      "item.skizzik.friendly_skizzie": "Friendly Skizzie Spawn Egg",
+      "block.skizzik.brown_gem_block": "Brown Gem Block",
+      "block.skizzik.blue_gem_block": "Blue Gem Block",
+      "item.skizzik.candy_pig_spawn_egg": "Candy Pig Spawn Egg",
+      "block.skizzik.candy_cane_plant": "Candy Cane Plant",
+      "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
+      "item.skizzik.candy_hoe": "Candy Hoe",
+      "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
+      "item.skizzik.skiz_launcher": "Skiz Launcher",
+      "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
+      "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
+      "block.skizzik.pink_gem_block": "Pink Gem Block",
+      "item.skizzik.brown_gem": "Brown Gem",
+      "item.skizzik.candy_chestplate": "Candy Body",
+      "entity.skizzik.skizzo": "Skizzo",
+      "block.skizzik.stripped_candy_log": "Stripped Candy Log",
+      "item.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie Spawn Egg",
+      "block.skizzik.green_gem_block": "Green Gem Block",
+      "item.skizzik.candy_helmet": "Candy Helmet",
+      "item.skizzik.candybody": "Candy Body",
+      "entity.skizzik.inactive_skizzik": "Inactive Skizzik",
+      "advancements.skizzik.descr": "Advancements parent",
+      "block.skizzik.candy_slab": "Candy Slab",
+      "block.skizzik.candy_planks": "Candy Planks",
+      "item.skizzik.minigun": "Minigun",
+      "item.skizzik.ka_boom_skizzie_spawn_egg": "Ka-Boom Skizzie Spawn Egg",
+      "item.minecraft.tipped_arrow.effect.corruption": "Arrow of Corruption",
+      "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
+      "entity.skizzik.corrupt_skizzie": "Corrupt Skizzie",
+      "item.minecraft.potion.effect.corruption": "Corruption",
+      "block.skizzik.candy_ore": "Candy Ore",
+      "block.skizzik.corrupt_block": "Corrupt Block",
+      "entity.skizzik.minigun_skizzie": "Minigun Skizzie",
+      "itemGroup.tabskizzik_tab": "Skizzik",
+      "item.skizzik.candy_pickaxe": "Candy Pickaxe",
+      "block.skizzik.candy_leaves": "Candy Leaves",
+      "item.skizzik.candy_pig": "Candy Pig Spawn Egg",
+      "item.skizzik.inactive_skizzik_spawn_egg": "Inactive Skizzik Spawn Egg",
+      "item.skizzik.platinum_ingot": "Platinum Ingot",
+      "effect.corruption": "Corruption",
+      "item.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie Spawn Egg",
+      "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
+      "item.skizzik.witch_skizzie_spawn_egg": "Witch Skizzie Spawn Egg",
+      "block.skizzik.candyrack": "Candyrack",
+      "item.skizzik.skizzik_4_spawn_egg": "Skizzik - Stage 4 Spawn Egg",
+      "block.skizzik.broken_command_block": "Broken Command Block",
+      "block.skizzik.yellow_gem_block": "Yellow Gem Block",
+      "block.skizzik.rainbow_ore": "Rainbow Ore",
+      "item.skizzik.corrupt_skizzie_spawn_egg": "Corrupt Skizzie Spawn Egg",
+      "block.skizzik.stone_skizzie": "Stone Skizzie",
+      "item.skizzik.friendly_witch_skizzie_spawn_egg": "Friendly Witch Skizzie Spawn Egg",
+      "item.skizzik.skizzik_bone": "Skizzik Bone",
+      "block.skizzik.rainbow_gem_block": "Rainbow Gem Block",
+      "item.skizzik.candy_shovel": "Candy Shovel",
+      "advancements.skizzik.title": "Skizzik",
+      "item.skizzik.skiz_launcher_2": "Skiz Launcher 2",
+      "block.skizzik.skizzik_flesh_block": "Skizzik Flesh Block",
+      "item.skizzik.skiz_launcher_3": "Skiz Launcher 3",
+      "item.skizzik.candyboots": "Candy Boots",
+      "item.skizzik.candyhelmet": "Candy Helmet",
+      "block.skizzik.black_gem_block": "Black Gem Block",
+      "item.skizzik.skizzik_1_spawn_egg": "Skizzik - Stage 1 Spawn Egg",
+      "item.minecraft.lingering_potion.effect.corruption": "Lingering Corruption",
+      "entity.skizzik.skizzik_1": "Skizzik - Stage 1",
+      "item.skizzik.candy_ingot": "Candy Ingot",
+      "item.skizzik.skizzie": "Skizzie Spawn Egg",
+      "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
+      "item.skizzik.pink_gem": "Pink Gem",
+      "item.skizzik.skizzik_2": "Skizzik - Stage 2 Spawn Egg",
+      "entity.skizzik.skizzik_4": "Skizzik - Stage 4",
+      "entity.skizzik.skizzik_5": "Skizzik - Stage 5",
+      "item.skizzik.skizzik_3": "Skizzik - Stage 3 Spawn Egg",
+      "block.skizzik.candy_fence_gate": "Candy Fence Gate",
+      "entity.skizzik.skizzik_2": "Skizzik - Stage 2",
+      "item.skizzik.skizzik_4": "Skizzik - Stage 4 Spawn Egg",
+      "entity.skizzik.skizzik_3": "Skizzik - Stage 3",
+      "item.skizzik.skizzik_5": "Skizzik - Stage 5 Spawn Egg",
+      "item.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie Spawn Egg",
+      "item.skizzik.candy_cane": "Candy Cane",
+      "block.skizzik.candy_trapdoor": "Candy Trapdoor",
+      "block.skizzik.skizzik_head": "Skizzik Head",
+      "block.skizzik.candy_door": "Candy Door",
+      "entity.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie",
+      "block.skizzik.deactivated_command_block": "Deactivated Command Block",
+      "block.skizzik.candy_wood": "Candy Wood",
+      "item.skizzik.rainbow_gem": "Rainbow Gem",
+      "item.skizzik.skizzik_2_spawn_egg": "Skizzik - Stage 2 Spawn Egg",
+      "item.skizzik.rainbow_sword": "Rainbow Sword",
+      "item.skizzik.green_gem": "Green Gem",
+      "item.skizzik.candy_leggings": "Candy Leggings",
+      "item.skizzik.candy_boots": "Candy Boots",
+      "item.skizzik.friendly_minigun_skizzie_spawn_egg": "Friendly Minigun Skizzie Spawn Egg",
+      "entity.skizzik.candy_pig": "Candy Pig",
+      "item.skizzik.skizzik_1": "Skizzik - Stage 1 Spawn Egg",
+      "entity.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie",
+      "item.skizzik.blue_gem": "Blue Gem",
+      "item.skizzik.candylegs": "Candy Leggings",
+      "block.skizzik.candy_grass": "Candy Nylium",
+      "item.skizzik.skizzo": "Skizzo Spawn Egg",
+      "item.skizzik.skizzik_flesh": "Skizzik Flesh",
+      "item.skizzik.orange_gem": "Orange Gem",
+      "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
+      "entity.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie",
+      "item.skizzik.candy_nugget": "Candy Nugget",
+      "entity.skizzik.skizzie": "Skizzie",
+      "item.skizzik.candy_sword": "Candy Sword",
+      "block.skizzik.skizzik_head_gems": "Skizzik Head Gems",
+      "block.skizzik.candy_fence": "Candy Fence",
+      "item.skizzik.inactive_skizzik": "Inactive Skizzik Spawn Egg",
+      "block.skizzik.candy_stairs": "Candy Stairs",
+      "item.skizzik.minigun_skizzie_spawn_egg": "Minigun Skizzie Spawn Egg",
+      "item.minecraft.splash_potion.effect.corruption": "Splash Corruption",
+      "item.skizzik.skizzik_3_spawn_egg": "Skizzik - Stage 3 Spawn Egg",
+      "advancements.out_of_ideas.title": "Out of Ideas",
+      "item.skizzik.candy_axe": "Candy Axe",
+      "advancements.out_of_ideas.descr": "Visit the Candy Plains",
+      "item.skizzik.corrupted_skizzie": "Corrupted Skizzie Spawn Egg",
+      "entity.skizzik.witch_skizzie": "Witch Skizzie",
+      "item.skizzik.yellow_gem": "Yellow Gem",
+      "biome.skizzik.candy_plains": "Candy Plains",
+      "block.skizzik.candy_log": "Candy Log",
+      "block.skizzik.command_block": "Command Block",
+      "item.skizzik.black_gem": "Black Gem",
+      "block.skizzik.orange_gem_block": "Orange Gem Block"
+    }
+  },
+  "workspaceSettings": {
+    "modid": "skizzik",
+    "modName": "Skizzik",
+    "version": "Skizzik [1.8.0 - Beta #2]",
+    "description": "Coming Soon",
+    "author": "uSkizzik",
+    "websiteURL": "https://discord.gg/VbTjjQK",
+    "license": "All Rights Reserved",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "modPicture": "logo",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.16.4",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.uskizzik.skizzik",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202000652319
+}

@@ -1,0 +1,85 @@
+{
+  "_fv": 15,
+  "_type": "biome",
+  "definition": {
+    "name": "Candy Plains",
+    "groundBlock": {
+      "value": "CUSTOM:CandyGrass"
+    },
+    "undergroundBlock": {
+      "value": "CUSTOM:Candyrack"
+    },
+    "grassColor": {
+      "value": -786388,
+      "falpha": 0.0
+    },
+    "foliageColor": {
+      "value": -786388,
+      "falpha": 0.0
+    },
+    "waterColor": {
+      "value": -786388,
+      "falpha": 0.0
+    },
+    "waterFogColor": {
+      "value": -786388,
+      "falpha": 0.0
+    },
+    "biomeCategory": "NONE",
+    "parent": {
+      "value": "No parent"
+    },
+    "rainingPossibility": 0.5,
+    "temperature": 0.5,
+    "baseHeight": 0.1,
+    "heightVariation": 0.0,
+    "biomeType": "WARM",
+    "spawnBiome": true,
+    "biomeWeight": 75,
+    "biomeDictionaryTypes": [],
+    "grassPerChunk": 10,
+    "seagrassPerChunk": 0,
+    "flowersPerChunk": 4,
+    "mushroomsPerChunk": 0,
+    "bigMushroomsChunk": 0,
+    "sandPatchesPerChunk": 0,
+    "gravelPatchesPerChunk": 0,
+    "reedsPerChunk": 0,
+    "cactiPerChunk": 0,
+    "treesPerChunk": 5,
+    "vanillaTreeType": "Default",
+    "treeType": 1,
+    "minHeight": 6,
+    "treeStem": {
+      "value": "CUSTOM:CandyLog"
+    },
+    "treeBranch": {
+      "value": "CUSTOM:CandyLeaves"
+    },
+    "treeVines": {
+      "value": "Blocks.AIR"
+    },
+    "treeFruits": {
+      "value": "Blocks.AIR"
+    },
+    "spawnStronghold": true,
+    "spawnMineshaft": true,
+    "spawnPillagerOutpost": true,
+    "villageType": "none",
+    "spawnWoodlandMansion": false,
+    "spawnJungleTemple": false,
+    "spawnDesertPyramid": false,
+    "spawnIgloo": false,
+    "spawnOceanMonument": false,
+    "spawnShipwreck": false,
+    "oceanRuinType": "NONE",
+    "defaultFeatures": [
+      "Caves",
+      "MonsterRooms",
+      "Structures",
+      "Ores",
+      "Lakes"
+    ],
+    "spawnEntries": []
+  }
+}

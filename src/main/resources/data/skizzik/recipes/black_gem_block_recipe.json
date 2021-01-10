@@ -1,0 +1,42 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:black_gem"
+    },
+    "1": {
+      "item": "skizzik:black_gem"
+    },
+    "2": {
+      "item": "skizzik:black_gem"
+    },
+    "3": {
+      "item": "skizzik:black_gem"
+    },
+    "4": {
+      "item": "skizzik:black_gem"
+    },
+    "5": {
+      "item": "skizzik:black_gem"
+    },
+    "6": {
+      "item": "skizzik:black_gem"
+    },
+    "7": {
+      "item": "skizzik:black_gem"
+    },
+    "8": {
+      "item": "skizzik:black_gem"
+    }
+  },
+  "result": {
+    "item": "skizzik:black_gem_block",
+    "count": 1
+  }
+}

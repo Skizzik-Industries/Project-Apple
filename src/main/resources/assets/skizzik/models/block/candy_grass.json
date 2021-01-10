@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/candyrack",
+    "up": "skizzik:blocks/candy_nylium",
+    "north": "skizzik:blocks/crimson_nylium_side",
+    "east": "skizzik:blocks/crimson_nylium_side",
+    "south": "skizzik:blocks/crimson_nylium_side",
+    "west": "skizzik:blocks/crimson_nylium_side",
+    "particle": "skizzik:blocks/candyrack"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:brown_gem"
+    },
+    "1": {
+      "item": "skizzik:brown_gem"
+    },
+    "2": {
+      "item": "skizzik:brown_gem"
+    },
+    "3": {
+      "item": "skizzik:brown_gem"
+    },
+    "4": {
+      "item": "skizzik:brown_gem"
+    },
+    "5": {
+      "item": "skizzik:brown_gem"
+    },
+    "6": {
+      "item": "skizzik:brown_gem"
+    },
+    "7": {
+      "item": "skizzik:brown_gem"
+    },
+    "8": {
+      "item": "skizzik:brown_gem"
+    }
+  },
+  "result": {
+    "item": "skizzik:brown_gem_block",
+    "count": 1
+  }
+}

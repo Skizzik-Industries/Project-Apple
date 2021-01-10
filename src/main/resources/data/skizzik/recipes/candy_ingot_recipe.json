@@ -1,0 +1,12 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:smelting",
+  "experience": 3,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "skizzik:candy_ore"
+  },
+  "result": {
+    "item": "skizzik:candy_ingot"
+  }
+}

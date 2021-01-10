@@ -1,0 +1,7 @@
+{
+  "parent": "block/fence_side",
+  "textures": {
+    "texture": "skizzik:blocks/candy_planks",
+    "particle": "skizzik:blocks/candy_planks"
+  }
+}

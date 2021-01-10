@@ -1,0 +1,29 @@
+{
+  "item.rainbow_sword.shoot": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "skizzik:item.rainbow_sword.shoot",
+        "stream": false
+      }
+    ]
+  },
+  "item.minigun.shoot": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "skizzik:item.minigun.shoot",
+        "stream": false
+      }
+    ]
+  },
+  "music.skizzik.battle": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "skizzik:music.skizzik.battle",
+        "stream": true
+      }
+    ]
+  }
+}

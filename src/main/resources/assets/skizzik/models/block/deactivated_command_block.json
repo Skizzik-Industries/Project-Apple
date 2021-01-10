@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/deactivated_command_block",
+    "up": "skizzik:blocks/deactivated_command_block",
+    "north": "skizzik:blocks/deactivated_command_block",
+    "east": "skizzik:blocks/deactivated_command_block",
+    "south": "skizzik:blocks/deactivated_command_block",
+    "west": "skizzik:blocks/deactivated_command_block",
+    "particle": "skizzik:blocks/deactivated_command_block"
+  }
+}

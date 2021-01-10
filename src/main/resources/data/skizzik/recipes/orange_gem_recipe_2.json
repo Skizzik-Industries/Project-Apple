@@ -1,0 +1,13 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:orange_gem_block"
+    }
+  ],
+  "result": {
+    "item": "skizzik:orange_gem",
+    "count": 9
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "skizzik:block/candy_slab"
+    },
+    "type=top": {
+      "model": "skizzik:block/candy_slab_top"
+    },
+    "type=double": {
+      "model": "skizzik:block/candy_slab_full"
+    }
+  }
+}

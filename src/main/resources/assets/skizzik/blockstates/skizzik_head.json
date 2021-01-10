@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "skizzik:block/skizzik_head"
+    },
+    "facing=east": {
+      "model": "skizzik:block/skizzik_head",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "skizzik:block/skizzik_head",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "skizzik:block/skizzik_head",
+      "y": 270
+    }
+  }
+}

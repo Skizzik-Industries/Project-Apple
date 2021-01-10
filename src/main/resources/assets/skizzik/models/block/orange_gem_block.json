@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/orange_gem_block",
+    "up": "skizzik:blocks/orange_gem_block",
+    "north": "skizzik:blocks/orange_gem_block",
+    "east": "skizzik:blocks/orange_gem_block",
+    "south": "skizzik:blocks/orange_gem_block",
+    "west": "skizzik:blocks/orange_gem_block",
+    "particle": "skizzik:blocks/orange_gem_block"
+  }
+}

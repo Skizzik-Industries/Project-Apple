@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "beast_gauntlet"
+      },
+      "name": "default"
+    }
+  }
+}

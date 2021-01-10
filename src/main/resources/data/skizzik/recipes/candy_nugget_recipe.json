@@ -1,0 +1,13 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:candy_ingot"
+    }
+  ],
+  "result": {
+    "item": "skizzik:candy_nugget",
+    "count": 9
+  }
+}

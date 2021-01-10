@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="skizzik"
+version="Skizzik [1.8.0 - Beta #2]"
+displayName="Skizzik"
+credits="Created using mod maker MCreator - https://mcreator.net/about"
+displayURL="https://discord.gg/VbTjjQK"
+logoFile="logo.png"
+authors="uSkizzik"
+description='''
+Coming Soon
+'''
+
+[[dependencies.skizzik]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4]"
+    ordering="NONE"
+    side="BOTH"
+
+
+
+

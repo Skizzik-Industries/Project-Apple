@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_bottom_rh",
+  "textures": {
+    "bottom": "skizzik:blocks/candy_door_bottom",
+    "top": "skizzik:blocks/candy_door_top"
+  }
+}

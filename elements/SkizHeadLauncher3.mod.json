@@ -1,0 +1,46 @@
+{
+  "_fv": 15,
+  "_type": "gun",
+  "definition": {
+    "renderType": 0,
+    "texture": "minigun",
+    "customModelName": "Normal",
+    "name": "Skiz Launcher 3",
+    "specialInfo": [],
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 1,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": true,
+    "usageCount": 100,
+    "actionSound": {
+      "value": "entity.wither.shoot"
+    },
+    "hasGlow": true,
+    "animation": "bow",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 3.0,
+    "bulletDamage": 15.0,
+    "bulletKnockback": 5,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": "Blocks.AIR"
+    },
+    "bulletModel": "Modelskiz_head",
+    "customBulletModelTexture": "skiz_head_3.png",
+    "onBulletHitsBlock": {
+      "name": "SkizHeadLauncher3BulletHitsBlock"
+    },
+    "onBulletHitsPlayer": {
+      "name": "SkizHeadLauncher3BulletHitsPlayer"
+    },
+    "onBulletHitsEntity": {
+      "name": "SkizHeadLauncher3BulletHitsPlayer"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "_fv": 15,
+  "_type": "recipe",
+  "definition": {
+    "recipeType": "Crafting",
+    "xpReward": 0.0,
+    "cookingTime": 200,
+    "recipeRetstackSize": 1,
+    "group": "",
+    "recipeShapeless": false,
+    "recipeSlots": [
+      {
+        "value": "CUSTOM:CandyIngot"
+      },
+      {
+        "value": "CUSTOM:CandyIngot"
+      },
+      {
+        "value": "CUSTOM:CandyIngot"
+      },
+      {
+        "value": "CUSTOM:CandyIngot"
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": "CUSTOM:CandyIngot"
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      }
+    ],
+    "recipeReturnStack": {
+      "value": "CUSTOM:Candy.helmet"
+    },
+    "name": "candy_helmet_recipe",
+    "namespace": "mod"
+  }
+}

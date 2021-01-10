@@ -1,0 +1,42 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:yellow_gem"
+    },
+    "1": {
+      "item": "skizzik:yellow_gem"
+    },
+    "2": {
+      "item": "skizzik:yellow_gem"
+    },
+    "3": {
+      "item": "skizzik:yellow_gem"
+    },
+    "4": {
+      "item": "skizzik:yellow_gem"
+    },
+    "5": {
+      "item": "skizzik:yellow_gem"
+    },
+    "6": {
+      "item": "skizzik:yellow_gem"
+    },
+    "7": {
+      "item": "skizzik:yellow_gem"
+    },
+    "8": {
+      "item": "skizzik:yellow_gem"
+    }
+  },
+  "result": {
+    "item": "skizzik:yellow_gem_block",
+    "count": 1
+  }
+}

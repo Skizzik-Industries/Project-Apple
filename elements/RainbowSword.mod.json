@@ -1,0 +1,35 @@
+{
+  "_fv": 15,
+  "_type": "tool",
+  "definition": {
+    "renderType": 0,
+    "texture": "rainbow_sword",
+    "customModelName": "Normal",
+    "name": "Rainbow Sword",
+    "specialInfo": [
+      "Right-click on a block to teleport it in another dimension"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:TemplateTab"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 4.0,
+    "attackSpeed": 1.0,
+    "enchantability": 2,
+    "damageVsEntity": 10.0,
+    "usageCount": 2100,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [
+      {
+        "value": "CUSTOM:RainbowGem"
+      }
+    ],
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedOnBlock": {
+      "name": "RainbowSwordRightClickedOnBlock"
+    }
+  }
+}

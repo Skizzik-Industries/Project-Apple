@@ -1,0 +1,8 @@
+{
+  "parent": "skizzik:custom/stone_skizzie",
+  "textures": {
+    "all": "skizzik:blocks/stone",
+    "particle": "skizzik:blocks/stone",
+    "2": "skizzik:blocks/stone_skizzie"
+  }
+}

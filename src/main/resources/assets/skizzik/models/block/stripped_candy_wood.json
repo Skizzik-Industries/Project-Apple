@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/stripped_candy_log",
+    "up": "skizzik:blocks/stripped_candy_log",
+    "north": "skizzik:blocks/stripped_candy_log",
+    "east": "skizzik:blocks/stripped_candy_log",
+    "south": "skizzik:blocks/stripped_candy_log",
+    "west": "skizzik:blocks/stripped_candy_log",
+    "particle": "skizzik:blocks/stripped_candy_log"
+  }
+}

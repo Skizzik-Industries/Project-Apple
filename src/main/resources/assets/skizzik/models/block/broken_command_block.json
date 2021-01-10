@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/broken_command_block",
+    "up": "skizzik:blocks/broken_command_block",
+    "north": "skizzik:blocks/broken_command_block",
+    "east": "skizzik:blocks/broken_command_block",
+    "south": "skizzik:blocks/broken_command_block",
+    "west": "skizzik:blocks/broken_command_block",
+    "particle": "skizzik:blocks/broken_command_block"
+  }
+}

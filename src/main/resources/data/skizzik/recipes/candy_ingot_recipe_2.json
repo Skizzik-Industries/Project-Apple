@@ -1,0 +1,42 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:candy_nugget"
+    },
+    "1": {
+      "item": "skizzik:candy_nugget"
+    },
+    "2": {
+      "item": "skizzik:candy_nugget"
+    },
+    "3": {
+      "item": "skizzik:candy_nugget"
+    },
+    "4": {
+      "item": "skizzik:candy_nugget"
+    },
+    "5": {
+      "item": "skizzik:candy_nugget"
+    },
+    "6": {
+      "item": "skizzik:candy_nugget"
+    },
+    "7": {
+      "item": "skizzik:candy_nugget"
+    },
+    "8": {
+      "item": "skizzik:candy_nugget"
+    }
+  },
+  "result": {
+    "item": "skizzik:candy_ingot",
+    "count": 1
+  }
+}

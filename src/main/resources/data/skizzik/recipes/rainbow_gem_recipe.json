@@ -1,0 +1,19 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:black_gem"
+    },
+    {
+      "item": "skizzik:black_gem"
+    },
+    {
+      "item": "skizzik:black_gem"
+    }
+  ],
+  "result": {
+    "item": "skizzik:rainbow_gem",
+    "count": 1
+  }
+}

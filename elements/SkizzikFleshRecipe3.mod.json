@@ -1,0 +1,20 @@
+{
+  "_fv": 15,
+  "_type": "recipe",
+  "definition": {
+    "recipeType": "Smelting",
+    "xpReward": 10.0,
+    "cookingTime": 200,
+    "recipeRetstackSize": 1,
+    "group": "",
+    "recipeShapeless": false,
+    "smeltingInputStack": {
+      "value": "CUSTOM:RawSkizzikFlesh"
+    },
+    "smeltingReturnStack": {
+      "value": "CUSTOM:SkizzikLeather"
+    },
+    "name": "skizzik_flesh_recipe_3",
+    "namespace": "mod"
+  }
+}

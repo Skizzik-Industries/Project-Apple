@@ -1,0 +1,13 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:candy_wood"
+    }
+  ],
+  "result": {
+    "item": "skizzik:candy_planks",
+    "count": 4
+  }
+}

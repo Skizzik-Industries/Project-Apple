@@ -1,0 +1,32 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:candy_planks"
+    },
+    "1": {
+      "item": "skizzik:candy_planks"
+    },
+    "2": {
+      "item": "skizzik:candy_planks"
+    },
+    "3": {
+      "item": "skizzik:candy_planks"
+    },
+    "4": {
+      "item": "skizzik:candy_planks"
+    },
+    "5": {
+      "item": "skizzik:candy_planks"
+    }
+  },
+  "result": {
+    "item": "skizzik:candy_trapdoor",
+    "count": 2
+  }
+}
