@@ -1,0 +1,58 @@
+{
+  "_fv": 15,
+  "_type": "armor",
+  "definition": {
+    "enableHelmet": true,
+    "textureHelmet": "skizzik_flesh_helmet",
+    "enableBody": true,
+    "textureBody": "skizzik_flesh_chestplate",
+    "enableLeggings": true,
+    "textureLeggings": "golden_leggings",
+    "enableBoots": true,
+    "textureBoots": "skizzik_flesh_boots",
+    "creativeTab": {
+      "value": "CUSTOM:TemplateTab"
+    },
+    "armorTextureFile": "skizzik_flesh_",
+    "helmetName": "Skizzik Flesh Helmet",
+    "bodyName": "Skizzik Flesh Chestplate",
+    "leggingsName": "Skizzik Flesh Leggings",
+    "bootsName": "Skizzik Flesh Boots",
+    "helmetSpecialInfo": [],
+    "bodySpecialInfo": [],
+    "leggingsSpecialInfo": [],
+    "bootsSpecialInfo": [],
+    "helmetModelName": "Default",
+    "helmetModelPart": "Helmet",
+    "helmetModelTexture": "From armor",
+    "bodyModelName": "Default",
+    "bodyModelPart": "Body",
+    "armsModelPartL": "Arms L",
+    "armsModelPartR": "Arms R",
+    "bodyModelTexture": "From armor",
+    "leggingsModelName": "Default",
+    "leggingsModelPartL": "Leggings L",
+    "leggingsModelPartR": "Leggings R",
+    "leggingsModelTexture": "From armor",
+    "bootsModelName": "Default",
+    "bootsModelPartL": "Boots L",
+    "bootsModelPartR": "Boots R",
+    "bootsModelTexture": "From armor",
+    "maxDamage": 15,
+    "damageValueHelmet": 1,
+    "damageValueBody": 4,
+    "damageValueLeggings": 2,
+    "damageValueBoots": 1,
+    "enchantability": 9,
+    "toughness": 0.5,
+    "knockbackResistance": 0.0,
+    "equipSound": {
+      "value": "CUSTOM:item.skizzik_flesh.equip"
+    },
+    "repairItems": [
+      {
+        "value": "CUSTOM:SkizzikLeather"
+      }
+    ]
+  }
+}

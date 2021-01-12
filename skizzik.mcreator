@@ -2954,6 +2954,84 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "skizzik_flesh_block_recipe"
+    },
+    {
+      "name": "PlatinumNugget",
+      "type": "item",
+      "sortid": 225,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "platinum_nugget"
+    },
+    {
+      "name": "PlatinumNuggetRecipe",
+      "type": "recipe",
+      "sortid": 226,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "platinum_nugget_recipe"
+    },
+    {
+      "name": "PlatinumIngotRecipe2",
+      "type": "recipe",
+      "sortid": 227,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "platinum_ingot_recipe_2"
+    },
+    {
+      "name": "SkizzikFleshArmor",
+      "type": "armor",
+      "sortid": 228,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_armor",
+      "metadata": {
+        "eh": true,
+        "el": true,
+        "eb": true,
+        "ec": true
+      }
+    },
+    {
+      "name": "SkizzikFleshArmorHelmetRecipe",
+      "type": "recipe",
+      "sortid": 229,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_armor_helmet_recipe"
+    },
+    {
+      "name": "SkizzikFleshArmorBodyRecipe",
+      "type": "recipe",
+      "sortid": 230,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_armor_body_recipe"
+    },
+    {
+      "name": "SkizzikFleshArmorLeggingsRecipe",
+      "type": "recipe",
+      "sortid": 231,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_armor_leggings_recipe"
+    },
+    {
+      "name": "SkizzikFleshArmorBootsRecipe",
+      "type": "recipe",
+      "sortid": 232,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "skizzik_flesh_armor_boots_recipe"
     }
   ],
   "variable_elements": [],
@@ -2978,6 +3056,14 @@
         "music.skizzik.battle"
       ],
       "category": "music"
+    },
+    {
+      "name": "item.skizzik_flesh.equip",
+      "files": [
+        "item.skizzik_flesh.equip"
+      ],
+      "category": "player",
+      "subtitle": "Skizzik Flesh Armor Equiped"
     }
   ],
   "language_map": {
@@ -2995,15 +3081,20 @@
       "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
       "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
       "block.skizzik.pink_gem_block": "Pink Gem Block",
-      "item.skizzik.brown_gem": "Brown Gem",
       "item.skizzik.candy_chestplate": "Candy Body",
+      "item.skizzik.brown_gem": "Brown Gem",
+      "item.skizzik.skizzik_flesh_armor_helmet": "Skizzik Flesh Helmet",
+      "subtitles.item.skizzik_flesh.equip": "Skizzik Flesh Armor Equiped",
       "entity.skizzik.skizzo": "Skizzo",
       "block.skizzik.stripped_candy_log": "Stripped Candy Log",
+      "item.skizzik.platinum_nugget": "Platinum Nugget",
+      "item.skizzik.skizzik_flesh_armor_chestplate": "Skizzik Flesh Chestplate",
       "item.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie Spawn Egg",
       "block.skizzik.green_gem_block": "Green Gem Block",
       "item.skizzik.candy_helmet": "Candy Helmet",
       "item.skizzik.candybody": "Candy Body",
-      "entity.skizzik.inactive_skizzik": "Inactive Skizzik",
+      "entity.skizzik.inactive_skizzik": "Skizzik - Inactive",
+      "item.skizzik.skizzik_flesh_armor_boots": "Skizzik Flesh Boots",
       "advancements.skizzik.descr": "Advancements parent",
       "block.skizzik.candy_slab": "Candy Slab",
       "block.skizzik.candy_planks": "Candy Planks",
@@ -3020,7 +3111,7 @@
       "item.skizzik.candy_pickaxe": "Candy Pickaxe",
       "block.skizzik.candy_leaves": "Candy Leaves",
       "item.skizzik.candy_pig": "Candy Pig Spawn Egg",
-      "item.skizzik.inactive_skizzik_spawn_egg": "Inactive Skizzik Spawn Egg",
+      "item.skizzik.inactive_skizzik_spawn_egg": "Skizzik - Inactive Spawn Egg",
       "item.skizzik.platinum_ingot": "Platinum Ingot",
       "effect.corruption": "Corruption",
       "item.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie Spawn Egg",
@@ -3095,6 +3186,7 @@
       "block.skizzik.candy_stairs": "Candy Stairs",
       "item.skizzik.minigun_skizzie_spawn_egg": "Minigun Skizzie Spawn Egg",
       "item.minecraft.splash_potion.effect.corruption": "Splash Corruption",
+      "item.skizzik.skizzik_flesh_armor_leggings": "Skizzik Flesh Leggings",
       "item.skizzik.skizzik_3_spawn_egg": "Skizzik - Stage 3 Spawn Egg",
       "advancements.out_of_ideas.title": "Out of Ideas",
       "item.skizzik.candy_axe": "Candy Axe",
@@ -3112,7 +3204,7 @@
   "workspaceSettings": {
     "modid": "skizzik",
     "modName": "Skizzik",
-    "version": "Skizzik [1.8.0 - Beta #2]",
+    "version": "Skizzik [1.8.0 - Beta #3]",
     "description": "Coming Soon",
     "author": "uSkizzik",
     "websiteURL": "https://discord.gg/VbTjjQK",

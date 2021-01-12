@@ -2,10 +2,10 @@
   "_fv": 15,
   "_type": "mob",
   "definition": {
-    "mobName": "Inactive Skizzik",
+    "mobName": "Skizzik - Inactive",
     "mobLabel": "",
-    "mobModelName": "Modelskizzik",
-    "mobModelTexture": "skizzik.png",
+    "mobModelName": "Modelinactive_skizzik",
+    "mobModelTexture": "inactive_skizzik.png",
     "mobModelGlowTexture": "",
     "modelWidth": 3.0,
     "modelHeight": 4.0,
@@ -81,6 +81,9 @@
       "value": ""
     },
     "deathSound": {
+      "value": ""
+    },
+    "stepSound": {
       "value": ""
     },
     "spawnParticles": false,

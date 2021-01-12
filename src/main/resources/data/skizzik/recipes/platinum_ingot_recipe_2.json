@@ -1,0 +1,42 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "1": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "2": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "3": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "4": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "5": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "6": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "7": {
+      "item": "skizzik:platinum_nugget"
+    },
+    "8": {
+      "item": "skizzik:platinum_nugget"
+    }
+  },
+  "result": {
+    "item": "skizzik:platinum_ingot",
+    "count": 1
+  }
+}

@@ -25,5 +25,15 @@
         "stream": true
       }
     ]
+  },
+  "item.skizzik_flesh.equip": {
+    "category": "player",
+    "subtitle": "subtitles.item.skizzik_flesh.equip",
+    "sounds": [
+      {
+        "name": "skizzik:item.skizzik_flesh.equip",
+        "stream": false
+      }
+    ]
   }
 }

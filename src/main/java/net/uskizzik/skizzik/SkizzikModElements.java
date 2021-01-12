@@ -51,6 +51,8 @@ public class SkizzikModElements {
 				new net.minecraft.util.SoundEvent(new ResourceLocation("skizzik", "item.minigun.shoot")));
 		sounds.put(new ResourceLocation("skizzik", "music.skizzik.battle"),
 				new net.minecraft.util.SoundEvent(new ResourceLocation("skizzik", "music.skizzik.battle")));
+		sounds.put(new ResourceLocation("skizzik", "item.skizzik_flesh.equip"),
+				new net.minecraft.util.SoundEvent(new ResourceLocation("skizzik", "item.skizzik_flesh.equip")));
 		try {
 			ModFileScanData modFileInfo = ModList.get().getModFileById("skizzik").getFile().getScanResult();
 			Set<ModFileScanData.AnnotationData> annotations = modFileInfo.getAnnotations();

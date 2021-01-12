@@ -67,10 +67,10 @@ public class InactiveSkizzikEntity extends SkizzikModElements.ModElement {
 		@OnlyIn(Dist.CLIENT)
 		public void registerModels(ModelRegistryEvent event) {
 			RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
-				return new MobRenderer(renderManager, new Modelskizzik(), 1f) {
+				return new MobRenderer(renderManager, new Modelinactive_skizzik(), 1f) {
 					@Override
 					public ResourceLocation getEntityTexture(Entity entity) {
-						return new ResourceLocation("skizzik:textures/skizzik.png");
+						return new ResourceLocation("skizzik:textures/inactive_skizzik.png");
 					}
 				};
 			});
@@ -176,72 +176,70 @@ public class InactiveSkizzikEntity extends SkizzikModElements.ModElement {
 		}
 	}
 
-	// Made with Blockbench 3.5.4
+	// Made with Blockbench 3.6.6
 	// Exported for Minecraft version 1.15
 	// Paste this class into your mod and generate all required imports
-	public static class Modelskizzik extends EntityModel<Entity> {
+	public static class Modelinactive_skizzik extends EntityModel<Entity> {
+		private final ModelRenderer Skizzik;
 		private final ModelRenderer body;
-		private final ModelRenderer body2;
 		private final ModelRenderer head1;
 		private final ModelRenderer head2;
 		private final ModelRenderer head3;
 		private final ModelRenderer head4;
 		private final ModelRenderer head5;
-		public Modelskizzik() {
+		public Modelinactive_skizzik() {
 			textureWidth = 256;
 			textureHeight = 256;
+			Skizzik = new ModelRenderer(this);
+			Skizzik.setRotationPoint(0.0F, 24.0F, 0.0F);
 			body = new ModelRenderer(this);
-			body.setRotationPoint(0.0F, 4.9F, -8.5F);
-			body.setTextureOffset(73, 100).addBox(-3.0F, -11.0F, 6.0F, 7.0F, 19.0F, 7.0F, 0.0F, false);
-			body.setTextureOffset(84, 46).addBox(-11.0F, -9.5F, 7.5F, 23.0F, 4.0F, 4.0F, 0.0F, false);
-			body.setTextureOffset(0, 86).addBox(8.0F, -8.5F, -11.5F, 3.0F, 2.0F, 20.0F, 0.0F, false);
-			body.setTextureOffset(80, 24).addBox(-10.0F, -8.5F, -11.5F, 3.0F, 2.0F, 20.0F, 0.0F, false);
-			body.setTextureOffset(60, 44).addBox(-7.0F, -8.5F, -11.5F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-			body.setTextureOffset(0, 42).addBox(5.0F, -8.5F, -11.5F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-			body.setTextureOffset(0, 37).addBox(5.0F, 2.5F, -11.5F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-			body.setTextureOffset(0, 32).addBox(-7.0F, 2.5F, -11.5F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-			body.setTextureOffset(64, 78).addBox(-10.0F, 2.5F, -11.5F, 3.0F, 2.0F, 20.0F, 0.0F, false);
-			body.setTextureOffset(90, 76).addBox(8.0F, -3.5F, -11.5F, 3.0F, 3.0F, 19.0F, 0.0F, false);
-			body.setTextureOffset(88, 0).addBox(-10.0F, -3.5F, -11.5F, 3.0F, 3.0F, 19.0F, 0.0F, false);
-			body.setTextureOffset(76, 54).addBox(8.0F, 2.5F, -11.5F, 3.0F, 2.0F, 20.0F, 0.0F, false);
-			body.setTextureOffset(0, 10).addBox(-7.0F, -3.5F, -11.5F, 3.0F, 3.0F, 3.0F, 0.0F, false);
-			body.setTextureOffset(0, 4).addBox(5.0F, -3.5F, -11.5F, 3.0F, 3.0F, 3.0F, 0.0F, false);
-			body.setTextureOffset(48, 8).addBox(-11.0F, -4.0F, 7.5F, 23.0F, 4.0F, 4.0F, 0.0F, false);
-			body.setTextureOffset(48, 0).addBox(-11.0F, 1.5F, 7.5F, 23.0F, 4.0F, 4.0F, 0.0F, false);
-			body.setTextureOffset(0, 32).addBox(-7.0F, -10.0F, -9.0F, 15.0F, 15.0F, 15.0F, 0.0F, false);
-			body.setTextureOffset(29, 98).addBox(-2.0F, 5.0F, -11.0F, 5.0F, 1.0F, 17.0F, 0.0F, false);
-			body.setTextureOffset(0, 0).addBox(-2.0F, 3.0F, -11.0F, 5.0F, 2.0F, 2.0F, 0.0F, false);
-			body2 = new ModelRenderer(this);
-			body2.setRotationPoint(1.0F, 15.9F, 4.5F);
-			setRotationAngle(body2, 0.6981F, 0.0F, 0.0F);
-			body2.setTextureOffset(101, 101).addBox(-4.0F, -7.0026F, -3.3586F, 7.0F, 13.0F, 7.0F, 0.0F, false);
+			body.setRotationPoint(0.5F, -7.3895F, -10.9211F);
+			Skizzik.addChild(body);
+			body.setTextureOffset(73, 100).addBox(-3.5F, -9.7105F, 8.4211F, 7.0F, 19.0F, 7.0F, 0.0F, false);
+			body.setTextureOffset(84, 46).addBox(-11.5F, -8.2105F, 9.9211F, 23.0F, 4.0F, 4.0F, 0.0F, false);
+			body.setTextureOffset(0, 86).addBox(7.5F, -7.2105F, -9.0789F, 3.0F, 2.0F, 20.0F, 0.0F, false);
+			body.setTextureOffset(80, 24).addBox(-10.5F, -7.2105F, -9.0789F, 3.0F, 2.0F, 20.0F, 0.0F, false);
+			body.setTextureOffset(60, 44).addBox(-7.5F, -7.2105F, -9.0789F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+			body.setTextureOffset(0, 42).addBox(4.5F, -7.2105F, -9.0789F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+			body.setTextureOffset(0, 37).addBox(4.5F, 3.7895F, -9.0789F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+			body.setTextureOffset(0, 32).addBox(-7.5F, 3.7895F, -9.0789F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+			body.setTextureOffset(64, 78).addBox(-10.5F, 3.7895F, -9.0789F, 3.0F, 2.0F, 20.0F, 0.0F, false);
+			body.setTextureOffset(90, 76).addBox(7.5F, -2.2105F, -9.0789F, 3.0F, 3.0F, 19.0F, 0.0F, false);
+			body.setTextureOffset(88, 0).addBox(-10.5F, -2.2105F, -9.0789F, 3.0F, 3.0F, 19.0F, 0.0F, false);
+			body.setTextureOffset(76, 54).addBox(7.5F, 3.7895F, -9.0789F, 3.0F, 2.0F, 20.0F, 0.0F, false);
+			body.setTextureOffset(0, 10).addBox(-7.5F, -2.2105F, -9.0789F, 3.0F, 3.0F, 3.0F, 0.0F, false);
+			body.setTextureOffset(0, 4).addBox(4.5F, -2.2105F, -9.0789F, 3.0F, 3.0F, 3.0F, 0.0F, false);
+			body.setTextureOffset(48, 8).addBox(-11.5F, -2.7105F, 9.9211F, 23.0F, 4.0F, 4.0F, 0.0F, false);
+			body.setTextureOffset(48, 0).addBox(-11.5F, 2.7895F, 9.9211F, 23.0F, 4.0F, 4.0F, 0.0F, false);
+			body.setTextureOffset(0, 32).addBox(-7.5F, -8.7105F, -6.5789F, 15.0F, 15.0F, 15.0F, 0.0F, false);
+			body.setTextureOffset(29, 98).addBox(-2.5F, 6.2895F, -8.5789F, 5.0F, 1.0F, 17.0F, 0.0F, false);
+			body.setTextureOffset(0, 0).addBox(-2.5F, 4.2895F, -8.5789F, 5.0F, 2.0F, 2.0F, 0.0F, false);
 			head1 = new ModelRenderer(this);
-			head1.setRotationPoint(1.0F, -16.0F, 0.0F);
-			head1.setTextureOffset(0, 0).addBox(-8.0F, -8.0F, -8.0F, 16.0F, 16.0F, 16.0F, 0.0F, false);
+			head1.setRotationPoint(1.0F, -40.0F, 0.0F);
+			Skizzik.addChild(head1);
+			head1.setTextureOffset(0, 0).addBox(-9.0F, 7.0F, -8.0F, 16.0F, 16.0F, 16.0F, 0.0F, false);
 			head2 = new ModelRenderer(this);
-			head2.setRotationPoint(19.0F, -9.0F, 0.0F);
-			head2.setTextureOffset(0, 62).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
+			head2.setRotationPoint(19.0F, -33.0F, 0.0F);
+			Skizzik.addChild(head2);
+			head2.setTextureOffset(0, 62).addBox(-6.0F, 21.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
 			head3 = new ModelRenderer(this);
-			head3.setRotationPoint(-18.0F, -11.0F, 1.0F);
-			head3.setTextureOffset(36, 74).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
+			head3.setRotationPoint(-18.0F, -35.0F, 1.0F);
+			Skizzik.addChild(head3);
+			head3.setTextureOffset(36, 74).addBox(-6.0F, 23.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
 			head4 = new ModelRenderer(this);
-			head4.setRotationPoint(-13.0F, -34.0F, 1.0F);
+			head4.setRotationPoint(-17.0F, -19.0F, 1.0F);
+			Skizzik.addChild(head4);
 			head4.setTextureOffset(52, 20).addBox(-6.0F, -5.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
 			head5 = new ModelRenderer(this);
-			head5.setRotationPoint(17.0F, -31.0F, 0.0F);
-			head5.setTextureOffset(48, 50).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
+			head5.setRotationPoint(17.0F, -55.0F, 0.0F);
+			Skizzik.addChild(head5);
+			head5.setTextureOffset(48, 50).addBox(-5.0F, 31.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
 		}
 
 		@Override
 		public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue,
 				float alpha) {
-			body.render(matrixStack, buffer, packedLight, packedOverlay);
-			body2.render(matrixStack, buffer, packedLight, packedOverlay);
-			head1.render(matrixStack, buffer, packedLight, packedOverlay);
-			head2.render(matrixStack, buffer, packedLight, packedOverlay);
-			head3.render(matrixStack, buffer, packedLight, packedOverlay);
-			head4.render(matrixStack, buffer, packedLight, packedOverlay);
-			head5.render(matrixStack, buffer, packedLight, packedOverlay);
+			Skizzik.render(matrixStack, buffer, packedLight, packedOverlay);
 		}
 
 		public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -251,8 +249,6 @@ public class InactiveSkizzikEntity extends SkizzikModElements.ModElement {
 		}
 
 		public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4) {
-			this.head1.rotateAngleY = f3 / (180F / (float) Math.PI);
-			this.head1.rotateAngleX = f4 / (180F / (float) Math.PI);
 		}
 	}
 }

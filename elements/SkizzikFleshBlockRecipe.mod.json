@@ -10,13 +10,13 @@
     "recipeShapeless": false,
     "recipeSlots": [
       {
-        "value": "Items.IRON_NUGGET"
+        "value": "CUSTOM:PlatinumNugget"
       },
       {
         "value": "CUSTOM:SkizzikLeather"
       },
       {
-        "value": "Items.IRON_NUGGET"
+        "value": "CUSTOM:PlatinumNugget"
       },
       {
         "value": "CUSTOM:SkizzikLeather"
@@ -28,13 +28,13 @@
         "value": "CUSTOM:SkizzikLeather"
       },
       {
-        "value": "Items.IRON_NUGGET"
+        "value": "CUSTOM:PlatinumNugget"
       },
       {
         "value": "CUSTOM:SkizzikLeather"
       },
       {
-        "value": "Items.IRON_NUGGET"
+        "value": "CUSTOM:PlatinumNugget"
       }
     ],
     "recipeReturnStack": {

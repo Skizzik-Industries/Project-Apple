@@ -8,13 +8,13 @@
   ],
   "key": {
     "0": {
-      "item": "minecraft:iron_nugget"
+      "item": "skizzik:platinum_nugget"
     },
     "1": {
       "item": "skizzik:skizzik_flesh"
     },
     "2": {
-      "item": "minecraft:iron_nugget"
+      "item": "skizzik:platinum_nugget"
     },
     "3": {
       "item": "skizzik:skizzik_flesh"
@@ -26,13 +26,13 @@
       "item": "skizzik:skizzik_flesh"
     },
     "6": {
-      "item": "minecraft:iron_nugget"
+      "item": "skizzik:platinum_nugget"
     },
     "7": {
       "item": "skizzik:skizzik_flesh"
     },
     "8": {
-      "item": "minecraft:iron_nugget"
+      "item": "skizzik:platinum_nugget"
     }
   },
   "result": {
