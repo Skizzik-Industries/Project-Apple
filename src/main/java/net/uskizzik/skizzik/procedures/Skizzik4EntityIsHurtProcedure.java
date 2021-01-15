@@ -1,6 +1,6 @@
 package net.uskizzik.skizzik.procedures;
 
-import net.uskizzik.skizzik.entity.WitchSkizzieEntity;
+import net.uskizzik.skizzik.entity.WitchSkizzie2Entity;
 import net.uskizzik.skizzik.entity.SkizzieEntity;
 import net.uskizzik.skizzik.entity.MinigunSkizzieEntity;
 import net.uskizzik.skizzik.entity.KaBoomSkizzieEntity;
@@ -85,7 +85,7 @@ public class Skizzik4EntityIsHurtProcedure extends SkizzikModElements.ModElement
 					} else {
 						if ((Math.random() < 0.5)) {
 							if (world instanceof ServerWorld) {
-								Entity entityToSpawn = new WitchSkizzieEntity.CustomEntity(WitchSkizzieEntity.entity, (World) world);
+								Entity entityToSpawn = new WitchSkizzie2Entity.CustomEntity(WitchSkizzie2Entity.entity, (World) world);
 								entityToSpawn.setLocationAndAngles(x, y, z, world.getRandom().nextFloat() * 360F, 0);
 								if (entityToSpawn instanceof MobEntity)
 									((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,

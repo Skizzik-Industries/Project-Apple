@@ -36,7 +36,7 @@ public class SkizzikLeatherBlockBlock extends SkizzikModElements.ModElement {
 	}
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
-			super(Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH).hardnessAndResistance(0.8f, 0.8f).setLightLevel(s -> 0)
+			super(Block.Properties.create(Material.WOOL).sound(SoundType.SLIME).hardnessAndResistance(0.8f, 0.8f).setLightLevel(s -> 0)
 					.harvestLevel(-1).harvestTool(ToolType.HOE));
 			setRegistryName("skizzik_flesh_block");
 		}

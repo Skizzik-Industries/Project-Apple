@@ -92,13 +92,18 @@ public class InactiveSkizzikEntity extends SkizzikModElements.ModElement {
 		public CustomEntity(EntityType<CustomEntity> type, World world) {
 			super(type, world);
 			experienceValue = 0;
-			setNoAI(true);
+			setNoAI(false);
 			enablePersistence();
 		}
 
 		@Override
 		public IPacket<?> createSpawnPacket() {
 			return NetworkHooks.getEntitySpawningPacket(this);
+		}
+
+		@Override
+		protected void registerGoals() {
+			super.registerGoals();
 		}
 
 		@Override

@@ -70,10 +70,10 @@ public class WitchSkizzieEntity extends SkizzikModElements.ModElement {
 	public void initElements() {
 		entity = (EntityType.Builder.<CustomEntity>create(CustomEntity::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true)
 				.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).immuneToFire().size(0.6f, 1.5999999999999999f))
-						.build("witch_skizzie").setRegistryName("witch_skizzie");
+						.build("witch_skizzie_1").setRegistryName("witch_skizzie_1");
 		elements.entities.add(() -> entity);
 		elements.items.add(() -> new SpawnEggItem(entity, -65536, -16737997, new Item.Properties().group(TemplateTabItemGroup.tab))
-				.setRegistryName("witch_skizzie_spawn_egg"));
+				.setRegistryName("witch_skizzie_1_spawn_egg"));
 	}
 
 	@Override
@@ -126,11 +126,14 @@ public class WitchSkizzieEntity extends SkizzikModElements.ModElement {
 		protected void registerGoals() {
 			super.registerGoals();
 			this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true));
-			this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+			this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setCallsForHelp(this.getClass()));
 			this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 0.8));
 			this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
 			this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, PlayerEntity.class, false, true));
 			this.targetSelector.addGoal(6, new NearestAttackableTargetGoal(this, AnimalEntity.class, false, true));
+			this.targetSelector.addGoal(7, new NearestAttackableTargetGoal(this, FriendlySkizzieEntity.CustomEntity.class, false, true));
+			this.targetSelector.addGoal(8, new NearestAttackableTargetGoal(this, FriendlyMinigunSkizzieEntity.CustomEntity.class, false, true));
+			this.targetSelector.addGoal(9, new NearestAttackableTargetGoal(this, FriendlyWitchSkizzieEntity.CustomEntity.class, false, true));
 		}
 
 		@Override

@@ -4,7 +4,7 @@ import net.uskizzik.skizzik.entity.WitchSkizzieEntity;
 import net.uskizzik.skizzik.entity.SkizzieEntity;
 import net.uskizzik.skizzik.entity.MinigunSkizzieEntity;
 import net.uskizzik.skizzik.entity.CorruptedSkizzieEntity;
-import net.uskizzik.skizzik.block.SkizzikHeadBlock;
+import net.uskizzik.skizzik.block.SkizzikHeadSmallBlock;
 import net.uskizzik.skizzik.block.CorruptedBlockBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
@@ -78,7 +78,7 @@ public class KaBoomSkizzieRightClickedOnEntityProcedure extends SkizzikModElemen
 		IWorld world = (IWorld) dependencies.get("world");
 		if ((!(world.isRemote()))) {
 			if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
-					.getItem() == new ItemStack(SkizzikHeadBlock.block, (int) (1)).getItem())) {
+					.getItem() == new ItemStack(SkizzikHeadSmallBlock.block, (int) (1)).getItem())) {
 				if ((new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayerEntity) {
@@ -129,7 +129,7 @@ public class KaBoomSkizzieRightClickedOnEntityProcedure extends SkizzikModElemen
 					if (!entity.world.isRemote())
 						entity.remove();
 					if (sourceentity instanceof PlayerEntity) {
-						ItemStack _stktoremove = new ItemStack(SkizzikHeadBlock.block, (int) (1));
+						ItemStack _stktoremove = new ItemStack(SkizzikHeadSmallBlock.block, (int) (1));
 						((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 								((PlayerEntity) sourceentity).container.func_234641_j_());
 					}

@@ -69,10 +69,10 @@ public class FriendlyWitchSkizzieEntity extends SkizzikModElements.ModElement {
 	public void initElements() {
 		entity = (EntityType.Builder.<CustomEntity>create(CustomEntity::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true)
 				.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).immuneToFire().size(0.6f, 1.5999999999999999f))
-						.build("friendly_witch_skizzie").setRegistryName("friendly_witch_skizzie");
+						.build("friendly_witch_skizzie_1").setRegistryName("friendly_witch_skizzie_1");
 		elements.entities.add(() -> entity);
 		elements.items.add(() -> new SpawnEggItem(entity, -16711681, -16711885, new Item.Properties().group(TemplateTabItemGroup.tab))
-				.setRegistryName("friendly_witch_skizzie_spawn_egg"));
+				.setRegistryName("friendly_witch_skizzie_1_spawn_egg"));
 	}
 
 	@Override

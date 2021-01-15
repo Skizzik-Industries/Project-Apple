@@ -62,7 +62,7 @@
     "reactionToPushing": "NORMAL",
     "isNotColidable": false,
     "soundOnStep": {
-      "value": "CLOTH"
+      "value": "SLIME"
     },
     "luminance": 0,
     "unbreakable": false,

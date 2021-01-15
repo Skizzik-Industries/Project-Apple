@@ -1,10 +1,11 @@
 package net.uskizzik.skizzik.procedures;
 
 import net.uskizzik.skizzik.entity.WitchSkizzieEntity;
+import net.uskizzik.skizzik.entity.FriendlyWitchSkizzie2Entity;
 import net.uskizzik.skizzik.entity.FriendlySkizzieEntity;
 import net.uskizzik.skizzik.entity.FriendlyMinigunSkizzieEntity;
 import net.uskizzik.skizzik.block.StoneSkizzieBlock;
-import net.uskizzik.skizzik.block.SkizzikHeadBlock;
+import net.uskizzik.skizzik.block.SkizzikHeadSmallBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
 
@@ -139,124 +140,178 @@ public class FriendlyWitchSkizzieRightClickedOnEntityProcedure extends SkizzikMo
 						}
 					}
 				}
-			} else {
-				if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
-						.getItem() == new ItemStack(SkizzikHeadBlock.block, (int) (1)).getItem())) {
-					if ((new Object() {
-						public boolean checkGamemode(Entity _ent) {
-							if (_ent instanceof ServerPlayerEntity) {
-								return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
-							} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
-								NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-										.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
-								return _npi != null && _npi.getGameType() == GameType.CREATIVE;
-							}
-							return false;
+			}
+			if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
+					.getItem() == new ItemStack(SkizzikHeadSmallBlock.block, (int) (1)).getItem())) {
+				if ((new Object() {
+					public boolean checkGamemode(Entity _ent) {
+						if (_ent instanceof ServerPlayerEntity) {
+							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
+						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
+							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
+									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
-					}.checkGamemode(sourceentity))) {
-						if (world instanceof ServerWorld) {
-							Entity entityToSpawn = new FriendlySkizzieEntity.CustomEntity(FriendlySkizzieEntity.entity, (World) world);
-							entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
-							entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
-							if (entityToSpawn instanceof MobEntity)
-								((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
-										world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED,
-										(ILivingEntityData) null, (CompoundNBT) null);
-							world.addEntity(entityToSpawn);
-						}
-						if (world instanceof ServerWorld) {
-							LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
-							_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
-							_ent.setEffectOnly(false);
-							((World) world).addEntity(_ent);
-						}
-						if (!entity.world.isRemote())
-							entity.remove();
-					} else {
-						if (world instanceof ServerWorld) {
-							Entity entityToSpawn = new FriendlySkizzieEntity.CustomEntity(FriendlySkizzieEntity.entity, (World) world);
-							entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
-							entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
-							if (entityToSpawn instanceof MobEntity)
-								((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
-										world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED,
-										(ILivingEntityData) null, (CompoundNBT) null);
-							world.addEntity(entityToSpawn);
-						}
-						if (world instanceof ServerWorld) {
-							LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
-							_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
-							_ent.setEffectOnly(false);
-							((World) world).addEntity(_ent);
-						}
-						if (!entity.world.isRemote())
-							entity.remove();
-						if (sourceentity instanceof PlayerEntity) {
-							ItemStack _stktoremove = new ItemStack(Items.POTION, (int) (1));
-							((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
-									((PlayerEntity) sourceentity).container.func_234641_j_());
-						}
+						return false;
 					}
+				}.checkGamemode(sourceentity))) {
+					if (world instanceof ServerWorld) {
+						Entity entityToSpawn = new FriendlySkizzieEntity.CustomEntity(FriendlySkizzieEntity.entity, (World) world);
+						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
+						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
+						if (entityToSpawn instanceof MobEntity)
+							((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
+									world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, (ILivingEntityData) null,
+									(CompoundNBT) null);
+						world.addEntity(entityToSpawn);
+					}
+					if (world instanceof ServerWorld) {
+						LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+						_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
+						_ent.setEffectOnly(false);
+						((World) world).addEntity(_ent);
+					}
+					if (!entity.world.isRemote())
+						entity.remove();
 				} else {
-					if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
-							.getItem() == new ItemStack(Items.BOW, (int) (1)).getItem())) {
-						if ((new Object() {
-							public boolean checkGamemode(Entity _ent) {
-								if (_ent instanceof ServerPlayerEntity) {
-									return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
-								} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
-									NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
-									return _npi != null && _npi.getGameType() == GameType.CREATIVE;
-								}
-								return false;
-							}
-						}.checkGamemode(sourceentity))) {
-							if (world instanceof ServerWorld) {
-								Entity entityToSpawn = new FriendlyMinigunSkizzieEntity.CustomEntity(FriendlyMinigunSkizzieEntity.entity,
-										(World) world);
-								entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
-								entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
-								if (entityToSpawn instanceof MobEntity)
-									((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
-											world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED,
-											(ILivingEntityData) null, (CompoundNBT) null);
-								world.addEntity(entityToSpawn);
-							}
-							if (world instanceof ServerWorld) {
-								LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
-								_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
-								_ent.setEffectOnly(false);
-								((World) world).addEntity(_ent);
-							}
-							if (!entity.world.isRemote())
-								entity.remove();
-						} else {
-							if (world instanceof ServerWorld) {
-								Entity entityToSpawn = new FriendlyMinigunSkizzieEntity.CustomEntity(FriendlyMinigunSkizzieEntity.entity,
-										(World) world);
-								entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
-								entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
-								if (entityToSpawn instanceof MobEntity)
-									((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
-											world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED,
-											(ILivingEntityData) null, (CompoundNBT) null);
-								world.addEntity(entityToSpawn);
-							}
-							if (world instanceof ServerWorld) {
-								LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
-								_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
-								_ent.setEffectOnly(false);
-								((World) world).addEntity(_ent);
-							}
-							if (!entity.world.isRemote())
-								entity.remove();
-							if (sourceentity instanceof PlayerEntity) {
-								ItemStack _stktoremove = new ItemStack(Items.BOW, (int) (1));
-								((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
-										((PlayerEntity) sourceentity).container.func_234641_j_());
-							}
+					if (world instanceof ServerWorld) {
+						Entity entityToSpawn = new FriendlySkizzieEntity.CustomEntity(FriendlySkizzieEntity.entity, (World) world);
+						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
+						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
+						if (entityToSpawn instanceof MobEntity)
+							((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
+									world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, (ILivingEntityData) null,
+									(CompoundNBT) null);
+						world.addEntity(entityToSpawn);
+					}
+					if (world instanceof ServerWorld) {
+						LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+						_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
+						_ent.setEffectOnly(false);
+						((World) world).addEntity(_ent);
+					}
+					if (!entity.world.isRemote())
+						entity.remove();
+					if (sourceentity instanceof PlayerEntity) {
+						ItemStack _stktoremove = new ItemStack(SkizzikHeadSmallBlock.block, (int) (1));
+						((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+								((PlayerEntity) sourceentity).container.func_234641_j_());
+					}
+				}
+			}
+			if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
+					.getItem() == new ItemStack(Items.BOW, (int) (1)).getItem())) {
+				if ((new Object() {
+					public boolean checkGamemode(Entity _ent) {
+						if (_ent instanceof ServerPlayerEntity) {
+							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
+						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
+							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
+									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
+						return false;
+					}
+				}.checkGamemode(sourceentity))) {
+					if (world instanceof ServerWorld) {
+						Entity entityToSpawn = new FriendlyMinigunSkizzieEntity.CustomEntity(FriendlyMinigunSkizzieEntity.entity, (World) world);
+						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
+						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
+						if (entityToSpawn instanceof MobEntity)
+							((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
+									world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, (ILivingEntityData) null,
+									(CompoundNBT) null);
+						world.addEntity(entityToSpawn);
+					}
+					if (world instanceof ServerWorld) {
+						LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+						_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
+						_ent.setEffectOnly(false);
+						((World) world).addEntity(_ent);
+					}
+					if (!entity.world.isRemote())
+						entity.remove();
+				} else {
+					if (world instanceof ServerWorld) {
+						Entity entityToSpawn = new FriendlyMinigunSkizzieEntity.CustomEntity(FriendlyMinigunSkizzieEntity.entity, (World) world);
+						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
+						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
+						if (entityToSpawn instanceof MobEntity)
+							((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
+									world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, (ILivingEntityData) null,
+									(CompoundNBT) null);
+						world.addEntity(entityToSpawn);
+					}
+					if (world instanceof ServerWorld) {
+						LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+						_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
+						_ent.setEffectOnly(false);
+						((World) world).addEntity(_ent);
+					}
+					if (!entity.world.isRemote())
+						entity.remove();
+					if (sourceentity instanceof PlayerEntity) {
+						ItemStack _stktoremove = new ItemStack(Items.BOW, (int) (1));
+						((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+								((PlayerEntity) sourceentity).container.func_234641_j_());
+					}
+				}
+			}
+			if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
+					.getItem() == new ItemStack(Items.POTION, (int) (1)).getItem())) {
+				if ((new Object() {
+					public boolean checkGamemode(Entity _ent) {
+						if (_ent instanceof ServerPlayerEntity) {
+							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
+						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
+							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
+									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
+						}
+						return false;
+					}
+				}.checkGamemode(sourceentity))) {
+					if (world instanceof ServerWorld) {
+						Entity entityToSpawn = new FriendlyWitchSkizzie2Entity.CustomEntity(FriendlyWitchSkizzie2Entity.entity, (World) world);
+						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
+						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
+						if (entityToSpawn instanceof MobEntity)
+							((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
+									world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, (ILivingEntityData) null,
+									(CompoundNBT) null);
+						world.addEntity(entityToSpawn);
+					}
+					if (world instanceof ServerWorld) {
+						LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+						_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
+						_ent.setEffectOnly(false);
+						((World) world).addEntity(_ent);
+					}
+					if (!entity.world.isRemote())
+						entity.remove();
+				} else {
+					if (world instanceof ServerWorld) {
+						Entity entityToSpawn = new FriendlyWitchSkizzie2Entity.CustomEntity(FriendlyWitchSkizzie2Entity.entity, (World) world);
+						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
+						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
+						if (entityToSpawn instanceof MobEntity)
+							((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world,
+									world.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, (ILivingEntityData) null,
+									(CompoundNBT) null);
+						world.addEntity(entityToSpawn);
+					}
+					if (world instanceof ServerWorld) {
+						LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+						_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) z)));
+						_ent.setEffectOnly(false);
+						((World) world).addEntity(_ent);
+					}
+					if (!entity.world.isRemote())
+						entity.remove();
+					if (sourceentity instanceof PlayerEntity) {
+						ItemStack _stktoremove = new ItemStack(Items.POTION, (int) (1));
+						((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+								((PlayerEntity) sourceentity).container.func_234641_j_());
 					}
 				}
 			}

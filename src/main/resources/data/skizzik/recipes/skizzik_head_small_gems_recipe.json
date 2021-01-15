@@ -1,0 +1,26 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "345"
+  ],
+  "key": {
+    "1": {
+      "item": "skizzik:brown_gem"
+    },
+    "3": {
+      "item": "skizzik:green_gem"
+    },
+    "4": {
+      "item": "skizzik:skizzik_head_small_gems"
+    },
+    "5": {
+      "item": "skizzik:green_gem"
+    }
+  },
+  "result": {
+    "item": "skizzik:skizzik_head_small_gems",
+    "count": 1
+  }
+}

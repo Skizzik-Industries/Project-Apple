@@ -4,6 +4,7 @@ import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
 
 import net.minecraft.util.DamageSource;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Entity;
 
 import java.util.Map;
@@ -21,6 +22,8 @@ public class CorruptionPotionExpiresProcedure extends SkizzikModElements.ModElem
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		entity.attackEntityFrom(DamageSource.MAGIC, (float) 1000);
+		if (entity instanceof LivingEntity) {
+			((LivingEntity) entity).attackEntityFrom(new DamageSource("corrupted").setDamageBypassesArmor(), (float) 1000);
+		}
 	}
 }
