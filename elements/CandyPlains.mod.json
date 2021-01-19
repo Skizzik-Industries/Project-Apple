@@ -25,8 +25,23 @@
       "value": -786388,
       "falpha": 0.0
     },
+    "ambientSound": {
+      "value": ""
+    },
+    "additionsSound": {
+      "value": ""
+    },
+    "music": {
+      "value": ""
+    },
+    "moodSound": {
+      "value": ""
+    },
     "moodSoundDelay": 0,
     "spawnParticles": false,
+    "particleToSpawn": {
+      "value": "EXPLOSION_NORMAL"
+    },
     "particlesProbability": 0.0,
     "biomeCategory": "NONE",
     "parent": {
@@ -81,8 +96,7 @@
       "Caves",
       "MonsterRooms",
       "Structures",
-      "Ores",
-      "Lakes"
+      "Ores"
     ],
     "spawnEntries": []
   }

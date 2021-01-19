@@ -27,7 +27,7 @@ public class CandyCaneItem extends SkizzikModElements.ModElement {
 	public static class FoodItemCustom extends Item {
 		public FoodItemCustom() {
 			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(64).rarity(Rarity.COMMON)
-					.food((new Food.Builder()).hunger(4).saturation(2.5f).build()));
+					.food((new Food.Builder()).hunger(4).saturation(2.5f).setAlwaysEdible().build()));
 			setRegistryName("candy_cane");
 		}
 

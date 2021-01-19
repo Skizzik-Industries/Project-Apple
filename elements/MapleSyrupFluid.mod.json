@@ -1,0 +1,27 @@
+{
+  "_fv": 15,
+  "_type": "fluid",
+  "definition": {
+    "name": "MapleSyrupFluid",
+    "textureStill": "maple_syrup_fluid_still",
+    "textureFlowing": "maple_syrup_fluid_flow",
+    "luminosity": 0,
+    "density": 1000,
+    "viscosity": 1000,
+    "isGas": false,
+    "type": "LAVA",
+    "generateBucket": true,
+    "creativeTab": {
+      "value": "CUSTOM:TemplateTab"
+    },
+    "frequencyOnChunks": 15,
+    "spawnWorldTypes": [
+      "Surface"
+    ],
+    "restrictionBiomes": [
+      {
+        "value": "CUSTOM:CandyPlains"
+      }
+    ]
+  }
+}

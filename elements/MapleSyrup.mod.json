@@ -3,24 +3,24 @@
   "_type": "food",
   "definition": {
     "renderType": 0,
-    "texture": "candy_cane",
+    "texture": "maple_syrup",
     "customModelName": "Normal",
-    "name": "Candy Cane",
+    "name": "Maple Syrup",
     "rarity": "COMMON",
     "specialInfo": [],
     "creativeTab": {
       "value": "CUSTOM:TemplateTab"
     },
-    "stackSize": 64,
+    "stackSize": 16,
     "nutritionalValue": 4,
     "saturation": 2.5,
-    "eatingSpeed": 15,
+    "eatingSpeed": 32,
     "resultItem": {
-      "value": ""
+      "value": "CUSTOM:MapleSyrupBottle"
     },
     "forDogs": false,
     "isAlwaysEdible": true,
-    "animation": "eat",
+    "animation": "drink",
     "hasGlow": false
   }
 }

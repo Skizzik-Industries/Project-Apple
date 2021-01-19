@@ -3393,6 +3393,33 @@
           }
         ]
       }
+    },
+    {
+      "name": "MapleSyrupBottle",
+      "type": "item",
+      "sortid": 250,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "maple_syrup_bottle"
+    },
+    {
+      "name": "MapleSyrup",
+      "type": "food",
+      "sortid": 250,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "maple_syrup"
+    },
+    {
+      "name": "MapleSyrupFluid",
+      "type": "fluid",
+      "sortid": 251,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "maple_syrup_fluid"
     }
   ],
   "variable_elements": [],
@@ -3433,6 +3460,7 @@
       "item.skizzik.friendly_skizzie": "Friendly Skizzie Spawn Egg",
       "block.skizzik.brown_gem_block": "Brown Gem Block",
       "block.skizzik.blue_gem_block": "Blue Gem Block",
+      "item.skizzik.maple_syrup": "Maple Syrup",
       "item.skizzik.friendly_witch_skizzie_1_spawn_egg": "Friendly Witch Skizzie (Level 1) Spawn Egg",
       "item.skizzik.candy_pig_spawn_egg": "Candy Pig Spawn Egg",
       "block.skizzik.candy_cane_plant": "Candy Cane Plant",
@@ -3446,6 +3474,7 @@
       "block.skizzik.pink_gem_block": "Pink Gem Block",
       "item.skizzik.brown_gem": "Brown Gem",
       "item.skizzik.candy_chestplate": "Candy Body",
+      "fluid.maple_syrup_fluid": "MapleSyrupFluid",
       "item.skizzik.skizzik_flesh_armor_helmet": "Skizzik Flesh Helmet",
       "subtitles.item.skizzik_flesh.equip": "Skizzik Flesh Armor Equiped",
       "entity.skizzik.skizzo": "Skizzo",
@@ -3488,6 +3517,7 @@
       "effect.corruption": "Corruption",
       "item.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie Spawn Egg",
       "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
+      "item.skizzik.maple_syrup_fluid_bucket": "MapleSyrupFluid Bucket",
       "block.skizzik.candyrack": "Candyrack",
       "item.skizzik.skizzik_4_spawn_egg": "Skizzik - Stage 4 Spawn Egg",
       "item.skizzik.friendly_witch_skizzie_2_spawn_egg": "Friendly Witch Skizzie (Level 2) Spawn Egg",
@@ -3515,6 +3545,7 @@
       "item.skizzik.skizzie": "Skizzie Spawn Egg",
       "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
       "item.skizzik.pink_gem": "Pink Gem",
+      "item.skizzik.maple_syrup_bottle": "Maple Syrup Bottle",
       "item.skizzik.skizzik_2": "Skizzik - Stage 2 Spawn Egg",
       "entity.skizzik.skizzik_4": "Skizzik - Stage 4",
       "entity.skizzik.skizzik_5": "Skizzik - Stage 5",

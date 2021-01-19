@@ -12,11 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.block.BlockState;
 
 @SkizzikModElements.ModElement.Tag
-public class PlatinumIngotItem extends SkizzikModElements.ModElement {
-	@ObjectHolder("skizzik:platinum_ingot")
+public class MapleSyrupBottleItem extends SkizzikModElements.ModElement {
+	@ObjectHolder("skizzik:maple_syrup_bottle")
 	public static final Item block = null;
-	public PlatinumIngotItem(SkizzikModElements instance) {
-		super(instance, 219);
+	public MapleSyrupBottleItem(SkizzikModElements instance) {
+		super(instance, 250);
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class PlatinumIngotItem extends SkizzikModElements.ModElement {
 	}
 	public static class ItemCustom extends Item {
 		public ItemCustom() {
-			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(64).isImmuneToFire().rarity(Rarity.COMMON));
-			setRegistryName("platinum_ingot");
+			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(16).rarity(Rarity.COMMON));
+			setRegistryName("maple_syrup_bottle");
 		}
 
 		@Override

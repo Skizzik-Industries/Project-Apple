@@ -60,7 +60,7 @@ public class RainbowSwordItem extends SkizzikModElements.ModElement {
 			public Ingredient getRepairMaterial() {
 				return Ingredient.fromStacks(new ItemStack(RainbowGemItem.block, (int) (1)));
 			}
-		}, 3, -3f, new Item.Properties().group(TemplateTabItemGroup.tab)) {
+		}, 3, -3f, new Item.Properties().group(TemplateTabItemGroup.tab).isImmuneToFire()) {
 			@Override
 			public void addInformation(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
 				super.addInformation(itemstack, world, list, flag);
