@@ -9,7 +9,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "skizzik:unknown_element",
+          "name": "skizzik:deleted_mod_element",
           "weight": 1,
           "functions": [
             {

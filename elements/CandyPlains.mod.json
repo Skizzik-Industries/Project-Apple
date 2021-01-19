@@ -25,6 +25,9 @@
       "value": -786388,
       "falpha": 0.0
     },
+    "moodSoundDelay": 0,
+    "spawnParticles": false,
+    "particlesProbability": 0.0,
     "biomeCategory": "NONE",
     "parent": {
       "value": "No parent"
@@ -50,6 +53,7 @@
     "vanillaTreeType": "Default",
     "treeType": 1,
     "minHeight": 6,
+    "maxWaterDepth": 0,
     "treeStem": {
       "value": "CUSTOM:CandyLog"
     },

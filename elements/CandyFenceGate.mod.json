@@ -16,6 +16,8 @@
     "itemTexture": "",
     "particleTexture": "",
     "blockBase": "FenceGate",
+    "tintType": "No tint",
+    "isItemTinted": false,
     "hasTransparency": true,
     "connectedSides": false,
     "transparencyType": "SOLID",
