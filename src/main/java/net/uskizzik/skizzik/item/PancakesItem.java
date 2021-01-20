@@ -13,11 +13,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Food;
 
 @SkizzikModElements.ModElement.Tag
-public class CandyCaneItem extends SkizzikModElements.ModElement {
-	@ObjectHolder("skizzik:candy_cane")
+public class PancakesItem extends SkizzikModElements.ModElement {
+	@ObjectHolder("skizzik:pancakes")
 	public static final Item block = null;
-	public CandyCaneItem(SkizzikModElements instance) {
-		super(instance, 40);
+	public PancakesItem(SkizzikModElements instance) {
+		super(instance, 256);
 	}
 
 	@Override
@@ -27,13 +27,13 @@ public class CandyCaneItem extends SkizzikModElements.ModElement {
 	public static class FoodItemCustom extends Item {
 		public FoodItemCustom() {
 			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(64).rarity(Rarity.COMMON)
-					.food((new Food.Builder()).hunger(1).saturation(2.5f).setAlwaysEdible().build()));
-			setRegistryName("candy_cane");
+					.food((new Food.Builder()).hunger(3).saturation(2.3f).build()));
+			setRegistryName("pancakes");
 		}
 
 		@Override
 		public int getUseDuration(ItemStack stack) {
-			return 15;
+			return 40;
 		}
 
 		@Override

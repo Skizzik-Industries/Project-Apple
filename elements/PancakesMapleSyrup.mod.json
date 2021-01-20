@@ -3,24 +3,24 @@
   "_type": "food",
   "definition": {
     "renderType": 0,
-    "texture": "maple_syrup",
+    "texture": "pancakes_maple_syrup",
     "customModelName": "Normal",
-    "name": "Maple Syrup",
+    "name": "Pancakes with Maple Syrup",
     "rarity": "COMMON",
     "specialInfo": [],
     "creativeTab": {
       "value": "CUSTOM:TemplateTab"
     },
-    "stackSize": 16,
-    "nutritionalValue": 1,
+    "stackSize": 64,
+    "nutritionalValue": 5,
     "saturation": 2.5,
-    "eatingSpeed": 20,
+    "eatingSpeed": 40,
     "resultItem": {
-      "value": "CUSTOM:MapleSyrupBottle"
+      "value": ""
     },
     "forDogs": false,
-    "isAlwaysEdible": true,
-    "animation": "drink",
+    "isAlwaysEdible": false,
+    "animation": "eat",
     "hasGlow": false
   }
 }

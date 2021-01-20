@@ -1,0 +1,32 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:sugar"
+    },
+    "1": {
+      "item": "skizzik:salt"
+    },
+    "2": {
+      "item": "minecraft:sugar"
+    },
+    "3": {
+      "item": "skizzik:butter"
+    },
+    "4": {
+      "item": "minecraft:milk_bucket"
+    },
+    "5": {
+      "item": "skizzik:butter"
+    }
+  },
+  "result": {
+    "item": "skizzik:pancakes",
+    "count": 3
+  }
+}

@@ -30,8 +30,13 @@ public class MapleSyrupItem extends SkizzikModElements.ModElement {
 	public static class FoodItemCustom extends Item {
 		public FoodItemCustom() {
 			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(16).rarity(Rarity.COMMON)
-					.food((new Food.Builder()).hunger(4).saturation(2.5f).setAlwaysEdible().build()));
+					.food((new Food.Builder()).hunger(1).saturation(2.5f).setAlwaysEdible().build()));
 			setRegistryName("maple_syrup");
+		}
+
+		@Override
+		public int getUseDuration(ItemStack stack) {
+			return 20;
 		}
 
 		@Override

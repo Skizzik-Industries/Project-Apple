@@ -1,0 +1,42 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "skizzik:salt"
+    },
+    "1": {
+      "item": "skizzik:salt"
+    },
+    "2": {
+      "item": "skizzik:salt"
+    },
+    "3": {
+      "item": "skizzik:salt"
+    },
+    "4": {
+      "item": "skizzik:salt"
+    },
+    "5": {
+      "item": "skizzik:salt"
+    },
+    "6": {
+      "item": "skizzik:salt"
+    },
+    "7": {
+      "item": "skizzik:salt"
+    },
+    "8": {
+      "item": "skizzik:salt"
+    }
+  },
+  "result": {
+    "item": "minecraft:diorite",
+    "count": 1
+  }
+}

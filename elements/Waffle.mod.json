@@ -3,24 +3,24 @@
   "_type": "food",
   "definition": {
     "renderType": 0,
-    "texture": "maple_syrup",
+    "texture": "waffle",
     "customModelName": "Normal",
-    "name": "Maple Syrup",
+    "name": "Waffle",
     "rarity": "COMMON",
     "specialInfo": [],
     "creativeTab": {
       "value": "CUSTOM:TemplateTab"
     },
-    "stackSize": 16,
-    "nutritionalValue": 1,
-    "saturation": 2.5,
-    "eatingSpeed": 20,
+    "stackSize": 64,
+    "nutritionalValue": 4,
+    "saturation": 0.3,
+    "eatingSpeed": 32,
     "resultItem": {
-      "value": "CUSTOM:MapleSyrupBottle"
+      "value": ""
     },
     "forDogs": false,
-    "isAlwaysEdible": true,
-    "animation": "drink",
+    "isAlwaysEdible": false,
+    "animation": "eat",
     "hasGlow": false
   }
 }

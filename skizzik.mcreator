@@ -2706,15 +2706,6 @@
       "registry_name": "candy_cane_plant_loot"
     },
     {
-      "name": "Skizzik5Loot",
-      "type": "loottable",
-      "sortid": 208,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "skizzik_5_loot"
-    },
-    {
       "name": "CandyPigLoot",
       "type": "loottable",
       "sortid": 209,
@@ -3420,6 +3411,123 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "maple_syrup_fluid"
+    },
+    {
+      "name": "Salt",
+      "type": "item",
+      "sortid": 252,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "salt"
+    },
+    {
+      "name": "Diorite",
+      "type": "loottable",
+      "sortid": 253,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "diorite"
+    },
+    {
+      "name": "DioriteRecipe",
+      "type": "recipe",
+      "sortid": 254,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "diorite_recipe"
+    },
+    {
+      "name": "Butter",
+      "type": "item",
+      "sortid": 252,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "butter"
+    },
+    {
+      "name": "ButterRecipe",
+      "type": "recipe",
+      "sortid": 255,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "butter_recipe"
+    },
+    {
+      "name": "Pancakes",
+      "type": "food",
+      "sortid": 256,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pancakes"
+    },
+    {
+      "name": "PancakesMapleSyrup",
+      "type": "food",
+      "sortid": 257,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pancakes_maple_syrup"
+    },
+    {
+      "name": "PancakesRecipe",
+      "type": "recipe",
+      "sortid": 258,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pancakes_recipe"
+    },
+    {
+      "name": "PancakesMapleSyrupRecipe",
+      "type": "recipe",
+      "sortid": 258,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pancakes_maple_syrup_recipe"
+    },
+    {
+      "name": "PancakesMapleSyrupRecipe2",
+      "type": "recipe",
+      "sortid": 258,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "pancakes_maple_syrup_recipe_2"
+    },
+    {
+      "name": "Waffle",
+      "type": "food",
+      "sortid": 259,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "waffle"
+    },
+    {
+      "name": "WaffleRecipe",
+      "type": "recipe",
+      "sortid": 260,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "waffle_recipe"
+    },
+    {
+      "name": "WaffleBlock",
+      "type": "block",
+      "sortid": 259,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "waffle_block"
     }
   ],
   "variable_elements": [],
@@ -3530,8 +3638,10 @@
       "block.skizzik.rainbow_gem_block": "Rainbow Gem Block",
       "item.skizzik.witch_skizzie_3_spawn_egg": "Witch Skizzie (Level 3) Spawn Egg",
       "item.skizzik.candy_shovel": "Candy Shovel",
+      "item.skizzik.waffle": "Waffle",
       "advancements.skizzik.title": "Skizzik",
       "death.attack.corrupted": "%1$s got corrupted",
+      "item.skizzik.pancakes_maple_syrup": "Pancakes with Maple Syrup",
       "item.skizzik.skiz_launcher_2": "Skiz Launcher 2",
       "block.skizzik.skizzik_flesh_block": "Skizzik Flesh Block",
       "item.skizzik.skiz_launcher_3": "Skiz Launcher 3",
@@ -3546,6 +3656,7 @@
       "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
       "item.skizzik.pink_gem": "Pink Gem",
       "item.skizzik.maple_syrup_bottle": "Maple Syrup Bottle",
+      "block.skizzik.waffle_block": "Waffle Block",
       "item.skizzik.skizzik_2": "Skizzik - Stage 2 Spawn Egg",
       "entity.skizzik.skizzik_4": "Skizzik - Stage 4",
       "entity.skizzik.skizzik_5": "Skizzik - Stage 5",
@@ -3561,6 +3672,7 @@
       "block.skizzik.skizzik_head": "Skizzik Head",
       "block.skizzik.candy_door": "Candy Door",
       "block.skizzik.deactivated_command_block": "Deactivated Command Block",
+      "item.skizzik.butter": "Butter",
       "block.skizzik.candy_wood": "Candy Wood",
       "item.skizzik.rainbow_gem": "Rainbow Gem",
       "item.skizzik.skizzik_2_spawn_egg": "Skizzik - Stage 2 Spawn Egg",
@@ -3581,6 +3693,7 @@
       "item.skizzik.friendly_witch_skizzie_3_spawn_egg": "Friendly Witch Skizzie (Level 3) Spawn Egg",
       "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
       "entity.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie",
+      "item.skizzik.pancakes": "Pancakes",
       "item.skizzik.candy_nugget": "Candy Nugget",
       "entity.skizzik.skizzie": "Skizzie",
       "item.skizzik.candy_sword": "Candy Sword",
@@ -3599,6 +3712,7 @@
       "item.skizzik.corrupted_skizzie": "Corrupted Skizzie Spawn Egg",
       "item.skizzik.yellow_gem": "Yellow Gem",
       "biome.skizzik.candy_plains": "Candy Plains",
+      "item.skizzik.salt": "Salt",
       "block.skizzik.candy_log": "Candy Log",
       "block.skizzik.skizzik_head_small": "Small Skizzik Head",
       "block.skizzik.command_block": "Command Block",
