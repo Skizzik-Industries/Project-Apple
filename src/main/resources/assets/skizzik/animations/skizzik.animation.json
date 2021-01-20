@@ -1,0 +1,25 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.skizzik.idle": {
+			"loop": true,
+			"animation_length": 2.2,
+			"bones": {
+				"head1": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.04": {
+							"vector": [0, -25, 0]
+						},
+						"2.2": {
+							"vector": [-30, -25, 0],
+							"easing": "easeInBounce"
+						}
+					}
+				}
+			}
+		}
+	}
+}
