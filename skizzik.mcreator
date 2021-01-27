@@ -3528,24 +3528,6 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "waffle_block"
-    },
-    {
-      "name": "SkizzikAnimationTestOnEntityTickUpdate",
-      "type": "procedure",
-      "sortid": 261,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "skizzik_animation_test_on_entity_tick_update"
-    },
-    {
-      "name": "SkizzikAnimationTest",
-      "type": "mob",
-      "sortid": 261,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "skizzik_animation_test"
     }
   ],
   "variable_elements": [],
@@ -3658,7 +3640,6 @@
       "item.skizzik.candy_shovel": "Candy Shovel",
       "item.skizzik.waffle": "Waffle",
       "advancements.skizzik.title": "Skizzik",
-      "item.skizzik.skizzik_animation_test_spawn_egg": "Skizzik Animation Test Spawn Egg",
       "death.attack.corrupted": "%1$s got corrupted",
       "item.skizzik.pancakes_maple_syrup": "Pancakes with Maple Syrup",
       "item.skizzik.skiz_launcher_2": "Skiz Launcher 2",
@@ -3715,7 +3696,6 @@
       "item.skizzik.pancakes": "Pancakes",
       "item.skizzik.candy_nugget": "Candy Nugget",
       "entity.skizzik.skizzie": "Skizzie",
-      "entity.skizzik.skizzik_animation_test": "Skizzik Animation Test",
       "item.skizzik.candy_sword": "Candy Sword",
       "block.skizzik.skizzik_head_gems": "Skizzik Head with Gems",
       "block.skizzik.candy_fence": "Candy Fence",
