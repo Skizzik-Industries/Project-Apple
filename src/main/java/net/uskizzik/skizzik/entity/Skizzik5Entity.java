@@ -110,7 +110,7 @@ public class Skizzik5Entity extends SkizzikModElements.ModElement {
 		AttributeModifierMap.MutableAttribute ammma = MobEntity.func_233666_p_();
 		ammma = ammma.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3);
 		ammma = ammma.createMutableAttribute(Attributes.MAX_HEALTH, 250);
-		ammma = ammma.createMutableAttribute(Attributes.ARMOR, 20);
+		ammma = ammma.createMutableAttribute(Attributes.ARMOR, 12);
 		ammma = ammma.createMutableAttribute(Attributes.ATTACK_DAMAGE, 10);
 		ammma = ammma.createMutableAttribute(Attributes.FLYING_SPEED, 0.3);
 		GlobalEntityTypeAttributes.put(entity, ammma.create());

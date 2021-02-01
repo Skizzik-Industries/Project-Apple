@@ -50,7 +50,7 @@
     "attackKnockback": 0.0,
     "knockbackResistance": 0.0,
     "movementSpeed": 0.3,
-    "armorBaseValue": 20.0,
+    "armorBaseValue": 12.0,
     "trackingRange": 64,
     "health": 250,
     "xpAmount": 0,
