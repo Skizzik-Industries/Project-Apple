@@ -1,7 +1,76 @@
 
 package net.uskizzik.skizzik.entity;
 
+import net.uskizzik.skizzik.procedures.Skizzik4ThisEntityKillsAnotherOneProcedure;
+import net.uskizzik.skizzik.procedures.Skizzik4PlayerCollidesWithThisEntityProcedure;
+import net.uskizzik.skizzik.procedures.Skizzik4OnInitialEntitySpawnProcedure;
+import net.uskizzik.skizzik.procedures.Skizzik4EntityIsHurtProcedure;
+import net.uskizzik.skizzik.procedures.Skizzik4EntityDiesProcedure;
+import net.uskizzik.skizzik.procedures.Skizzik1OnEntityTickUpdateProcedure;
 import net.uskizzik.skizzik.item.SkizLauncher2Item;
+import net.uskizzik.skizzik.SkizzikModElements;
+
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+
+import net.minecraft.world.server.ServerBossInfo;
+import net.minecraft.world.World;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.BossInfo;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.DamageSource;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.network.IPacket;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.entity.projectile.PotionEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.block.BlockState;
+
+import javax.annotation.Nullable;
+
+import java.util.Random;
+import java.util.Map;
+import java.util.HashMap;
+
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.matrix.MatrixStack;
 
 @SkizzikModElements.ModElement.Tag
 public class Skizzik4Entity extends SkizzikModElements.ModElement {
