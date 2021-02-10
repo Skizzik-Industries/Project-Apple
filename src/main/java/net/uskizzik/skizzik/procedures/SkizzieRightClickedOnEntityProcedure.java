@@ -1,5 +1,7 @@
 package net.uskizzik.skizzik.procedures;
 
+import net.uskizzik.skizzik.world.ConvertSkizziesGameRule;
+import net.uskizzik.skizzik.world.BefriendSkizziesGameRule;
 import net.uskizzik.skizzik.entity.WitchSkizzieEntity;
 import net.uskizzik.skizzik.entity.MinigunSkizzieEntity;
 import net.uskizzik.skizzik.entity.KaBoomSkizzieEntity;
@@ -78,8 +80,11 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		IWorld world = (IWorld) dependencies.get("world");
 		if ((!(world.isRemote()))) {
-			if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
-					.getItem() == new ItemStack(Items.WATER_BUCKET, (int) (1)).getItem())) {
+			if (((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
+					.getItem() == new ItemStack(Items.WATER_BUCKET, (int) (1)).getItem())
+					&& (((world instanceof World)
+							? ((World) world).getGameRules().getBoolean(BefriendSkizziesGameRule.gamerule)
+							: false) == (true)))) {
 				if ((new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayerEntity) {
@@ -141,7 +146,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 						}
 					}
 				}
-			} else {
+			} else if ((((world instanceof World) ? ((World) world).getGameRules().getBoolean(ConvertSkizziesGameRule.gamerule) : false) == (true))) {
 				if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
 						.getItem() == new ItemStack(Items.GUNPOWDER, (int) (1)).getItem())) {
 					if ((new Object() {

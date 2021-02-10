@@ -3546,6 +3546,39 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "skizzik_animation_test"
+    },
+    {
+      "name": "BefriendSkizzies",
+      "type": "gamerule",
+      "sortid": 262,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "befriendSkizzies",
+      "metadata": {
+        "type": "boolean"
+      }
+    },
+    {
+      "name": "ConvertSkizzies",
+      "type": "gamerule",
+      "sortid": 263,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "convertSkizzies",
+      "metadata": {
+        "type": "boolean"
+      }
+    },
+    {
+      "name": "CosmicSkizzik",
+      "type": "mob",
+      "sortid": 264,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "cosmic_skizzik"
     }
   ],
   "variable_elements": [],
@@ -3594,7 +3627,9 @@
       "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie (Level 1) Spawn Egg",
       "item.skizzik.candy_hoe": "Candy Hoe",
       "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
+      "entity.skizzik.cosmic_skizzik": "Cosmic Skizzik (Coming Soon)",
       "item.skizzik.skiz_launcher": "Skiz Launcher",
+      "gamerule.convertSkizzies": "If true, you will be able to convert Skizzies into other types.",
       "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
       "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
       "block.skizzik.pink_gem_block": "Pink Gem Block",
@@ -3610,6 +3645,7 @@
       "item.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie Spawn Egg",
       "item.skizzik.witch_skizzie_2_spawn_egg": "Witch Skizzie (Level 2) Spawn Egg",
       "block.skizzik.green_gem_block": "Green Gem Block",
+      "gamerule.befriendSkizzies": "If true, you will be able to right-click on Skizzies with water bucket to befriend them.",
       "item.skizzik.candy_helmet": "Candy Helmet",
       "item.skizzik.candybody": "Candy Body",
       "entity.skizzik.inactive_skizzik": "Skizzik - Inactive",
@@ -3713,6 +3749,7 @@
       "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
       "entity.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie",
       "item.skizzik.pancakes": "Pancakes",
+      "item.skizzik.cosmic_skizzik_spawn_egg": "Cosmic Skizzik (Coming Soon) Spawn Egg",
       "item.skizzik.candy_nugget": "Candy Nugget",
       "entity.skizzik.skizzie": "Skizzie",
       "entity.skizzik.skizzik_animation_test": "Skizzik Animation Test",
@@ -3746,7 +3783,7 @@
     "version": "Skizzik [1.8.0 - Beta #4]",
     "description": "Coming Soon",
     "author": "uSkizzik",
-    "websiteURL": "https://discord.gg/VbTjjQK",
+    "websiteURL": "https://skizzik-industries.xyz",
     "license": "All Rights Reserved",
     "disableForgeVersionCheck": true,
     "serverSideOnly": false,
@@ -3756,7 +3793,7 @@
     "dependants": [],
     "mcreatorDependencies": [],
     "currentGenerator": "forge-1.16.4",
-    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "credits": "Credits to jacso10 for giving me the idea for the Ka-Boom Skizzie.",
     "modElementsPackage": "net.uskizzik.skizzik",
     "lockBaseModFiles": false
   },
