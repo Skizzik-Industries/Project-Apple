@@ -48,7 +48,7 @@
     "mobCreatureType": "UNDEAD",
     "attackStrength": 8,
     "attackKnockback": 0.0,
-    "knockbackResistance": 0.0,
+    "knockbackResistance": 0.5,
     "movementSpeed": 0.3,
     "armorBaseValue": 4.0,
     "trackingRange": 64,

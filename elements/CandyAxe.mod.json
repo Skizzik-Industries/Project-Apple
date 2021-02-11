@@ -8,7 +8,7 @@
     "name": "Candy Axe",
     "specialInfo": [],
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:CandyTab"
     },
     "toolType": "Axe",
     "harvestLevel": 2,

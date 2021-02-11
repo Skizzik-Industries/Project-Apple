@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -17,7 +17,7 @@ public class CandyShovelItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_shovel")
 	public static final Item block = null;
 	public CandyShovelItem(SkizzikModElements instance) {
-		super(instance, 46);
+		super(instance, 62);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class CandyShovelItem extends SkizzikModElements.ModElement {
 			public Ingredient getRepairMaterial() {
 				return Ingredient.fromStacks(new ItemStack(CandyIngotItem.block, (int) (1)));
 			}
-		}, 1, -3f, new Item.Properties().group(TemplateTabItemGroup.tab)) {
+		}, 1, -3f, new Item.Properties().group(CandyTabItemGroup.tab)) {
 		}.setRegistryName("candy_shovel"));
 	}
 }

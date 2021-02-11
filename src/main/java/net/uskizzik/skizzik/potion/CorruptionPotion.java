@@ -25,7 +25,7 @@ public class CorruptionPotion extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:corruption")
 	public static final Effect potion = null;
 	public CorruptionPotion(SkizzikModElements instance) {
-		super(instance, 105);
+		super(instance, 128);
 		FMLJavaModLoadingContext.get().getModEventBus().register(this);
 	}
 

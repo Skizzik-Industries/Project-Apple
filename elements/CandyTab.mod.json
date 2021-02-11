@@ -1,0 +1,11 @@
+{
+  "_fv": 15,
+  "_type": "tab",
+  "definition": {
+    "name": "Skizzik: Candy",
+    "icon": {
+      "value": "CUSTOM:CandyIngot"
+    },
+    "showSearch": false
+  }
+}

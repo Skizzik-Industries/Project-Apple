@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.block;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -31,14 +31,13 @@ public class CandyLogBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_log")
 	public static final Block block = null;
 	public CandyLogBlock(SkizzikModElements instance) {
-		super(instance, 15);
+		super(instance, 67);
 	}
 
 	@Override
 	public void initElements() {
 		elements.blocks.add(() -> new CustomBlock());
-		elements.items
-				.add(() -> new BlockItem(block, new Item.Properties().group(TemplateTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
+		elements.items.add(() -> new BlockItem(block, new Item.Properties().group(CandyTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
 	}
 	public static class CustomBlock extends Block {
 		public static final DirectionProperty FACING = DirectionalBlock.FACING;

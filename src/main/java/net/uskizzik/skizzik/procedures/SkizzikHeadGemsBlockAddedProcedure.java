@@ -28,7 +28,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizzikHeadGemsBlockAddedProcedure extends SkizzikModElements.ModElement {
 	public SkizzikHeadGemsBlockAddedProcedure(SkizzikModElements instance) {
-		super(instance, 162);
+		super(instance, 185);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

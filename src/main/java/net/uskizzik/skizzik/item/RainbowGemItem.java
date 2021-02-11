@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.RainbowTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -16,7 +16,7 @@ public class RainbowGemItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:rainbow_gem")
 	public static final Item block = null;
 	public RainbowGemItem(SkizzikModElements instance) {
-		super(instance, 29);
+		super(instance, 32);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class RainbowGemItem extends SkizzikModElements.ModElement {
 	}
 	public static class ItemCustom extends Item {
 		public ItemCustom() {
-			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(64).isImmuneToFire().rarity(Rarity.COMMON));
+			super(new Item.Properties().group(RainbowTabItemGroup.tab).maxStackSize(64).isImmuneToFire().rarity(Rarity.COMMON));
 			setRegistryName("rainbow_gem");
 		}
 

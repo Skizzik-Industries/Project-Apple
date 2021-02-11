@@ -2,22 +2,22 @@
   "_fv": 15,
   "_type": "mob",
   "definition": {
-    "mobName": "Cosmic Skizzik (Coming Soon)",
+    "mobName": "Cosmic Skizzie",
     "mobLabel": "",
-    "mobModelName": "Modelcosmic_skizzik",
-    "mobModelTexture": "cosmic_skizzik.png",
-    "mobModelGlowTexture": "",
-    "modelWidth": 0.6,
-    "modelHeight": 1.8,
+    "mobModelName": "Modelcosmic_skizzie",
+    "mobModelTexture": "cosmic_skizzie.png",
+    "mobModelGlowTexture": "cosmic_skizzie_glow.png",
+    "modelWidth": 1.1,
+    "modelHeight": 3.1,
     "modelShadowSize": 0.5,
     "mountedYOffset": 0.0,
     "hasSpawnEgg": true,
     "spawnEggBaseColor": {
-      "value": -1,
+      "value": -6750055,
       "falpha": 0.0
     },
     "spawnEggDotColor": {
-      "value": -1,
+      "value": -10092442,
       "falpha": 0.0
     },
     "creativeTab": {
@@ -45,14 +45,14 @@
       "value": ""
     },
     "mobBehaviourType": "Mob",
-    "mobCreatureType": "UNDEFINED",
+    "mobCreatureType": "UNDEAD",
     "attackStrength": 3,
     "attackKnockback": 0.0,
     "knockbackResistance": 0.0,
     "movementSpeed": 0.3,
-    "armorBaseValue": 0.0,
+    "armorBaseValue": 10.0,
     "trackingRange": 64,
-    "health": 10,
+    "health": 35,
     "xpAmount": 0,
     "waterMob": false,
     "flyingMob": true,
@@ -63,13 +63,13 @@
     "ridable": false,
     "canControlForward": false,
     "canControlStrafe": false,
-    "immuneToFire": false,
+    "immuneToFire": true,
     "immuneToArrows": false,
-    "immuneToFallDamage": false,
-    "immuneToCactus": false,
-    "immuneToDrowning": false,
-    "immuneToLightning": false,
-    "immuneToPotions": false,
+    "immuneToFallDamage": true,
+    "immuneToCactus": true,
+    "immuneToDrowning": true,
+    "immuneToLightning": true,
+    "immuneToPotions": true,
     "immuneToPlayer": false,
     "mobDrop": {
       "value": ""
@@ -78,10 +78,10 @@
       "value": ""
     },
     "hurtSound": {
-      "value": ""
+      "value": "CUSTOM:entity.cosmic_skizzie.hurt"
     },
     "deathSound": {
-      "value": ""
+      "value": "CUSTOM:entity.cosmic_skizzie.death"
     },
     "stepSound": {
       "value": ""

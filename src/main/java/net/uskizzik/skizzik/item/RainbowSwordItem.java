@@ -2,7 +2,7 @@
 package net.uskizzik.skizzik.item;
 
 import net.uskizzik.skizzik.procedures.RainbowSwordRightClickedOnBlockProcedure;
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.RainbowTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -31,7 +31,7 @@ public class RainbowSwordItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:rainbow_sword")
 	public static final Item block = null;
 	public RainbowSwordItem(SkizzikModElements instance) {
-		super(instance, 42);
+		super(instance, 40);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class RainbowSwordItem extends SkizzikModElements.ModElement {
 			public Ingredient getRepairMaterial() {
 				return Ingredient.fromStacks(new ItemStack(RainbowGemItem.block, (int) (1)));
 			}
-		}, 3, -3f, new Item.Properties().group(TemplateTabItemGroup.tab).isImmuneToFire()) {
+		}, 3, -3f, new Item.Properties().group(RainbowTabItemGroup.tab).isImmuneToFire()) {
 			@Override
 			public void addInformation(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
 				super.addInformation(itemstack, world, list, flag);

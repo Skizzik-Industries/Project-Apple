@@ -46,7 +46,7 @@ public class SkizzikHeadGemsBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:skizzik_head_gems")
 	public static final Block block = null;
 	public SkizzikHeadGemsBlock(SkizzikModElements instance) {
-		super(instance, 28);
+		super(instance, 10);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class PlatinumIngotItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:platinum_ingot")
 	public static final Item block = null;
 	public PlatinumIngotItem(SkizzikModElements instance) {
-		super(instance, 219);
+		super(instance, 2);
 	}
 
 	@Override

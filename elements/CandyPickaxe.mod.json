@@ -8,7 +8,7 @@
     "name": "Candy Pickaxe",
     "specialInfo": [],
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:CandyTab"
     },
     "toolType": "Pickaxe",
     "harvestLevel": 2,

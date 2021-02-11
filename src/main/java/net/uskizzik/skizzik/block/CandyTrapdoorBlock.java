@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.block;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -33,14 +33,13 @@ public class CandyTrapdoorBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_trapdoor")
 	public static final Block block = null;
 	public CandyTrapdoorBlock(SkizzikModElements instance) {
-		super(instance, 26);
+		super(instance, 78);
 	}
 
 	@Override
 	public void initElements() {
 		elements.blocks.add(() -> new CustomBlock());
-		elements.items
-				.add(() -> new BlockItem(block, new Item.Properties().group(TemplateTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
+		elements.items.add(() -> new BlockItem(block, new Item.Properties().group(CandyTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
 	}
 
 	@Override

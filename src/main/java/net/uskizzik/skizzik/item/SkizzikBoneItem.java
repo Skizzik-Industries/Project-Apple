@@ -16,7 +16,7 @@ public class SkizzikBoneItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:skizzik_bone")
 	public static final Item block = null;
 	public SkizzikBoneItem(SkizzikModElements instance) {
-		super(instance, 218);
+		super(instance, 3);
 	}
 
 	@Override

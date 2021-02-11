@@ -8,7 +8,7 @@
     "name": "Candy Hoe",
     "specialInfo": [],
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:CandyTab"
     },
     "toolType": "Hoe",
     "harvestLevel": 2,

@@ -2,7 +2,7 @@
 package net.uskizzik.skizzik.entity;
 
 import net.uskizzik.skizzik.procedures.CandyPigItIsStruckByLightningProcedure;
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -53,7 +53,7 @@ import java.util.HashMap;
 public class CandyPigEntity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public CandyPigEntity(SkizzikModElements instance) {
-		super(instance, 49);
+		super(instance, 80);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -64,7 +64,7 @@ public class CandyPigEntity extends SkizzikModElements.ModElement {
 				.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).size(0.9f, 0.9f)).build("candy_pig")
 						.setRegistryName("candy_pig");
 		elements.entities.add(() -> entity);
-		elements.items.add(() -> new SpawnEggItem(entity, -786388, -65462, new Item.Properties().group(TemplateTabItemGroup.tab))
+		elements.items.add(() -> new SpawnEggItem(entity, -786388, -65462, new Item.Properties().group(CandyTabItemGroup.tab))
 				.setRegistryName("candy_pig_spawn_egg"));
 	}
 

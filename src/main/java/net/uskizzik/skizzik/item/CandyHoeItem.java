@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -17,7 +17,7 @@ public class CandyHoeItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_hoe")
 	public static final Item block = null;
 	public CandyHoeItem(SkizzikModElements instance) {
-		super(instance, 47);
+		super(instance, 63);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class CandyHoeItem extends SkizzikModElements.ModElement {
 			public Ingredient getRepairMaterial() {
 				return Ingredient.fromStacks(new ItemStack(CandyIngotItem.block, (int) (1)));
 			}
-		}, 0, -3f, new Item.Properties().group(TemplateTabItemGroup.tab)) {
+		}, 0, -3f, new Item.Properties().group(CandyTabItemGroup.tab)) {
 		}.setRegistryName("candy_hoe"));
 	}
 }

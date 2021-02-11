@@ -75,7 +75,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class Skizzik3Entity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public Skizzik3Entity(SkizzikModElements instance) {
-		super(instance, 101);
+		super(instance, 124);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 
@@ -111,6 +111,7 @@ public class Skizzik3Entity extends SkizzikModElements.ModElement {
 		ammma = ammma.createMutableAttribute(Attributes.MAX_HEALTH, 200);
 		ammma = ammma.createMutableAttribute(Attributes.ARMOR, 8);
 		ammma = ammma.createMutableAttribute(Attributes.ATTACK_DAMAGE, 8);
+		ammma = ammma.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 2);
 		ammma = ammma.createMutableAttribute(Attributes.FLYING_SPEED, 0.3);
 		GlobalEntityTypeAttributes.put(entity, ammma.create());
 	}

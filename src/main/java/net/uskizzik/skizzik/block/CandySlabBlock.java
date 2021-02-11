@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.block;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -31,14 +31,13 @@ public class CandySlabBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_slab")
 	public static final Block block = null;
 	public CandySlabBlock(SkizzikModElements instance) {
-		super(instance, 23);
+		super(instance, 75);
 	}
 
 	@Override
 	public void initElements() {
 		elements.blocks.add(() -> new CustomBlock());
-		elements.items
-				.add(() -> new BlockItem(block, new Item.Properties().group(TemplateTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
+		elements.items.add(() -> new BlockItem(block, new Item.Properties().group(CandyTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
 	}
 
 	@Override

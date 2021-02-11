@@ -70,7 +70,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class CorruptedSkizzieEntity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public CorruptedSkizzieEntity(SkizzikModElements instance) {
-		super(instance, 55);
+		super(instance, 22);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 

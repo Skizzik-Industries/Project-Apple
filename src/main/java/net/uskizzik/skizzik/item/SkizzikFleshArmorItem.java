@@ -29,7 +29,7 @@ public class SkizzikFleshArmorItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:skizzik_flesh_armor_boots")
 	public static final Item boots = null;
 	public SkizzikFleshArmorItem(SkizzikModElements instance) {
-		super(instance, 228);
+		super(instance, 6);
 	}
 
 	@Override

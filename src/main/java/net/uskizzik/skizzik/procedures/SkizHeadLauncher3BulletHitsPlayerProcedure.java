@@ -16,7 +16,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizHeadLauncher3BulletHitsPlayerProcedure extends SkizzikModElements.ModElement {
 	public SkizHeadLauncher3BulletHitsPlayerProcedure(SkizzikModElements instance) {
-		super(instance, 154);
+		super(instance, 177);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

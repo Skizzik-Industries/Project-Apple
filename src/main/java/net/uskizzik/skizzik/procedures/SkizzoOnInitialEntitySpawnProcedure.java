@@ -17,7 +17,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizzoOnInitialEntitySpawnProcedure extends SkizzikModElements.ModElement {
 	public SkizzoOnInitialEntitySpawnProcedure(SkizzikModElements instance) {
-		super(instance, 124);
+		super(instance, 147);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

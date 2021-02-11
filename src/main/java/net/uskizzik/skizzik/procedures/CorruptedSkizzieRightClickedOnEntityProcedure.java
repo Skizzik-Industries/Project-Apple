@@ -36,7 +36,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class CorruptedSkizzieRightClickedOnEntityProcedure extends SkizzikModElements.ModElement {
 	public CorruptedSkizzieRightClickedOnEntityProcedure(SkizzikModElements instance) {
-		super(instance, 131);
+		super(instance, 154);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

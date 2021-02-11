@@ -24,7 +24,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class Skizzik5EntityDiesProcedure extends SkizzikModElements.ModElement {
 	public Skizzik5EntityDiesProcedure(SkizzikModElements instance) {
-		super(instance, 149);
+		super(instance, 172);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

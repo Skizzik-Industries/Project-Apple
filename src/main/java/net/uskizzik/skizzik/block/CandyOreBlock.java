@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.block;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -41,15 +41,14 @@ public class CandyOreBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_ore")
 	public static final Block block = null;
 	public CandyOreBlock(SkizzikModElements instance) {
-		super(instance, 5);
+		super(instance, 65);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
 	public void initElements() {
 		elements.blocks.add(() -> new CustomBlock());
-		elements.items
-				.add(() -> new BlockItem(block, new Item.Properties().group(TemplateTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
+		elements.items.add(() -> new BlockItem(block, new Item.Properties().group(CandyTabItemGroup.tab)).setRegistryName(block.getRegistryName()));
 	}
 	public static class CustomBlock extends Block {
 		public CustomBlock() {

@@ -42,7 +42,7 @@ public class SkizzikHeadSmallBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:skizzik_head_small")
 	public static final Block block = null;
 	public SkizzikHeadSmallBlock(SkizzikModElements instance) {
-		super(instance, 233);
+		super(instance, 7);
 	}
 
 	@Override

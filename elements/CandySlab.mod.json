@@ -14,6 +14,7 @@
     "emissiveRendering": false,
     "displayFluidOverlay": false,
     "itemTexture": "",
+    "particleTexture": "",
     "blockBase": "Slab",
     "tintType": "No tint",
     "isItemTinted": false,
@@ -33,7 +34,7 @@
     "hasGravity": false,
     "isWaterloggable": false,
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:CandyTab"
     },
     "destroyTool": "Not specified",
     "customDrop": {

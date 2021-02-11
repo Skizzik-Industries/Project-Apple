@@ -18,7 +18,7 @@ import java.util.HashMap;
 @SkizzikModElements.ModElement.Tag
 public class RidableSkizziesProcedure extends SkizzikModElements.ModElement {
 	public RidableSkizziesProcedure(SkizzikModElements instance) {
-		super(instance, 179);
+		super(instance, 202);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

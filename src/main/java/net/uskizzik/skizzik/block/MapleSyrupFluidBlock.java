@@ -1,7 +1,6 @@
 
 package net.uskizzik.skizzik.block;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -27,9 +26,7 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.item.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.BucketItem;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -50,7 +47,7 @@ public class MapleSyrupFluidBlock extends SkizzikModElements.ModElement {
 	public static FlowingFluid still = null;
 	private ForgeFlowingFluid.Properties fluidproperties = null;
 	public MapleSyrupFluidBlock(SkizzikModElements instance) {
-		super(instance, 251);
+		super(instance, 31);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new FluidRegisterHandler());
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -73,14 +70,11 @@ public class MapleSyrupFluidBlock extends SkizzikModElements.ModElement {
 		fluidproperties = new ForgeFlowingFluid.Properties(() -> still, () -> flowing,
 				FluidAttributes.builder(new ResourceLocation("skizzik:blocks/maple_syrup_fluid_still"),
 						new ResourceLocation("skizzik:blocks/maple_syrup_fluid_flow")).luminosity(0).density(1000).viscosity(1000))
-								.bucket(() -> bucket).block(() -> block);
+								.block(() -> block);
 		still = (FlowingFluid) new ForgeFlowingFluid.Source(fluidproperties).setRegistryName("maple_syrup_fluid");
 		flowing = (FlowingFluid) new ForgeFlowingFluid.Flowing(fluidproperties).setRegistryName("maple_syrup_fluid_flowing");
 		elements.blocks.add(() -> new FlowingFluidBlock(still, Block.Properties.create(Material.LAVA)) {
 		}.setRegistryName("maple_syrup_fluid"));
-		elements.items
-				.add(() -> new BucketItem(still, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(TemplateTabItemGroup.tab))
-						.setRegistryName("maple_syrup_fluid_bucket"));
 	}
 
 	@SubscribeEvent

@@ -33,7 +33,7 @@
     "hasGravity": false,
     "isWaterloggable": false,
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:RainbowTab"
     },
     "destroyTool": "pickaxe",
     "customDrop": {

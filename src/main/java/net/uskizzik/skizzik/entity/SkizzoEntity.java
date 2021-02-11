@@ -69,7 +69,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class SkizzoEntity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public SkizzoEntity(SkizzikModElements instance) {
-		super(instance, 50);
+		super(instance, 23);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 

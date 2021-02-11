@@ -8,7 +8,7 @@
     "name": "Rainbow Gem",
     "rarity": "COMMON",
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:RainbowTab"
     },
     "stackSize": 64,
     "enchantability": 0,

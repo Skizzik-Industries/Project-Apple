@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -20,7 +20,7 @@ public class MapleSyrupItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:maple_syrup")
 	public static final Item block = null;
 	public MapleSyrupItem(SkizzikModElements instance) {
-		super(instance, 250);
+		super(instance, 52);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class MapleSyrupItem extends SkizzikModElements.ModElement {
 	}
 	public static class FoodItemCustom extends Item {
 		public FoodItemCustom() {
-			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(16).rarity(Rarity.COMMON)
+			super(new Item.Properties().group(CandyTabItemGroup.tab).maxStackSize(16).rarity(Rarity.COMMON)
 					.food((new Food.Builder()).hunger(1).saturation(2.5f).setAlwaysEdible().build()));
 			setRegistryName("maple_syrup");
 		}

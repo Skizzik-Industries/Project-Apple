@@ -8,7 +8,7 @@
     "name": "Candy Shovel",
     "specialInfo": [],
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:CandyTab"
     },
     "toolType": "Spade",
     "harvestLevel": 2,

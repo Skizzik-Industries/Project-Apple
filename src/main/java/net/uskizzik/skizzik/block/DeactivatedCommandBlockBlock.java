@@ -26,7 +26,7 @@ public class DeactivatedCommandBlockBlock extends SkizzikModElements.ModElement 
 	@ObjectHolder("skizzik:deactivated_command_block")
 	public static final Block block = null;
 	public DeactivatedCommandBlockBlock(SkizzikModElements instance) {
-		super(instance, 215);
+		super(instance, 15);
 	}
 
 	@Override

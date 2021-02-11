@@ -10,6 +10,7 @@
       }
     ],
     "functions": [],
+    "entities": [],
     "name": "valid_spawn",
     "namespace": "minecraft"
   }

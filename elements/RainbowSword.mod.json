@@ -10,7 +10,7 @@
       "Right-click on a block to teleport it in another dimension"
     ],
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:RainbowTab"
     },
     "toolType": "Sword",
     "harvestLevel": 0,

@@ -43,7 +43,7 @@ public class StoneSkizzieBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:stone_skizzie")
 	public static final Block block = null;
 	public StoneSkizzieBlock(SkizzikModElements instance) {
-		super(instance, 3);
+		super(instance, 12);
 	}
 
 	@Override

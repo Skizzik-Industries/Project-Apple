@@ -26,7 +26,7 @@ public class CommandBlockBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:command_block")
 	public static final Block block = null;
 	public CommandBlockBlock(SkizzikModElements instance) {
-		super(instance, 1);
+		super(instance, 17);
 	}
 
 	@Override

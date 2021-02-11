@@ -39,7 +39,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class WitchSkizzieRightClickedOnEntityProcedure extends SkizzikModElements.ModElement {
 	public WitchSkizzieRightClickedOnEntityProcedure(SkizzikModElements instance) {
-		super(instance, 128);
+		super(instance, 151);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

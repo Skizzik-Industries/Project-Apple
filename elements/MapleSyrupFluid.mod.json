@@ -10,7 +10,7 @@
     "viscosity": 1000,
     "isGas": false,
     "type": "LAVA",
-    "generateBucket": true,
+    "generateBucket": false,
     "creativeTab": {
       "value": "CUSTOM:TemplateTab"
     },

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemGroup;
 @SkizzikModElements.ModElement.Tag
 public class TemplateTabItemGroup extends SkizzikModElements.ModElement {
 	public TemplateTabItemGroup(SkizzikModElements instance) {
-		super(instance, 60);
+		super(instance, 85);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -16,7 +16,7 @@ public class CandyNuggetItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_nugget")
 	public static final Item block = null;
 	public CandyNuggetItem(SkizzikModElements instance) {
-		super(instance, 38);
+		super(instance, 57);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class CandyNuggetItem extends SkizzikModElements.ModElement {
 	}
 	public static class ItemCustom extends Item {
 		public ItemCustom() {
-			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(64).rarity(Rarity.COMMON));
+			super(new Item.Properties().group(CandyTabItemGroup.tab).maxStackSize(64).rarity(Rarity.COMMON));
 			setRegistryName("candy_nugget");
 		}
 

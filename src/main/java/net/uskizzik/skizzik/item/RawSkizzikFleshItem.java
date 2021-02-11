@@ -16,7 +16,7 @@ public class RawSkizzikFleshItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:raw_skizzik_flesh")
 	public static final Item block = null;
 	public RawSkizzikFleshItem(SkizzikModElements instance) {
-		super(instance, 220);
+		super(instance, 4);
 	}
 
 	@Override

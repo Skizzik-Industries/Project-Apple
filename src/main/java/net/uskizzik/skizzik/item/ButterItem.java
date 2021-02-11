@@ -16,7 +16,7 @@ public class ButterItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:butter")
 	public static final Item block = null;
 	public ButterItem(SkizzikModElements instance) {
-		super(instance, 252);
+		super(instance, 82);
 	}
 
 	@Override

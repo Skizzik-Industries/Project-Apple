@@ -10,6 +10,7 @@
       }
     ],
     "functions": [],
+    "entities": [],
     "name": "enderman_holdable",
     "namespace": "minecraft"
   }

@@ -54,7 +54,7 @@ public class SkizzikLootbagBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:skizzik_lootbag")
 	public static final Block block = null;
 	public SkizzikLootbagBlock(SkizzikModElements instance) {
-		super(instance, 235);
+		super(instance, 11);
 	}
 
 	@Override

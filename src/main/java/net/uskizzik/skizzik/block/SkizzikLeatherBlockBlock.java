@@ -25,7 +25,7 @@ public class SkizzikLeatherBlockBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:skizzik_flesh_block")
 	public static final Block block = null;
 	public SkizzikLeatherBlockBlock(SkizzikModElements instance) {
-		super(instance, 218);
+		super(instance, 14);
 	}
 
 	@Override

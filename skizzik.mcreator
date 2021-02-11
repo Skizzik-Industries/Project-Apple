@@ -4,7 +4,7 @@
     {
       "name": "CommandBlock",
       "type": "block",
-      "sortid": 1,
+      "sortid": 17,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -13,7 +13,7 @@
     {
       "name": "CommandBlockRecipe",
       "type": "recipe",
-      "sortid": 59,
+      "sortid": 84,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -22,7 +22,7 @@
     {
       "name": "TemplateTab",
       "type": "tab",
-      "sortid": 60,
+      "sortid": 85,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -31,7 +31,7 @@
     {
       "name": "BlackGem",
       "type": "item",
-      "sortid": 30,
+      "sortid": 33,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -40,7 +40,7 @@
     {
       "name": "BlueGem",
       "type": "item",
-      "sortid": 31,
+      "sortid": 34,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -49,7 +49,7 @@
     {
       "name": "BrownGem",
       "type": "item",
-      "sortid": 32,
+      "sortid": 35,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -58,7 +58,7 @@
     {
       "name": "YellowGem",
       "type": "item",
-      "sortid": 33,
+      "sortid": 36,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -67,7 +67,7 @@
     {
       "name": "OrangeGem",
       "type": "item",
-      "sortid": 34,
+      "sortid": 37,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -76,7 +76,7 @@
     {
       "name": "GreenGem",
       "type": "item",
-      "sortid": 35,
+      "sortid": 38,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -85,7 +85,7 @@
     {
       "name": "PinkGem",
       "type": "item",
-      "sortid": 36,
+      "sortid": 39,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -94,7 +94,7 @@
     {
       "name": "RainbowGem",
       "type": "item",
-      "sortid": 29,
+      "sortid": 32,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -103,7 +103,7 @@
     {
       "name": "RainbowOre",
       "type": "block",
-      "sortid": 4,
+      "sortid": 41,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -112,7 +112,7 @@
     {
       "name": "BlackGemRecipe",
       "type": "recipe",
-      "sortid": 61,
+      "sortid": 86,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -121,7 +121,7 @@
     {
       "name": "BlueGemRecipe",
       "type": "recipe",
-      "sortid": 62,
+      "sortid": 87,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -130,7 +130,7 @@
     {
       "name": "BrownGemRecipe",
       "type": "recipe",
-      "sortid": 63,
+      "sortid": 88,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -139,7 +139,7 @@
     {
       "name": "YellowGemRecipe",
       "type": "recipe",
-      "sortid": 64,
+      "sortid": 89,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -148,7 +148,7 @@
     {
       "name": "OrangeGemRecipe",
       "type": "recipe",
-      "sortid": 65,
+      "sortid": 90,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -157,7 +157,7 @@
     {
       "name": "GreenGemRecipe",
       "type": "recipe",
-      "sortid": 66,
+      "sortid": 91,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -166,7 +166,7 @@
     {
       "name": "PinkGemRecipe",
       "type": "recipe",
-      "sortid": 67,
+      "sortid": 92,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -175,7 +175,7 @@
     {
       "name": "RainbowGemRecipe",
       "type": "recipe",
-      "sortid": 68,
+      "sortid": 93,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -184,7 +184,7 @@
     {
       "name": "RainbowGemRecipe2",
       "type": "recipe",
-      "sortid": 69,
+      "sortid": 94,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -193,7 +193,7 @@
     {
       "name": "RainbowGemRecipe3",
       "type": "recipe",
-      "sortid": 70,
+      "sortid": 95,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -202,7 +202,7 @@
     {
       "name": "RainbowGemRecipe4",
       "type": "recipe",
-      "sortid": 71,
+      "sortid": 96,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -211,7 +211,7 @@
     {
       "name": "RainbowGemRecipe5",
       "type": "recipe",
-      "sortid": 72,
+      "sortid": 97,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -220,7 +220,7 @@
     {
       "name": "RainbowGemRecipe6",
       "type": "recipe",
-      "sortid": 73,
+      "sortid": 98,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -229,7 +229,7 @@
     {
       "name": "RainbowGemRecipe7",
       "type": "recipe",
-      "sortid": 74,
+      "sortid": 99,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -238,7 +238,7 @@
     {
       "name": "RainbowGemBlock",
       "type": "block",
-      "sortid": 6,
+      "sortid": 42,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -247,7 +247,7 @@
     {
       "name": "RainbowSword",
       "type": "tool",
-      "sortid": 42,
+      "sortid": 40,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -256,7 +256,7 @@
     {
       "name": "RainbowSwordRightClickedOnBlock",
       "type": "procedure",
-      "sortid": 77,
+      "sortid": 100,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -289,7 +289,7 @@
     {
       "name": "RainbowGemBlockRecipe",
       "type": "recipe",
-      "sortid": 78,
+      "sortid": 101,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -298,7 +298,7 @@
     {
       "name": "RainbowSwordRecipe",
       "type": "recipe",
-      "sortid": 79,
+      "sortid": 102,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -307,7 +307,7 @@
     {
       "name": "CandyIngot",
       "type": "item",
-      "sortid": 37,
+      "sortid": 58,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -316,7 +316,7 @@
     {
       "name": "CandyNugget",
       "type": "item",
-      "sortid": 38,
+      "sortid": 57,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -325,7 +325,7 @@
     {
       "name": "Candy",
       "type": "armor",
-      "sortid": 48,
+      "sortid": 64,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -340,7 +340,7 @@
     {
       "name": "CandyGrass",
       "type": "block",
-      "sortid": 19,
+      "sortid": 71,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -349,7 +349,7 @@
     {
       "name": "Bambooplantableon",
       "type": "tag",
-      "sortid": 80,
+      "sortid": 103,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -358,7 +358,7 @@
     {
       "name": "Endermanholdable",
       "type": "tag",
-      "sortid": 81,
+      "sortid": 104,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -367,7 +367,7 @@
     {
       "name": "Validspawn",
       "type": "tag",
-      "sortid": 82,
+      "sortid": 105,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -376,7 +376,7 @@
     {
       "name": "Candyrack",
       "type": "block",
-      "sortid": 20,
+      "sortid": 72,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -385,7 +385,7 @@
     {
       "name": "CandyLog",
       "type": "block",
-      "sortid": 15,
+      "sortid": 67,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -394,7 +394,7 @@
     {
       "name": "Logs",
       "type": "tag",
-      "sortid": 83,
+      "sortid": 106,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -403,7 +403,7 @@
     {
       "name": "CandyLeaves",
       "type": "block",
-      "sortid": 14,
+      "sortid": 66,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -412,7 +412,7 @@
     {
       "name": "Leaves",
       "type": "tag",
-      "sortid": 84,
+      "sortid": 107,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -421,7 +421,7 @@
     {
       "name": "CandyOre",
       "type": "block",
-      "sortid": 5,
+      "sortid": 65,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -430,7 +430,7 @@
     {
       "name": "CandyPlains",
       "type": "biome",
-      "sortid": 85,
+      "sortid": 108,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -439,7 +439,7 @@
     {
       "name": "CandyPigItIsStruckByLightning",
       "type": "procedure",
-      "sortid": 86,
+      "sortid": 109,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -472,7 +472,7 @@
     {
       "name": "CandyPig",
       "type": "mob",
-      "sortid": 49,
+      "sortid": 80,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -481,7 +481,7 @@
     {
       "name": "CandySword",
       "type": "tool",
-      "sortid": 43,
+      "sortid": 59,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -490,7 +490,7 @@
     {
       "name": "CandyPickaxe",
       "type": "tool",
-      "sortid": 45,
+      "sortid": 61,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -499,7 +499,7 @@
     {
       "name": "CandyAxe",
       "type": "tool",
-      "sortid": 44,
+      "sortid": 60,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -508,7 +508,7 @@
     {
       "name": "CandyShovel",
       "type": "tool",
-      "sortid": 46,
+      "sortid": 62,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -517,7 +517,7 @@
     {
       "name": "CandyHoe",
       "type": "tool",
-      "sortid": 47,
+      "sortid": 63,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -526,7 +526,7 @@
     {
       "name": "CandySwordRecipe",
       "type": "recipe",
-      "sortid": 87,
+      "sortid": 110,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -535,7 +535,7 @@
     {
       "name": "CandyPickaxeRecipe",
       "type": "recipe",
-      "sortid": 88,
+      "sortid": 111,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -544,7 +544,7 @@
     {
       "name": "CandyAxeRecipe",
       "type": "recipe",
-      "sortid": 89,
+      "sortid": 112,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -553,7 +553,7 @@
     {
       "name": "CandyShovelRecipe",
       "type": "recipe",
-      "sortid": 90,
+      "sortid": 113,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -562,7 +562,7 @@
     {
       "name": "CandyHoeRecipe",
       "type": "recipe",
-      "sortid": 91,
+      "sortid": 114,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -571,7 +571,7 @@
     {
       "name": "CandyIngotRecipe",
       "type": "recipe",
-      "sortid": 92,
+      "sortid": 115,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -580,7 +580,7 @@
     {
       "name": "CandyIngotRecipe2",
       "type": "recipe",
-      "sortid": 93,
+      "sortid": 116,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -589,7 +589,7 @@
     {
       "name": "CandyNuggetRecipe",
       "type": "recipe",
-      "sortid": 94,
+      "sortid": 117,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -598,7 +598,7 @@
     {
       "name": "CandyHelmetRecipe",
       "type": "recipe",
-      "sortid": 95,
+      "sortid": 118,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -607,7 +607,7 @@
     {
       "name": "CandyChestplateRecipe",
       "type": "recipe",
-      "sortid": 96,
+      "sortid": 119,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -616,7 +616,7 @@
     {
       "name": "CandyLegginsRecipe",
       "type": "recipe",
-      "sortid": 97,
+      "sortid": 120,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -625,7 +625,7 @@
     {
       "name": "CandyBootsRecipe",
       "type": "recipe",
-      "sortid": 98,
+      "sortid": 121,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -634,7 +634,7 @@
     {
       "name": "Skizzik1",
       "type": "mob",
-      "sortid": 99,
+      "sortid": 122,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -643,7 +643,7 @@
     {
       "name": "Skizzik2",
       "type": "mob",
-      "sortid": 100,
+      "sortid": 123,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -652,7 +652,7 @@
     {
       "name": "Skizzik3",
       "type": "mob",
-      "sortid": 101,
+      "sortid": 124,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -661,7 +661,7 @@
     {
       "name": "Skizzik4",
       "type": "mob",
-      "sortid": 102,
+      "sortid": 125,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -670,7 +670,7 @@
     {
       "name": "Skizzik5",
       "type": "mob",
-      "sortid": 103,
+      "sortid": 126,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -679,7 +679,7 @@
     {
       "name": "CorruptedBlock",
       "type": "block",
-      "sortid": 2,
+      "sortid": 13,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -688,7 +688,7 @@
     {
       "name": "CorruptionPotionExpires",
       "type": "procedure",
-      "sortid": 104,
+      "sortid": 127,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -705,7 +705,7 @@
     {
       "name": "Corruption",
       "type": "potion",
-      "sortid": 105,
+      "sortid": 128,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -714,7 +714,7 @@
     {
       "name": "CorruptedBlockEntityCollidesInTheBlock",
       "type": "procedure",
-      "sortid": 106,
+      "sortid": 129,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -731,7 +731,7 @@
     {
       "name": "CandyCane",
       "type": "food",
-      "sortid": 40,
+      "sortid": 50,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -740,7 +740,7 @@
     {
       "name": "SkizzikHead",
       "type": "block",
-      "sortid": 27,
+      "sortid": 9,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -749,7 +749,7 @@
     {
       "name": "SkizzikHeadGems",
       "type": "block",
-      "sortid": 28,
+      "sortid": 10,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -758,7 +758,7 @@
     {
       "name": "SkizzikHeadRecipe",
       "type": "recipe",
-      "sortid": 107,
+      "sortid": 130,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -767,7 +767,7 @@
     {
       "name": "SkizzikHeadGemsRecipe",
       "type": "recipe",
-      "sortid": 108,
+      "sortid": 131,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -776,7 +776,7 @@
     {
       "name": "Skizzik1EntityDies",
       "type": "procedure",
-      "sortid": 109,
+      "sortid": 132,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -809,7 +809,7 @@
     {
       "name": "Skizzik1PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 110,
+      "sortid": 133,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -826,7 +826,7 @@
     {
       "name": "Skizzik1EntityIsHurt",
       "type": "procedure",
-      "sortid": 111,
+      "sortid": 134,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -855,7 +855,7 @@
     {
       "name": "Skizzik1OnInitialEntitySpawn",
       "type": "procedure",
-      "sortid": 112,
+      "sortid": 135,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -884,7 +884,7 @@
     {
       "name": "Skizzik1ThisEntityKillsAnotherOne",
       "type": "procedure",
-      "sortid": 113,
+      "sortid": 136,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -901,7 +901,7 @@
     {
       "name": "Skizzie",
       "type": "mob",
-      "sortid": 51,
+      "sortid": 18,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -910,7 +910,7 @@
     {
       "name": "KaBoomSkizzie",
       "type": "mob",
-      "sortid": 52,
+      "sortid": 19,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -919,7 +919,7 @@
     {
       "name": "MinigunSkizzie",
       "type": "mob",
-      "sortid": 53,
+      "sortid": 20,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -928,7 +928,7 @@
     {
       "name": "WitchSkizzie",
       "type": "mob",
-      "sortid": 54,
+      "sortid": 21,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -937,7 +937,7 @@
     {
       "name": "CorruptedSkizzie",
       "type": "mob",
-      "sortid": 55,
+      "sortid": 22,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -946,7 +946,7 @@
     {
       "name": "SkizzieEntityDies",
       "type": "procedure",
-      "sortid": 114,
+      "sortid": 137,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -975,7 +975,7 @@
     {
       "name": "SkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 115,
+      "sortid": 138,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1012,7 +1012,7 @@
     {
       "name": "SkizziePlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 116,
+      "sortid": 139,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1029,7 +1029,7 @@
     {
       "name": "KaBoomSkizziePlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 117,
+      "sortid": 140,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1058,7 +1058,7 @@
     {
       "name": "Minigun",
       "type": "gun",
-      "sortid": 118,
+      "sortid": 141,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1067,7 +1067,7 @@
     {
       "name": "WitchSkizziePlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 119,
+      "sortid": 142,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1084,7 +1084,7 @@
     {
       "name": "CorruptedSkizzieOnEntityTickUpdate",
       "type": "procedure",
-      "sortid": 120,
+      "sortid": 143,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1113,7 +1113,7 @@
     {
       "name": "CorruptedSkizziePlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 121,
+      "sortid": 144,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1130,7 +1130,7 @@
     {
       "name": "SkizzoOnEntityTickUpdate",
       "type": "procedure",
-      "sortid": 122,
+      "sortid": 145,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1159,7 +1159,7 @@
     {
       "name": "SkizzoPlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 123,
+      "sortid": 146,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1176,7 +1176,7 @@
     {
       "name": "SkizzoOnInitialEntitySpawn",
       "type": "procedure",
-      "sortid": 124,
+      "sortid": 147,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1205,7 +1205,7 @@
     {
       "name": "Skizzo",
       "type": "mob",
-      "sortid": 50,
+      "sortid": 23,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1214,7 +1214,7 @@
     {
       "name": "FriendlySkizzie",
       "type": "mob",
-      "sortid": 56,
+      "sortid": 24,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1223,7 +1223,7 @@
     {
       "name": "FriendlyMinigunSkizzie",
       "type": "mob",
-      "sortid": 57,
+      "sortid": 25,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1232,7 +1232,7 @@
     {
       "name": "FriendlyWitchSkizziePlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 125,
+      "sortid": 148,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1249,7 +1249,7 @@
     {
       "name": "FriendlyWitchSkizzie",
       "type": "mob",
-      "sortid": 58,
+      "sortid": 26,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1258,7 +1258,7 @@
     {
       "name": "StoneSkizzie",
       "type": "block",
-      "sortid": 3,
+      "sortid": 12,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1267,7 +1267,7 @@
     {
       "name": "KaBoomSkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 126,
+      "sortid": 149,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1304,7 +1304,7 @@
     {
       "name": "MinigunSkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 127,
+      "sortid": 150,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1341,7 +1341,7 @@
     {
       "name": "WitchSkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 128,
+      "sortid": 151,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1378,7 +1378,7 @@
     {
       "name": "FriendlyMinigunSkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 129,
+      "sortid": 152,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1415,7 +1415,7 @@
     {
       "name": "FriendlySkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 130,
+      "sortid": 153,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1452,7 +1452,7 @@
     {
       "name": "CorruptedSkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 131,
+      "sortid": 154,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1489,7 +1489,7 @@
     {
       "name": "SkizLauncherBulletHitsBlock",
       "type": "procedure",
-      "sortid": 132,
+      "sortid": 155,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1518,7 +1518,7 @@
     {
       "name": "SkizLauncherBulletHitsPlayer",
       "type": "procedure",
-      "sortid": 133,
+      "sortid": 156,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1551,7 +1551,7 @@
     {
       "name": "SkizLauncher",
       "type": "gun",
-      "sortid": 134,
+      "sortid": 157,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1560,7 +1560,7 @@
     {
       "name": "Skizzik2EntityDies",
       "type": "procedure",
-      "sortid": 135,
+      "sortid": 158,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1593,7 +1593,7 @@
     {
       "name": "Skizzik2EntityIsHurt",
       "type": "procedure",
-      "sortid": 136,
+      "sortid": 159,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1622,7 +1622,7 @@
     {
       "name": "Skizzik2ThisEntityKillsAnotherOne",
       "type": "procedure",
-      "sortid": 137,
+      "sortid": 160,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1639,7 +1639,7 @@
     {
       "name": "Skizzik3EntityDies",
       "type": "procedure",
-      "sortid": 138,
+      "sortid": 161,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1672,7 +1672,7 @@
     {
       "name": "Skizzik3EntityIsHurt",
       "type": "procedure",
-      "sortid": 139,
+      "sortid": 162,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1701,7 +1701,7 @@
     {
       "name": "Skizzik3ThisEntityKillsAnotherOne",
       "type": "procedure",
-      "sortid": 140,
+      "sortid": 163,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1718,7 +1718,7 @@
     {
       "name": "Skizzik3PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 141,
+      "sortid": 164,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1735,7 +1735,7 @@
     {
       "name": "SkizLauncher2BulletHitsBlock",
       "type": "procedure",
-      "sortid": 142,
+      "sortid": 165,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1764,7 +1764,7 @@
     {
       "name": "SkizLauncher2BulletHitsPlayer",
       "type": "procedure",
-      "sortid": 143,
+      "sortid": 166,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1797,7 +1797,7 @@
     {
       "name": "SkizLauncher2",
       "type": "gun",
-      "sortid": 144,
+      "sortid": 167,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1806,7 +1806,7 @@
     {
       "name": "Skizzik4EntityDies",
       "type": "procedure",
-      "sortid": 145,
+      "sortid": 168,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1839,7 +1839,7 @@
     {
       "name": "Skizzik4EntityIsHurt",
       "type": "procedure",
-      "sortid": 146,
+      "sortid": 169,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1868,7 +1868,7 @@
     {
       "name": "Skizzik4ThisEntityKillsAnotherOne",
       "type": "procedure",
-      "sortid": 147,
+      "sortid": 170,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1885,7 +1885,7 @@
     {
       "name": "Skizzik4PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 148,
+      "sortid": 171,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1902,7 +1902,7 @@
     {
       "name": "Skizzik5EntityDies",
       "type": "procedure",
-      "sortid": 149,
+      "sortid": 172,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1931,7 +1931,7 @@
     {
       "name": "Skizzik5EntityIsHurt",
       "type": "procedure",
-      "sortid": 150,
+      "sortid": 173,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1960,7 +1960,7 @@
     {
       "name": "Skizzik5ThisEntityKillsAnotherOne",
       "type": "procedure",
-      "sortid": 151,
+      "sortid": 174,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1977,7 +1977,7 @@
     {
       "name": "Skizzik5PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 152,
+      "sortid": 175,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -1994,7 +1994,7 @@
     {
       "name": "SkizHeadLauncher3BulletHitsBlock",
       "type": "procedure",
-      "sortid": 153,
+      "sortid": 176,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2023,7 +2023,7 @@
     {
       "name": "SkizHeadLauncher3BulletHitsPlayer",
       "type": "procedure",
-      "sortid": 154,
+      "sortid": 177,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2056,7 +2056,7 @@
     {
       "name": "SkizHeadLauncher3",
       "type": "gun",
-      "sortid": 155,
+      "sortid": 178,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2065,7 +2065,7 @@
     {
       "name": "Skizzik3OnInitialEntitySpawn",
       "type": "procedure",
-      "sortid": 156,
+      "sortid": 179,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2082,7 +2082,7 @@
     {
       "name": "Skizzik2OnInitialEntitySpawn",
       "type": "procedure",
-      "sortid": 157,
+      "sortid": 180,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2099,7 +2099,7 @@
     {
       "name": "Skizzik4OnInitialEntitySpawn",
       "type": "procedure",
-      "sortid": 158,
+      "sortid": 181,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2116,7 +2116,7 @@
     {
       "name": "Skizzik5OnInitialEntitySpawn",
       "type": "procedure",
-      "sortid": 159,
+      "sortid": 182,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2133,7 +2133,7 @@
     {
       "name": "InactiveSkizzikEntityDies",
       "type": "procedure",
-      "sortid": 160,
+      "sortid": 183,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2162,7 +2162,7 @@
     {
       "name": "InactiveSkizzik",
       "type": "mob",
-      "sortid": 161,
+      "sortid": 184,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2171,7 +2171,7 @@
     {
       "name": "SkizzikHeadGemsBlockAdded",
       "type": "procedure",
-      "sortid": 162,
+      "sortid": 185,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2200,7 +2200,7 @@
     {
       "name": "Gems",
       "type": "tag",
-      "sortid": 163,
+      "sortid": 186,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2209,7 +2209,7 @@
     {
       "name": "Skizzik1OnEntityTickUpdate",
       "type": "procedure",
-      "sortid": 164,
+      "sortid": 187,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2226,7 +2226,7 @@
     {
       "name": "PinkGemBlock",
       "type": "block",
-      "sortid": 13,
+      "sortid": 49,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2235,7 +2235,7 @@
     {
       "name": "GreenGemBlock",
       "type": "block",
-      "sortid": 12,
+      "sortid": 48,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2244,7 +2244,7 @@
     {
       "name": "OrangeGemBlock",
       "type": "block",
-      "sortid": 11,
+      "sortid": 47,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2253,7 +2253,7 @@
     {
       "name": "YellowGemBlock",
       "type": "block",
-      "sortid": 10,
+      "sortid": 46,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2262,7 +2262,7 @@
     {
       "name": "BrownGemBlock",
       "type": "block",
-      "sortid": 9,
+      "sortid": 45,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2271,7 +2271,7 @@
     {
       "name": "BlueGemBlock",
       "type": "block",
-      "sortid": 8,
+      "sortid": 44,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2280,7 +2280,7 @@
     {
       "name": "BlackGemBlock",
       "type": "block",
-      "sortid": 7,
+      "sortid": 43,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2289,7 +2289,7 @@
     {
       "name": "BlackGemBlockRecipe",
       "type": "recipe",
-      "sortid": 165,
+      "sortid": 188,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2298,7 +2298,7 @@
     {
       "name": "BlueGemBlockRecipe",
       "type": "recipe",
-      "sortid": 166,
+      "sortid": 189,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2307,7 +2307,7 @@
     {
       "name": "BrownGemBlockRecipe",
       "type": "recipe",
-      "sortid": 167,
+      "sortid": 190,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2316,7 +2316,7 @@
     {
       "name": "YellowGemBlockRecipe",
       "type": "recipe",
-      "sortid": 168,
+      "sortid": 191,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2325,7 +2325,7 @@
     {
       "name": "OrangeGemBlockRecipe",
       "type": "recipe",
-      "sortid": 169,
+      "sortid": 192,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2334,7 +2334,7 @@
     {
       "name": "GreenGemBlockRecipe",
       "type": "recipe",
-      "sortid": 170,
+      "sortid": 193,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2343,7 +2343,7 @@
     {
       "name": "PinkGemBlockRecipe",
       "type": "recipe",
-      "sortid": 171,
+      "sortid": 194,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2352,7 +2352,7 @@
     {
       "name": "BlackGemRecipe2",
       "type": "recipe",
-      "sortid": 172,
+      "sortid": 195,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2361,7 +2361,7 @@
     {
       "name": "BlueGemRecipe2",
       "type": "recipe",
-      "sortid": 173,
+      "sortid": 196,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2370,7 +2370,7 @@
     {
       "name": "BrownGemRecipe2",
       "type": "recipe",
-      "sortid": 174,
+      "sortid": 197,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2379,7 +2379,7 @@
     {
       "name": "YellowGemRecipe2",
       "type": "recipe",
-      "sortid": 175,
+      "sortid": 198,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2388,7 +2388,7 @@
     {
       "name": "OrangeGemRecipe2",
       "type": "recipe",
-      "sortid": 176,
+      "sortid": 199,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2397,7 +2397,7 @@
     {
       "name": "GreenGemRecipe2",
       "type": "recipe",
-      "sortid": 177,
+      "sortid": 200,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2406,7 +2406,7 @@
     {
       "name": "PinkGemRecipe2",
       "type": "recipe",
-      "sortid": 178,
+      "sortid": 201,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2415,7 +2415,7 @@
     {
       "name": "RidableSkizzies",
       "type": "procedure",
-      "sortid": 179,
+      "sortid": 202,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2432,7 +2432,7 @@
     {
       "name": "CandyPlanks",
       "type": "block",
-      "sortid": 21,
+      "sortid": 73,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2441,7 +2441,7 @@
     {
       "name": "Planks",
       "type": "tag",
-      "sortid": 180,
+      "sortid": 203,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2450,7 +2450,7 @@
     {
       "name": "Plank",
       "type": "tag",
-      "sortid": 181,
+      "sortid": 204,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2459,7 +2459,7 @@
     {
       "name": "CandyDoor",
       "type": "block",
-      "sortid": 25,
+      "sortid": 79,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2468,7 +2468,7 @@
     {
       "name": "CandyDoorRecipe",
       "type": "recipe",
-      "sortid": 182,
+      "sortid": 205,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2477,7 +2477,7 @@
     {
       "name": "CandyTrapdoor",
       "type": "block",
-      "sortid": 26,
+      "sortid": 78,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2486,7 +2486,7 @@
     {
       "name": "CandyTrapdoorRecipe",
       "type": "recipe",
-      "sortid": 183,
+      "sortid": 206,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2495,7 +2495,7 @@
     {
       "name": "CandySlab",
       "type": "block",
-      "sortid": 23,
+      "sortid": 75,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2504,7 +2504,7 @@
     {
       "name": "CandyStairs",
       "type": "block",
-      "sortid": 22,
+      "sortid": 74,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2513,7 +2513,7 @@
     {
       "name": "CandyPlanksRecipe",
       "type": "recipe",
-      "sortid": 184,
+      "sortid": 207,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2522,7 +2522,7 @@
     {
       "name": "CandyFence",
       "type": "block",
-      "sortid": 24,
+      "sortid": 76,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2531,7 +2531,7 @@
     {
       "name": "Fence",
       "type": "tag",
-      "sortid": 185,
+      "sortid": 208,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2540,7 +2540,7 @@
     {
       "name": "CandyCanePlant",
       "type": "plant",
-      "sortid": 186,
+      "sortid": 209,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2549,7 +2549,7 @@
     {
       "name": "StrippedCandyLog",
       "type": "block",
-      "sortid": 17,
+      "sortid": 69,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2558,7 +2558,7 @@
     {
       "name": "CandyPlanksRecipe2",
       "type": "recipe",
-      "sortid": 188,
+      "sortid": 210,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2567,7 +2567,7 @@
     {
       "name": "CandySlabRecipe",
       "type": "recipe",
-      "sortid": 189,
+      "sortid": 211,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2576,7 +2576,7 @@
     {
       "name": "CandyStairsRecipe",
       "type": "recipe",
-      "sortid": 190,
+      "sortid": 212,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2585,7 +2585,7 @@
     {
       "name": "CandyFenceRecipe",
       "type": "recipe",
-      "sortid": 191,
+      "sortid": 213,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2594,7 +2594,7 @@
     {
       "name": "CandyLogOnBlockRightClicked",
       "type": "procedure",
-      "sortid": 192,
+      "sortid": 214,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2627,7 +2627,7 @@
     {
       "name": "CandyWood",
       "type": "block",
-      "sortid": 16,
+      "sortid": 68,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2636,7 +2636,7 @@
     {
       "name": "StrippedCandyWood",
       "type": "block",
-      "sortid": 18,
+      "sortid": 70,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2645,7 +2645,7 @@
     {
       "name": "CandyPlanksRecipe3",
       "type": "recipe",
-      "sortid": 193,
+      "sortid": 215,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2654,7 +2654,7 @@
     {
       "name": "CandyPlanksRecipe4",
       "type": "recipe",
-      "sortid": 194,
+      "sortid": 216,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2663,7 +2663,7 @@
     {
       "name": "Skizzik",
       "type": "achievement",
-      "sortid": 199,
+      "sortid": 217,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2672,7 +2672,7 @@
     {
       "name": "OutOfIdeas",
       "type": "achievement",
-      "sortid": 202,
+      "sortid": 218,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2681,7 +2681,7 @@
     {
       "name": "RainbowOreLoot",
       "type": "loottable",
-      "sortid": 205,
+      "sortid": 219,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2690,7 +2690,7 @@
     {
       "name": "CandyLeavesLoot",
       "type": "loottable",
-      "sortid": 206,
+      "sortid": 220,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2699,7 +2699,7 @@
     {
       "name": "CandyCanePlantLoot",
       "type": "loottable",
-      "sortid": 207,
+      "sortid": 221,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2708,7 +2708,7 @@
     {
       "name": "CandyPigLoot",
       "type": "loottable",
-      "sortid": 209,
+      "sortid": 222,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2717,7 +2717,7 @@
     {
       "name": "CandyCaneRightClickedInAir",
       "type": "procedure",
-      "sortid": 210,
+      "sortid": 223,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2750,7 +2750,7 @@
     {
       "name": "FriendlyWitchSkizzieRightClickedOnEntity",
       "type": "procedure",
-      "sortid": 211,
+      "sortid": 224,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2787,7 +2787,7 @@
     {
       "name": "CandyIngotRecipe3",
       "type": "recipe",
-      "sortid": 212,
+      "sortid": 225,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2796,7 +2796,7 @@
     {
       "name": "CandyFenceGate",
       "type": "block",
-      "sortid": 213,
+      "sortid": 77,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2805,7 +2805,7 @@
     {
       "name": "CandyFenceGateRecipe",
       "type": "recipe",
-      "sortid": 213,
+      "sortid": 226,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2814,7 +2814,7 @@
     {
       "name": "BrokenCommandBlock",
       "type": "block",
-      "sortid": 214,
+      "sortid": 16,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2823,7 +2823,7 @@
     {
       "name": "DeactivatedCommandBlock",
       "type": "block",
-      "sortid": 215,
+      "sortid": 15,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2832,7 +2832,7 @@
     {
       "name": "DeactivatedCommandBlockRecipe",
       "type": "recipe",
-      "sortid": 216,
+      "sortid": 227,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2841,7 +2841,7 @@
     {
       "name": "CommandBlockRecipe2",
       "type": "recipe",
-      "sortid": 217,
+      "sortid": 228,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2850,7 +2850,7 @@
     {
       "name": "SkizzikBone",
       "type": "item",
-      "sortid": 218,
+      "sortid": 3,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2859,7 +2859,7 @@
     {
       "name": "SkizzikLeather",
       "type": "item",
-      "sortid": 218,
+      "sortid": 5,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2868,7 +2868,7 @@
     {
       "name": "SkizzikLeatherBlock",
       "type": "block",
-      "sortid": 218,
+      "sortid": 14,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2877,7 +2877,7 @@
     {
       "name": "PlatinumIngot",
       "type": "item",
-      "sortid": 219,
+      "sortid": 2,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2886,7 +2886,7 @@
     {
       "name": "SkizzikBoneRecipe",
       "type": "recipe",
-      "sortid": 219,
+      "sortid": 229,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2895,7 +2895,7 @@
     {
       "name": "RawSkizzikFlesh",
       "type": "item",
-      "sortid": 220,
+      "sortid": 4,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2904,7 +2904,7 @@
     {
       "name": "RawSkizzikFleshRecipe",
       "type": "recipe",
-      "sortid": 221,
+      "sortid": 230,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2913,7 +2913,7 @@
     {
       "name": "SkizzikFleshRecipe",
       "type": "recipe",
-      "sortid": 220,
+      "sortid": 231,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2922,7 +2922,7 @@
     {
       "name": "SkizzikFleshRecipe2",
       "type": "recipe",
-      "sortid": 222,
+      "sortid": 232,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2931,7 +2931,7 @@
     {
       "name": "SkizzikFleshRecipe3",
       "type": "recipe",
-      "sortid": 223,
+      "sortid": 233,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2940,7 +2940,7 @@
     {
       "name": "SkizzikFleshBlockRecipe",
       "type": "recipe",
-      "sortid": 224,
+      "sortid": 234,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2949,7 +2949,7 @@
     {
       "name": "PlatinumNugget",
       "type": "item",
-      "sortid": 225,
+      "sortid": 1,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2958,7 +2958,7 @@
     {
       "name": "PlatinumNuggetRecipe",
       "type": "recipe",
-      "sortid": 226,
+      "sortid": 235,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2967,7 +2967,7 @@
     {
       "name": "PlatinumIngotRecipe2",
       "type": "recipe",
-      "sortid": 227,
+      "sortid": 236,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2976,7 +2976,7 @@
     {
       "name": "SkizzikFleshArmor",
       "type": "armor",
-      "sortid": 228,
+      "sortid": 6,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -2991,7 +2991,7 @@
     {
       "name": "SkizzikFleshArmorHelmetRecipe",
       "type": "recipe",
-      "sortid": 229,
+      "sortid": 237,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3000,7 +3000,7 @@
     {
       "name": "SkizzikFleshArmorBodyRecipe",
       "type": "recipe",
-      "sortid": 230,
+      "sortid": 238,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3009,7 +3009,7 @@
     {
       "name": "SkizzikFleshArmorLeggingsRecipe",
       "type": "recipe",
-      "sortid": 231,
+      "sortid": 239,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3018,7 +3018,7 @@
     {
       "name": "SkizzikFleshArmorBootsRecipe",
       "type": "recipe",
-      "sortid": 232,
+      "sortid": 240,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3027,7 +3027,7 @@
     {
       "name": "SkizzikHeadSmallGems",
       "type": "block",
-      "sortid": 233,
+      "sortid": 8,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3036,7 +3036,7 @@
     {
       "name": "SkizzikHeadSmall",
       "type": "block",
-      "sortid": 233,
+      "sortid": 7,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3045,7 +3045,7 @@
     {
       "name": "SkizzikHeadSmallRecipe",
       "type": "recipe",
-      "sortid": 234,
+      "sortid": 241,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3054,7 +3054,7 @@
     {
       "name": "SkizzikHeadSmallGemsRecipe",
       "type": "recipe",
-      "sortid": 234,
+      "sortid": 242,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3063,7 +3063,7 @@
     {
       "name": "NeverGonnaGiveYouUpRightClickedInAir",
       "type": "procedure",
-      "sortid": 235,
+      "sortid": 243,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3080,7 +3080,7 @@
     {
       "name": "SkizzikLootbag",
       "type": "block",
-      "sortid": 235,
+      "sortid": 11,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3089,7 +3089,7 @@
     {
       "name": "NeverGonnaGiveYouUp",
       "type": "item",
-      "sortid": 235,
+      "sortid": 244,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3098,7 +3098,7 @@
     {
       "name": "SkizzikLootbagOnBlockRightClicked",
       "type": "procedure",
-      "sortid": 236,
+      "sortid": 245,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3127,7 +3127,7 @@
     {
       "name": "SkizzikLoot",
       "type": "loottable",
-      "sortid": 237,
+      "sortid": 246,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3136,7 +3136,7 @@
     {
       "name": "WitchSkizzie2",
       "type": "mob",
-      "sortid": 238,
+      "sortid": 27,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3145,7 +3145,7 @@
     {
       "name": "WitchSkizzie3",
       "type": "mob",
-      "sortid": 239,
+      "sortid": 28,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3154,7 +3154,7 @@
     {
       "name": "WitchSkizzie2RightClickedOnEntity",
       "type": "procedure",
-      "sortid": 240,
+      "sortid": 247,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3191,7 +3191,7 @@
     {
       "name": "WitchSkizzie3RightClickedOnEntity",
       "type": "procedure",
-      "sortid": 241,
+      "sortid": 248,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3228,7 +3228,7 @@
     {
       "name": "FriendlyWitchSkizzie2",
       "type": "mob",
-      "sortid": 242,
+      "sortid": 29,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3237,7 +3237,7 @@
     {
       "name": "FriendlyWitchSkizzie3",
       "type": "mob",
-      "sortid": 243,
+      "sortid": 30,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3246,7 +3246,7 @@
     {
       "name": "WitchSkizzie2PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 244,
+      "sortid": 249,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3263,7 +3263,7 @@
     {
       "name": "WitchSkizzie3PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 245,
+      "sortid": 250,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3280,7 +3280,7 @@
     {
       "name": "FriendlyWitchSkizzie2RightClickedOnEntity",
       "type": "procedure",
-      "sortid": 246,
+      "sortid": 251,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3317,7 +3317,7 @@
     {
       "name": "FriendlyWitchSkizzie3RightClickedOnEntity",
       "type": "procedure",
-      "sortid": 247,
+      "sortid": 252,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3354,7 +3354,7 @@
     {
       "name": "FriendlyWitchSkizzie2PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 248,
+      "sortid": 253,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3371,7 +3371,7 @@
     {
       "name": "FriendlyWitchSkizzie3PlayerCollidesWithThisEntity",
       "type": "procedure",
-      "sortid": 249,
+      "sortid": 254,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3388,7 +3388,7 @@
     {
       "name": "MapleSyrupBottle",
       "type": "item",
-      "sortid": 250,
+      "sortid": 51,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3397,7 +3397,7 @@
     {
       "name": "MapleSyrup",
       "type": "food",
-      "sortid": 250,
+      "sortid": 52,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3406,7 +3406,7 @@
     {
       "name": "MapleSyrupFluid",
       "type": "fluid",
-      "sortid": 251,
+      "sortid": 31,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3415,7 +3415,7 @@
     {
       "name": "Salt",
       "type": "item",
-      "sortid": 252,
+      "sortid": 81,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3424,7 +3424,7 @@
     {
       "name": "Diorite",
       "type": "loottable",
-      "sortid": 253,
+      "sortid": 255,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3433,7 +3433,7 @@
     {
       "name": "DioriteRecipe",
       "type": "recipe",
-      "sortid": 254,
+      "sortid": 256,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3442,7 +3442,7 @@
     {
       "name": "Butter",
       "type": "item",
-      "sortid": 252,
+      "sortid": 82,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3451,7 +3451,7 @@
     {
       "name": "ButterRecipe",
       "type": "recipe",
-      "sortid": 255,
+      "sortid": 257,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3460,7 +3460,7 @@
     {
       "name": "Pancakes",
       "type": "food",
-      "sortid": 256,
+      "sortid": 53,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3469,7 +3469,7 @@
     {
       "name": "PancakesMapleSyrup",
       "type": "food",
-      "sortid": 257,
+      "sortid": 54,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3487,7 +3487,7 @@
     {
       "name": "PancakesMapleSyrupRecipe",
       "type": "recipe",
-      "sortid": 258,
+      "sortid": 259,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3496,7 +3496,7 @@
     {
       "name": "PancakesMapleSyrupRecipe2",
       "type": "recipe",
-      "sortid": 258,
+      "sortid": 260,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3505,7 +3505,7 @@
     {
       "name": "Waffle",
       "type": "food",
-      "sortid": 259,
+      "sortid": 55,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3514,7 +3514,7 @@
     {
       "name": "WaffleRecipe",
       "type": "recipe",
-      "sortid": 260,
+      "sortid": 261,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3523,34 +3523,16 @@
     {
       "name": "WaffleBlock",
       "type": "block",
-      "sortid": 259,
+      "sortid": 56,
       "compiles": true,
       "locked_code": false,
       "ids": {},
       "registry_name": "waffle_block"
     },
     {
-      "name": "SkizzikAnimationTestOnEntityTickUpdate",
-      "type": "procedure",
-      "sortid": 261,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "skizzik_animation_test_on_entity_tick_update"
-    },
-    {
-      "name": "SkizzikAnimationTest",
-      "type": "mob",
-      "sortid": 261,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "skizzik_animation_test"
-    },
-    {
       "name": "BefriendSkizzies",
       "type": "gamerule",
-      "sortid": 262,
+      "sortid": 263,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3562,7 +3544,7 @@
     {
       "name": "ConvertSkizzies",
       "type": "gamerule",
-      "sortid": 263,
+      "sortid": 264,
       "compiles": true,
       "locked_code": false,
       "ids": {},
@@ -3572,13 +3554,31 @@
       }
     },
     {
-      "name": "CosmicSkizzik",
-      "type": "mob",
-      "sortid": 264,
+      "name": "CandyTab",
+      "type": "tab",
+      "sortid": 265,
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_skizzik"
+      "registry_name": "candy_tab"
+    },
+    {
+      "name": "RainbowTab",
+      "type": "tab",
+      "sortid": 266,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "rainbow_tab"
+    },
+    {
+      "name": "CosmicSkizzie",
+      "type": "mob",
+      "sortid": 267,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "cosmic_skizzie"
     }
   ],
   "variable_elements": [],
@@ -3611,11 +3611,31 @@
       ],
       "category": "player",
       "subtitle": "Skizzik Flesh Armor Equiped"
+    },
+    {
+      "name": "entity.cosmic_skizzie.hurt",
+      "files": [
+        "entity.cosmic_skizzie.hurt_1",
+        "entity.cosmic_skizzie.hurt_2",
+        "entity.cosmic_skizzie.hurt_3",
+        "entity.cosmic_skizzie.hurt_4"
+      ],
+      "category": "hostile",
+      "subtitle": "Cosmic Skizzie Hurts"
+    },
+    {
+      "name": "entity.cosmic_skizzie.death",
+      "files": [
+        "entity.cosmic_skizzie.death"
+      ],
+      "category": "hostile",
+      "subtitle": "Cosmic Skizzie Dies"
     }
   ],
   "language_map": {
     "en_us": {
       "item.skizzik.skizzik_5_spawn_egg": "Skizzik - Stage 5 Spawn Egg",
+      "entity.skizzik.cosmic_skizzie": "Cosmic Skizzie",
       "item.skizzik.friendly_skizzie": "Friendly Skizzie Spawn Egg",
       "block.skizzik.brown_gem_block": "Brown Gem Block",
       "block.skizzik.blue_gem_block": "Blue Gem Block",
@@ -3627,11 +3647,11 @@
       "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie (Level 1) Spawn Egg",
       "item.skizzik.candy_hoe": "Candy Hoe",
       "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
-      "entity.skizzik.cosmic_skizzik": "Cosmic Skizzik (Coming Soon)",
       "item.skizzik.skiz_launcher": "Skiz Launcher",
       "gamerule.convertSkizzies": "If true, you will be able to convert Skizzies into other types.",
       "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
       "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
+      "itemGroup.tabrainbow_tab": "Skizzik: Rainbow",
       "block.skizzik.pink_gem_block": "Pink Gem Block",
       "item.skizzik.brown_gem": "Brown Gem",
       "item.skizzik.candy_chestplate": "Candy Body",
@@ -3648,6 +3668,7 @@
       "gamerule.befriendSkizzies": "If true, you will be able to right-click on Skizzies with water bucket to befriend them.",
       "item.skizzik.candy_helmet": "Candy Helmet",
       "item.skizzik.candybody": "Candy Body",
+      "subtitles.entity.cosmic_skizzie.hurt": "Cosmic Skizzie Hurts",
       "entity.skizzik.inactive_skizzik": "Skizzik - Inactive",
       "entity.skizzik.witch_skizzie_3": "Witch Skizzie (Level 3)",
       "entity.skizzik.friendly_witch_skizzie_1": "Friendly Witch Skizzie (Level 1)",
@@ -3694,7 +3715,7 @@
       "item.skizzik.candy_shovel": "Candy Shovel",
       "item.skizzik.waffle": "Waffle",
       "advancements.skizzik.title": "Skizzik",
-      "item.skizzik.skizzik_animation_test_spawn_egg": "Skizzik Animation Test Spawn Egg",
+      "itemGroup.tabcandy_tab": "Skizzik: Candy",
       "death.attack.corrupted": "%1$s got corrupted",
       "item.skizzik.pancakes_maple_syrup": "Pancakes with Maple Syrup",
       "item.skizzik.skiz_launcher_2": "Skiz Launcher 2",
@@ -3719,6 +3740,7 @@
       "block.skizzik.candy_fence_gate": "Candy Fence Gate",
       "entity.skizzik.skizzik_2": "Skizzik - Stage 2",
       "item.skizzik.skizzik_4": "Skizzik - Stage 4 Spawn Egg",
+      "subtitles.entity.cosmic_skizzie.death": "Cosmic Skizzie Dies",
       "entity.skizzik.skizzik_3": "Skizzik - Stage 3",
       "item.skizzik.skizzik_5": "Skizzik - Stage 5 Spawn Egg",
       "item.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie Spawn Egg",
@@ -3728,6 +3750,7 @@
       "block.skizzik.candy_door": "Candy Door",
       "block.skizzik.deactivated_command_block": "Deactivated Command Block",
       "item.skizzik.butter": "Butter",
+      "item.skizzik.cosmic_skizzie_spawn_egg": "Cosmic Skizzie Spawn Egg",
       "block.skizzik.candy_wood": "Candy Wood",
       "item.skizzik.rainbow_gem": "Rainbow Gem",
       "item.skizzik.skizzik_2_spawn_egg": "Skizzik - Stage 2 Spawn Egg",
@@ -3749,10 +3772,8 @@
       "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
       "entity.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie",
       "item.skizzik.pancakes": "Pancakes",
-      "item.skizzik.cosmic_skizzik_spawn_egg": "Cosmic Skizzik (Coming Soon) Spawn Egg",
       "item.skizzik.candy_nugget": "Candy Nugget",
       "entity.skizzik.skizzie": "Skizzie",
-      "entity.skizzik.skizzik_animation_test": "Skizzik Animation Test",
       "item.skizzik.candy_sword": "Candy Sword",
       "block.skizzik.skizzik_head_gems": "Skizzik Head with Gems",
       "block.skizzik.candy_fence": "Candy Fence",

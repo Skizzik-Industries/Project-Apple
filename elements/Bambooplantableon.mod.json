@@ -10,6 +10,7 @@
       }
     ],
     "functions": [],
+    "entities": [],
     "name": "bamboo_plantable_on",
     "namespace": "minecraft"
   }

@@ -22,7 +22,7 @@ public class NeverGonnaGiveYouUpItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:never_gonna_give_you_up")
 	public static final Item block = null;
 	public NeverGonnaGiveYouUpItem(SkizzikModElements instance) {
-		super(instance, 235);
+		super(instance, 244);
 	}
 
 	@Override

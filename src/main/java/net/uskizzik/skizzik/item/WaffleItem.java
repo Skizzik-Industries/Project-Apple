@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -17,7 +17,7 @@ public class WaffleItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:waffle")
 	public static final Item block = null;
 	public WaffleItem(SkizzikModElements instance) {
-		super(instance, 259);
+		super(instance, 55);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class WaffleItem extends SkizzikModElements.ModElement {
 	}
 	public static class FoodItemCustom extends Item {
 		public FoodItemCustom() {
-			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(64).rarity(Rarity.COMMON)
+			super(new Item.Properties().group(CandyTabItemGroup.tab).maxStackSize(64).rarity(Rarity.COMMON)
 					.food((new Food.Builder()).hunger(4).saturation(0.3f).build()));
 			setRegistryName("waffle");
 		}

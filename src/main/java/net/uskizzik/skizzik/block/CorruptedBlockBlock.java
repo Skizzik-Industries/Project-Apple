@@ -30,7 +30,7 @@ public class CorruptedBlockBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:corrupt_block")
 	public static final Block block = null;
 	public CorruptedBlockBlock(SkizzikModElements instance) {
-		super(instance, 2);
+		super(instance, 13);
 	}
 
 	@Override

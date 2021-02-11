@@ -22,7 +22,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class Skizzik5EntityIsHurtProcedure extends SkizzikModElements.ModElement {
 	public Skizzik5EntityIsHurtProcedure(SkizzikModElements instance) {
-		super(instance, 150);
+		super(instance, 173);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

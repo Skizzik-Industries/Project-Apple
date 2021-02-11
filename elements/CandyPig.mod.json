@@ -21,7 +21,7 @@
       "falpha": 0.0
     },
     "creativeTab": {
-      "value": "CUSTOM:TemplateTab"
+      "value": "CUSTOM:CandyTab"
     },
     "isBoss": false,
     "bossBarColor": "PINK",
@@ -82,6 +82,9 @@
     },
     "deathSound": {
       "value": "entity.pig.death"
+    },
+    "stepSound": {
+      "value": ""
     },
     "spawnParticles": false,
     "particleToSpawn": {

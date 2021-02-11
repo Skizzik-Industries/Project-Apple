@@ -16,7 +16,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class RainbowSwordRightClickedOnBlockProcedure extends SkizzikModElements.ModElement {
 	public RainbowSwordRightClickedOnBlockProcedure(SkizzikModElements instance) {
-		super(instance, 77);
+		super(instance, 100);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

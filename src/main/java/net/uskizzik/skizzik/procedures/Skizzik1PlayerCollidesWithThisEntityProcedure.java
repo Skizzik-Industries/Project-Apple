@@ -10,7 +10,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class Skizzik1PlayerCollidesWithThisEntityProcedure extends SkizzikModElements.ModElement {
 	public Skizzik1PlayerCollidesWithThisEntityProcedure(SkizzikModElements instance) {
-		super(instance, 110);
+		super(instance, 133);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

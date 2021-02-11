@@ -19,7 +19,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class CandyPigItIsStruckByLightningProcedure extends SkizzikModElements.ModElement {
 	public CandyPigItIsStruckByLightningProcedure(SkizzikModElements instance) {
-		super(instance, 86);
+		super(instance, 109);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

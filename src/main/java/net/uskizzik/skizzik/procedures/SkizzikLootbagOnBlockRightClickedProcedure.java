@@ -14,7 +14,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizzikLootbagOnBlockRightClickedProcedure extends SkizzikModElements.ModElement {
 	public SkizzikLootbagOnBlockRightClickedProcedure(SkizzikModElements instance) {
-		super(instance, 236);
+		super(instance, 245);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.item;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CandyTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -16,7 +16,7 @@ public class MapleSyrupBottleItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:maple_syrup_bottle")
 	public static final Item block = null;
 	public MapleSyrupBottleItem(SkizzikModElements instance) {
-		super(instance, 250);
+		super(instance, 51);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class MapleSyrupBottleItem extends SkizzikModElements.ModElement {
 	}
 	public static class ItemCustom extends Item {
 		public ItemCustom() {
-			super(new Item.Properties().group(TemplateTabItemGroup.tab).maxStackSize(16).rarity(Rarity.COMMON));
+			super(new Item.Properties().group(CandyTabItemGroup.tab).maxStackSize(16).rarity(Rarity.COMMON));
 			setRegistryName("maple_syrup_bottle");
 		}
 

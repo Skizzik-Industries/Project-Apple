@@ -26,7 +26,7 @@ public class BrokenCommandBlockBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:broken_command_block")
 	public static final Block block = null;
 	public BrokenCommandBlockBlock(SkizzikModElements instance) {
-		super(instance, 214);
+		super(instance, 16);
 	}
 
 	@Override
