@@ -27,7 +27,7 @@ import java.util.Collections;
 
 @SkizzikModElements.ModElement.Tag
 public class CorruptedBlockBlock extends SkizzikModElements.ModElement {
-	@ObjectHolder("skizzik:corrupt_block")
+	@ObjectHolder("skizzik:corrupted_block")
 	public static final Block block = null;
 	public CorruptedBlockBlock(SkizzikModElements instance) {
 		super(instance, 13);
@@ -43,7 +43,7 @@ public class CorruptedBlockBlock extends SkizzikModElements.ModElement {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.5f, 6f).setLightLevel(s -> 0).harvestLevel(-1)
 					.harvestTool(ToolType.PICKAXE));
-			setRegistryName("corrupt_block");
+			setRegistryName("corrupted_block");
 		}
 
 		@Override

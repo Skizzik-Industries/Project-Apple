@@ -1,0 +1,15 @@
+{
+  "_fv": 15,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LCONTROL",
+    "keyBindingName": "Fly Down (Skizzie Control)",
+    "keyBindingCategoryKey": "skizzik",
+    "onKeyPressed": {
+      "name": "FlyDownOnKeyPressed"
+    },
+    "onKeyReleased": {
+      "name": "FlyUpOnKeyReleased"
+    }
+  }
+}

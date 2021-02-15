@@ -11,7 +11,7 @@
     "renderType": 2,
     "customModelName": "skizzik_head_gems:default",
     "rotationMode": 1,
-    "emissiveRendering": false,
+    "emissiveRendering": true,
     "displayFluidOverlay": false,
     "itemTexture": "",
     "particleTexture": "",
@@ -66,7 +66,7 @@
     "soundOnStep": {
       "value": "WOOD"
     },
-    "luminance": 0,
+    "luminance": 6,
     "unbreakable": false,
     "breakHarvestLevel": -1,
     "spawnParticles": false,

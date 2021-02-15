@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/dark_chocolate_block",
+    "up": "skizzik:blocks/dark_chocolate_block",
+    "north": "skizzik:blocks/dark_chocolate_block",
+    "east": "skizzik:blocks/dark_chocolate_block",
+    "south": "skizzik:blocks/dark_chocolate_block",
+    "west": "skizzik:blocks/dark_chocolate_block",
+    "particle": "skizzik:blocks/dark_chocolate_block"
+  }
+}

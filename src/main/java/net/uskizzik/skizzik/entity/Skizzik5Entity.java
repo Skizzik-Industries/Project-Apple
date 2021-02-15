@@ -2,10 +2,10 @@
 package net.uskizzik.skizzik.entity;
 
 import net.uskizzik.skizzik.procedures.Skizzik5ThisEntityKillsAnotherOneProcedure;
-import net.uskizzik.skizzik.procedures.Skizzik5PlayerCollidesWithThisEntityProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik5OnInitialEntitySpawnProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik5EntityIsHurtProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik5EntityDiesProcedure;
+import net.uskizzik.skizzik.procedures.Skizzik4PlayerCollidesWithThisEntityProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik1OnEntityTickUpdateProcedure;
 import net.uskizzik.skizzik.item.SkizHeadLauncher3Item;
 import net.uskizzik.skizzik.SkizzikModElements;
@@ -32,13 +32,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.network.IPacket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -57,6 +57,7 @@ import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
@@ -76,7 +77,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class Skizzik5Entity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public Skizzik5Entity(SkizzikModElements instance) {
-		super(instance, 126);
+		super(instance, 134);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 
@@ -100,7 +101,7 @@ public class Skizzik5Entity extends SkizzikModElements.ModElement {
 				return new MobRenderer(renderManager, new Modelskizzik_5(), 1f) {
 					@Override
 					public ResourceLocation getEntityTexture(Entity entity) {
-						return new ResourceLocation("skizzik:textures/skizzik.png");
+						return new ResourceLocation("skizzik:textures/skizzik_5.png");
 					}
 				};
 			});
@@ -139,7 +140,7 @@ public class Skizzik5Entity extends SkizzikModElements.ModElement {
 		protected void registerGoals() {
 			super.registerGoals();
 			this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, PlayerEntity.class, false, false));
-			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, AnimalEntity.class, false, false));
+			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, CreatureEntity.class, false, false));
 			this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, FriendlySkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, FriendlyMinigunSkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, FriendlyWitchSkizzieEntity.CustomEntity.class, false, false));
@@ -295,7 +296,7 @@ public class Skizzik5Entity extends SkizzikModElements.ModElement {
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
 				$_dependencies.put("sourceentity", sourceentity);
-				Skizzik5PlayerCollidesWithThisEntityProcedure.executeProcedure($_dependencies);
+				Skizzik4PlayerCollidesWithThisEntityProcedure.executeProcedure($_dependencies);
 			}
 		}
 
@@ -338,6 +339,22 @@ public class Skizzik5Entity extends SkizzikModElements.ModElement {
 		public void livingTick() {
 			super.livingTick();
 			this.setNoGravity(true);
+			double x = this.getPosX();
+			double y = this.getPosY();
+			double z = this.getPosZ();
+			Random random = this.rand;
+			Entity entity = this;
+			if (true)
+				for (int l = 0; l < 5; ++l) {
+					double d0 = (x + random.nextFloat());
+					double d1 = (y + random.nextFloat());
+					double d2 = (z + random.nextFloat());
+					int i1 = random.nextInt(2) * 2 - 1;
+					double d3 = (random.nextFloat() - 0.5D) * 0.5D;
+					double d4 = (random.nextFloat() - 0.5D) * 0.5D;
+					double d5 = (random.nextFloat() - 0.5D) * 0.5D;
+					world.addParticle(ParticleTypes.FLAME, d0, d1, d2, d3, d4, d5);
+				}
 		}
 	}
 

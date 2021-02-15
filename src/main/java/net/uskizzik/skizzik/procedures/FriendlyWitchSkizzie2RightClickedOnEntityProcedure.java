@@ -5,7 +5,7 @@ import net.uskizzik.skizzik.entity.FriendlyWitchSkizzie3Entity;
 import net.uskizzik.skizzik.entity.FriendlySkizzieEntity;
 import net.uskizzik.skizzik.entity.FriendlyMinigunSkizzieEntity;
 import net.uskizzik.skizzik.block.StoneSkizzieBlock;
-import net.uskizzik.skizzik.block.SkizzikHeadBlock;
+import net.uskizzik.skizzik.block.SkizzikHeadSmallBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
 
@@ -36,7 +36,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikModElements.ModElement {
 	public FriendlyWitchSkizzie2RightClickedOnEntityProcedure(SkizzikModElements instance) {
-		super(instance, 251);
+		super(instance, 258);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -142,7 +142,7 @@ public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikM
 				}
 			}
 			if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
-					.getItem() == new ItemStack(SkizzikHeadBlock.block, (int) (1)).getItem())) {
+					.getItem() == new ItemStack(SkizzikHeadSmallBlock.block, (int) (1)).getItem())) {
 				if ((new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayerEntity) {
@@ -193,7 +193,7 @@ public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikM
 					if (!entity.world.isRemote())
 						entity.remove();
 					if (sourceentity instanceof PlayerEntity) {
-						ItemStack _stktoremove = new ItemStack(Items.POTION, (int) (1));
+						ItemStack _stktoremove = new ItemStack(SkizzikHeadSmallBlock.block, (int) (1));
 						((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 								((PlayerEntity) sourceentity).container.func_234641_j_());
 					}

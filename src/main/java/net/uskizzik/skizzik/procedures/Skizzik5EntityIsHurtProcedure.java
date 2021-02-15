@@ -11,10 +11,14 @@ import net.uskizzik.skizzik.SkizzikMod;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.IWorld;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Entity;
 
 import java.util.Map;
@@ -22,7 +26,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class Skizzik5EntityIsHurtProcedure extends SkizzikModElements.ModElement {
 	public Skizzik5EntityIsHurtProcedure(SkizzikModElements instance) {
-		super(instance, 173);
+		super(instance, 180);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -115,6 +119,30 @@ public class Skizzik5EntityIsHurtProcedure extends SkizzikModElements.ModElement
 					}
 				}
 			}
+		}
+		if (world instanceof ServerWorld) {
+			LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+			_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) (112 + z))));
+			_ent.setEffectOnly(true);
+			((World) world).addEntity(_ent);
+		}
+		if (world instanceof ServerWorld) {
+			LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+			_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) x, (int) y, (int) (112 - z))));
+			_ent.setEffectOnly(true);
+			((World) world).addEntity(_ent);
+		}
+		if (world instanceof ServerWorld) {
+			LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+			_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) (x + 112), (int) y, (int) z)));
+			_ent.setEffectOnly(true);
+			((World) world).addEntity(_ent);
+		}
+		if (world instanceof ServerWorld) {
+			LightningBoltEntity _ent = EntityType.LIGHTNING_BOLT.create((World) world);
+			_ent.moveForced(Vector3d.copyCenteredHorizontally(new BlockPos((int) (x - 112), (int) y, (int) z)));
+			_ent.setEffectOnly(true);
+			((World) world).addEntity(_ent);
 		}
 	}
 }

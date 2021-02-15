@@ -44,7 +44,7 @@ public class MinigunItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:entitybulletminigun")
 	public static final EntityType arrow = null;
 	public MinigunItem(SkizzikModElements instance) {
-		super(instance, 141);
+		super(instance, 148);
 	}
 
 	@Override

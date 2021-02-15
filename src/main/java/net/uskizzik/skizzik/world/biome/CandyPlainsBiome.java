@@ -60,7 +60,7 @@ import com.google.common.collect.ImmutableList;
 public class CandyPlainsBiome extends SkizzikModElements.ModElement {
 	public static Biome biome;
 	public CandyPlainsBiome(SkizzikModElements instance) {
-		super(instance, 108);
+		super(instance, 116);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new BiomeRegisterHandler());
 	}
 	private static class BiomeRegisterHandler {

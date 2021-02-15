@@ -17,7 +17,7 @@ public class CandyHoeItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_hoe")
 	public static final Item block = null;
 	public CandyHoeItem(SkizzikModElements instance) {
-		super(instance, 63);
+		super(instance, 71);
 	}
 
 	@Override

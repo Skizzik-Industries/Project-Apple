@@ -52,7 +52,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class CosmicSkizzieEntity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public CosmicSkizzieEntity(SkizzikModElements instance) {
-		super(instance, 267);
+		super(instance, 18);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 
@@ -91,7 +91,7 @@ public class CosmicSkizzieEntity extends SkizzikModElements.ModElement {
 		AttributeModifierMap.MutableAttribute ammma = MobEntity.func_233666_p_();
 		ammma = ammma.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3);
 		ammma = ammma.createMutableAttribute(Attributes.MAX_HEALTH, 35);
-		ammma = ammma.createMutableAttribute(Attributes.ARMOR, 10);
+		ammma = ammma.createMutableAttribute(Attributes.ARMOR, 7);
 		ammma = ammma.createMutableAttribute(Attributes.ATTACK_DAMAGE, 3);
 		ammma = ammma.createMutableAttribute(Attributes.FLYING_SPEED, 0.3);
 		GlobalEntityTypeAttributes.put(entity, ammma.create());

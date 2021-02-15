@@ -27,7 +27,7 @@ public class CandyAxeItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_axe")
 	public static final Item block = null;
 	public CandyAxeItem(SkizzikModElements instance) {
-		super(instance, 60);
+		super(instance, 68);
 	}
 
 	@Override

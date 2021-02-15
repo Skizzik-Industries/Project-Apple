@@ -13,7 +13,7 @@ public class ConvertSkizziesGameRule extends SkizzikModElements.ModElement {
 	public static final GameRules.RuleKey<GameRules.BooleanValue> gamerule = GameRules.register("convertSkizzies", GameRules.Category.MOBS,
 			create(true));
 	public ConvertSkizziesGameRule(SkizzikModElements instance) {
-		super(instance, 264);
+		super(instance, 270);
 	}
 
 	public static GameRules.RuleType<GameRules.BooleanValue> create(boolean defaultValue) {

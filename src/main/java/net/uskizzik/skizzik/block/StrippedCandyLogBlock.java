@@ -30,7 +30,7 @@ public class StrippedCandyLogBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:stripped_candy_log")
 	public static final Block block = null;
 	public StrippedCandyLogBlock(SkizzikModElements instance) {
-		super(instance, 69);
+		super(instance, 77);
 	}
 
 	@Override

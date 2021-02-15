@@ -24,7 +24,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class CandyLogOnBlockRightClickedProcedure extends SkizzikModElements.ModElement {
 	public CandyLogOnBlockRightClickedProcedure(SkizzikModElements instance) {
-		super(instance, 214);
+		super(instance, 221);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

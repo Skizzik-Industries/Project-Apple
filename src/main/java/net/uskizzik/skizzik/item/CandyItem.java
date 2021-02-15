@@ -29,7 +29,7 @@ public class CandyItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_boots")
 	public static final Item boots = null;
 	public CandyItem(SkizzikModElements instance) {
-		super(instance, 64);
+		super(instance, 72);
 	}
 
 	@Override

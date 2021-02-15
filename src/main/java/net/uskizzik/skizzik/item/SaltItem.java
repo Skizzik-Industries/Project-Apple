@@ -16,7 +16,7 @@ public class SaltItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:salt")
 	public static final Item block = null;
 	public SaltItem(SkizzikModElements instance) {
-		super(instance, 81);
+		super(instance, 89);
 	}
 
 	@Override

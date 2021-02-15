@@ -33,7 +33,7 @@ public class CandyLeavesBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_leaves")
 	public static final Block block = null;
 	public CandyLeavesBlock(SkizzikModElements instance) {
-		super(instance, 66);
+		super(instance, 74);
 	}
 
 	@Override

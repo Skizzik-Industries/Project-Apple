@@ -4,8 +4,7 @@ import net.uskizzik.skizzik.entity.WitchSkizzieEntity;
 import net.uskizzik.skizzik.entity.SkizzieEntity;
 import net.uskizzik.skizzik.entity.MinigunSkizzieEntity;
 import net.uskizzik.skizzik.entity.KaBoomSkizzieEntity;
-import net.uskizzik.skizzik.entity.CandyPigEntity;
-import net.uskizzik.skizzik.block.SkizzikHeadBlock;
+import net.uskizzik.skizzik.block.SkizzikHeadSmallBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
 
@@ -36,7 +35,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class CorruptedSkizzieRightClickedOnEntityProcedure extends SkizzikModElements.ModElement {
 	public CorruptedSkizzieRightClickedOnEntityProcedure(SkizzikModElements instance) {
-		super(instance, 154);
+		super(instance, 161);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -111,7 +110,7 @@ public class CorruptedSkizzieRightClickedOnEntityProcedure extends SkizzikModEle
 						entity.remove();
 				} else {
 					if (world instanceof ServerWorld) {
-						Entity entityToSpawn = new CandyPigEntity.CustomEntity(CandyPigEntity.entity, (World) world);
+						Entity entityToSpawn = new KaBoomSkizzieEntity.CustomEntity(KaBoomSkizzieEntity.entity, (World) world);
 						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
 						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
 						if (entityToSpawn instanceof MobEntity)
@@ -136,7 +135,7 @@ public class CorruptedSkizzieRightClickedOnEntityProcedure extends SkizzikModEle
 				}
 			} else {
 				if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
-						.getItem() == new ItemStack(SkizzikHeadBlock.block, (int) (1)).getItem())) {
+						.getItem() == new ItemStack(SkizzikHeadSmallBlock.block, (int) (1)).getItem())) {
 					if ((new Object() {
 						public boolean checkGamemode(Entity _ent) {
 							if (_ent instanceof ServerPlayerEntity) {
@@ -187,7 +186,7 @@ public class CorruptedSkizzieRightClickedOnEntityProcedure extends SkizzikModEle
 						if (!entity.world.isRemote())
 							entity.remove();
 						if (sourceentity instanceof PlayerEntity) {
-							ItemStack _stktoremove = new ItemStack(SkizzikHeadBlock.block, (int) (1));
+							ItemStack _stktoremove = new ItemStack(SkizzikHeadSmallBlock.block, (int) (1));
 							((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 									((PlayerEntity) sourceentity).container.func_234641_j_());
 						}

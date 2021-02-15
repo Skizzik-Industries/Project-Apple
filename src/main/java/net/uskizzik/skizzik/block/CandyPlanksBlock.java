@@ -28,7 +28,7 @@ public class CandyPlanksBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_planks")
 	public static final Block block = null;
 	public CandyPlanksBlock(SkizzikModElements instance) {
-		super(instance, 73);
+		super(instance, 81);
 	}
 
 	@Override

@@ -1,0 +1,26 @@
+{
+  "_fv": 15,
+  "_type": "food",
+  "definition": {
+    "renderType": 0,
+    "texture": "white_chocolate_bar",
+    "customModelName": "Normal",
+    "name": "White Chocolate Bar",
+    "rarity": "COMMON",
+    "specialInfo": [],
+    "creativeTab": {
+      "value": "CUSTOM:CandyTab"
+    },
+    "stackSize": 64,
+    "nutritionalValue": 1,
+    "saturation": 2.5,
+    "eatingSpeed": 15,
+    "resultItem": {
+      "value": "CUSTOM:ChocolateBarWrap"
+    },
+    "forDogs": false,
+    "isAlwaysEdible": true,
+    "animation": "eat",
+    "hasGlow": false
+  }
+}

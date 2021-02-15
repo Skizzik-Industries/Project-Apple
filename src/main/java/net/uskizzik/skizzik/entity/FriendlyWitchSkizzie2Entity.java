@@ -1,10 +1,9 @@
 
 package net.uskizzik.skizzik.entity;
 
-import net.uskizzik.skizzik.procedures.SkizzieRightClickedOnEntityProcedure;
 import net.uskizzik.skizzik.procedures.SkizzieEntityDiesProcedure;
 import net.uskizzik.skizzik.procedures.FriendlyWitchSkizziePlayerCollidesWithThisEntityProcedure;
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.procedures.FriendlyWitchSkizzie2RightClickedOnEntityProcedure;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,9 +26,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.network.IPacket;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -46,9 +43,14 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.block.BlockState;
 
 import java.util.Map;
@@ -61,7 +63,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class FriendlyWitchSkizzie2Entity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public FriendlyWitchSkizzie2Entity(SkizzikModElements instance) {
-		super(instance, 29);
+		super(instance, 30);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 
@@ -71,8 +73,6 @@ public class FriendlyWitchSkizzie2Entity extends SkizzikModElements.ModElement {
 				.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).immuneToFire().size(0.6f, 1.5999999999999999f))
 						.build("friendly_witch_skizzie_2").setRegistryName("friendly_witch_skizzie_2");
 		elements.entities.add(() -> entity);
-		elements.items.add(() -> new SpawnEggItem(entity, -16711681, -16711885, new Item.Properties().group(TemplateTabItemGroup.tab))
-				.setRegistryName("friendly_witch_skizzie_2_spawn_egg"));
 	}
 
 	@Override
@@ -85,6 +85,9 @@ public class FriendlyWitchSkizzie2Entity extends SkizzikModElements.ModElement {
 		public void registerModels(ModelRegistryEvent event) {
 			RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
 				return new MobRenderer(renderManager, new Modelwitch_skizzie(), 0.5f) {
+					{
+						this.addLayer(new GlowingLayer<>(this));
+					}
 					@Override
 					public ResourceLocation getEntityTexture(Entity entity) {
 						return new ResourceLocation("skizzik:textures/friendly_witch_skizzie.png");
@@ -203,7 +206,7 @@ public class FriendlyWitchSkizzie2Entity extends SkizzikModElements.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				SkizzieRightClickedOnEntityProcedure.executeProcedure($_dependencies);
+				FriendlyWitchSkizzie2RightClickedOnEntityProcedure.executeProcedure($_dependencies);
 			}
 			return retval;
 		}
@@ -234,6 +237,20 @@ public class FriendlyWitchSkizzie2Entity extends SkizzikModElements.ModElement {
 		public void livingTick() {
 			super.livingTick();
 			this.setNoGravity(true);
+		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	private static class GlowingLayer<T extends Entity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+		public GlowingLayer(IEntityRenderer<T, M> er) {
+			super(er);
+		}
+
+		public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing,
+				float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+			IVertexBuilder ivertexbuilder = bufferIn
+					.getBuffer(RenderType.getEyes(new ResourceLocation("skizzik:textures/friendly_witch_skizzie_2_glow.png")));
+			this.getEntityModel().render(matrixStackIn, ivertexbuilder, 15728640, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 		}
 	}
 

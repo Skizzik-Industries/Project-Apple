@@ -40,7 +40,7 @@ public class RainbowOreBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:rainbow_ore")
 	public static final Block block = null;
 	public RainbowOreBlock(SkizzikModElements instance) {
-		super(instance, 41);
+		super(instance, 42);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

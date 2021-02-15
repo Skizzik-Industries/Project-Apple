@@ -1,0 +1,46 @@
+{
+  "_fv": 15,
+  "_type": "recipe",
+  "definition": {
+    "recipeType": "Crafting",
+    "xpReward": 0.0,
+    "cookingTime": 200,
+    "recipeRetstackSize": 3,
+    "group": "",
+    "recipeShapeless": false,
+    "recipeSlots": [
+      {
+        "value": "Items.SUGAR"
+      },
+      {
+        "value": "Items.DYE#3"
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": "CUSTOM:Butter"
+      },
+      {
+        "value": "Items.DYE#3"
+      },
+      {
+        "value": "Items.MILK_BUCKET"
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": "CUSTOM:ChocolateBarWrap"
+      },
+      {
+        "value": ""
+      }
+    ],
+    "recipeReturnStack": {
+      "value": "CUSTOM:DarkChocolateBar"
+    },
+    "name": "dark_chocolate_bar_recipe",
+    "namespace": "mod"
+  }
+}

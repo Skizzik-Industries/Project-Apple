@@ -31,7 +31,7 @@ public class RainbowSwordItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:rainbow_sword")
 	public static final Item block = null;
 	public RainbowSwordItem(SkizzikModElements instance) {
-		super(instance, 40);
+		super(instance, 41);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class RainbowSwordItem extends SkizzikModElements.ModElement {
 			public Ingredient getRepairMaterial() {
 				return Ingredient.fromStacks(new ItemStack(RainbowGemItem.block, (int) (1)));
 			}
-		}, 3, -3f, new Item.Properties().group(RainbowTabItemGroup.tab).isImmuneToFire()) {
+		}, 3, -2.4f, new Item.Properties().group(RainbowTabItemGroup.tab).isImmuneToFire()) {
 			@Override
 			public void addInformation(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
 				super.addInformation(itemstack, world, list, flag);

@@ -24,7 +24,7 @@ public class PinkGemBlockBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:pink_gem_block")
 	public static final Block block = null;
 	public PinkGemBlockBlock(SkizzikModElements instance) {
-		super(instance, 49);
+		super(instance, 50);
 	}
 
 	@Override

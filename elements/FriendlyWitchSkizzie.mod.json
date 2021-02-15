@@ -2,11 +2,11 @@
   "_fv": 15,
   "_type": "mob",
   "definition": {
-    "mobName": "Friendly Witch Skizzie (Level 1)",
+    "mobName": "Friendly Witch Skizzie",
     "mobLabel": "",
     "mobModelName": "Modelwitch_skizzie",
     "mobModelTexture": "friendly_witch_skizzie.png",
-    "mobModelGlowTexture": "",
+    "mobModelGlowTexture": "skizzie_glow.png",
     "modelWidth": 0.6,
     "modelHeight": 1.5999999999999999,
     "modelShadowSize": 0.5,
@@ -97,14 +97,14 @@
       "name": "SkizzieEntityDies"
     },
     "onRightClickedOn": {
-      "name": "SkizzieRightClickedOnEntity"
+      "name": "FriendlyWitchSkizzieRightClickedOnEntity"
     },
     "onPlayerCollidesWith": {
       "name": "FriendlyWitchSkizziePlayerCollidesWithThisEntity"
     },
     "hasAI": true,
     "aiBase": "(none)",
-    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"238\" y=\"51\"><next><block type=\"attack_on_collide\"><field name=\"speed\">1.2</field><field name=\"longmemory\">TRUE</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">TRUE</field><field name=\"entity\">EntityMonster</field><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></xml>",
+    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"238\" y=\"51\"><next><block type=\"attack_on_collide\"><field name=\"speed\">1.2</field><field name=\"longmemory\">TRUE</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"attack_entity\"><field name=\"insight\">FALSE</field><field name=\"nearby\">TRUE</field><field name=\"entity\">CUSTOM:CandyPig</field><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></xml>",
     "breedable": false,
     "tameable": false,
     "breedTriggerItems": [],

@@ -16,7 +16,7 @@ public class BlackGemItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:black_gem")
 	public static final Item block = null;
 	public BlackGemItem(SkizzikModElements instance) {
-		super(instance, 33);
+		super(instance, 34);
 	}
 
 	@Override

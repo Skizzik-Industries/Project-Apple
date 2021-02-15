@@ -6,7 +6,7 @@
     "mobLabel": "",
     "mobModelName": "Modelinactive_skizzik",
     "mobModelTexture": "inactive_skizzik.png",
-    "mobModelGlowTexture": "",
+    "mobModelGlowTexture": "inactive_skizzik_glow.png",
     "modelWidth": 3.0,
     "modelHeight": 4.0,
     "modelShadowSize": 1.0,

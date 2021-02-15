@@ -17,7 +17,7 @@ public class WaffleItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:waffle")
 	public static final Item block = null;
 	public WaffleItem(SkizzikModElements instance) {
-		super(instance, 55);
+		super(instance, 60);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizHeadLauncher3BulletHitsBlockProcedure extends SkizzikModElements.ModElement {
 	public SkizHeadLauncher3BulletHitsBlockProcedure(SkizzikModElements instance) {
-		super(instance, 176);
+		super(instance, 183);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

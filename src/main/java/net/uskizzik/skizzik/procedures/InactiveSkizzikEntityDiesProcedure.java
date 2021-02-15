@@ -27,7 +27,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class InactiveSkizzikEntityDiesProcedure extends SkizzikModElements.ModElement {
 	public InactiveSkizzikEntityDiesProcedure(SkizzikModElements instance) {
-		super(instance, 183);
+		super(instance, 190);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -79,6 +79,15 @@ public class InactiveSkizzikEntityDiesProcedure extends SkizzikModElements.ModEl
 		} else {
 			((World) world).playSound(x, y, z,
 					(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("skizzik:music.skizzik.battle")),
+					SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
+		}
+		if (world instanceof World && !world.isRemote()) {
+			((World) world).playSound(null, new BlockPos((int) x, (int) y, (int) z),
+					(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.spawn")),
+					SoundCategory.NEUTRAL, (float) 1, (float) 1);
+		} else {
+			((World) world).playSound(x, y, z,
+					(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.spawn")),
 					SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 		}
 	}

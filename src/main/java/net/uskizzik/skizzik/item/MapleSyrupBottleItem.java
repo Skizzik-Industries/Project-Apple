@@ -16,7 +16,7 @@ public class MapleSyrupBottleItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:maple_syrup_bottle")
 	public static final Item block = null;
 	public MapleSyrupBottleItem(SkizzikModElements instance) {
-		super(instance, 51);
+		super(instance, 56);
 	}
 
 	@Override

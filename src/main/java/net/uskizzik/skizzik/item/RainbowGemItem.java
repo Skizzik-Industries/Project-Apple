@@ -16,7 +16,7 @@ public class RainbowGemItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:rainbow_gem")
 	public static final Item block = null;
 	public RainbowGemItem(SkizzikModElements instance) {
-		super(instance, 32);
+		super(instance, 33);
 	}
 
 	@Override

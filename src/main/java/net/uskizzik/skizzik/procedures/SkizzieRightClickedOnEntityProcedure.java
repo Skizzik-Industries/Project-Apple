@@ -39,7 +39,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.ModElement {
 	public SkizzieRightClickedOnEntityProcedure(SkizzikModElements instance) {
-		super(instance, 138);
+		super(instance, 145);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -96,7 +96,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 						}
 						return false;
 					}
-				}.checkGamemode(entity))) {
+				}.checkGamemode(sourceentity))) {
 					if (world instanceof ServerWorld) {
 						Entity entityToSpawn = new FriendlySkizzieEntity.CustomEntity(FriendlySkizzieEntity.entity, (World) world);
 						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
@@ -160,7 +160,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 							}
 							return false;
 						}
-					}.checkGamemode(entity))) {
+					}.checkGamemode(sourceentity))) {
 						if (world instanceof ServerWorld) {
 							Entity entityToSpawn = new KaBoomSkizzieEntity.CustomEntity(KaBoomSkizzieEntity.entity, (World) world);
 							entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
@@ -218,7 +218,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 								}
 								return false;
 							}
-						}.checkGamemode(entity))) {
+						}.checkGamemode(sourceentity))) {
 							if (world instanceof ServerWorld) {
 								Entity entityToSpawn = new CorruptedSkizzieEntity.CustomEntity(CorruptedSkizzieEntity.entity, (World) world);
 								entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
@@ -276,7 +276,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 									}
 									return false;
 								}
-							}.checkGamemode(entity))) {
+							}.checkGamemode(sourceentity))) {
 								if (world instanceof ServerWorld) {
 									Entity entityToSpawn = new WitchSkizzieEntity.CustomEntity(WitchSkizzieEntity.entity, (World) world);
 									entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
@@ -334,7 +334,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 										}
 										return false;
 									}
-								}.checkGamemode(entity))) {
+								}.checkGamemode(sourceentity))) {
 									if (world instanceof ServerWorld) {
 										Entity entityToSpawn = new MinigunSkizzieEntity.CustomEntity(MinigunSkizzieEntity.entity, (World) world);
 										entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));

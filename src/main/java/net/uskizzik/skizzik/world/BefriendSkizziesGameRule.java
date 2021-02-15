@@ -13,7 +13,7 @@ public class BefriendSkizziesGameRule extends SkizzikModElements.ModElement {
 	public static final GameRules.RuleKey<GameRules.BooleanValue> gamerule = GameRules.register("befriendSkizzies", GameRules.Category.MOBS,
 			create(true));
 	public BefriendSkizziesGameRule(SkizzikModElements instance) {
-		super(instance, 263);
+		super(instance, 269);
 	}
 
 	public static GameRules.RuleType<GameRules.BooleanValue> create(boolean defaultValue) {

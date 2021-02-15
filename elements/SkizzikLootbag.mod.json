@@ -29,7 +29,7 @@
     "name": "Skizzik Lootbag",
     "specialInfo": [],
     "hardness": 0.8,
-    "resistance": 0.8,
+    "resistance": 3600001.8,
     "hasGravity": true,
     "isWaterloggable": false,
     "creativeTab": {
@@ -67,7 +67,7 @@
       "value": "CLOTH"
     },
     "luminance": 0,
-    "unbreakable": false,
+    "unbreakable": true,
     "breakHarvestLevel": -1,
     "spawnParticles": true,
     "particleToSpawn": {

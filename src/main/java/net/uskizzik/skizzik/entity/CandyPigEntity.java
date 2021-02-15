@@ -53,7 +53,7 @@ import java.util.HashMap;
 public class CandyPigEntity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public CandyPigEntity(SkizzikModElements instance) {
-		super(instance, 80);
+		super(instance, 88);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 		MinecraftForge.EVENT_BUS.register(this);
 	}

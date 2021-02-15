@@ -45,8 +45,6 @@ public class SkizzikModElements {
 	public final List<Supplier<Enchantment>> enchantments = new ArrayList<>();
 	public static Map<ResourceLocation, net.minecraft.util.SoundEvent> sounds = new HashMap<>();
 	public SkizzikModElements() {
-		sounds.put(new ResourceLocation("skizzik", "item.rainbow_sword.shoot"),
-				new net.minecraft.util.SoundEvent(new ResourceLocation("skizzik", "item.rainbow_sword.shoot")));
 		sounds.put(new ResourceLocation("skizzik", "item.minigun.shoot"),
 				new net.minecraft.util.SoundEvent(new ResourceLocation("skizzik", "item.minigun.shoot")));
 		sounds.put(new ResourceLocation("skizzik", "music.skizzik.battle"),

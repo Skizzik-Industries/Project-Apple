@@ -12,7 +12,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class NeverGonnaGiveYouUpRightClickedInAirProcedure extends SkizzikModElements.ModElement {
 	public NeverGonnaGiveYouUpRightClickedInAirProcedure(SkizzikModElements instance) {
-		super(instance, 243);
+		super(instance, 250);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

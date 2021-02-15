@@ -72,7 +72,7 @@ public class SkizzikLootbagBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends FallingBlock {
 		public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 		public CustomBlock() {
-			super(Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH).hardnessAndResistance(0.8f, 0.8f).setLightLevel(s -> 0)
+			super(Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH).hardnessAndResistance(-1, 3600000).setLightLevel(s -> 0)
 					.doesNotBlockMovement().notSolid().setOpaque((bs, br, bp) -> false));
 			this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 			setRegistryName("skizzik_lootbag");

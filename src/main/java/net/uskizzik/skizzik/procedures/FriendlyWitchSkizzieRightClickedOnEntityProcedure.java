@@ -4,6 +4,7 @@ import net.uskizzik.skizzik.entity.WitchSkizzieEntity;
 import net.uskizzik.skizzik.entity.FriendlyWitchSkizzie2Entity;
 import net.uskizzik.skizzik.entity.FriendlySkizzieEntity;
 import net.uskizzik.skizzik.entity.FriendlyMinigunSkizzieEntity;
+import net.uskizzik.skizzik.entity.CandyPigEntity;
 import net.uskizzik.skizzik.block.StoneSkizzieBlock;
 import net.uskizzik.skizzik.block.SkizzikHeadSmallBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
@@ -36,7 +37,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class FriendlyWitchSkizzieRightClickedOnEntityProcedure extends SkizzikModElements.ModElement {
 	public FriendlyWitchSkizzieRightClickedOnEntityProcedure(SkizzikModElements instance) {
-		super(instance, 224);
+		super(instance, 231);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -272,7 +273,7 @@ public class FriendlyWitchSkizzieRightClickedOnEntityProcedure extends SkizzikMo
 					}
 				}.checkGamemode(sourceentity))) {
 					if (world instanceof ServerWorld) {
-						Entity entityToSpawn = new FriendlyWitchSkizzie2Entity.CustomEntity(FriendlyWitchSkizzie2Entity.entity, (World) world);
+						Entity entityToSpawn = new CandyPigEntity.CustomEntity(CandyPigEntity.entity, (World) world);
 						entityToSpawn.setLocationAndAngles(x, y, z, (float) (entity.rotationYaw), (float) (entity.rotationPitch));
 						entityToSpawn.setRenderYawOffset((float) (entity.rotationYaw));
 						if (entityToSpawn instanceof MobEntity)

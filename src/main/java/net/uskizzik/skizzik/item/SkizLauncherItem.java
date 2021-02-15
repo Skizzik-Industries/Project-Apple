@@ -57,7 +57,7 @@ public class SkizLauncherItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:entitybulletskiz_launcher")
 	public static final EntityType arrow = null;
 	public SkizLauncherItem(SkizzikModElements instance) {
-		super(instance, 157);
+		super(instance, 164);
 	}
 
 	@Override

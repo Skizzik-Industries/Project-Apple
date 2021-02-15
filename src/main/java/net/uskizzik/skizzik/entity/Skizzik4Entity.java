@@ -32,13 +32,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.network.IPacket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -57,10 +57,16 @@ import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.block.BlockState;
 
 import javax.annotation.Nullable;
@@ -76,7 +82,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class Skizzik4Entity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public Skizzik4Entity(SkizzikModElements instance) {
-		super(instance, 125);
+		super(instance, 133);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 
@@ -98,6 +104,9 @@ public class Skizzik4Entity extends SkizzikModElements.ModElement {
 		public void registerModels(ModelRegistryEvent event) {
 			RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
 				return new MobRenderer(renderManager, new Modelskizzik_4(), 1f) {
+					{
+						this.addLayer(new GlowingLayer<>(this));
+					}
 					@Override
 					public ResourceLocation getEntityTexture(Entity entity) {
 						return new ResourceLocation("skizzik:textures/skizzik.png");
@@ -139,7 +148,7 @@ public class Skizzik4Entity extends SkizzikModElements.ModElement {
 		protected void registerGoals() {
 			super.registerGoals();
 			this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, PlayerEntity.class, false, false));
-			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, AnimalEntity.class, false, false));
+			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, CreatureEntity.class, false, false));
 			this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, FriendlySkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, FriendlyMinigunSkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, FriendlyWitchSkizzieEntity.CustomEntity.class, false, false));
@@ -295,7 +304,7 @@ public class Skizzik4Entity extends SkizzikModElements.ModElement {
 			double z = this.getPosZ();
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("entity", entity);
+				$_dependencies.put("sourceentity", sourceentity);
 				Skizzik4PlayerCollidesWithThisEntityProcedure.executeProcedure($_dependencies);
 			}
 		}
@@ -339,6 +348,35 @@ public class Skizzik4Entity extends SkizzikModElements.ModElement {
 		public void livingTick() {
 			super.livingTick();
 			this.setNoGravity(true);
+			double x = this.getPosX();
+			double y = this.getPosY();
+			double z = this.getPosZ();
+			Random random = this.rand;
+			Entity entity = this;
+			if (true)
+				for (int l = 0; l < 4; ++l) {
+					double d0 = (x + random.nextFloat());
+					double d1 = (y + random.nextFloat());
+					double d2 = (z + random.nextFloat());
+					int i1 = random.nextInt(2) * 2 - 1;
+					double d3 = (random.nextFloat() - 0.5D) * 0.5D;
+					double d4 = (random.nextFloat() - 0.5D) * 0.5D;
+					double d5 = (random.nextFloat() - 0.5D) * 0.5D;
+					world.addParticle(ParticleTypes.FLAME, d0, d1, d2, d3, d4, d5);
+				}
+		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	private static class GlowingLayer<T extends Entity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+		public GlowingLayer(IEntityRenderer<T, M> er) {
+			super(er);
+		}
+
+		public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing,
+				float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+			IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEyes(new ResourceLocation("skizzik:textures/skizzik_glow.png")));
+			this.getEntityModel().render(matrixStackIn, ivertexbuilder, 15728640, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 		}
 	}
 

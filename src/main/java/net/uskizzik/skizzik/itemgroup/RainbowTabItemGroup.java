@@ -13,7 +13,7 @@ import net.minecraft.item.ItemGroup;
 @SkizzikModElements.ModElement.Tag
 public class RainbowTabItemGroup extends SkizzikModElements.ModElement {
 	public RainbowTabItemGroup(SkizzikModElements instance) {
-		super(instance, 266);
+		super(instance, 272);
 	}
 
 	@Override

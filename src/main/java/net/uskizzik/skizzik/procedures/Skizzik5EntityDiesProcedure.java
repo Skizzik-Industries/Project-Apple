@@ -1,5 +1,6 @@
 package net.uskizzik.skizzik.procedures;
 
+import net.uskizzik.skizzik.entity.SkizzikFinishHimEntity;
 import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
 
@@ -14,8 +15,13 @@ import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Entity;
 import net.minecraft.command.ICommandSource;
 import net.minecraft.command.CommandSource;
 
@@ -24,7 +30,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class Skizzik5EntityDiesProcedure extends SkizzikModElements.ModElement {
 	public Skizzik5EntityDiesProcedure(SkizzikModElements instance) {
-		super(instance, 172);
+		super(instance, 179);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -89,13 +95,25 @@ public class Skizzik5EntityDiesProcedure extends SkizzikModElements.ModElement {
 			((World) world).getServer().getCommandManager().handleCommand(
 					new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 							new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
-					"kill @e[type=skizzik:witch_skizzie]");
+					"kill @e[type=skizzik:witch_skizzie_1]");
 		}
 		if (world instanceof ServerWorld) {
 			((World) world).getServer().getCommandManager().handleCommand(
 					new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 							new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
-					"kill @e[type=skizzik:corrupted_skizzie]");
+					"kill @e[type=skizzik:witch_skizzie_2]");
+		}
+		if (world instanceof ServerWorld) {
+			((World) world).getServer().getCommandManager().handleCommand(
+					new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
+							new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
+					"kill @e[type=skizzik:witch_skizzie_3]");
+		}
+		if (world instanceof ServerWorld) {
+			((World) world).getServer().getCommandManager().handleCommand(
+					new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
+							new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
+					"kill @e[type=skizzik:corrupt_skizzie]");
 		}
 		if (world instanceof ServerWorld) {
 			((World) world).getServer().getCommandManager().handleCommand(
@@ -109,6 +127,14 @@ public class Skizzik5EntityDiesProcedure extends SkizzikModElements.ModElement {
 							new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 									new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
 							"kill @e[type=skizzik:skizzo]");
+		}
+		if (world instanceof ServerWorld) {
+			Entity entityToSpawn = new SkizzikFinishHimEntity.CustomEntity(SkizzikFinishHimEntity.entity, (World) world);
+			entityToSpawn.setLocationAndAngles(x, y, z, world.getRandom().nextFloat() * 360F, 0);
+			if (entityToSpawn instanceof MobEntity)
+				((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world, world.getDifficultyForLocation(entityToSpawn.getPosition()),
+						SpawnReason.MOB_SUMMONED, (ILivingEntityData) null, (CompoundNBT) null);
+			world.addEntity(entityToSpawn);
 		}
 	}
 }

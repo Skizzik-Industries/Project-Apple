@@ -13,7 +13,7 @@ import net.minecraft.item.ItemGroup;
 @SkizzikModElements.ModElement.Tag
 public class CandyTabItemGroup extends SkizzikModElements.ModElement {
 	public CandyTabItemGroup(SkizzikModElements instance) {
-		super(instance, 265);
+		super(instance, 271);
 	}
 
 	@Override

@@ -7,15 +7,11 @@ import net.uskizzik.skizzik.block.CommandBlockBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
 import net.uskizzik.skizzik.SkizzikMod;
 
-import net.minecraftforge.registries.ForgeRegistries;
-
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.Difficulty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.MobEntity;
@@ -28,7 +24,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class SkizzikHeadGemsBlockAddedProcedure extends SkizzikModElements.ModElement {
 	public SkizzikHeadGemsBlockAddedProcedure(SkizzikModElements instance) {
-		super(instance, 185);
+		super(instance, 192);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {
@@ -58,23 +54,24 @@ public class SkizzikHeadGemsBlockAddedProcedure extends SkizzikModElements.ModEl
 		IWorld world = (IWorld) dependencies.get("world");
 		double fireHeight = 0;
 		double previousRecipe = 0;
-		if (((!(world.getDifficulty() == Difficulty.PEACEFUL)) && ((world.getBlockState(new BlockPos((int) x, (int) (y - 2), (int) z)))
-				.getBlock() == SkizzikLeatherBlockBlock.block.getDefaultState().getBlock()))) {
-			if ((((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) (z - 1)))).getBlock() == SkizzikLeatherBlockBlock.block
-					.getDefaultState().getBlock())
-					&& (((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) (z + 1)))).getBlock() == SkizzikLeatherBlockBlock.block
+		if ((!(world.getDifficulty() == Difficulty.PEACEFUL))) {
+			if ((((world.getBlockState(new BlockPos((int) x, (int) (y - 2), (int) z))).getBlock() == SkizzikLeatherBlockBlock.block.getDefaultState()
+					.getBlock())
+					&& (((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) (z - 1)))).getBlock() == SkizzikLeatherBlockBlock.block
 							.getDefaultState().getBlock())
-							&& (((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) z))).getBlock() == CommandBlockBlock.block
-									.getDefaultState().getBlock())
-									&& (((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z + 1))))
-											.getBlock() == SkizzikHeadSmallGemsBlock.block.getDefaultState().getBlock())
-											&& (((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z - 1))))
+							&& (((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) (z + 1))))
+									.getBlock() == SkizzikLeatherBlockBlock.block.getDefaultState().getBlock())
+									&& (((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) z))).getBlock() == CommandBlockBlock.block
+											.getDefaultState().getBlock())
+											&& (((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z + 1))))
 													.getBlock() == SkizzikHeadSmallGemsBlock.block.getDefaultState().getBlock())
-													&& (((world.getBlockState(new BlockPos((int) x, (int) (y + 1), (int) (z + 1))))
+													&& (((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z - 1))))
 															.getBlock() == SkizzikHeadSmallGemsBlock.block.getDefaultState().getBlock())
-															&& ((world.getBlockState(new BlockPos((int) x, (int) (y + 1), (int) (z - 1))))
-																	.getBlock() == SkizzikHeadSmallGemsBlock.block.getDefaultState()
-																			.getBlock())))))))) {
+															&& (((world.getBlockState(new BlockPos((int) x, (int) (y + 1), (int) (z + 1))))
+																	.getBlock() == SkizzikHeadSmallGemsBlock.block.getDefaultState().getBlock())
+																	&& ((world.getBlockState(new BlockPos((int) x, (int) (y + 1), (int) (z - 1))))
+																			.getBlock() == SkizzikHeadSmallGemsBlock.block.getDefaultState()
+																					.getBlock()))))))))) {
 				world.setBlockState(new BlockPos((int) x, (int) y, (int) z), Blocks.AIR.getDefaultState(), 3);
 				world.setBlockState(new BlockPos((int) x, (int) (y - 2), (int) z), Blocks.AIR.getDefaultState(), 3);
 				world.setBlockState(new BlockPos((int) x, (int) (y - 1), (int) (z - 1)), Blocks.AIR.getDefaultState(), 3);
@@ -91,15 +88,6 @@ public class SkizzikHeadGemsBlockAddedProcedure extends SkizzikModElements.ModEl
 						((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world, world.getDifficultyForLocation(entityToSpawn.getPosition()),
 								SpawnReason.MOB_SUMMONED, (ILivingEntityData) null, (CompoundNBT) null);
 					world.addEntity(entityToSpawn);
-				}
-				if (world instanceof World && !world.isRemote()) {
-					((World) world).playSound(null, new BlockPos((int) x, (int) y, (int) z),
-							(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.spawn")),
-							SoundCategory.NEUTRAL, (float) 1, (float) 1);
-				} else {
-					((World) world).playSound(x, y, z,
-							(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.spawn")),
-							SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 				}
 			} else if ((((world.getBlockState(new BlockPos((int) (x - 1), (int) (y - 1), (int) z))).getBlock() == SkizzikLeatherBlockBlock.block
 					.getDefaultState().getBlock())
@@ -132,15 +120,6 @@ public class SkizzikHeadGemsBlockAddedProcedure extends SkizzikModElements.ModEl
 						((MobEntity) entityToSpawn).onInitialSpawn((ServerWorld) world, world.getDifficultyForLocation(entityToSpawn.getPosition()),
 								SpawnReason.MOB_SUMMONED, (ILivingEntityData) null, (CompoundNBT) null);
 					world.addEntity(entityToSpawn);
-				}
-				if (world instanceof World && !world.isRemote()) {
-					((World) world).playSound(null, new BlockPos((int) x, (int) y, (int) z),
-							(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.spawn")),
-							SoundCategory.NEUTRAL, (float) 1, (float) 1);
-				} else {
-					((World) world).playSound(x, y, z,
-							(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.wither.spawn")),
-							SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 				}
 			}
 		}

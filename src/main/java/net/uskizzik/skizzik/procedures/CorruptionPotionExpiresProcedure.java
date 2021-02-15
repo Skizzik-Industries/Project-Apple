@@ -12,7 +12,7 @@ import java.util.Map;
 @SkizzikModElements.ModElement.Tag
 public class CorruptionPotionExpiresProcedure extends SkizzikModElements.ModElement {
 	public CorruptionPotionExpiresProcedure(SkizzikModElements instance) {
-		super(instance, 127);
+		super(instance, 135);
 	}
 
 	public static void executeProcedure(Map<String, Object> dependencies) {

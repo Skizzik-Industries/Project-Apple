@@ -48,9 +48,14 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.block.BlockState;
 
 import java.util.Map;
@@ -63,7 +68,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 public class FriendlySkizzieEntity extends SkizzikModElements.ModElement {
 	public static EntityType entity = null;
 	public FriendlySkizzieEntity(SkizzikModElements instance) {
-		super(instance, 24);
+		super(instance, 25);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new ModelRegisterHandler());
 	}
 
@@ -87,6 +92,9 @@ public class FriendlySkizzieEntity extends SkizzikModElements.ModElement {
 		public void registerModels(ModelRegistryEvent event) {
 			RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
 				return new MobRenderer(renderManager, new Modelskizzie(), 0.5f) {
+					{
+						this.addLayer(new GlowingLayer<>(this));
+					}
 					@Override
 					public ResourceLocation getEntityTexture(Entity entity) {
 						return new ResourceLocation("skizzik:textures/friendly_skizzie.png");
@@ -254,6 +262,19 @@ public class FriendlySkizzieEntity extends SkizzikModElements.ModElement {
 		public void livingTick() {
 			super.livingTick();
 			this.setNoGravity(true);
+		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	private static class GlowingLayer<T extends Entity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+		public GlowingLayer(IEntityRenderer<T, M> er) {
+			super(er);
+		}
+
+		public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing,
+				float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+			IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEyes(new ResourceLocation("skizzik:textures/skizzie_glow.png")));
+			this.getEntityModel().render(matrixStackIn, ivertexbuilder, 15728640, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 		}
 	}
 

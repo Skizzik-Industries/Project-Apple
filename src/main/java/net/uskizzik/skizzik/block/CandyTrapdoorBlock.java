@@ -33,7 +33,7 @@ public class CandyTrapdoorBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_trapdoor")
 	public static final Block block = null;
 	public CandyTrapdoorBlock(SkizzikModElements instance) {
-		super(instance, 78);
+		super(instance, 86);
 	}
 
 	@Override

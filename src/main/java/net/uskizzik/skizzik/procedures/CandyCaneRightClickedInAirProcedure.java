@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SkizzikModElements.ModElement.Tag
 public class CandyCaneRightClickedInAirProcedure extends SkizzikModElements.ModElement {
 	public CandyCaneRightClickedInAirProcedure(SkizzikModElements instance) {
-		super(instance, 223);
+		super(instance, 230);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

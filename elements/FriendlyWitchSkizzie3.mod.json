@@ -6,12 +6,12 @@
     "mobLabel": "",
     "mobModelName": "Modelwitch_skizzie",
     "mobModelTexture": "friendly_witch_skizzie.png",
-    "mobModelGlowTexture": "",
+    "mobModelGlowTexture": "friendly_witch_skizzie_3_glow.png",
     "modelWidth": 0.6,
     "modelHeight": 1.5999999999999999,
     "modelShadowSize": 0.5,
     "mountedYOffset": 0.0,
-    "hasSpawnEgg": true,
+    "hasSpawnEgg": false,
     "spawnEggBaseColor": {
       "value": -16711681,
       "falpha": 0.0
@@ -97,7 +97,7 @@
       "name": "SkizzieEntityDies"
     },
     "onRightClickedOn": {
-      "name": "SkizzieRightClickedOnEntity"
+      "name": "FriendlyWitchSkizzie3RightClickedOnEntity"
     },
     "onPlayerCollidesWith": {
       "name": "FriendlyWitchSkizziePlayerCollidesWithThisEntity"

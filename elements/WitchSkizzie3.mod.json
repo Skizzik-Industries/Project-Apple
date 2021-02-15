@@ -6,7 +6,7 @@
     "mobLabel": "",
     "mobModelName": "Modelwitch_skizzie",
     "mobModelTexture": "witch_skizzie_3.png",
-    "mobModelGlowTexture": "",
+    "mobModelGlowTexture": "witch_skizzie_3_glow.png",
     "modelWidth": 0.6,
     "modelHeight": 1.5999999999999999,
     "modelShadowSize": 0.5,

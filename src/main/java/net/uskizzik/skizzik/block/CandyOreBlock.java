@@ -41,7 +41,7 @@ public class CandyOreBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_ore")
 	public static final Block block = null;
 	public CandyOreBlock(SkizzikModElements instance) {
-		super(instance, 65);
+		super(instance, 73);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

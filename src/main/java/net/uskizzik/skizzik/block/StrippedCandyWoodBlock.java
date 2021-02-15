@@ -30,7 +30,7 @@ public class StrippedCandyWoodBlock extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:stripped_candy_wood")
 	public static final Block block = null;
 	public StrippedCandyWoodBlock(SkizzikModElements instance) {
-		super(instance, 70);
+		super(instance, 78);
 	}
 
 	@Override

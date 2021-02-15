@@ -17,7 +17,7 @@ public class CandyPickaxeItem extends SkizzikModElements.ModElement {
 	@ObjectHolder("skizzik:candy_pickaxe")
 	public static final Item block = null;
 	public CandyPickaxeItem(SkizzikModElements instance) {
-		super(instance, 61);
+		super(instance, 69);
 	}
 
 	@Override

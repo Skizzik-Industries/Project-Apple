@@ -47,7 +47,7 @@ public class MapleSyrupFluidBlock extends SkizzikModElements.ModElement {
 	public static FlowingFluid still = null;
 	private ForgeFlowingFluid.Properties fluidproperties = null;
 	public MapleSyrupFluidBlock(SkizzikModElements instance) {
-		super(instance, 31);
+		super(instance, 32);
 		FMLJavaModLoadingContext.get().getModEventBus().register(new FluidRegisterHandler());
 		MinecraftForge.EVENT_BUS.register(this);
 	}

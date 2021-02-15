@@ -1,0 +1,15 @@
+{
+  "_fv": 15,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "SPACE",
+    "keyBindingName": "Fly Up (Skizzie Control)",
+    "keyBindingCategoryKey": "skizzik",
+    "onKeyPressed": {
+      "name": "FlyUpOnKeyPressed"
+    },
+    "onKeyReleased": {
+      "name": "FlyUpOnKeyReleased"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "group": "skizzik",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0  ",
+    "345",
+    " 7 "
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:sugar"
+    },
+    "3": {
+      "item": "skizzik:butter"
+    },
+    "4": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "5": {
+      "item": "minecraft:milk_bucket"
+    },
+    "7": {
+      "item": "skizzik:chocolate_bar_wrap"
+    }
+  },
+  "result": {
+    "item": "skizzik:chocolate_bar",
+    "count": 3
+  }
+}
