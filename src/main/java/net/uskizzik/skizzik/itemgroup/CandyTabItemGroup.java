@@ -18,7 +18,7 @@ public class CandyTabItemGroup extends SkizzikModElements.ModElement {
 
 	@Override
 	public void initElements() {
-		tab = new ItemGroup("tabcandy_tab") {
+		tab = new ItemGroup("tabliving_candy_tab") {
 			@OnlyIn(Dist.CLIENT)
 			@Override
 			public ItemStack createIcon() {

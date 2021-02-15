@@ -3513,7 +3513,7 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_tab"
+      "registry_name": "living_candy_tab"
     },
     {
       "name": "RainbowTab",
@@ -3522,7 +3522,7 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_tab"
+      "registry_name": "rainbow_magic_tab"
     },
     {
       "name": "CosmicSkizzie",
@@ -3802,6 +3802,24 @@
           }
         ]
       }
+    },
+    {
+      "name": "PrismarineColossus",
+      "type": "mob",
+      "sortid": 288,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_colossus"
+    },
+    {
+      "name": "PrismarineSecretsTab",
+      "type": "tab",
+      "sortid": 289,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_secrets_tab"
     }
   ],
   "variable_elements": [],
@@ -3854,20 +3872,19 @@
       "entity.skizzik.cosmic_skizzie": "Cosmic Skizzie",
       "item.skizzik.friendly_skizzie": "Friendly Skizzie Spawn Egg",
       "block.skizzik.brown_gem_block": "Brown Gem Block",
-      "block.skizzik.blue_gem_block": "Blue Gem Block",
       "item.skizzik.maple_syrup": "Maple Syrup",
+      "block.skizzik.blue_gem_block": "Blue Gem Block",
       "item.skizzik.friendly_witch_skizzie_1_spawn_egg": "Friendly Witch Skizzie Spawn Egg",
       "item.skizzik.candy_pig_spawn_egg": "Candy Pig Spawn Egg",
       "block.skizzik.candy_cane_plant": "Candy Cane Plant",
-      "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie Spawn Egg",
       "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
+      "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie Spawn Egg",
       "item.skizzik.candy_hoe": "Candy Hoe",
       "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
       "item.skizzik.skiz_launcher": "Skiz Launcher",
       "gamerule.convertSkizzies": "If true, you will be able to convert Skizzies into other types.",
       "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
       "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
-      "itemGroup.tabrainbow_tab": "Skizzik: Rainbow",
       "block.skizzik.pink_gem_block": "Pink Gem Block",
       "item.skizzik.brown_gem": "Brown Gem",
       "item.skizzik.candy_chestplate": "Candy Body",
@@ -3928,11 +3945,11 @@
       "item.skizzik.skizzik_bone": "Skizzik Bone",
       "block.skizzik.rainbow_gem_block": "Rainbow Gem Block",
       "item.skizzik.witch_skizzie_3_spawn_egg": "Witch Skizzie (Level 3) Spawn Egg",
+      "itemGroup.tabprismarine_secrets_tab": "Skizzik: Prismarine Secrets",
       "item.skizzik.candy_shovel": "Candy Shovel",
       "item.skizzik.waffle": "Waffle",
       "advancements.skizzik.title": "Skizzik",
       "item.skizzik.white_chocolate_bar": "White Chocolate Bar",
-      "itemGroup.tabcandy_tab": "Skizzik: Candy",
       "item.skizzik.chocolate_bar_wrap": "Chocolate Bar Wrap",
       "death.attack.corrupted": "%1$s got corrupted",
       "item.skizzik.pancakes_maple_syrup": "Pancakes with Maple Syrup",
@@ -4013,6 +4030,7 @@
       "item.skizzik.candy_axe": "Candy Axe",
       "advancements.out_of_ideas.descr": "Visit the Candy Plains",
       "item.skizzik.corrupted_skizzie": "Corrupted Skizzie Spawn Egg",
+      "entity.skizzik.prismarine_colossus": "Prismarine Colossus",
       "key.categories.skizzik": "Skizzik",
       "item.skizzik.chocolate_bar": "Chocolate Bar",
       "item.skizzik.yellow_gem": "Yellow Gem",
@@ -4020,9 +4038,12 @@
       "item.skizzik.salt": "Salt",
       "item.skizzik.dark_chocolate_bar": "Dark Chocolate Bar",
       "block.skizzik.candy_log": "Candy Log",
+      "itemGroup.tabrainbow_magic_tab": "Skizzik: Rainbow Magic",
       "block.skizzik.skizzik_head_small": "Small Skizzik Head",
       "block.skizzik.command_block": "Command Block",
       "item.skizzik.black_gem": "Black Gem",
+      "item.skizzik.prismarine_colossus_spawn_egg": "Prismarine Colossus Spawn Egg",
+      "itemGroup.tabliving_candy_tab": "Skizzik: Living Candy",
       "block.skizzik.orange_gem_block": "Orange Gem Block"
     }
   },

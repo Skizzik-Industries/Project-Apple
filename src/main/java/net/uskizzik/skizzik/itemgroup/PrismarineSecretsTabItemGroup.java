@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.itemgroup;
 
-import net.uskizzik.skizzik.item.RainbowGemItem;
+import net.uskizzik.skizzik.block.CommandBlockBlock;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -11,18 +11,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemGroup;
 
 @SkizzikModElements.ModElement.Tag
-public class RainbowTabItemGroup extends SkizzikModElements.ModElement {
-	public RainbowTabItemGroup(SkizzikModElements instance) {
-		super(instance, 272);
+public class PrismarineSecretsTabItemGroup extends SkizzikModElements.ModElement {
+	public PrismarineSecretsTabItemGroup(SkizzikModElements instance) {
+		super(instance, 289);
 	}
 
 	@Override
 	public void initElements() {
-		tab = new ItemGroup("tabrainbow_magic_tab") {
+		tab = new ItemGroup("tabprismarine_secrets_tab") {
 			@OnlyIn(Dist.CLIENT)
 			@Override
 			public ItemStack createIcon() {
-				return new ItemStack(RainbowGemItem.block, (int) (1));
+				return new ItemStack(CommandBlockBlock.block, (int) (1));
 			}
 
 			@OnlyIn(Dist.CLIENT)
