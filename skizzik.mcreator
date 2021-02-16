@@ -3820,6 +3820,117 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "prismarine_secrets_tab"
+    },
+    {
+      "name": "PrismarineStick",
+      "type": "item",
+      "sortid": 290,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_stick"
+    },
+    {
+      "name": "PrismarineStickRecipe",
+      "type": "recipe",
+      "sortid": 291,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_stick_recipe"
+    },
+    {
+      "name": "PrismarineAxeToolInHandTick",
+      "type": "procedure",
+      "sortid": 292,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_axe_tool_in_hand_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PrismarineAxeRightClickedOnBlock",
+      "type": "procedure",
+      "sortid": 292,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_axe_right_clicked_on_block",
+      "metadata": {
+        "dependencies": []
+      }
+    },
+    {
+      "name": "PrismarineAxe",
+      "type": "tool",
+      "sortid": 290,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_axe"
+    },
+    {
+      "name": "PrismarineAxeBlockDestroyedWithTool",
+      "type": "procedure",
+      "sortid": 293,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_axe_block_destroyed_with_tool",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PrismarineFoe",
+      "type": "mob",
+      "sortid": 290,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_foe"
+    },
+    {
+      "name": "PrismarineAxeRecipe",
+      "type": "recipe",
+      "sortid": 294,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "prismarine_axe_recipe"
     }
   ],
   "variable_elements": [],
@@ -3880,6 +3991,7 @@
       "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
       "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie Spawn Egg",
       "item.skizzik.candy_hoe": "Candy Hoe",
+      "entity.skizzik.prismarine_foe": "Prismarine Foe",
       "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
       "item.skizzik.skiz_launcher": "Skiz Launcher",
       "gamerule.convertSkizzies": "If true, you will be able to convert Skizzies into other types.",
@@ -3951,13 +4063,16 @@
       "advancements.skizzik.title": "Skizzik",
       "item.skizzik.white_chocolate_bar": "White Chocolate Bar",
       "item.skizzik.chocolate_bar_wrap": "Chocolate Bar Wrap",
+      "item.skizzik.prismarine_foe_spawn_egg": "Prismarine Foe Spawn Egg",
       "death.attack.corrupted": "%1$s got corrupted",
       "item.skizzik.pancakes_maple_syrup": "Pancakes with Maple Syrup",
       "key.mcreator.fly_down": "Fly Down (Skizzie Control)",
+      "item.skizzik.prismarine_axe": "Prismarine Axe",
       "item.skizzik.skiz_launcher_2": "Skiz Launcher 2",
       "block.skizzik.skizzik_flesh_block": "Skizzik Flesh Block",
       "item.skizzik.skiz_launcher_3": "Skiz Launcher 3",
       "item.skizzik.candyboots": "Candy Boots",
+      "item.skizzik.prismarine_stick": "Prismarine Stick",
       "item.skizzik.candyhelmet": "Candy Helmet",
       "block.skizzik.black_gem_block": "Black Gem Block",
       "item.skizzik.skizzik_1_spawn_egg": "Skizzik - Stage 1 Spawn Egg",
@@ -4057,7 +4172,7 @@
     "license": "All Rights Reserved",
     "disableForgeVersionCheck": true,
     "serverSideOnly": false,
-    "modPicture": "logo",
+    "modPicture": "logo_new",
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],

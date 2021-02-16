@@ -2,32 +2,32 @@
   "_fv": 15,
   "_type": "mob",
   "definition": {
-    "mobName": "Prismarine Colossus",
+    "mobName": "Prismarine Foe",
     "mobLabel": "",
-    "mobModelName": "Modelprismarine_colossus",
-    "mobModelTexture": "prismarine_colossus.png",
-    "mobModelGlowTexture": "prismarine_colossus_glow.png",
-    "modelWidth": 5.5,
-    "modelHeight": 12.200000000000001,
-    "modelShadowSize": 2.9,
+    "mobModelName": "Modelprismarine_foe",
+    "mobModelTexture": "prismarine_foe.png",
+    "mobModelGlowTexture": "prismarine_foe_glow.png",
+    "modelWidth": 0.6,
+    "modelHeight": 1.8,
+    "modelShadowSize": 0.5,
     "mountedYOffset": 0.0,
     "hasSpawnEgg": true,
     "spawnEggBaseColor": {
-      "value": -14335177,
+      "value": -14997469,
       "falpha": 0.0
     },
     "spawnEggDotColor": {
-      "value": -11037300,
+      "value": -8810630,
       "falpha": 0.0
     },
     "creativeTab": {
       "value": "CUSTOM:PrismarineSecretsTab"
     },
-    "isBoss": true,
-    "bossBarColor": "GREEN",
+    "isBoss": false,
+    "bossBarColor": "PINK",
     "bossBarType": "PROGRESS",
     "equipmentMainHand": {
-      "value": ""
+      "value": "CUSTOM:PrismarineAxe"
     },
     "equipmentOffHand": {
       "value": ""
@@ -46,13 +46,13 @@
     },
     "mobBehaviourType": "Mob",
     "mobCreatureType": "WATER",
-    "attackStrength": 3,
+    "attackStrength": 5,
     "attackKnockback": 0.0,
     "knockbackResistance": 0.0,
     "movementSpeed": 0.3,
-    "armorBaseValue": 6.0,
+    "armorBaseValue": 4.0,
     "trackingRange": 64,
-    "health": 300,
+    "health": 20,
     "xpAmount": 0,
     "waterMob": true,
     "flyingMob": false,
