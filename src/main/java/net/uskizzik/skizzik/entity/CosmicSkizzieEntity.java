@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.entity;
 
-import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
+import net.uskizzik.skizzik.itemgroup.CosmicVerseTabItemGroup;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -62,7 +62,7 @@ public class CosmicSkizzieEntity extends SkizzikModElements.ModElement {
 				.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).immuneToFire().size(1.1f, 3.1f))
 						.build("cosmic_skizzie").setRegistryName("cosmic_skizzie");
 		elements.entities.add(() -> entity);
-		elements.items.add(() -> new SpawnEggItem(entity, -6750055, -10092442, new Item.Properties().group(TemplateTabItemGroup.tab))
+		elements.items.add(() -> new SpawnEggItem(entity, -6750055, -10092442, new Item.Properties().group(CosmicVerseTabItemGroup.tab))
 				.setRegistryName("cosmic_skizzie_spawn_egg"));
 	}
 

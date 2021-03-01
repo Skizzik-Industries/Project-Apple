@@ -113,7 +113,7 @@ public class Skizzik5EntityDiesProcedure extends SkizzikModElements.ModElement {
 			((World) world).getServer().getCommandManager().handleCommand(
 					new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 							new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
-					"kill @e[type=skizzik:corrupt_skizzie]");
+					"kill @e[type=skizzik:corrupted_skizzie]");
 		}
 		if (world instanceof ServerWorld) {
 			((World) world).getServer().getCommandManager().handleCommand(

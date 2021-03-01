@@ -66,7 +66,7 @@
     "soundOnStep": {
       "value": "METAL"
     },
-    "luminance": 0,
+    "luminance": 4,
     "unbreakable": false,
     "breakHarvestLevel": 4,
     "spawnParticles": false,

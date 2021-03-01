@@ -1,7 +1,7 @@
 
 package net.uskizzik.skizzik.itemgroup;
 
-import net.uskizzik.skizzik.block.CommandBlockBlock;
+import net.uskizzik.skizzik.item.PrismarineAxeItem;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,7 +22,7 @@ public class PrismarineSecretsTabItemGroup extends SkizzikModElements.ModElement
 			@OnlyIn(Dist.CLIENT)
 			@Override
 			public ItemStack createIcon() {
-				return new ItemStack(CommandBlockBlock.block, (int) (1));
+				return new ItemStack(PrismarineAxeItem.block, (int) (1));
 			}
 
 			@OnlyIn(Dist.CLIENT)

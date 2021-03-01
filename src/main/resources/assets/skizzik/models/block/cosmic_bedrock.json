@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "skizzik:blocks/cosmic_bedrock",
+    "up": "skizzik:blocks/cosmic_bedrock",
+    "north": "skizzik:blocks/cosmic_bedrock",
+    "east": "skizzik:blocks/cosmic_bedrock",
+    "south": "skizzik:blocks/cosmic_bedrock",
+    "west": "skizzik:blocks/cosmic_bedrock",
+    "particle": "skizzik:blocks/cosmic_bedrock"
+  }
+}

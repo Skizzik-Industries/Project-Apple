@@ -39,6 +39,7 @@ import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -57,7 +58,6 @@ import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -148,7 +148,7 @@ public class Skizzik4Entity extends SkizzikModElements.ModElement {
 		protected void registerGoals() {
 			super.registerGoals();
 			this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, PlayerEntity.class, false, false));
-			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, CreatureEntity.class, false, false));
+			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, AnimalEntity.class, false, false));
 			this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, FriendlySkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, FriendlyMinigunSkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, FriendlyWitchSkizzieEntity.CustomEntity.class, false, false));

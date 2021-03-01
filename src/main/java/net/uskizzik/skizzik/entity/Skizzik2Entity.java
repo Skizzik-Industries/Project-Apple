@@ -2,7 +2,6 @@
 package net.uskizzik.skizzik.entity;
 
 import net.uskizzik.skizzik.procedures.Skizzik2ThisEntityKillsAnotherOneProcedure;
-import net.uskizzik.skizzik.procedures.Skizzik2OnInitialEntitySpawnProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik2EntityIsHurtProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik2EntityDiesProcedure;
 import net.uskizzik.skizzik.procedures.Skizzik1PlayerCollidesWithThisEntityProcedure;
@@ -24,8 +23,6 @@ import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.World;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.BossInfo;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.BlockPos;
@@ -34,9 +31,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.network.IPacket;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -47,15 +44,12 @@ import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -66,8 +60,6 @@ import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.block.BlockState;
-
-import javax.annotation.Nullable;
 
 import java.util.Random;
 import java.util.Map;
@@ -146,7 +138,7 @@ public class Skizzik2Entity extends SkizzikModElements.ModElement {
 		protected void registerGoals() {
 			super.registerGoals();
 			this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, PlayerEntity.class, false, false));
-			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, CreatureEntity.class, false, false));
+			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, AnimalEntity.class, false, false));
 			this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, FriendlySkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, FriendlyMinigunSkizzieEntity.CustomEntity.class, false, false));
 			this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, FriendlyWitchSkizzieEntity.CustomEntity.class, false, false));
@@ -243,22 +235,6 @@ public class Skizzik2Entity extends SkizzikModElements.ModElement {
 				$_dependencies.put("world", world);
 				Skizzik2EntityDiesProcedure.executeProcedure($_dependencies);
 			}
-		}
-
-		@Override
-		public ILivingEntityData onInitialSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason,
-				@Nullable ILivingEntityData livingdata, @Nullable CompoundNBT tag) {
-			ILivingEntityData retval = super.onInitialSpawn(world, difficulty, reason, livingdata, tag);
-			double x = this.getPosX();
-			double y = this.getPosY();
-			double z = this.getPosZ();
-			Entity entity = this;
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("world", world);
-				Skizzik2OnInitialEntitySpawnProcedure.executeProcedure($_dependencies);
-			}
-			return retval;
 		}
 
 		@Override

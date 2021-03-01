@@ -37,7 +37,7 @@ public class CommandBlockBlock extends SkizzikModElements.ModElement {
 	}
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
-			super(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(1.5f, 3600000f).setLightLevel(s -> 0)
+			super(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(1.5f, 3600000f).setLightLevel(s -> 4)
 					.harvestLevel(4).harvestTool(ToolType.PICKAXE).setNeedsPostProcessing((bs, br, bp) -> true)
 					.setEmmisiveRendering((bs, br, bp) -> true));
 			setRegistryName("command_block");
