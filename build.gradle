@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -49,13 +49,8 @@ minecraft {
     }
 }
 
-repositories {
-    maven { url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
-}
-
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.4-35.1.4'
-    implementation fg.deobf('software.bernie.geckolib:forge-1.16.5-geckolib:3.0.6')
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 }
 
 apply from: 'mcreator.gradle'

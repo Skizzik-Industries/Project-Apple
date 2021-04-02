@@ -37,7 +37,7 @@ public class CosmicUnderrackBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.EARTH).sound(SoundType.NETHERRACK).hardnessAndResistance(0.8f, 0.8f).setLightLevel(s -> 0)
-					.harvestLevel(0).harvestTool(ToolType.PICKAXE));
+					.harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool());
 			setRegistryName("cosmic_underrack");
 		}
 

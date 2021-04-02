@@ -50,7 +50,7 @@ public class CandyFenceGateBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends FenceGateBlock {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2f, 3f).setLightLevel(s -> 0).harvestLevel(-1)
-					.harvestTool(ToolType.AXE).notSolid().setOpaque((bs, br, bp) -> false));
+					.harvestTool(ToolType.AXE).setRequiresTool().notSolid().setOpaque((bs, br, bp) -> false));
 			setRegistryName("candy_fence_gate");
 		}
 

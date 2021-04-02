@@ -1,8 +1,9 @@
 {
-  "_fv": 15,
+  "_fv": 17,
   "_type": "gamerule",
   "definition": {
     "type": "Logic",
+    "displayName": "If true, you will be able to convert Skizzies into other types.",
     "description": "If true, you will be able to convert Skizzies into other types.",
     "category": "MOBS",
     "defaultValueLogic": true,

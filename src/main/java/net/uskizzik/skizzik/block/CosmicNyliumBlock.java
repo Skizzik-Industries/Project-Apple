@@ -37,7 +37,7 @@ public class CosmicNyliumBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.ORGANIC).sound(SoundType.NYLIUM).hardnessAndResistance(0.8f, 2f).setLightLevel(s -> 0)
-					.harvestLevel(0).harvestTool(ToolType.PICKAXE));
+					.harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool());
 			setRegistryName("cosmic_nylium");
 		}
 

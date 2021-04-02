@@ -41,7 +41,7 @@ public class FlyUpKeyBinding extends SkizzikModElements.ModElement {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void initElements() {
-		keys = new KeyBinding("key.mcreator.fly_up", GLFW.GLFW_KEY_SPACE, "key.categories.skizzik");
+		keys = new KeyBinding("key.skizzik.fly_up", GLFW.GLFW_KEY_SPACE, "key.categories.skizzik");
 		ClientRegistry.registerKeyBinding(keys);
 		MinecraftForge.EVENT_BUS.register(this);
 	}

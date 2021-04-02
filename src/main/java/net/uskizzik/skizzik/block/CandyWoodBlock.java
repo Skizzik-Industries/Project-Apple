@@ -43,7 +43,7 @@ public class CandyWoodBlock extends SkizzikModElements.ModElement {
 		public static final DirectionProperty FACING = DirectionalBlock.FACING;
 		public CustomBlock() {
 			super(Block.Properties.create(Material.WOOD).sound(SoundType.SLIME).hardnessAndResistance(2f, 2f).setLightLevel(s -> 0).harvestLevel(-1)
-					.harvestTool(ToolType.AXE));
+					.harvestTool(ToolType.AXE).setRequiresTool());
 			this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.SOUTH));
 			setRegistryName("candy_wood");
 		}

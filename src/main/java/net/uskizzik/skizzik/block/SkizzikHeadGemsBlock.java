@@ -79,17 +79,15 @@ public class SkizzikHeadGemsBlock extends SkizzikModElements.ModElement {
 		public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
 			Vector3d offset = state.getOffset(world, pos);
 			switch ((Direction) state.get(FACING)) {
-				case UP :
-				case DOWN :
 				case SOUTH :
 				default :
-					return VoxelShapes.create(0.75D, 0D, 0.75D, 0.25D, 0.5D, 0.25D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(12, 0, 12, 4, 8, 4)).withOffset(offset.x, offset.y, offset.z);
 				case NORTH :
-					return VoxelShapes.create(0.25D, 0D, 0.25D, 0.75D, 0.5D, 0.75D).withOffset(offset.x, offset.y, offset.z);
-				case WEST :
-					return VoxelShapes.create(0.25D, 0D, 0.75D, 0.75D, 0.5D, 0.25D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(4, 0, 4, 12, 8, 12)).withOffset(offset.x, offset.y, offset.z);
 				case EAST :
-					return VoxelShapes.create(0.75D, 0D, 0.25D, 0.25D, 0.5D, 0.75D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(12, 0, 4, 4, 8, 12)).withOffset(offset.x, offset.y, offset.z);
+				case WEST :
+					return VoxelShapes.or(makeCuboidShape(4, 0, 12, 12, 8, 4)).withOffset(offset.x, offset.y, offset.z);
 			}
 		}
 

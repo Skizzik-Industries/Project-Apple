@@ -208,61 +208,87 @@ public class PrismarineFoeEntity extends SkizzikModElements.ModElement {
 		}
 	}
 
-	// Made with Blockbench 3.6.6
+	// Made with Blockbench 3.8.2
 	// Exported for Minecraft version 1.15
 	// Paste this class into your mod and generate all required imports
 	public static class Modelprismarine_foe extends EntityModel<Entity> {
+		private final ModelRenderer prismarine_foe;
 		private final ModelRenderer head;
 		private final ModelRenderer body;
-		private final ModelRenderer arms;
-		private final ModelRenderer rightarm;
-		private final ModelRenderer leftarm;
-		private final ModelRenderer leg0;
-		private final ModelRenderer leg1;
+		private final ModelRenderer rightArm;
+		private final ModelRenderer rightItem;
+		private final ModelRenderer leftArm;
+		private final ModelRenderer rightLeg;
+		private final ModelRenderer leftLeg;
 		public Modelprismarine_foe() {
 			textureWidth = 64;
 			textureHeight = 64;
+			prismarine_foe = new ModelRenderer(this);
+			prismarine_foe.setRotationPoint(0.0F, 24.0F, 0.0F);
 			head = new ModelRenderer(this);
-			head.setRotationPoint(0.0F, 0.0F, 0.0F);
-			head.setTextureOffset(0, 48).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-			head.setTextureOffset(16, 21).addBox(-3.9F, -1.0F, -4.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-			head.setTextureOffset(16, 25).addBox(-2.0F, -1.0F, -4.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
-			head.setTextureOffset(16, 17).addBox(0.0F, -1.0F, -4.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-			head.setTextureOffset(16, 14).addBox(1.0F, 1.0F, -4.5F, 1.0F, 2.0F, 1.0F, 0.0F, false);
-			head.setTextureOffset(20, 22).addBox(2.9F, -1.0F, -4.5F, 1.0F, 2.0F, 1.0F, 0.0F, false);
-			head.setTextureOffset(0, 12).addBox(-3.0F, -2.0F, -4.5F, 6.0F, 1.0F, 1.0F, 0.0F, false);
-			head.setTextureOffset(20, 27).addBox(-1.0F, -4.0F, -4.5F, 2.0F, 2.0F, 1.0F, 0.0F, false);
+			head.setRotationPoint(0.0F, -24.0F, 0.0F);
+			prismarine_foe.addChild(head);
+			head.setTextureOffset(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.01F, false);
+			head.setTextureOffset(2, 0).addBox(-3.0F, -8.5F, -3.5F, 6.0F, 1.0F, 7.0F, 0.01F, false);
+			head.setTextureOffset(32, 14).addBox(-3.0F, -8.5F, -4.0F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(23, 37).addBox(-4.0F, 0.0F, -4.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(24, 35).addBox(3.0F, 0.0F, -4.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(25, 38).addBox(-2.0F, 0.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(27, 37).addBox(-3.0F, 3.0F, -4.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(26, 37).addBox(1.0F, 0.0F, -4.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(31, 38).addBox(2.0F, 1.0F, -4.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(22, 35).addBox(-4.0F, 0.0F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(29, 40).addBox(-2.0F, 0.0F, 3.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(23, 36).addBox(1.0F, 0.0F, 3.0F, 1.0F, 3.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(26, 36).addBox(3.0F, 0.0F, 3.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			head.setTextureOffset(27, 39).addBox(-3.0F, 1.0F, 3.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
 			body = new ModelRenderer(this);
 			body.setRotationPoint(0.0F, 0.0F, 0.0F);
-			body.setTextureOffset(0, 30).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 12.0F, 6.0F, 0.0F, false);
-			arms = new ModelRenderer(this);
-			arms.setRotationPoint(0.0F, 3.0F, 0.0F);
-			arms.setTextureOffset(32, 48).addBox(-8.0F, -3.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
-			arms.setTextureOffset(48, 48).addBox(4.0F, -3.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
-			rightarm = new ModelRenderer(this);
-			rightarm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-			rightarm.setTextureOffset(32, 48).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
-			leftarm = new ModelRenderer(this);
-			leftarm.setRotationPoint(5.0F, 2.0F, 0.0F);
-			leftarm.setTextureOffset(48, 48).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
-			leg0 = new ModelRenderer(this);
-			leg0.setRotationPoint(-2.0F, 12.0F, 0.0F);
-			leg0.setTextureOffset(0, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
-			leg1 = new ModelRenderer(this);
-			leg1.setRotationPoint(2.0F, 12.0F, 0.0F);
-			leg1.setTextureOffset(28, 32).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
+			prismarine_foe.addChild(body);
+			body.setTextureOffset(16, 16).addBox(-4.0F, -24.0F, -2.0F, 8.0F, 12.0F, 4.0F, 0.0F, false);
+			rightArm = new ModelRenderer(this);
+			rightArm.setRotationPoint(-5.0F, -22.0F, 0.0F);
+			prismarine_foe.addChild(rightArm);
+			rightArm.setTextureOffset(40, 16).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
+			rightArm.setTextureOffset(21, 33).addBox(-1.0F, -3.0F, -3.0F, 1.0F, 1.0F, 6.0F, 0.01F, false);
+			rightArm.setTextureOffset(21, 41).addBox(-2.0F, -1.5F, -3.0F, 1.0F, 1.0F, 6.0F, 0.01F, false);
+			rightArm.setTextureOffset(20, 35).addBox(-2.5F, -1.5F, -3.0F, 1.0F, 3.0F, 6.0F, 0.0F, false);
+			rightArm.setTextureOffset(20, 33).addBox(-1.0F, -2.5F, -3.0F, 1.0F, 2.0F, 6.0F, 0.0F, false);
+			rightArm.setTextureOffset(20, 35).addBox(-3.5F, 1.0F, -3.0F, 2.0F, 1.0F, 6.0F, 0.001F, false);
+			rightArm.setTextureOffset(21, 33).addBox(-4.0F, 1.0F, -3.0F, 1.0F, 1.0F, 6.0F, 0.01F, false);
+			rightArm.setTextureOffset(49, 0).addBox(-2.5F, -2.5F, -2.5F, 2.0F, 1.0F, 5.0F, 0.0F, false);
+			rightArm.setTextureOffset(48, 0).addBox(-3.5F, -2.5F, -2.5F, 2.0F, 4.0F, 5.0F, -0.01F, false);
+			rightItem = new ModelRenderer(this);
+			rightItem.setRotationPoint(-1.5F, 7.75F, 1.0F);
+			rightArm.addChild(rightItem);
+			leftArm = new ModelRenderer(this);
+			leftArm.setRotationPoint(5.0F, -22.0F, 0.0F);
+			prismarine_foe.addChild(leftArm);
+			leftArm.setTextureOffset(21, 33).addBox(0.0F, -3.0F, -3.0F, 1.0F, 1.0F, 6.0F, 0.01F, false);
+			leftArm.setTextureOffset(21, 36).addBox(0.0F, -2.5F, -3.0F, 1.0F, 2.0F, 6.0F, 0.0F, false);
+			leftArm.setTextureOffset(21, 41).addBox(1.0F, -1.5F, -3.0F, 1.0F, 1.0F, 6.0F, 0.01F, false);
+			leftArm.setTextureOffset(20, 35).addBox(1.5F, -1.5F, -3.0F, 1.0F, 3.0F, 6.0F, 0.0F, false);
+			leftArm.setTextureOffset(32, 48).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
+			leftArm.setTextureOffset(49, 0).addBox(0.5F, -2.5F, -2.5F, 2.0F, 1.0F, 5.0F, 0.0F, false);
+			leftArm.setTextureOffset(48, 0).addBox(1.5F, -2.5F, -2.5F, 2.0F, 4.0F, 5.0F, -0.01F, false);
+			leftArm.setTextureOffset(21, 33).addBox(3.0F, 1.0F, -3.0F, 1.0F, 1.0F, 6.0F, 0.01F, false);
+			leftArm.setTextureOffset(20, 35).addBox(1.5F, 1.0F, -3.0F, 2.0F, 1.0F, 6.0F, 0.001F, false);
+			rightLeg = new ModelRenderer(this);
+			rightLeg.setRotationPoint(-1.9F, -12.0F, 0.0F);
+			prismarine_foe.addChild(rightLeg);
+			rightLeg.setTextureOffset(0, 16).addBox(-2.1F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
+			rightLeg.setTextureOffset(0, 32).addBox(-2.2F, 10.0F, -2.0F, 4.0F, 2.0F, 4.0F, 0.25F, false);
+			leftLeg = new ModelRenderer(this);
+			leftLeg.setRotationPoint(1.9F, -12.0F, 0.0F);
+			prismarine_foe.addChild(leftLeg);
+			leftLeg.setTextureOffset(16, 48).addBox(-1.9F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
+			leftLeg.setTextureOffset(0, 32).addBox(-2.0F, 10.0F, -2.0F, 4.0F, 2.0F, 4.0F, 0.25F, false);
 		}
 
 		@Override
 		public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue,
 				float alpha) {
-			head.render(matrixStack, buffer, packedLight, packedOverlay);
-			body.render(matrixStack, buffer, packedLight, packedOverlay);
-			arms.render(matrixStack, buffer, packedLight, packedOverlay);
-			rightarm.render(matrixStack, buffer, packedLight, packedOverlay);
-			leftarm.render(matrixStack, buffer, packedLight, packedOverlay);
-			leg0.render(matrixStack, buffer, packedLight, packedOverlay);
-			leg1.render(matrixStack, buffer, packedLight, packedOverlay);
+			prismarine_foe.render(matrixStack, buffer, packedLight, packedOverlay);
 		}
 
 		public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -274,10 +300,10 @@ public class PrismarineFoeEntity extends SkizzikModElements.ModElement {
 		public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4) {
 			this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
 			this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
-			this.leg0.rotateAngleX = MathHelper.cos(f * 1.0F) * 1.0F * f1;
-			this.leg1.rotateAngleX = MathHelper.cos(f * 1.0F) * -1.0F * f1;
-			this.rightarm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
-			this.leftarm.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+			this.rightLeg.rotateAngleX = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+			this.rightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+			this.leftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+			this.leftLeg.rotateAngleX = MathHelper.cos(f * 1.0F) * -1.0F * f1;
 		}
 	}
 }

@@ -41,7 +41,7 @@ public class FlyDownKeyBinding extends SkizzikModElements.ModElement {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void initElements() {
-		keys = new KeyBinding("key.mcreator.fly_down", GLFW.GLFW_KEY_LEFT_CONTROL, "key.categories.skizzik");
+		keys = new KeyBinding("key.skizzik.fly_down", GLFW.GLFW_KEY_LEFT_CONTROL, "key.categories.skizzik");
 		ClientRegistry.registerKeyBinding(keys);
 		MinecraftForge.EVENT_BUS.register(this);
 	}

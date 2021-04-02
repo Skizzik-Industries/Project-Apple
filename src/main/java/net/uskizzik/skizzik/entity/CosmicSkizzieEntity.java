@@ -75,7 +75,7 @@ public class CosmicSkizzieEntity extends SkizzikModElements.ModElement {
 		@OnlyIn(Dist.CLIENT)
 		public void registerModels(ModelRegistryEvent event) {
 			RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
-				return new MobRenderer(renderManager, new Modelcosmic_skizzie(), 0.5f) {
+				return new MobRenderer(renderManager, new Modelcosmic_skizzie(), 0.6f) {
 					{
 						this.addLayer(new GlowingLayer<>(this));
 					}

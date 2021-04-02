@@ -1,5 +1,5 @@
 {
-  "_fv": 15,
+  "_fv": 17,
   "_type": "mob",
   "definition": {
     "mobName": "Skizzik - Stage 5",
@@ -71,6 +71,11 @@
     "immuneToLightning": true,
     "immuneToPotions": true,
     "immuneToPlayer": false,
+    "immuneToExplosion": false,
+    "immuneToTrident": false,
+    "immuneToAnvil": false,
+    "immuneToWither": false,
+    "immuneToDragonBreath": false,
     "mobDrop": {
       "value": ""
     },

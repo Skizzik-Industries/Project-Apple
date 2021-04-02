@@ -40,7 +40,7 @@ public class CandyGrassBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.ORGANIC).sound(SoundType.SLIME).hardnessAndResistance(0.6f, 0.6f).setLightLevel(s -> 0)
-					.harvestLevel(-1).harvestTool(ToolType.SHOVEL));
+					.harvestLevel(-1).harvestTool(ToolType.SHOVEL).setRequiresTool());
 			setRegistryName("candy_grass");
 		}
 

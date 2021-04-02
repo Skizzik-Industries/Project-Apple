@@ -36,7 +36,7 @@ public class CandyrackBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.EARTH).sound(SoundType.SLIME).hardnessAndResistance(0.5f, 0.5f).setLightLevel(s -> 0)
-					.harvestLevel(-1).harvestTool(ToolType.SHOVEL));
+					.harvestLevel(-1).harvestTool(ToolType.SHOVEL).setRequiresTool());
 			setRegistryName("candyrack");
 		}
 

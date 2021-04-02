@@ -38,7 +38,7 @@ public class BrokenCommandBlockBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(1.5f, 3600000f).setLightLevel(s -> 0)
-					.harvestLevel(4).harvestTool(ToolType.PICKAXE));
+					.harvestLevel(4).harvestTool(ToolType.PICKAXE).setRequiresTool());
 			setRegistryName("broken_command_block");
 		}
 

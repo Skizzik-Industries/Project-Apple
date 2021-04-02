@@ -28,7 +28,7 @@ import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.Minecraft;
 
 import java.util.Map;
@@ -85,7 +85,7 @@ public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikM
 							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
 						return false;
@@ -149,7 +149,7 @@ public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikM
 							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
 						return false;
@@ -207,7 +207,7 @@ public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikM
 							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
 						return false;
@@ -265,7 +265,7 @@ public class FriendlyWitchSkizzie2RightClickedOnEntityProcedure extends SkizzikM
 							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
 						return false;

@@ -1,5 +1,5 @@
 {
-  "_fv": 15,
+  "_fv": 17,
   "_type": "mob",
   "definition": {
     "mobName": "Cosmic Skizzie",
@@ -9,7 +9,7 @@
     "mobModelGlowTexture": "cosmic_skizzie_glow.png",
     "modelWidth": 1.1,
     "modelHeight": 3.1,
-    "modelShadowSize": 0.5,
+    "modelShadowSize": 0.6,
     "mountedYOffset": 0.0,
     "hasSpawnEgg": true,
     "spawnEggBaseColor": {
@@ -71,6 +71,11 @@
     "immuneToLightning": true,
     "immuneToPotions": true,
     "immuneToPlayer": false,
+    "immuneToExplosion": false,
+    "immuneToTrident": false,
+    "immuneToAnvil": false,
+    "immuneToWither": false,
+    "immuneToDragonBreath": false,
     "mobDrop": {
       "value": ""
     },

@@ -31,7 +31,7 @@ import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.Minecraft;
 
 import java.util.Map;
@@ -82,16 +82,14 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 		if ((!(world.isRemote()))) {
 			if (((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
 					.getItem() == new ItemStack(Items.WATER_BUCKET, (int) (1)).getItem())
-					&& (((world instanceof World)
-							? ((World) world).getGameRules().getBoolean(BefriendSkizziesGameRule.gamerule)
-							: false) == (true)))) {
+					&& ((world.getWorldInfo().getGameRulesInstance().getBoolean(BefriendSkizziesGameRule.gamerule)) == (true)))) {
 				if ((new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayerEntity) {
 							return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 						} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 							NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 							return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 						}
 						return false;
@@ -146,7 +144,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 						}
 					}
 				}
-			} else if ((((world instanceof World) ? ((World) world).getGameRules().getBoolean(ConvertSkizziesGameRule.gamerule) : false) == (true))) {
+			} else if (((world.getWorldInfo().getGameRulesInstance().getBoolean(ConvertSkizziesGameRule.gamerule)) == (true))) {
 				if ((((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHeldItemMainhand() : ItemStack.EMPTY)
 						.getItem() == new ItemStack(Items.GUNPOWDER, (int) (1)).getItem())) {
 					if ((new Object() {
@@ -155,7 +153,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 								return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 							} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 								NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-										.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+										.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 								return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 							}
 							return false;
@@ -213,7 +211,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 									return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 								} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 									NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+											.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 									return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 								}
 								return false;
@@ -271,7 +269,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 										return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 									} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 										NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-												.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+												.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 										return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 									}
 									return false;
@@ -329,7 +327,7 @@ public class SkizzieRightClickedOnEntityProcedure extends SkizzikModElements.Mod
 											return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.CREATIVE;
 										} else if (_ent instanceof PlayerEntity && _ent.world.isRemote()) {
 											NetworkPlayerInfo _npi = Minecraft.getInstance().getConnection()
-													.getPlayerInfo(((ClientPlayerEntity) _ent).getGameProfile().getId());
+													.getPlayerInfo(((AbstractClientPlayerEntity) _ent).getGameProfile().getId());
 											return _npi != null && _npi.getGameType() == GameType.CREATIVE;
 										}
 										return false;

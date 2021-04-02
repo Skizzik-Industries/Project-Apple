@@ -36,7 +36,7 @@ public class WaffleBlockBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.MISCELLANEOUS).sound(SoundType.SNOW).hardnessAndResistance(0.2f, 10f).setLightLevel(s -> 0)
-					.harvestLevel(-1).harvestTool(ToolType.HOE));
+					.harvestLevel(-1).harvestTool(ToolType.HOE).setRequiresTool());
 			setRegistryName("waffle_block");
 		}
 

@@ -48,7 +48,7 @@ public class CandyStairsBlock extends SkizzikModElements.ModElement {
 		public CustomBlock() {
 			super(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 3f)).getDefaultState(),
 					Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2f, 3f).setLightLevel(s -> 0).harvestLevel(-1)
-							.harvestTool(ToolType.AXE).notSolid().setOpaque((bs, br, bp) -> false));
+							.harvestTool(ToolType.AXE).setRequiresTool().notSolid().setOpaque((bs, br, bp) -> false));
 			setRegistryName("candy_stairs");
 		}
 

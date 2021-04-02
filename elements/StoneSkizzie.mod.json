@@ -1,5 +1,5 @@
 {
-  "_fv": 15,
+  "_fv": 17,
   "_type": "block",
   "definition": {
     "texture": "stone",
@@ -20,12 +20,54 @@
     "hasTransparency": true,
     "connectedSides": false,
     "transparencyType": "CUTOUT_MIPPED",
-    "mx": 0.7,
-    "my": 0.0,
-    "mz": 0.5,
-    "Mx": 0.4,
-    "My": 1.0,
-    "Mz": 0.6,
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 6.5,
+        "my": 2.1,
+        "mz": 5.5,
+        "Mx": 9.5,
+        "My": 17.1,
+        "Mz": 8.5,
+        "subtract": false
+      },
+      {
+        "mx": 4.0,
+        "my": 17.0,
+        "mz": 2.0,
+        "Mx": 12.0,
+        "My": 25.0,
+        "Mz": 10.0,
+        "subtract": false
+      },
+      {
+        "mx": 2.5,
+        "my": 13.6,
+        "mz": 6.0,
+        "Mx": 13.5,
+        "My": 15.6,
+        "Mz": 8.0,
+        "subtract": false
+      },
+      {
+        "mx": 2.5,
+        "my": 11.1,
+        "mz": 6.0,
+        "Mx": 13.5,
+        "My": 13.1,
+        "Mz": 8.0,
+        "subtract": false
+      },
+      {
+        "mx": 2.5,
+        "my": 8.6,
+        "mz": 6.0,
+        "Mx": 13.5,
+        "My": 10.6,
+        "Mz": 8.0,
+        "subtract": false
+      }
+    ],
     "name": "Stone Skizzie",
     "specialInfo": [],
     "hardness": 1.5,
@@ -61,6 +103,8 @@
     "fireSpreadSpeed": 0,
     "isLadder": false,
     "slipperiness": 0.6,
+    "speedFactor": 1.0,
+    "jumpFactor": 1.0,
     "reactionToPushing": "NORMAL",
     "isNotColidable": false,
     "soundOnStep": {

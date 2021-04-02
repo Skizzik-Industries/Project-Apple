@@ -39,7 +39,7 @@ public class WhiteChocolateBlockBlock extends SkizzikModElements.ModElement {
 	public static class CustomBlock extends Block {
 		public CustomBlock() {
 			super(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.5f, 1.5f).setLightLevel(s -> 0)
-					.harvestLevel(-1).harvestTool(ToolType.AXE));
+					.harvestLevel(-1).harvestTool(ToolType.AXE).setRequiresTool());
 			setRegistryName("white_chocolate_block");
 		}
 

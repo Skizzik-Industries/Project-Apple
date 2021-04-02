@@ -3,7 +3,6 @@ package net.uskizzik.skizzik.block;
 
 import net.uskizzik.skizzik.procedures.SkizzikLootbagOnBlockRightClickedProcedure;
 import net.uskizzik.skizzik.itemgroup.TemplateTabItemGroup;
-import net.uskizzik.skizzik.item.NeverGonnaGiveYouUpItem;
 import net.uskizzik.skizzik.SkizzikModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
@@ -17,7 +16,6 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.Rotation;
@@ -28,7 +26,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.BlockItem;
@@ -87,17 +84,15 @@ public class SkizzikLootbagBlock extends SkizzikModElements.ModElement {
 		public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
 			Vector3d offset = state.getOffset(world, pos);
 			switch ((Direction) state.get(FACING)) {
-				case UP :
-				case DOWN :
 				case SOUTH :
 				default :
-					return VoxelShapes.create(0.813D, 0D, 0.813D, 0.188D, 0.062D, 0.188D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(13.008, 0, 13.008, 3.008, 0.992, 3.008)).withOffset(offset.x, offset.y, offset.z);
 				case NORTH :
-					return VoxelShapes.create(0.187D, 0D, 0.187D, 0.812D, 0.062D, 0.812D).withOffset(offset.x, offset.y, offset.z);
-				case WEST :
-					return VoxelShapes.create(0.187D, 0D, 0.813D, 0.812D, 0.062D, 0.188D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(2.992, 0, 2.992, 12.992, 0.992, 12.992)).withOffset(offset.x, offset.y, offset.z);
 				case EAST :
-					return VoxelShapes.create(0.813D, 0D, 0.187D, 0.188D, 0.062D, 0.812D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(13.008, 0, 2.992, 3.008, 0.992, 12.992)).withOffset(offset.x, offset.y, offset.z);
+				case WEST :
+					return VoxelShapes.or(makeCuboidShape(2.992, 0, 13.008, 12.992, 0.992, 3.008)).withOffset(offset.x, offset.y, offset.z);
 			}
 		}
 
@@ -118,11 +113,6 @@ public class SkizzikLootbagBlock extends SkizzikModElements.ModElement {
 		public BlockState getStateForPlacement(BlockItemUseContext context) {
 			;
 			return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-		}
-
-		@Override
-		public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
-			return new ItemStack(NeverGonnaGiveYouUpItem.block, (int) (1));
 		}
 
 		@Override

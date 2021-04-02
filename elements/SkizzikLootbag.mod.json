@@ -1,5 +1,5 @@
 {
-  "_fv": 15,
+  "_fv": 17,
   "_type": "block",
   "definition": {
     "texture": "skizzik_loot_bag",
@@ -20,12 +20,18 @@
     "hasTransparency": true,
     "connectedSides": false,
     "transparencyType": "CUTOUT_MIPPED",
-    "mx": 0.187,
-    "my": 0.0,
-    "mz": 0.187,
-    "Mx": 0.812,
-    "My": 0.062,
-    "Mz": 0.812,
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 2.992,
+        "my": 0.0,
+        "mz": 2.992,
+        "Mx": 12.992,
+        "My": 0.992,
+        "Mz": 12.992,
+        "subtract": false
+      }
+    ],
     "name": "Skizzik Lootbag",
     "specialInfo": [],
     "hardness": 0.8,
@@ -53,7 +59,7 @@
     "isReplaceable": false,
     "colorOnMap": "AIR",
     "creativePickItem": {
-      "value": "CUSTOM:NeverGonnaGiveYouUp"
+      "value": ""
     },
     "offsetType": "NONE",
     "aiPathNodeType": "DEFAULT",
@@ -61,6 +67,8 @@
     "fireSpreadSpeed": 0,
     "isLadder": false,
     "slipperiness": 0.6,
+    "speedFactor": 1.0,
+    "jumpFactor": 1.0,
     "reactionToPushing": "BLOCK",
     "isNotColidable": true,
     "soundOnStep": {

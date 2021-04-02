@@ -62,7 +62,7 @@ public class StoneSkizzieBlock extends SkizzikModElements.ModElement {
 		public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 		public CustomBlock() {
 			super(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.5f, 6f).setLightLevel(s -> 0).harvestLevel(-1)
-					.harvestTool(ToolType.PICKAXE).notSolid().setOpaque((bs, br, bp) -> false));
+					.harvestTool(ToolType.PICKAXE).setRequiresTool().notSolid().setOpaque((bs, br, bp) -> false));
 			this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 			setRegistryName("stone_skizzie");
 		}
@@ -76,17 +76,23 @@ public class StoneSkizzieBlock extends SkizzikModElements.ModElement {
 		public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
 			Vector3d offset = state.getOffset(world, pos);
 			switch ((Direction) state.get(FACING)) {
-				case UP :
-				case DOWN :
 				case SOUTH :
 				default :
-					return VoxelShapes.create(0.3D, 0D, 0.5D, 0.6D, 1D, 0.4D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(9.5, 2.1, 10.5, 6.5, 17.1, 7.5), makeCuboidShape(12, 17, 14, 4, 25, 6),
+							makeCuboidShape(13.5, 13.6, 10, 2.5, 15.6, 8), makeCuboidShape(13.5, 11.1, 10, 2.5, 13.1, 8),
+							makeCuboidShape(13.5, 8.6, 10, 2.5, 10.6, 8)).withOffset(offset.x, offset.y, offset.z);
 				case NORTH :
-					return VoxelShapes.create(0.7D, 0D, 0.5D, 0.4D, 1D, 0.6D).withOffset(offset.x, offset.y, offset.z);
-				case WEST :
-					return VoxelShapes.create(0.5D, 0D, 0.3D, 0.6D, 1D, 0.6D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(6.5, 2.1, 5.5, 9.5, 17.1, 8.5), makeCuboidShape(4, 17, 2, 12, 25, 10),
+							makeCuboidShape(2.5, 13.6, 6, 13.5, 15.6, 8), makeCuboidShape(2.5, 11.1, 6, 13.5, 13.1, 8),
+							makeCuboidShape(2.5, 8.6, 6, 13.5, 10.6, 8)).withOffset(offset.x, offset.y, offset.z);
 				case EAST :
-					return VoxelShapes.create(0.5D, 0D, 0.7D, 0.4D, 1D, 0.4D).withOffset(offset.x, offset.y, offset.z);
+					return VoxelShapes.or(makeCuboidShape(10.5, 2.1, 6.5, 7.5, 17.1, 9.5), makeCuboidShape(14, 17, 4, 6, 25, 12),
+							makeCuboidShape(10, 13.6, 2.5, 8, 15.6, 13.5), makeCuboidShape(10, 11.1, 2.5, 8, 13.1, 13.5),
+							makeCuboidShape(10, 8.6, 2.5, 8, 10.6, 13.5)).withOffset(offset.x, offset.y, offset.z);
+				case WEST :
+					return VoxelShapes.or(makeCuboidShape(5.5, 2.1, 9.5, 8.5, 17.1, 6.5), makeCuboidShape(2, 17, 12, 10, 25, 4),
+							makeCuboidShape(6, 13.6, 13.5, 8, 15.6, 2.5), makeCuboidShape(6, 11.1, 13.5, 8, 13.1, 2.5),
+							makeCuboidShape(6, 8.6, 13.5, 8, 10.6, 2.5)).withOffset(offset.x, offset.y, offset.z);
 			}
 		}
 

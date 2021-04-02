@@ -1,5 +1,5 @@
 {
-  "_fv": 15,
+  "_fv": 17,
   "_type": "block",
   "definition": {
     "texture": "skizzik_head_small_gems",
@@ -20,12 +20,18 @@
     "hasTransparency": true,
     "connectedSides": false,
     "transparencyType": "CUTOUT_MIPPED",
-    "mx": 0.312,
-    "my": 0.0,
-    "mz": 0.312,
-    "Mx": 0.687,
-    "My": 0.375,
-    "Mz": 0.687,
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 4.992,
+        "my": 0.0,
+        "mz": 4.992,
+        "Mx": 10.992,
+        "My": 6.0,
+        "Mz": 10.992,
+        "subtract": false
+      }
+    ],
     "name": "Small Skizzik Head with Gems",
     "specialInfo": [],
     "hardness": 1.0,
@@ -61,6 +67,8 @@
     "fireSpreadSpeed": 0,
     "isLadder": false,
     "slipperiness": 0.6,
+    "speedFactor": 1.0,
+    "jumpFactor": 1.0,
     "reactionToPushing": "NORMAL",
     "isNotColidable": false,
     "soundOnStep": {

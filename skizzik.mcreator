@@ -8,7 +8,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "command_block"
+      "registry_name": "command_block",
+      "path": "~/Skizzik"
     },
     {
       "name": "CommandBlockRecipe",
@@ -17,7 +18,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "command_block_recipe"
+      "registry_name": "command_block_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "TemplateTab",
@@ -26,7 +28,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_tab"
+      "registry_name": "skizzik_tab",
+      "path": "~/Skizzik"
     },
     {
       "name": "BlackGem",
@@ -35,7 +38,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "black_gem"
+      "registry_name": "black_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlueGem",
@@ -44,7 +48,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "blue_gem"
+      "registry_name": "blue_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BrownGem",
@@ -53,7 +58,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "brown_gem"
+      "registry_name": "brown_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "YellowGem",
@@ -62,7 +68,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "yellow_gem"
+      "registry_name": "yellow_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "OrangeGem",
@@ -71,7 +78,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "orange_gem"
+      "registry_name": "orange_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "GreenGem",
@@ -80,7 +88,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "green_gem"
+      "registry_name": "green_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "PinkGem",
@@ -89,7 +98,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pink_gem"
+      "registry_name": "pink_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGem",
@@ -98,7 +108,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem"
+      "registry_name": "rainbow_gem",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowOre",
@@ -107,7 +118,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_ore"
+      "registry_name": "rainbow_ore",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlackGemRecipe",
@@ -116,7 +128,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "black_gem_recipe"
+      "registry_name": "black_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlueGemRecipe",
@@ -125,7 +138,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "blue_gem_recipe"
+      "registry_name": "blue_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BrownGemRecipe",
@@ -134,7 +148,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "brown_gem_recipe"
+      "registry_name": "brown_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "YellowGemRecipe",
@@ -143,7 +158,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "yellow_gem_recipe"
+      "registry_name": "yellow_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "OrangeGemRecipe",
@@ -152,7 +168,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "orange_gem_recipe"
+      "registry_name": "orange_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "GreenGemRecipe",
@@ -161,7 +178,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "green_gem_recipe"
+      "registry_name": "green_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "PinkGemRecipe",
@@ -170,7 +188,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pink_gem_recipe"
+      "registry_name": "pink_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe",
@@ -179,7 +198,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe"
+      "registry_name": "rainbow_gem_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe2",
@@ -188,7 +208,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe_2"
+      "registry_name": "rainbow_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe3",
@@ -197,7 +218,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe_3"
+      "registry_name": "rainbow_gem_recipe_3",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe4",
@@ -206,7 +228,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe_4"
+      "registry_name": "rainbow_gem_recipe_4",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe5",
@@ -215,7 +238,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe_5"
+      "registry_name": "rainbow_gem_recipe_5",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe6",
@@ -224,7 +248,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe_6"
+      "registry_name": "rainbow_gem_recipe_6",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemRecipe7",
@@ -233,7 +258,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_recipe_7"
+      "registry_name": "rainbow_gem_recipe_7",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemBlock",
@@ -242,7 +268,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_block"
+      "registry_name": "rainbow_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowSword",
@@ -251,7 +278,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_sword"
+      "registry_name": "rainbow_sword",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowSwordRightClickedOnBlock",
@@ -284,7 +312,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowGemBlockRecipe",
@@ -293,7 +322,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_gem_block_recipe"
+      "registry_name": "rainbow_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "RainbowSwordRecipe",
@@ -302,7 +332,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_sword_recipe"
+      "registry_name": "rainbow_sword_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "CandyIngot",
@@ -311,7 +342,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_ingot"
+      "registry_name": "candy_ingot",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyNugget",
@@ -320,7 +352,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_nugget"
+      "registry_name": "candy_nugget",
+      "path": "~/Living Candy"
     },
     {
       "name": "Candy",
@@ -335,7 +368,8 @@
         "el": true,
         "eb": true,
         "ec": true
-      }
+      },
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyGrass",
@@ -344,7 +378,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_grass"
+      "registry_name": "candy_grass",
+      "path": "~/Living Candy"
     },
     {
       "name": "Bambooplantableon",
@@ -380,7 +415,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candyrack"
+      "registry_name": "candyrack",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyLog",
@@ -389,7 +425,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_log"
+      "registry_name": "candy_log",
+      "path": "~/Living Candy"
     },
     {
       "name": "Logs",
@@ -407,7 +444,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_leaves"
+      "registry_name": "candy_leaves",
+      "path": "~/Living Candy"
     },
     {
       "name": "Leaves",
@@ -425,7 +463,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_ore"
+      "registry_name": "candy_ore",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPlains",
@@ -434,7 +473,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_plains"
+      "registry_name": "candy_plains",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPigItIsStruckByLightning",
@@ -467,7 +507,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPig",
@@ -476,7 +517,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_pig"
+      "registry_name": "candy_pig",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandySword",
@@ -485,7 +527,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_sword"
+      "registry_name": "candy_sword",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPickaxe",
@@ -494,7 +537,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_pickaxe"
+      "registry_name": "candy_pickaxe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyAxe",
@@ -503,7 +547,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_axe"
+      "registry_name": "candy_axe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyShovel",
@@ -512,7 +557,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_shovel"
+      "registry_name": "candy_shovel",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyHoe",
@@ -521,7 +567,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_hoe"
+      "registry_name": "candy_hoe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandySwordRecipe",
@@ -530,7 +577,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_sword_recipe"
+      "registry_name": "candy_sword_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPickaxeRecipe",
@@ -539,7 +587,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_pickaxe_recipe"
+      "registry_name": "candy_pickaxe_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyAxeRecipe",
@@ -548,7 +597,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_axe_recipe"
+      "registry_name": "candy_axe_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyShovelRecipe",
@@ -557,7 +607,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_shovel_recipe"
+      "registry_name": "candy_shovel_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyHoeRecipe",
@@ -566,7 +617,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_hoe_recipe"
+      "registry_name": "candy_hoe_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyIngotRecipe",
@@ -575,7 +627,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_ingot_recipe"
+      "registry_name": "candy_ingot_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyIngotRecipe2",
@@ -584,7 +637,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_ingot_recipe_2"
+      "registry_name": "candy_ingot_recipe_2",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyNuggetRecipe",
@@ -593,7 +647,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_nugget_recipe"
+      "registry_name": "candy_nugget_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyHelmetRecipe",
@@ -602,7 +657,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_helmet_recipe"
+      "registry_name": "candy_helmet_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyChestplateRecipe",
@@ -611,7 +667,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_chestplate_recipe"
+      "registry_name": "candy_chestplate_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyLegginsRecipe",
@@ -620,7 +677,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_leggins_recipe"
+      "registry_name": "candy_leggins_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyBootsRecipe",
@@ -629,7 +687,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_boots_recipe"
+      "registry_name": "candy_boots_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "Skizzik1",
@@ -638,7 +697,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_1"
+      "registry_name": "skizzik_1",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik2",
@@ -647,7 +707,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_2"
+      "registry_name": "skizzik_2",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik3",
@@ -656,7 +717,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_3"
+      "registry_name": "skizzik_3",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik4",
@@ -665,7 +727,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_4"
+      "registry_name": "skizzik_4",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik5",
@@ -674,7 +737,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_5"
+      "registry_name": "skizzik_5",
+      "path": "~/Skizzik"
     },
     {
       "name": "CorruptedBlock",
@@ -735,7 +799,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_cane"
+      "registry_name": "candy_cane",
+      "path": "~/Living Candy"
     },
     {
       "name": "SkizzikHead",
@@ -744,7 +809,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head"
+      "registry_name": "skizzik_head",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadGems",
@@ -753,7 +819,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_gems"
+      "registry_name": "skizzik_head_gems",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadRecipe",
@@ -762,7 +829,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_recipe"
+      "registry_name": "skizzik_head_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadGemsRecipe",
@@ -771,7 +839,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_gems_recipe"
+      "registry_name": "skizzik_head_gems_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik1EntityDies",
@@ -804,7 +873,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik1PlayerCollidesWithThisEntity",
@@ -821,7 +891,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik1EntityIsHurt",
@@ -850,7 +921,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik1OnInitialEntitySpawn",
@@ -879,7 +951,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzie",
@@ -888,7 +961,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzie"
+      "registry_name": "skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "KaBoomSkizzie",
@@ -897,7 +971,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "ka_boom_skizzie"
+      "registry_name": "ka_boom_skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "MinigunSkizzie",
@@ -906,7 +981,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "minigun_skizzie"
+      "registry_name": "minigun_skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie",
@@ -915,7 +991,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "witch_skizzie_1"
+      "registry_name": "witch_skizzie_1",
+      "path": "~/Skizzik"
     },
     {
       "name": "CorruptedSkizzie",
@@ -924,7 +1001,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "corrupted_skizzie"
+      "registry_name": "corrupted_skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzieEntityDies",
@@ -953,7 +1031,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzieRightClickedOnEntity",
@@ -990,7 +1069,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizziePlayerCollidesWithThisEntity",
@@ -1007,7 +1087,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "KaBoomSkizziePlayerCollidesWithThisEntity",
@@ -1040,7 +1121,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Minigun",
@@ -1049,7 +1131,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "minigun"
+      "registry_name": "minigun",
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizziePlayerCollidesWithThisEntity",
@@ -1066,7 +1149,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "CorruptedSkizzieOnEntityTickUpdate",
@@ -1095,7 +1179,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "CorruptedSkizziePlayerCollidesWithThisEntity",
@@ -1112,7 +1197,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzoOnEntityTickUpdate",
@@ -1141,7 +1227,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzoPlayerCollidesWithThisEntity",
@@ -1158,7 +1245,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzoOnInitialEntitySpawn",
@@ -1187,7 +1275,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzo",
@@ -1196,7 +1285,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzo"
+      "registry_name": "skizzo",
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlySkizzie",
@@ -1205,7 +1295,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "friendly_skizzie"
+      "registry_name": "friendly_skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyMinigunSkizzie",
@@ -1214,7 +1305,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "friendly_minigun_skizzie"
+      "registry_name": "friendly_minigun_skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizziePlayerCollidesWithThisEntity",
@@ -1231,7 +1323,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie",
@@ -1240,7 +1333,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "friendly_witch_skizzie_1"
+      "registry_name": "friendly_witch_skizzie_1",
+      "path": "~/Skizzik"
     },
     {
       "name": "StoneSkizzie",
@@ -1249,7 +1343,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "stone_skizzie"
+      "registry_name": "stone_skizzie",
+      "path": "~/Skizzik"
     },
     {
       "name": "KaBoomSkizzieRightClickedOnEntity",
@@ -1286,7 +1381,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "MinigunSkizzieRightClickedOnEntity",
@@ -1323,7 +1419,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzieRightClickedOnEntity",
@@ -1360,7 +1457,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyMinigunSkizzieRightClickedOnEntity",
@@ -1397,7 +1495,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlySkizzieRightClickedOnEntity",
@@ -1434,7 +1533,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "CorruptedSkizzieRightClickedOnEntity",
@@ -1471,7 +1571,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizLauncherBulletHitsBlock",
@@ -1500,7 +1601,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizLauncherBulletHitsPlayer",
@@ -1533,7 +1635,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizLauncher",
@@ -1542,7 +1645,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skiz_launcher"
+      "registry_name": "skiz_launcher",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik2EntityDies",
@@ -1575,7 +1679,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik2EntityIsHurt",
@@ -1604,7 +1709,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik2ThisEntityKillsAnotherOne",
@@ -1621,7 +1727,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik3EntityDies",
@@ -1654,7 +1761,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik3EntityIsHurt",
@@ -1683,7 +1791,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik3ThisEntityKillsAnotherOne",
@@ -1700,7 +1809,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik3PlayerCollidesWithThisEntity",
@@ -1717,7 +1827,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizLauncher2BulletHitsBlock",
@@ -1746,7 +1857,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizLauncher2BulletHitsPlayer",
@@ -1779,7 +1891,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizLauncher2",
@@ -1788,7 +1901,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skiz_launcher_2"
+      "registry_name": "skiz_launcher_2",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik4EntityDies",
@@ -1821,7 +1935,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik4EntityIsHurt",
@@ -1850,7 +1965,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik4ThisEntityKillsAnotherOne",
@@ -1867,7 +1983,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik4PlayerCollidesWithThisEntity",
@@ -1884,7 +2001,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik5EntityDies",
@@ -1913,7 +2031,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik5EntityIsHurt",
@@ -1942,7 +2061,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik5ThisEntityKillsAnotherOne",
@@ -1959,7 +2079,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizHeadLauncher3BulletHitsBlock",
@@ -1988,7 +2109,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizHeadLauncher3BulletHitsPlayer",
@@ -2021,7 +2143,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizHeadLauncher3",
@@ -2030,7 +2153,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skiz_launcher_3"
+      "registry_name": "skiz_launcher_3",
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik3OnInitialEntitySpawn",
@@ -2047,7 +2171,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik4OnInitialEntitySpawn",
@@ -2064,7 +2189,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik5OnInitialEntitySpawn",
@@ -2081,7 +2207,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "InactiveSkizzikEntityDies",
@@ -2110,7 +2237,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "InactiveSkizzik",
@@ -2119,7 +2247,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "inactive_skizzik"
+      "registry_name": "inactive_skizzik",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadGemsBlockAdded",
@@ -2148,16 +2277,8 @@
             "type": "world"
           }
         ]
-      }
-    },
-    {
-      "name": "Gems",
-      "type": "tag",
-      "sortid": 193,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "gems"
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "Skizzik1OnEntityTickUpdate",
@@ -2174,7 +2295,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "PinkGemBlock",
@@ -2183,7 +2305,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pink_gem_block"
+      "registry_name": "pink_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "GreenGemBlock",
@@ -2192,7 +2315,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "green_gem_block"
+      "registry_name": "green_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "OrangeGemBlock",
@@ -2201,7 +2325,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "orange_gem_block"
+      "registry_name": "orange_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "YellowGemBlock",
@@ -2210,7 +2335,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "yellow_gem_block"
+      "registry_name": "yellow_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BrownGemBlock",
@@ -2219,7 +2345,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "brown_gem_block"
+      "registry_name": "brown_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlueGemBlock",
@@ -2228,7 +2355,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "blue_gem_block"
+      "registry_name": "blue_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlackGemBlock",
@@ -2237,7 +2365,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "black_gem_block"
+      "registry_name": "black_gem_block",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlackGemBlockRecipe",
@@ -2246,7 +2375,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "black_gem_block_recipe"
+      "registry_name": "black_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlueGemBlockRecipe",
@@ -2255,7 +2385,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "blue_gem_block_recipe"
+      "registry_name": "blue_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BrownGemBlockRecipe",
@@ -2264,7 +2395,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "brown_gem_block_recipe"
+      "registry_name": "brown_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "YellowGemBlockRecipe",
@@ -2273,7 +2405,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "yellow_gem_block_recipe"
+      "registry_name": "yellow_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "OrangeGemBlockRecipe",
@@ -2282,7 +2415,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "orange_gem_block_recipe"
+      "registry_name": "orange_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "GreenGemBlockRecipe",
@@ -2291,7 +2425,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "green_gem_block_recipe"
+      "registry_name": "green_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "PinkGemBlockRecipe",
@@ -2300,7 +2435,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pink_gem_block_recipe"
+      "registry_name": "pink_gem_block_recipe",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlackGemRecipe2",
@@ -2309,7 +2445,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "black_gem_recipe_2"
+      "registry_name": "black_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BlueGemRecipe2",
@@ -2318,7 +2455,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "blue_gem_recipe_2"
+      "registry_name": "blue_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "BrownGemRecipe2",
@@ -2327,7 +2465,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "brown_gem_recipe_2"
+      "registry_name": "brown_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "YellowGemRecipe2",
@@ -2336,7 +2475,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "yellow_gem_recipe_2"
+      "registry_name": "yellow_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "OrangeGemRecipe2",
@@ -2345,7 +2485,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "orange_gem_recipe_2"
+      "registry_name": "orange_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "GreenGemRecipe2",
@@ -2354,7 +2495,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "green_gem_recipe_2"
+      "registry_name": "green_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "PinkGemRecipe2",
@@ -2363,7 +2505,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pink_gem_recipe_2"
+      "registry_name": "pink_gem_recipe_2",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "CandyPlanks",
@@ -2372,16 +2515,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_planks"
-    },
-    {
-      "name": "Planks",
-      "type": "tag",
-      "sortid": 210,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "planks"
+      "registry_name": "candy_planks",
+      "path": "~/Living Candy"
     },
     {
       "name": "Plank",
@@ -2399,7 +2534,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_door"
+      "registry_name": "candy_door",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyDoorRecipe",
@@ -2408,7 +2544,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_door_recipe"
+      "registry_name": "candy_door_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyTrapdoor",
@@ -2417,7 +2554,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_trapdoor"
+      "registry_name": "candy_trapdoor",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyTrapdoorRecipe",
@@ -2426,7 +2564,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_trapdoor_recipe"
+      "registry_name": "candy_trapdoor_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandySlab",
@@ -2435,7 +2574,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_slab"
+      "registry_name": "candy_slab",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyStairs",
@@ -2444,7 +2584,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_stairs"
+      "registry_name": "candy_stairs",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPlanksRecipe",
@@ -2453,7 +2594,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_planks_recipe"
+      "registry_name": "candy_planks_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyFence",
@@ -2462,7 +2604,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_fence"
+      "registry_name": "candy_fence",
+      "path": "~/Living Candy"
     },
     {
       "name": "Fence",
@@ -2471,7 +2614,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "fence"
+      "registry_name": "fence",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyCanePlant",
@@ -2480,7 +2624,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_cane_plant"
+      "registry_name": "candy_cane_plant",
+      "path": "~/Living Candy"
     },
     {
       "name": "StrippedCandyLog",
@@ -2489,7 +2634,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "stripped_candy_log"
+      "registry_name": "stripped_candy_log",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPlanksRecipe2",
@@ -2498,7 +2644,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_planks_recipe_2"
+      "registry_name": "candy_planks_recipe_2",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandySlabRecipe",
@@ -2507,7 +2654,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_slab_recipe"
+      "registry_name": "candy_slab_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyStairsRecipe",
@@ -2516,7 +2664,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_stairs_recipe"
+      "registry_name": "candy_stairs_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyFenceRecipe",
@@ -2525,7 +2674,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_fence_recipe"
+      "registry_name": "candy_fence_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyLogOnBlockRightClicked",
@@ -2558,7 +2708,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyWood",
@@ -2567,7 +2718,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_wood"
+      "registry_name": "candy_wood",
+      "path": "~/Living Candy"
     },
     {
       "name": "StrippedCandyWood",
@@ -2576,7 +2728,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "stripped_candy_wood"
+      "registry_name": "stripped_candy_wood",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPlanksRecipe3",
@@ -2585,7 +2738,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_planks_recipe_3"
+      "registry_name": "candy_planks_recipe_3",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPlanksRecipe4",
@@ -2594,7 +2748,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_planks_recipe_4"
+      "registry_name": "candy_planks_recipe_4",
+      "path": "~/Living Candy"
     },
     {
       "name": "Skizzik",
@@ -2603,7 +2758,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik"
+      "registry_name": "skizzik",
+      "path": "~/Skizzik"
     },
     {
       "name": "OutOfIdeas",
@@ -2612,7 +2768,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "out_of_ideas"
+      "registry_name": "out_of_ideas",
+      "path": "~/Living Candy"
     },
     {
       "name": "RainbowOreLoot",
@@ -2621,7 +2778,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_ore_loot"
+      "registry_name": "rainbow_ore_loot",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "CandyLeavesLoot",
@@ -2630,7 +2788,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_leaves_loot"
+      "registry_name": "candy_leaves_loot",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyCanePlantLoot",
@@ -2639,7 +2798,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_cane_plant_loot"
+      "registry_name": "candy_cane_plant_loot",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyPigLoot",
@@ -2648,7 +2808,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_pig_loot"
+      "registry_name": "candy_pig_loot",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyCaneRightClickedInAir",
@@ -2681,7 +2842,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Living Candy"
     },
     {
       "name": "FriendlyWitchSkizzieRightClickedOnEntity",
@@ -2718,7 +2880,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "CandyIngotRecipe3",
@@ -2727,7 +2890,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_ingot_recipe_3"
+      "registry_name": "candy_ingot_recipe_3",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyFenceGate",
@@ -2736,7 +2900,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_fence_gate"
+      "registry_name": "candy_fence_gate",
+      "path": "~/Living Candy"
     },
     {
       "name": "CandyFenceGateRecipe",
@@ -2745,7 +2910,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "candy_fence_gate_recipe"
+      "registry_name": "candy_fence_gate_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "BrokenCommandBlock",
@@ -2754,7 +2920,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "broken_command_block"
+      "registry_name": "broken_command_block",
+      "path": "~/Skizzik"
     },
     {
       "name": "DeactivatedCommandBlock",
@@ -2763,7 +2930,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "deactivated_command_block"
+      "registry_name": "deactivated_command_block",
+      "path": "~/Skizzik"
     },
     {
       "name": "DeactivatedCommandBlockRecipe",
@@ -2772,7 +2940,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "deactivated_command_block_recipe"
+      "registry_name": "deactivated_command_block_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "CommandBlockRecipe2",
@@ -2781,7 +2950,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "command_block_recipe_2"
+      "registry_name": "command_block_recipe_2",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikBone",
@@ -2790,7 +2960,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_bone"
+      "registry_name": "skizzik_bone",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikLeather",
@@ -2799,7 +2970,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh"
+      "registry_name": "skizzik_flesh",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikLeatherBlock",
@@ -2808,7 +2980,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_block"
+      "registry_name": "skizzik_flesh_block",
+      "path": "~/Skizzik"
     },
     {
       "name": "PlatinumIngot",
@@ -2826,7 +2999,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_bone_recipe"
+      "registry_name": "skizzik_bone_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "RawSkizzikFlesh",
@@ -2835,7 +3009,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "raw_skizzik_flesh"
+      "registry_name": "raw_skizzik_flesh",
+      "path": "~/Skizzik"
     },
     {
       "name": "RawSkizzikFleshRecipe",
@@ -2844,7 +3019,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "raw_skizzik_flesh_recipe"
+      "registry_name": "raw_skizzik_flesh_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshRecipe",
@@ -2853,7 +3029,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_recipe"
+      "registry_name": "skizzik_flesh_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshRecipe2",
@@ -2862,7 +3039,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_recipe_2"
+      "registry_name": "skizzik_flesh_recipe_2",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshRecipe3",
@@ -2871,7 +3049,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_recipe_3"
+      "registry_name": "skizzik_flesh_recipe_3",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshBlockRecipe",
@@ -2880,7 +3059,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_block_recipe"
+      "registry_name": "skizzik_flesh_block_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "PlatinumNugget",
@@ -2922,7 +3102,8 @@
         "el": true,
         "eb": true,
         "ec": true
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshArmorHelmetRecipe",
@@ -2931,7 +3112,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_armor_helmet_recipe"
+      "registry_name": "skizzik_flesh_armor_helmet_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshArmorBodyRecipe",
@@ -2940,7 +3122,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_armor_body_recipe"
+      "registry_name": "skizzik_flesh_armor_body_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshArmorLeggingsRecipe",
@@ -2949,7 +3132,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_armor_leggings_recipe"
+      "registry_name": "skizzik_flesh_armor_leggings_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFleshArmorBootsRecipe",
@@ -2958,7 +3142,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_flesh_armor_boots_recipe"
+      "registry_name": "skizzik_flesh_armor_boots_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadSmallGems",
@@ -2967,7 +3152,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_small_gems"
+      "registry_name": "skizzik_head_small_gems",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadSmall",
@@ -2976,7 +3162,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_small"
+      "registry_name": "skizzik_head_small",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadSmallRecipe",
@@ -2985,7 +3172,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_small_recipe"
+      "registry_name": "skizzik_head_small_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikHeadSmallGemsRecipe",
@@ -2994,24 +3182,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_head_small_gems_recipe"
-    },
-    {
-      "name": "NeverGonnaGiveYouUpRightClickedInAir",
-      "type": "procedure",
-      "sortid": 250,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "never_gonna_give_you_up_right_clicked_in_air",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      }
+      "registry_name": "skizzik_head_small_gems_recipe",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikLootbag",
@@ -3020,16 +3192,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_lootbag"
-    },
-    {
-      "name": "NeverGonnaGiveYouUp",
-      "type": "item",
-      "sortid": 251,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {},
-      "registry_name": "never_gonna_give_you_up"
+      "registry_name": "skizzik_lootbag",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikLootbagOnBlockRightClicked",
@@ -3058,7 +3222,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikLoot",
@@ -3067,7 +3232,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_loot"
+      "registry_name": "skizzik_loot",
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie2",
@@ -3076,7 +3242,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "witch_skizzie_2"
+      "registry_name": "witch_skizzie_2",
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie3",
@@ -3085,7 +3252,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "witch_skizzie_3"
+      "registry_name": "witch_skizzie_3",
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie2RightClickedOnEntity",
@@ -3122,7 +3290,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie3RightClickedOnEntity",
@@ -3159,7 +3328,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie2",
@@ -3168,7 +3338,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "friendly_witch_skizzie_2"
+      "registry_name": "friendly_witch_skizzie_2",
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie3",
@@ -3177,7 +3348,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "friendly_witch_skizzie_3"
+      "registry_name": "friendly_witch_skizzie_3",
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie2PlayerCollidesWithThisEntity",
@@ -3194,7 +3366,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "WitchSkizzie3PlayerCollidesWithThisEntity",
@@ -3211,7 +3384,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie2RightClickedOnEntity",
@@ -3248,7 +3422,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie3RightClickedOnEntity",
@@ -3285,7 +3460,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie2PlayerCollidesWithThisEntity",
@@ -3302,7 +3478,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FriendlyWitchSkizzie3PlayerCollidesWithThisEntity",
@@ -3319,7 +3496,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "MapleSyrupBottle",
@@ -3328,7 +3506,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "maple_syrup_bottle"
+      "registry_name": "maple_syrup_bottle",
+      "path": "~/Living Candy"
     },
     {
       "name": "MapleSyrup",
@@ -3337,7 +3516,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "maple_syrup"
+      "registry_name": "maple_syrup",
+      "path": "~/Living Candy"
     },
     {
       "name": "MapleSyrupFluid",
@@ -3346,7 +3526,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "maple_syrup_fluid"
+      "registry_name": "maple_syrup_fluid",
+      "path": "~/Living Candy"
     },
     {
       "name": "Salt",
@@ -3400,7 +3581,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pancakes"
+      "registry_name": "pancakes",
+      "path": "~/Living Candy"
     },
     {
       "name": "PancakesMapleSyrup",
@@ -3409,7 +3591,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pancakes_maple_syrup"
+      "registry_name": "pancakes_maple_syrup",
+      "path": "~/Living Candy"
     },
     {
       "name": "PancakesRecipe",
@@ -3418,7 +3601,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pancakes_recipe"
+      "registry_name": "pancakes_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "PancakesMapleSyrupRecipe",
@@ -3427,7 +3611,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pancakes_maple_syrup_recipe"
+      "registry_name": "pancakes_maple_syrup_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "PancakesMapleSyrupRecipe2",
@@ -3436,7 +3621,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "pancakes_maple_syrup_recipe_2"
+      "registry_name": "pancakes_maple_syrup_recipe_2",
+      "path": "~/Living Candy"
     },
     {
       "name": "Waffle",
@@ -3445,7 +3631,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "waffle"
+      "registry_name": "waffle",
+      "path": "~/Living Candy"
     },
     {
       "name": "WaffleRecipe",
@@ -3454,7 +3641,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "waffle_recipe"
+      "registry_name": "waffle_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "WaffleBlock",
@@ -3463,7 +3651,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "waffle_block"
+      "registry_name": "waffle_block",
+      "path": "~/Living Candy"
     },
     {
       "name": "BefriendSkizzies",
@@ -3475,7 +3664,8 @@
       "registry_name": "befriendSkizzies",
       "metadata": {
         "type": "boolean"
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "ConvertSkizzies",
@@ -3487,7 +3677,8 @@
       "registry_name": "convertSkizzies",
       "metadata": {
         "type": "boolean"
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "CandyTab",
@@ -3496,7 +3687,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "living_candy_tab"
+      "registry_name": "living_candy_tab",
+      "path": "~/Living Candy"
     },
     {
       "name": "RainbowTab",
@@ -3505,7 +3697,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "rainbow_magic_tab"
+      "registry_name": "rainbow_magic_tab",
+      "path": "~/Rainbow Magic"
     },
     {
       "name": "CosmicSkizzie",
@@ -3514,7 +3707,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_skizzie"
+      "registry_name": "cosmic_skizzie",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "SkizzikFinishHim",
@@ -3523,7 +3717,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "skizzik_finish_him"
+      "registry_name": "skizzik_finish_him",
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzikFinishHimEntityDies",
@@ -3552,7 +3747,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "ChocolateBlock",
@@ -3561,7 +3757,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "chocolate_block"
+      "registry_name": "chocolate_block",
+      "path": "~/Living Candy"
     },
     {
       "name": "WhiteChocolateBlock",
@@ -3570,7 +3767,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "white_chocolate_block"
+      "registry_name": "white_chocolate_block",
+      "path": "~/Living Candy"
     },
     {
       "name": "DarkChocolateBlock",
@@ -3579,7 +3777,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "dark_chocolate_block"
+      "registry_name": "dark_chocolate_block",
+      "path": "~/Living Candy"
     },
     {
       "name": "ChocolateBarWrap",
@@ -3588,7 +3787,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "chocolate_bar_wrap"
+      "registry_name": "chocolate_bar_wrap",
+      "path": "~/Living Candy"
     },
     {
       "name": "WhiteChocolateBar",
@@ -3597,7 +3797,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "white_chocolate_bar"
+      "registry_name": "white_chocolate_bar",
+      "path": "~/Living Candy"
     },
     {
       "name": "ChocolateBar",
@@ -3606,7 +3807,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "chocolate_bar"
+      "registry_name": "chocolate_bar",
+      "path": "~/Living Candy"
     },
     {
       "name": "DarkChocolateBar",
@@ -3615,7 +3817,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "dark_chocolate_bar"
+      "registry_name": "dark_chocolate_bar",
+      "path": "~/Living Candy"
     },
     {
       "name": "ChocolateBarRecipe",
@@ -3624,7 +3827,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "chocolate_bar_recipe"
+      "registry_name": "chocolate_bar_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "DarkChocolateBarRecipe",
@@ -3633,7 +3837,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "dark_chocolate_bar_recipe"
+      "registry_name": "dark_chocolate_bar_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "WhiteChocolateBarRecipe",
@@ -3642,7 +3847,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "white_chocolate_bar_recipe"
+      "registry_name": "white_chocolate_bar_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "WhiteChocolateBlockRecipe",
@@ -3651,7 +3857,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "white_chocolate_block_recipe"
+      "registry_name": "white_chocolate_block_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "ChocolateBlockRecipe",
@@ -3660,7 +3867,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "chocolate_block_recipe"
+      "registry_name": "chocolate_block_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "DarkChocolateBlockRecipe",
@@ -3669,7 +3877,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "dark_chocolate_block_recipe"
+      "registry_name": "dark_chocolate_block_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "ChocolateBarWrapRecipe",
@@ -3678,7 +3887,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "chocolate_bar_wrap_recipe"
+      "registry_name": "chocolate_bar_wrap_recipe",
+      "path": "~/Living Candy"
     },
     {
       "name": "FlyDown",
@@ -3687,7 +3897,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "fly_down"
+      "registry_name": "fly_down",
+      "path": "~/Skizzik"
     },
     {
       "name": "FlyUp",
@@ -3696,7 +3907,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "fly_up"
+      "registry_name": "fly_up",
+      "path": "~/Skizzik"
     },
     {
       "name": "FlyUpOnKeyPressed",
@@ -3713,7 +3925,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FlyUpOnKeyReleased",
@@ -3730,7 +3943,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "FlyDownOnKeyPressed",
@@ -3747,7 +3961,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "SkizzieSpecialAttacksOnEntities",
@@ -3784,7 +3999,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Skizzik"
     },
     {
       "name": "PrismarineColossus",
@@ -3793,7 +4009,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_colossus"
+      "registry_name": "prismarine_colossus",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineSecretsTab",
@@ -3802,7 +4019,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_secrets_tab"
+      "registry_name": "prismarine_secrets_tab",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineStick",
@@ -3811,7 +4029,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_stick"
+      "registry_name": "prismarine_stick",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineStickRecipe",
@@ -3820,7 +4039,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_stick_recipe"
+      "registry_name": "prismarine_stick_recipe",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineAxeToolInHandTick",
@@ -3837,7 +4057,8 @@
             "type": "entity"
           }
         ]
-      }
+      },
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineAxeRightClickedOnBlock",
@@ -3849,7 +4070,8 @@
       "registry_name": "prismarine_axe_right_clicked_on_block",
       "metadata": {
         "dependencies": []
-      }
+      },
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineAxe",
@@ -3858,7 +4080,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_axe"
+      "registry_name": "prismarine_axe",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineAxeBlockDestroyedWithTool",
@@ -3895,7 +4118,8 @@
             "type": "world"
           }
         ]
-      }
+      },
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineFoe",
@@ -3904,7 +4128,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_foe"
+      "registry_name": "prismarine_foe",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "PrismarineAxeRecipe",
@@ -3913,7 +4138,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "prismarine_axe_recipe"
+      "registry_name": "prismarine_axe_recipe",
+      "path": "~/Prismarine Secrets"
     },
     {
       "name": "CosmicVerseTab",
@@ -3922,7 +4148,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_verse_tab"
+      "registry_name": "cosmic_verse_tab",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "CosmicUnderrack",
@@ -3931,7 +4158,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_underrack"
+      "registry_name": "cosmic_underrack",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "CosmicNylium",
@@ -3940,7 +4168,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_nylium"
+      "registry_name": "cosmic_nylium",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "CosmicBottomrack",
@@ -3949,7 +4178,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_bottomrack"
+      "registry_name": "cosmic_bottomrack",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "CosmicBedrock",
@@ -3958,7 +4188,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_bedrock"
+      "registry_name": "cosmic_bedrock",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "CosmicPlains",
@@ -3967,7 +4198,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "cosmic_plains"
+      "registry_name": "cosmic_plains",
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "CosmicDimension",
@@ -3979,7 +4211,8 @@
       "registry_name": "cosmic_dimension",
       "metadata": {
         "ep": false
-      }
+      },
+      "path": "~/Cosmic-Verse"
     },
     {
       "name": "BabyCosmicSkizzie",
@@ -3988,7 +4221,8 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "baby_cosmic_skizzie"
+      "registry_name": "baby_cosmic_skizzie",
+      "path": "~/Cosmic-Verse"
     }
   ],
   "variable_elements": [],
@@ -4037,44 +4271,22 @@
   ],
   "language_map": {
     "en_us": {
-      "entity.skizzik.cosmic_skizzie": "Cosmic Skizzie",
-      "item.skizzik.skizzik_5_spawn_egg": "Skizzik - Stage 5 Spawn Egg",
       "item.skizzik.friendly_skizzie": "Friendly Skizzie Spawn Egg",
       "block.skizzik.brown_gem_block": "Brown Gem Block",
-      "block.skizzik.blue_gem_block": "Blue Gem Block",
-      "item.skizzik.maple_syrup": "Maple Syrup",
       "item.skizzik.friendly_witch_skizzie_1_spawn_egg": "Friendly Witch Skizzie Spawn Egg",
       "item.skizzik.candy_pig_spawn_egg": "Candy Pig Spawn Egg",
       "block.skizzik.candy_cane_plant": "Candy Cane Plant",
       "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
-      "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie Spawn Egg",
       "item.skizzik.candy_hoe": "Candy Hoe",
       "entity.skizzik.prismarine_foe": "Prismarine Foe",
-      "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
-      "item.skizzik.skiz_launcher": "Skiz Launcher",
       "gamerule.convertSkizzies": "If true, you will be able to convert Skizzies into other types.",
-      "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
-      "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
-      "block.skizzik.pink_gem_block": "Pink Gem Block",
       "fluid.maple_syrup_fluid": "MapleSyrupFluid",
-      "item.skizzik.candy_chestplate": "Candy Body",
-      "item.skizzik.brown_gem": "Brown Gem",
-      "block.skizzik.cosmic_bottomrack": "Cosmic Bottomrack",
       "item.skizzik.skizzik_flesh_armor_helmet": "Skizzik Flesh Helmet",
-      "biome.skizzik.cosmic_plains": "Cosmic Plains",
       "subtitles.item.skizzik_flesh.equip": "Skizzik Flesh Armor Equiped",
       "entity.skizzik.skizzo": "Skizzo",
       "block.skizzik.stripped_candy_log": "Stripped Candy Log",
-      "item.skizzik.platinum_nugget": "Platinum Nugget",
-      "block.skizzik.cosmic_underrack": "Cosmic Underrack",
-      "block.skizzik.white_chocolate_block": "White Chocolate Block",
-      "item.skizzik.skizzik_flesh_armor_chestplate": "Skizzik Flesh Chestplate",
       "item.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie Spawn Egg",
-      "item.skizzik.witch_skizzie_2_spawn_egg": "Witch Skizzie (Level 2) Spawn Egg",
-      "item.skizzik.skizzik_finish_him_spawn_egg": "Skizzik - Finish Him Spawn Egg",
       "block.skizzik.green_gem_block": "Green Gem Block",
-      "gamerule.befriendSkizzies": "If true, you will be able to right-click on Skizzies with water bucket to befriend them.",
-      "item.skizzik.candy_helmet": "Candy Helmet",
       "item.skizzik.candybody": "Candy Body",
       "subtitles.entity.cosmic_skizzie.hurt": "Cosmic Skizzie Hurts",
       "entity.skizzik.inactive_skizzik": "Skizzik - Inactive",
@@ -4083,54 +4295,138 @@
       "entity.skizzik.witch_skizzie_2": "Witch Skizzie (Level 2)",
       "entity.skizzik.friendly_witch_skizzie_3": "Friendly Witch Skizzie (Level 3)",
       "entity.skizzik.witch_skizzie_1": "Witch Skizzie",
-      "entity.skizzik.friendly_witch_skizzie_2": "Friendly Witch Skizzie (Level 2)",
       "block.skizzik.skizzik_lootbag": "Skizzik Lootbag",
-      "item.skizzik.skizzik_flesh_armor_boots": "Skizzik Flesh Boots",
+      "entity.skizzik.friendly_witch_skizzie_2": "Friendly Witch Skizzie (Level 2)",
       "advancements.skizzik.descr": "Advancements parent",
       "block.skizzik.candy_slab": "Candy Slab",
+      "item.skizzik.ka_boom_skizzie_spawn_egg": "Ka-Boom Skizzie Spawn Egg",
+      "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
+      "item.minecraft.potion.effect.corruption": "Corruption",
+      "itemGroup.tabskizzik_tab": "Skizzik",
+      "key.mcreator.fly_up": "Fly Up (Skizzie Control)",
+      "item.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie Spawn Egg",
+      "item.skizzik.friendly_witch_skizzie_2_spawn_egg": "Friendly Witch Skizzie (Level 2) Spawn Egg",
+      "block.skizzik.yellow_gem_block": "Yellow Gem Block",
+      "block.skizzik.rainbow_ore": "Rainbow Ore",
+      "gamerule.befriendSkizzies.description": "If true, you will be able to right-click on Skizzies with water bucket to befriend them.",
+      "block.skizzik.stone_skizzie": "Stone Skizzie",
+      "item.skizzik.skizzik_bone": "Skizzik Bone",
+      "gamerule.convertSkizzies.description": "If true, you will be able to convert Skizzies into other types.",
+      "item.skizzik.candy_shovel": "Candy Shovel",
+      "advancements.skizzik.title": "Skizzik",
+      "item.skizzik.chocolate_bar_wrap": "Chocolate Bar Wrap",
+      "death.attack.corrupted": "%1$s got corrupted",
+      "key.mcreator.fly_down": "Fly Down (Skizzie Control)",
+      "block.skizzik.skizzik_flesh_block": "Skizzik Flesh Block",
+      "item.minecraft.lingering_potion.effect.corruption": "Lingering Corruption",
+      "entity.skizzik.skizzik_1": "Skizzik - Stage 1",
+      "item.skizzik.candy_ingot": "Candy Ingot",
+      "item.skizzik.skizzie": "Skizzie Spawn Egg",
+      "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
+      "block.skizzik.waffle_block": "Waffle Block",
+      "item.skizzik.skizzik_2": "Skizzik - Stage 2 Spawn Egg",
+      "entity.skizzik.skizzik_4": "Skizzik - Stage 4",
+      "entity.skizzik.skizzik_5": "Skizzik - Stage 5",
+      "item.skizzik.skizzik_3": "Skizzik - Stage 3 Spawn Egg",
+      "entity.skizzik.skizzik_2": "Skizzik - Stage 2",
+      "item.skizzik.skizzik_4": "Skizzik - Stage 4 Spawn Egg",
+      "entity.skizzik.skizzik_3": "Skizzik - Stage 3",
+      "item.skizzik.skizzik_5": "Skizzik - Stage 5 Spawn Egg",
+      "item.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie Spawn Egg",
+      "item.skizzik.candy_cane": "Candy Cane",
+      "block.skizzik.candy_trapdoor": "Candy Trapdoor",
+      "block.skizzik.candy_door": "Candy Door",
+      "block.skizzik.deactivated_command_block": "Deactivated Command Block",
+      "item.skizzik.cosmic_skizzie_spawn_egg": "Cosmic Skizzie Spawn Egg",
+      "item.skizzik.rainbow_gem": "Rainbow Gem",
+      "item.skizzik.skizzik_2_spawn_egg": "Skizzik - Stage 2 Spawn Egg",
+      "item.skizzik.green_gem": "Green Gem",
+      "item.skizzik.candy_leggings": "Candy Leggings",
+      "item.skizzik.candy_boots": "Candy Boots",
+      "item.skizzik.friendly_minigun_skizzie_spawn_egg": "Friendly Minigun Skizzie Spawn Egg",
+      "item.skizzik.skizzik_1": "Skizzik - Stage 1 Spawn Egg",
+      "item.skizzik.blue_gem": "Blue Gem",
+      "item.skizzik.candylegs": "Candy Leggings",
+      "block.skizzik.candy_grass": "Candy Nylium",
+      "item.skizzik.skizzo": "Skizzo Spawn Egg",
+      "item.skizzik.skizzik_flesh": "Skizzik Flesh",
+      "block.skizzik.chocolate_block": "Chocolate Block",
+      "item.skizzik.orange_gem": "Orange Gem",
+      "item.skizzik.friendly_witch_skizzie_3_spawn_egg": "Friendly Witch Skizzie (Level 3) Spawn Egg",
+      "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
+      "entity.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie",
+      "item.skizzik.candy_nugget": "Candy Nugget",
+      "block.skizzik.corrupted_block": "Corrupted Block",
+      "entity.skizzik.baby_cosmic_skizzie": "Baby Cosmic Skizzie",
+      "block.skizzik.candy_fence": "Candy Fence",
+      "block.skizzik.candy_stairs": "Candy Stairs",
+      "item.skizzik.minigun_skizzie_spawn_egg": "Minigun Skizzie Spawn Egg",
+      "item.skizzik.skizzik_flesh_armor_leggings": "Skizzik Flesh Leggings",
+      "item.skizzik.skizzik_3_spawn_egg": "Skizzik - Stage 3 Spawn Egg",
+      "advancements.out_of_ideas.title": "Out of Ideas",
+      "item.skizzik.candy_axe": "Candy Axe",
+      "item.skizzik.corrupted_skizzie": "Corrupted Skizzie Spawn Egg",
+      "entity.skizzik.prismarine_colossus": "Prismarine Colossus",
+      "item.skizzik.chocolate_bar": "Chocolate Bar",
+      "item.skizzik.baby_cosmic_skizzie_spawn_egg": "Baby Cosmic Skizzie Spawn Egg",
+      "item.skizzik.yellow_gem": "Yellow Gem",
+      "biome.skizzik.candy_plains": "Candy Plains",
+      "block.skizzik.candy_log": "Candy Log",
+      "block.skizzik.skizzik_head_small": "Small Skizzik Head",
+      "block.skizzik.command_block": "Command Block",
+      "item.skizzik.prismarine_colossus_spawn_egg": "Prismarine Colossus Spawn Egg",
+      "itemGroup.tabliving_candy_tab": "Skizzik: Living Candy",
+      "block.skizzik.orange_gem_block": "Orange Gem Block",
+      "entity.skizzik.cosmic_skizzie": "Cosmic Skizzie",
+      "item.skizzik.skizzik_5_spawn_egg": "Skizzik - Stage 5 Spawn Egg",
+      "block.skizzik.blue_gem_block": "Blue Gem Block",
+      "item.skizzik.maple_syrup": "Maple Syrup",
+      "item.skizzik.witch_skizzie_1_spawn_egg": "Witch Skizzie Spawn Egg",
+      "item.skizzik.witch_skizzie": "Witch Skizzie Spawn Egg",
+      "item.skizzik.skiz_launcher": "Skiz Launcher",
+      "item.skizzik.minigun_skizzie": "Minigun Skizzie Spawn Egg",
+      "key.skizzik.fly_down": "Fly Down (Skizzie Control)",
+      "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
+      "block.skizzik.pink_gem_block": "Pink Gem Block",
+      "item.skizzik.candy_chestplate": "Candy Body",
+      "item.skizzik.brown_gem": "Brown Gem",
+      "block.skizzik.cosmic_bottomrack": "Cosmic Bottomrack",
+      "biome.skizzik.cosmic_plains": "Cosmic Plains",
+      "item.skizzik.platinum_nugget": "Platinum Nugget",
+      "block.skizzik.cosmic_underrack": "Cosmic Underrack",
+      "block.skizzik.white_chocolate_block": "White Chocolate Block",
+      "item.skizzik.skizzik_flesh_armor_chestplate": "Skizzik Flesh Chestplate",
+      "item.skizzik.witch_skizzie_2_spawn_egg": "Witch Skizzie (Level 2) Spawn Egg",
+      "item.skizzik.skizzik_finish_him_spawn_egg": "Skizzik - Finish Him Spawn Egg",
+      "gamerule.befriendSkizzies": "If true, you will be able to right-click on Skizzies with water bucket to befriend them.",
+      "item.skizzik.candy_helmet": "Candy Helmet",
+      "item.skizzik.skizzik_flesh_armor_boots": "Skizzik Flesh Boots",
       "block.skizzik.skizzik_head_small_gems": "Small Skizzik Head with Gems",
       "block.skizzik.candy_planks": "Candy Planks",
       "item.skizzik.minigun": "Minigun",
-      "item.skizzik.ka_boom_skizzie_spawn_egg": "Ka-Boom Skizzie Spawn Egg",
-      "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
       "item.minecraft.tipped_arrow.effect.corruption": "Arrow of Corruption",
-      "item.minecraft.potion.effect.corruption": "Corruption",
       "block.skizzik.candy_ore": "Candy Ore",
       "entity.skizzik.minigun_skizzie": "Minigun Skizzie",
-      "itemGroup.tabskizzik_tab": "Skizzik",
-      "key.mcreator.fly_up": "Fly Up (Skizzie Control)",
       "item.skizzik.candy_pickaxe": "Candy Pickaxe",
       "block.skizzik.candy_leaves": "Candy Leaves",
       "item.skizzik.candy_pig": "Candy Pig Spawn Egg",
       "item.skizzik.inactive_skizzik_spawn_egg": "Skizzik - Inactive Spawn Egg",
       "item.skizzik.platinum_ingot": "Platinum Ingot",
-      "item.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie Spawn Egg",
       "effect.corruption": "Corruption",
       "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
       "item.skizzik.maple_syrup_fluid_bucket": "MapleSyrupFluid Bucket",
-      "item.skizzik.friendly_witch_skizzie_2_spawn_egg": "Friendly Witch Skizzie (Level 2) Spawn Egg",
       "item.skizzik.skizzik_4_spawn_egg": "Skizzik - Stage 4 Spawn Egg",
       "block.skizzik.candyrack": "Candyrack",
       "block.skizzik.broken_command_block": "Broken Command Block",
-      "block.skizzik.yellow_gem_block": "Yellow Gem Block",
-      "block.skizzik.rainbow_ore": "Rainbow Ore",
-      "block.skizzik.stone_skizzie": "Stone Skizzie",
-      "item.skizzik.skizzik_bone": "Skizzik Bone",
       "block.skizzik.rainbow_gem_block": "Rainbow Gem Block",
       "item.skizzik.witch_skizzie_3_spawn_egg": "Witch Skizzie (Level 3) Spawn Egg",
       "itemGroup.tabprismarine_secrets_tab": "Skizzik: Prismarine Secrets",
-      "item.skizzik.candy_shovel": "Candy Shovel",
       "item.skizzik.waffle": "Waffle",
-      "advancements.skizzik.title": "Skizzik",
       "item.skizzik.white_chocolate_bar": "White Chocolate Bar",
       "block.skizzik.cosmic_nylium": "Cosmic Nylium",
-      "item.skizzik.chocolate_bar_wrap": "Chocolate Bar Wrap",
       "item.skizzik.prismarine_foe_spawn_egg": "Prismarine Foe Spawn Egg",
-      "death.attack.corrupted": "%1$s got corrupted",
       "item.skizzik.pancakes_maple_syrup": "Pancakes with Maple Syrup",
-      "key.mcreator.fly_down": "Fly Down (Skizzie Control)",
       "item.skizzik.prismarine_axe": "Prismarine Axe",
-      "block.skizzik.skizzik_flesh_block": "Skizzik Flesh Block",
       "item.skizzik.skiz_launcher_2": "Skiz Launcher 2",
       "item.skizzik.skiz_launcher_3": "Skiz Launcher 3",
       "item.skizzik.candyboots": "Candy Boots",
@@ -4139,95 +4435,61 @@
       "block.skizzik.black_gem_block": "Black Gem Block",
       "item.skizzik.skizzik_1_spawn_egg": "Skizzik - Stage 1 Spawn Egg",
       "block.skizzik.cosmic_bedrock": "Cosmic Bedrock",
-      "item.minecraft.lingering_potion.effect.corruption": "Lingering Corruption",
-      "entity.skizzik.skizzik_1": "Skizzik - Stage 1",
-      "item.skizzik.candy_ingot": "Candy Ingot",
-      "item.skizzik.skizzie": "Skizzie Spawn Egg",
       "itemGroup.tabcosmic_verse_tab": "Skizzik: The Cosmic-Verse",
-      "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
       "item.skizzik.pink_gem": "Pink Gem",
-      "block.skizzik.waffle_block": "Waffle Block",
       "item.skizzik.maple_syrup_bottle": "Maple Syrup Bottle",
-      "item.skizzik.skizzik_2": "Skizzik - Stage 2 Spawn Egg",
-      "entity.skizzik.skizzik_4": "Skizzik - Stage 4",
-      "item.skizzik.skizzik_3": "Skizzik - Stage 3 Spawn Egg",
-      "entity.skizzik.skizzik_5": "Skizzik - Stage 5",
       "block.skizzik.candy_fence_gate": "Candy Fence Gate",
-      "item.skizzik.skizzik_4": "Skizzik - Stage 4 Spawn Egg",
-      "entity.skizzik.skizzik_2": "Skizzik - Stage 2",
       "subtitles.entity.cosmic_skizzie.death": "Cosmic Skizzie Dies",
-      "item.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie Spawn Egg",
-      "item.skizzik.skizzik_5": "Skizzik - Stage 5 Spawn Egg",
-      "entity.skizzik.skizzik_3": "Skizzik - Stage 3",
       "entity.skizzik.corrupted_skizzie": "Corrupted Skizzie",
-      "item.skizzik.candy_cane": "Candy Cane",
-      "block.skizzik.candy_trapdoor": "Candy Trapdoor",
       "block.skizzik.skizzik_head": "Skizzik Head",
-      "block.skizzik.candy_door": "Candy Door",
-      "block.skizzik.deactivated_command_block": "Deactivated Command Block",
-      "item.skizzik.cosmic_skizzie_spawn_egg": "Cosmic Skizzie Spawn Egg",
       "item.skizzik.butter": "Butter",
       "block.skizzik.candy_wood": "Candy Wood",
-      "item.skizzik.rainbow_gem": "Rainbow Gem",
-      "item.skizzik.skizzik_2_spawn_egg": "Skizzik - Stage 2 Spawn Egg",
       "item.skizzik.rainbow_sword": "Rainbow Sword",
-      "item.skizzik.green_gem": "Green Gem",
-      "item.skizzik.candy_leggings": "Candy Leggings",
-      "item.skizzik.candy_boots": "Candy Boots",
-      "item.skizzik.friendly_minigun_skizzie_spawn_egg": "Friendly Minigun Skizzie Spawn Egg",
-      "item.skizzik.skizzik_1": "Skizzik - Stage 1 Spawn Egg",
       "entity.skizzik.candy_pig": "Candy Pig",
       "entity.skizzik.ka_boom_skizzie": "Ka-Boom Skizzie",
-      "item.skizzik.blue_gem": "Blue Gem",
-      "item.skizzik.candylegs": "Candy Leggings",
-      "block.skizzik.candy_grass": "Candy Nylium",
-      "item.skizzik.skizzo": "Skizzo Spawn Egg",
-      "item.skizzik.skizzik_flesh": "Skizzik Flesh",
-      "block.skizzik.chocolate_block": "Chocolate Block",
-      "item.skizzik.friendly_witch_skizzie_3_spawn_egg": "Friendly Witch Skizzie (Level 3) Spawn Egg",
-      "item.skizzik.orange_gem": "Orange Gem",
       "item.skizzik.cosmic_dimension": "Cosmic Dimension Portal Igniter",
-      "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
-      "entity.skizzik.friendly_minigun_skizzie": "Friendly Minigun Skizzie",
       "item.skizzik.pancakes": "Pancakes",
-      "item.skizzik.candy_nugget": "Candy Nugget",
       "item.skizzik.corrupted_skizzie_spawn_egg": "Corrupted Skizzie Spawn Egg",
-      "block.skizzik.corrupted_block": "Corrupted Block",
       "entity.skizzik.skizzie": "Skizzie",
-      "entity.skizzik.baby_cosmic_skizzie": "Baby Cosmic Skizzie",
-      "block.skizzik.candy_fence": "Candy Fence",
       "block.skizzik.skizzik_head_gems": "Skizzik Head with Gems",
       "item.skizzik.candy_sword": "Candy Sword",
-      "block.skizzik.candy_stairs": "Candy Stairs",
       "item.skizzik.inactive_skizzik": "Inactive Skizzik Spawn Egg",
-      "item.skizzik.minigun_skizzie_spawn_egg": "Minigun Skizzie Spawn Egg",
-      "item.skizzik.skizzik_flesh_armor_leggings": "Skizzik Flesh Leggings",
+      "key.skizzik.fly_up": "Fly Up (Skizzie Control)",
       "item.minecraft.splash_potion.effect.corruption": "Splash Corruption",
-      "item.skizzik.skizzik_3_spawn_egg": "Skizzik - Stage 3 Spawn Egg",
       "entity.skizzik.skizzik_finish_him": "Skizzik - Finish Him",
-      "item.skizzik.never_gonna_give_you_up": "Never Gonna Give You Up",
-      "advancements.out_of_ideas.title": "Out of Ideas",
       "block.skizzik.dark_chocolate_block": "Dark Chocolate Block",
-      "item.skizzik.candy_axe": "Candy Axe",
       "advancements.out_of_ideas.descr": "Visit the Candy Plains",
-      "item.skizzik.corrupted_skizzie": "Corrupted Skizzie Spawn Egg",
-      "entity.skizzik.prismarine_colossus": "Prismarine Colossus",
       "key.categories.skizzik": "Skizzik",
-      "item.skizzik.chocolate_bar": "Chocolate Bar",
-      "item.skizzik.baby_cosmic_skizzie_spawn_egg": "Baby Cosmic Skizzie Spawn Egg",
-      "item.skizzik.yellow_gem": "Yellow Gem",
-      "biome.skizzik.candy_plains": "Candy Plains",
       "item.skizzik.salt": "Salt",
       "item.skizzik.dark_chocolate_bar": "Dark Chocolate Bar",
-      "block.skizzik.candy_log": "Candy Log",
       "itemGroup.tabrainbow_magic_tab": "Skizzik: Rainbow Magic",
-      "block.skizzik.skizzik_head_small": "Small Skizzik Head",
-      "block.skizzik.command_block": "Command Block",
-      "item.skizzik.black_gem": "Black Gem",
-      "item.skizzik.prismarine_colossus_spawn_egg": "Prismarine Colossus Spawn Egg",
-      "itemGroup.tabliving_candy_tab": "Skizzik: Living Candy",
-      "block.skizzik.orange_gem_block": "Orange Gem Block"
+      "item.skizzik.black_gem": "Black Gem"
     }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": [
+      {
+        "name": "Living Candy",
+        "children": []
+      },
+      {
+        "name": "Skizzik",
+        "children": []
+      },
+      {
+        "name": "Rainbow Magic",
+        "children": []
+      },
+      {
+        "name": "Cosmic-Verse",
+        "children": []
+      },
+      {
+        "name": "Prismarine Secrets",
+        "children": []
+      }
+    ]
   },
   "workspaceSettings": {
     "modid": "skizzik",
@@ -4244,10 +4506,10 @@
     "dependencies": [],
     "dependants": [],
     "mcreatorDependencies": [],
-    "currentGenerator": "forge-1.16.4",
+    "currentGenerator": "forge-1.16.5",
     "credits": "Boss Music is from Terraria",
     "modElementsPackage": "net.uskizzik.skizzik",
     "lockBaseModFiles": false
   },
-  "mcreatorVersion": 202100103117
+  "mcreatorVersion": 202100112313
 }
