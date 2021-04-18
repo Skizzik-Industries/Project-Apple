@@ -1,8 +1,0 @@
-{
-  "parent": "skizzik:custom/skizzik_head_small",
-  "textures": {
-    "all": "skizzik:blocks/skizzik_head_small",
-    "particle": "skizzik:blocks/skizzik_head_small",
-    "1": "skizzik:blocks/skizzik_head_small"
-  }
-}

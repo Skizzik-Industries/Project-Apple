@@ -1,7 +1,0 @@
-{
-  "parent": "block/door_bottom",
-  "textures": {
-    "bottom": "skizzik:blocks/candy_door_bottom",
-    "top": "skizzik:blocks/candy_door_top"
-  }
-}

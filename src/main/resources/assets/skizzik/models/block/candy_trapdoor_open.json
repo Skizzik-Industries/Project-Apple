@@ -1,7 +1,0 @@
-{
-  "parent": "block/template_orientable_trapdoor_open",
-  "textures": {
-    "texture": "skizzik:blocks/candy_trapdoor",
-    "particle": "skizzik:blocks/candy_trapdoor"
-  }
-}

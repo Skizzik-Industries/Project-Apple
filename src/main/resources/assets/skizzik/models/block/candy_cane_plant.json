@@ -1,7 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "skizzik:blocks/candy_cane",
-    "particle": "skizzik:blocks/candy_cane"
-  }
-}
