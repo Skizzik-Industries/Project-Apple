@@ -1,5 +1,10 @@
 {
   "block.skizzik.command_block": "Command Block",
   "block.skizzik.deactivated_command_block": "Deactivated Command Block",
-  "block.skizzik.broken_command_block": "Broken Command Block"
+  "block.skizzik.broken_command_block": "Broken Command Block",
+
+  "item.skizzik.skizzik_bone": "Skizzik Bone",
+  "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
+  "item.skizzik.skizzik_flesh": "Skizzik Flesh",
+  "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh"
 }

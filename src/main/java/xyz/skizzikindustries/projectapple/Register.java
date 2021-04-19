@@ -7,6 +7,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.skizzikindustries.projectapple.block.ModBlocks;
+import xyz.skizzikindustries.projectapple.item.ModItems;
 
 public class Register {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectApple.MOD_ID);
@@ -18,5 +19,6 @@ public class Register {
         ITEMS.register(modEventBus);
 
         ModBlocks.register();
+        ModItems.register();
     }
 }
