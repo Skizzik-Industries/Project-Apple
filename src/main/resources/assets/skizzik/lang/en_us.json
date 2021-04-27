@@ -3,8 +3,37 @@
   "block.skizzik.deactivated_command_block": "Deactivated Command Block",
   "block.skizzik.broken_command_block": "Broken Command Block",
 
+  "entity.skizzik_flesh.equip.sub" : "Skizzik Flesh Tearing",
+  "item.skizzik.skizzik_flesh_cap": "Skizzik Flesh Cap",
+  "item.skizzik.skizzik_flesh_tunic": "Skizzik Flesh Tunic",
+  "item.skizzik.skizzik_flesh_pants": "Skizzik Flesh Pants",
+  "item.skizzik.skizzik_flesh_boots": "Skizzik Flesh Boots",
+
   "item.skizzik.skizzik_bone": "Skizzik Bone",
   "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
-  "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh"
+  "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
+
+  "item.skizzik.platinum_nugget": "Platinum Nugget",
+  "item.skizzik.platinum_ingot": "Platinum Ingot",
+
+  "item.skizzik.rainbow_gem": "Rainbow Gem",
+  "item.skizzik.black_gem": "Black Gem",
+  "item.skizzik.blue_gem": "Blue Gem",
+  "item.skizzik.brown_gem": "Brown Gem",
+  "item.skizzik.yellow_gem": "Yellow Gem",
+  "item.skizzik.orange_gem": "Orange Gem",
+  "item.skizzik.green_gem": "Green Gem",
+  "item.skizzik.pink_gem": "Pink Gem",
+
+  "block.skizzik.rainbow_ore": "Rainbow Ore",
+
+  "block.skizzik.rainbow_gem_block": "Block of Rainbow Gem",
+  "block.skizzik.black_gem_block": "Block of Black Gem",
+  "block.skizzik.blue_gem_block": "Block of Blue Gem",
+  "block.skizzik.brown_gem_block": "Block of Brown Gem",
+  "block.skizzik.yellow_gem_block": "Block of Yellow Gem",
+  "block.skizzik.orange_gem_block": "Block of Orange Gem",
+  "block.skizzik.green_gem_block": "Block of Green Gem",
+  "block.skizzik.pink_gem_block": "Block of Pink Gem"
 }

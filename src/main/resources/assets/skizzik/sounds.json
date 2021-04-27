@@ -1,0 +1,10 @@
+{
+  "entity.skizzik_flesh.equip": {
+    "category": "entity",
+    "subtitle": "entity.skizzik_flesh.equip.sub",
+    "sounds": [{
+      "name": "skizzik:entity/skizzik_flesh_equip",
+      "stream": true
+    }]
+  }
+}
