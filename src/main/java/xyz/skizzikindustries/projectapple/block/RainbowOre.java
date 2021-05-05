@@ -12,32 +12,32 @@ import java.util.Random;
 
 public class RainbowOre extends OreBlock implements IForgeBlock {
 
-    public RainbowOre(Properties p_i48440_1_) {
-        super(p_i48440_1_);
+    public RainbowOre(Properties properties) {
+        super(properties);
     }
 
     @Override
-    public int xpOnDrop(Random p_220281_1_) {
+    public int xpOnDrop(Random random) {
         if (this == Blocks.COAL_ORE) {
-            return MathHelper.nextInt(p_220281_1_, 0, 2);
+            return MathHelper.nextInt(random, 0, 2);
         }
         else if (this == Blocks.DIAMOND_ORE) {
-            return MathHelper.nextInt(p_220281_1_, 3, 7);
+            return MathHelper.nextInt(random, 3, 7);
         }
         else if (this == Blocks.EMERALD_ORE) {
-            return MathHelper.nextInt(p_220281_1_, 3, 7);
+            return MathHelper.nextInt(random, 3, 7);
         }
         else if (this == Blocks.LAPIS_ORE) {
-            return MathHelper.nextInt(p_220281_1_, 2, 5);
+            return MathHelper.nextInt(random, 2, 5);
         }
         else if (this == Blocks.NETHER_QUARTZ_ORE) {
-            return MathHelper.nextInt(p_220281_1_, 2, 5);
+            return MathHelper.nextInt(random, 2, 5);
         }
         else if (this == ModBlocks.RAINBOW_ORE.get()) {
-            return MathHelper.nextInt(p_220281_1_, 2, 9);
+            return MathHelper.nextInt(random, 2, 9);
         }
         else {
-            return this == Blocks.NETHER_GOLD_ORE ? MathHelper.nextInt(p_220281_1_, 0, 1) : 0;
+            return this == Blocks.NETHER_GOLD_ORE ? MathHelper.nextInt(random, 0, 1) : 0;
         }
     }
 }

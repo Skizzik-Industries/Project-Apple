@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "skizzik:rainbow_gem"
+  },
+  "result": "skizzik:blue_gem",
+  "group": "skizzik_rainbow_gems",
+  "count": 3
+}

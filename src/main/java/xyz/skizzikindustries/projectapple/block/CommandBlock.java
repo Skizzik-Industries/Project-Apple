@@ -9,8 +9,8 @@ import net.minecraft.state.Property;
 
 public class CommandBlock extends Block {
 
-    public CommandBlock(Properties p_i48440_1_) {
-        super(p_i48440_1_);
+    public CommandBlock(Properties properties) {
+        super(properties);
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {

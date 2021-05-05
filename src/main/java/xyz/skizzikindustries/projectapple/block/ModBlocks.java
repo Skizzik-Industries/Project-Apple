@@ -19,15 +19,18 @@ import xyz.skizzikindustries.projectapple.Register;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    public static final RegistryObject<Block> COMMAND_BLOCK = register("command_block", () -> new CommandBlock(AbstractBlock.Properties.of(Material.METAL).strength(65,3_600_000).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).lightLevel((p_235464_0_) -> {return 4;} ).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.EPIC, false);
+    public static final RegistryObject<Block> COMMAND_BLOCK = register("command_block", () -> new CommandBlock(AbstractBlock.Properties.of(Material.METAL).strength(65,3_600_000).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).lightLevel((blockstate) -> {return 4;} ).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.EPIC, false);
     public static final RegistryObject<Block> DEACTIVATED_COMMAND_BLOCK = register("deactivated_command_block", () -> new CommandBlock(AbstractBlock.Properties.of(Material.METAL).strength(65,3_600_000).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.RARE, false);
     public static final RegistryObject<Block> BROKEN_COMMAND_BLOCK = register("broken_command_block", () -> new CommandBlock(AbstractBlock.Properties.of(Material.METAL).strength(45f,1200).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.UNCOMMON, false);
 
-    public static final RegistryObject<Block> SKIZZIK_FLESH_BLOCK = register("skizzik_flesh_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).strength(0.8f,0.8f).harvestLevel(2).harvestTool(ToolType.HOE).sound(SoundType.SLIME_BLOCK).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.UNCOMMON, true);
+    public static final RegistryObject<Block> SKIZZIK_FLESH_BLOCK = register("skizzik_flesh_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).strength(0.8f,0.8f).harvestLevel(0).harvestTool(ToolType.HOE).sound(SoundType.SLIME_BLOCK).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.UNCOMMON, true);
 
-    public static final RegistryObject<Block> RAINBOW_ORE = register("rainbow_ore", () -> new RainbowOre(AbstractBlock.Properties.of(Material.STONE, MaterialColor.STONE).strength(3,3).harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).lightLevel((p_235464_0_) -> {return 3;} )), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
+    public static final RegistryObject<Block> CANDY_GRASS_BLOCK = register("candy_grass_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_PINK).strength(0.6f,0.6f).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.SLIME_BLOCK).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
+    public static final RegistryObject<Block> CANDYRACK = register("candyrack", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_PINK).strength(0.5f,0.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.SLIME_BLOCK).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
 
-    public static final RegistryObject<Block> RAINBOW_GEM_BLOCK = register("rainbow_gem_block", () -> new RainbowGemBlock(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_PURPLE).strength(55,1200).harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).lightLevel((p_235464_0_) -> {return 7;} ).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, true);
+    public static final RegistryObject<Block> RAINBOW_ORE = register("rainbow_ore", () -> new RainbowOre(AbstractBlock.Properties.of(Material.STONE, MaterialColor.STONE).strength(3,3).harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).lightLevel((blockstate) -> {return 3;} )), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
+
+    public static final RegistryObject<Block> RAINBOW_GEM_BLOCK = register("rainbow_gem_block", () -> new RainbowGemBlock(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_PURPLE).strength(55,1200).harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).lightLevel((blockstate) -> {return 7;} ).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, true);
     public static final RegistryObject<Block> BLACK_GEM_BLOCK = register("black_gem_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BLACK).strength(5,6).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
     public static final RegistryObject<Block> BLUE_GEM_BLOCK = register("blue_gem_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).strength(5,6).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
     public static final RegistryObject<Block> BROWN_GEM_BLOCK = register("brown_gem_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BROWN).strength(5,6).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
@@ -53,7 +56,7 @@ public class ModBlocks {
         return ret;
     }
 
-    private static boolean always(BlockState p_235426_0_, IBlockReader p_235426_1_, BlockPos p_235426_2_) {
+    private static boolean always(BlockState blockstate, IBlockReader iblockreader, BlockPos blockpos) {
         return true;
     }
 }

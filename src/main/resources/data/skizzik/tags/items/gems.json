@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "skizzik:black_gem",
+    "skizzik:blue_gem",
+    "skizzik:brown_gem",
+    "skizzik:yellow_gem",
+    "skizzik:orange_gem",
+    "skizzik:green_gem",
+    "skizzik:pink_gem"
+  ]
+}

@@ -8,8 +8,8 @@ import net.minecraftforge.common.extensions.IForgeBlock;
 
 public class RainbowGemBlock extends Block implements IForgeBlock {
 
-    public RainbowGemBlock(Properties p_i48440_1_) {
-        super(p_i48440_1_);
+    public RainbowGemBlock(Properties properties) {
+        super(properties);
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {

@@ -9,6 +9,9 @@ import java.util.function.Supplier;
 
 public class ModItems {
     public static final IArmorMaterial SkizzikFleshArmorMaterial = new SkizzikFleshArmorMaterial();
+    public static final IItemTier RAINBOW = new RainbowTier();
+
+    public static final RegistryObject<SwordItem> RAINBOW_SWORD = Register.ITEMS.register("rainbow_sword", () -> new RainbowSword(ModItems.RAINBOW, 3, -2.4F, (new Item.Properties().durability(2100).tab(ItemGroup.TAB_COMBAT).fireResistant().rarity(Rarity.COMMON))));
 
     public static final RegistryObject<Item> SKIZZIK_BONE = Register.ITEMS.register("skizzik_bone", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> RAW_SKIZZIK_FLESH = Register.ITEMS.register("raw_skizzik_flesh", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.COMMON)));
