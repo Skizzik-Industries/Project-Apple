@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.skizzikindustries.projectapple.item.procedures.RainbowSwordAbility;
+import xyz.skizzikindustries.projectapple.item.functions.RainbowSwordAbility;
 
 import java.util.HashMap;
 import java.util.Map;

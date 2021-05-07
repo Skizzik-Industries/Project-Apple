@@ -1,4 +1,4 @@
-package xyz.skizzikindustries.projectapple.item.procedures;
+package xyz.skizzikindustries.projectapple.item.functions;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
