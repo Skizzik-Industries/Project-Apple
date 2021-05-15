@@ -14,10 +14,23 @@
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
 
+  "item.skizzik.candy_helmet": "Candy Helmet",
+  "item.skizzik.candy_chestplate": "Candy Chestplate",
+  "item.skizzik.candy_leggings": "Candy Leggings",
+  "item.skizzik.candy_boots": "Candy Boots",
+
+  "item.skizzik.candy_nugget": "Candy Nugget",
+  "item.skizzik.candy_ingot": "Candy Ingot",
+
+  "block.skizzik.corrupted_block": "Corrupted Block",
+  "effect.skizzik.corruption": "Corruption",
+  "death.attack.corrupted": "%1$s got corrupted",
+
   "item.skizzik.platinum_nugget": "Platinum Nugget",
   "item.skizzik.platinum_ingot": "Platinum Ingot",
 
   "block.skizzik.candy_leaves": "Candy Leaves",
+  "block.skizzik.candy_log": "Candy Log",
   "block.skizzik.candy_nylium": "Candy Nylium",
   "block.skizzik.candyrack": "Candyrack",
 

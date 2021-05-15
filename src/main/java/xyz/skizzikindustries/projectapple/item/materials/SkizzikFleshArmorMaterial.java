@@ -1,4 +1,4 @@
-package xyz.skizzikindustries.projectapple.item;
+package xyz.skizzikindustries.projectapple.item.materials;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
@@ -7,6 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import xyz.skizzikindustries.projectapple.ModSoundEvents;
 import xyz.skizzikindustries.projectapple.ProjectApple;
+import xyz.skizzikindustries.projectapple.item.ModItems;
 
 public class SkizzikFleshArmorMaterial implements IArmorMaterial {
     @Override

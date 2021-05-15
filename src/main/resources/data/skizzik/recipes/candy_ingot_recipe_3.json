@@ -1,0 +1,37 @@
+{
+  "group": "skizzik_candy_iron",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    },
+    {
+      "item": "skizzik:candy_nugget"
+    }
+  ],
+  "result": {
+    "item": "skizzik:candy_ingot",
+    "count": 1
+  }
+}

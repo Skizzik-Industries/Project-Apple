@@ -1,10 +1,8 @@
-package xyz.skizzikindustries.projectapple.block;
+package xyz.skizzikindustries.projectapple.block.custom_blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.PushReaction;
-import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.extensions.IForgeBlock;
 
 public class RainbowGemBlock extends Block implements IForgeBlock {

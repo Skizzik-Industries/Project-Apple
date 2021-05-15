@@ -1,0 +1,11 @@
+{
+  "group": "skizzik_candy_iron",
+  "type": "minecraft:smelting",
+  "experience": 0.7,
+  "ingredient": {
+    "item": "skizzik:candy_ore"
+  },
+  "result": {
+    "item": "skizzik:candy_ingot"
+  }
+}

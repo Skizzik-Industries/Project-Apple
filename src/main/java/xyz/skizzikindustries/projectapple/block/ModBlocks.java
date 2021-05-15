@@ -3,16 +3,20 @@ package xyz.skizzikindustries.projectapple.block;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import xyz.skizzikindustries.projectapple.Register;
+import xyz.skizzikindustries.projectapple.block.custom_blocks.CandyNylium;
+import xyz.skizzikindustries.projectapple.block.custom_blocks.CommandBlock;
+import xyz.skizzikindustries.projectapple.block.custom_blocks.RainbowGemBlock;
+import xyz.skizzikindustries.projectapple.block.custom_blocks.RainbowOre;
 
 import java.util.function.Supplier;
 
@@ -23,15 +27,16 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SKIZZIK_FLESH_BLOCK = register("skizzik_flesh_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).strength(0.8f,0.8f).harvestTool(ToolType.HOE).sound(SoundType.SLIME_BLOCK).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.UNCOMMON, true);
 
-    /* NEEDS LOOT TABLE!!! */ public static final RegistryObject<Block> CANDY_LEAVES = register("candy_leaves", () -> new LeavesBlock(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_PINK).strength(0.2f,0.2f).sound(SoundType.SLIME_BLOCK).randomTicks().isViewBlocking(ModBlocks::never).isSuffocating(ModBlocks::never).noOcclusion()), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
-    /* NEEDS LOOT TABLE!!! */ public static final RegistryObject<Block> CANDY_LOG = register("candy_log", () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_PINK).strength(2,2).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
+    //public static final RegistryObject<Block> CORRUPTED_BLOCK = register("corrupted_block", () -> new CorruptedBlock(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_PINK).strength(1.5f, 6f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
 
+    public static final RegistryObject<Block> CANDY_LEAVES = register("candy_leaves", () -> new LeavesBlock(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_PINK).strength(0.2f,0.2f).sound(SoundType.SLIME_BLOCK).randomTicks().isViewBlocking(ModBlocks::never).isSuffocating(ModBlocks::never).noOcclusion()), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
+    public static final RegistryObject<Block> CANDY_LOG = register("candy_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.of(Material.WOOD, (rotation) -> { return rotation.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MaterialColor.COLOR_PINK : MaterialColor.COLOR_PINK; }).strength(2,2).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
     public static final RegistryObject<Block> CANDY_NYLIUM = register("candy_nylium", () -> new CandyNylium(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_PINK).strength(0.4f,0.4f).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.SLIME_BLOCK).emissiveRendering(ModBlocks::always).randomTicks()), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
     public static final RegistryObject<Block> CANDYRACK = register("candyrack", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_PINK).strength(0.4f,0.4f).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.SLIME_BLOCK).requiresCorrectToolForDrops().emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
 
-    public static final RegistryObject<Block> RAINBOW_ORE = register("rainbow_ore", () -> new RainbowOre(AbstractBlock.Properties.of(Material.STONE, MaterialColor.STONE).strength(3,3).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel((blockstate) -> {return 3;} )), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
+    public static final RegistryObject<Block> RAINBOW_ORE = register("rainbow_ore", () -> new RainbowOre(AbstractBlock.Properties.of(Material.STONE, MaterialColor.STONE).strength(3,3).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel((blockstate) -> {return 3;} )), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.EPIC, false);
 
-    public static final RegistryObject<Block> RAINBOW_GEM_BLOCK = register("rainbow_gem_block", () -> new RainbowGemBlock(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_PURPLE).strength(55,1200).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel((blockstate) -> {return 7;} ).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, true);
+    public static final RegistryObject<Block> RAINBOW_GEM_BLOCK = register("rainbow_gem_block", () -> new RainbowGemBlock(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_PURPLE).strength(55,1200).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel((blockstate) -> {return 7;} ).emissiveRendering(ModBlocks::always)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.EPIC, true);
     public static final RegistryObject<Block> BLACK_GEM_BLOCK = register("black_gem_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BLACK).strength(5,6).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
     public static final RegistryObject<Block> BLUE_GEM_BLOCK = register("blue_gem_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).strength(5,6).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
     public static final RegistryObject<Block> BROWN_GEM_BLOCK = register("brown_gem_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BROWN).strength(5,6).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), ItemGroup.TAB_BUILDING_BLOCKS, Rarity.COMMON, false);
