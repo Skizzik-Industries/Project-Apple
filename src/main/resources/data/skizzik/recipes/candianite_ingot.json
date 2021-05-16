@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "skizzik:candianite_ore"
+  },
+  "result": {
+    "item": "skizzik:candianite_ingot"
+  }
+}

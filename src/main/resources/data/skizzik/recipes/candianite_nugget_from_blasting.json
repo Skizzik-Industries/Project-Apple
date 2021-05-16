@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "skizzik:candinite_pickaxe"
+    },
+    {
+      "item": "skizzik:candinite_shovel"
+    },
+    {
+      "item": "skizzik:candinite_axe"
+    },
+    {
+      "item": "skizzik:candinite_hoe"
+    },
+    {
+      "item": "skizzik:candinite_sword"
+    },
+    {
+      "item": "skizzik:candinite_helmet"
+    },
+    {
+      "item": "skizzik:candinite_chestplate"
+    },
+    {
+      "item": "skizzik:candinite_leggings"
+    },
+    {
+      "item": "skizzik:candinite_boots"
+    },
+    {
+      "item": "skizzik:candinite_horse_armor"
+    }
+  ],
+  "result": "skizzik:candinite_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

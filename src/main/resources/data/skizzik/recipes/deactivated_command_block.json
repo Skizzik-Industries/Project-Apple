@@ -1,0 +1,21 @@
+{
+  "group": "skizzik_command_block",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "skizzik:broken_command_block"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "skizzik:deactivated_command_block",
+    "count": 1
+  }
+}

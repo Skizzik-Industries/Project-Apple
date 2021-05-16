@@ -32,7 +32,7 @@ public class CandyArmorMaterial implements IArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(ModItems.CANDY_INGOT.get());
+        return Ingredient.of(ModItems.CANDIANITE_INGOT.get());
     }
 
     @Override

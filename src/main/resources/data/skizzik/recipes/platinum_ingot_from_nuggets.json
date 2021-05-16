@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "skizzik_platinum_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "skizzik:candinite_nugget"
+    }
+  },
+  "result": {
+    "item": "skizzik:candinite_ingot"
+  }
+}

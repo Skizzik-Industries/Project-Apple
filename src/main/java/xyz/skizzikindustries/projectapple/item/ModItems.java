@@ -23,8 +23,8 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> SKIZZIK_FLESH_PANTS = Register.ITEMS.register("skizzik_flesh_pants", () -> new ArmorItem(SkizzikFleshArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().tab(ItemGroup.TAB_COMBAT).fireResistant().rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> SKIZZIK_FLESH_BOOTS = Register.ITEMS.register("skizzik_flesh_boots", () -> new ArmorItem(SkizzikFleshArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().tab(ItemGroup.TAB_COMBAT).fireResistant().rarity(Rarity.COMMON)));
 
-    public static final RegistryObject<Item> CANDY_NUGGET  = Register.ITEMS.register("candy_nugget", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
-    public static final RegistryObject<Item> CANDY_INGOT  = Register.ITEMS.register("candy_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> CANDIANITE_NUGGET  = Register.ITEMS.register("candianite_nugget", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> CANDIANITE_INGOT  = Register.ITEMS.register("candianite_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 
     public static final RegistryObject<ArmorItem> CANDY_HELMET = Register.ITEMS.register("candy_helmet", () -> new ArmorItem(CandyArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().tab(ItemGroup.TAB_COMBAT).fireResistant().rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDY_CHESTPLATE = Register.ITEMS.register("candy_chestplate", () -> new ArmorItem(CandyArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().tab(ItemGroup.TAB_COMBAT).fireResistant().rarity(Rarity.COMMON)));

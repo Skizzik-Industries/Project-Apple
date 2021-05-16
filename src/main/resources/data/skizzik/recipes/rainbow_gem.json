@@ -1,0 +1,19 @@
+{
+  "group": "skizzik_rainbow_gem",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "skizzik:gems"
+    },
+    {
+      "tag": "skizzik:gems"
+    },
+    {
+      "tag": "skizzik:gems"
+    }
+  ],
+  "result": {
+    "item": "skizzik:rainbow_gem",
+    "count": 1
+  }
+}

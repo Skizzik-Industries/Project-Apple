@@ -1,0 +1,18 @@
+{
+  "group": "skizzik_rainbow_block",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "skizzik:yellow_gem"
+    }
+  },
+  "result": {
+    "item": "skizzik:yellow_gem_block",
+    "count": 1
+  }
+}
