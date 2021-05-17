@@ -13,7 +13,7 @@ apply plugin: 'maven-publish'
 
 version = '2.0.0'
 group = 'xyz.skizzikindustries.projectapple'
-archivesBaseName = 'Skizzik'
+archivesBaseName = 'skizzik'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -49,7 +49,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             args '--mod', 'skizzik', '--all',
                     '--existing', file('src/main/resources/'),
-                    '-existing', file('src/generated/resources'),
+                    '--existing', file('src/generated/resources'),
                     '--output', file('src/generated/resources/')
             mods {
                 skizzik {
