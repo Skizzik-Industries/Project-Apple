@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "skizzik:item/candy_boots"
+    "layer0": "skizzik:item/candianite_chestplate"
   }
 }

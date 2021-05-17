@@ -5,11 +5,10 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import xyz.skizzikindustries.projectapple.ModSoundEvents;
 import xyz.skizzikindustries.projectapple.ProjectApple;
-import xyz.skizzikindustries.projectapple.item.ModItems;
+import xyz.skizzikindustries.projectapple.init.ModItems;
 
-public class CandyArmorMaterial implements IArmorMaterial {
+public class CandianiteArmorMaterial implements IArmorMaterial {
     @Override
     public int getDurabilityForSlot(EquipmentSlotType slot) {
         return new int[]{195, 225, 240, 165}[slot.getIndex()];
@@ -37,7 +36,7 @@ public class CandyArmorMaterial implements IArmorMaterial {
 
     @Override
     public String getName() {
-        return ProjectApple.MOD_ID+":"+"candy_armor";
+        return ProjectApple.MOD_ID+":"+"candianite_armor";
     }
 
     @Override

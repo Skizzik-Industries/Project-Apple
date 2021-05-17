@@ -1,10 +1,10 @@
-package xyz.skizzikindustries.projectapple.block.custom_blocks;
+package xyz.skizzikindustries.projectapple.block;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.extensions.IForgeBlock;
-import xyz.skizzikindustries.projectapple.block.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.ModBlocks;
 
 import java.util.Random;
 

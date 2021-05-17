@@ -1,23 +1,18 @@
-package xyz.skizzikindustries.projectapple;
+package xyz.skizzikindustries.projectapple.init;
 
 import net.minecraft.block.Block;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IDataProvider;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.skizzikindustries.projectapple.block.ModBlocks;
+import xyz.skizzikindustries.projectapple.ProjectApple;
+import xyz.skizzikindustries.projectapple.init.ModBlocks;
 import xyz.skizzikindustries.projectapple.effect.ModEffects;
-import xyz.skizzikindustries.projectapple.item.ModItems;
+import xyz.skizzikindustries.projectapple.init.ModItems;
+import xyz.skizzikindustries.projectapple.init.ModSoundEvents;
 
 public class Register {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectApple.MOD_ID);

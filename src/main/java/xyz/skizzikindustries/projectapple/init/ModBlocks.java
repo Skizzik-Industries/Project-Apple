@@ -1,4 +1,4 @@
-package xyz.skizzikindustries.projectapple.block;
+package xyz.skizzikindustries.projectapple.init;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -12,11 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
-import xyz.skizzikindustries.projectapple.Register;
-import xyz.skizzikindustries.projectapple.block.custom_blocks.CandyNylium;
-import xyz.skizzikindustries.projectapple.block.custom_blocks.CommandBlock;
-import xyz.skizzikindustries.projectapple.block.custom_blocks.RainbowGemBlock;
-import xyz.skizzikindustries.projectapple.block.custom_blocks.RainbowOre;
+import xyz.skizzikindustries.projectapple.block.CandyNylium;
+import xyz.skizzikindustries.projectapple.block.CommandBlock;
+import xyz.skizzikindustries.projectapple.block.RainbowGemBlock;
+import xyz.skizzikindustries.projectapple.block.RainbowOre;
 
 import java.util.function.Supplier;
 

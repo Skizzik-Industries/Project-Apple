@@ -2,7 +2,7 @@ package xyz.skizzikindustries.projectapple.block.functions;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import xyz.skizzikindustries.projectapple.block.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.ModBlocks;
 
 import java.util.Map;
 

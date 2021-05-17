@@ -2,15 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
+    "X X",
     "X X"
   ],
   "key": {
     "X": {
-      "item": "skizzik:candinite_ingot"
+      "item": "skizzik:candianite_ingot"
     }
   },
   "result": {
-    "item": "skizzik:candinite_helmet",
+    "item": "skizzik:candianite_leggings",
     "count": 1
   }
 }

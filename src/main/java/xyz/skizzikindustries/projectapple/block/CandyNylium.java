@@ -1,4 +1,4 @@
-package xyz.skizzikindustries.projectapple.block.custom_blocks;
+package xyz.skizzikindustries.projectapple.block;
 
 import net.minecraft.block.*;
 import net.minecraft.tags.FluidTags;
@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
-import xyz.skizzikindustries.projectapple.block.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.ModBlocks;
 
 import java.util.List;
 import java.util.Random;

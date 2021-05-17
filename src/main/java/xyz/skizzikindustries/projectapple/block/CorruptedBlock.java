@@ -1,4 +1,4 @@
-package xyz.skizzikindustries.projectapple.block.custom_blocks;
+package xyz.skizzikindustries.projectapple.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

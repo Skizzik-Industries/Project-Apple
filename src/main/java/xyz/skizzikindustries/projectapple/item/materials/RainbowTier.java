@@ -1,10 +1,9 @@
 package xyz.skizzikindustries.projectapple.item.materials;
 
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
-import xyz.skizzikindustries.projectapple.item.ModItems;
+import xyz.skizzikindustries.projectapple.init.ModItems;
 
 public class RainbowTier implements IItemTier {
     @Override
