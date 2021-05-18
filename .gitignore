@@ -8,3 +8,5 @@ build/
 
 # Minecraft client/server files
 run/
+
+src/generated/resources

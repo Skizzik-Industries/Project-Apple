@@ -8,7 +8,7 @@ import net.minecraft.util.LazyValue;
 import java.util.function.Supplier;
 
 public enum ModTiers implements IItemTier {
-    CANDY(0, 59, 2.0F, 0.0F, 15, () -> {
+    CANDIANITE(0, 59, 2.0F, 0.0F, 15, () -> {
         return Ingredient.of(ItemTags.PLANKS);
     }),
     RAINBOW(5, 2100, 18.0F, 5.5F, 22, () -> {

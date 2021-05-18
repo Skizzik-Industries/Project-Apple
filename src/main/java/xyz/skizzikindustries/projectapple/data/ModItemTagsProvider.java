@@ -6,6 +6,7 @@ import net.minecraft.data.ItemTagsProvider;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.skizzikindustries.projectapple.ProjectApple;
+import xyz.skizzikindustries.projectapple.init.ModBlocks;
 import xyz.skizzikindustries.projectapple.init.ModItems;
 import xyz.skizzikindustries.projectapple.init.ModTags;
 
@@ -16,6 +17,20 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
+        tag(ModTags.Items.LOGS).add(ModBlocks.CANDY_LOG.get().asItem());
+        tag(ModTags.Items.LOGS_THAT_BURN).add(ModBlocks.CANDY_LOG.get().asItem());
+        copy(ModTags.Blocks.LOGS, ModTags.Items.LOGS);
+        copy(ModTags.Blocks.LOGS_THAT_BURN, ModTags.Items.LOGS_THAT_BURN);
+        copy(ModTags.Blocks.CANDY_LOGS, ModTags.Items.CANDY_LOGS);
+
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.BLACK_GEM.get());
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.BLUE_GEM.get());
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.BROWN_GEM.get());
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.YELLOW_GEM.get());
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.ORANGE_GEM.get());
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.GREEN_GEM.get());
+        tag(ModTags.Items.BASE_GEMS).add(ModItems.PINK_GEM.get());
+
         tag(ModTags.Items.ALL_GEMS).add(ModItems.RAINBOW_GEM.get());
         tag(ModTags.Items.ALL_GEMS).add(ModItems.BLACK_GEM.get());
         tag(ModTags.Items.ALL_GEMS).add(ModItems.BLUE_GEM.get());
@@ -24,13 +39,5 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModTags.Items.ALL_GEMS).add(ModItems.ORANGE_GEM.get());
         tag(ModTags.Items.ALL_GEMS).add(ModItems.GREEN_GEM.get());
         tag(ModTags.Items.ALL_GEMS).add(ModItems.PINK_GEM.get());
-
-        /* copy(ModTags.Blocks.ORES_SILVER, ModTags.Items.ORES_SILVER);
-        copy(Tags.Blocks.ORES, Tags.Items.ORES);
-        copy(ModTags.Blocks.STORAGE_BLOCKS_SILVER, ModTags.Items.STORAGE_BLOCKS_SILVER);
-        copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
-
-        tag(ModTags.Items.INGOTS_SILVER).add(ModItems.SILVER_INGOT.get());
-        tag(Tags.Items.INGOTS).addTag(ModTags.Items.INGOTS_SILVER); */
     }
 }

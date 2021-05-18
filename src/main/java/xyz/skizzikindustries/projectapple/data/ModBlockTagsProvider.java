@@ -2,7 +2,6 @@ package xyz.skizzikindustries.projectapple.data;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.skizzikindustries.projectapple.ProjectApple;
 import xyz.skizzikindustries.projectapple.init.ModBlocks;
@@ -15,9 +14,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        /* tag(ModTags.Blocks.ORES_SILVER).add(ModBlocks.SILVER_ORE.get());
-        tag(Tags.Blocks.ORES).addTag(ModTags.Blocks.ORES_SILVER);
-        tag(ModTags.Blocks.STORAGE_BLOCKS_SILVER).add(ModBlocks.SILVER_BLOCK.get());
-        tag(Tags.Blocks.STORAGE_BLOCKS).addTag(ModTags.Blocks.STORAGE_BLOCKS_SILVER); */
+        tag(ModTags.Blocks.LOGS).add(ModBlocks.CANDY_LOG.get());
+        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.CANDY_LOG.get());
+        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.CANDY_LOG.get());
     }
 }
