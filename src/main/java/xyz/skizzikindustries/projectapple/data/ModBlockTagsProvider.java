@@ -16,6 +16,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     protected void addTags() {
         tag(ModTags.Blocks.LOGS).add(ModBlocks.CANDY_LOG.get());
         tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.CANDY_LOG.get());
+
         tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.CANDY_LOG.get());
+
+        tag(ModTags.Blocks.BEACON_BASE_BLOCKS).add(ModBlocks.RAINBOW_GEM_BLOCK.get());
     }
 }

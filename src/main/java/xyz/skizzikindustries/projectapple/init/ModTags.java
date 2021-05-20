@@ -13,6 +13,8 @@ public final class ModTags {
         public static final ITag.INamedTag<Block> LOGS_THAT_BURN = minecraft("logs_that_burn");
         public static final ITag.INamedTag<Block> CANDY_LOGS = mod("candy_logs");
 
+        public static final ITag.INamedTag<Block> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
+
         private static ITag.INamedTag<Block> minecraft(String path) {
             return BlockTags.bind(new ResourceLocation("minecraft", path).toString());
         }
@@ -29,6 +31,9 @@ public final class ModTags {
         public static final ITag.INamedTag<Item> LOGS = minecraft("logs");
         public static final ITag.INamedTag<Item> LOGS_THAT_BURN = minecraft("logs_that_burn");
         public static final ITag.INamedTag<Item> CANDY_LOGS = mod("candy_logs");
+
+        public static final ITag.INamedTag<Item> BEACON_PAYMENT_ITEMS = minecraft("beacon_payment_items");
+        public static final ITag.INamedTag<Item> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
         public static final ITag.INamedTag<Item> ALL_GEMS = mod("all_gems");
         public static final ITag.INamedTag<Item> BASE_GEMS = mod("base_gems");

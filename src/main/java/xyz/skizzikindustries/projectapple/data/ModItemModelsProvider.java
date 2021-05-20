@@ -20,6 +20,8 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
 
+        withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
+
         withExistingParent("candy_leaves", modLoc("block/candy_leaves"));
         withExistingParent("candy_log", modLoc("block/candy_log"));
         withExistingParent("candy_nylium", modLoc("block/candy_nylium"));
@@ -38,40 +40,55 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
         ModelFile generated = getExistingFile(mcLoc("item/generated"));
 
-        builder(generated, "skizzik_bone");
-        builder(generated, "raw_skizzik_flesh");
-        builder(generated, "skizzik_flesh");
+        skullBuilder("skizzik_head");
+        skullBuilder("skizzik_wall_head");
 
-        builder(generated, "skizzik_flesh_cap");
-        builder(generated, "skizzik_flesh_tunic");
-        builder(generated, "skizzik_flesh_pants");
-        builder(generated, "skizzik_flesh_boots");
+        defaultBuilder(generated, "skizzik_bone");
+        defaultBuilder(generated, "raw_skizzik_flesh");
+        defaultBuilder(generated, "skizzik_flesh");
 
-        builder(generated, "candianite_nugget");
-        builder(generated, "candianite_ingot");
+        defaultBuilder(generated, "skizzik_flesh_cap");
+        defaultBuilder(generated, "skizzik_flesh_tunic");
+        defaultBuilder(generated, "skizzik_flesh_pants");
+        defaultBuilder(generated, "skizzik_flesh_boots");
 
-        builder(generated, "candianite_horse_armor");
-        builder(generated, "candianite_helmet");
-        builder(generated, "candianite_chestplate");
-        builder(generated, "candianite_leggings");
-        builder(generated, "candianite_boots");
+        defaultBuilder(generated, "candy_stick");
 
-        builder(generated, "platinum_nugget");
-        builder(generated, "platinum_ingot");
+        defaultBuilder(generated, "candianite_nugget");
+        defaultBuilder(generated, "candianite_ingot");
 
-        builder(generated, "rainbow_sword");
+        defaultBuilder(generated, "candianite_sword");
+        defaultBuilder(generated, "candianite_pickaxe");
+        defaultBuilder(generated, "candianite_axe");
+        defaultBuilder(generated, "candianite_shovel");
+        defaultBuilder(generated, "candianite_hoe");
 
-        builder(generated, "rainbow_gem");
-        builder(generated, "black_gem");
-        builder(generated, "blue_gem");
-        builder(generated, "brown_gem");
-        builder(generated, "yellow_gem");
-        builder(generated, "orange_gem");
-        builder(generated, "green_gem");
-        builder(generated, "pink_gem");
+        defaultBuilder(generated, "candianite_horse_armor");
+        defaultBuilder(generated, "candianite_helmet");
+        defaultBuilder(generated, "candianite_chestplate");
+        defaultBuilder(generated, "candianite_leggings");
+        defaultBuilder(generated, "candianite_boots");
+
+        defaultBuilder(generated, "platinum_nugget");
+        defaultBuilder(generated, "platinum_ingot");
+
+        defaultBuilder(generated, "rainbow_sword");
+
+        defaultBuilder(generated, "rainbow_gem");
+        defaultBuilder(generated, "black_gem");
+        defaultBuilder(generated, "blue_gem");
+        defaultBuilder(generated, "brown_gem");
+        defaultBuilder(generated, "yellow_gem");
+        defaultBuilder(generated, "orange_gem");
+        defaultBuilder(generated, "green_gem");
+        defaultBuilder(generated, "pink_gem");
     }
 
-    private ItemModelBuilder builder(ModelFile generated, String name) {
+    private ItemModelBuilder defaultBuilder(ModelFile generated, String name) {
         return getBuilder(name).parent(generated).texture("layer0", "item/" + name);
+    }
+
+    private ItemModelBuilder skullBuilder(String name) {
+        return getBuilder(name).texture("parent", "item/template_skull");
     }
 }

@@ -25,7 +25,12 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
         simpleBlock(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
+        axisBlock((RotatedPillarBlock) ModBlocks.SKIZZIK_HEAD.get());
+        simpleBlock(ModBlocks.SKIZZIK_WALL_HEAD.get());
+
         simpleBlock(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
+
+        simpleBlock(ModBlocks.CANDIANITE_ORE.get());
 
         simpleBlock(ModBlocks.CANDY_LEAVES.get());
         logBlock((RotatedPillarBlock) ModBlocks.CANDY_LOG.get());

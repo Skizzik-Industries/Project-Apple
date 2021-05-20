@@ -8,8 +8,8 @@ import net.minecraft.util.LazyValue;
 import java.util.function.Supplier;
 
 public enum ModTiers implements IItemTier {
-    CANDIANITE(0, 59, 2.0F, 0.0F, 15, () -> {
-        return Ingredient.of(ItemTags.PLANKS);
+    CANDIANITE(2, 350, 7.0F, 2.5F, 15, () -> {
+        return Ingredient.of(ModItems.CANDIANITE_INGOT.get());
     }),
     RAINBOW(5, 2100, 18.0F, 5.5F, 22, () -> {
         return Ingredient.of(ModTags.Items.ALL_GEMS);

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "## ",
+    "#/ ",
+    " / "
+  ],
+  "key": {
+    "#": {
+      "item": "skizzik:candianite_ingot"
+    },
+    "/": {
+      "item": "skizzik:candy_stick"
+    }
+  },
+  "result": {
+    "item": "skizzik:candianite_axe",
+    "count": 1
+  }
+}

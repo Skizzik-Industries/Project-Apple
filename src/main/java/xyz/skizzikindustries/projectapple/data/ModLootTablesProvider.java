@@ -47,7 +47,12 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
+            dropSelf(ModBlocks.SKIZZIK_HEAD.get());
+            dropOther(ModBlocks.SKIZZIK_WALL_HEAD.get(), ModBlocks.SKIZZIK_HEAD.get());
+
             dropSelf(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
+
+            dropSelf(ModBlocks.CANDIANITE_ORE.get());
 
             add(ModBlocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, Blocks.OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
             dropSelf(ModBlocks.CANDY_LOG.get());

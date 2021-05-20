@@ -9,10 +9,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.skizzikindustries.projectapple.ProjectApple;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
-import xyz.skizzikindustries.projectapple.effect.ModEffects;
-import xyz.skizzikindustries.projectapple.init.ModItems;
-import xyz.skizzikindustries.projectapple.init.ModSoundEvents;
 
 public class Register {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectApple.MOD_ID);
