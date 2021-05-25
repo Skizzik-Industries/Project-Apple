@@ -1,13 +1,11 @@
-package xyz.skizzikindustries.projectapple.data;
+package xyz.skizzikindustries.projectapple.data.tags;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.skizzikindustries.projectapple.ProjectApple;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
-import xyz.skizzikindustries.projectapple.init.ModItems;
+import xyz.skizzikindustries.projectapple.init.item.ModItems;
 import xyz.skizzikindustries.projectapple.init.ModTags;
 
 public class ModItemTagsProvider extends ItemTagsProvider {

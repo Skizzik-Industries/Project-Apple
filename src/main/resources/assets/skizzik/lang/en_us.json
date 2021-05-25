@@ -3,19 +3,39 @@
   "block.skizzik.deactivated_command_block": "Deactivated Command Block",
   "block.skizzik.broken_command_block": "Broken Command Block",
 
-  "entity.skizzik_flesh.equip.sub" : "Skizzik Flesh Tearing",
+  "subtitles.entity.skizzik_flesh.equip" : "Skizzik Flesh Tearing",
   "item.skizzik.skizzik_flesh_cap": "Skizzik Flesh Cap",
   "item.skizzik.skizzik_flesh_tunic": "Skizzik Flesh Tunic",
   "item.skizzik.skizzik_flesh_pants": "Skizzik Flesh Pants",
   "item.skizzik.skizzik_flesh_boots": "Skizzik Flesh Boots",
 
-  "block.skizzik.skizzik_head": "Skizzik Head",
-  "block.skizzik.skizzik_wall_head": "Skizzik Wall Head",
-
   "item.skizzik.skizzik_bone": "Skizzik Bone",
   "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
+
+  "item.skizzik.salt": "Salt",
+  "item.skizzik.butter": "Butter",
+
+  "block.skizzik.candy_cane": "Candy Cane",
+
+  "item.skizzik.maple_syrup_bucket": "Maple Syrup Bucket",
+  "block.skizzik.maple_syrup": "Maple Syrup",
+
+  "item.skizzik.waffle": "Waffle",
+  "block.skizzik.waffle_block": "Waffle Block",
+
+  "item.skizzik.pancakes": "Pancakes",
+  "item.skizzik.syrup_pancakes": "Pancakes with Maple Syrup",
+
+  "item.skizzik.chocolate_bar_wrap": "Chocolate Bar Wrap",
+  "item.skizzik.white_chocolate_bar": "White Chocolate Bar",
+  "item.skizzik.chocolate_bar": "Chocolate Bar",
+  "item.skizzik.dark_chocolate_bar": "Dark Chocolate Bar",
+
+  "block.skizzik.white_chocolate_block": "White Chocolate Block",
+  "block.skizzik.chocolate_block": "Chocolate Block",
+  "block.skizzik.dark_chocolate_block": "Dark Chocolate Block",
 
   "item.skizzik.candianite_nugget": "Candianite Nugget",
   "item.skizzik.candianite_ingot": "Candianite Ingot",

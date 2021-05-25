@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "skizzik_chocolate",
+  "ingredients": [
+    {
+      "item": "skizzik:dark_chocolate_block"
+    }
+  ],
+  "result": {
+    "item": "skizzik:dark_chocolate_bar",
+    "count": 9
+  }
+}

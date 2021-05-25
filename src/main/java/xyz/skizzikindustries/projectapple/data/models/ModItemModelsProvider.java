@@ -1,4 +1,4 @@
-package xyz.skizzikindustries.projectapple.data;
+package xyz.skizzikindustries.projectapple.data.models;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -20,6 +20,11 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
 
+        withExistingParent("waffle_block", modLoc("block/white_chocolate_block"));
+        withExistingParent("waffle_block", modLoc("block/chocolate_block"));
+        withExistingParent("waffle_block", modLoc("block/dark_chocolate_block"));
+        withExistingParent("waffle_block", modLoc("block/waffle_block"));
+
         withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
 
         withExistingParent("candy_leaves", modLoc("block/candy_leaves"));
@@ -40,9 +45,6 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
         ModelFile generated = getExistingFile(mcLoc("item/generated"));
 
-        skullBuilder("skizzik_head");
-        skullBuilder("skizzik_wall_head");
-
         defaultBuilder(generated, "skizzik_bone");
         defaultBuilder(generated, "raw_skizzik_flesh");
         defaultBuilder(generated, "skizzik_flesh");
@@ -51,6 +53,21 @@ public class ModItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "skizzik_flesh_tunic");
         defaultBuilder(generated, "skizzik_flesh_pants");
         defaultBuilder(generated, "skizzik_flesh_boots");
+
+        defaultBuilder(generated, "salt");
+        defaultBuilder(generated, "butter");
+
+        defaultBuilder(generated, "candy_cane");
+        defaultBuilder(generated, "maple_syrup_bucket");
+        defaultBuilder(generated, "waffle");
+
+        defaultBuilder(generated, "pancakes");
+        defaultBuilder(generated, "syrup_pancakes");
+
+        defaultBuilder(generated, "chocolate_bar_wrap");
+        defaultBuilder(generated, "white_chocolate_bar");
+        defaultBuilder(generated, "chocolate_bar");
+        defaultBuilder(generated, "dark_chocolate_bar");
 
         defaultBuilder(generated, "candy_stick");
 
@@ -86,9 +103,5 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
     private ItemModelBuilder defaultBuilder(ModelFile generated, String name) {
         return getBuilder(name).parent(generated).texture("layer0", "item/" + name);
-    }
-
-    private ItemModelBuilder skullBuilder(String name) {
-        return getBuilder(name).texture("parent", "item/template_skull");
     }
 }

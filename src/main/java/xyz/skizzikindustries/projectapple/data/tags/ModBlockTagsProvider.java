@@ -1,10 +1,10 @@
-package xyz.skizzikindustries.projectapple.data;
+package xyz.skizzikindustries.projectapple.data.tags;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.skizzikindustries.projectapple.ProjectApple;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 import xyz.skizzikindustries.projectapple.init.ModTags;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {

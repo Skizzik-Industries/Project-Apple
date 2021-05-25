@@ -1,13 +1,7 @@
 package xyz.skizzikindustries.projectapple.block;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
-
-import javax.annotation.Nullable;
+import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 
 public class SkizzikWallHead extends WallSkullBlock {
     public SkizzikWallHead(AbstractBlock.Properties properties) {

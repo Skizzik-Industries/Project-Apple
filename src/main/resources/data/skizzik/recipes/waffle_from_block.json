@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "skizzik_waffle",
+  "ingredients": [
+    {
+      "item": "skizzik:waffle_block"
+    }
+  ],
+  "result": {
+    "item": "skizzik:waffle",
+    "count": 9
+  }
+}

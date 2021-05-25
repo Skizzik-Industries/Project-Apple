@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 
 import java.util.List;
 import java.util.Random;

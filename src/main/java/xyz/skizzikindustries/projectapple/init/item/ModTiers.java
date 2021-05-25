@@ -1,9 +1,9 @@
-package xyz.skizzikindustries.projectapple.init;
+package xyz.skizzikindustries.projectapple.init.item;
 
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.LazyValue;
+import xyz.skizzikindustries.projectapple.init.ModTags;
 
 import java.util.function.Supplier;
 

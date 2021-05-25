@@ -1,7 +1,7 @@
 {
   "entity.skizzik_flesh.equip": {
     "category": "entity",
-    "subtitle": "entity.skizzik_flesh.equip.sub",
+    "subtitle": "subtitles.entity.skizzik_flesh.equip",
     "sounds": [{
       "name": "skizzik:entity/skizzik_flesh_equip",
       "stream": true

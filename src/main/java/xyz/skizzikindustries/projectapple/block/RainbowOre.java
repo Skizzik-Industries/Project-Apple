@@ -4,7 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.extensions.IForgeBlock;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 
 import java.util.Random;
 

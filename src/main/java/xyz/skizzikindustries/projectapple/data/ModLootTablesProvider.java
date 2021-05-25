@@ -10,8 +10,8 @@ import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.loot.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
-import xyz.skizzikindustries.projectapple.init.ModBlocks;
-import xyz.skizzikindustries.projectapple.init.ModItems;
+import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
+import xyz.skizzikindustries.projectapple.init.item.ModItems;
 import xyz.skizzikindustries.projectapple.init.Register;
 
 import java.util.List;
@@ -47,10 +47,14 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
-            dropSelf(ModBlocks.SKIZZIK_HEAD.get());
-            dropOther(ModBlocks.SKIZZIK_WALL_HEAD.get(), ModBlocks.SKIZZIK_HEAD.get());
-
             dropSelf(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
+
+            dropSelf(ModBlocks.CANDY_CANE.get());
+            dropSelf(ModBlocks.WAFFLE_BLOCK.get());
+
+            dropSelf(ModBlocks.WHITE_CHOCOLATE_BLOCK.get());
+            dropSelf(ModBlocks.CHOCOLATE_BLOCK.get());
+            dropSelf(ModBlocks.DARK_CHOCOLATE_BLOCK.get());
 
             dropSelf(ModBlocks.CANDIANITE_ORE.get());
 

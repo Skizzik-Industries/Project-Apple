@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "skizzik_pancakes",
+  "ingredients": [
+    {
+      "item": "skizzik:pancakes"
+    },
+    {
+      "item": "skizzik:maple_syrup_bucket"
+    }
+  ],
+  "result": {
+    "item": "skizzik:syrup_pancakes",
+    "count": 1
+  }
+}

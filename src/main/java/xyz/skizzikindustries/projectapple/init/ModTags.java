@@ -1,6 +1,7 @@
 package xyz.skizzikindustries.projectapple.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.*;
 import net.minecraft.util.ResourceLocation;
@@ -19,12 +20,20 @@ public final class ModTags {
             return BlockTags.bind(new ResourceLocation("minecraft", path).toString());
         }
 
-        private static ITag.INamedTag<Block> forge(String path) {
-            return BlockTags.bind(new ResourceLocation("forge", path).toString());
-        }
-
         private static ITag.INamedTag<Block> mod(String path) {
             return BlockTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
+        }
+    }
+    public static final class Fluids {
+        public static final ITag.INamedTag<Fluid> WATER = minecraft("water");
+        public static final ITag.INamedTag<Fluid> CANDY_FLUIDS = mod("candy_fluids");
+
+        private static ITag.INamedTag<Fluid> minecraft(String path) {
+            return FluidTags.bind(new ResourceLocation("minecraft", path).toString());
+        }
+
+        private static ITag.INamedTag<Fluid> mod(String path) {
+            return FluidTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
         }
     }
     public static final class Items {
@@ -40,10 +49,6 @@ public final class ModTags {
 
         private static ITag.INamedTag<Item> minecraft(String path) {
             return ItemTags.bind(new ResourceLocation("minecraft", path).toString());
-        }
-
-        private static ITag.INamedTag<Item> forge(String path) {
-            return ItemTags.bind(new ResourceLocation("forge", path).toString());
         }
 
         private static ITag.INamedTag<Item> mod(String path) {
