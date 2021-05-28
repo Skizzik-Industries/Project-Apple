@@ -1,6 +1,7 @@
 package xyz.skizzikindustries.projectapple.block;
 
 import net.minecraft.block.*;
+import net.minecraft.state.DirectionProperty;
 import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 
 public class SkizzikHead extends SkullBlock {

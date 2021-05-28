@@ -1,8 +1,12 @@
 package xyz.skizzikindustries.projectapple.data.models;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.data.*;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.skizzikindustries.projectapple.ProjectApple;
 import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
@@ -18,7 +22,10 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
         simpleBlock(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
+        //directionalBlock(ModBlocks.SKIZZIK_HEAD.get(), new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:block/skull"), this.models().existingFileHelper));
         simpleBlock(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
+
+        simpleBlock(ModBlocks.CORRUPTED_BLOCK.get());
 
         simpleBlock(ModBlocks.WHITE_CHOCOLATE_BLOCK.get());
         simpleBlock(ModBlocks.CHOCOLATE_BLOCK.get());
@@ -28,7 +35,7 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CANDIANITE_ORE.get());
 
         simpleBlock(ModBlocks.CANDY_LEAVES.get());
-        logBlock((RotatedPillarBlock) ModBlocks.CANDY_LOG.get());
+        logBlock(ModBlocks.CANDY_LOG.get());
         simpleBlock(ModBlocks.CANDYRACK.get());
 
         simpleBlock(ModBlocks.RAINBOW_ORE.get());

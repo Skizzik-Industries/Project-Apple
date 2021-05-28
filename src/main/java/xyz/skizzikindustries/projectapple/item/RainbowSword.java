@@ -8,6 +8,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class RainbowSword extends SwordItem {
     public RainbowSword(IItemTier iitemtier, int p_i48460_2_, float p_i48460_3_, Properties properties) {
@@ -29,12 +30,9 @@ public class RainbowSword extends SwordItem {
         ItemStack itemstack = context.getItemInHand();
         
         if ((!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.BEDROCK.defaultBlockState().getBlock()))
-                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.WATER.defaultBlockState().getBlock()))
-                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.LAVA.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.AIR.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.CAVE_AIR.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.MOVING_PISTON.defaultBlockState().getBlock()))
-                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.PISTON_HEAD.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.SPAWNER.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.COMMAND_BLOCK.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.REPEATING_COMMAND_BLOCK.defaultBlockState().getBlock()))
@@ -54,11 +52,10 @@ public class RainbowSword extends SwordItem {
             if (world instanceof ServerWorld) {
                 ((ServerWorld) world).sendParticles(ParticleTypes.PORTAL, x, y, z, 15, 1, 1, 1, 1);
             }
+            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.portal.travel")), SoundCategory.NEUTRAL, (float) 1, (float) 1);
 
-            {
-                ItemStack stack = (itemstack);
-                stack.hurtAndBreak(1, entity, (breakevent) -> {breakevent.broadcastBreakEvent(context.getHand());});
-            }
+            ItemStack stack = (itemstack);
+            stack.hurtAndBreak(1, entity, (breakevent) -> {breakevent.broadcastBreakEvent(context.getHand());});
         }
         return retrieval;
     }

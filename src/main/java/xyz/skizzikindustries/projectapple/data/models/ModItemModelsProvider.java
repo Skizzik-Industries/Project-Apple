@@ -19,10 +19,11 @@ public class ModItemModelsProvider extends ItemModelProvider {
         withExistingParent("broken_command_block", modLoc("block/broken_command_block"));
 
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
+        withExistingParent("corrupted_block", modLoc("block/corrupted_block"));
 
-        withExistingParent("waffle_block", modLoc("block/white_chocolate_block"));
-        withExistingParent("waffle_block", modLoc("block/chocolate_block"));
-        withExistingParent("waffle_block", modLoc("block/dark_chocolate_block"));
+        withExistingParent("white_chocolate_block", modLoc("block/white_chocolate_block"));
+        withExistingParent("chocolate_block", modLoc("block/chocolate_block"));
+        withExistingParent("dark_chocolate_block", modLoc("block/dark_chocolate_block"));
         withExistingParent("waffle_block", modLoc("block/waffle_block"));
 
         withExistingParent("candianite_ore", modLoc("block/candianite_ore"));

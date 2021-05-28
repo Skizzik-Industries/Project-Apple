@@ -54,8 +54,8 @@
   "item.skizzik.candianite_boots": "Candianite Boots",
 
   "block.skizzik.corrupted_block": "Corrupted Block",
-  "effect.skizzik.corruption": "Corruption",
-  "death.attack.corrupted": "%1$s got corrupted",
+  "effect.skizzik.corruption": "§kCorruption",
+  "death.attack.corrupted": "%1$s got §kcorrupted",
 
   "item.skizzik.platinum_nugget": "Platinum Nugget",
   "item.skizzik.platinum_ingot": "Platinum Ingot",
