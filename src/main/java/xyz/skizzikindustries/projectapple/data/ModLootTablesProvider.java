@@ -7,9 +7,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Items;
 import net.minecraft.loot.*;
+import net.minecraft.loot.functions.ApplyBonus;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
 import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 import xyz.skizzikindustries.projectapple.init.item.ModItems;
 import xyz.skizzikindustries.projectapple.init.Register;
@@ -47,8 +52,8 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
-            //dropSelf(ModBlocks.SKIZZIK_HEAD.get());
-            //dropSelf(ModBlocks.SKIZZIK_LOOT_BAG.get());
+            dropSelf(ModBlocks.STONE_SKIZZIE.get());
+            add(ModBlocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SMALL_SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(RandomValueRange.between(1,4)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(ConstantRange.exactly(1))))*/.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.NETHER_STAR)).apply(SetCount.setCount(RandomValueRange.between(1,3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_BONE.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_FLESH.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModBlocks.BROKEN_COMMAND_BLOCK.get())).apply(SetCount.setCount(ConstantRange.exactly(1)))));
             dropSelf(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
 
             dropSelf(ModBlocks.CORRUPTED_BLOCK.get());
