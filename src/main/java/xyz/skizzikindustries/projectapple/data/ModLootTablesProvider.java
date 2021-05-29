@@ -48,6 +48,7 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
             //dropSelf(ModBlocks.SKIZZIK_HEAD.get());
+            //dropSelf(ModBlocks.SKIZZIK_LOOT_BAG.get());
             dropSelf(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
 
             dropSelf(ModBlocks.CORRUPTED_BLOCK.get());

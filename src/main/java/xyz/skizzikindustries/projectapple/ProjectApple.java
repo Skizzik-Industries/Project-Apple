@@ -30,8 +30,8 @@ public class ProjectApple
     }
 
     private void renderLayers(final FMLClientSetupEvent event) {
+        RenderTypeLookup.setRenderLayer(ModBlocks.SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.CANDY_CANE.get(), RenderType.cutout());
-        /* RenderTypeLookup.setRenderLayer(ModBlocks.MAPLE_SYRUP.get(), RenderType.translucent()); */
         RenderTypeLookup.setRenderLayer(ModFluids.MAPLE_SYRUP.get(), RenderType.translucent());
         RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
     }

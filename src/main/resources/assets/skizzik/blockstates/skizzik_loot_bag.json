@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "skizzik:block/skizzik_loot_bag"
+    },
+    "facing=east": {
+      "model": "skizzik:block/skizzik_loot_bag",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "skizzik:block/skizzik_loot_bag",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "skizzik:block/skizzik_loot_bag",
+      "y": 270
+    }
+  }
+}
