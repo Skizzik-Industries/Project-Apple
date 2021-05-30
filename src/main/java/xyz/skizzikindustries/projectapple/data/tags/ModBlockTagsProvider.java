@@ -14,10 +14,25 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
+        tag(ModTags.Blocks.FENCES).add(ModBlocks.CANDY_FENCE.get());
+        tag(ModTags.Blocks.WOODEN_FENCES).add(ModBlocks.CANDY_FENCE.get());
+
         tag(ModTags.Blocks.LOGS).add(ModBlocks.CANDY_LOG.get());
         tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.CANDY_LOG.get());
 
+        tag(ModTags.Blocks.LOGS).add(ModBlocks.STRIPPED_CANDY_LOG.get());
+        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.STRIPPED_CANDY_LOG.get());
+
+        tag(ModTags.Blocks.LOGS).add(ModBlocks.CANDY_WOOD.get());
+        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.CANDY_WOOD.get());
+
+        tag(ModTags.Blocks.LOGS).add(ModBlocks.STRIPPED_CANDY_WOOD.get());
+        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.STRIPPED_CANDY_WOOD.get());
+
         tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.CANDY_LOG.get());
+        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.STRIPPED_CANDY_LOG.get());
+        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.CANDY_WOOD.get());
+        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.STRIPPED_CANDY_WOOD.get());
 
         tag(ModTags.Blocks.BEACON_BASE_BLOCKS).add(ModBlocks.RAINBOW_GEM_BLOCK.get());
     }

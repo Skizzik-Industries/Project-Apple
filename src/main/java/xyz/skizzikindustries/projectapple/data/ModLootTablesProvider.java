@@ -67,8 +67,18 @@ public class ModLootTablesProvider extends LootTableProvider {
 
             dropSelf(ModBlocks.CANDIANITE_ORE.get());
 
-            add(ModBlocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, Blocks.OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
+            dropSelf(ModBlocks.CANDY_PLANKS.get());
+            dropSelf(ModBlocks.CANDY_SLAB.get());
+            dropSelf(ModBlocks.CANDY_STAIRS.get());
+
+            dropSelf(ModBlocks.CANDY_FENCE.get());
+
             dropSelf(ModBlocks.CANDY_LOG.get());
+            dropSelf(ModBlocks.STRIPPED_CANDY_LOG.get());
+            dropSelf(ModBlocks.CANDY_WOOD.get());
+            dropSelf(ModBlocks.STRIPPED_CANDY_WOOD.get());
+
+            add(ModBlocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, Blocks.OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
             add(ModBlocks.CANDY_NYLIUM.get(), (drops) -> createSingleItemTableWithSilkTouch(drops, ModBlocks.CANDYRACK.get()));
             dropSelf(ModBlocks.CANDYRACK.get());
 

@@ -34,8 +34,16 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.CANDIANITE_ORE.get());
 
-        simpleBlock(ModBlocks.CANDY_LEAVES.get());
+        simpleBlock(ModBlocks.CANDY_PLANKS.get());
+        slabBlock(ModBlocks.CANDY_SLAB.get(), new ResourceLocation("skizzik:block/candy_planks"), new ResourceLocation("skizzik:block/candy_planks"));
+        stairsBlock(ModBlocks.CANDY_STAIRS.get(), new ResourceLocation("skizzik:block/candy_planks"));
+
+        fenceBlock(ModBlocks.CANDY_FENCE.get(), new ResourceLocation("skizzik:block/candy_planks"));
+
         logBlock(ModBlocks.CANDY_LOG.get());
+        logBlock(ModBlocks.STRIPPED_CANDY_LOG.get());
+
+        simpleBlock(ModBlocks.CANDY_LEAVES.get());
         simpleBlock(ModBlocks.CANDYRACK.get());
 
         simpleBlock(ModBlocks.RAINBOW_ORE.get());

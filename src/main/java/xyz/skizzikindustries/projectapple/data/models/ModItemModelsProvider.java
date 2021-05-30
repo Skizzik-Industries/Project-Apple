@@ -28,8 +28,18 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
         withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
 
-        withExistingParent("candy_leaves", modLoc("block/candy_leaves"));
+        withExistingParent("candy_planks", modLoc("block/candy_planks"));
+        withExistingParent("candy_slab", modLoc("block/candy_slab"));
+        withExistingParent("candy_stairs", modLoc("block/candy_stairs"));
+
+        withExistingParent("candy_fence", modLoc("block/candy_fence_inventory"));
+
         withExistingParent("candy_log", modLoc("block/candy_log"));
+        withExistingParent("stripped_candy_log", modLoc("block/stripped_candy_log"));
+        withExistingParent("candy_wood", modLoc("block/candy_wood"));
+        withExistingParent("stripped_candy_wood", modLoc("block/stripped_candy_wood"));
+
+        withExistingParent("candy_leaves", modLoc("block/candy_leaves"));
         withExistingParent("candy_nylium", modLoc("block/candy_nylium"));
         withExistingParent("candyrack", modLoc("block/candyrack"));
 

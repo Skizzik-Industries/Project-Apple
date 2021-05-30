@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 
 public class RainbowSword extends SwordItem {
     public RainbowSword(IItemTier iitemtier, int p_i48460_2_, float p_i48460_3_, Properties properties) {
@@ -45,7 +46,9 @@ public class RainbowSword extends SwordItem {
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.STRUCTURE_VOID.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.STRUCTURE_BLOCK.defaultBlockState().getBlock()))
                 && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.JIGSAW.defaultBlockState().getBlock()))
-                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.DRAGON_EGG.defaultBlockState().getBlock()))) {
+                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == Blocks.DRAGON_EGG.defaultBlockState().getBlock()))
+                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == ModBlocks.RAINBOW_GEM_BLOCK.get().defaultBlockState().getBlock()))
+                && (!((world.getBlockState(new BlockPos(x, y, z))).getBlock() == ModBlocks.RAINBOW_ORE.get().defaultBlockState().getBlock()))) {
 
             world.setBlock(new BlockPos(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 

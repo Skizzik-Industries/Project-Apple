@@ -63,9 +63,19 @@
   "item.skizzik.platinum_nugget": "Platinum Nugget",
   "item.skizzik.platinum_ingot": "Platinum Ingot",
 
+  "block.skizzik.candy_planks": "Candy Planks",
+  "block.skizzik.candy_slab": "Candy Slab",
+  "block.skizzik.candy_stairs": "Candy Stairs",
+
+  "block.skizzik.candy_fence": "Candy Fence",
+
   "item.skizzik.candy_stick": "Candy Stick",
-  "block.skizzik.candy_leaves": "Candy Leaves",
   "block.skizzik.candy_log": "Candy Log",
+  "block.skizzik.stripped_candy_log": "Stripped Candy Log",
+  "block.skizzik.candy_wood": "Candy Wood",
+  "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
+
+  "block.skizzik.candy_leaves": "Candy Leaves",
   "block.skizzik.candy_nylium": "Candy Nylium",
   "block.skizzik.candyrack": "Candyrack",
 
