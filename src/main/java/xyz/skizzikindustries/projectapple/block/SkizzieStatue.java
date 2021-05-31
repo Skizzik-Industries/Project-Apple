@@ -19,8 +19,8 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
-public class StoneSkizzie extends Block implements IWaterLoggable {
-    public StoneSkizzie(Properties properties) {
+public class SkizzieStatue extends FallingBlock implements IWaterLoggable {
+    public SkizzieStatue(Properties properties) {
         super(properties);
     }
 

@@ -1,7 +1,7 @@
 {
 	"texture_size": [64, 64],
 	"textures": {
-		"all": "block/stone_skizzie"
+		"all": "block/skizzie_statue"
 	},
 	"elements": [
 		{

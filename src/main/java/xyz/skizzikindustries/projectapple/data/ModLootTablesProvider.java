@@ -52,7 +52,7 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(ModBlocks.BROKEN_COMMAND_BLOCK.get());
 
-            dropSelf(ModBlocks.STONE_SKIZZIE.get());
+            dropSelf(ModBlocks.SKIZZIE_STATUE.get());
             add(ModBlocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SMALL_SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(RandomValueRange.between(1,4)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(ConstantRange.exactly(1))))*/.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.NETHER_STAR)).apply(SetCount.setCount(RandomValueRange.between(1,3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_BONE.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_FLESH.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModBlocks.BROKEN_COMMAND_BLOCK.get())).apply(SetCount.setCount(ConstantRange.exactly(1)))));
             dropSelf(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
 
@@ -67,11 +67,18 @@ public class ModLootTablesProvider extends LootTableProvider {
 
             dropSelf(ModBlocks.CANDIANITE_ORE.get());
 
+            dropSelf(ModBlocks.CANDY_PRESSURE_PLATE.get());
+            dropSelf(ModBlocks.CANDY_BUTTON.get());
+
             dropSelf(ModBlocks.CANDY_PLANKS.get());
             dropSelf(ModBlocks.CANDY_SLAB.get());
             dropSelf(ModBlocks.CANDY_STAIRS.get());
 
             dropSelf(ModBlocks.CANDY_FENCE.get());
+            dropSelf(ModBlocks.CANDY_FENCE_GATE.get());
+
+            dropSelf(ModBlocks.CANDY_TRAPDOOR.get());
+            add(ModBlocks.CANDY_DOOR.get(), BlockLootTables::createDoorTable);
 
             dropSelf(ModBlocks.CANDY_LOG.get());
             dropSelf(ModBlocks.STRIPPED_CANDY_LOG.get());

@@ -26,8 +26,9 @@ public final class DataGenerators {
 
         generator.addProvider(new ModLootTablesProvider(generator));
 
-        generator.addProvider(new ModBlockTagsProvider(generator, helper));
+        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(generator, helper);
+        generator.addProvider(blockTags);
         generator.addProvider(new ModFluidTagsProvider(generator, helper));
-        generator.addProvider(new ModItemTagsProvider(generator, new ModBlockTagsProvider(generator, helper), helper));
+        generator.addProvider(new ModItemTagsProvider(generator, blockTags, helper));
     }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "skizzik:block/stone_skizzie",
+  "parent": "skizzik:block/skizzie_statue",
   "display": {
     "thirdperson": {
       "rotation": [

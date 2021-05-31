@@ -39,6 +39,10 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         stairsBlock(ModBlocks.CANDY_STAIRS.get(), new ResourceLocation("skizzik:block/candy_planks"));
 
         fenceBlock(ModBlocks.CANDY_FENCE.get(), new ResourceLocation("skizzik:block/candy_planks"));
+        fenceGateBlock(ModBlocks.CANDY_FENCE_GATE.get(), new ResourceLocation("skizzik:block/candy_planks"));
+
+        trapdoorBlock(ModBlocks.CANDY_TRAPDOOR.get(), new ResourceLocation("skizzik:block/candy_trapdoor"), false);
+        doorBlock(ModBlocks.CANDY_DOOR.get(), new ResourceLocation("skizzik:block/candy_door_bottom"), new ResourceLocation("skizzik:block/candy_door_top"));
 
         logBlock(ModBlocks.CANDY_LOG.get());
         logBlock(ModBlocks.STRIPPED_CANDY_LOG.get());

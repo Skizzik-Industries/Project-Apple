@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "skizzik:candy_logs"
+    }
+  ],
+  "result": {
+    "item": "skizzik:candy_planks",
+    "count": 4
+  }
+}
