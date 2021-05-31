@@ -80,8 +80,6 @@ public class ModItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "chocolate_bar");
         defaultBuilder(generated, "dark_chocolate_bar");
 
-        defaultBuilder(generated, "candy_stick");
-
         defaultBuilder(generated, "candianite_nugget");
         defaultBuilder(generated, "candianite_ingot");
 

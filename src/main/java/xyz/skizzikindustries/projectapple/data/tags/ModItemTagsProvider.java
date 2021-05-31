@@ -15,6 +15,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
+        copy(ModTags.Blocks.PLANKS, ModTags.Items.PLANKS);
+
         copy(ModTags.Blocks.FENCES, ModTags.Items.FENCES);
         copy(ModTags.Blocks.WOODEN_FENCES, ModTags.Items.WOODEN_FENCES);
 

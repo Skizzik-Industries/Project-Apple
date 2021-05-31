@@ -36,8 +36,6 @@ public class ModItems {
     public static final RegistryObject<Item> CHOCOLATE_BAR = Register.ITEMS.register("chocolate_bar", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(ModFoods.CHOCOLATE_BAR)));
     public static final RegistryObject<Item> DARK_CHOCOLATE_BAR = Register.ITEMS.register("dark_chocolate_bar", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(ModFoods.CHOCOLATE_BAR)));
 
-    public static final RegistryObject<Item> CANDY_STICK = Register.ITEMS.register("candy_stick", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
-
     public static final RegistryObject<Item> CANDIANITE_NUGGET = Register.ITEMS.register("candianite_nugget", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> CANDIANITE_INGOT = Register.ITEMS.register("candianite_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 

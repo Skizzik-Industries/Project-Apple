@@ -14,6 +14,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
+        tag(ModTags.Blocks.PLANKS).add(ModBlocks.CANDY_PLANKS.get());
+
         tag(ModTags.Blocks.FENCES).add(ModBlocks.CANDY_FENCE.get());
         tag(ModTags.Blocks.WOODEN_FENCES).add(ModBlocks.CANDY_FENCE.get());
 

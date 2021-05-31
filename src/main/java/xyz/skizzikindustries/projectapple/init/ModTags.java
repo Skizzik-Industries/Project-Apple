@@ -10,6 +10,8 @@ import xyz.skizzikindustries.projectapple.ProjectApple;
 
 public final class ModTags {
     public static final class Blocks {
+        public static final ITag.INamedTag<Block> PLANKS = minecraft("planks");
+
         public static final ITag.INamedTag<Block> FENCES = minecraft("fences");
         public static final ITag.INamedTag<Block> WOODEN_FENCES = minecraft("wooden_fences");
 
@@ -40,6 +42,8 @@ public final class ModTags {
         }
     }
     public static final class Items {
+        public static final ITag.INamedTag<Item> PLANKS = minecraft("planks");
+
         public static final ITag.INamedTag<Item> FENCES = minecraft("fences");
         public static final ITag.INamedTag<Item> WOODEN_FENCES = minecraft("wooden_fences");
 
