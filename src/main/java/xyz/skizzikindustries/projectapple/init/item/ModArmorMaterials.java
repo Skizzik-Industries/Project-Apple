@@ -8,6 +8,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.skizzikindustries.projectapple.init.ModSoundEvents;
 
 import java.util.function.Supplier;
 
@@ -15,7 +16,7 @@ public enum ModArmorMaterials implements IArmorMaterial {
     CANDIANITE("candianite", 15, new int[]{2, 5, 6, 2}, 15, SoundEvents.SLIME_BLOCK_PLACE, 0.0F, 0.0F, () -> {
         return Ingredient.of(ModItems.CANDIANITE_INGOT.get());
     }),
-    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, null, 0.5F, 0F, () -> {
+    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, ModSoundEvents.FLESH_EQUIP_LAZY.get(), 0.5F, 0F, () -> {
         return Ingredient.of(ModItems.SKIZZIK_FLESH.get());
     });
 
