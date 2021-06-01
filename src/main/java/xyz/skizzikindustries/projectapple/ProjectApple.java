@@ -2,6 +2,8 @@ package xyz.skizzikindustries.projectapple;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -12,12 +14,12 @@ import org.apache.logging.log4j.Logger;
 import xyz.skizzikindustries.projectapple.init.block.ModBlocks;
 import xyz.skizzikindustries.projectapple.init.Register;
 import xyz.skizzikindustries.projectapple.init.block.ModFluids;
+import xyz.skizzikindustries.projectapple.init.item.ModItems;
 
 @Mod(ProjectApple.MOD_ID)
 public class ProjectApple
 {
     public static final String MOD_ID = "skizzik";
-
     public static final Logger LOGGER = LogManager.getLogger();
 
     public ProjectApple() {
