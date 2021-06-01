@@ -1,0 +1,117 @@
+{
+  "itemGroup.main_skizzik_tab": "Скиззик",
+  "itemGroup.living_candy_tab": "Скиззик: Живите Бонбони",
+
+  "block.skizzik.command_block": "Команден Блок",
+  "block.skizzik.deactivated_command_block": "Деактивиран Команден Блок",
+  "block.skizzik.broken_command_block": "Счупен Команден Блок",
+
+  "subtitles.entity.skizzik_flesh.equip" : "Разкъсване на Плът",
+  "item.skizzik.skizzik_flesh_cap": "Шапка от Плът на Скиззик",
+  "item.skizzik.skizzik_flesh_tunic": "Туника от Плът на Скиззик",
+  "item.skizzik.skizzik_flesh_pants": "Панталони от Плът на Скиззик",
+  "item.skizzik.skizzik_flesh_boots": "Ботуши от Плът на Скиззик",
+
+  "block.skizzik.skizzie_statue": "Статуя на Скиззи",
+  "block.skizzik.skizzik_loot_bag": "Чанта с Плячка от Скиззик",
+
+  "block.skizzik.small_skizzik_head": "Малка Глава на Скиззик",
+  "block.skizzik.small_skizzik_head_gems": "Малка Глава на Скиззик със Скъпоценни Камъни",
+  "block.skizzik.skizzik_head": "Глава на Скиззик",
+  "block.skizzik.skizzik_head_gems": "Глава на Скиззик със Скъпоценни Камъни",
+
+  "item.skizzik.skizzik_bone": "Кокал на Скиззик",
+  "item.skizzik.raw_skizzik_flesh": "Сурова Плът на Скиззик",
+  "item.skizzik.skizzik_flesh": "Плът на Скиззик",
+  "block.skizzik.skizzik_flesh_block": "Блок от Плът на Скиззик",
+
+  "item.skizzik.salt": "Сол",
+  "item.skizzik.butter": "Маргарин (Калиакра)",
+
+  "block.skizzik.candy_cane": "Захарно Бастунче",
+
+  "item.skizzik.maple_syrup_bucket": "Кофа с Кленов Сироп",
+  "block.skizzik.maple_syrup": "Кленов Сироп",
+
+  "item.skizzik.waffle": "Вафла",
+  "block.skizzik.waffle_block": "Вафлен Блок",
+
+  "item.skizzik.pancakes": "Палачинки",
+  "item.skizzik.syrup_pancakes": "Палачинки с Кленов Сироп",
+
+  "item.skizzik.chocolate_bar_wrap": "Опаковка от Шоколад",
+  "item.skizzik.white_chocolate_bar": "Бял Шоколад",
+  "item.skizzik.chocolate_bar": "Шоколад",
+  "item.skizzik.dark_chocolate_bar": "Черен Шоколад",
+
+  "block.skizzik.white_chocolate_block": "Бял Шоколадов Блок",
+  "block.skizzik.chocolate_block": "Шоколадов Блок",
+  "block.skizzik.dark_chocolate_block": "Черен Шоколадов Блок",
+
+  "item.skizzik.candianite_nugget": "Кандианитов Къшей",
+  "item.skizzik.candianite_ingot": "Кандианитово Кюлче",
+  "block.skizzik.candianite_ore": "Кандианитова Руда",
+
+  "item.skizzik.candianite_sword": "Кандианитов Меч",
+  "item.skizzik.candianite_pickaxe": "Кандианитова Кирка",
+  "item.skizzik.candianite_axe": "Кандианитова Брадва",
+  "item.skizzik.candianite_shovel": "Кандианитова Лопата",
+  "item.skizzik.candianite_hoe": "Кандианитова Мотика",
+
+  "item.skizzik.candianite_horse_armor": "Кандианитова Конска Броня",
+  "item.skizzik.candianite_helmet": "Кандианитов Шлем",
+  "item.skizzik.candianite_chestplate": "Кандианитов Нагръдник",
+  "item.skizzik.candianite_leggings": "Кандианитови Панталони",
+  "item.skizzik.candianite_boots": "Кандианитови Ботуши",
+
+  "block.skizzik.corrupted_block": "Corrupted Block",
+  "effect.skizzik.corruption": "§kCorruption",
+  "death.attack.corrupted": "%1$s got §kcorrupted",
+
+  "item.skizzik.platinum_nugget": "Платинен Къшей",
+  "item.skizzik.platinum_ingot": "Платинено Килче",
+
+  "block.skizzik.candy_pressure_plate": "Бонбонена Претегляща Сигнална Плоча",
+  "block.skizzik.candy_button": "Бонбонен Бутон",
+
+  "block.skizzik.candy_planks": "Бонбонени Дъски",
+  "block.skizzik.candy_slab": "Бонбонена Плоча",
+  "block.skizzik.candy_stairs": "Бонбонени Стъпала",
+
+  "block.skizzik.candy_fence": "Бонбонена Ограда",
+  "block.skizzik.candy_fence_gate": "Бонбонена Порта",
+
+  "block.skizzik.candy_trapdoor": "Бонбонен Люк",
+  "block.skizzik.candy_door": "Бонбонена Врата",
+
+  "block.skizzik.candy_log": "Бонбонен Дънер",
+  "block.skizzik.stripped_candy_log": "Оголен Бонбонен Дънер",
+  "block.skizzik.candy_wood": "Бонбонена Дървесина",
+  "block.skizzik.stripped_candy_wood": "Оголена Бонбонена Дървесина",
+
+  "block.skizzik.candy_leaves": "Бонбонени Листа",
+  "block.skizzik.candy_nylium": "Бонбонен Найлиум",
+  "block.skizzik.candyrack": "Бонбонен Камък",
+
+  "item.skizzik.rainbow_sword": "Разноцветен Меч",
+
+  "item.skizzik.rainbow_gem": "Разноцветен Скъпоценен Камък",
+  "item.skizzik.black_gem": "Черен Скъпоценен Камък",
+  "item.skizzik.blue_gem": "Син Скъпоценен Камък",
+  "item.skizzik.brown_gem": "Кафяв Скъпоценен Камък",
+  "item.skizzik.yellow_gem": "Жълт Скъпоценен Камък",
+  "item.skizzik.orange_gem": "Оранджев Скъпоценен Камък",
+  "item.skizzik.green_gem": "Зелен Скъпоценен Камък",
+  "item.skizzik.pink_gem": "Розов Скъпоценен Камък",
+
+  "block.skizzik.rainbow_ore": "Разноцветна Руда",
+
+  "block.skizzik.rainbow_gem_block": "Блок от Разноцветен Скъпоценен Камък",
+  "block.skizzik.black_gem_block": "Блок от Черен Скъпоценен Камък",
+  "block.skizzik.blue_gem_block": "Блок от Син Скъпоценен Камък",
+  "block.skizzik.brown_gem_block": "Блок от Кафяв Скъпоценен Камък",
+  "block.skizzik.yellow_gem_block": "Блок от Жълт Скъпоценен Камък",
+  "block.skizzik.orange_gem_block": "Блок от Оранджев Скъпоценен Камък",
+  "block.skizzik.green_gem_block": "Блок от Зелен Скъпоценен Камък",
+  "block.skizzik.pink_gem_block": "Блок от Розов Скъпоценен Камък"
+}
