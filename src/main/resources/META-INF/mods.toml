@@ -6,10 +6,10 @@ modId="skizzik"
 version="${file.jarVersion}"
 displayName="Skizzik & Co. [Project Apple]"
 updateJSONURL="https://skizzik-industries.xyz/assets/includes/updates/apple-update.json"
-displayURL="https://skizzik-industries.xyz/"
+displayURL="https://skizzium.com/"
 logoFile="logo.png"
 credits=""
-authors="Skizzik Industries [Ownership] ,uSkizzik [Coding & Concept], LazTheArtist [Assets & Coding]"
+authors="Skizzium [Ownership] ,uSkizzik [Coding & Concept], LazTheArtist [Assets & Coding]"
 description='''
 Lorem Ipsum.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.

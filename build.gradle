@@ -12,7 +12,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '2.0.0-beta'
-group = 'xyz.skizzikindustries.projectapple'
+group = 'com.skizzium.projectapple'
 archivesBaseName = 'skizzik'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
@@ -47,10 +47,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'skizzik', '--all',
-                    '--existing', file('src/main/resources/'),
-                    '--existing', file('src/generated/resources'),
-                    '--output', file('src/generated/resources/')
+            args '--mod', 'skizzik', '--all', '--output', file('src/generated/resources'), "--validate", '--existing', file('src/main/resources')
             mods {
                 skizzik {
                     source sourceSets.main
