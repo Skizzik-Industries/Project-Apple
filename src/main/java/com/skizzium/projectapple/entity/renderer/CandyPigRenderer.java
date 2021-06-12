@@ -13,8 +13,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class CandyPigRenderer extends MobRenderer<CandyPig, CandyPigModel<CandyPig>> {
    private static final ResourceLocation CANDY_PIG_LOCATION = new ResourceLocation("skizzik:textures/entity/candy_pig/candy_pig.png");
 
-   public CandyPigRenderer(EntityRendererManager p_i47198_1_) {
-      super(p_i47198_1_, new CandyPigModel<>(), 0.7F);
+   public CandyPigRenderer(EntityRendererManager manager) {
+      super(manager, new CandyPigModel<>(), 0.7F);
       this.addLayer(new SaddleLayer<>(this, new CandyPigModel<>(0.5F), new ResourceLocation("minecraft:textures/entity/pig/pig_saddle.png")));
    }
 

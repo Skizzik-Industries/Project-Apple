@@ -26,7 +26,6 @@ import java.util.Random;
 
 public class CandyPig extends PigEntity {
     private static final Ingredient FOOD_ITEMS = Ingredient.of(ModItems.CANDY_CANE.get());
-    public static final Item SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
 
     @Override
     public boolean isFood(ItemStack item) {

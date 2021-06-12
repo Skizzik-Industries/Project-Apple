@@ -1,6 +1,7 @@
-package com.skizzium.projectapple.tab;
+package com.skizzium.projectapple.itemgroup;
 
 import com.skizzium.projectapple.entity.CandyPig;
+import com.skizzium.projectapple.init.ModEntities;
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.init.item.ModItems;
 import net.minecraft.item.ItemGroup;
@@ -23,8 +24,7 @@ public class LivingCandyTab extends ItemGroup {
         ModItems.WAFFLE.get().fillItemCategory(this, items);
         ModBlocks.WAFFLE_BLOCK.get().fillItemCategory(this, items);
 
-        //ModEntities.CANDY_PIG.get().fillItemCategory(this, items)
-        CandyPig.SPAWN_EGG.asItem().fillItemCategory(this, items);
+        ModEntities.CANDY_PIG_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
         ModItems.CHOCOLATE_BAR_WRAP.get().fillItemCategory(this, items);
         ModItems.WHITE_CHOCOLATE_BAR.get().fillItemCategory(this, items);
@@ -36,6 +36,8 @@ public class LivingCandyTab extends ItemGroup {
 
         ModBlocks.CANDY_BUTTON.get().fillItemCategory(this, items);
         ModBlocks.CANDY_PRESSURE_PLATE.get().fillItemCategory(this, items);
+
+        ModItems.CANDY_SIGN.get().fillItemCategory(this, items);
 
         ModBlocks.CANDY_FENCE.get().fillItemCategory(this, items);
         ModBlocks.CANDY_FENCE_GATE.get().fillItemCategory(this, items);

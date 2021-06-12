@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.init.block;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.*;
 import com.skizzium.projectapple.init.Register;
 import net.minecraft.block.*;
@@ -7,21 +8,21 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Rarity;
+import net.minecraft.item.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import com.skizzium.projectapple.block.*;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.function.Supplier;
 
+@Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
     public static final RegistryObject<Block> COMMAND_BLOCK = register("command_block", () -> new CommandBlock(AbstractBlock.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel((blockstate) -> 4).emissiveRendering(ModBlocks::always)), Register.MAIN_SKIZZIK_TAB, Rarity.EPIC, false);
     public static final RegistryObject<Block> DEACTIVATED_COMMAND_BLOCK = register("deactivated_command_block", () -> new CommandBlock(AbstractBlock.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), Register.MAIN_SKIZZIK_TAB, Rarity.RARE, false);
@@ -44,27 +45,28 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CANDIANITE_ORE = register("candianite_ore", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.STONE).strength(3.0F,3.0F).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
-    public static final RegistryObject<PressurePlateBlock> CANDY_PRESSURE_PLATE = register("candy_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.of(Material.WOOD, MaterialColor.CRIMSON_STEM).strength(0.5F).sound(SoundType.SLIME_BLOCK).noCollission()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
-    public static final RegistryObject<WoodButtonBlock> CANDY_BUTTON = register("candy_button", () -> new WoodButtonBlock(AbstractBlock.Properties.of(Material.DECORATION, MaterialColor.CRIMSON_STEM).strength(0.5F).sound(SoundType.SLIME_BLOCK).noCollission()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
-
     public static final RegistryObject<Block> CANDY_PLANKS = register("candy_planks", () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.CRIMSON_STEM).strength(2.0F,3.0F).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK)), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+
+    public static final RegistryObject<PressurePlateBlock> CANDY_PRESSURE_PLATE = register("candy_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.of(Material.WOOD, ModBlocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(0.5F).sound(SoundType.SLIME_BLOCK).noCollission()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<WoodButtonBlock> CANDY_BUTTON = register("candy_button", () -> new WoodButtonBlock(AbstractBlock.Properties.of(Material.DECORATION, ModBlocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(0.5F).sound(SoundType.SLIME_BLOCK).noCollission()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+
     public static final RegistryObject<SlabBlock> CANDY_SLAB = register("candy_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CANDY_PLANKS.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<StairsBlock> CANDY_STAIRS = register("candy_stairs", () -> new StairsBlock(CANDY_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CANDY_PLANKS.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
     public static final RegistryObject<FenceBlock> CANDY_FENCE = register("candy_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(CANDY_PLANKS.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<FenceGateBlock> CANDY_FENCE_GATE = register("candy_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(CANDY_PLANKS.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
-    public static final RegistryObject<TrapDoorBlock> CANDY_TRAPDOOR = register("candy_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.CRIMSON_STEM).strength(3.0F).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK).noOcclusion()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<TrapDoorBlock> CANDY_TRAPDOOR = register("candy_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, ModBlocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(3.0F).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK).noOcclusion()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<DoorBlock> CANDY_DOOR = register("candy_door", () -> new DoorBlock(AbstractBlock.Properties.copy(CANDY_TRAPDOOR.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
-    public static final RegistryObject<RotatedPillarBlock> CANDY_LOG = register("candy_log", () -> new StrippableLog(AbstractBlock.Properties.of(Material.WOOD, (rotation) -> rotation.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MaterialColor.CRIMSON_STEM : MaterialColor.CRIMSON_STEM).strength(2.0F,2.0F).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK)), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<RotatedPillarBlock> CANDY_LOG = register("candy_log", () -> new StrippableLog(AbstractBlock.Properties.of(Material.WOOD, (rotation) -> rotation.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? ModBlocks.CANDY_PLANKS.get().defaultMaterialColor() : MaterialColor.CRIMSON_NYLIUM).strength(2.0F,2.0F).harvestTool(ToolType.AXE).sound(SoundType.SLIME_BLOCK)), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CANDY_LOG = register("stripped_candy_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(CANDY_LOG.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<RotatedPillarBlock> CANDY_WOOD = register("candy_wood", () -> new StrippableLog(AbstractBlock.Properties.copy(CANDY_LOG.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CANDY_WOOD = register("stripped_candy_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(CANDY_LOG.get())), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
-    public static final RegistryObject<LeavesBlock> CANDY_LEAVES = register("candy_leaves", () -> new LeavesBlock(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.CRIMSON_STEM).strength(0.2F,0.2F).sound(SoundType.SLIME_BLOCK).randomTicks().isViewBlocking(ModBlocks::never).isSuffocating(ModBlocks::never).noOcclusion()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
-    public static final RegistryObject<Block> CANDY_NYLIUM = register("candy_nylium", () -> new CandyNylium(AbstractBlock.Properties.of(Material.STONE, MaterialColor.CRIMSON_STEM).strength(0.4F,0.4F).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.SLIME_BLOCK).randomTicks()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
-    public static final RegistryObject<Block> CANDYRACK = register("candyrack", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.CRIMSON_STEM).strength(0.4F,0.4F).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.SLIME_BLOCK).requiresCorrectToolForDrops()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<LeavesBlock> CANDY_LEAVES = register("candy_leaves", () -> new LeavesBlock(AbstractBlock.Properties.of(Material.LEAVES, ModBlocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(0.2F,0.2F).sound(SoundType.SLIME_BLOCK).randomTicks().isViewBlocking(ModBlocks::never).isSuffocating(ModBlocks::never).noOcclusion()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<Block> CANDY_NYLIUM = register("candy_nylium", () -> new CandyNylium(AbstractBlock.Properties.of(Material.STONE, ModBlocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(0.4F,0.4F).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.SLIME_BLOCK).randomTicks()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<Block> CANDYRACK = register("candyrack", () -> new Block(AbstractBlock.Properties.of(Material.STONE, ModBlocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(0.4F,0.4F).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.SLIME_BLOCK).requiresCorrectToolForDrops()), Register.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
     public static final RegistryObject<Block> RAINBOW_ORE = register("rainbow_ore", () -> new RainbowOre(AbstractBlock.Properties.of(Material.STONE, MaterialColor.STONE).strength(3.0F,3.0F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel((blockstate) -> {return 3;} )), Register.MAIN_SKIZZIK_TAB, Rarity.EPIC, false);
 
@@ -96,14 +98,14 @@ public class ModBlocks {
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block, ItemGroup group, Rarity rarity, boolean isItemFireResistent){
-        RegistryObject<T> ret = registerNoItem(name, block);
+        RegistryObject<T> object = registerNoItem(name, block);
         if(isItemFireResistent) {
-            Register.ITEMS.register(name, () -> new BlockItem(ret.get(), new Item.Properties().tab(group).rarity(rarity).fireResistant()));
+            Register.ITEMS.register(name, () -> new BlockItem(object.get(), new Item.Properties().tab(group).rarity(rarity).fireResistant()));
         }
         else {
-            Register.ITEMS.register(name, () -> new BlockItem(ret.get(), new Item.Properties().tab(group).rarity(rarity)));
+            Register.ITEMS.register(name, () -> new BlockItem(object.get(), new Item.Properties().tab(group).rarity(rarity)));
         }
-        return ret;
+        return object;
     }
 
     public enum ModSkullTypes implements SkullBlock.ISkullType {

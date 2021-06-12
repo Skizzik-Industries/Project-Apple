@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,9 +21,11 @@ import java.lang.reflect.Field;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
-    public static final EntityType<CandyPig> CANDY_PIG = registerEntity(EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(1.45F, 1.75F).setTrackingRange(64).setUpdateInterval(1), "candy_pig");
+    public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
 
-    private static final EntityType registerEntity(EntityType.Builder builder, String name) {
+    public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(1.45F, 1.75F).setTrackingRange(64).setUpdateInterval(1));
+
+    private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);
         return (EntityType) builder.build(name).setRegistryName(location);
     }

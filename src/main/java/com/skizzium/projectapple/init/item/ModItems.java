@@ -1,11 +1,12 @@
 package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.CandyPig;
+import com.skizzium.projectapple.init.ModEntities;
 import com.skizzium.projectapple.init.Register;
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.init.block.ModFluids;
 import com.skizzium.projectapple.item.RainbowSword;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.text.TextFormatting;
@@ -29,7 +30,6 @@ public class ModItems {
     public static final RegistryObject<Item> BUTTER = Register.ITEMS.register("butter", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 
     public static final RegistryObject<Item> CANDY_CANE = Register.ITEMS.register("candy_cane", () -> new BlockItem(ModBlocks.CANDY_CANE.get(), new Item.Properties().tab(Register.LIVING_CANDY_TAB).food(ModFoods.CANDY_CANE)));
-    //public static final RegistryObject<SpawnEggItem> CANDY_PIG_SPAWN_EGG = Register.ITEMS.register("candy_pig_spawn_egg", () -> new SpawnEggItem(ModEntities.CANDY_PIG.get(), 16580691, 16659580, (new Item.Properties()).tab(ItemGroup.TAB_MISC)));
 
     public static final RegistryObject<BucketItem> MAPLE_SYRUP_BUCKET = Register.ITEMS.register("maple_syrup_bucket", () -> new BucketItem(ModFluids.MAPLE_SYRUP, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1).tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> WAFFLE = Register.ITEMS.register("waffle", () -> new Item(new Item.Properties().tab(Register.LIVING_CANDY_TAB).food(ModFoods.WAFFLE)));
@@ -75,6 +75,8 @@ public class ModItems {
 
     @SubscribeEvent
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(CandyPig.SPAWN_EGG);
+        event.getRegistry().register(ModEntities.CANDY_PIG_SPAWN_EGG);
+
+        ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
     }
 }

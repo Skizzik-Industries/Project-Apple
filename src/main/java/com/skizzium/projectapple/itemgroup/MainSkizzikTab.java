@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.tab;
+package com.skizzium.projectapple.itemgroup;
 
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.init.item.ModItems;
