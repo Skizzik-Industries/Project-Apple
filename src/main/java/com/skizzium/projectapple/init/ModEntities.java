@@ -2,7 +2,9 @@ package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.CandyPig;
+import com.skizzium.projectapple.entity.Skizzie;
 import com.skizzium.projectapple.entity.renderer.CandyPigRenderer;
+import com.skizzium.projectapple.entity.renderer.SkizzieRenderer;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -21,13 +23,25 @@ import java.lang.reflect.Field;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
-    public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
+    public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
+    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
 
-    public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(1.45F, 1.75F).setTrackingRange(64).setUpdateInterval(1));
+    public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
+    public static final Item SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);
         return (EntityType) builder.build(name).setRegistryName(location);
+    }
+
+    private static void registerAttributes() {
+        GlobalEntityTypeAttributes.put(CANDY_PIG, CandyPig.buildAttributes().build());
+        GlobalEntityTypeAttributes.put(SKIZZIE, Skizzie.buildAttributes().build());
+    }
+
+    public static void registerRenderers(final FMLClientSetupEvent event) {
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CANDY_PIG, CandyPigRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKIZZIE, SkizzieRenderer::new);
     }
 
     static {
@@ -55,52 +69,5 @@ public class ModEntities {
         registerAttributes();
     }
 
-    private static void registerAttributes() {
-        GlobalEntityTypeAttributes.put(CANDY_PIG, CandyPig.buildAttributes().build());
-    }
-
-    public static void registerRenderers(final FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CANDY_PIG, CandyPigRenderer::new);
-    }
-
     public static void register() {}
-
-    /* public static final RegistryObject<EntityType<CandyPig>> CANDY_PIG = createEntity("candy_pig", CandyPig::new, 0.9F, 0.9F, 0XFF638C, 0XC92B60, Register.LIVING_CANDY_TAB, EntityClassification.CREATURE);
-
-    private static final List<Item> SPAWN_EGGS = Lists.newArrayList();
-    private static <T extends AnimalEntity> RegistryObject<EntityType<T>> createEntity(String name, EntityType.IFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary, ItemGroup itemGroup, EntityClassification classification) {
-        ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);
-        EntityType<T> entity = EntityType.Builder.of(factory, classification).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-
-        Item egg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(itemGroup));
-        egg.setRegistryName(new ResourceLocation(ProjectApple.MOD_ID, name + "_spawn_egg"));
-        SPAWN_EGGS.add(egg);
-
-        return Register.ENTITIES.register(name, () -> entity);
-    }
-
-    @SubscribeEvent
-    public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-        EntitySpawnPlacementRegistry.register(CANDY_PIG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
-    }
-
-    @SubscribeEvent
-    public static void addEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.CANDY_PIG.get(), CandyPig.createAttributes().build());
-    }
-
-    public static void registerRenderers(final FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CANDY_PIG.get(), CandyPigRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
-        ProjectApple.LOGGER.debug("All Working, Chief!");
-        for (Item spawnEgg : SPAWN_EGGS) {
-            Preconditions.checkNotNull(spawnEgg.getRegistryName(), "registryName");
-            event.getRegistry().register(spawnEgg);
-        }
-    }
-
-    public static void register() {} */
 }

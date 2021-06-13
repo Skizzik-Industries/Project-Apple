@@ -76,6 +76,7 @@ public class ModItems {
     @SubscribeEvent
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(ModEntities.CANDY_PIG_SPAWN_EGG);
+        event.getRegistry().register(ModEntities.SKIZZIE_SPAWN_EGG);
 
         ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
     }

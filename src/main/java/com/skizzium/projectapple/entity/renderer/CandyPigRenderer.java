@@ -11,7 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CandyPigRenderer extends MobRenderer<CandyPig, CandyPigModel<CandyPig>> {
-   private static final ResourceLocation CANDY_PIG_LOCATION = new ResourceLocation("skizzik:textures/entity/candy_pig/candy_pig.png");
+   private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("skizzik:textures/entity/candy_pig/candy_pig.png");
 
    public CandyPigRenderer(EntityRendererManager manager) {
       super(manager, new CandyPigModel<>(), 0.7F);
@@ -19,6 +19,6 @@ public class CandyPigRenderer extends MobRenderer<CandyPig, CandyPigModel<CandyP
    }
 
    public ResourceLocation getTextureLocation(CandyPig entity) {
-      return CANDY_PIG_LOCATION;
+      return TEXTURE_LOCATION;
    }
 }

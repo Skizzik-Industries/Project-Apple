@@ -21,6 +21,8 @@ public class ModItemModelsProvider extends ItemModelProvider {
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
         withExistingParent("corrupted_block", modLoc("block/corrupted_block"));
 
+        withExistingParent("skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));
+
         withExistingParent("candy_pig_spawn_egg", mcLoc("item/template_spawn_egg"));
 
         withExistingParent("white_chocolate_block", modLoc("block/white_chocolate_block"));

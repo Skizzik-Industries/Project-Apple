@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.itemgroup;
 
+import com.skizzium.projectapple.init.ModEntities;
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.init.item.ModItems;
 import net.minecraft.block.Blocks;
@@ -28,15 +29,16 @@ public class MainSkizzikTab extends ItemGroup {
         ModItems.SKIZZIK_FLESH.get().fillItemCategory(this, items);
         ModBlocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 
-        ModItems.PLATINUM_NUGGET.get().fillItemCategory(this, items);
-        ModItems.PLATINUM_INGOT.get().fillItemCategory(this, items);
+        ModEntities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
         ModBlocks.SKIZZIK_LOOT_BAG.get().fillItemCategory(this, items);
         ModBlocks.SKIZZIE_STATUE.get().fillItemCategory(this, items);
+
+        ModItems.PLATINUM_NUGGET.get().fillItemCategory(this, items);
+        ModItems.PLATINUM_INGOT.get().fillItemCategory(this, items);
         ModBlocks.CORRUPTED_BLOCK.get().fillItemCategory(this, items);
 
-        Blocks.LIGHT_GRAY_STAINED_GLASS_PANE.fillItemCategory(this, items);
-        Blocks.LIGHT_GRAY_STAINED_GLASS_PANE.fillItemCategory(this, items);
+        ModItems.RAINBOW_SWORD.get().fillItemCategory(this, items);
 
         ModItems.RAINBOW_GEM.get().fillItemCategory(this, items);
         ModItems.BLACK_GEM.get().fillItemCategory(this, items);
