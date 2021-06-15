@@ -30,6 +30,7 @@ public class MainSkizzikTab extends ItemGroup {
         ModBlocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 
         ModEntities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        ModEntities.KABOOM_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
         ModBlocks.SKIZZIK_LOOT_BAG.get().fillItemCategory(this, items);
         ModBlocks.SKIZZIE_STATUE.get().fillItemCategory(this, items);

@@ -51,7 +51,7 @@ public class ModItems {
     public static final RegistryObject<ShovelItem> CANDIANITE_SHOVEL = Register.ITEMS.register("candianite_shovel", () -> new ShovelItem(ModTiers.CANDIANITE, 3, -2.4F, (new Item.Properties().durability(350).tab(Register.LIVING_CANDY_TAB).fireResistant().rarity(Rarity.COMMON))));
     public static final RegistryObject<HoeItem> CANDIANITE_HOE = Register.ITEMS.register("candianite_hoe", () -> new HoeItem(ModTiers.CANDIANITE, 3, -2.4F, (new Item.Properties().durability(350).tab(Register.LIVING_CANDY_TAB).fireResistant().rarity(Rarity.COMMON))));
 
-    public static final RegistryObject<HorseArmorItem> CANDIANITE_HORSE_ARMOR = Register.ITEMS.register("candianite_horse_armor", () -> new HorseArmorItem(5, "candianite", (new Item.Properties()).stacksTo(1).tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<HorseArmorItem> CANDIANITE_HORSE_ARMOR = Register.ITEMS.register("candianite_horse_armor", () -> new HorseArmorItem(5, "candianite", (new Item.Properties()).stacksTo(1).tab(Register.LIVING_CANDY_TAB)));
     public static final RegistryObject<ArmorItem> CANDIANITE_HELMET = Register.ITEMS.register("candianite_helmet", () -> new ArmorItem(ModArmorMaterials.CANDIANITE, EquipmentSlotType.HEAD, new Item.Properties().tab(Register.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDIANITE_CHESTPLATE = Register.ITEMS.register("candianite_chestplate", () -> new ArmorItem(ModArmorMaterials.CANDIANITE, EquipmentSlotType.CHEST, new Item.Properties().tab(Register.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDIANITE_LEGGINGS = Register.ITEMS.register("candianite_leggings", () -> new ArmorItem(ModArmorMaterials.CANDIANITE, EquipmentSlotType.LEGS, new Item.Properties().tab(Register.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
@@ -77,6 +77,7 @@ public class ModItems {
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(ModEntities.CANDY_PIG_SPAWN_EGG);
         event.getRegistry().register(ModEntities.SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(ModEntities.KABOOM_SKIZZIE_SPAWN_EGG);
 
         ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
     }

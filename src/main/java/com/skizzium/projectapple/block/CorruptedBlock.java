@@ -30,7 +30,7 @@ public class CorruptedBlock extends Block {
 
     @Override
     public void stepOn(World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && /*((ServerPlayerEntity) entity).gameMode.isSurvival() &&*/ !((LivingEntity) entity).hasEffect(ModEffects.CORRUPTION.get())) {
+        if (entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(ModEffects.CORRUPTION.get())) {
             if (entity instanceof ServerPlayerEntity) {
                 if (((ServerPlayerEntity) entity).gameMode.isSurvival()) {
                     ((ServerPlayerEntity) entity).addEffect(new EffectInstance(ModEffects.CORRUPTION.get(), 1200, 1));

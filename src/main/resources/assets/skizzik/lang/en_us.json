@@ -26,7 +26,10 @@
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
 
   "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
+  "item.skizzik.kaboom_skizzie_spawn_egg": "Kaboom Skizzie Spawn Egg",
+
   "entity.skizzik.skizzie": "Skizzie",
+  "entity.skizzik.kaboom_skizzie": "Kaboom Skizzie",
 
   "item.skizzik.salt": "Salt",
   "item.skizzik.butter": "Butter",

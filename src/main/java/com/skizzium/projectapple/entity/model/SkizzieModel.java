@@ -3,14 +3,17 @@ package com.skizzium.projectapple.entity.model;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.skizzium.projectapple.entity.KaboomSkizzie;
 import com.skizzium.projectapple.entity.Skizzie;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SkizzieModel extends EntityModel<Skizzie> {
+public class SkizzieModel<T extends Entity> extends EntityModel<T> {
 	private final ModelRenderer lowerBody;
 	private final ModelRenderer upperBody;
 	private final ModelRenderer head;
@@ -37,7 +40,7 @@ public class SkizzieModel extends EntityModel<Skizzie> {
 	}
 
 	@Override
-	public void setupAnim(Skizzie entity, float f, float f1, float f2, float f3, float f4) {
+	public void setupAnim(T entity, float f, float f1, float f2, float f3, float f4) {
 		this.head.yRot = f3 / (180F / (float) Math.PI);
 		this.head.xRot = f4 / (180F / (float) Math.PI);
 	}

@@ -23,8 +23,6 @@ public class LivingCandyTab extends ItemGroup {
         ModItems.WAFFLE.get().fillItemCategory(this, items);
         ModBlocks.WAFFLE_BLOCK.get().fillItemCategory(this, items);
 
-        ModEntities.CANDY_PIG_SPAWN_EGG.asItem().fillItemCategory(this, items);
-
         ModItems.CHOCOLATE_BAR_WRAP.get().fillItemCategory(this, items);
         ModItems.WHITE_CHOCOLATE_BAR.get().fillItemCategory(this, items);
         ModItems.CHOCOLATE_BAR.get().fillItemCategory(this, items);
