@@ -78,6 +78,7 @@ public class ModItems {
         event.getRegistry().register(ModEntities.CANDY_PIG_SPAWN_EGG);
         event.getRegistry().register(ModEntities.SKIZZIE_SPAWN_EGG);
         event.getRegistry().register(ModEntities.KABOOM_SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(ModEntities.MINIGUN_SKIZZIE_SPAWN_EGG);
 
         ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
     }

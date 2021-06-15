@@ -39,6 +39,11 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     }
 
     @Override
+    protected float getStandingEyeHeight(Pose pose, EntitySize size) {
+        return 1.35F;
+    }
+
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.CREEPER_HURT;
     }

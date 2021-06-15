@@ -4,10 +4,7 @@ import com.skizzium.projectapple.init.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
@@ -35,6 +32,11 @@ public class Skizzie extends MonsterEntity {
         this.moveControl = new FlyingMovementController(this, 10, true);
         this.navigation = new FlyingPathNavigator(this, this.getCommandSenderWorld());
         this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
+    }
+
+    @Override
+    protected float getStandingEyeHeight(Pose pose, EntitySize size) {
+        return 1.30F;
     }
 
     //protected SoundEvent getAmbientSound() {
