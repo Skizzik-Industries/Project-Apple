@@ -19,12 +19,19 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.COMMAND_BLOCK.get());
         tag(ModTags.Blocks.WITHER_IMMUNE).add(ModBlocks.COMMAND_BLOCK.get());
+
         tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).addTag(ModTags.Blocks.WITHER_IMMUNE);
         tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.SPAWNER);
         tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.STRUCTURE_VOID);
         tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.DRAGON_EGG);
         tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(ModBlocks.RAINBOW_GEM_BLOCK.get());
         tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(ModBlocks.RAINBOW_ORE.get());
+
+        tag(ModTags.Blocks.CORRUPTION_IMMUNE).addTag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE);
+        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR);
+        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(Blocks.CAVE_AIR);
+        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(Blocks.VOID_AIR);
+        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(ModBlocks.CORRUPTED_BLOCK.get());
 
         tag(ModTags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
         tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());

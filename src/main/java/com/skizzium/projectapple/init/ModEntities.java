@@ -1,19 +1,15 @@
 package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.CandyPig;
-import com.skizzium.projectapple.entity.KaboomSkizzie;
-import com.skizzium.projectapple.entity.MinigunSkizzie;
-import com.skizzium.projectapple.entity.Skizzie;
-import com.skizzium.projectapple.entity.renderer.CandyPigRenderer;
-import com.skizzium.projectapple.entity.renderer.KaboomSkizzieRenderer;
-import com.skizzium.projectapple.entity.renderer.MinigunSkizzieRenderer;
-import com.skizzium.projectapple.entity.renderer.SkizzieRenderer;
+import com.skizzium.projectapple.entity.*;
+import com.skizzium.projectapple.entity.renderer.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,16 +25,16 @@ public class ModEntities {
     public static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = (entity) -> entity.getMobType() != CreatureAttribute.UNDEAD && entity.attackable();
 
     public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
-    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
-    public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
-    //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
-    //public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
+    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
 
     public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
     public static final Item SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
     public static final Item KABOOM_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.KABOOM_SKIZZIE, 0XB40A1A, 0X5BE9B7, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
     //public static final Item MINIGUN_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.MINIGUN_SKIZZIE, 0XB40A1A, 0X4F0000, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:minigun_skizzie_spawn_egg");
-    //public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
+    public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", TextFormatting.OBFUSCATED)).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);
@@ -50,6 +46,7 @@ public class ModEntities {
         GlobalEntityTypeAttributes.put(SKIZZIE, Skizzie.buildAttributes().build());
         GlobalEntityTypeAttributes.put(KABOOM_SKIZZIE, KaboomSkizzie.buildAttributes().build());
         //GlobalEntityTypeAttributes.put(MINIGUN_SKIZZIE, MinigunSkizzie.buildAttributes().build());
+        GlobalEntityTypeAttributes.put(CORRUPTED_SKIZZIE, CorruptedSkizzie.buildAttributes().build());
     }
 
     public static void registerRenderers(final FMLClientSetupEvent event) {
@@ -57,6 +54,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKIZZIE, SkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.KABOOM_SKIZZIE, KaboomSkizzieRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
     }
 
     static {

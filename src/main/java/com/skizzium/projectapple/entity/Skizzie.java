@@ -73,6 +73,7 @@ public class Skizzie extends MonsterEntity {
         if (source == DamageSource.DRAGON_BREATH ||
                 source == DamageSource.FALL ||
                 source.isExplosion() ||
+                source == DamageSource.LIGHTNING_BOLT ||
                 source == DamageSource.HOT_FLOOR ||
                 source == DamageSource.IN_FIRE ||
                 source == DamageSource.LAVA ||
@@ -124,25 +125,25 @@ public class Skizzie extends MonsterEntity {
     } */
 
     @Override
-    public void playerTouch(PlayerEntity entity) {
-        super.playerTouch(entity);
-        World world = entity.getCommandSenderWorld();
+    public void playerTouch(PlayerEntity player) {
+        super.playerTouch(player);
+        World world = player.getCommandSenderWorld();
 
-        if (entity instanceof ServerPlayerEntity) {
-            if (((ServerPlayerEntity) entity).gameMode.isSurvival()) {
-                entity.setSecondsOnFire(10);
+        if (player instanceof ServerPlayerEntity) {
+            if (((ServerPlayerEntity) player).gameMode.isSurvival()) {
+                player.setSecondsOnFire(10);
             }
         }
-        else if (entity instanceof PlayerEntity && world.isClientSide()) {
-            NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(entity.getGameProfile().getId());
+        else if (player instanceof PlayerEntity && world.isClientSide()) {
+            NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
             if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                entity.setSecondsOnFire(10);
+                player.setSecondsOnFire(10);
             }
         }
         else {
-            if (!entity.fireImmune()) {
-                entity.setSecondsOnFire(10);
+            if (!player.fireImmune()) {
+                player.setSecondsOnFire(10);
             }
         }
     }

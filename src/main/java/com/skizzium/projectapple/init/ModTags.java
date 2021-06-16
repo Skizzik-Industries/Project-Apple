@@ -12,6 +12,8 @@ public final class ModTags {
         public static final ITag.INamedTag<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
 
         public static final ITag.INamedTag<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
+        public static final ITag.INamedTag<Block> CORRUPTION_IMMUNE = forge("corruption_immune");
+
         public static final ITag.INamedTag<Block> DRAGON_IMMUNE = minecraft("dragon_immune");
         public static final ITag.INamedTag<Block> WITHER_IMMUNE = minecraft("wither_immune");
 

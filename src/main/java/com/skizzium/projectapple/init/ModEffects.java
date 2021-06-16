@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.init;
 
-import com.skizzium.projectapple.effect.CorruptionPotion;
+import com.skizzium.projectapple.potion.CorruptionPotion;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraftforge.fml.RegistryObject;
