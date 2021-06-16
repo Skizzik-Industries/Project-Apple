@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 public final class ModTags {
     public static final class Blocks {
         public static final ITag.INamedTag<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
+
+        public static final ITag.INamedTag<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
         public static final ITag.INamedTag<Block> DRAGON_IMMUNE = minecraft("dragon_immune");
         public static final ITag.INamedTag<Block> WITHER_IMMUNE = minecraft("wither_immune");
 
@@ -44,7 +46,7 @@ public final class ModTags {
 
         public static final ITag.INamedTag<Block> LOGS = minecraft("logs");
         public static final ITag.INamedTag<Block> LOGS_THAT_BURN = minecraft("logs_that_burn");
-        public static final ITag.INamedTag<Block> CANDY_LOGS = mod("candy_logs");
+        public static final ITag.INamedTag<Block> CANDY_LOGS = forge("candy_logs");
 
         public static final ITag.INamedTag<Block> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 

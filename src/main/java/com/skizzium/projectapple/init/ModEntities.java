@@ -32,13 +32,13 @@ public class ModEntities {
     public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
     public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
     //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
-    public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
+    //public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F));
 
     public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
     public static final Item SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
     public static final Item KABOOM_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.KABOOM_SKIZZIE, 0XB40A1A, 0X5BE9B7, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
     //public static final Item MINIGUN_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.MINIGUN_SKIZZIE, 0XB40A1A, 0X4F0000, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:minigun_skizzie_spawn_egg");
-    public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
+    //public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);

@@ -3,6 +3,7 @@ package com.skizzium.projectapple.data.tags;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.ModTags;
 import com.skizzium.projectapple.init.block.ModBlocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -15,8 +16,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(ModTags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(ModBlocks.COMMAND_BLOCK.get());
+
         tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.COMMAND_BLOCK.get());
         tag(ModTags.Blocks.WITHER_IMMUNE).add(ModBlocks.COMMAND_BLOCK.get());
+        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).addTag(ModTags.Blocks.WITHER_IMMUNE);
+        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.SPAWNER);
+        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.STRUCTURE_VOID);
+        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.DRAGON_EGG);
+        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(ModBlocks.RAINBOW_GEM_BLOCK.get());
+        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(ModBlocks.RAINBOW_ORE.get());
 
         tag(ModTags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
         tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
