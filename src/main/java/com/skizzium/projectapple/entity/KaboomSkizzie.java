@@ -67,22 +67,6 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        if (source == DamageSource.DRAGON_BREATH ||
-                source == DamageSource.DROWN ||
-                source == DamageSource.FALL ||
-                source.isExplosion() ||
-                source == DamageSource.HOT_FLOOR ||
-                source == DamageSource.IN_FIRE ||
-                source == DamageSource.LAVA ||
-                source == DamageSource.ON_FIRE ||
-                source == DamageSource.WITHER) {
-            return false;
-        }
-        return super.hurt(source, amount);
-    }
-
-    @Override
     public void tick() {
         if (this.isAlive()) {
             this.oldSwell = this.swell;
@@ -110,13 +94,14 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new KaboomSkizzieSwellGoal(this));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(0, new SwimGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, ModEntities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, ModEntities.LIVING_ENTITY_SELECTOR));
+        this.goalSelector.addGoal(4, new KaboomSkizzieSwellGoal(this));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.ModEntities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -22,8 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
-
-import java.util.function.Predicate;
 
 public class Skizzie extends MonsterEntity {
     public Skizzie(EntityType<? extends Skizzie> entity, World world) {
@@ -74,8 +71,8 @@ public class Skizzie extends MonsterEntity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (source == DamageSource.DRAGON_BREATH ||
-                source == DamageSource.DROWN ||
                 source == DamageSource.FALL ||
+                source.isExplosion() ||
                 source == DamageSource.HOT_FLOOR ||
                 source == DamageSource.IN_FIRE ||
                 source == DamageSource.LAVA ||
@@ -97,13 +94,14 @@ public class Skizzie extends MonsterEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(0, new SwimGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, ModEntities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, ModEntities.LIVING_ENTITY_SELECTOR));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
     }
 
     @Override
