@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.entity.ai.MinigunShootAttackGoal;
 import com.skizzium.projectapple.init.ModEntities;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class MinigunSkizzie extends Skizzie implements IRangedAttackMob {
-    private final RangedBowAttackGoal<MinigunSkizzie> shootGoal = new RangedBowAttackGoal<>(this, 1.2D, 1, 15.0F);
+    private final MinigunShootAttackGoal<MinigunSkizzie> shootGoal = new MinigunShootAttackGoal(this, 1.2D, 1, 15.0F);
     private final MeleeAttackGoal meleeGoal = new MeleeAttackGoal(this, 1.2D, false) {
         public void start() {
             super.start();
