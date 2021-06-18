@@ -55,7 +55,7 @@ public class SkizzieStatue extends FallingBlock implements IWaterLoggable {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-        switch ((Direction) state.getValue(FACING)) {
+        switch (state.getValue(FACING)) {
             case SOUTH :
             default :
                 return VoxelShapes.or(box(9.5, 2.1, 10.5, 6.5, 17.1, 7.5),

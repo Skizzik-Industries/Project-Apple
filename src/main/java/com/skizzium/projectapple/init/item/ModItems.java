@@ -76,6 +76,10 @@ public class ModItems {
     @SubscribeEvent
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(ModEntities.CANDY_PIG_SPAWN_EGG);
+
+        event.getRegistry().register(ModEntities.FRIENDLY_SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(ModEntities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG);
+
         event.getRegistry().register(ModEntities.SKIZZIE_SPAWN_EGG);
         event.getRegistry().register(ModEntities.KABOOM_SKIZZIE_SPAWN_EGG);
         //event.getRegistry().register(ModEntities.MINIGUN_SKIZZIE_SPAWN_EGG);

@@ -25,11 +25,17 @@
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
 
+  "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
+  "item.skizzik.friendly_witch_skizzie_spawn_egg": "Friendly Witch Skizzie Spawn Egg",
+
   "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
   "item.skizzik.kaboom_skizzie_spawn_egg": "Kaboom Skizzie Spawn Egg",
   "item.skizzik.minigun_skizzie_spawn_egg": "Minigun Skizzie Spawn Egg",
   "item.skizzik.corrupted_skizzie_spawn_egg": "Corrupted Skizzie Spawn Egg",
   "item.skizzik.witch_skizzie_spawn_egg": "Witch Skizzie Spawn Egg",
+
+  "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
+  "entity.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie",
 
   "entity.skizzik.skizzie": "Skizzie",
   "entity.skizzik.kaboom_skizzie": "Kaboom Skizzie",

@@ -50,6 +50,8 @@ public class LivingCandyTab extends ItemGroup {
         ModBlocks.STRIPPED_CANDY_WOOD.get().fillItemCategory(this, items);
 
         ModBlocks.CANDY_LEAVES.get().fillItemCategory(this, items);
+
+        ModEntities.CANDY_PIG_SPAWN_EGG.asItem().fillItemCategory(this, items);
         ModBlocks.CANDY_NYLIUM.get().fillItemCategory(this, items);
         ModBlocks.CANDYRACK.get().fillItemCategory(this, items);
 

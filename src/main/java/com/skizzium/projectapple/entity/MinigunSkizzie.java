@@ -71,18 +71,6 @@ public class MinigunSkizzie extends Skizzie implements IRangedAttackMob {
         return data;
     }
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, ModEntities.LIVING_ENTITY_SELECTOR));
-    }
-
     public void reassessWeaponGoal() {
         if (this.level != null && !this.level.isClientSide) {
             this.goalSelector.removeGoal(this.meleeGoal);

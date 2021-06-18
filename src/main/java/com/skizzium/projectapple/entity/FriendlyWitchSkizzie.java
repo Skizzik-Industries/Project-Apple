@@ -1,8 +1,6 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.ModEffects;
-import com.skizzium.projectapple.init.ModTags;
-import com.skizzium.projectapple.init.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.EntityType;
@@ -14,12 +12,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 
-public class WitchSkizzie extends Skizzie {
-    public WitchSkizzie(EntityType<? extends Skizzie> entity, World world) {
+public class FriendlyWitchSkizzie extends FriendlySkizzie {
+    public FriendlyWitchSkizzie(EntityType<? extends FriendlyWitchSkizzie> entity, World world) {
         super(entity, world);
     }
 
@@ -39,11 +36,11 @@ public class WitchSkizzie extends Skizzie {
         if (player instanceof LivingEntity && !player.hasEffect(ModEffects.CORRUPTION.get())) {
             if (player instanceof ServerPlayerEntity) {
                 if (((ServerPlayerEntity) player).gameMode.isSurvival() && Math.random() < 0.05) {
-                    if (Math.random() < 0.01) {
-                        player.addEffect(new EffectInstance(Effects.WITHER, 300, 1));
+                    if (Math.random() < 0.1) {
+                        player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 600, 2));
                     }
                     else {
-                        player.addEffect(new EffectInstance(Effects.WEAKNESS, 1200, 1));
+                        player.addEffect(new EffectInstance(Effects.HEAL, 3));
                     }
                 }
             }
@@ -51,11 +48,11 @@ public class WitchSkizzie extends Skizzie {
                 NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
                 if ((network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) && Math.random() < 0.05) {
-                    if (Math.random() < 0.05) {
-                        player.addEffect(new EffectInstance(Effects.WITHER, 300, 1));
+                    if (Math.random() < 0.1) {
+                        player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 600, 2));
                     }
                     else {
-                        player.addEffect(new EffectInstance(Effects.WEAKNESS, 2400, 1));
+                        player.addEffect(new EffectInstance(Effects.HEAL, 3));
                     }
                 }
             }

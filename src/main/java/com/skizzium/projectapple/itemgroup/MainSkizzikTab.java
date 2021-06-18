@@ -29,6 +29,9 @@ public class MainSkizzikTab extends ItemGroup {
         ModItems.SKIZZIK_FLESH.get().fillItemCategory(this, items);
         ModBlocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 
+        ModEntities.FRIENDLY_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        ModEntities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+
         ModEntities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         ModEntities.KABOOM_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         //ModEntities.MINIGUN_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);

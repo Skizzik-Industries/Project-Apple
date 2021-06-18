@@ -1,6 +1,9 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.ModEntities;
+import com.skizzium.projectapple.init.ModTags;
+import com.skizzium.projectapple.init.block.ModBlocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;
@@ -14,21 +17,21 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 
-public class Skizzie extends MonsterEntity {
-    public Skizzie(EntityType<? extends Skizzie> entity, World world) {
+public class FriendlySkizzie extends CreatureEntity {
+    public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, World world) {
         super(entity, world);
         this.xpReward = 7;
         this.moveControl = new FlyingMovementController(this, 10, true);
         this.navigation = new FlyingPathNavigator(this, this.getCommandSenderWorld());
-        this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
     }
 
     @Override
@@ -37,13 +40,9 @@ public class Skizzie extends MonsterEntity {
     }
 
     @Override
-    public boolean canBeLeashed(PlayerEntity player) {
-        return false;
+    public Vector3d getLeashOffset() {
+        return new Vector3d(0.0D, this.getEyeHeight() * 0.8F, this.getBbWidth() * 0.05F);
     }
-
-    //protected SoundEvent getAmbientSound() {
-    //    return SoundEvents.PIG_AMBIENT;
-    //}
 
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.GENERIC_HURT;
@@ -69,20 +68,12 @@ public class Skizzie extends MonsterEntity {
     }
 
     @Override
-    public boolean isSensitiveToWater() {
-        return true;
-    }
-
-    @Override
     public boolean hurt(DamageSource source, float amount) {
         if (source == DamageSource.DRAGON_BREATH ||
                 source == DamageSource.FALL ||
                 source.isExplosion() ||
                 source == DamageSource.LIGHTNING_BOLT ||
-                source == DamageSource.HOT_FLOOR ||
                 source == DamageSource.IN_FIRE ||
-                source == DamageSource.LAVA ||
-                source == DamageSource.ON_FIRE ||
                 source == DamageSource.WITHER) {
             return false;
         }
@@ -100,13 +91,10 @@ public class Skizzie extends MonsterEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, true, true, ModEntities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Skizzie.class, true, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true, true));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
     }
@@ -115,6 +103,62 @@ public class Skizzie extends MonsterEntity {
     public void baseTick() {
         super.baseTick();
         this.setNoGravity(true);
+
+        World world = this.level;
+        double x = this.getX();
+        double y = this.getY();
+        double z = this.getZ();
+        BlockPos pos = new BlockPos(x, y, z);
+
+        this.clearFire();
+
+        if (world.getBlockState(pos).getBlock() == Blocks.FIRE || world.getBlockState(pos).getBlock() == Blocks.SOUL_FIRE) {
+            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+            world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+            this.clearFire();
+        }
+        else if (world.getBlockState(pos).getBlock() == Blocks.LAVA) {
+            world.setBlock(pos, ModBlocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
+            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+            this.remove();
+        }
+    }
+
+    @Override
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        player.startRiding(this);
+        return super.mobInteract(player, hand);
+    }
+
+    @Override
+    public void playerTouch(PlayerEntity player) {
+        super.playerTouch(player);
+
+        World world = player.getCommandSenderWorld();
+        double x = this.getX();
+        double y = this.getY();
+        double z = this.getZ();
+
+        if (player instanceof ServerPlayerEntity) {
+            if (((ServerPlayerEntity) player).gameMode.isSurvival() && player.isOnFire()) {
+                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+                player.clearFire();
+            }
+        }
+        else if (player instanceof PlayerEntity && world.isClientSide()) {
+            NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
+
+            if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE && player.isOnFire()) {
+                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+                player.clearFire();
+            }
+        }
+        else {
+            if (!player.isOnFire()) {
+                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+                player.clearFire();
+            }
+        }
     }
 
     @Override
@@ -129,34 +173,5 @@ public class Skizzie extends MonsterEntity {
         LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
         lightning.moveTo(Vector3d.atCenterOf(new BlockPos(x, y, z)));
         world.addFreshEntity(lightning);
-    }
-
-    /* @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
-
-    } */
-
-    @Override
-    public void playerTouch(PlayerEntity player) {
-        super.playerTouch(player);
-        World world = player.getCommandSenderWorld();
-
-        if (player instanceof ServerPlayerEntity) {
-            if (((ServerPlayerEntity) player).gameMode.isSurvival()) {
-                player.setSecondsOnFire(10);
-            }
-        }
-        else if (player instanceof PlayerEntity && world.isClientSide()) {
-            NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
-
-            if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                player.setSecondsOnFire(10);
-            }
-        }
-        else {
-            if (!player.fireImmune()) {
-                player.setSecondsOnFire(10);
-            }
-        }
     }
 }
