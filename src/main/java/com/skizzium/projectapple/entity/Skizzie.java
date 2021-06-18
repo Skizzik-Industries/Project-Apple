@@ -89,7 +89,7 @@ public class Skizzie extends MonsterEntity {
                 .add(Attributes.ATTACK_DAMAGE, 8.0D)
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ARMOR, 3.0D)
-                .add(Attributes.FOLLOW_RANGE, 35.0D)
+                .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.FLYING_SPEED, 0.3D);
     }
