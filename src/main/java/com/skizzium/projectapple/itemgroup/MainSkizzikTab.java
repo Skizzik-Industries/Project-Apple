@@ -32,6 +32,7 @@ public class MainSkizzikTab extends ItemGroup {
         ModEntities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         ModEntities.KABOOM_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         //ModEntities.MINIGUN_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        ModEntities.WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         ModEntities.CORRUPTED_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
         ModBlocks.SKIZZIK_LOOT_BAG.get().fillItemCategory(this, items);
