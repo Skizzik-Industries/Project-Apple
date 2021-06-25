@@ -32,6 +32,7 @@ public class ModEntities {
     //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(2.5F, 4F).clientTrackingRange(10));
 
     public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
     public static final Item FRIENDLY_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_skizzie_spawn_egg");
@@ -49,13 +50,17 @@ public class ModEntities {
 
     private static void registerAttributes() {
         GlobalEntityTypeAttributes.put(CANDY_PIG, CandyPig.buildAttributes().build());
-        GlobalEntityTypeAttributes.put(FRIENDLY_SKIZZIE, Skizzie.buildAttributes().build());
-        GlobalEntityTypeAttributes.put(FRIENDLY_WITCH_SKIZZIE, Skizzie.buildAttributes().build());
+
+        GlobalEntityTypeAttributes.put(FRIENDLY_SKIZZIE, FriendlySkizzie.buildAttributes().build());
+        GlobalEntityTypeAttributes.put(FRIENDLY_WITCH_SKIZZIE, FriendlyWitchSkizzie.buildAttributes().build());
+
         GlobalEntityTypeAttributes.put(SKIZZIE, Skizzie.buildAttributes().build());
         GlobalEntityTypeAttributes.put(KABOOM_SKIZZIE, KaboomSkizzie.buildAttributes().build());
         //GlobalEntityTypeAttributes.put(MINIGUN_SKIZZIE, MinigunSkizzie.buildAttributes().build());
         GlobalEntityTypeAttributes.put(CORRUPTED_SKIZZIE, CorruptedSkizzie.buildAttributes().build());
         GlobalEntityTypeAttributes.put(WITCH_SKIZZIE, WitchSkizzie.buildAttributes().build());
+
+        GlobalEntityTypeAttributes.put(SKIZZIK, Skizzik.buildAttributes().build());
     }
 
     public static void registerRenderers(final FMLClientSetupEvent event) {
@@ -67,6 +72,7 @@ public class ModEntities {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKIZZIK, SkizzikRenderer::new);
     }
 
     static {

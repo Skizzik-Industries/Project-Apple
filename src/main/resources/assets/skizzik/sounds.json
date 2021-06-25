@@ -3,7 +3,13 @@
     "category": "entity",
     "subtitle": "subtitles.entity.skizzik_flesh.equip",
     "sounds": [{
-      "name": "skizzik:entity/skizzik_flesh_equip",
+      "name": "skizzik:entity/skizzik_flesh_equip"
+    }]
+  },
+  "music.skizzik": {
+    "category": "music",
+    "sounds": [{
+      "name": "skizzik:music/skizzik",
       "stream": true
     }]
   }

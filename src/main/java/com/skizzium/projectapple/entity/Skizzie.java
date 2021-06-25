@@ -69,6 +69,11 @@ public class Skizzie extends MonsterEntity {
     }
 
     @Override
+    public boolean causeFallDamage(float f0, float f1) {
+        return false;
+    }
+
+    @Override
     public boolean isSensitiveToWater() {
         return true;
     }

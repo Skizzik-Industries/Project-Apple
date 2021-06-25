@@ -46,10 +46,10 @@ public class SkizzieModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		lowerBody.render(matrixStack, buffer, packedLight, packedOverlay);
-		upperBody.render(matrixStack, buffer, packedLight, packedOverlay);
-		head.render(matrixStack, buffer, packedLight, packedOverlay);
+	public void renderToBuffer(MatrixStack matrix, IVertexBuilder buffer, int light, int overlay, float red, float green, float blue, float alpha){
+		lowerBody.render(matrix, buffer, light, overlay);
+		upperBody.render(matrix, buffer, light, overlay);
+		head.render(matrix, buffer, light, overlay);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
