@@ -44,6 +44,6 @@ public class Register {
         ModEffects.register();
         ModFluids.register();
         ModEntities.register();
-        //ModTileEntities.register();
+        ModTileEntities.register();
     }
 }

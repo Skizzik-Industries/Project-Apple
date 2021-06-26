@@ -93,8 +93,9 @@
   "item.skizzik.platinum_nugget": "Platinum Nugget",
   "item.skizzik.platinum_ingot": "Platinum Ingot",
 
-  "block.skizzik.candy_pressure_plate": "Candy Pressure Plate",
   "block.skizzik.candy_button": "Candy Button",
+  "block.skizzik.candy_pressure_plate": "Candy Pressure Plate",
+  "block.skizzik.candy_sign": "Candy Sign",
 
   "block.skizzik.candy_planks": "Candy Planks",
   "block.skizzik.candy_slab": "Candy Slab",

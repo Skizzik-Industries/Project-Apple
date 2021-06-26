@@ -60,6 +60,7 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(ModBlocks.CORRUPTED_BLOCK.get());
 
             dropSelf(ModBlocks.CANDY_CANE.get());
+            dropSelf(ModBlocks.CANDY_SIGN.get());
             dropSelf(ModBlocks.WAFFLE_BLOCK.get());
 
             dropSelf(ModBlocks.WHITE_CHOCOLATE_BLOCK.get());

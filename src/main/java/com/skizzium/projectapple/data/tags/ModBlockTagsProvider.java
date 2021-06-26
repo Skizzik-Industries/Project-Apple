@@ -55,6 +55,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.BUTTONS).add(ModBlocks.CANDY_BUTTON.get());
         tag(ModTags.Blocks.WOODEN_BUTTONS).add(ModBlocks.CANDY_BUTTON.get());
 
+        tag(ModTags.Blocks.SIGNS).add(ModBlocks.CANDY_WALL_SIGN.get());
+        tag(ModTags.Blocks.WALL_SIGNS).add(ModBlocks.CANDY_WALL_SIGN.get());
+
+        tag(ModTags.Blocks.SIGNS).add(ModBlocks.CANDY_SIGN.get());
+        tag(ModTags.Blocks.STANDING_SIGNS).add(ModBlocks.CANDY_SIGN.get());
+        tag(ModTags.Blocks.WALL_POST_OVERRIDE).add(ModBlocks.CANDY_SIGN.get());
+
         tag(ModTags.Blocks.PLANKS).add(ModBlocks.CANDY_PLANKS.get());
         tag(ModTags.Blocks.SLABS).add(ModBlocks.CANDY_SLAB.get());
         tag(ModTags.Blocks.WOODEN_SLABS).add(ModBlocks.CANDY_SLAB.get());

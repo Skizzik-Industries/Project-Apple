@@ -26,6 +26,10 @@ public final class ModTags {
         public static final ITag.INamedTag<Block> BUTTONS = minecraft("buttons");
         public static final ITag.INamedTag<Block> WOODEN_BUTTONS = minecraft("wooden_buttons");
 
+        public static final ITag.INamedTag<Block> SIGNS = minecraft("signs");
+        public static final ITag.INamedTag<Block> STANDING_SIGNS = minecraft("standing_signs");
+        public static final ITag.INamedTag<Block> WALL_SIGNS = minecraft("wall_signs");
+
         public static final ITag.INamedTag<Block> PLANKS = minecraft("planks");
         public static final ITag.INamedTag<Block> SLABS = minecraft("slabs");
         public static final ITag.INamedTag<Block> WOODEN_SLABS = minecraft("wooden_slabs");
@@ -86,6 +90,8 @@ public final class ModTags {
         public static final ITag.INamedTag<Item> WOODEN_PRESSURE_PLATES = minecraft("wooden_pressure_plates");
         public static final ITag.INamedTag<Item> BUTTONS = minecraft("buttons");
         public static final ITag.INamedTag<Item> WOODEN_BUTTONS = minecraft("wooden_buttons");
+
+        public static final ITag.INamedTag<Item> SIGNS = minecraft("signs");
 
         public static final ITag.INamedTag<Item> PLANKS = minecraft("planks");
         public static final ITag.INamedTag<Item> SLABS = minecraft("slabs");

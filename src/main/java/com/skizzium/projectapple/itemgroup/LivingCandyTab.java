@@ -33,6 +33,7 @@ public class LivingCandyTab extends ItemGroup {
 
         ModBlocks.CANDY_BUTTON.get().fillItemCategory(this, items);
         ModBlocks.CANDY_PRESSURE_PLATE.get().fillItemCategory(this, items);
+        ModItems.CANDY_SIGN.get().fillItemCategory(this, items);
 
         ModBlocks.CANDY_FENCE.get().fillItemCategory(this, items);
         ModBlocks.CANDY_FENCE_GATE.get().fillItemCategory(this, items);

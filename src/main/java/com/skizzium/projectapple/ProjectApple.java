@@ -22,6 +22,7 @@ public class ProjectApple
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(ModBlocks::renderLayers);
         modBus.addListener(ModEntities::registerRenderers);
+        modBus.addListener(ModBlocks::registerWoodTypes);
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
     }

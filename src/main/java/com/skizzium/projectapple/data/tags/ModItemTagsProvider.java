@@ -29,6 +29,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.BUTTONS, ModTags.Items.BUTTONS);
         copy(ModTags.Blocks.WOODEN_BUTTONS, ModTags.Items.WOODEN_BUTTONS);
 
+        tag(ModTags.Items.SIGNS).add(ModItems.CANDY_SIGN.get());
+
         copy(ModTags.Blocks.PLANKS, ModTags.Items.PLANKS);
         copy(ModTags.Blocks.SLABS, ModTags.Items.SLABS);
         copy(ModTags.Blocks.WOODEN_SLABS, ModTags.Items.WOODEN_SLABS);

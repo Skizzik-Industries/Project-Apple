@@ -1,12 +1,9 @@
-package com.skizzium.projectapple.sounds;
+package com.skizzium.projectapple.sound;
 
 import com.skizzium.projectapple.entity.Skizzik;
 import com.skizzium.projectapple.init.ModSoundEvents;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

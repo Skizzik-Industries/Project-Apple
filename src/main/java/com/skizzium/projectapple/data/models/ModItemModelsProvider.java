@@ -39,8 +39,8 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
         withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
 
-        withExistingParent("candy_pressure_plate", modLoc("block/candy_pressure_plate"));
         withExistingParent("candy_button", modLoc("block/candy_button_inventory"));
+        withExistingParent("candy_pressure_plate", modLoc("block/candy_pressure_plate"));
 
         withExistingParent("candy_planks", modLoc("block/candy_planks"));
         withExistingParent("candy_slab", modLoc("block/candy_slab"));
@@ -95,6 +95,8 @@ public class ModItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "white_chocolate_bar");
         defaultBuilder(generated, "chocolate_bar");
         defaultBuilder(generated, "dark_chocolate_bar");
+
+        defaultBuilder(generated, "candy_sign");
 
         defaultBuilder(generated, "candy_door");
 
