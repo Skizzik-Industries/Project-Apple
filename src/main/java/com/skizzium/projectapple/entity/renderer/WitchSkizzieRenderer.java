@@ -1,10 +1,7 @@
 package com.skizzium.projectapple.entity.renderer;
 
-import com.skizzium.projectapple.entity.Skizzie;
 import com.skizzium.projectapple.entity.WitchSkizzie;
-import com.skizzium.projectapple.entity.layer.SkizzieGlowLayer;
 import com.skizzium.projectapple.entity.layer.WitchSkizzieGlowLayer;
-import com.skizzium.projectapple.entity.model.SkizzieModel;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

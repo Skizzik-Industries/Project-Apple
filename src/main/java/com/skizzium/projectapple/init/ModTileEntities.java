@@ -2,7 +2,6 @@ package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.tileentity.SkizzikSign;
-import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 

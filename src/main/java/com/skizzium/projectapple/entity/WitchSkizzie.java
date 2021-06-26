@@ -1,8 +1,6 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.ModEffects;
-import com.skizzium.projectapple.init.ModTags;
-import com.skizzium.projectapple.init.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.EntityType;
@@ -14,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 

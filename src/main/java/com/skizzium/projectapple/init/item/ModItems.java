@@ -6,7 +6,6 @@ import com.skizzium.projectapple.init.Register;
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.init.block.ModFluids;
 import com.skizzium.projectapple.item.RainbowSword;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;

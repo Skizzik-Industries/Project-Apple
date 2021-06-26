@@ -1,11 +1,8 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.entity.ai.KaboomSkizzieSwellGoal;
-import com.skizzium.projectapple.init.ModEntities;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;

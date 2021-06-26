@@ -6,7 +6,6 @@ import net.minecraft.fluid.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
-import com.skizzium.projectapple.init.*;
 import com.skizzium.projectapple.init.block.ModFluids;
 
 public class MapleSyrup extends ForgeFlowingFluid {

@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.item;
 
 import com.skizzium.projectapple.init.ModTags;
-import com.skizzium.projectapple.init.block.ModBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;

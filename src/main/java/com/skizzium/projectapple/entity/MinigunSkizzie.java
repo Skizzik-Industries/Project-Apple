@@ -1,10 +1,8 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.entity.ai.MinigunShootAttackGoal;
-import com.skizzium.projectapple.init.ModEntities;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;

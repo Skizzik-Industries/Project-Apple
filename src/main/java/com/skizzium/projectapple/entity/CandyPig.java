@@ -1,6 +1,8 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.Register;
+import com.skizzium.projectapple.init.ModEntities;
+import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.item.ModItems;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -8,19 +10,12 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import com.skizzium.projectapple.init.ModEntities;
-import com.skizzium.projectapple.init.block.ModBlocks;
-import com.skizzium.projectapple.init.item.ModItems;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Random;
 

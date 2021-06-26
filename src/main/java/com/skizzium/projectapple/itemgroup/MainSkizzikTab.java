@@ -3,7 +3,6 @@ package com.skizzium.projectapple.itemgroup;
 import com.skizzium.projectapple.init.ModEntities;
 import com.skizzium.projectapple.init.block.ModBlocks;
 import com.skizzium.projectapple.init.item.ModItems;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

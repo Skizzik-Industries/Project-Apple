@@ -1,8 +1,6 @@
 package com.skizzium.projectapple.entity.renderer;
 
-import com.skizzium.projectapple.entity.KaboomSkizzie;
 import com.skizzium.projectapple.entity.MinigunSkizzie;
-import com.skizzium.projectapple.entity.layer.KaboomSkizzieGlowLayer;
 import com.skizzium.projectapple.entity.layer.MinigunSkizzieGlowLayer;
 import com.skizzium.projectapple.entity.model.SkizzieModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

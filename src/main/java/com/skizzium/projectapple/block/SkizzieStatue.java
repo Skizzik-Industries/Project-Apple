@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.block;
 
 import net.minecraft.block.*;
-import net.minecraft.block.material.PushReaction;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;

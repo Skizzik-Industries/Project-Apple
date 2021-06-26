@@ -1,7 +1,5 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.ModEntities;
-import com.skizzium.projectapple.init.ModTags;
 import com.skizzium.projectapple.init.block.ModBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -16,11 +14,8 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
