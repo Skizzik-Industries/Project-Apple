@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import com.skizzium.projectapple.init.ModEffects;
+import com.skizzium.projectapple.init.PA_Effects;
 
 public class CorruptedBlock extends Block {
     public CorruptedBlock(Properties properties) {
@@ -30,21 +30,21 @@ public class CorruptedBlock extends Block {
 
     @Override
     public void stepOn(World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(ModEffects.CORRUPTION.get())) {
+        if (entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(PA_Effects.CORRUPTION.get())) {
             if (entity instanceof ServerPlayerEntity) {
                 if (((ServerPlayerEntity) entity).gameMode.isSurvival()) {
-                    ((ServerPlayerEntity) entity).addEffect(new EffectInstance(ModEffects.CORRUPTION.get(), 1200, 1));
+                    ((ServerPlayerEntity) entity).addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
             else if (entity instanceof PlayerEntity && world.isClientSide()) {
                 NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(((AbstractClientPlayerEntity) entity).getGameProfile().getId());
 
                 if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                    ((PlayerEntity) entity).addEffect(new EffectInstance(ModEffects.CORRUPTION.get(), 1200, 1));
+                    ((PlayerEntity) entity).addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
             else {
-                ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.CORRUPTION.get(), 1200, 1));
+                ((LivingEntity) entity).addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
             }
         }
     }

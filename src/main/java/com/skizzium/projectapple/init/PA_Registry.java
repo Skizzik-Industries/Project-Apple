@@ -1,9 +1,9 @@
 package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.block.ModBlocks;
-import com.skizzium.projectapple.init.block.ModFluids;
-import com.skizzium.projectapple.init.item.ModItems;
+import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.block.PA_Fluids;
+import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.itemgroup.LivingCandyTab;
 import com.skizzium.projectapple.itemgroup.MainSkizzikTab;
 import net.minecraft.block.Block;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class Register {
+public class PA_Registry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectApple.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ProjectApple.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ProjectApple.MOD_ID);
@@ -38,12 +38,12 @@ public class Register {
         FLUIDS.register(modEventBus);
         TILE_ENTITIES.register(modEventBus);
 
-        ModBlocks.register();
-        ModItems.register();
-        ModSoundEvents.register();
-        ModEffects.register();
-        ModFluids.register();
-        ModEntities.register();
-        ModTileEntities.register();
+        PA_Blocks.register();
+        PA_Items.register();
+        PA_SoundEvents.register();
+        PA_Effects.register();
+        PA_Fluids.register();
+        PA_Entities.register();
+        PA_TileEntities.register();
     }
 }

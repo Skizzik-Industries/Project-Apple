@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.block;
 
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.block.*;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
@@ -47,13 +47,13 @@ public class CandyNylium extends Block implements IGrowable {
         super.tick(state, world, pos, rand);
         if (!canBeNylium(state, world, pos)) {
             if (!world.isAreaLoaded(pos, 3)) return;
-            world.setBlockAndUpdate(pos, ModBlocks.CANDYRACK.get().defaultBlockState());
+            world.setBlockAndUpdate(pos, PA_Blocks.CANDYRACK.get().defaultBlockState());
         } else {
             if (world.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 BlockState blockstate = this.defaultBlockState();
                 for(int i = 0; i < 4; ++i) {
                     BlockPos blockpos = pos.offset(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-                    if (world.getBlockState(blockpos).is(ModBlocks.CANDYRACK.get()) && canPropagate(blockstate, world, blockpos)) {
+                    if (world.getBlockState(blockpos).is(PA_Blocks.CANDYRACK.get()) && canPropagate(blockstate, world, blockpos)) {
                         world.setBlockAndUpdate(blockpos, blockstate);
                     }
                 }

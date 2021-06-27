@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.ModEntities;
-import com.skizzium.projectapple.init.block.ModBlocks;
-import com.skizzium.projectapple.init.item.ModItems;
+import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -20,7 +20,7 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.Random;
 
 public class CandyPig extends PigEntity {
-    private static final Ingredient FOOD_ITEMS = Ingredient.of(ModItems.CANDY_CANE.get());
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(PA_Items.CANDY_CANE.get());
 
     @Override
     public boolean isFood(ItemStack item) {
@@ -32,7 +32,7 @@ public class CandyPig extends PigEntity {
     }
 
     public CandyPig getBreedOffspring(ServerWorld world, AgeableEntity entity) {
-        return ModEntities.CANDY_PIG.create(this.level);
+        return PA_Entities.CANDY_PIG.create(this.level);
     }
 
     public static AttributeModifierMap.MutableAttribute buildAttributes() {
@@ -40,6 +40,6 @@ public class CandyPig extends PigEntity {
     }
 
     public static boolean canEntitySpawn(EntityType<? extends CandyPig> animal, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.below()).is(ModBlocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos);
+        return world.getBlockState(pos.below()).is(PA_Blocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos);
     }
 }

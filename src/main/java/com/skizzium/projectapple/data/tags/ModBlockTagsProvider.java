@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.data.tags;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.ModTags;
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -15,91 +15,91 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(ModTags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(ModBlocks.COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.COMMAND_BLOCK.get());
 
-        tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.COMMAND_BLOCK.get());
-        tag(ModTags.Blocks.WITHER_IMMUNE).add(ModBlocks.COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.COMMAND_BLOCK.get());
 
-        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).addTag(ModTags.Blocks.WITHER_IMMUNE);
-        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.SPAWNER);
-        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.STRUCTURE_VOID);
-        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.DRAGON_EGG);
-        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(ModBlocks.RAINBOW_GEM_BLOCK.get());
-        tag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE).add(ModBlocks.RAINBOW_ORE.get());
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).addTag(PA_Tags.Blocks.WITHER_IMMUNE);
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.SPAWNER);
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.STRUCTURE_VOID);
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.DRAGON_EGG);
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.RAINBOW_GEM_BLOCK.get());
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.RAINBOW_ORE.get());
 
-        tag(ModTags.Blocks.CORRUPTION_IMMUNE).addTag(ModTags.Blocks.RAINBOW_SWORD_IMMUNE);
-        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR);
-        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(Blocks.CAVE_AIR);
-        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(Blocks.VOID_AIR);
-        tag(ModTags.Blocks.CORRUPTION_IMMUNE).add(ModBlocks.CORRUPTED_BLOCK.get());
+        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).addTag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE);
+        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR);
+        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.CAVE_AIR);
+        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.VOID_AIR);
+        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(PA_Blocks.CORRUPTED_BLOCK.get());
 
-        tag(ModTags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
-        tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
-        tag(ModTags.Blocks.WITHER_IMMUNE).add(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
 
-        tag(ModTags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(ModBlocks.BROKEN_COMMAND_BLOCK.get());
-        tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.BROKEN_COMMAND_BLOCK.get());
-        tag(ModTags.Blocks.WITHER_IMMUNE).add(ModBlocks.BROKEN_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
-        tag(ModTags.Blocks.DRAGON_IMMUNE).add(ModBlocks.SKIZZIK_LOOT_BAG.get());
-        tag(ModTags.Blocks.WITHER_IMMUNE).add(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
+        tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.SKIZZIK_LOOT_BAG.get());
+        tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
-        tag(ModTags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(ModBlocks.WHITE_CHOCOLATE_BLOCK.get());
-        tag(ModTags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(ModBlocks.CHOCOLATE_BLOCK.get());
-        tag(ModTags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(ModBlocks.DARK_CHOCOLATE_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(PA_Blocks.WHITE_CHOCOLATE_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(PA_Blocks.CHOCOLATE_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(PA_Blocks.DARK_CHOCOLATE_BLOCK.get());
 
-        tag(ModTags.Blocks.PRESSURE_PLATES).add(ModBlocks.CANDY_PRESSURE_PLATE.get());
-        tag(ModTags.Blocks.WALL_POST_OVERRIDE).add(ModBlocks.CANDY_PRESSURE_PLATE.get());
-        tag(ModTags.Blocks.WOODEN_PRESSURE_PLATES).add(ModBlocks.CANDY_PRESSURE_PLATE.get());
+        tag(PA_Tags.Blocks.PRESSURE_PLATES).add(PA_Blocks.CANDY_PRESSURE_PLATE.get());
+        tag(PA_Tags.Blocks.WALL_POST_OVERRIDE).add(PA_Blocks.CANDY_PRESSURE_PLATE.get());
+        tag(PA_Tags.Blocks.WOODEN_PRESSURE_PLATES).add(PA_Blocks.CANDY_PRESSURE_PLATE.get());
 
-        tag(ModTags.Blocks.BUTTONS).add(ModBlocks.CANDY_BUTTON.get());
-        tag(ModTags.Blocks.WOODEN_BUTTONS).add(ModBlocks.CANDY_BUTTON.get());
+        tag(PA_Tags.Blocks.BUTTONS).add(PA_Blocks.CANDY_BUTTON.get());
+        tag(PA_Tags.Blocks.WOODEN_BUTTONS).add(PA_Blocks.CANDY_BUTTON.get());
 
-        tag(ModTags.Blocks.SIGNS).add(ModBlocks.CANDY_WALL_SIGN.get());
-        tag(ModTags.Blocks.WALL_SIGNS).add(ModBlocks.CANDY_WALL_SIGN.get());
+        tag(PA_Tags.Blocks.SIGNS).add(PA_Blocks.CANDY_WALL_SIGN.get());
+        tag(PA_Tags.Blocks.WALL_SIGNS).add(PA_Blocks.CANDY_WALL_SIGN.get());
 
-        tag(ModTags.Blocks.SIGNS).add(ModBlocks.CANDY_SIGN.get());
-        tag(ModTags.Blocks.STANDING_SIGNS).add(ModBlocks.CANDY_SIGN.get());
-        tag(ModTags.Blocks.WALL_POST_OVERRIDE).add(ModBlocks.CANDY_SIGN.get());
+        tag(PA_Tags.Blocks.SIGNS).add(PA_Blocks.CANDY_SIGN.get());
+        tag(PA_Tags.Blocks.STANDING_SIGNS).add(PA_Blocks.CANDY_SIGN.get());
+        tag(PA_Tags.Blocks.WALL_POST_OVERRIDE).add(PA_Blocks.CANDY_SIGN.get());
 
-        tag(ModTags.Blocks.PLANKS).add(ModBlocks.CANDY_PLANKS.get());
-        tag(ModTags.Blocks.SLABS).add(ModBlocks.CANDY_SLAB.get());
-        tag(ModTags.Blocks.WOODEN_SLABS).add(ModBlocks.CANDY_SLAB.get());
-        tag(ModTags.Blocks.STAIRS).add(ModBlocks.CANDY_STAIRS.get());
-        tag(ModTags.Blocks.WOODEN_STAIRS).add(ModBlocks.CANDY_STAIRS.get());
+        tag(PA_Tags.Blocks.PLANKS).add(PA_Blocks.CANDY_PLANKS.get());
+        tag(PA_Tags.Blocks.SLABS).add(PA_Blocks.CANDY_SLAB.get());
+        tag(PA_Tags.Blocks.WOODEN_SLABS).add(PA_Blocks.CANDY_SLAB.get());
+        tag(PA_Tags.Blocks.STAIRS).add(PA_Blocks.CANDY_STAIRS.get());
+        tag(PA_Tags.Blocks.WOODEN_STAIRS).add(PA_Blocks.CANDY_STAIRS.get());
 
-        tag(ModTags.Blocks.FENCES).add(ModBlocks.CANDY_FENCE.get());
-        tag(ModTags.Blocks.WOODEN_FENCES).add(ModBlocks.CANDY_FENCE.get());
-        tag(ModTags.Blocks.FENCE_GATES).add(ModBlocks.CANDY_FENCE_GATE.get());
-        tag(ModTags.Blocks.UNSTABLE_BOTTOM_CENTER).add(ModBlocks.CANDY_FENCE_GATE.get());
+        tag(PA_Tags.Blocks.FENCES).add(PA_Blocks.CANDY_FENCE.get());
+        tag(PA_Tags.Blocks.WOODEN_FENCES).add(PA_Blocks.CANDY_FENCE.get());
+        tag(PA_Tags.Blocks.FENCE_GATES).add(PA_Blocks.CANDY_FENCE_GATE.get());
+        tag(PA_Tags.Blocks.UNSTABLE_BOTTOM_CENTER).add(PA_Blocks.CANDY_FENCE_GATE.get());
 
-        tag(ModTags.Blocks.TRAPDOORS).add(ModBlocks.CANDY_TRAPDOOR.get());
-        tag(ModTags.Blocks.WOODEN_TRAPDOORS).add(ModBlocks.CANDY_TRAPDOOR.get());
-        tag(ModTags.Blocks.DOORS).add(ModBlocks.CANDY_DOOR.get());
-        tag(ModTags.Blocks.WOODEN_DOORS).add(ModBlocks.CANDY_DOOR.get());
+        tag(PA_Tags.Blocks.TRAPDOORS).add(PA_Blocks.CANDY_TRAPDOOR.get());
+        tag(PA_Tags.Blocks.WOODEN_TRAPDOORS).add(PA_Blocks.CANDY_TRAPDOOR.get());
+        tag(PA_Tags.Blocks.DOORS).add(PA_Blocks.CANDY_DOOR.get());
+        tag(PA_Tags.Blocks.WOODEN_DOORS).add(PA_Blocks.CANDY_DOOR.get());
 
-        tag(ModTags.Blocks.LEAVES).add(ModBlocks.CANDY_LEAVES.get());
-        tag(ModTags.Blocks.ENDERMAN_HOLDABLE).add(ModBlocks.CANDY_NYLIUM.get());
-        tag(ModTags.Blocks.ENDERMAN_HOLDABLE).add(ModBlocks.CANDYRACK.get());
-        tag(ModTags.Blocks.VALID_SPAWN).add(ModBlocks.CANDY_NYLIUM.get());
+        tag(PA_Tags.Blocks.LEAVES).add(PA_Blocks.CANDY_LEAVES.get());
+        tag(PA_Tags.Blocks.ENDERMAN_HOLDABLE).add(PA_Blocks.CANDY_NYLIUM.get());
+        tag(PA_Tags.Blocks.ENDERMAN_HOLDABLE).add(PA_Blocks.CANDYRACK.get());
+        tag(PA_Tags.Blocks.VALID_SPAWN).add(PA_Blocks.CANDY_NYLIUM.get());
 
-        tag(ModTags.Blocks.LOGS).add(ModBlocks.CANDY_LOG.get());
-        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.CANDY_LOG.get());
+        tag(PA_Tags.Blocks.LOGS).add(PA_Blocks.CANDY_LOG.get());
+        tag(PA_Tags.Blocks.LOGS_THAT_BURN).add(PA_Blocks.CANDY_LOG.get());
 
-        tag(ModTags.Blocks.LOGS).add(ModBlocks.STRIPPED_CANDY_LOG.get());
-        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.STRIPPED_CANDY_LOG.get());
+        tag(PA_Tags.Blocks.LOGS).add(PA_Blocks.STRIPPED_CANDY_LOG.get());
+        tag(PA_Tags.Blocks.LOGS_THAT_BURN).add(PA_Blocks.STRIPPED_CANDY_LOG.get());
 
-        tag(ModTags.Blocks.LOGS).add(ModBlocks.CANDY_WOOD.get());
-        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.CANDY_WOOD.get());
+        tag(PA_Tags.Blocks.LOGS).add(PA_Blocks.CANDY_WOOD.get());
+        tag(PA_Tags.Blocks.LOGS_THAT_BURN).add(PA_Blocks.CANDY_WOOD.get());
 
-        tag(ModTags.Blocks.LOGS).add(ModBlocks.STRIPPED_CANDY_WOOD.get());
-        tag(ModTags.Blocks.LOGS_THAT_BURN).add(ModBlocks.STRIPPED_CANDY_WOOD.get());
+        tag(PA_Tags.Blocks.LOGS).add(PA_Blocks.STRIPPED_CANDY_WOOD.get());
+        tag(PA_Tags.Blocks.LOGS_THAT_BURN).add(PA_Blocks.STRIPPED_CANDY_WOOD.get());
 
-        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.CANDY_LOG.get());
-        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.STRIPPED_CANDY_LOG.get());
-        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.CANDY_WOOD.get());
-        tag(ModTags.Blocks.CANDY_LOGS).add(ModBlocks.STRIPPED_CANDY_WOOD.get());
+        tag(PA_Tags.Blocks.CANDY_LOGS).add(PA_Blocks.CANDY_LOG.get());
+        tag(PA_Tags.Blocks.CANDY_LOGS).add(PA_Blocks.STRIPPED_CANDY_LOG.get());
+        tag(PA_Tags.Blocks.CANDY_LOGS).add(PA_Blocks.CANDY_WOOD.get());
+        tag(PA_Tags.Blocks.CANDY_LOGS).add(PA_Blocks.STRIPPED_CANDY_WOOD.get());
 
-        tag(ModTags.Blocks.BEACON_BASE_BLOCKS).add(ModBlocks.RAINBOW_GEM_BLOCK.get());
+        tag(PA_Tags.Blocks.BEACON_BASE_BLOCKS).add(PA_Blocks.RAINBOW_GEM_BLOCK.get());
     }
 }

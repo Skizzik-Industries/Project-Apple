@@ -1,16 +1,28 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.tileentity.PA_Skull;
 import net.minecraft.block.*;
-import com.skizzium.projectapple.init.block.ModBlocks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
 
-public class SkizzikHead extends SkullBlock {
+public class SkizzikHead extends PA_SkullBlock {
     /* @Nullable
     private static BlockPattern skizzikPatternFull;
     @Nullable
     private static BlockPattern skizzikPatternBase; */
 
     public SkizzikHead(AbstractBlock.Properties properties) {
-        super(ModBlocks.ModSkullTypes.SKIZZIK, properties);
+        super(PA_SkullBlock.CustomTypes.SKIZZIK, properties);
+    }
+
+    @Override
+    public TileEntity newBlockEntity(IBlockReader reader) {
+        return new PA_Skull();
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
 
     /* public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
@@ -20,7 +32,6 @@ public class SkizzikHead extends SkullBlock {
         if (block instanceof SkullTileEntity) {
             checkSpawn(world, pos, (SkullTileEntity)block);
         }
-
     }
 
     public static void checkSpawn(World world, BlockPos pos, SkullTileEntity block) {

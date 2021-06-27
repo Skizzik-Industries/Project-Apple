@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.ModEffects;
+import com.skizzium.projectapple.init.PA_Effects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.EntityType;
@@ -33,7 +33,7 @@ public class WitchSkizzie extends Skizzie {
     @Override
     public void playerTouch(PlayerEntity player) {
         World world = player.getCommandSenderWorld();
-        if (player instanceof LivingEntity && !player.hasEffect(ModEffects.CORRUPTION.get())) {
+        if (player instanceof LivingEntity && !player.hasEffect(PA_Effects.CORRUPTION.get())) {
             if (player instanceof ServerPlayerEntity) {
                 if (((ServerPlayerEntity) player).gameMode.isSurvival() && Math.random() < 0.05) {
                     if (Math.random() < 0.01) {

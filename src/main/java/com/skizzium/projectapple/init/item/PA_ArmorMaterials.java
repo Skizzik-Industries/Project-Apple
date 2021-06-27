@@ -8,16 +8,16 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import com.skizzium.projectapple.init.ModSoundEvents;
+import com.skizzium.projectapple.init.PA_SoundEvents;
 
 import java.util.function.Supplier;
 
-public enum ModArmorMaterials implements IArmorMaterial {
+public enum PA_ArmorMaterials implements IArmorMaterial {
     CANDIANITE("candianite", 15, new int[]{2, 5, 6, 2}, 15, SoundEvents.SLIME_BLOCK_PLACE, 0.0F, 0.0F, () -> {
-        return Ingredient.of(ModItems.CANDIANITE_INGOT.get());
+        return Ingredient.of(PA_Items.CANDIANITE_INGOT.get());
     }),
-    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, ModSoundEvents.FLESH_EQUIP_LAZY.get(), 0.5F, 0F, () -> {
-        return Ingredient.of(ModItems.SKIZZIK_FLESH.get());
+    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, PA_SoundEvents.FLESH_EQUIP_LAZY.get(), 0.5F, 0F, () -> {
+        return Ingredient.of(PA_Items.SKIZZIK_FLESH.get());
     });
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
@@ -30,7 +30,7 @@ public enum ModArmorMaterials implements IArmorMaterial {
     private final float knockbackResistance;
     private final LazyValue<Ingredient> repairIngredient;
 
-    ModArmorMaterials(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+    PA_ArmorMaterials(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.slotProtections = slotProtections;

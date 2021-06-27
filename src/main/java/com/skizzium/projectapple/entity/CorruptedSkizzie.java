@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.ModEffects;
-import com.skizzium.projectapple.init.ModTags;
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.PA_Effects;
+import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.EntityType;
@@ -42,25 +42,25 @@ public class CorruptedSkizzie extends Skizzie {
         double z = this.getZ();
         BlockPos pos = new BlockPos(x, y-1, z);
 
-        if (!ModTags.Blocks.CORRUPTION_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
-            world.setBlock(pos, ModBlocks.CORRUPTED_BLOCK.get().defaultBlockState(), 3);
+        if (!PA_Tags.Blocks.CORRUPTION_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
+            world.setBlock(pos, PA_Blocks.CORRUPTED_BLOCK.get().defaultBlockState(), 3);
         }
     }
 
     @Override
     public void playerTouch(PlayerEntity player) {
         World world = player.getCommandSenderWorld();
-        if (player instanceof LivingEntity && !player.hasEffect(ModEffects.CORRUPTION.get())) {
+        if (player instanceof LivingEntity && !player.hasEffect(PA_Effects.CORRUPTION.get())) {
             if (player instanceof ServerPlayerEntity) {
                 if (((ServerPlayerEntity) player).gameMode.isSurvival()) {
-                    player.addEffect(new EffectInstance(ModEffects.CORRUPTION.get(), 1200, 1));
+                    player.addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
             else if (player instanceof PlayerEntity && world.isClientSide()) {
                 NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
                 if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                    player.addEffect(new EffectInstance(ModEffects.CORRUPTION.get(), 1200, 1));
+                    player.addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
         }

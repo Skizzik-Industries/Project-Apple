@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 
 import javax.annotation.Nullable;
 
-public class StrippableLog extends RotatedPillarBlock {
-    public StrippableLog(Properties properties) {
+public class PA_StrippableLog extends RotatedPillarBlock {
+    public PA_StrippableLog(Properties properties) {
         super(properties);
     }
 
@@ -23,11 +23,11 @@ public class StrippableLog extends RotatedPillarBlock {
         if (toolType == ToolType.AXE) {
             Block block = state.getBlock();
             BlockState blockstate = world.getBlockState(pos);
-            if (block == ModBlocks.CANDY_LOG.get()) {
-                return ModBlocks.STRIPPED_CANDY_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
+            if (block == PA_Blocks.CANDY_LOG.get()) {
+                return PA_Blocks.STRIPPED_CANDY_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
             }
-            else if (block == ModBlocks.CANDY_WOOD.get()) {
-                return ModBlocks.STRIPPED_CANDY_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
+            else if (block == PA_Blocks.CANDY_WOOD.get()) {
+                return PA_Blocks.STRIPPED_CANDY_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
             }
             else {
                 return super.getToolModifiedState(state, world, pos, player, stack, toolType);

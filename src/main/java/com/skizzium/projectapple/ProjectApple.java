@@ -1,8 +1,8 @@
 package com.skizzium.projectapple;
 
-import com.skizzium.projectapple.init.ModEntities;
-import com.skizzium.projectapple.init.Register;
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.PA_Registry;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -17,12 +17,12 @@ public class ProjectApple
     public static final Logger LOGGER = LogManager.getLogger();
 
     public ProjectApple() {
-        Register.register();
+        PA_Registry.register();
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modBus.addListener(ModBlocks::renderLayers);
-        modBus.addListener(ModEntities::registerRenderers);
-        modBus.addListener(ModBlocks::registerWoodTypes);
+        modBus.addListener(PA_Blocks::renderLayers);
+        modBus.addListener(PA_Entities::registerRenderers);
+        modBus.addListener(PA_Blocks::registerWoodTypes);
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
     }

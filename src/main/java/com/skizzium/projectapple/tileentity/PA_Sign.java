@@ -1,12 +1,12 @@
 package com.skizzium.projectapple.tileentity;
 
-import com.skizzium.projectapple.init.ModTileEntities;
+import com.skizzium.projectapple.init.PA_TileEntities;
 import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class SkizzikSign extends SignTileEntity {
+public class PA_Sign extends SignTileEntity {
     @Override
     public TileEntityType<?> getType() {
-        return ModTileEntities.SKIZZIK_SIGN.get();
+        return PA_TileEntities.SKIZZIK_SIGN.get();
     }
 }

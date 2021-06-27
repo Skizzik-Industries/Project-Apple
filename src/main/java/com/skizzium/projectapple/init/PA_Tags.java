@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.*;
 import net.minecraft.util.ResourceLocation;
 
-public final class ModTags {
+public final class PA_Tags {
     public static final class Blocks {
         public static final ITag.INamedTag<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
 

@@ -3,16 +3,16 @@ package com.skizzium.projectapple.init.item;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
-import com.skizzium.projectapple.init.ModTags;
+import com.skizzium.projectapple.init.PA_Tags;
 
 import java.util.function.Supplier;
 
-public enum ModTiers implements IItemTier {
+public enum PA_Tiers implements IItemTier {
     CANDIANITE(2, 350, 7.0F, 2.5F, 15, () -> {
-        return Ingredient.of(ModItems.CANDIANITE_INGOT.get());
+        return Ingredient.of(PA_Items.CANDIANITE_INGOT.get());
     }),
     RAINBOW(5, 2100, 18.0F, 5.5F, 22, () -> {
-        return Ingredient.of(ModTags.Items.ALL_GEMS);
+        return Ingredient.of(PA_Tags.Items.ALL_GEMS);
     });
 
     private final int level;
@@ -22,7 +22,7 @@ public enum ModTiers implements IItemTier {
     private final int enchantmentValue;
     private final LazyValue<Ingredient> repairIngredient;
 
-    private ModTiers(int level, int uses, float speed, float damage, int enchantmentValue, Supplier<Ingredient> repairIngredient) {
+    private PA_Tiers(int level, int uses, float speed, float damage, int enchantmentValue, Supplier<Ingredient> repairIngredient) {
         this.level = level;
         this.uses = uses;
         this.speed = speed;

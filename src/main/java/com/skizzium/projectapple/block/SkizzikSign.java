@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.tileentity.PA_Sign;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.WoodType;
@@ -13,7 +14,7 @@ public class SkizzikSign extends StandingSignBlock {
 
     @Override
     public TileEntity newBlockEntity(IBlockReader reader) {
-        return new com.skizzium.projectapple.tileentity.SkizzikSign();
+        return new PA_Sign();
     }
 
     @Override

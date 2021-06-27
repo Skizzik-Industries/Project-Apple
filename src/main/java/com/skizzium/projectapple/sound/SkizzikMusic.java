@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.sound;
 
 import com.skizzium.projectapple.entity.Skizzik;
-import com.skizzium.projectapple.init.ModSoundEvents;
+import com.skizzium.projectapple.init.PA_SoundEvents;
 import net.minecraft.client.audio.TickableSound;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,7 +13,7 @@ public class SkizzikMusic extends TickableSound {
     private float pitch = 0.0F;
 
     public SkizzikMusic(Skizzik skizzik) {
-        super(ModSoundEvents.MUSIC_SKIZZIK_LAZY.get(), SoundCategory.HOSTILE);
+        super(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), SoundCategory.HOSTILE);
         this.skizzik = skizzik;
         this.delay = 0;
         this.volume = 0.0F;

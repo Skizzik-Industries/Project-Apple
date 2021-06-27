@@ -2,7 +2,7 @@ package com.skizzium.projectapple.potion;
 
 import com.google.common.collect.Maps;
 import com.skizzium.projectapple.entity.CorruptedSkizzie;
-import com.skizzium.projectapple.init.ModEffects;
+import com.skizzium.projectapple.init.PA_Effects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -66,7 +66,7 @@ public class CorruptionPotion extends Effect {
             super.applyEffectTick(entity, amplifier);
         }
         else {
-            entity.removeEffect(ModEffects.CORRUPTION.get());
+            entity.removeEffect(PA_Effects.CORRUPTION.get());
         }
     }
 

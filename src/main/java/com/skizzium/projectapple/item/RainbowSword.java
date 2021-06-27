@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.item;
 
-import com.skizzium.projectapple.init.ModTags;
+import com.skizzium.projectapple.init.PA_Tags;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -30,7 +30,7 @@ public class RainbowSword extends SwordItem {
         int z = pos.getZ();
         ItemStack item = context.getItemInHand();
         
-        if (!ModTags.Blocks.RAINBOW_SWORD_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
+        if (!PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 
             if (world instanceof ServerWorld) {

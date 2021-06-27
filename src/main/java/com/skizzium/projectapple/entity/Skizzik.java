@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
-import com.skizzium.projectapple.init.ModEntities;
+import com.skizzium.projectapple.init.PA_Entities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -44,7 +44,7 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
     private final int[] idleHeadUpdates = new int[4];
     private int destroyBlocksTick;
     private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
-    private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(ModEntities.LIVING_ENTITY_SELECTOR);
+    private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.LIVING_ENTITY_SELECTOR);
 
     public Skizzik(EntityType<? extends Skizzik> entity, World world) {
         super(entity, world);

@@ -2,9 +2,9 @@ package com.skizzium.projectapple.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import com.skizzium.projectapple.init.Register;
-import com.skizzium.projectapple.init.block.ModBlocks;
-import com.skizzium.projectapple.init.item.ModItems;
+import com.skizzium.projectapple.init.PA_Registry;
+import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
@@ -45,63 +45,63 @@ public class ModLootTablesProvider extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            dropSelf(ModBlocks.COMMAND_BLOCK.get());
-            dropSelf(ModBlocks.DEACTIVATED_COMMAND_BLOCK.get());
-            dropSelf(ModBlocks.BROKEN_COMMAND_BLOCK.get());
+            dropSelf(PA_Blocks.COMMAND_BLOCK.get());
+            dropSelf(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
+            dropSelf(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
-            dropSelf(ModBlocks.SKIZZIE_STATUE.get());
-            add(ModBlocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SMALL_SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(RandomValueRange.between(1,4)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(ConstantRange.exactly(1))))*/.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.NETHER_STAR)).apply(SetCount.setCount(RandomValueRange.between(1,3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_BONE.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_FLESH.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModBlocks.BROKEN_COMMAND_BLOCK.get())).apply(SetCount.setCount(ConstantRange.exactly(1)))));
-            dropSelf(ModBlocks.SKIZZIK_FLESH_BLOCK.get());
+            dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
+            add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SMALL_SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(RandomValueRange.between(1,4)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(ConstantRange.exactly(1))))*/.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.NETHER_STAR)).apply(SetCount.setCount(RandomValueRange.between(1,3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_BONE.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_FLESH.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Blocks.BROKEN_COMMAND_BLOCK.get())).apply(SetCount.setCount(ConstantRange.exactly(1)))));
+            dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
-            dropSelf(ModBlocks.CORRUPTED_BLOCK.get());
+            dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());
 
-            dropSelf(ModBlocks.CANDY_CANE.get());
-            dropSelf(ModBlocks.CANDY_SIGN.get());
-            dropSelf(ModBlocks.WAFFLE_BLOCK.get());
+            dropSelf(PA_Blocks.CANDY_CANE.get());
+            dropSelf(PA_Blocks.CANDY_SIGN.get());
+            dropSelf(PA_Blocks.WAFFLE_BLOCK.get());
 
-            dropSelf(ModBlocks.WHITE_CHOCOLATE_BLOCK.get());
-            dropSelf(ModBlocks.CHOCOLATE_BLOCK.get());
-            dropSelf(ModBlocks.DARK_CHOCOLATE_BLOCK.get());
+            dropSelf(PA_Blocks.WHITE_CHOCOLATE_BLOCK.get());
+            dropSelf(PA_Blocks.CHOCOLATE_BLOCK.get());
+            dropSelf(PA_Blocks.DARK_CHOCOLATE_BLOCK.get());
 
-            dropSelf(ModBlocks.CANDIANITE_ORE.get());
+            dropSelf(PA_Blocks.CANDIANITE_ORE.get());
 
-            dropSelf(ModBlocks.CANDY_PRESSURE_PLATE.get());
-            dropSelf(ModBlocks.CANDY_BUTTON.get());
+            dropSelf(PA_Blocks.CANDY_PRESSURE_PLATE.get());
+            dropSelf(PA_Blocks.CANDY_BUTTON.get());
 
-            dropSelf(ModBlocks.CANDY_PLANKS.get());
-            dropSelf(ModBlocks.CANDY_SLAB.get());
-            dropSelf(ModBlocks.CANDY_STAIRS.get());
+            dropSelf(PA_Blocks.CANDY_PLANKS.get());
+            dropSelf(PA_Blocks.CANDY_SLAB.get());
+            dropSelf(PA_Blocks.CANDY_STAIRS.get());
 
-            dropSelf(ModBlocks.CANDY_FENCE.get());
-            dropSelf(ModBlocks.CANDY_FENCE_GATE.get());
+            dropSelf(PA_Blocks.CANDY_FENCE.get());
+            dropSelf(PA_Blocks.CANDY_FENCE_GATE.get());
 
-            dropSelf(ModBlocks.CANDY_TRAPDOOR.get());
-            add(ModBlocks.CANDY_DOOR.get(), BlockLootTables::createDoorTable);
+            dropSelf(PA_Blocks.CANDY_TRAPDOOR.get());
+            add(PA_Blocks.CANDY_DOOR.get(), BlockLootTables::createDoorTable);
 
-            dropSelf(ModBlocks.CANDY_LOG.get());
-            dropSelf(ModBlocks.STRIPPED_CANDY_LOG.get());
-            dropSelf(ModBlocks.CANDY_WOOD.get());
-            dropSelf(ModBlocks.STRIPPED_CANDY_WOOD.get());
+            dropSelf(PA_Blocks.CANDY_LOG.get());
+            dropSelf(PA_Blocks.STRIPPED_CANDY_LOG.get());
+            dropSelf(PA_Blocks.CANDY_WOOD.get());
+            dropSelf(PA_Blocks.STRIPPED_CANDY_WOOD.get());
 
-            add(ModBlocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, Blocks.OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
-            add(ModBlocks.CANDY_NYLIUM.get(), (drops) -> createSingleItemTableWithSilkTouch(drops, ModBlocks.CANDYRACK.get()));
-            dropSelf(ModBlocks.CANDYRACK.get());
+            add(PA_Blocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, Blocks.OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
+            add(PA_Blocks.CANDY_NYLIUM.get(), (drops) -> createSingleItemTableWithSilkTouch(drops, PA_Blocks.CANDYRACK.get()));
+            dropSelf(PA_Blocks.CANDYRACK.get());
 
-            add(ModBlocks.RAINBOW_ORE.get(), (drops) -> createOreDrop(drops, ModItems.RAINBOW_GEM.get()));
+            add(PA_Blocks.RAINBOW_ORE.get(), (drops) -> createOreDrop(drops, PA_Items.RAINBOW_GEM.get()));
 
-            dropSelf(ModBlocks.RAINBOW_GEM_BLOCK.get());
-            dropSelf(ModBlocks.BLACK_GEM_BLOCK.get());
-            dropSelf(ModBlocks.BLUE_GEM_BLOCK.get());
-            dropSelf(ModBlocks.BROWN_GEM_BLOCK.get());
-            dropSelf(ModBlocks.YELLOW_GEM_BLOCK.get());
-            dropSelf(ModBlocks.ORANGE_GEM_BLOCK.get());
-            dropSelf(ModBlocks.GREEN_GEM_BLOCK.get());
-            dropSelf(ModBlocks.PINK_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.RAINBOW_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.BLACK_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.BLUE_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.BROWN_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.YELLOW_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.ORANGE_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.GREEN_GEM_BLOCK.get());
+            dropSelf(PA_Blocks.PINK_GEM_BLOCK.get());
         }
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            return Register.BLOCKS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
+            return PA_Registry.BLOCKS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
         }
     }
 }

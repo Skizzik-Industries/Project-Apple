@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
@@ -113,7 +113,7 @@ public class FriendlySkizzie extends CreatureEntity {
             this.clearFire();
         }
         else if (world.getBlockState(pos).getBlock() == Blocks.LAVA) {
-            world.setBlock(pos, ModBlocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
+            world.setBlock(pos, PA_Blocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
             world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
             this.remove();
         }

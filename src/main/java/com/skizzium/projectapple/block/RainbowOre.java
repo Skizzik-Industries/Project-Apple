@@ -4,7 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.extensions.IForgeBlock;
-import com.skizzium.projectapple.init.block.ModBlocks;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 
 import java.util.Random;
 
@@ -31,7 +31,7 @@ public class RainbowOre extends OreBlock implements IForgeBlock {
         else if (this == Blocks.NETHER_QUARTZ_ORE) {
             return MathHelper.nextInt(random, 2, 5);
         }
-        else if (this == ModBlocks.RAINBOW_ORE.get()) {
+        else if (this == PA_Blocks.RAINBOW_ORE.get()) {
             return MathHelper.nextInt(random, 2, 9);
         }
         else {

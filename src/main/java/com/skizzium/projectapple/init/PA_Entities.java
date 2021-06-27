@@ -3,6 +3,7 @@ package com.skizzium.projectapple.init;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.renderer.*;
+import com.skizzium.projectapple.tileentity.renderer.PA_SkullRenderer;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
@@ -23,7 +24,7 @@ import java.lang.reflect.Field;
 import java.util.function.Predicate;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEntities {
+public class PA_Entities {
     public static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = (entity) -> entity.getMobType() != CreatureAttribute.UNDEAD && entity.attackable();
 
     public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
@@ -36,14 +37,14 @@ public class ModEntities {
     public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(2.5F, 4F).clientTrackingRange(10));
 
-    public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(ModEntities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(Register.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
-    public static final Item FRIENDLY_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_skizzie_spawn_egg");
-    public static final Item FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.FRIENDLY_WITCH_SKIZZIE, 0X17D1C7, 0X5349438, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_witch_skizzie_spawn_egg");
-    public static final Item SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
-    public static final Item KABOOM_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.KABOOM_SKIZZIE, 0XB40A1A, 0X5BE9B7, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
+    public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
+    public static final Item FRIENDLY_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_skizzie_spawn_egg");
+    public static final Item FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.FRIENDLY_WITCH_SKIZZIE, 0X17D1C7, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_witch_skizzie_spawn_egg");
+    public static final Item SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
+    public static final Item KABOOM_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.KABOOM_SKIZZIE, 0XB40A1A, 0X5BE9B7, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
     //public static final Item MINIGUN_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.MINIGUN_SKIZZIE, 0XB40A1A, 0X4F0000, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:minigun_skizzie_spawn_egg");
-    public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", TextFormatting.OBFUSCATED)).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
-    public static final Item WITCH_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.WITCH_SKIZZIE, 0XB40A1A, 0X5349438, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:witch_skizzie_spawn_egg");
+    public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", TextFormatting.OBFUSCATED)).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
+    public static final Item WITCH_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.WITCH_SKIZZIE, 0XB40A1A, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:witch_skizzie_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);
@@ -66,17 +67,18 @@ public class ModEntities {
     }
 
     public static void registerRenderers(final FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer(ModTileEntities.SKIZZIK_SIGN.get(), SignTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.SKIZZIK_SIGN.get(), SignTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.SKIZZIK_SKULL.get(), PA_SkullRenderer::new);
 
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CANDY_PIG, CandyPigRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FRIENDLY_SKIZZIE, FriendlySkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FRIENDLY_WITCH_SKIZZIE, FriendlyWitchSkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKIZZIE, SkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.KABOOM_SKIZZIE, KaboomSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.FRIENDLY_SKIZZIE, FriendlySkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.FRIENDLY_WITCH_SKIZZIE, FriendlyWitchSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIE, SkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.KABOOM_SKIZZIE, KaboomSkizzieRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKIZZIK, SkizzikRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK, SkizzikRenderer::new);
     }
 
     static {
@@ -86,7 +88,7 @@ public class ModEntities {
     @SubscribeEvent
     public static void registerEntities(final RegistryEvent.Register<EntityType<?>> event) {
         try {
-            for (Field field : ModEntities.class.getDeclaredFields()) {
+            for (Field field : PA_Entities.class.getDeclaredFields()) {
                 Object object = field.get(null);
                 if (object instanceof EntityType) {
                     event.getRegistry().register((EntityType) object);
