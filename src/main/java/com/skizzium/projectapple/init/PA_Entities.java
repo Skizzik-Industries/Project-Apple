@@ -3,8 +3,8 @@ package com.skizzium.projectapple.init;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.renderer.*;
-import com.skizzium.projectapple.tileentity.renderer.PA_SkullRenderer;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.SkullTileEntityRenderer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.Item;
@@ -68,7 +68,7 @@ public class PA_Entities {
 
     public static void registerRenderers(final FMLClientSetupEvent event) {
         ClientRegistry.bindTileEntityRenderer(PA_TileEntities.PA_SIGN.get(), SignTileEntityRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.PA_SKULL.get(), PA_SkullRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.PA_SKULL.get(), SkullTileEntityRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.FRIENDLY_SKIZZIE, FriendlySkizzieRenderer::new);
