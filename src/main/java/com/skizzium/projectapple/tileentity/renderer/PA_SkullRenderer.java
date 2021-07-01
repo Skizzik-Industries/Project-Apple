@@ -5,7 +5,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.skizzium.projectapple.block.PA_SkullBlock;
+import com.skizzium.projectapple.init.PA_TileEntities;
 import com.skizzium.projectapple.tileentity.PA_Skull;
 import net.minecraft.block.AbstractSkullBlock;
 import net.minecraft.block.BlockState;
@@ -33,10 +33,10 @@ import java.util.Map;
 public class PA_SkullRenderer extends TileEntityRenderer<PA_Skull> {
     private static final Map<SkullBlock.ISkullType, GenericHeadModel> MODEL_BY_TYPE = Util.make(Maps.newHashMap(), (model) -> {
         GenericHeadModel genericHead = new GenericHeadModel(0, 0, 32, 32);
-        model.put(PA_SkullBlock.CustomTypes.SKIZZIK, genericHead);
+        model.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, genericHead);
     });
     private static final Map<SkullBlock.ISkullType, ResourceLocation> SKIN_BY_TYPE = Util.make(Maps.newHashMap(), (skin) -> {
-        skin.put(PA_SkullBlock.CustomTypes.SKIZZIK, new ResourceLocation("skizzik:textures/block/skizzik_head.png"));
+        skin.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new ResourceLocation("skizzik:textures/block/skizzik_head.png"));
     });
 
     public PA_SkullRenderer(TileEntityRendererDispatcher dispatcher) {

@@ -7,6 +7,6 @@ import net.minecraft.tileentity.TileEntityType;
 public class PA_Sign extends SignTileEntity {
     @Override
     public TileEntityType<?> getType() {
-        return PA_TileEntities.SKIZZIK_SIGN.get();
+        return PA_TileEntities.PA_SIGN.get();
     }
 }

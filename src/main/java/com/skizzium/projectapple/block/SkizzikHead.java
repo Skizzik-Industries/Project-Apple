@@ -5,14 +5,14 @@ import net.minecraft.block.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
-public class SkizzikHead extends PA_SkullBlock {
+public class SkizzikHead extends SkullBlock {
     /* @Nullable
     private static BlockPattern skizzikPatternFull;
     @Nullable
     private static BlockPattern skizzikPatternBase; */
 
-    public SkizzikHead(AbstractBlock.Properties properties) {
-        super(CustomTypes.SKIZZIK, properties);
+    public SkizzikHead(ISkullType skull, AbstractBlock.Properties properties) {
+        super(skull, properties);
     }
 
     @Override

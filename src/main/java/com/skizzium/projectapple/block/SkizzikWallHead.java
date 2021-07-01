@@ -13,14 +13,14 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class SkizzikWallHead extends WallSkullBlock {
-    public SkizzikWallHead(AbstractBlock.Properties properties) {
-        super(PA_SkullBlock.CustomTypes.SKIZZIK, properties);
+    public SkizzikWallHead(SkullBlock.ISkullType skull, AbstractBlock.Properties properties) {
+        super(skull, properties);
     }
 
-    @Override
+    /* @Override
     public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
         PA_Blocks.SKIZZIK_HEAD.get().setPlacedBy(world, pos, state, entity, stack);
-    }
+    } */
 
     @Override
     public TileEntity newBlockEntity(IBlockReader reader) {

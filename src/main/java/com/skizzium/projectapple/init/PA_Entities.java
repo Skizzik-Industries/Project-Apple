@@ -67,8 +67,8 @@ public class PA_Entities {
     }
 
     public static void registerRenderers(final FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.SKIZZIK_SIGN.get(), SignTileEntityRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.SKIZZIK_SKULL.get(), PA_SkullRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.PA_SIGN.get(), SignTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(PA_TileEntities.PA_SKULL.get(), PA_SkullRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.FRIENDLY_SKIZZIE, FriendlySkizzieRenderer::new);

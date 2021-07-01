@@ -7,6 +7,6 @@ import net.minecraft.tileentity.TileEntityType;
 public class PA_Skull extends SkullTileEntity {
     @Override
     public TileEntityType<?> getType() {
-        return PA_TileEntities.SKIZZIK_SKULL.get();
+        return PA_TileEntities.PA_SKULL.get();
     }
 }
