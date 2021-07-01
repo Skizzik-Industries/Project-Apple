@@ -19,6 +19,7 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         simpleBlock(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
         //directionalBlock(ModBlocks.SKIZZIK_HEAD.get(), new ModelFile.ExistingModelFile(new ResourceLocation("minecraft:block/skull"), this.models().existingFileHelper));
+
         simpleBlock(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
         simpleBlock(PA_Blocks.CORRUPTED_BLOCK.get());

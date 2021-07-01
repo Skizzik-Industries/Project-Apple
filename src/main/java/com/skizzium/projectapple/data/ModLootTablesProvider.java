@@ -49,11 +49,12 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
-            dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
-            add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SMALL_SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(RandomValueRange.between(1,4)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(ConstantRange.exactly(1))))*/.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.NETHER_STAR)).apply(SetCount.setCount(RandomValueRange.between(1,3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_BONE.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_FLESH.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Blocks.BROKEN_COMMAND_BLOCK.get())).apply(SetCount.setCount(ConstantRange.exactly(1)))));
+            dropSelf(PA_Blocks.SKIZZIK_HEAD.get());
             dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
             dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());
+            dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
+            add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SMALL_SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(RandomValueRange.between(1,4)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.SKIZZIK_HEAD_GEMS.get())).apply(SetCount.setCount(ConstantRange.exactly(1))))*/.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.NETHER_STAR)).apply(SetCount.setCount(RandomValueRange.between(1,3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_BONE.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_FLESH.get())).apply(SetCount.setCount(RandomValueRange.between(5,15)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(PA_Blocks.BROKEN_COMMAND_BLOCK.get())).apply(SetCount.setCount(ConstantRange.exactly(1)))));
 
             dropSelf(PA_Blocks.CANDY_CANE.get());
             dropSelf(PA_Blocks.CANDY_SIGN.get());

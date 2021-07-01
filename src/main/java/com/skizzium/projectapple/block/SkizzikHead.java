@@ -12,7 +12,7 @@ public class SkizzikHead extends PA_SkullBlock {
     private static BlockPattern skizzikPatternBase; */
 
     public SkizzikHead(AbstractBlock.Properties properties) {
-        super(PA_SkullBlock.CustomTypes.SKIZZIK, properties);
+        super(CustomTypes.SKIZZIK, properties);
     }
 
     @Override

@@ -7,7 +7,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.skizzium.projectapple.block.PA_SkullBlock;
 import com.skizzium.projectapple.tileentity.PA_Skull;
-import com.skizzium.projectapple.tileentity.model.SkizzikHeadModel;
 import net.minecraft.block.AbstractSkullBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SkullBlock;
@@ -33,11 +32,11 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class PA_SkullRenderer extends TileEntityRenderer<PA_Skull> {
     private static final Map<SkullBlock.ISkullType, GenericHeadModel> MODEL_BY_TYPE = Util.make(Maps.newHashMap(), (model) -> {
-        SkizzikHeadModel skizzikHead = new SkizzikHeadModel(0, 0, 64, 32);
-        model.put(PA_SkullBlock.CustomTypes.SKIZZIK, skizzikHead);
+        GenericHeadModel genericHead = new GenericHeadModel(0, 0, 32, 32);
+        model.put(PA_SkullBlock.CustomTypes.SKIZZIK, genericHead);
     });
     private static final Map<SkullBlock.ISkullType, ResourceLocation> SKIN_BY_TYPE = Util.make(Maps.newHashMap(), (skin) -> {
-        skin.put(PA_SkullBlock.CustomTypes.SKIZZIK, new ResourceLocation("skizzik:textures/entity/skizzik/skizzik.png"));
+        skin.put(PA_SkullBlock.CustomTypes.SKIZZIK, new ResourceLocation("skizzik:textures/block/skizzik_head.png"));
     });
 
     public PA_SkullRenderer(TileEntityRendererDispatcher dispatcher) {

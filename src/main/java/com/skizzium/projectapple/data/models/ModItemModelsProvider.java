@@ -18,7 +18,9 @@ public class ModItemModelsProvider extends ItemModelProvider {
         withExistingParent("deactivated_command_block", modLoc("block/deactivated_command_block"));
         withExistingParent("broken_command_block", modLoc("block/broken_command_block"));
 
+        withExistingParent("skizzik_head", mcLoc("item/template_skull"));
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
+
         withExistingParent("corrupted_block", modLoc("block/corrupted_block"));
 
         withExistingParent("friendly_skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));

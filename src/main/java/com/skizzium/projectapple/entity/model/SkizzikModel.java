@@ -101,7 +101,7 @@ public class SkizzikModel<T extends Skizzik> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrix, IVertexBuilder buffer, int light, int overlay, float red, float green, float blue, float alpha){
+	public void renderToBuffer(MatrixStack matrix, IVertexBuilder buffer, int light, int overlay, float red, float green, float blue, float alpha) {
 		lowerBody.render(matrix, buffer, light, overlay);
 		upperBody.render(matrix, buffer, light, overlay);
 		mainHead.render(matrix, buffer, light, overlay);
