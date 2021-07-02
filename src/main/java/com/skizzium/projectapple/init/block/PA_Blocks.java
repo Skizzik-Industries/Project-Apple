@@ -1,6 +1,5 @@
 package com.skizzium.projectapple.init.block;
 
-import com.google.common.collect.Maps;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.*;
 import com.skizzium.projectapple.init.PA_Registry;
@@ -11,17 +10,11 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.entity.model.GenericHeadModel;
-import net.minecraft.client.renderer.entity.model.HumanoidHeadModel;
-import net.minecraft.client.renderer.tileentity.SkullTileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.model.DragonHeadModel;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
@@ -30,8 +23,6 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import java.lang.reflect.Field;
-import java.util.Map;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
