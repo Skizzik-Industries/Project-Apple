@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "experience": 15,
+  "experience": 1.5,
   "cookingtime": 350,
   "ingredient": {
     "item": "skizzik:raw_skizzik_flesh"

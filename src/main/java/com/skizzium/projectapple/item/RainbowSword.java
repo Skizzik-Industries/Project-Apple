@@ -2,14 +2,22 @@ package com.skizzium.projectapple.item;
 
 import com.skizzium.projectapple.init.PA_Tags;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class RainbowSword extends SwordItem {
     public RainbowSword(IItemTier iitemtier, int p_i48460_2_, float p_i48460_3_, Properties properties) {
@@ -18,6 +26,12 @@ public class RainbowSword extends SwordItem {
 
     public float getDamage() {
         return 9.5F;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack item, @Nullable World world, List<ITextComponent> text, ITooltipFlag tooltip) {
+        text.add(new StringTextComponent("Right-Click on a block to teleport it to another dimension."));
     }
 
     public ActionResultType useOn(ItemUseContext context) {

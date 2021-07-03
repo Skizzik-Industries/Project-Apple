@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "minecraft:wither_skull"
+    }
+  ],
+  "result": "skizzik:skizzik_head",
+  "experience": 2,
+  "cookingtime": 350
+}

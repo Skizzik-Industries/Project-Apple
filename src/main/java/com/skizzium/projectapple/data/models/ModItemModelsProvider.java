@@ -18,7 +18,10 @@ public class ModItemModelsProvider extends ItemModelProvider {
         withExistingParent("deactivated_command_block", modLoc("block/deactivated_command_block"));
         withExistingParent("broken_command_block", modLoc("block/broken_command_block"));
 
+        withExistingParent("small_skizzik_head", mcLoc("item/template_skull"));
+        withExistingParent("small_skizzik_head_with_gems", mcLoc("item/template_skull"));
         withExistingParent("skizzik_head", mcLoc("item/template_skull"));
+        withExistingParent("skizzik_head_with_gems", mcLoc("item/template_skull"));
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
 
         withExistingParent("corrupted_block", modLoc("block/corrupted_block"));
@@ -73,6 +76,7 @@ public class ModItemModelsProvider extends ItemModelProvider {
         withExistingParent("pink_gem_block", modLoc("block/pink_gem_block"));
 
         ModelFile generated = getExistingFile(mcLoc("item/generated"));
+        ModelFile handheld = getExistingFile(mcLoc("item/handheld"));
 
         defaultBuilder(generated, "skizzik_bone");
         defaultBuilder(generated, "raw_skizzik_flesh");
@@ -105,11 +109,11 @@ public class ModItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "candianite_nugget");
         defaultBuilder(generated, "candianite_ingot");
 
-        defaultBuilder(generated, "candianite_sword");
-        defaultBuilder(generated, "candianite_pickaxe");
-        defaultBuilder(generated, "candianite_axe");
-        defaultBuilder(generated, "candianite_shovel");
-        defaultBuilder(generated, "candianite_hoe");
+        defaultBuilder(handheld, "candianite_sword");
+        defaultBuilder(handheld, "candianite_pickaxe");
+        defaultBuilder(handheld, "candianite_axe");
+        defaultBuilder(handheld, "candianite_shovel");
+        defaultBuilder(handheld, "candianite_hoe");
 
         defaultBuilder(generated, "candianite_horse_armor");
         defaultBuilder(generated, "candianite_helmet");
@@ -120,7 +124,7 @@ public class ModItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "platinum_nugget");
         defaultBuilder(generated, "platinum_ingot");
 
-        defaultBuilder(generated, "rainbow_sword");
+        defaultBuilder(handheld, "rainbow_sword");
 
         defaultBuilder(generated, "rainbow_gem");
         defaultBuilder(generated, "black_gem");

@@ -16,6 +16,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         copy(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS, PA_Tags.Items.SKIZZIK_COMMAND_BLOCKS);
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get());
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD.get());
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.PANCAKES.get());
         tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.SYRUP_PANCAKES.get());

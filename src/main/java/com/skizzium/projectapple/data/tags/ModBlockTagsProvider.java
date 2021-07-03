@@ -16,6 +16,18 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
+        tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
+
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_HEAD.get());
+        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_WALL_HEAD.get());
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
+        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_WALL_HEAD_WITH_GEMS.get());
+
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_HEAD.get());
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_WALL_HEAD.get());
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.COMMAND_BLOCK.get());
         tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.COMMAND_BLOCK.get());
@@ -26,6 +38,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.DRAGON_EGG);
         tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.RAINBOW_GEM_BLOCK.get());
         tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.RAINBOW_ORE.get());
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).addTag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE);
         tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR);

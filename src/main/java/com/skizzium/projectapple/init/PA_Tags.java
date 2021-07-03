@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public final class PA_Tags {
     public static final class Blocks {
         public static final ITag.INamedTag<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
+        public static final ITag.INamedTag<Block> SKIZZIK_HEADS = forge("skizzik_heads");
 
         public static final ITag.INamedTag<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
         public static final ITag.INamedTag<Block> CORRUPTION_IMMUNE = forge("corruption_immune");
@@ -82,6 +83,7 @@ public final class PA_Tags {
     }
     public static final class Items {
         public static final ITag.INamedTag<Item> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
+        public static final ITag.INamedTag<Item> SKIZZIK_HEADS = forge("skizzik_heads");
 
         public static final ITag.INamedTag<Item> SKIZZIK_PANCAKES = forge("skizzik_pancakes");
         public static final ITag.INamedTag<Item> SKIZZIK_CHOCOLATE = forge("skizzik_chocolate");
