@@ -36,6 +36,7 @@ public class MainSkizzikTab extends ItemGroup {
         PA_Entities.FRIENDLY_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         PA_Entities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
+        PA_Entities.SKIZZO_SPAWN_EGG.asItem().fillItemCategory(this, items);
         PA_Entities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         PA_Entities.KABOOM_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         //ModEntities.MINIGUN_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);

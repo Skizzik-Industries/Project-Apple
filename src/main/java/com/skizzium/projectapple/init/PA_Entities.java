@@ -35,6 +35,7 @@ public class PA_Entities {
     //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<Skizzo> SKIZZO = registerEntity("skizzo", EntityType.Builder.of(Skizzo::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10));
     public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(2.5F, 4F).clientTrackingRange(10));
 
     public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
@@ -45,6 +46,7 @@ public class PA_Entities {
     //public static final Item MINIGUN_SKIZZIE_SPAWN_EGG = new SpawnEggItem(ModEntities.MINIGUN_SKIZZIE, 0XB40A1A, 0X4F0000, (new Item.Properties()).tab(Register.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:minigun_skizzie_spawn_egg");
     public static final Item CORRUPTED_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", TextFormatting.OBFUSCATED)).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
     public static final Item WITCH_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.WITCH_SKIZZIE, 0XB40A1A, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:witch_skizzie_spawn_egg");
+    public static final Item SKIZZO_SPAWN_EGG = new SpawnEggItem(PA_Entities.SKIZZO, 0XFF0000, 0X330000, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzo_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(ProjectApple.MOD_ID, name);
@@ -63,6 +65,7 @@ public class PA_Entities {
         GlobalEntityTypeAttributes.put(CORRUPTED_SKIZZIE, CorruptedSkizzie.buildAttributes().build());
         GlobalEntityTypeAttributes.put(WITCH_SKIZZIE, WitchSkizzie.buildAttributes().build());
 
+        GlobalEntityTypeAttributes.put(SKIZZO, Skizzo.buildAttributes().build());
         GlobalEntityTypeAttributes.put(SKIZZIK, Skizzik.buildAttributes().build());
     }
 
@@ -78,6 +81,7 @@ public class PA_Entities {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZO, SkizzoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK, SkizzikRenderer::new);
     }
 

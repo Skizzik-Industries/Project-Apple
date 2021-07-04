@@ -1,6 +1,8 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.PA_Entities;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;
@@ -13,6 +15,8 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.PotionEntity;
+import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
@@ -24,10 +28,10 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 
-public class Skizzie extends MonsterEntity {
-    public Skizzie(EntityType<? extends Skizzie> entity, World world) {
+public class Skizzo extends MonsterEntity {
+    public Skizzo(EntityType<? extends Skizzo> entity, World world) {
         super(entity, world);
-        this.xpReward = 7;
+        this.xpReward = 25;
         this.moveControl = new FlyingMovementController(this, 10, true);
         this.navigation = new FlyingPathNavigator(this, this.getCommandSenderWorld());
         this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
@@ -35,17 +39,13 @@ public class Skizzie extends MonsterEntity {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntitySize size) {
-        return 1.30F;
+        return 1.75F;
     }
 
     @Override
     public boolean canBeLeashed(PlayerEntity player) {
         return false;
     }
-
-    //protected SoundEvent getAmbientSound() {
-    //    return SoundEvents.PIG_AMBIENT;
-    //}
 
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.GENERIC_HURT;
@@ -82,7 +82,10 @@ public class Skizzie extends MonsterEntity {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source == DamageSource.DRAGON_BREATH ||
+        if (source == DamageSource.ANVIL ||
+                source.getDirectEntity() instanceof ArrowEntity ||
+                source == DamageSource.CACTUS ||
+                source == DamageSource.DRAGON_BREATH ||
                 source == DamageSource.FALL ||
                 source.isExplosion() ||
                 source == DamageSource.LIGHTNING_BOLT ||
@@ -90,8 +93,10 @@ public class Skizzie extends MonsterEntity {
                 source == DamageSource.IN_FIRE ||
                 source == DamageSource.LAVA ||
                 source == DamageSource.ON_FIRE ||
-                source == DamageSource.WITHER ||
-                source.getDirectEntity() instanceof WitherSkullEntity) {
+                source.getDirectEntity() instanceof PotionEntity ||
+                source == DamageSource.SWEET_BERRY_BUSH ||
+                source.getDirectEntity() instanceof TridentEntity ||
+                source == DamageSource.WITHER) {
             return false;
         }
         return super.hurt(source, amount);
@@ -99,12 +104,11 @@ public class Skizzie extends MonsterEntity {
 
     public static AttributeModifierMap.MutableAttribute buildAttributes() {
         return MonsterEntity.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 8.0D)
-                .add(Attributes.MAX_HEALTH, 20.0D)
-                .add(Attributes.ARMOR, 3.0D)
+                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.FLYING_SPEED, 0.3D);
+                .add(Attributes.MOVEMENT_SPEED, 0.2D)
+                .add(Attributes.FLYING_SPEED, 0.2D);
     }
 
     protected void registerGoals() {
@@ -123,26 +127,23 @@ public class Skizzie extends MonsterEntity {
     public void baseTick() {
         super.baseTick();
         this.setNoGravity(true);
-    }
 
-    @Override
-    public void die(DamageSource source) {
-        super.die(source);
-
-        World world = this.getCommandSenderWorld();
-        double x = this.getX();
+        /* double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
+        World world = this.getCommandSenderWorld();
 
-        LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
-        lightning.moveTo(Vector3d.atCenterOf(new BlockPos(x, y, z)));
-        world.addFreshEntity(lightning);
+        BlockPos[] blockPositions = {new BlockPos(x, y, z), new BlockPos(x + 1, y, z), new BlockPos(x - 1, y, z), new BlockPos(x, y, z + 1), new BlockPos(x, y, z - 1), new BlockPos(x + 1, y, z + 1), new BlockPos(x + 1, y, z - 1), new BlockPos(x - 1, y, z + 1), new BlockPos(x - 1, y, z - 1)};
+        for (BlockPos pos : blockPositions) {
+            Block blockBelow = world.getBlockState(pos.below()).getBlock();
+            if (blockBelow != Blocks.FIRE &&
+                blockBelow != Blocks.AIR &&
+                blockBelow != Blocks.CAVE_AIR &&
+                blockBelow != Blocks.VOID_AIR) {
+                world.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
+            }
+        } */
     }
-
-    /* @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
-
-    } */
 
     @Override
     public void playerTouch(PlayerEntity player) {
@@ -166,5 +167,19 @@ public class Skizzie extends MonsterEntity {
                 player.setSecondsOnFire(10);
             }
         }
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+
+        World world = this.getCommandSenderWorld();
+        double x = this.getX();
+        double y = this.getY();
+        double z = this.getZ();
+
+        LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
+        lightning.moveTo(Vector3d.atCenterOf(new BlockPos(x, y, z)));
+        world.addFreshEntity(lightning);
     }
 }

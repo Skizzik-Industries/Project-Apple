@@ -39,6 +39,8 @@
   "item.skizzik.corrupted_skizzie_spawn_egg": "Corrupted Skizzie Spawn Egg",
   "item.skizzik.witch_skizzie_spawn_egg": "Witch Skizzie Spawn Egg",
 
+  "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
+
   "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
   "entity.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie",
 
@@ -48,6 +50,7 @@
   "entity.skizzik.corrupted_skizzie": "§kCorrupted Skizzie",
   "entity.skizzik.witch_skizzie": "Witch Skizzie",
 
+  "entity.skizzik.skizzo": "Skizzo",
   "entity.skizzik.skizzik": "Skizzik",
 
   "item.skizzik.salt": "Salt",
