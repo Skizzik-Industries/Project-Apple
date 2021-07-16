@@ -50,8 +50,11 @@
   "entity.skizzik.corrupted_skizzie": "§kCorrupted Skizzie",
   "entity.skizzik.witch_skizzie": "Witch Skizzie",
 
+  "entity.skizzik.skizzik_skull": "Skizzik Skull",
   "entity.skizzik.skizzo": "Skizzo",
   "entity.skizzik.skizzik": "Skizzik",
+
+  "death.attack.skizzikSkull": "%1$s was shot by a skull from %2$s",
 
   "item.skizzik.salt": "Salt",
   "item.skizzik.butter": "Butter",

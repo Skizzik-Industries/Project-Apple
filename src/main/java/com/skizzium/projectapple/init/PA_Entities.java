@@ -36,6 +36,7 @@ public class PA_Entities {
     public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<Skizzo> SKIZZO = registerEntity("skizzo", EntityType.Builder.of(Skizzo::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10));
+    public static final EntityType<SkizzikSkull> SKIZZIK_SKULL = registerEntity("skizzik_skull", EntityType.Builder.<SkizzikSkull>of(SkizzikSkull::new, EntityClassification.MISC).setUpdateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4));
     public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(2.5F, 4F).clientTrackingRange(10));
 
     public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
@@ -81,6 +82,7 @@ public class PA_Entities {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK_SKULL, SkizzikSkullRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZO, SkizzoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK, SkizzikRenderer::new);
     }
