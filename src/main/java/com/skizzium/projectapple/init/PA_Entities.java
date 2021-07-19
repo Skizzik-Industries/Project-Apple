@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.SkullTileEntityRenderer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SpawnEggItem;
@@ -28,16 +29,16 @@ public class PA_Entities {
     public static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = (entity) -> entity.getMobType() != CreatureAttribute.UNDEAD && entity.attackable();
 
     public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
-    public static final EntityType<FriendlySkizzie> FRIENDLY_SKIZZIE = registerEntity("friendly_skizzie", EntityType.Builder.of(FriendlySkizzie::new, EntityClassification.CREATURE).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<FriendlyWitchSkizzie> FRIENDLY_WITCH_SKIZZIE = registerEntity("friendly_witch_skizzie", EntityType.Builder.of(FriendlyWitchSkizzie::new, EntityClassification.CREATURE).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<Skizzo> SKIZZO = registerEntity("skizzo", EntityType.Builder.of(Skizzo::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10));
-    public static final EntityType<SkizzikSkull> SKIZZIK_SKULL = registerEntity("skizzik_skull", EntityType.Builder.<SkizzikSkull>of(SkizzikSkull::new, EntityClassification.MISC).setUpdateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4));
-    public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune().sized(2.5F, 4F).clientTrackingRange(10));
+    public static final EntityType<FriendlySkizzie> FRIENDLY_SKIZZIE = registerEntity("friendly_skizzie", EntityType.Builder.of(FriendlySkizzie::new, EntityClassification.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<FriendlyWitchSkizzie> FRIENDLY_WITCH_SKIZZIE = registerEntity("friendly_witch_skizzie", EntityType.Builder.of(FriendlyWitchSkizzie::new, EntityClassification.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    //public static final EntityType<MinigunSkizzie> MINIGUN_SKIZZIE = registerEntity("minigun_skizzie", EntityType.Builder.of(MinigunSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<Skizzo> SKIZZO = registerEntity("skizzo", EntityType.Builder.of(Skizzo::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10));
+    public static final EntityType<SkizzikSkull> SKIZZIK_SKULL = registerEntity("skizzik_skull", EntityType.Builder.<SkizzikSkull>of(SkizzikSkull::new, EntityClassification.MISC).updateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4));
+    public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, EntityClassification.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(2.5F, 4F).clientTrackingRange(10));
 
     public static final Item CANDY_PIG_SPAWN_EGG = new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
     public static final Item FRIENDLY_SKIZZIE_SPAWN_EGG = new SpawnEggItem(PA_Entities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_skizzie_spawn_egg");
@@ -82,8 +83,8 @@ public class PA_Entities {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK_SKULL, SkizzikSkullRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZO, SkizzoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK_SKULL, SkizzikSkullRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PA_Entities.SKIZZIK, SkizzikRenderer::new);
     }
 

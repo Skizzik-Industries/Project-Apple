@@ -2,14 +2,18 @@ package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.PA_Entities;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -17,130 +21,108 @@ import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SkizzikSkull extends DamagingProjectileEntity {
-    private static final DataParameter<Integer> DATA_LEVEL = EntityDataManager.defineId(SkizzikSkull.class, DataSerializers.INT);
+import java.util.List;
 
-    public SkizzikSkull(EntityType<? extends SkizzikSkull> entity, World world) {
-        super(entity, world);
+public class SkizzikSkull extends DamagingProjectileEntity {
+    private static final DataParameter<Boolean> DATA_DANGEROUS = EntityDataManager.defineId(SkizzikSkull.class, DataSerializers.BOOLEAN);
+
+    public SkizzikSkull(EntityType<? extends SkizzikSkull> p_i50147_1_, World p_i50147_2_) {
+        super(p_i50147_1_, p_i50147_2_);
     }
 
-    public SkizzikSkull(World world, LivingEntity entity, float power, double damage, int knockback) {
-        super(PA_Entities.SKIZZIK_SKULL, entity, power, damage, knockback, world);
+    public SkizzikSkull(World p_i1794_1_, LivingEntity p_i1794_2_, double p_i1794_3_, double p_i1794_5_, double p_i1794_7_) {
+        super(PA_Entities.SKIZZIK_SKULL, p_i1794_2_, p_i1794_3_, p_i1794_5_, p_i1794_7_, p_i1794_1_);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public SkizzikSkull(World world, double d0, double d1, double d2, double d3, double d4, double d5) {
-        super(PA_Entities.SKIZZIK_SKULL, d0, d1, d2, d3, d4, d5, world);
+    public SkizzikSkull(World p_i1795_1_, double p_i1795_2_, double p_i1795_4_, double p_i1795_6_, double p_i1795_8_, double p_i1795_10_, double p_i1795_12_) {
+        super(PA_Entities.SKIZZIK_SKULL, p_i1795_2_, p_i1795_4_, p_i1795_6_, p_i1795_8_, p_i1795_10_, p_i1795_12_, p_i1795_1_);
     }
 
-    /*@Override
     protected float getInertia() {
-        int level = this.getLevel();
+        return this.isDangerous() ? 0.73F : super.getInertia();
+    }
 
-        if (level == 1) {
-            return super.getInertia();
-        }
-        else if (level == 2) {
-            return 0.73F;
-        }
-        else {
-            return 0.50F;
-        }
-    } */
-
-    @Override
     public boolean isOnFire() {
         return false;
     }
 
-    @Override
-    public float getBlockExplosionResistance(Explosion explosion, IBlockReader world, BlockPos pos, BlockState state, FluidState fluidState, float f1) {
-        return /* this.getLevel() >= 2 && state.canEntityDestroy(world, pos, this) ? Math.min(0.8F, f1) :*/ f1;
+    public float getBlockExplosionResistance(Explosion p_180428_1_, IBlockReader p_180428_2_, BlockPos p_180428_3_, BlockState p_180428_4_, FluidState p_180428_5_, float p_180428_6_) {
+        return this.isDangerous() && p_180428_4_.canEntityDestroy(p_180428_2_, p_180428_3_, this) ? Math.min(0.8F, p_180428_6_) : p_180428_6_;
     }
 
-    public static DamageSource skizzikSkull(SkizzikSkull skull, Entity entity) {
-        return (new IndirectEntityDamageSource("skizzikSkull", skull, entity)).setProjectile();
-    }
-
-    @Override
-    protected void onHitEntity(EntityRayTraceResult entity) {
-        super.onHitEntity(entity);
+    protected void onHitEntity(EntityRayTraceResult p_213868_1_) {
+        super.onHitEntity(p_213868_1_);
         if (!this.level.isClientSide) {
-            Entity target = entity.getEntity();
-            Entity source = this.getOwner();
-            boolean hurt;
-            if (source instanceof LivingEntity) {
-                LivingEntity livingentity = (LivingEntity)source;
-                hurt = /*this.getLevel() == 1 ? target.hurt(skizzikSkull(this, livingentity), 8.0F)
-                        : this.getLevel() == 2 ? target.hurt(skizzikSkull(this, livingentity), 10.0F)
-                        :*/ target.hurt(skizzikSkull(this, livingentity), 15.0F);
-                if (hurt) {
-                    if (target.isAlive()) {
-                        this.doEnchantDamageEffects(livingentity, target);
-                    }
-                    else {
+            Entity entity = p_213868_1_.getEntity();
+            Entity entity1 = this.getOwner();
+            boolean flag;
+            if (entity1 instanceof LivingEntity) {
+                LivingEntity livingentity = (LivingEntity)entity1;
+                flag = entity.hurt(DamageSource.indirectMagic(this, livingentity), 8.0F);
+                if (flag) {
+                    if (entity.isAlive()) {
+                        this.doEnchantDamageEffects(livingentity, entity);
+                    } else {
                         livingentity.heal(5.0F);
                     }
                 }
-            }
-            else {
-                hurt = target.hurt(DamageSource.MAGIC, 5.0F);
+            } else {
+                flag = entity.hurt(DamageSource.MAGIC, 5.0F);
             }
 
-            if (hurt && target instanceof LivingEntity) {
-                //if (this.getLevel() >= 2) {
-                //    ((LivingEntity)target).addEffect(new EffectInstance(Effects.WITHER, 400, 2));
-                //}
-                //else {
-                    ((LivingEntity)target).addEffect(new EffectInstance(Effects.WITHER, 800, 1));
-                //}
+            if (flag && entity instanceof LivingEntity) {
+                int i = 0;
+                if (this.level.getDifficulty() == Difficulty.NORMAL) {
+                    i = 10;
+                } else if (this.level.getDifficulty() == Difficulty.HARD) {
+                    i = 40;
+                }
 
-                if (!target.fireImmune()) {
-                    target.setRemainingFireTicks(15);
+                if (i > 0) {
+                    ((LivingEntity)entity).addEffect(new EffectInstance(Effects.WITHER, 20 * i, 1));
                 }
             }
+
         }
     }
 
-    @Override
-    protected void onHit(RayTraceResult entity) {
-        super.onHit(entity);
+    protected void onHit(RayTraceResult p_70227_1_) {
+        super.onHit(p_70227_1_);
         if (!this.level.isClientSide) {
-            Explosion.Mode explosion = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
+            Explosion.Mode explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion$mode);
             this.remove();
         }
 
     }
 
-    @Override
     public boolean isPickable() {
         return false;
     }
 
-    @Override
-    public boolean hurt(DamageSource source, float damage) {
+    public boolean hurt(DamageSource p_70097_1_, float p_70097_2_) {
         return false;
     }
 
-    /* @Override
     protected void defineSynchedData() {
-        this.entityData.define(DATA_LEVEL, 1);
+        this.entityData.define(DATA_DANGEROUS, false);
     }
 
-    public int getLevel() {
-        return this.entityData.get(DATA_LEVEL);
+    public boolean isDangerous() {
+        return this.entityData.get(DATA_DANGEROUS);
     }
 
-    public void setLevel(int level) {
-        this.entityData.set(DATA_LEVEL, level);
-    } */
+    public void setDangerous(boolean p_82343_1_) {
+        this.entityData.set(DATA_DANGEROUS, p_82343_1_);
+    }
 
     protected boolean shouldBurn() {
         return false;
