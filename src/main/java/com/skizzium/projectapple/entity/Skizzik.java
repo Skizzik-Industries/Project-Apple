@@ -6,7 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,44 +17,57 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
-public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRangedAttackMob */ {
+import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
+import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
+
+public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRangedAttackMob {
     private static final DataParameter<Integer> DATA_TARGET_A = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_B = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_C = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_D = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_E = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
+
     private static final List<DataParameter<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
     private static final DataParameter<Integer> DATA_ID_STAGE = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
+
     private final float[] xRotHeads = new float[4];
     private final float[] yRotHeads = new float[4];
+
     private final float[] xRotHeads1 = new float[4];
     private final float[] yRotHeads1 = new float[4];
+
     private final int[] nextHeadUpdate = new int[4];
     private final int[] idleHeadUpdates = new int[4];
+
     private int destroyBlocksTick;
     private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
     private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.LIVING_ENTITY_SELECTOR);
 
     public Skizzik(EntityType<? extends Skizzik> entity, World world) {
         super(entity, world);
+        this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
     }
 
@@ -96,7 +111,17 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
     @Override
     public void setCustomName(@Nullable ITextComponent name) {
         super.setCustomName(name);
-        this.bossBar.setName(this.getDisplayName());
+
+        int stage = this.getStage();
+        if (stage == 0) {
+            this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+        }
+        else if (stage >= 1 && stage <= 5) {
+            this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + stage));
+        }
+        else if (stage == 6) {
+            this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
+        }
     }
 
     @Override
@@ -129,17 +154,18 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         return false;
     }
 
-    public static boolean canDestroy(BlockState state) {
-        return !state.isAir() && !BlockTags.WITHER_IMMUNE.contains(state.getBlock());
-    }
-
     @Override
     public void makeStuckInBlock(BlockState state, Vector3d vector) {
     }
 
+    public static boolean canDestroy(BlockState state) {
+        return !state.isAir() && !BlockTags.WITHER_IMMUNE.contains(state.getBlock());
+    }
+
     public static AttributeModifierMap.MutableAttribute buildAttributes() {
+        //this.getAttribute(Attributes.ARMOR)
         return MonsterEntity.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 1000.0D)
+                .add(Attributes.MAX_HEALTH, 1021.0D)
                 .add(Attributes.ARMOR, 8.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
@@ -154,6 +180,19 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         this.entityData.set(DATA_ID_STAGE, stage);
     }
 
+    public int getAlternativeTarget(int head) {
+        return this.entityData.get(DATA_TARGETS.get(head));
+    }
+
+    public void setAlternativeTarget(int head, int target) {
+        this.entityData.set(DATA_TARGETS.get(head), target);
+    }
+
+    @Override
+    public boolean canBeAffected(EffectInstance effect) {
+        return false;
+    }
+
     @OnlyIn(Dist.CLIENT)
     public float getHeadYRot(int head) {
         return this.yRotHeads[head];
@@ -164,28 +203,34 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         return this.xRotHeads[head];
     }
 
-    /* private double getHeadX(int value) {
-        if (value <= 0) {
+    private double getHeadX(int head) {
+        if (head <= 0) {
             return this.getX();
         }
         else {
-            float f = (this.yBodyRot + (float)(180 * (value - 1))) * ((float)Math.PI / 180F);
+            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
             float f1 = MathHelper.cos(f);
-            return this.getX() + (double)f1 * 1.3D;
+
+            return head <= 2 ? this.getX() + (double)f1 * 1.3D :
+                    head == 3 ? this.getX() + f1 * 1.2D :
+                    this.getX() + (double)f1 * 0.8D;
         }
     }
 
-    private double getHeadY(int value) {
-        return value <= 0 ? this.getY() + 3.0D : this.getY() + 2.2D;
+    private double getHeadY(int head) {
+        return head == 0 ? this.getY() + 2.5D :
+                head == 1 || head == 2 ? this.getY() + 1.8 :
+                head == 3 ? this.getY() + 3.3 :
+                this.getY() + 3.4;
     }
 
-    private double getHeadZ(int value) {
-        if (value <= 0) {
-            return z;
+    private double getHeadZ(int head) {
+        if (head <= 0) {
+            return this.getZ();
         } else {
-            float f = (this.yBodyRot + (float)(180 * (value - 1))) * ((float)Math.PI / 180F);
+            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
             float f1 = MathHelper.sin(f);
-            return z + (double)f1 * 1.3D;
+            return this.getZ() + (double)f1 * 1.3D;
         }
     }
 
@@ -200,17 +245,19 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         }
 
         return f1 + f;
-    } */
+    }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
+
+        this.entityData.define(DATA_ID_STAGE, 0);
+
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
         this.entityData.define(DATA_TARGET_C, 0);
         this.entityData.define(DATA_TARGET_D, 0);
         this.entityData.define(DATA_TARGET_E, 0);
-        this.entityData.define(DATA_ID_STAGE, 0);
     }
 
     @Override
@@ -229,45 +276,45 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
 
     }
 
-    /* @Override
+    @Override
     public void performRangedAttack(LivingEntity entity, float f) {
         this.performRangedAttack(0, entity);
     }
 
-    private void performRangedAttack(int i, LivingEntity entity) {
-        this.performRangedAttack(i, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), i == 0 && this.random.nextFloat() < 0.001F);
+    private void performRangedAttack(int head, LivingEntity entity) {
+    /* SKIZZIK SKULL LEVEL! */    this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), 1);
     }
 
-    private void performRangedAttack(int i0, double d6, double d7, double d8, boolean bool) {
+    private void performRangedAttack(int head, double x, double y, double z, int level) {
         if (!this.isSilent()) {
             this.level.levelEvent(null, 1024, this.blockPosition(), 0);
         }
 
-        double d0 = this.getHeadX(i0);
-        double d1 = this.getHeadY(i0);
-        double d2 = this.getHeadZ(i0);
-        double d3 = d6 - d0;
-        double d4 = d7 - d1;
-        double d5 = d8 - d2;
-        WitherSkullEntity skull = new WitherSkullEntity(this.level, this, d3, d4, d5);
-        skull.setOwner(this);
-        if (bool) {
-            skull.setDangerous(true);
-        }
+        double headX = this.getHeadX(head);
+        double headY = this.getHeadY(head);
+        double headZ = this.getHeadZ(head);
 
-        skull.setPosRaw(d0, d1, d2);
+        double targetX = x - headX;
+        double targetY = y - headY;
+        double targetZ = z - headZ;
+
+        SkizzikSkull skull = new SkizzikSkull(this.level, this, targetX, targetY, targetZ);
+        skull.setOwner(this);
+        skull.setLevel(level);
+
+        skull.setPosRaw(headX, headY, headZ);
         this.level.addFreshEntity(skull);
     }
 
     @Override
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, ModEntities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, PA_Entities.LIVING_ENTITY_SELECTOR));
         this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 20.0F));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-    } */
+    }
 
     @Override
     public void baseTick() {
@@ -277,6 +324,65 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         if (world instanceof ServerWorld) {
             ((ServerWorld) world).setDayTime(18000);
         }
+
+        float health = this.getHealth();
+        int currentStage = this.getStage();
+        int newStage = health > 1020 ? 0 :
+                        health > 870 ? 1 :
+                        health > 670 ? 2 :
+                        health > 470 ? 3 :
+                        health > 270 ? 4 :
+                        health > 20 ? 5 :
+                        6;
+
+        // The sleeping stage's boss bar name is set separately instead of together with the other boss bars.
+        // This is because otherwise this boss bar will appear as just "Skizzik" until the entity is named with a name tag
+        // or it's health is changed to something else and then back to 1021
+        if (health == 1021) {
+            if (this.hasCustomName()) {
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+            }
+            else {
+                this.bossBar.setName(new StringTextComponent("Skizzik - Sleeping"));
+            }
+        }
+
+        if (currentStage != newStage) {
+            if (currentStage == 0 && newStage == 1) {
+                this.setHealth(1020);
+            }
+
+            //if (newStage == 1) {
+
+            //}
+
+            if (world instanceof ServerWorld) {
+                PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
+            }
+
+            world.addFreshEntity(EntityType.LIGHTNING_BOLT.create(world));
+
+            //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
+
+            if (this.hasCustomName()) {
+                if (newStage >= 1 && newStage <= 5) {
+                    this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + newStage));
+                }
+                else if (newStage == 6) {
+                    this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
+                }
+            }
+            else {
+                if (newStage >= 1 && newStage <= 5) {
+                    this.bossBar.setName(new StringTextComponent("Skizzik - Stage " + newStage));
+                }
+                else if (newStage == 6) {
+                    this.bossBar.setName(new StringTextComponent("Skizzik - FINISH HIM!"));
+                }
+            }
+
+            this.setStage(newStage);
+        }
     }
 
     @Override
@@ -285,6 +391,7 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         double y = this.getY();
         double z = this.getZ();
         World world = this.getCommandSenderWorld();
+
         if (world instanceof ServerWorld) {
             LightningBoltEntity[] lightnings = {EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world)};
             
@@ -321,40 +428,23 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
         super.die(source);
     }
 
-    /*
-    public int getAlternativeTarget(int p_82203_1_) {
-        return this.entityData.get(DATA_TARGETS.get(p_82203_1_));
-    }
-
-    public void setAlternativeTarget(int p_82211_1_, int p_82211_2_) {
-        this.entityData.set(DATA_TARGETS.get(p_82211_1_), p_82211_2_);
-    }
-
-    public boolean isPowered() {
-        return this.getHealth() <= this.getMaxHealth() / 2.0F;
-    }
-
-    public boolean canBeAffected(EffectInstance effect) {
-        return effect.getEffect() == Effects.WITHER ? false : super.canBeAffected(effect);
-    } *
-
     @Override
     public void aiStep() {
         Vector3d vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
             if (entity != null) {
-                double d0 = vector.y;
-                if (this.getY() < entity.getY() || !this.isPowered() && this.getY() < entity.getY() + 5.0D) {
-                    d0 = Math.max(0.0D, d0);
-                    d0 = d0 + (0.3D - d0 * (double)0.6F);
+                double vectorY = vector.y;
+                if (this.getY() < entity.getY()) {
+                    vectorY = Math.max(0.0D, vectorY);
+                    vectorY = vectorY + (0.3D - vectorY * (double)0.6F);
                 }
 
-                vector = new Vector3d(vector.x, d0, vector.z);
-                Vector3d vector1 = new Vector3d(entity.getX() - x, 0.0D, entity.getZ() - z);
+                vector = new Vector3d(vector.x, vectorY, vector.z);
+                Vector3d vector1 = new Vector3d(entity.getX() - this.getX(), 0.0D, entity.getZ() - this.getZ());
                 if (getHorizontalDistanceSqr(vector1) > 9.0D) {
-                    Vector3d vector3d2 = vector1.normalize();
-                    vector = vector.add(vector3d2.x * 0.3D - vector.x * 0.6D, 0.0D, vector3d2.z * 0.3D - vector.z * 0.6D);
+                    Vector3d vector2 = vector1.normalize();
+                    vector = vector.add(vector2.x * 0.3D - vector.x * 0.6D, 0.0D, vector2.z * 0.3D - vector.z * 0.6D);
                 }
             }
         }
@@ -366,12 +456,12 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
 
         super.aiStep();
 
-        for(int i = 0; i < 2; ++i) {
+        for(int i = 0; i < 4; ++i) {
             this.yRotHeads1[i] = this.yRotHeads[i];
             this.xRotHeads1[i] = this.xRotHeads[i];
         }
 
-        for(int j = 0; j < 2; ++j) {
+        for(int j = 0; j < 4; ++j) {
             int k = this.getAlternativeTarget(j + 1);
             Entity entity1 = null;
             if (k > 0) {
@@ -405,52 +495,53 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-        for(int i = 1; i < 3; ++i) {
-            if (this.tickCount >= this.nextHeadUpdate[i - 1]) {
-                this.nextHeadUpdate[i - 1] = this.tickCount + 10 + this.random.nextInt(10);
-                if (this.level.getDifficulty() == Difficulty.NORMAL || this.level.getDifficulty() == Difficulty.HARD) {
-                    int j3 = i - 1;
-                    int k3 = this.idleHeadUpdates[i - 1];
-                    this.idleHeadUpdates[j3] = this.idleHeadUpdates[i - 1] + 1;
-                    if (k3 > 15) {
-                        double d0 = MathHelper.nextDouble(this.random, x - 10.0D, x + 10.0D);
-                        double d1 = MathHelper.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
-                        double d2 = MathHelper.nextDouble(this.random, z - 10.0D, z + 10.0D);
-                        this.performRangedAttack(i + 1, d0, d1, d2, true);
-                        this.idleHeadUpdates[i - 1] = 0;
-                    }
+        for(int headIndex = 1; headIndex < 5; ++headIndex) {
+            if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
+                this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
+                int head = headIndex - 1;
+                int idleHeadUpdate = this.idleHeadUpdates[headIndex - 1];
+                this.idleHeadUpdates[head] = this.idleHeadUpdates[headIndex - 1] + 1;
+
+                if (idleHeadUpdate > 15) {
+                    double x = MathHelper.nextDouble(this.random, this.getX() - 10.0D, this.getX() + 10.0D);
+                    double y = MathHelper.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
+                    double z = MathHelper.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
+
+                    /* SKIZZIK SKULL LEVEL! */ this.performRangedAttack(headIndex + 1, x, y, z, 1);
+                    this.idleHeadUpdates[headIndex - 1] = 0;
                 }
 
-                int k1 = this.getAlternativeTarget(i);
-                if (k1 > 0) {
-                    Entity target = this.level.getEntity(k1);
+                int alternativeTarget = this.getAlternativeTarget(headIndex);
+
+                if (alternativeTarget > 0) {
+                    Entity target = this.level.getEntity(alternativeTarget);
                     if (target != null && target.isAlive() && !(this.distanceToSqr(target) > 900.0D) && this.canSee(target)) {
                         if (target instanceof PlayerEntity && ((PlayerEntity)target).abilities.invulnerable) {
-                            this.setAlternativeTarget(i, 0);
+                            this.setAlternativeTarget(headIndex, 0);
                         }
                         else {
-                            this.performRangedAttack(i + 1, (LivingEntity)target);
-                            this.nextHeadUpdate[i - 1] = this.tickCount + 40 + this.random.nextInt(20);
-                            this.idleHeadUpdates[i - 1] = 0;
+                            /* SKIZZIK SKULL LEVEL! */    this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double)target.getEyeHeight() * 0.5D, target.getZ(), 1);
+                            this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
+                            this.idleHeadUpdates[headIndex - 1] = 0;
                         }
                     }
                     else {
-                        this.setAlternativeTarget(i, 0);
+                        this.setAlternativeTarget(headIndex, 0);
                     }
                 }
                 else {
                     List<LivingEntity> list = this.level.getNearbyEntities(LivingEntity.class, TARGETING_CONDITIONS, this, this.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
 
-                    for(int j2 = 0; j2 < 10 && !list.isEmpty(); ++j2) {
+                    for(int i = 0; i < 10 && !list.isEmpty(); ++i) {
                         LivingEntity target = list.get(this.random.nextInt(list.size()));
                         if (target != this && target.isAlive() && this.canSee(target)) {
                             if (target instanceof PlayerEntity) {
                                 if (!((PlayerEntity)target).abilities.invulnerable) {
-                                    this.setAlternativeTarget(i, target.getId());
+                                    this.setAlternativeTarget(headIndex, target.getId());
                                 }
                             }
                             else {
-                                this.setAlternativeTarget(i, target.getId());
+                                this.setAlternativeTarget(headIndex, target.getId());
                             }
                             break;
                         }
@@ -469,37 +560,63 @@ public class Skizzik extends MonsterEntity /* implements IChargeableMob, IRanged
 
         if (this.destroyBlocksTick > 0) {
             --this.destroyBlocksTick;
-            if (this.destroyBlocksTick == 0 && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
-                int i1 = MathHelper.floor(this.getY());
-                int l1 = MathHelper.floor(x);
-                int i2 = MathHelper.floor(z);
-                boolean flag = false;
+
+            if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
+                int y = MathHelper.floor(this.getY());
+                int x = MathHelper.floor(this.getX());
+                int z = MathHelper.floor(this.getZ());
+                boolean canDestroy = false;
 
                 for(int k2 = -1; k2 <= 1; ++k2) {
                     for(int l2 = -1; l2 <= 1; ++l2) {
                         for(int j = 0; j <= 3; ++j) {
-                            int i3 = l1 + k2;
-                            int k = i1 + j;
-                            int l = i2 + l2;
-                            BlockPos blockpos = new BlockPos(i3, k, l);
-                            BlockState blockstate = this.level.getBlockState(blockpos);
-                            if (blockstate.canEntityDestroy(this.level, blockpos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, blockstate)) {
-                                flag = this.level.destroyBlock(blockpos, true, this) || flag;
+                            int i = x + k2;
+                            int k = y + j;
+                            int l = z + l2;
+                            BlockPos pos = new BlockPos(i, k, l);
+                            BlockState state = this.level.getBlockState(pos);
+                            if (state.canEntityDestroy(this.level, pos, this) && canDestroy(state) && onEntityDestroyBlock(this, pos, state)) {
+                                canDestroy = this.level.destroyBlock(pos, true, this) || canDestroy;
                             }
                         }
                     }
                 }
 
-                if (flag) {
+                if (canDestroy) {
                     this.level.levelEvent(null, 1022, this.blockPosition(), 0);
                 }
             }
         }
 
-        if (this.tickCount % 20 == 0) {
-            this.heal(1.0F);
+        float health = this.getHealth();
+        int stage = this.getStage();
+
+        if (stage == 5 && health < 269) {
+            if (this.tickCount % 20 == 0) {
+                this.heal(1.0F);
+            }
+        }
+        else if (stage == 4 && health < 469.5) {
+            if (this.tickCount % 30 == 0) {
+                this.heal(0.5F);
+            }
+        }
+        else if (stage == 3 && health < 669.5) {
+            if (this.tickCount % 30 == 0) {
+                this.heal(0.5F);
+            }
+        }
+        else if (stage == 2 && health < 869.5) {
+            if (this.tickCount % 40 == 0) {
+                this.heal(0.5F);
+            }
+        }
+        else if (stage == 1 && health < 1019.5) {
+            if (this.tickCount % 40 == 0) {
+                this.heal(0.5F);
+            }
         }
 
         this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
-    } */
+    }
 }

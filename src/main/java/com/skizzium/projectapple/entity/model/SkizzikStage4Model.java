@@ -1,10 +1,7 @@
 package com.skizzium.projectapple.entity.model;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.skizzium.projectapple.entity.Skizzik;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
@@ -14,17 +11,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Arrays;
 
 @OnlyIn(Dist.CLIENT)
-public class SkizzikModel<T extends Skizzik> extends SegmentedModel<T> {
+public class SkizzikStage4Model<T extends Skizzik> extends SegmentedModel<T> {
 	private final ModelRenderer[] body;
 	private final ModelRenderer[] heads;
 	private final ImmutableList<ModelRenderer> parts;
 
-	public SkizzikModel() {
+	public SkizzikStage4Model() {
 		texWidth = 256;
 		texHeight = 256;
 
 		body = new ModelRenderer[2];
-		heads = new ModelRenderer[5];
+		heads = new ModelRenderer[2];
 
 		body[0] = new ModelRenderer(this, 0, 16);
 		body[0].setPos(1.0F, 15.9F, 4.5F);
@@ -59,19 +56,7 @@ public class SkizzikModel<T extends Skizzik> extends SegmentedModel<T> {
 
 		heads[1] = new ModelRenderer(this, 32, 0);
 		heads[1].setPos(19.0F, -9.0F, 0.0F);
-		heads[1].texOffs(0, 62).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
-
-		heads[2] = new ModelRenderer(this, 32, 0);
-		heads[2].setPos(-18.0F, -11.0F, 1.0F);
-		heads[2].texOffs(36, 74).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
-
-		heads[3] = new ModelRenderer(this, 32, 0);
-		heads[3].setPos(17.0F, -31.0F, 0.0F);
-		heads[3].texOffs(48, 50).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
-
-		heads[4] = new ModelRenderer(this, 32, 0);
-		heads[4].setPos(-13.0F, -34.0F, 1.0F);
-		heads[4].texOffs(52, 20).addBox(-6.0F, -5.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
+		heads[1].texOffs(0, 62).addBox(-14.0F, -29.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
 
 		ImmutableList.Builder<ModelRenderer> builder = ImmutableList.builder();
 		builder.addAll(Arrays.asList(this.heads));
@@ -88,17 +73,13 @@ public class SkizzikModel<T extends Skizzik> extends SegmentedModel<T> {
 	public void setupAnim(T entity, float f, float f1, float f2, float f3, float f4) {
 		float f5 = MathHelper.cos(f3 * 0.1F);
 
-		//this.body[1].xRot = (0.065F + 0.05F * f5) * (float)Math.PI;
-		//this.body[0].setPos(1.0F, 15.9F + MathHelper.cos(this.body[1].xRot) * 10.0F, -0.5F + MathHelper.sin(this.body[1].xRot) * 10.0F);
-		//this.body[0].xRot = (0.265F + 0.1F * f5) * (float)Math.PI;
-
 		this.heads[0].yRot = f3 * ((float)Math.PI / 180F);
 		this.heads[0].xRot = f4 * ((float)Math.PI / 180F);
 	}
 
 	@Override
 	public void prepareMobModel(T entity, float f, float f1, float f2) {
-		for(int i = 1; i < 5; ++i) {
+		for(int i = 1; i < 2; ++i) {
 			this.heads[i].yRot = (entity.getHeadYRot(i - 1) - entity.yBodyRot) * ((float)Math.PI / 180F);
 			this.heads[i].xRot = entity.getHeadXRot(i - 1) * ((float)Math.PI / 180F);
 		}

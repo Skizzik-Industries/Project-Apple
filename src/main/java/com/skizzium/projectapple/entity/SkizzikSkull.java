@@ -27,6 +27,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
+
 public class SkizzikSkull extends DamagingProjectileEntity {
     private static final DataParameter<Integer> DATA_LEVEL = EntityDataManager.defineId(SkizzikSkull.class, DataSerializers.INT);
 
@@ -34,8 +36,8 @@ public class SkizzikSkull extends DamagingProjectileEntity {
         super(entity, world);
     }
 
-    public SkizzikSkull(World world, LivingEntity entity, float power, double damage, int knockback) {
-        super(PA_Entities.SKIZZIK_SKULL, entity, power, damage, knockback, world);
+    public SkizzikSkull(World world, LivingEntity entity, double x, double y, double z) {
+        super(PA_Entities.SKIZZIK_SKULL, entity, x, y, z, world);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -131,7 +133,7 @@ public class SkizzikSkull extends DamagingProjectileEntity {
             }
 
             if (hurt && target instanceof LivingEntity) {
-                if (this.getLevel() >= 2) {
+                if (this.getLevel() >= 3) {
                     ((LivingEntity)target).addEffect(new EffectInstance(Effects.WITHER, 400, 2));
                 }
                 else {
@@ -150,10 +152,9 @@ public class SkizzikSkull extends DamagingProjectileEntity {
     protected void onHit(RayTraceResult entity) {
         super.onHit(entity);
         if (!this.level.isClientSide) {
-            Explosion.Mode explosion = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+            Explosion.Mode explosion = getMobGriefingEvent(this.level, this.getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
             this.remove();
         }
-
     }
 }

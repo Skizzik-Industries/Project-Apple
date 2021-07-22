@@ -51,8 +51,8 @@ public class RainbowSword extends SwordItem {
                 ((ServerWorld) world).sendParticles(ParticleTypes.PORTAL, x, y, z, 15, 1, 1, 1, 1);
             }
 
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.portal.travel")), SoundCategory.PLAYERS, (float) 1, (float) 1);
-            item.hurtAndBreak(1, entity, (breakevent) -> {breakevent.broadcastBreakEvent(context.getHand());});
+            world.playSound(null, new BlockPos(x, y,z), SoundEvents.PORTAL_TRAVEL, SoundCategory.PLAYERS, (float) 1, (float) 1);
+            item.hurtAndBreak(1, entity, (breakevent) -> breakevent.broadcastBreakEvent(context.getHand()));
         }
         return retrieval;
     }

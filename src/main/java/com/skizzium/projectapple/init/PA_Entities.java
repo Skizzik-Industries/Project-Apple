@@ -2,6 +2,7 @@ package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
+import com.skizzium.projectapple.entity.model.SkizzikModel;
 import com.skizzium.projectapple.entity.renderer.*;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.SkullTileEntityRenderer;
