@@ -7,6 +7,10 @@ import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.item.RainbowSword;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.SkullBlock;
+import net.minecraft.client.renderer.entity.model.GenericHeadModel;
+import net.minecraft.client.renderer.tileentity.SkullTileEntityRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.text.TextFormatting;
@@ -14,6 +18,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+
+import java.lang.reflect.Field;
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Items {
@@ -93,7 +100,5 @@ public class PA_Items {
         event.getRegistry().register(PA_Entities.WITCH_SKIZZIE_SPAWN_EGG);
 
         event.getRegistry().register(PA_Entities.SKIZZO_SPAWN_EGG);
-
-        ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
     }
 }

@@ -2,22 +2,30 @@ package com.skizzium.projectapple.init.block;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.*;
+import com.skizzium.projectapple.init.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.PA_TileEntities;
+import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Rarity;
+import net.minecraft.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IDispenseItemBehavior;
+import net.minecraft.dispenser.OptionalDispenseBehavior;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -98,8 +106,46 @@ public class PA_Blocks {
 
     public static void register() {}
 
-    public static void registerWoodTypes(final FMLClientSetupEvent event) {
+    public static void registerOtherStuff(final FMLClientSetupEvent event) {
+        ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
+
         WoodType.register(PA_Blocks.CANDY_WOOD_TYPE);
+
+        IDispenseItemBehavior fluidDispenseBehavior = new DefaultDispenseItemBehavior() {
+            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+
+            public ItemStack execute(IBlockSource source, ItemStack item) {
+                BucketItem bucket = (BucketItem)item.getItem();
+                BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+                World world = source.getLevel();
+
+                if (bucket.emptyBucket(null, world, pos, null)) {
+                    bucket.checkExtraContent(world, item, pos);
+                    return new ItemStack(Items.BUCKET);
+                }
+                else {
+                    return this.defaultDispenseItemBehavior.dispense(source, item);
+                }
+            }
+        };
+
+        DispenserBlock.registerBehavior(PA_Items.MAPLE_SYRUP_BUCKET.get(), fluidDispenseBehavior);
+
+        DefaultDispenseItemBehavior entityDispenseBehavior = new DefaultDispenseItemBehavior() {
+            public ItemStack execute(IBlockSource source, ItemStack item) {
+                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+                EntityType<?> entity = ((SpawnEggItem)item.getItem()).getType(item.getTag());
+
+                entity.spawn(source.getLevel(), item, null, source.getPos().relative(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+                item.shrink(1);
+
+                return item;
+            }
+        };
+
+        for(SpawnEggItem egg : SpawnEggItem.eggs()) {
+            DispenserBlock.registerBehavior(egg, entityDispenseBehavior);
+        }
 
         event.enqueueWork(() -> {
             Atlases.addWoodType(PA_Blocks.CANDY_WOOD_TYPE);

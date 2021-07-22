@@ -23,7 +23,7 @@ public class ProjectApple
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(PA_Blocks::renderLayers);
         modBus.addListener(PA_Entities::registerRenderers);
-        modBus.addListener(PA_Blocks::registerWoodTypes);
+        modBus.addListener(PA_Blocks::registerOtherStuff);
         modBus.addListener(PA_TileEntities::registerCustomSkullRenderers);
 
         MinecraftForge.EVENT_BUS.register(this);
