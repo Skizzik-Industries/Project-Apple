@@ -1,13 +1,13 @@
 package com.skizzium.projectapple.block;
 
-import com.skizzium.projectapple.init.block.PA_Blocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SugarCaneBlock;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
 import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.block.PA_Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.SugarCaneBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 
 public class CandyCane extends SugarCaneBlock {
     public CandyCane(Properties properties) {
@@ -15,7 +15,7 @@ public class CandyCane extends SugarCaneBlock {
     }
     
     @Override
-    public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         BlockState blockstate = world.getBlockState(pos.below());
         if (blockstate.getBlock() == this) {
             return true;

@@ -2,34 +2,34 @@ package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.init.PA_Entities;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.*;
-import net.minecraft.world.server.ServerBossInfo;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -42,15 +42,36 @@ import java.util.Objects;
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
 
-public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRangedAttackMob {
-    private static final DataParameter<Integer> DATA_TARGET_A = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
-    private static final DataParameter<Integer> DATA_TARGET_B = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
-    private static final DataParameter<Integer> DATA_TARGET_C = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
-    private static final DataParameter<Integer> DATA_TARGET_D = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
-    private static final DataParameter<Integer> DATA_TARGET_E = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.level.Level;
 
-    private static final List<DataParameter<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
-    private static final DataParameter<Integer> DATA_ID_STAGE = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
+public class Skizzik extends Monster implements /*IChargeableMob,*/ RangedAttackMob {
+    private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_TARGET_C = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_TARGET_D = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_TARGET_E = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+
+    private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
+    private static final EntityDataAccessor<Integer> DATA_ID_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
 
     private final float[] xRotHeads = new float[4];
     private final float[] yRotHeads = new float[4];
@@ -62,24 +83,24 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     private final int[] idleHeadUpdates = new int[4];
 
     private int destroyBlocksTick;
-    private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.LIVING_ENTITY_SELECTOR);
+    private static final TargetingConditions TARGETING_CONDITIONS = (new TargetingConditions()).range(20.0D).selector(PA_Entities.LIVING_ENTITY_SELECTOR);
 
-    private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
+    private final ServerBossEvent bossBar = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
-    public Skizzik(EntityType<? extends Skizzik> entity, World world) {
+    public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
     }
 
     @Override
-    public boolean canBeLeashed(PlayerEntity player) {
+    public boolean canBeLeashed(Player player) {
         return false;
     }
 
     @Override
-    public CreatureAttribute getMobType() {
-        return CreatureAttribute.UNDEAD;
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
@@ -93,35 +114,35 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntitySize size) {
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return 2.4F;
     }
 
     @Override
-    public void startSeenByPlayer(ServerPlayerEntity player) {
+    public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
         this.bossBar.addPlayer(player);
     }
 
     @Override
-    public void stopSeenByPlayer(ServerPlayerEntity player) {
+    public void stopSeenByPlayer(ServerPlayer player) {
         super.stopSeenByPlayer(player);
         this.bossBar.removePlayer(player);
     }
 
     @Override
-    public void setCustomName(@Nullable ITextComponent name) {
+    public void setCustomName(@Nullable Component name) {
         super.setCustomName(name);
 
         int stage = this.getStage();
         if (stage == 0) {
-            this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Sleeping"));
         }
         else if (stage >= 1 && stage <= 5) {
-            this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + stage));
+            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Stage " + stage));
         }
         else if (stage == 6) {
-            this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
+            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
         }
     }
 
@@ -151,21 +172,21 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
-    public boolean addEffect(EffectInstance effect) {
+    public boolean addEffect(MobEffectInstance effect) {
         return false;
     }
 
     @Override
-    public void makeStuckInBlock(BlockState state, Vector3d vector) {
+    public void makeStuckInBlock(BlockState state, Vec3 vector) {
     }
 
     public static boolean canDestroy(BlockState state) {
         return !state.isAir() && !BlockTags.WITHER_IMMUNE.contains(state.getBlock());
     }
 
-    public static AttributeModifierMap.MutableAttribute buildAttributes() {
+    public static AttributeSupplier.Builder buildAttributes() {
         //this.getAttribute(Attributes.ARMOR)
-        return MonsterEntity.createMobAttributes()
+        return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 1021.0D)
                 .add(Attributes.ARMOR, 8.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
@@ -190,7 +211,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
-    public boolean canBeAffected(EffectInstance effect) {
+    public boolean canBeAffected(MobEffectInstance effect) {
         return false;
     }
 
@@ -210,7 +231,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         }
         else {
             float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = MathHelper.cos(f);
+            float f1 = Mth.cos(f);
 
             return head <= 2 ? this.getX() + (double)f1 * 1.3D :
                     head == 3 ? this.getX() + f1 * 1.2D :
@@ -230,13 +251,13 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
             return this.getZ();
         } else {
             float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = MathHelper.sin(f);
+            float f1 = Mth.sin(f);
             return this.getZ() + (double)f1 * 1.3D;
         }
     }
 
     private float rotlerp(float f1, float f2, float f3) {
-        float f = MathHelper.wrapDegrees(f2 - f1);
+        float f = Mth.wrapDegrees(f2 - f1);
         if (f > f3) {
             f = f3;
         }
@@ -262,13 +283,13 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundNBT nbt) {
+    public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
         nbt.putInt("Stage", this.getStage());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundNBT nbt) {
+    public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
         this.setStage(nbt.getInt("Stage"));
         if (this.hasCustomName()) {
@@ -310,20 +331,20 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     @Override
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, PA_Entities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.LIVING_ENTITY_SELECTOR));
         this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 20.0F));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
     @Override
     public void baseTick() {
         super.baseTick();
 
-        World world = getCommandSenderWorld();
-        if (world instanceof ServerWorld) {
-            ((ServerWorld) world).setDayTime(18000);
+        Level world = getCommandSenderWorld();
+        if (world instanceof ServerLevel) {
+            ((ServerLevel) world).setDayTime(18000);
         }
 
         float health = this.getHealth();
@@ -341,10 +362,10 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         // or it's health is changed to something else and then back to 1021
         if (health == 1021) {
             if (this.hasCustomName()) {
-                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Sleeping"));
             }
             else {
-                this.bossBar.setName(new StringTextComponent("Skizzik - Sleeping"));
+                this.bossBar.setName(new TextComponent("Skizzik - Sleeping"));
             }
         }
 
@@ -369,11 +390,11 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
             }
             else if (newStage == 6) {
                 this.setHealth(20);
-                bossBar.setColor(BossInfo.Color.WHITE);
+                bossBar.setColor(BossEvent.BossBarColor.WHITE);
             }
 
-            if (world instanceof ServerWorld) {
-                PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
+            if (world instanceof ServerLevel) {
+                PA_Entities.SKIZZO.spawn((ServerLevel)world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
             }
 
             world.addFreshEntity(EntityType.LIGHTNING_BOLT.create(world));
@@ -382,18 +403,18 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
             if (this.hasCustomName()) {
                 if (newStage >= 1 && newStage <= 5) {
-                    this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + newStage));
+                    this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Stage " + newStage));
                 }
                 else if (newStage == 6) {
-                    this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
+                    this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
                 }
             }
             else {
                 if (newStage >= 1 && newStage <= 5) {
-                    this.bossBar.setName(new StringTextComponent("Skizzik - Stage " + newStage));
+                    this.bossBar.setName(new TextComponent("Skizzik - Stage " + newStage));
                 }
                 else if (newStage == 6) {
-                    this.bossBar.setName(new StringTextComponent("Skizzik - FINISH HIM!"));
+                    this.bossBar.setName(new TextComponent("Skizzik - FINISH HIM!"));
                 }
             }
 
@@ -406,24 +427,24 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-        World world = this.getCommandSenderWorld();
+        Level world = this.getCommandSenderWorld();
 
-        if (world instanceof ServerWorld) {
-            LightningBoltEntity[] lightnings = {EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world)};
+        if (world instanceof ServerLevel) {
+            LightningBolt[] lightnings = {EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world)};
             
-            lightnings[0].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x, y, z + 100)));
-            lightnings[1].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x, y, z - 100)));
-            lightnings[2].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x + 100, y, z)));
-            lightnings[3].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x - 100, y, z)));
+            lightnings[0].moveTo(Vec3.atBottomCenterOf(new BlockPos(x, y, z + 100)));
+            lightnings[1].moveTo(Vec3.atBottomCenterOf(new BlockPos(x, y, z - 100)));
+            lightnings[2].moveTo(Vec3.atBottomCenterOf(new BlockPos(x + 100, y, z)));
+            lightnings[3].moveTo(Vec3.atBottomCenterOf(new BlockPos(x - 100, y, z)));
 
-            for (LightningBoltEntity lightning : lightnings) {
+            for (LightningBolt lightning : lightnings) {
                 lightning.setVisualOnly(true);
                 world.addFreshEntity(lightning);
             }
         }
 
         Entity entity = source.getEntity();
-        if (entity != null && !(entity instanceof PlayerEntity) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
+        if (entity != null && !(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
             return false;
         }
         else {
@@ -446,7 +467,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
     @Override
     public void aiStep() {
-        Vector3d vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
+        Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
             if (entity != null) {
@@ -456,10 +477,10 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                     vectorY = vectorY + (0.3D - vectorY * (double)0.6F);
                 }
 
-                vector = new Vector3d(vector.x, vectorY, vector.z);
-                Vector3d vector1 = new Vector3d(entity.getX() - this.getX(), 0.0D, entity.getZ() - this.getZ());
+                vector = new Vec3(vector.x, vectorY, vector.z);
+                Vec3 vector1 = new Vec3(entity.getX() - this.getX(), 0.0D, entity.getZ() - this.getZ());
                 if (getHorizontalDistanceSqr(vector1) > 9.0D) {
-                    Vector3d vector2 = vector1.normalize();
+                    Vec3 vector2 = vector1.normalize();
                     vector = vector.add(vector2.x * 0.3D - vector.x * 0.6D, 0.0D, vector2.z * 0.3D - vector.z * 0.6D);
                 }
             }
@@ -467,7 +488,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
         this.setDeltaMovement(vector);
         if (getHorizontalDistanceSqr(vector) > 0.05D) {
-            this.yRot = (float) MathHelper.atan2(vector.z, vector.x) * (180F / (float)Math.PI) - 90.0F;
+            this.yRot = (float) Mth.atan2(vector.z, vector.x) * (180F / (float)Math.PI) - 90.0F;
         }
 
         super.aiStep();
@@ -493,10 +514,10 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                 double entityY = entity1.getEyeY() - headY;
                 double entityZ = entity1.getZ() - headZ;
 
-                double d7 = MathHelper.sqrt(entityX * entityX + entityZ * entityZ);
+                double d7 = Mth.sqrt(entityX * entityX + entityZ * entityZ);
 
-                float f = (float)(MathHelper.atan2(entityZ, entityX) * (double)(180F / (float)Math.PI)) - 90.0F;
-                float f1 = (float)(-(MathHelper.atan2(entityY, d7) * (double)(180F / (float)Math.PI)));
+                float f = (float)(Mth.atan2(entityZ, entityX) * (double)(180F / (float)Math.PI)) - 90.0F;
+                float f1 = (float)(-(Mth.atan2(entityY, d7) * (double)(180F / (float)Math.PI)));
 
                 this.xRotHeads[j] = this.rotlerp(this.xRotHeads[j], f1, 40.0F);
                 this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], f, 10.0F);
@@ -519,9 +540,9 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                 this.idleHeadUpdates[head] = this.idleHeadUpdates[headIndex - 1] + 1;
 
                 if (idleHeadUpdate > 15) {
-                    double x = MathHelper.nextDouble(this.random, this.getX() - 10.0D, this.getX() + 10.0D);
-                    double y = MathHelper.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
-                    double z = MathHelper.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
+                    double x = Mth.nextDouble(this.random, this.getX() - 10.0D, this.getX() + 10.0D);
+                    double y = Mth.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
+                    double z = Mth.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
 
                     /* SKIZZIK SKULL LEVEL! */ this.performRangedAttack(headIndex + 1, x, y, z, 1);
                     this.idleHeadUpdates[headIndex - 1] = 0;
@@ -532,7 +553,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                 if (alternativeTarget > 0) {
                     Entity target = this.level.getEntity(alternativeTarget);
                     if (target != null && target.isAlive() && !(this.distanceToSqr(target) > 900.0D) && this.canSee(target)) {
-                        if (target instanceof PlayerEntity && ((PlayerEntity)target).abilities.invulnerable) {
+                        if (target instanceof Player && ((Player)target).abilities.invulnerable) {
                             this.setAlternativeTarget(headIndex, 0);
                         }
                         else {
@@ -551,8 +572,8 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                     for(int i = 0; i < 10 && !list.isEmpty(); ++i) {
                         LivingEntity target = list.get(this.random.nextInt(list.size()));
                         if (target != this && target.isAlive() && this.canSee(target)) {
-                            if (target instanceof PlayerEntity) {
-                                if (!((PlayerEntity)target).abilities.invulnerable) {
+                            if (target instanceof Player) {
+                                if (!((Player)target).abilities.invulnerable) {
                                     this.setAlternativeTarget(headIndex, target.getId());
                                 }
                             }
@@ -578,9 +599,9 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
             --this.destroyBlocksTick;
 
             if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
-                int y = MathHelper.floor(this.getY());
-                int x = MathHelper.floor(this.getX());
-                int z = MathHelper.floor(this.getZ());
+                int y = Mth.floor(this.getY());
+                int x = Mth.floor(this.getX());
+                int z = Mth.floor(this.getZ());
                 boolean canDestroy = false;
 
                 for(int k2 = -1; k2 <= 1; ++k2) {

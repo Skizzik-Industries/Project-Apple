@@ -1,42 +1,60 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.play.NetworkPlayerInfo;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.GameType;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class FriendlySkizzie extends CreatureEntity {
-    public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, World world) {
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+
+public class FriendlySkizzie extends PathfinderMob {
+    public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {
         super(entity, world);
         this.xpReward = 7;
-        this.moveControl = new FlyingMovementController(this, 10, true);
-        this.navigation = new FlyingPathNavigator(this, this.getCommandSenderWorld());
+        this.moveControl = new FlyingMoveControl(this, 10, true);
+        this.navigation = new FlyingPathNavigation(this, this.getCommandSenderWorld());
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntitySize size) {
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return 1.30F;
     }
 
     @Override
-    public Vector3d getLeashOffset() {
-        return new Vector3d(0.0D, this.getEyeHeight() * 0.8F, this.getBbWidth() * 0.05F);
+    public Vec3 getLeashOffset() {
+        return new Vec3(0.0D, this.getEyeHeight() * 0.8F, this.getBbWidth() * 0.05F);
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
@@ -48,8 +66,8 @@ public class FriendlySkizzie extends CreatureEntity {
     }
 
     @Override
-    public CreatureAttribute getMobType() {
-        return CreatureAttribute.UNDEAD;
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
@@ -75,8 +93,8 @@ public class FriendlySkizzie extends CreatureEntity {
         return super.hurt(source, amount);
     }
 
-    public static AttributeModifierMap.MutableAttribute buildAttributes() {
-        return MonsterEntity.createMobAttributes()
+    public static AttributeSupplier.Builder buildAttributes() {
+        return Monster.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 8.0D)
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ARMOR, 3.0D)
@@ -87,11 +105,11 @@ public class FriendlySkizzie extends CreatureEntity {
 
     protected void registerGoals() {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Skizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Monster.class, true, true));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -99,7 +117,7 @@ public class FriendlySkizzie extends CreatureEntity {
         super.baseTick();
         this.setNoGravity(true);
 
-        World world = this.level;
+        Level world = this.level;
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
@@ -108,49 +126,49 @@ public class FriendlySkizzie extends CreatureEntity {
         this.clearFire();
 
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE || world.getBlockState(pos).getBlock() == Blocks.SOUL_FIRE) {
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             this.clearFire();
         }
         else if (world.getBlockState(pos).getBlock() == Blocks.LAVA) {
             world.setBlock(pos, PA_Blocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
             this.remove();
         }
     }
 
     @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         player.startRiding(this);
         return super.mobInteract(player, hand);
     }
 
     @Override
-    public void playerTouch(PlayerEntity player) {
+    public void playerTouch(Player player) {
         super.playerTouch(player);
 
-        World world = player.getCommandSenderWorld();
+        Level world = player.getCommandSenderWorld();
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
 
-        if (player instanceof ServerPlayerEntity) {
-            if (((ServerPlayerEntity) player).gameMode.isSurvival() && player.isOnFire()) {
-                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+        if (player instanceof ServerPlayer) {
+            if (((ServerPlayer) player).gameMode.isSurvival() && player.isOnFire()) {
+                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
                 player.clearFire();
             }
         }
-        else if (player instanceof PlayerEntity && world.isClientSide()) {
-            NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
+        else if (player instanceof Player && world.isClientSide()) {
+            PlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
             if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE && player.isOnFire()) {
-                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
                 player.clearFire();
             }
         }
         else {
             if (!player.isOnFire()) {
-                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, (float) 1, (float) 1);
+                world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
                 player.clearFire();
             }
         }
@@ -160,13 +178,13 @@ public class FriendlySkizzie extends CreatureEntity {
     public void die(DamageSource source) {
         super.die(source);
 
-        World world = this.getCommandSenderWorld();
+        Level world = this.getCommandSenderWorld();
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
 
-        LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
-        lightning.moveTo(Vector3d.atCenterOf(new BlockPos(x, y, z)));
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
+        lightning.moveTo(Vec3.atCenterOf(new BlockPos(x, y, z)));
         world.addFreshEntity(lightning);
     }
 }

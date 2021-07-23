@@ -1,22 +1,24 @@
 package com.skizzium.projectapple.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
-import net.minecraft.client.network.play.NetworkPlayerInfo;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameType;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import com.skizzium.projectapple.init.PA_Effects;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class CorruptedBlock extends Block {
     public CorruptedBlock(Properties properties) {
@@ -24,27 +26,27 @@ public class CorruptedBlock extends Block {
     }
 
     @Override
-    public PathNodeType getAiPathNodeType(BlockState state, IBlockReader world, BlockPos pos, MobEntity entity) {
-        return PathNodeType.DAMAGE_OTHER;
+    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
+        return BlockPathTypes.DAMAGE_OTHER;
     }
 
     @Override
-    public void stepOn(World world, BlockPos pos, Entity entity) {
+    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(PA_Effects.CORRUPTION.get())) {
-            if (entity instanceof ServerPlayerEntity) {
-                if (((ServerPlayerEntity) entity).gameMode.isSurvival()) {
-                    ((ServerPlayerEntity) entity).addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
+            if (entity instanceof ServerPlayer) {
+                if (((ServerPlayer) entity).gameMode.isSurvival()) {
+                    ((ServerPlayer) entity).addEffect(new MobEffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
-            else if (entity instanceof PlayerEntity && world.isClientSide()) {
-                NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(((AbstractClientPlayerEntity) entity).getGameProfile().getId());
+            else if (entity instanceof Player && world.isClientSide()) {
+                PlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(((AbstractClientPlayer) entity).getGameProfile().getId());
 
                 if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                    ((PlayerEntity) entity).addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
+                    ((Player) entity).addEffect(new MobEffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
             else {
-                ((LivingEntity) entity).addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
+                ((LivingEntity) entity).addEffect(new MobEffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
             }
         }
     }

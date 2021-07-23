@@ -1,34 +1,32 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.tileentity.PA_Skull;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SkullBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+
+import net.minecraft.world.level.block.SkullBlock.Type;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class SmallSkizzikHead extends SkullBlock {
     protected static final VoxelShape CUSTOM_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
-    public SmallSkizzikHead(ISkullType skull, Properties properties) {
+    public SmallSkizzikHead(Type skull, Properties properties) {
         super(skull, properties);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         return CUSTOM_SHAPE;
     }
 
     @Override
-    public TileEntity newBlockEntity(IBlockReader reader) {
-        return new PA_Skull();
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PA_Skull(pos, state);
     }
 }

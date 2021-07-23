@@ -2,41 +2,52 @@ package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.entity.ai.KaboomSkizzieSwellGoal;
 import net.minecraft.entity.*;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Collection;
 
-public class KaboomSkizzie extends Skizzie implements IChargeableMob {
-    private static final DataParameter<Integer> DATA_SWELL_DIR = EntityDataManager.defineId(KaboomSkizzie.class, DataSerializers.INT);
-    private static final DataParameter<Boolean> DATA_IS_POWERED = EntityDataManager.defineId(KaboomSkizzie.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DATA_IS_IGNITED = EntityDataManager.defineId(KaboomSkizzie.class, DataSerializers.BOOLEAN);
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.PowerableMob;
+
+public class KaboomSkizzie extends Skizzie implements PowerableMob {
+    private static final EntityDataAccessor<Integer> DATA_SWELL_DIR = SynchedEntityData.defineId(KaboomSkizzie.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_IS_POWERED = SynchedEntityData.defineId(KaboomSkizzie.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(KaboomSkizzie.class, EntityDataSerializers.BOOLEAN);
     private int oldSwell;
     private int swell;
     private int maxSwell = 30;
     private int explosionRadius = 3;
     private int droppedSkulls;
 
-    public KaboomSkizzie(EntityType<? extends Skizzie> entity, World world) {
+    public KaboomSkizzie(EntityType<? extends Skizzie> entity, Level world) {
         super(entity, world);
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntitySize size) {
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return 1.35F;
     }
 
@@ -104,7 +115,7 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundNBT nbt) {
+    public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
 
         nbt.putShort("Fuse", (short)this.maxSwell);
@@ -117,7 +128,7 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundNBT nbt) {
+    public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
         this.entityData.set(DATA_IS_POWERED, nbt.getBoolean("powered"));
 
@@ -136,7 +147,7 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
 
     @OnlyIn(Dist.CLIENT)
     public float getSwelling(float f) {
-        return MathHelper.lerp(f, (float)this.oldSwell, (float)this.swell) / (float)(this.maxSwell - 2);
+        return Mth.lerp(f, (float)this.oldSwell, (float)this.swell) / (float)(this.maxSwell - 2);
     }
 
     public int getSwellDir() {
@@ -148,13 +159,13 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     }
 
     @Override
-    public void thunderHit(ServerWorld world, LightningBoltEntity lightning) {
+    public void thunderHit(ServerLevel world, LightningBolt lightning) {
         super.thunderHit(world, lightning);
         this.entityData.set(DATA_IS_POWERED, true);
     }
 
     @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack item = player.getItemInHand(hand);
 
         if (item.getItem() == Items.FLINT_AND_STEEL) {
@@ -165,7 +176,7 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
                 item.hurtAndBreak(1, player, (event) -> event.broadcastBreakEvent(hand));
             }
 
-            return ActionResultType.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
         }
         else {
             return super.mobInteract(player, hand);
@@ -174,7 +185,7 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
 
     private void explodeSkizzie() {
         if (!this.level.isClientSide) {
-            Explosion.Mode explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+            Explosion.BlockInteraction explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
             float f = this.isPowered() ? 2.0F : 1.0F;
             this.dead = true;
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, explosion$mode);
@@ -184,18 +195,18 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     }
 
     private void spawnLingeringCloud() {
-        Collection<EffectInstance> effects = this.getActiveEffects();
+        Collection<MobEffectInstance> effects = this.getActiveEffects();
 
         if (!effects.isEmpty()) {
-            AreaEffectCloudEntity effectCloud = new AreaEffectCloudEntity(this.level, this.getX(), this.getY(), this.getZ());
+            AreaEffectCloud effectCloud = new AreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
             effectCloud.setRadius(2.5F);
             effectCloud.setRadiusOnUse(-0.5F);
             effectCloud.setWaitTime(10);
             effectCloud.setDuration(effectCloud.getDuration() / 2);
             effectCloud.setRadiusPerTick(-effectCloud.getRadius() / (float)effectCloud.getDuration());
 
-            for(EffectInstance instance : effects) {
-                effectCloud.addEffect(new EffectInstance(instance));
+            for(MobEffectInstance instance : effects) {
+                effectCloud.addEffect(new MobEffectInstance(instance));
             }
 
             this.level.addFreshEntity(effectCloud);

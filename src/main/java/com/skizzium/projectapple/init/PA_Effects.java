@@ -1,12 +1,12 @@
 package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.potion.CorruptionPotion;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraftforge.fmllegacy.RegistryObject;
 
 public class PA_Effects {
-    public static final RegistryObject<Effect> CORRUPTION = PA_Registry.EFFECTS.register("corruption", () -> new CorruptionPotion(EffectType.HARMFUL, -9959813));
+    public static final RegistryObject<MobEffect> CORRUPTION = PA_Registry.EFFECTS.register("corruption", () -> new CorruptionPotion(MobEffectCategory.HARMFUL, -9959813));
 
     public static void register() {}
 }

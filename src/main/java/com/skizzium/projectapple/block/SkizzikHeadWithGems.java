@@ -1,10 +1,14 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.tileentity.PA_Skull;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SkullBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.BlockGetter;
+
+import net.minecraft.world.level.block.SkullBlock.Type;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class SkizzikHeadWithGems extends SkullBlock {
     /* @Nullable
@@ -12,18 +16,13 @@ public class SkizzikHeadWithGems extends SkullBlock {
     @Nullable
     private static BlockPattern skizzikPatternBase; */
 
-    public SkizzikHeadWithGems(ISkullType skull, Properties properties) {
+    public SkizzikHeadWithGems(Type skull, Properties properties) {
         super(skull, properties);
     }
 
     @Override
-    public TileEntity newBlockEntity(IBlockReader reader) {
-        return new PA_Skull();
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PA_Skull(pos, state);
     }
 
     /* public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {

@@ -1,13 +1,13 @@
 package com.skizzium.projectapple.init.item;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.util.LazyLoadedValue;
 import com.skizzium.projectapple.init.PA_Tags;
 
 import java.util.function.Supplier;
 
-public enum PA_Tiers implements IItemTier {
+public enum PA_Tiers implements Tier {
     CANDIANITE(2, 350, 7.0F, 2.5F, 15, () -> {
         return Ingredient.of(PA_Items.CANDIANITE_INGOT.get());
     }),
@@ -20,7 +20,7 @@ public enum PA_Tiers implements IItemTier {
     private final float speed;
     private final float damage;
     private final int enchantmentValue;
-    private final LazyValue<Ingredient> repairIngredient;
+    private final LazyLoadedValue<Ingredient> repairIngredient;
 
     private PA_Tiers(int level, int uses, float speed, float damage, int enchantmentValue, Supplier<Ingredient> repairIngredient) {
         this.level = level;
@@ -28,7 +28,7 @@ public enum PA_Tiers implements IItemTier {
         this.speed = speed;
         this.damage = damage;
         this.enchantmentValue = enchantmentValue;
-        this.repairIngredient = new LazyValue<>(repairIngredient);
+        this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
     }
 
     public int getUses() {

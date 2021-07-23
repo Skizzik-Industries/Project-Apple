@@ -1,25 +1,21 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.tileentity.PA_Skull;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SkullBlock;
-import net.minecraft.block.WallSkullBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.WallSkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.BlockGetter;
 
 public class SkizzikWallHead extends WallSkullBlock {
-    public SkizzikWallHead(SkullBlock.ISkullType skull, AbstractBlock.Properties properties) {
+    public SkizzikWallHead(SkullBlock.Type skull, BlockBehaviour.Properties properties) {
         super(skull, properties);
     }
 
     @Override
-    public TileEntity newBlockEntity(IBlockReader reader) {
-        return new PA_Skull();
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PA_Skull(pos, state);
     }
 }

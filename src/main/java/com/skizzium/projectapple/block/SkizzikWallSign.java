@@ -1,11 +1,14 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.tileentity.PA_Sign;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.WoodType;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.BlockGetter;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class SkizzikWallSign extends WallSignBlock {
     public SkizzikWallSign(Properties properties, WoodType type) {
@@ -13,12 +16,7 @@ public class SkizzikWallSign extends WallSignBlock {
     }
 
     @Override
-    public TileEntity newBlockEntity(IBlockReader reader) {
-        return new PA_Sign();
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PA_Sign(pos, state);
     }
 }

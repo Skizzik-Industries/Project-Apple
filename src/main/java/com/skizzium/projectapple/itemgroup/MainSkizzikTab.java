@@ -3,11 +3,11 @@ package com.skizzium.projectapple.itemgroup;
 import com.skizzium.projectapple.init.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 
-public class MainSkizzikTab extends ItemGroup {
+public class MainSkizzikTab extends CreativeModeTab {
     public MainSkizzikTab(String label) {
         super(label);
     }

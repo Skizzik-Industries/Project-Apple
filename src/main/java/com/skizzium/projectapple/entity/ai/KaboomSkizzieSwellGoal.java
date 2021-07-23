@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.entity.ai;
 
 import com.skizzium.projectapple.entity.KaboomSkizzie;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
 
@@ -36,7 +36,7 @@ public class KaboomSkizzieSwellGoal extends Goal {
         else if (this.skizzie.distanceToSqr(this.target) > 49.0D) {
             this.skizzie.setSwellDir(-1);
         }
-        else if (!this.skizzie.getSensing().canSee(this.target)) {
+        else if (!this.skizzie.getSensing().hasLineOfSight(this.target)) {
             this.skizzie.setSwellDir(-1);
         }
         else {

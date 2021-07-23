@@ -2,44 +2,57 @@ package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.PA_Entities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.play.NetworkPlayerInfo;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.WitherSkullEntity;
-import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.GameType;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.projectile.WitherSkull;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
 
-public class Skizzie extends MonsterEntity {
-    public Skizzie(EntityType<? extends Skizzie> entity, World world) {
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+
+public class Skizzie extends Monster {
+    public Skizzie(EntityType<? extends Skizzie> entity, Level world) {
         super(entity, world);
         this.xpReward = 7;
-        this.moveControl = new FlyingMovementController(this, 10, true);
-        this.navigation = new FlyingPathNavigator(this, this.getCommandSenderWorld());
-        this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
+        this.moveControl = new FlyingMoveControl(this, 10, true);
+        this.navigation = new FlyingPathNavigation(this, this.getCommandSenderWorld());
+        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntitySize size) {
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return 1.30F;
     }
 
     @Override
-    public boolean canBeLeashed(PlayerEntity player) {
+    public boolean canBeLeashed(Player player) {
         return false;
     }
 
@@ -56,8 +69,8 @@ public class Skizzie extends MonsterEntity {
     }
 
     @Override
-    public CreatureAttribute getMobType() {
-        return CreatureAttribute.UNDEAD;
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
@@ -91,14 +104,14 @@ public class Skizzie extends MonsterEntity {
                 source == DamageSource.LAVA ||
                 source == DamageSource.ON_FIRE ||
                 source == DamageSource.WITHER ||
-                source.getDirectEntity() instanceof WitherSkullEntity) {
+                source.getDirectEntity() instanceof WitherSkull) {
             return false;
         }
         return super.hurt(source, amount);
     }
 
-    public static AttributeModifierMap.MutableAttribute buildAttributes() {
-        return MonsterEntity.createMobAttributes()
+    public static AttributeSupplier.Builder buildAttributes() {
+        return Monster.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 8.0D)
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ARMOR, 3.0D)
@@ -108,15 +121,15 @@ public class Skizzie extends MonsterEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, true, true, PA_Entities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.LIVING_ENTITY_SELECTOR));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.D, 0.0F));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -129,13 +142,13 @@ public class Skizzie extends MonsterEntity {
     public void die(DamageSource source) {
         super.die(source);
 
-        World world = this.getCommandSenderWorld();
+        Level world = this.getCommandSenderWorld();
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
 
-        LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
-        lightning.moveTo(Vector3d.atCenterOf(new BlockPos(x, y, z)));
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
+        lightning.moveTo(Vec3.atCenterOf(new BlockPos(x, y, z)));
         world.addFreshEntity(lightning);
     }
 
@@ -145,17 +158,17 @@ public class Skizzie extends MonsterEntity {
     } */
 
     @Override
-    public void playerTouch(PlayerEntity player) {
+    public void playerTouch(Player player) {
         super.playerTouch(player);
-        World world = player.getCommandSenderWorld();
+        Level world = player.getCommandSenderWorld();
 
-        if (player instanceof ServerPlayerEntity) {
-            if (((ServerPlayerEntity) player).gameMode.isSurvival()) {
+        if (player instanceof ServerPlayer) {
+            if (((ServerPlayer) player).gameMode.isSurvival()) {
                 player.setSecondsOnFire(10);
             }
         }
-        else if (player instanceof PlayerEntity && world.isClientSide()) {
-            NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
+        else if (player instanceof Player && world.isClientSide()) {
+            PlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
             if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
                 player.setSecondsOnFire(10);

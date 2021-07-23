@@ -1,12 +1,18 @@
 package com.skizzium.projectapple.tileentity;
 
 import com.skizzium.projectapple.init.PA_TileEntities;
-import net.minecraft.tileentity.SkullTileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class PA_Skull extends SkullTileEntity {
+public class PA_Skull extends SkullBlockEntity {
+    public PA_Skull(BlockPos pos, BlockState state) {
+        super(pos, state);
+    }
+
     @Override
-    public TileEntityType<?> getType() {
+    public BlockEntityType<?> getType() {
         return PA_TileEntities.PA_SKULL.get();
     }
 }

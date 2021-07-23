@@ -5,16 +5,14 @@ import com.mojang.datafixers.util.Pair;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.LootTableProvider;
-import net.minecraft.data.loot.BlockLootTables;
-import net.minecraft.item.Items;
-import net.minecraft.loot.*;
-import net.minecraft.loot.functions.SetCount;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 import java.util.Map;
@@ -23,24 +21,35 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.fmllegacy.RegistryObject;
+
 public class ModLootTablesProvider extends LootTableProvider {
     public ModLootTablesProvider(DataGenerator generator) {
         super(generator);
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
+    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
         return ImmutableList.of(
-            Pair.of(ModBlockLootTables::new, LootParameterSets.BLOCK)
+            Pair.of(ModBlockLootTables::new, LootContextParamSets.BLOCK)
         );
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-        map.forEach((p_218436_2_, p_218436_3_) -> LootTableManager.validate(validationtracker, p_218436_2_, p_218436_3_));
+    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
+        map.forEach((p_218436_2_, p_218436_3_) -> LootTables.validate(validationtracker, p_218436_2_, p_218436_3_));
     }
 
-    public static class ModBlockLootTables extends BlockLootTables {
+    public static class ModBlockLootTables extends BlockLoot {
         private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
         @Override
@@ -58,29 +67,29 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());
             dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
             add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable().withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantRange.exactly(1))
-                                                                                           .add(ItemLootEntry.lootTableItem(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()))
-                                                                                           .apply(SetCount.setCount(RandomValueRange.between(1,4))))
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,4))))
                                                                                    .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantRange.exactly(1))
-                                                                                           .add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get()))
-                                                                                           .apply(SetCount.setCount(ConstantRange.exactly(1))))
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
                                                                                    .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantRange.exactly(1))
-                                                                                           .add(ItemLootEntry.lootTableItem(Items.NETHER_STAR))
-                                                                                           .apply(SetCount.setCount(RandomValueRange.between(1,3))))
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(Items.NETHER_STAR))
+                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3))))
                                                                                    .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantRange.exactly(1))
-                                                                                           .add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_BONE.get()))
-                                                                                           .apply(SetCount.setCount(RandomValueRange.between(5,15))))
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(PA_Items.SKIZZIK_BONE.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(5,15))))
                                                                                    .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantRange.exactly(1))
-                                                                                           .add(ItemLootEntry.lootTableItem(PA_Items.SKIZZIK_FLESH.get()))
-                                                                                           .apply(SetCount.setCount(RandomValueRange.between(5,15))))
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(PA_Items.SKIZZIK_FLESH.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(5,15))))
                                                                                    .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantRange.exactly(1))
-                                                                                           .add(ItemLootEntry.lootTableItem(PA_Blocks.BROKEN_COMMAND_BLOCK.get()))
-                                                                                           .apply(SetCount.setCount(ConstantRange.exactly(1)))));
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(PA_Blocks.BROKEN_COMMAND_BLOCK.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))));
 
             dropSelf(PA_Blocks.CANDY_CANE.get());
             dropSelf(PA_Blocks.CANDY_SIGN.get());
@@ -103,7 +112,7 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.CANDY_FENCE_GATE.get());
 
             dropSelf(PA_Blocks.CANDY_TRAPDOOR.get());
-            add(PA_Blocks.CANDY_DOOR.get(), BlockLootTables::createDoorTable);
+            add(PA_Blocks.CANDY_DOOR.get(), BlockLoot::createDoorTable);
 
             dropSelf(PA_Blocks.CANDY_LOG.get());
             dropSelf(PA_Blocks.STRIPPED_CANDY_LOG.get());

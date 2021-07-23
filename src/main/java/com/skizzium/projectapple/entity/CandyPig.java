@@ -3,23 +3,23 @@ package com.skizzium.projectapple.entity;
 import com.skizzium.projectapple.init.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.AgableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.Random;
 
-public class CandyPig extends PigEntity {
+public class CandyPig extends Pig {
     private static final Ingredient FOOD_ITEMS = Ingredient.of(PA_Items.CANDY_CANE.get());
 
     @Override
@@ -27,19 +27,19 @@ public class CandyPig extends PigEntity {
         return FOOD_ITEMS.test(item);
     }
 
-    public CandyPig(EntityType<? extends PigEntity> entity, World world) {
+    public CandyPig(EntityType<? extends Pig> entity, Level world) {
         super(entity, world);
     }
 
-    public CandyPig getBreedOffspring(ServerWorld world, AgeableEntity entity) {
+    public CandyPig getBreedOffspring(ServerLevel world, AgableMob entity) {
         return PA_Entities.CANDY_PIG.create(this.level);
     }
 
-    public static AttributeModifierMap.MutableAttribute buildAttributes() {
-        return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
+    public static AttributeSupplier.Builder buildAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
-    public static boolean canEntitySpawn(EntityType<? extends CandyPig> animal, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+    public static boolean canEntitySpawn(EntityType<? extends CandyPig> animal, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
         return world.getBlockState(pos.below()).is(PA_Blocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos);
     }
 }

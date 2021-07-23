@@ -1,134 +1,136 @@
 package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
-import net.minecraft.block.Block;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Item;
 import net.minecraft.tags.*;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+
+import net.minecraft.server.players.ServerOpList;
 
 public final class PA_Tags {
     public static final class Blocks {
-        public static final ITag.INamedTag<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
-        public static final ITag.INamedTag<Block> SKIZZIK_HEADS = forge("skizzik_heads");
+        public static final Tag.Named<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
+        public static final Tag.Named<Block> SKIZZIK_HEADS = forge("skizzik_heads");
 
-        public static final ITag.INamedTag<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
-        public static final ITag.INamedTag<Block> CORRUPTION_IMMUNE = forge("corruption_immune");
+        public static final Tag.Named<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
+        public static final Tag.Named<Block> CORRUPTION_IMMUNE = forge("corruption_immune");
 
-        public static final ITag.INamedTag<Block> DRAGON_IMMUNE = minecraft("dragon_immune");
-        public static final ITag.INamedTag<Block> WITHER_IMMUNE = minecraft("wither_immune");
+        public static final Tag.Named<Block> DRAGON_IMMUNE = minecraft("dragon_immune");
+        public static final Tag.Named<Block> WITHER_IMMUNE = minecraft("wither_immune");
 
-        public static final ITag.INamedTag<Block> SKIZZIK_CHOCOLATE_BLOCKS = forge("skizzik_chocolate_blocks");
+        public static final Tag.Named<Block> SKIZZIK_CHOCOLATE_BLOCKS = forge("skizzik_chocolate_blocks");
 
-        public static final ITag.INamedTag<Block> PRESSURE_PLATES = minecraft("pressure_plates");
-        public static final ITag.INamedTag<Block> WALL_POST_OVERRIDE = minecraft("wall_post_override");
-        public static final ITag.INamedTag<Block> WOODEN_PRESSURE_PLATES = minecraft("wooden_pressure_plates");
+        public static final Tag.Named<Block> PRESSURE_PLATES = minecraft("pressure_plates");
+        public static final Tag.Named<Block> WALL_POST_OVERRIDE = minecraft("wall_post_override");
+        public static final Tag.Named<Block> WOODEN_PRESSURE_PLATES = minecraft("wooden_pressure_plates");
 
-        public static final ITag.INamedTag<Block> BUTTONS = minecraft("buttons");
-        public static final ITag.INamedTag<Block> WOODEN_BUTTONS = minecraft("wooden_buttons");
+        public static final Tag.Named<Block> BUTTONS = minecraft("buttons");
+        public static final Tag.Named<Block> WOODEN_BUTTONS = minecraft("wooden_buttons");
 
-        public static final ITag.INamedTag<Block> SIGNS = minecraft("signs");
-        public static final ITag.INamedTag<Block> STANDING_SIGNS = minecraft("standing_signs");
-        public static final ITag.INamedTag<Block> WALL_SIGNS = minecraft("wall_signs");
+        public static final Tag.Named<Block> SIGNS = minecraft("signs");
+        public static final Tag.Named<Block> STANDING_SIGNS = minecraft("standing_signs");
+        public static final Tag.Named<Block> WALL_SIGNS = minecraft("wall_signs");
 
-        public static final ITag.INamedTag<Block> PLANKS = minecraft("planks");
-        public static final ITag.INamedTag<Block> SLABS = minecraft("slabs");
-        public static final ITag.INamedTag<Block> WOODEN_SLABS = minecraft("wooden_slabs");
-        public static final ITag.INamedTag<Block> STAIRS = minecraft("stairs");
-        public static final ITag.INamedTag<Block> WOODEN_STAIRS = minecraft("wooden_stairs");
+        public static final Tag.Named<Block> PLANKS = minecraft("planks");
+        public static final Tag.Named<Block> SLABS = minecraft("slabs");
+        public static final Tag.Named<Block> WOODEN_SLABS = minecraft("wooden_slabs");
+        public static final Tag.Named<Block> STAIRS = minecraft("stairs");
+        public static final Tag.Named<Block> WOODEN_STAIRS = minecraft("wooden_stairs");
 
-        public static final ITag.INamedTag<Block> FENCES = minecraft("fences");
-        public static final ITag.INamedTag<Block> WOODEN_FENCES = minecraft("wooden_fences");
-        public static final ITag.INamedTag<Block> FENCE_GATES = minecraft("fence_gates");
-        public static final ITag.INamedTag<Block> UNSTABLE_BOTTOM_CENTER = minecraft("unstable_bottom_center");
+        public static final Tag.Named<Block> FENCES = minecraft("fences");
+        public static final Tag.Named<Block> WOODEN_FENCES = minecraft("wooden_fences");
+        public static final Tag.Named<Block> FENCE_GATES = minecraft("fence_gates");
+        public static final Tag.Named<Block> UNSTABLE_BOTTOM_CENTER = minecraft("unstable_bottom_center");
 
-        public static final ITag.INamedTag<Block> TRAPDOORS = minecraft("trapdoors");
-        public static final ITag.INamedTag<Block> WOODEN_TRAPDOORS = minecraft("wooden_trapdoors");
-        public static final ITag.INamedTag<Block> DOORS = minecraft("doors");
-        public static final ITag.INamedTag<Block> WOODEN_DOORS = minecraft("wooden_doors");
+        public static final Tag.Named<Block> TRAPDOORS = minecraft("trapdoors");
+        public static final Tag.Named<Block> WOODEN_TRAPDOORS = minecraft("wooden_trapdoors");
+        public static final Tag.Named<Block> DOORS = minecraft("doors");
+        public static final Tag.Named<Block> WOODEN_DOORS = minecraft("wooden_doors");
 
-        public static final ITag.INamedTag<Block> LEAVES = minecraft("leaves");
-        public static final ITag.INamedTag<Block> ENDERMAN_HOLDABLE = minecraft("enderman_holdable");
-        public static final ITag.INamedTag<Block> VALID_SPAWN = minecraft("valid_spawn");
+        public static final Tag.Named<Block> LEAVES = minecraft("leaves");
+        public static final Tag.Named<Block> ENDERMAN_HOLDABLE = minecraft("enderman_holdable");
+        public static final Tag.Named<Block> VALID_SPAWN = minecraft("valid_spawn");
 
-        public static final ITag.INamedTag<Block> LOGS = minecraft("logs");
-        public static final ITag.INamedTag<Block> LOGS_THAT_BURN = minecraft("logs_that_burn");
-        public static final ITag.INamedTag<Block> CANDY_LOGS = forge("candy_logs");
+        public static final Tag.Named<Block> LOGS = minecraft("logs");
+        public static final Tag.Named<Block> LOGS_THAT_BURN = minecraft("logs_that_burn");
+        public static final Tag.Named<Block> CANDY_LOGS = forge("candy_logs");
 
-        public static final ITag.INamedTag<Block> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
+        public static final Tag.Named<Block> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
-        private static ITag.INamedTag<Block> minecraft(String path) {
+        private static Tag.Named<Block> minecraft(String path) {
             return BlockTags.bind(new ResourceLocation("minecraft", path).toString());
         }
 
-        private static ITag.INamedTag<Block> forge(String path) {
+        private static Tag.Named<Block> forge(String path) {
             return BlockTags.bind(new ResourceLocation("forge", path).toString());
         }
 
-        private static ITag.INamedTag<Block> mod(String path) {
+        private static Tag.Named<Block> mod(String path) {
             return BlockTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
         }
     }
     public static final class Fluids {
-        public static final ITag.INamedTag<Fluid> WATER = minecraft("water");
-        public static final ITag.INamedTag<Fluid> CANDY_FLUIDS = mod("candy_fluids");
+        public static final Tag.Named<Fluid> WATER = minecraft("water");
+        public static final Tag.Named<Fluid> CANDY_FLUIDS = mod("candy_fluids");
 
-        private static ITag.INamedTag<Fluid> minecraft(String path) {
+        private static Tag.Named<Fluid> minecraft(String path) {
             return FluidTags.bind(new ResourceLocation("minecraft", path).toString());
         }
 
-        private static ITag.INamedTag<Fluid> mod(String path) {
+        private static Tag.Named<Fluid> mod(String path) {
             return FluidTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
         }
     }
     public static final class Items {
-        public static final ITag.INamedTag<Item> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
-        public static final ITag.INamedTag<Item> SKIZZIK_HEADS = forge("skizzik_heads");
+        public static final Tag.Named<Item> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
+        public static final Tag.Named<Item> SKIZZIK_HEADS = forge("skizzik_heads");
 
-        public static final ITag.INamedTag<Item> SKIZZIK_PANCAKES = forge("skizzik_pancakes");
-        public static final ITag.INamedTag<Item> SKIZZIK_CHOCOLATE = forge("skizzik_chocolate");
-        public static final ITag.INamedTag<Item> SKIZZIK_CHOCOLATE_BLOCKS = forge("skizzik_chocolate_blocks");
+        public static final Tag.Named<Item> SKIZZIK_PANCAKES = forge("skizzik_pancakes");
+        public static final Tag.Named<Item> SKIZZIK_CHOCOLATE = forge("skizzik_chocolate");
+        public static final Tag.Named<Item> SKIZZIK_CHOCOLATE_BLOCKS = forge("skizzik_chocolate_blocks");
 
-        public static final ITag.INamedTag<Item> WOODEN_PRESSURE_PLATES = minecraft("wooden_pressure_plates");
-        public static final ITag.INamedTag<Item> BUTTONS = minecraft("buttons");
-        public static final ITag.INamedTag<Item> WOODEN_BUTTONS = minecraft("wooden_buttons");
+        public static final Tag.Named<Item> WOODEN_PRESSURE_PLATES = minecraft("wooden_pressure_plates");
+        public static final Tag.Named<Item> BUTTONS = minecraft("buttons");
+        public static final Tag.Named<Item> WOODEN_BUTTONS = minecraft("wooden_buttons");
 
-        public static final ITag.INamedTag<Item> SIGNS = minecraft("signs");
+        public static final Tag.Named<Item> SIGNS = minecraft("signs");
 
-        public static final ITag.INamedTag<Item> PLANKS = minecraft("planks");
-        public static final ITag.INamedTag<Item> SLABS = minecraft("slabs");
-        public static final ITag.INamedTag<Item> WOODEN_SLABS = minecraft("wooden_slabs");
-        public static final ITag.INamedTag<Item> STAIRS = minecraft("stairs");
-        public static final ITag.INamedTag<Item> WOODEN_STAIRS = minecraft("wooden_stairs");
+        public static final Tag.Named<Item> PLANKS = minecraft("planks");
+        public static final Tag.Named<Item> SLABS = minecraft("slabs");
+        public static final Tag.Named<Item> WOODEN_SLABS = minecraft("wooden_slabs");
+        public static final Tag.Named<Item> STAIRS = minecraft("stairs");
+        public static final Tag.Named<Item> WOODEN_STAIRS = minecraft("wooden_stairs");
 
-        public static final ITag.INamedTag<Item> FENCES = minecraft("fences");
-        public static final ITag.INamedTag<Item> WOODEN_FENCES = minecraft("wooden_fences");
+        public static final Tag.Named<Item> FENCES = minecraft("fences");
+        public static final Tag.Named<Item> WOODEN_FENCES = minecraft("wooden_fences");
 
-        public static final ITag.INamedTag<Item> TRAPDOORS = minecraft("trapdoors");
-        public static final ITag.INamedTag<Item> WOODEN_TRAPDOORS = minecraft("wooden_trapdoors");
-        public static final ITag.INamedTag<Item> DOORS = minecraft("doors");
-        public static final ITag.INamedTag<Item> WOODEN_DOORS = minecraft("wooden_doors");
+        public static final Tag.Named<Item> TRAPDOORS = minecraft("trapdoors");
+        public static final Tag.Named<Item> WOODEN_TRAPDOORS = minecraft("wooden_trapdoors");
+        public static final Tag.Named<Item> DOORS = minecraft("doors");
+        public static final Tag.Named<Item> WOODEN_DOORS = minecraft("wooden_doors");
 
-        public static final ITag.INamedTag<Item> LEAVES = minecraft("leaves");
-        public static final ITag.INamedTag<Item> LOGS = minecraft("logs");
-        public static final ITag.INamedTag<Item> LOGS_THAT_BURN = minecraft("logs_that_burn");
-        public static final ITag.INamedTag<Item> CANDY_LOGS = mod("candy_logs");
+        public static final Tag.Named<Item> LEAVES = minecraft("leaves");
+        public static final Tag.Named<Item> LOGS = minecraft("logs");
+        public static final Tag.Named<Item> LOGS_THAT_BURN = minecraft("logs_that_burn");
+        public static final Tag.Named<Item> CANDY_LOGS = mod("candy_logs");
 
-        public static final ITag.INamedTag<Item> BEACON_PAYMENT_ITEMS = minecraft("beacon_payment_items");
-        public static final ITag.INamedTag<Item> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
+        public static final Tag.Named<Item> BEACON_PAYMENT_ITEMS = minecraft("beacon_payment_items");
+        public static final Tag.Named<Item> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
-        public static final ITag.INamedTag<Item> ALL_GEMS = mod("all_gems");
-        public static final ITag.INamedTag<Item> BASE_GEMS = mod("base_gems");
+        public static final Tag.Named<Item> ALL_GEMS = mod("all_gems");
+        public static final Tag.Named<Item> BASE_GEMS = mod("base_gems");
 
-        private static ITag.INamedTag<Item> minecraft(String path) {
+        private static Tag.Named<Item> minecraft(String path) {
             return ItemTags.bind(new ResourceLocation("minecraft", path).toString());
         }
 
-        private static ITag.INamedTag<Item> forge(String path) {
+        private static Tag.Named<Item> forge(String path) {
             return ItemTags.bind(new ResourceLocation("forge", path).toString());
         }
 
-        private static ITag.INamedTag<Item> mod(String path) {
+        private static Tag.Named<Item> mod(String path) {
             return ItemTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
         }
     }

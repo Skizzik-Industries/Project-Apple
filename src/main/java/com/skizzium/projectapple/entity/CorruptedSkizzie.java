@@ -4,26 +4,26 @@ import com.skizzium.projectapple.init.PA_Effects;
 import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.play.NetworkPlayerInfo;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameType;
-import net.minecraft.world.World;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
 
 public class CorruptedSkizzie extends Skizzie {
-    public CorruptedSkizzie(EntityType<? extends Skizzie> entity, World world) {
+    public CorruptedSkizzie(EntityType<? extends Skizzie> entity, Level world) {
         super(entity, world);
     }
 
-    public static AttributeModifierMap.MutableAttribute buildAttributes() {
-        return MonsterEntity.createMobAttributes()
+    public static AttributeSupplier.Builder buildAttributes() {
+        return Monster.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ARMOR, 3.0D)
@@ -36,7 +36,7 @@ public class CorruptedSkizzie extends Skizzie {
     public void baseTick() {
         super.baseTick();
 
-        World world = this.level;
+        Level world = this.level;
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
@@ -48,19 +48,19 @@ public class CorruptedSkizzie extends Skizzie {
     }
 
     @Override
-    public void playerTouch(PlayerEntity player) {
-        World world = player.getCommandSenderWorld();
+    public void playerTouch(Player player) {
+        Level world = player.getCommandSenderWorld();
         if (player instanceof LivingEntity && !player.hasEffect(PA_Effects.CORRUPTION.get())) {
-            if (player instanceof ServerPlayerEntity) {
-                if (((ServerPlayerEntity) player).gameMode.isSurvival()) {
-                    player.addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
+            if (player instanceof ServerPlayer) {
+                if (((ServerPlayer) player).gameMode.isSurvival()) {
+                    player.addEffect(new MobEffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
-            else if (player instanceof PlayerEntity && world.isClientSide()) {
-                NetworkPlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
+            else if (player instanceof Player && world.isClientSide()) {
+                PlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
                 if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                    player.addEffect(new EffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
+                    player.addEffect(new MobEffectInstance(PA_Effects.CORRUPTION.get(), 1200, 1));
                 }
             }
         }

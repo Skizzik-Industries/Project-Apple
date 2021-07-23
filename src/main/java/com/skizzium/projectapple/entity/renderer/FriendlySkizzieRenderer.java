@@ -3,17 +3,19 @@ package com.skizzium.projectapple.entity.renderer;
 import com.skizzium.projectapple.entity.FriendlySkizzie;
 import com.skizzium.projectapple.entity.layer.SkizzieGlowLayer;
 import com.skizzium.projectapple.entity.model.SkizzieModel;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.model.DrownedModel;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import ResourceLocation;
+
 @OnlyIn(Dist.CLIENT)
-public class FriendlySkizzieRenderer extends MobRenderer<FriendlySkizzie, SkizzieModel<FriendlySkizzie>> {
+public class FriendlySkizzieRenderer extends DrownedModel<FriendlySkizzie, SkizzieModel<FriendlySkizzie>> {
    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("skizzik:textures/entity/friendly_skizzie/friendly_skizzie.png");
 
-   public FriendlySkizzieRenderer(EntityRendererManager manager) {
+   public FriendlySkizzieRenderer(EntityRenderDispatcher manager) {
       super(manager, new SkizzieModel(), 0.45F);
       this.addLayer(new SkizzieGlowLayer(this));
    }

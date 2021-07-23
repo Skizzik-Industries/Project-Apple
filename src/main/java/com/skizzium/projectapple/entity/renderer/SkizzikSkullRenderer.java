@@ -1,32 +1,34 @@
 package com.skizzium.projectapple.entity.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.skizzium.projectapple.entity.SkizzikSkull;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.model.GenericHeadModel;
+import net.minecraft.client.gui.spectator.categories.TeleportToPlayerMenuCategory;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.projectile.WitherSkullEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import ResourceLocation;
+
 @OnlyIn(Dist.CLIENT)
-public class SkizzikSkullRenderer extends EntityRenderer<SkizzikSkull> {
+public class SkizzikSkullRenderer extends TeleportToPlayerMenuCategory<SkizzikSkull> {
    private static final ResourceLocation LEVEL_1 = new ResourceLocation("skizzik:textures/entity/skizzik_head/level_1.png");
    private static final ResourceLocation LEVEL_2 = new ResourceLocation("skizzik:textures/entity/skizzik_head/level_2.png");
    private static final ResourceLocation LEVEL_3 = new ResourceLocation("skizzik:textures/entity/skizzik_head/level_3.png");
-   private final GenericHeadModel model = new GenericHeadModel(0, 0, 32, 16);
+   private final SkullModel model = new SkullModel(0, 0, 32, 16);
 
-   public SkizzikSkullRenderer(EntityRendererManager renderer) {
+   public SkizzikSkullRenderer(EntityRenderDispatcher renderer) {
       super(renderer);
    }
 
@@ -34,14 +36,14 @@ public class SkizzikSkullRenderer extends EntityRenderer<SkizzikSkull> {
       return 15;
    }
 
-   public void render(SkizzikSkull skull, float yaw, float pitch, MatrixStack matrix, IRenderTypeBuffer renderer, int light) {
+   public void render(SkizzikSkull skull, float yaw, float pitch, PoseStack matrix, MultiBufferSource renderer, int light) {
       matrix.pushPose();
       matrix.scale(-1.0F, -1.0F, 1.0F);
 
-      float yRot = MathHelper.rotlerp(skull.yRotO, skull.yRot, pitch);
-      float xRot = MathHelper.lerp(pitch, skull.xRotO, skull.xRot);
+      float yRot = Mth.rotlerp(skull.yRotO, skull.yRot, pitch);
+      float xRot = Mth.lerp(pitch, skull.xRotO, skull.xRot);
 
-      IVertexBuilder vertex = renderer.getBuffer(this.model.renderType(this.getTextureLocation(skull)));
+      VertexConsumer vertex = renderer.getBuffer(this.model.renderType(this.getTextureLocation(skull)));
       this.model.setupAnim(0.0F, yRot, xRot);
       this.model.renderToBuffer(matrix, vertex, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 

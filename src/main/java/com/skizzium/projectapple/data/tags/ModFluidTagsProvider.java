@@ -3,7 +3,7 @@ package com.skizzium.projectapple.data.tags;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_Tags;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.FluidTagsProvider;
+import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 

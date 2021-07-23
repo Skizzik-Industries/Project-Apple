@@ -1,16 +1,16 @@
 package com.skizzium.projectapple.entity.ai;
 
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.Items;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.Items;
 
 import java.util.EnumSet;
 
-public class MinigunShootAttackGoal<T extends MonsterEntity & IRangedAttackMob> extends Goal {
+public class MinigunShootAttackGoal<T extends Monster & RangedAttackMob> extends Goal {
     private final T entity;
     private final double speedModifier;
     private int attackIntervalMin;
@@ -39,7 +39,7 @@ public class MinigunShootAttackGoal<T extends MonsterEntity & IRangedAttackMob> 
     }
 
     protected boolean isHoldingMinigun() {
-        return this.entity.isHolding(item -> item instanceof BowItem);
+        return true; //this.entity.isHolding(item -> item instanceof BowItem);
     }
 
     public boolean canContinueToUse() {
@@ -64,7 +64,7 @@ public class MinigunShootAttackGoal<T extends MonsterEntity & IRangedAttackMob> 
 
         if (target != null) {
             double distance = this.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            boolean flag = this.entity.getSensing().canSee(target);
+            boolean flag = this.entity.getSensing().hasLineOfSight(target);
             boolean flag1 = this.seeTime > 0;
             if (flag != flag1) {
                 this.seeTime = 0;
@@ -127,7 +127,7 @@ public class MinigunShootAttackGoal<T extends MonsterEntity & IRangedAttackMob> 
                 }
             }
             else if (--this.attackTime <= 0 && this.seeTime >= -60) {
-                this.entity.startUsingItem(ProjectileHelper.getWeaponHoldingHand(this.entity, Items.BOW));
+                this.entity.startUsingItem(ProjectileUtil.getWeaponHoldingHand(this.entity, Items.BOW));
             }
         }
     }

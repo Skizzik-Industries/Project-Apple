@@ -3,24 +3,24 @@ package com.skizzium.projectapple.potion;
 import com.google.common.collect.Maps;
 import com.skizzium.projectapple.entity.CorruptedSkizzie;
 import com.skizzium.projectapple.init.PA_Effects;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.AttributeModifierManager;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.damagesource.DamageSource;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CorruptionPotion extends Effect {
+public class CorruptionPotion extends MobEffect {
     private final Map<Attribute, AttributeModifier> attributeModifiers = Maps.newHashMap();
 
-    public CorruptionPotion(EffectType harmful, int amplifier) {
+    public CorruptionPotion(MobEffectCategory harmful, int amplifier) {
         super(harmful, amplifier);
     }
 
@@ -35,22 +35,7 @@ public class CorruptionPotion extends Effect {
     }
 
     @Override
-    public boolean shouldRenderInvText(EffectInstance effect) {
-        return true;
-    }
-
-    @Override
-    public boolean shouldRender(EffectInstance effect) {
-        return true;
-    }
-
-    @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
-    }
-
-    @Override
-    public boolean shouldRenderHUD(EffectInstance effect) {
         return true;
     }
 
@@ -71,7 +56,7 @@ public class CorruptionPotion extends Effect {
     }
 
     @Override
-    public void removeAttributeModifiers(LivingEntity entity, AttributeModifierManager attribute, int amplifier) {
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attribute, int amplifier) {
         super.removeAttributeModifiers(entity, attribute, amplifier);
 
         if (!(entity instanceof CorruptedSkizzie)) {

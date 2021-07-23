@@ -1,23 +1,25 @@
 package com.skizzium.projectapple.entity.model;
 
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import Entity;
+
 @OnlyIn(Dist.CLIENT)
 public class SkizzoModel<T extends Entity> extends EntityModel<T> {
-	private final ModelRenderer head;
+	private final ModelPart head;
 
 	public SkizzoModel() {
 		texWidth = 64;
 		texHeight = 64;
 
-		head = new ModelRenderer(this);
+		head = new ModelPart(this);
 		head.setPos(0.0F, 18.0F, 0.0F);
 		head.texOffs(0, 0).addBox(-6.0F, -27.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
 		head.texOffs(0, 24).addBox(-4.0F, -15.0F, -4.0F, 8.0F, 1.0F, 8.0F, 0.0F, false);
@@ -34,7 +36,7 @@ public class SkizzoModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int light, int overlay, float red, float green, float blue, float alpha){
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha){
 		head.render(matrixStack, buffer, light, overlay);
 	}
 }

@@ -1,49 +1,53 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import net.minecraft.block.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FlowersFeature;
-import net.minecraft.world.lighting.LightEngine;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.AbstractFlowerFeature;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.lighting.LayerLightEngine;
 import net.minecraftforge.common.IPlantable;
 
 import java.util.List;
 import java.util.Random;
 
-public class CandyNylium extends Block implements IGrowable {
+public class CandyNylium extends Block implements BonemealableBlock {
     public CandyNylium(Properties properties) {
         super(properties);
     }
 
-    public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction direction, IPlantable plantable) {
+    @Override
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, IPlantable plantable) {
         return true;
     }
 
-    private static boolean canBeNylium(BlockState state, IWorldReader world, BlockPos pos) {
+    private static boolean canBeNylium(BlockState state, LevelReader world, BlockPos pos) {
         BlockPos blockpos = pos.above();
         BlockState blockstate = world.getBlockState(blockpos);
         if (blockstate.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(world, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(world, blockpos));
+            int i = LayerLightEngine.getLightBlockInto(world, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(world, blockpos));
             return i < world.getMaxLightLevel();
         }
     }
 
-    private static boolean canPropagate(BlockState state, IWorldReader world, BlockPos pos) {
+    private static boolean canPropagate(BlockState state, LevelReader world, BlockPos pos) {
         BlockPos blockpos = pos.above();
         return canBeNylium(state, world, pos) && !world.getFluidState(blockpos).is(FluidTags.WATER);
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand) {
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random rand) {
         super.tick(state, world, pos, rand);
         if (!canBeNylium(state, world, pos)) {
             if (!world.isAreaLoaded(pos, 3)) return;
@@ -62,17 +66,17 @@ public class CandyNylium extends Block implements IGrowable {
     }
 
     @Override
-    public boolean isValidBonemealTarget(IBlockReader world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.above()).isAir();
     }
 
     @Override
-    public boolean isBonemealSuccess(World world, Random rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level world, Random rand, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel world, Random rand, BlockPos pos, BlockState state) {
         BlockPos blockpos = pos.above();
         BlockState blockstate = Blocks.GRASS.defaultBlockState();
 
@@ -89,7 +93,7 @@ public class CandyNylium extends Block implements IGrowable {
 
             BlockState blockstate2 = world.getBlockState(blockpos1);
             if (blockstate2.is(blockstate.getBlock()) && rand.nextInt(10) == 0) {
-                ((IGrowable)blockstate.getBlock()).performBonemeal(world, rand, blockpos1, blockstate2);
+                ((BonemealableBlock)blockstate.getBlock()).performBonemeal(world, rand, blockpos1, blockstate2);
             }
 
             if (blockstate2.isAir()) {
@@ -101,7 +105,7 @@ public class CandyNylium extends Block implements IGrowable {
                     }
 
                     ConfiguredFeature<?, ?> configuredfeature = list.get(0);
-                    FlowersFeature flowersfeature = (FlowersFeature)configuredfeature.feature;
+                    AbstractFlowerFeature flowersfeature = (AbstractFlowerFeature)configuredfeature.feature;
                     blockstate1 = flowersfeature.getRandomFlower(rand, blockpos1, configuredfeature.config());
                 } else {
                     blockstate1 = blockstate;
