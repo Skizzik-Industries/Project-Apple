@@ -164,7 +164,6 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     public static AttributeModifierMap.MutableAttribute buildAttributes() {
-        //this.getAttribute(Attributes.ARMOR)
         return MonsterEntity.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 1021.0D)
                 .add(Attributes.ARMOR, 8.0D)
@@ -346,30 +345,40 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
             else {
                 this.bossBar.setName(new StringTextComponent("Skizzik - Sleeping"));
             }
+            bossBar.setColor(BossInfo.Color.WHITE);
         }
 
         if (currentStage != newStage) {
-            // I was previously checking for both old and new stage below
-            // but I decided not to do that since there can be modded weapons that allow people to deal enough damage to skip a stage.
-            // Also, people can use command blocks to skip stages or come back to others (I know because I did.)
-            if (newStage == 1) {
+            if (currentStage == 0 && newStage == 1) {
                 this.setHealth(1020);
             }
+
+            if (newStage == 1) {
+
+            }
             else if (newStage == 2) {
-                this.setHealth(870);
+
             }
             else if (newStage == 3) {
-                this.setHealth(670);
+
             }
             else if (newStage == 4) {
-                this.setHealth(470);
+
             }
             else if (newStage == 5) {
-                this.setHealth(270);
+
             }
             else if (newStage == 6) {
-                this.setHealth(20);
                 bossBar.setColor(BossInfo.Color.WHITE);
+                this.setSpeed(1.2F);
+            }
+
+
+            if (newStage != 0 && newStage != 6) {
+                bossBar.setColor(BossInfo.Color.RED);
+            }
+            if (newStage != 6) {
+                this.setSpeed(0.6F);
             }
 
             if (world instanceof ServerWorld) {
