@@ -62,8 +62,9 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     private final int[] idleHeadUpdates = new int[4];
 
     private int destroyBlocksTick;
-    private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
     private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.LIVING_ENTITY_SELECTOR);
+
+    private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, World world) {
         super(entity, world);
@@ -348,13 +349,28 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         }
 
         if (currentStage != newStage) {
-            if (currentStage == 0 && newStage == 1) {
+            // I was previously checking for both old and new stage below
+            // but I decided not to do that since there can be modded weapons that allow people to deal enough damage to skip a stage.
+            // Also, people can use command blocks to skip stages or come back to others (I know because I did.)
+            if (newStage == 1) {
                 this.setHealth(1020);
             }
-
-            //if (newStage == 1) {
-
-            //}
+            else if (newStage == 2) {
+                this.setHealth(870);
+            }
+            else if (newStage == 3) {
+                this.setHealth(670);
+            }
+            else if (newStage == 4) {
+                this.setHealth(470);
+            }
+            else if (newStage == 5) {
+                this.setHealth(270);
+            }
+            else if (newStage == 6) {
+                this.setHealth(20);
+                bossBar.setColor(BossInfo.Color.WHITE);
+            }
 
             if (world instanceof ServerWorld) {
                 PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
