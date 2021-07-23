@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.potion;
 
 import com.google.common.collect.Maps;
-import com.skizzium.projectapple.entity.CorruptedSkizzie;
 import com.skizzium.projectapple.init.PA_Effects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -47,22 +46,15 @@ public class CorruptionPotion extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (!(entity instanceof CorruptedSkizzie)) {
-            super.applyEffectTick(entity, amplifier);
-        }
-        else {
-            entity.removeEffect(PA_Effects.CORRUPTION.get());
-        }
+        super.applyEffectTick(entity, amplifier);
     }
 
     @Override
     public void removeAttributeModifiers(LivingEntity entity, AttributeMap attribute, int amplifier) {
         super.removeAttributeModifiers(entity, attribute, amplifier);
 
-        if (!(entity instanceof CorruptedSkizzie)) {
             if (entity instanceof LivingEntity) {
                 entity.hurt(new DamageSource("corrupted").bypassArmor(), Float.MAX_VALUE);
             }
-        }
     }
 }

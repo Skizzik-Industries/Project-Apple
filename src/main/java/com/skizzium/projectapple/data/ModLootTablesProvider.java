@@ -57,23 +57,18 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.COMMAND_BLOCK.get());
             dropSelf(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
-
-            dropSelf(PA_Blocks.SMALL_SKIZZIK_HEAD.get());
-            dropSelf(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
-            dropSelf(PA_Blocks.SKIZZIK_HEAD.get());
-            dropSelf(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
             dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
             dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());
             dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
-            add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable().withPool(LootPool.lootPool()
+            add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()))
                                                                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,4))))
                                                                                    .withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get()))
-                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))*/
                                                                                    .withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(Items.NETHER_STAR))
@@ -92,7 +87,6 @@ public class ModLootTablesProvider extends LootTableProvider {
                                                                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))));
 
             dropSelf(PA_Blocks.CANDY_CANE.get());
-            dropSelf(PA_Blocks.CANDY_SIGN.get());
             dropSelf(PA_Blocks.WAFFLE_BLOCK.get());
 
             dropSelf(PA_Blocks.WHITE_CHOCOLATE_BLOCK.get());

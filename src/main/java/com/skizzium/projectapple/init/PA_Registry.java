@@ -43,7 +43,5 @@ public class PA_Registry {
         PA_SoundEvents.register();
         PA_Effects.register();
         PA_Fluids.register();
-        PA_Entities.register();
-        PA_TileEntities.register();
     }
 }

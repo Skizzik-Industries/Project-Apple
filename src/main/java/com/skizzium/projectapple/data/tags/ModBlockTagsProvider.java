@@ -19,16 +19,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
         tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
-        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_HEAD.get());
-        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_WALL_HEAD.get());
-        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
-        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_WALL_HEAD_WITH_GEMS.get());
-
-        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_HEAD.get());
-        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_WALL_HEAD.get());
-        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
-        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
-
         tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.COMMAND_BLOCK.get());
         tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.COMMAND_BLOCK.get());
 
@@ -38,8 +28,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.DRAGON_EGG);
         tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.RAINBOW_GEM_BLOCK.get());
         tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.RAINBOW_ORE.get());
-        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
-        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).addTag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE);
         tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR);
@@ -68,13 +56,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(PA_Tags.Blocks.BUTTONS).add(PA_Blocks.CANDY_BUTTON.get());
         tag(PA_Tags.Blocks.WOODEN_BUTTONS).add(PA_Blocks.CANDY_BUTTON.get());
-
-        tag(PA_Tags.Blocks.SIGNS).add(PA_Blocks.CANDY_WALL_SIGN.get());
-        tag(PA_Tags.Blocks.WALL_SIGNS).add(PA_Blocks.CANDY_WALL_SIGN.get());
-
-        tag(PA_Tags.Blocks.SIGNS).add(PA_Blocks.CANDY_SIGN.get());
-        tag(PA_Tags.Blocks.STANDING_SIGNS).add(PA_Blocks.CANDY_SIGN.get());
-        tag(PA_Tags.Blocks.WALL_POST_OVERRIDE).add(PA_Blocks.CANDY_SIGN.get());
 
         tag(PA_Tags.Blocks.PLANKS).add(PA_Blocks.CANDY_PLANKS.get());
         tag(PA_Tags.Blocks.SLABS).add(PA_Blocks.CANDY_SLAB.get());

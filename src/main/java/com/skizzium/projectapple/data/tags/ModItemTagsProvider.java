@@ -16,10 +16,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         copy(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS, PA_Tags.Items.SKIZZIK_COMMAND_BLOCKS);
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get());
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD.get());
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.PANCAKES.get());
         tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.SYRUP_PANCAKES.get());
@@ -32,8 +28,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         copy(PA_Tags.Blocks.WOODEN_PRESSURE_PLATES, PA_Tags.Items.WOODEN_PRESSURE_PLATES);
         copy(PA_Tags.Blocks.BUTTONS, PA_Tags.Items.BUTTONS);
         copy(PA_Tags.Blocks.WOODEN_BUTTONS, PA_Tags.Items.WOODEN_BUTTONS);
-
-        tag(PA_Tags.Items.SIGNS).add(PA_Items.CANDY_SIGN.get());
 
         copy(PA_Tags.Blocks.PLANKS, PA_Tags.Items.PLANKS);
         copy(PA_Tags.Blocks.SLABS, PA_Tags.Items.SLABS);

@@ -1,8 +1,6 @@
 package com.skizzium.projectapple;
 
-import com.skizzium.projectapple.init.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
-import com.skizzium.projectapple.init.PA_TileEntities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,9 +20,7 @@ public class ProjectApple
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(PA_Blocks::renderLayers);
-        modBus.addListener(PA_Entities::registerRenderers);
         modBus.addListener(PA_Blocks::registerOtherStuff);
-        modBus.addListener(PA_TileEntities::registerCustomSkullRenderers);
 
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;

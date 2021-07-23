@@ -10,8 +10,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-version = '2.0.0-beta-2'
+version = '2.0.0-beta-1'
 group = 'com.skizzium.projectapple'
 archivesBaseName = 'skizzik'
 
@@ -61,6 +62,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.1'
+    implementation('cpw.mods:securejarhandler') { version { strictly '0.9.45' } }
 }
 
 jar {
