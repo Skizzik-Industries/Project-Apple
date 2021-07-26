@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.util.SkizzieConvertion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;
@@ -12,13 +13,10 @@ import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
@@ -139,10 +137,10 @@ public class Skizzie extends MonsterEntity {
         world.addFreshEntity(lightning);
     }
 
-    /* @Override
+    @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
-
-    } */
+        return SkizzieConvertion.conversion(this, player);
+    }
 
     @Override
     public void playerTouch(PlayerEntity player) {

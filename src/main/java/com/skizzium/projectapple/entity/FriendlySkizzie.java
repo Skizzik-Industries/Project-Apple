@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.util.SkizzieConvertion;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
@@ -122,7 +123,7 @@ public class FriendlySkizzie extends CreatureEntity {
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         player.startRiding(this);
-        return super.mobInteract(player, hand);
+        return SkizzieConvertion.conversion(this, player);
     }
 
     @Override
