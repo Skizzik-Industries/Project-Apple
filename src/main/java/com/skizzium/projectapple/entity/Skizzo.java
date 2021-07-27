@@ -1,8 +1,6 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.PA_Entities;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;
@@ -17,7 +15,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.TridentEntity;
-import net.minecraft.entity.projectile.WitherSkullEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
@@ -27,8 +25,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class Skizzo extends MonsterEntity {
+    private UUID ownerUUID;
+    private int ownerNetworkId;
+
     public Skizzo(EntityType<? extends Skizzo> entity, World world) {
         super(entity, world);
         this.xpReward = 25;
@@ -116,11 +121,42 @@ public class Skizzo extends MonsterEntity {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, true, true, PA_Entities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, true, true, PA_Entities.SKIZZIK_SELECTOR));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.D, 0.0F));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+    }
+
+    public void setOwner(@Nullable Entity entity) {
+        if (entity != null) {
+            this.ownerUUID = entity.getUUID();
+            this.ownerNetworkId = entity.getId();
+        }
+    }
+
+    @Nullable
+    public Entity getOwner() {
+        if (this.ownerUUID != null && this.level instanceof ServerWorld) {
+            return ((ServerWorld)this.level).getEntity(this.ownerUUID);
+        }
+        else {
+            return this.ownerNetworkId != 0 ? this.level.getEntity(this.ownerNetworkId) : null;
+        }
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        if (this.ownerUUID != null) {
+            nbt.putUUID("Owner", this.ownerUUID);
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        if (nbt.hasUUID("Owner")) {
+            this.ownerUUID = nbt.getUUID("Owner");
+        }
     }
 
     @Override

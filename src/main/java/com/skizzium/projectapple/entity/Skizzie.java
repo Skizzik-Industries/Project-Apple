@@ -14,6 +14,7 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.*;
@@ -21,8 +22,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class Skizzie extends MonsterEntity {
+    private UUID ownerUUID;
+    private int ownerNetworkId;
+
     public Skizzie(EntityType<? extends Skizzie> entity, World world) {
         super(entity, world);
         this.xpReward = 7;
@@ -105,12 +113,44 @@ public class Skizzie extends MonsterEntity {
                 .add(Attributes.FLYING_SPEED, 0.3D);
     }
 
+    public void setOwner(@Nullable Entity entity) {
+        if (entity != null) {
+            this.ownerUUID = entity.getUUID();
+            this.ownerNetworkId = entity.getId();
+        }
+    }
+
+    @Nullable
+    public Entity getOwner() {
+        if (this.ownerUUID != null && this.level instanceof ServerWorld) {
+            return ((ServerWorld)this.level).getEntity(this.ownerUUID);
+        }
+        else {
+            return this.ownerNetworkId != 0 ? this.level.getEntity(this.ownerNetworkId) : null;
+        }
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        if (this.ownerUUID != null) {
+            nbt.putUUID("Owner", this.ownerUUID);
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        if (nbt.hasUUID("Owner")) {
+            this.ownerUUID = nbt.getUUID("Owner");
+        }
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, true, true, PA_Entities.LIVING_ENTITY_SELECTOR));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, true, true, PA_Entities.SKIZZIK_SELECTOR));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.D, 0.0F));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
