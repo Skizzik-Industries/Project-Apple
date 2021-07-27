@@ -6,7 +6,7 @@
   "block.skizzik.deactivated_command_block": "Deactivated Command Block",
   "block.skizzik.broken_command_block": "Broken Command Block",
 
-  "subtitles.entity.skizzik_flesh.equip" : "Skizzik Flesh tearing",
+  "subtitles.item.armor.equip_skizzik" : "Skizzik Flesh tearing",
   "item.skizzik.skizzik_flesh_cap": "Skizzik Flesh Cap",
   "item.skizzik.skizzik_flesh_tunic": "Skizzik Flesh Tunic",
   "item.skizzik.skizzik_flesh_pants": "Skizzik Flesh Pants",
@@ -55,6 +55,7 @@
   "entity.skizzik.skizzik": "Skizzik",
 
   "death.attack.skizzikSkull": "%1$s was shot by a skull from %2$s",
+  "subtitles.entity.skizzik.finish_him": "§4§l!!! FINISH HIM !!!",
 
   "item.skizzik.salt": "Salt",
   "item.skizzik.butter": "Butter",

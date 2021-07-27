@@ -1,16 +1,20 @@
 {
-  "entity.skizzik_flesh.equip": {
-    "category": "entity",
-    "subtitle": "subtitles.entity.skizzik_flesh.equip",
+  "item.armor.equip_skizzik": {
+    "subtitle": "subtitles.item.armor.equip_skizzik",
     "sounds": [{
-      "name": "skizzik:entity/skizzik_flesh_equip"
+      "name": "skizzik:item/armor/equip_skizzik"
     }]
   },
   "music.skizzik": {
-    "category": "music",
     "sounds": [{
       "name": "skizzik:music/skizzik",
       "stream": true
+    }]
+  },
+  "entity.skizzik.finish_him": {
+    "subtitle": "subtitles.entity.skizzik.finish_him",
+    "sounds": [{
+      "name": "skizzik:entity/skizzik/finish_him"
     }]
   }
 }

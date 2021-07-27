@@ -16,7 +16,7 @@ public enum PA_ArmorMaterials implements IArmorMaterial {
     CANDIANITE("candianite", 15, new int[]{2, 5, 6, 2}, 15, SoundEvents.SLIME_BLOCK_PLACE, 0.0F, 0.0F, () -> {
         return Ingredient.of(PA_Items.CANDIANITE_INGOT.get());
     }),
-    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, PA_SoundEvents.FLESH_EQUIP_LAZY.get(), 0.5F, 0F, () -> {
+    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, PA_SoundEvents.EQUIP_FLESH_LAZY.get(), 0.5F, 0F, () -> {
         return Ingredient.of(PA_Items.SKIZZIK_FLESH.get());
     });
 
