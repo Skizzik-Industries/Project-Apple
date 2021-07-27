@@ -16,28 +16,17 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         copy(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS, PA_Tags.Items.SKIZZIK_COMMAND_BLOCKS);
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get());
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD.get());
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
-
-        tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.PANCAKES.get());
-        tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.SYRUP_PANCAKES.get());
-
         copy(PA_Tags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS, PA_Tags.Items.SKIZZIK_CHOCOLATE_BLOCKS);
-        tag(PA_Tags.Items.SKIZZIK_CHOCOLATE).add(PA_Items.WHITE_CHOCOLATE_BAR.get());
-        tag(PA_Tags.Items.SKIZZIK_CHOCOLATE).add(PA_Items.CHOCOLATE_BAR.get());
-        tag(PA_Tags.Items.SKIZZIK_CHOCOLATE).add(PA_Items.DARK_CHOCOLATE_BAR.get());
 
         copy(PA_Tags.Blocks.WOODEN_PRESSURE_PLATES, PA_Tags.Items.WOODEN_PRESSURE_PLATES);
         copy(PA_Tags.Blocks.BUTTONS, PA_Tags.Items.BUTTONS);
         copy(PA_Tags.Blocks.WOODEN_BUTTONS, PA_Tags.Items.WOODEN_BUTTONS);
 
-        tag(PA_Tags.Items.SIGNS).add(PA_Items.CANDY_SIGN.get());
-
         copy(PA_Tags.Blocks.PLANKS, PA_Tags.Items.PLANKS);
+
         copy(PA_Tags.Blocks.SLABS, PA_Tags.Items.SLABS);
         copy(PA_Tags.Blocks.WOODEN_SLABS, PA_Tags.Items.WOODEN_SLABS);
+
         copy(PA_Tags.Blocks.STAIRS, PA_Tags.Items.STAIRS);
         copy(PA_Tags.Blocks.WOODEN_STAIRS, PA_Tags.Items.WOODEN_STAIRS);
 
@@ -46,6 +35,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         copy(PA_Tags.Blocks.TRAPDOORS, PA_Tags.Items.TRAPDOORS);
         copy(PA_Tags.Blocks.WOODEN_TRAPDOORS, PA_Tags.Items.WOODEN_TRAPDOORS);
+
         copy(PA_Tags.Blocks.DOORS, PA_Tags.Items.DOORS);
         copy(PA_Tags.Blocks.WOODEN_DOORS, PA_Tags.Items.WOODEN_DOORS);
 
@@ -56,24 +46,18 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         copy(PA_Tags.Blocks.CANDY_LOGS, PA_Tags.Items.CANDY_LOGS);
 
         copy(PA_Tags.Blocks.BEACON_BASE_BLOCKS, PA_Tags.Items.BEACON_BASE_BLOCKS);
-        tag(PA_Tags.Items.BEACON_PAYMENT_ITEMS).add(PA_Items.RAINBOW_GEM.get());
-        tag(PA_Tags.Items.BEACON_PAYMENT_ITEMS).add(PA_Items.CANDIANITE_INGOT.get());
 
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.BLACK_GEM.get());
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.BLUE_GEM.get());
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.BROWN_GEM.get());
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.YELLOW_GEM.get());
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.ORANGE_GEM.get());
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.GREEN_GEM.get());
-        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.PINK_GEM.get());
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get(), PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
+
+        tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.PANCAKES.get(), PA_Items.SYRUP_PANCAKES.get());
+        tag(PA_Tags.Items.SKIZZIK_CHOCOLATE).add(PA_Items.WHITE_CHOCOLATE_BAR.get(), PA_Items.CHOCOLATE_BAR.get(), PA_Items.DARK_CHOCOLATE_BAR.get());
+
+        tag(PA_Tags.Items.SIGNS).add(PA_Items.CANDY_SIGN.get());
+
+        tag(PA_Tags.Items.BEACON_PAYMENT_ITEMS).add(PA_Items.CANDIANITE_INGOT.get(), PA_Items.RAINBOW_GEM.get());
+        tag(PA_Tags.Items.BASE_GEMS).add(PA_Items.BLACK_GEM.get(), PA_Items.BLUE_GEM.get(), PA_Items.BROWN_GEM.get(), PA_Items.YELLOW_GEM.get(), PA_Items.ORANGE_GEM.get(), PA_Items.GREEN_GEM.get(), PA_Items.PINK_GEM.get());
 
         tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.RAINBOW_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.BLACK_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.BLUE_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.BROWN_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.YELLOW_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.ORANGE_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.GREEN_GEM.get());
-        tag(PA_Tags.Items.ALL_GEMS).add(PA_Items.PINK_GEM.get());
+        tag(PA_Tags.Items.ALL_GEMS).addTag(PA_Tags.Items.BASE_GEMS);
     }
 }
