@@ -20,6 +20,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.tileentity.SkullTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -142,6 +144,31 @@ public class PA_Blocks {
                 return item;
             }
         };
+
+        DispenserBlock.registerBehavior(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseBehavior() {
+            protected ItemStack execute(IBlockSource source, ItemStack itemStack) {
+                World world = source.getLevel();
+                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+                BlockPos blockpos = source.getPos().relative(direction);
+
+                if (world.isEmptyBlock(blockpos) && SkizzikHeadWithGems.canSpawnMob(world, blockpos, itemStack)) {
+                    world.setBlock(blockpos, PA_Blocks.SKIZZIK_HEAD.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(direction.getAxis() == Direction.Axis.Y ? 0 : direction.getOpposite().get2DDataValue() * 4)), 3);
+                    TileEntity tileEntity = world.getBlockEntity(blockpos);
+
+                    if (tileEntity instanceof SkullTileEntity) {
+                        SkizzikHeadWithGems.checkSpawn(world, blockpos, (SkullTileEntity)tileEntity);
+                    }
+
+                    itemStack.shrink(1);
+                    this.setSuccess(true);
+                }
+                else {
+                    this.setSuccess(ArmorItem.dispenseArmor(source, itemStack));
+                }
+
+                return itemStack;
+            }
+        });
 
         for(SpawnEggItem egg : SpawnEggItem.eggs()) {
             DispenserBlock.registerBehavior(egg, entityDispenseBehavior);

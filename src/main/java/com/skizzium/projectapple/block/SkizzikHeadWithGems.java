@@ -1,16 +1,44 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.entity.Skizzik;
+import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.tileentity.PA_Skull;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SkullBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.pattern.BlockMaterialMatcher;
+import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.block.pattern.BlockPatternBuilder;
+import net.minecraft.block.pattern.BlockStateMatcher;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tileentity.SkullTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.CachedBlockInfo;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class SkizzikHeadWithGems extends SkullBlock {
-    /* @Nullable
+    @Nullable
     private static BlockPattern skizzikPatternFull;
     @Nullable
-    private static BlockPattern skizzikPatternBase; */
+    private static BlockPattern skizzikPatternBase;
 
     public SkizzikHeadWithGems(ISkullType skull, Properties properties) {
         super(skull, properties);
@@ -26,7 +54,8 @@ public class SkizzikHeadWithGems extends SkullBlock {
         return true;
     }
 
-    /* public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
+    @Override
+    public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
         super.setPlacedBy(world, pos, state, entity, stack);
         TileEntity block = world.getBlockEntity(pos);
         
@@ -34,73 +63,77 @@ public class SkizzikHeadWithGems extends SkullBlock {
             checkSpawn(world, pos, (SkullTileEntity)block);
         }
     }
-
+    
     public static void checkSpawn(World world, BlockPos pos, SkullTileEntity block) {
         if (!world.isClientSide) {
             BlockState state = block.getBlockState();
-            boolean flag = state.is(ModBlocks.SKIZZIK_HEAD.get()) || state.is(ModBlocks.SKIZZIK_WALL_HEAD.get());
+            boolean isSkizzikHead = state.is(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
-            if (flag && pos.getY() >= 0 && world.getDifficulty() != Difficulty.PEACEFUL) {
+            if (isSkizzikHead && pos.getY() >= 0 && world.getDifficulty() != Difficulty.PEACEFUL) {
                 BlockPattern pattern = getOrCreateSkizzikFull();
-                BlockPattern.PatternHelper pattern$helper = pattern.find(world, pos);
+                BlockPattern.PatternHelper patternHelper = pattern.find(world, pos);
 
-                if (pattern$helper != null) {
+                if (patternHelper != null) {
                     for(int i = 0; i < pattern.getWidth(); ++i) {
                         for(int j = 0; j < pattern.getHeight(); ++j) {
-                            CachedBlockInfo cachedBlock = pattern$helper.getBlock(i, j, 0);
+                            CachedBlockInfo cachedBlock = patternHelper.getBlock(i, j, 0);
                             world.setBlock(cachedBlock.getPos(), Blocks.AIR.defaultBlockState(), 2);
                             world.levelEvent(2001, cachedBlock.getPos(), Block.getId(cachedBlock.getState()));
                         }
                     }
 
-                    Skizzik skizzik = EntityType.WITHER.create(world);
-                    BlockPos blockPos = pattern$helper.getBlock(1, 2, 0).getPos();
-                    witherentity.moveTo((double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.55D, (double)blockpos.getZ() + 0.5D, blockpattern$patternhelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F, 0.0F);
-                    witherentity.yBodyRot = blockpattern$patternhelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F;
-                    witherentity.makeInvulnerable();
+                    Skizzik skizzik = PA_Entities.SKIZZIK.create(world);
+                    BlockPos blockPos = patternHelper.getBlock(1, 2, 0).getPos();
 
-                    for(ServerPlayerEntity serverplayerentity : world.getEntitiesOfClass(ServerPlayerEntity.class, witherentity.getBoundingBox().inflate(50.0D))) {
-                        CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayerentity, witherentity);
+                    skizzik.moveTo((double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.55D, (double)blockPos.getZ() + 0.5D, patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F, 0.0F);
+                    skizzik.yBodyRot = patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F;
+
+                    for(ServerPlayerEntity player : world.getEntitiesOfClass(ServerPlayerEntity.class, skizzik.getBoundingBox().inflate(50.0D))) {
+                        CriteriaTriggers.SUMMONED_ENTITY.trigger(player, skizzik);
                     }
 
-                    world.addFreshEntity(witherentity);
+                    world.addFreshEntity(skizzik);
 
-                    for(int k = 0; k < blockpattern.getWidth(); ++k) {
-                        for(int l = 0; l < blockpattern.getHeight(); ++l) {
-                            world.blockUpdated(blockpattern$patternhelper.getBlock(k, l, 0).getPos(), Blocks.AIR);
+                    for(int k = 0; k < pattern.getWidth(); ++k) {
+                        for(int l = 0; l < pattern.getHeight(); ++l) {
+                            world.blockUpdated(patternHelper.getBlock(k, l, 0).getPos(), Blocks.AIR);
                         }
                     }
-
                 }
             }
         }
     }
 
-    public static boolean canSpawnMob(World p_196299_0_, BlockPos p_196299_1_, ItemStack p_196299_2_) {
-        if (p_196299_2_.getItem() == Items.WITHER_SKELETON_SKULL && p_196299_1_.getY() >= 2 && p_196299_0_.getDifficulty() != Difficulty.PEACEFUL && !p_196299_0_.isClientSide) {
-            return getOrCreateWitherBase().find(p_196299_0_, p_196299_1_) != null;
-        } else {
+    public static boolean canSpawnMob(World world, BlockPos pos, ItemStack itemStack) {
+        if ((itemStack.getItem() == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get() || itemStack.getItem() == PA_Items.SKIZZIK_HEAD_WITH_GEMS.get()) && pos.getY() >= 2 && world.getDifficulty() != Difficulty.PEACEFUL && !world.isClientSide) {
+            return getOrCreateSkizzikBase().find(world, pos) != null;
+        }
+        else {
             return false;
         }
     }
 
-    private static BlockPattern getOrCreateWitherFull() {
-        if (witherPatternFull == null) {
-            witherPatternFull = BlockPatternBuilder.start().aisle("^^^", "###", "~#~").where('#', (p_235639_0_) -> {
-                return p_235639_0_.getState().is(BlockTags.WITHER_SUMMON_BASE_BLOCKS);
-            }).where('^', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(Blocks.WITHER_SKELETON_SKULL).or(BlockStateMatcher.forBlock(Blocks.WITHER_SKELETON_WALL_SKULL)))).where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
+    private static BlockPattern getOrCreateSkizzikFull() {
+        if (skizzikPatternFull == null) {
+            skizzikPatternFull = BlockPatternBuilder.start().aisle("*~*", "*^*", "#@#", "~#~")
+                    .where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
+                    .where('*', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get())))
+                    .where('^', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()).or(BlockStateMatcher.forBlock(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get()))))
+                    .where('@', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(PA_Blocks.COMMAND_BLOCK.get())))
+                    .where('#', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
         }
 
-        return witherPatternFull;
+        return skizzikPatternFull;
     }
 
-    private static BlockPattern getOrCreateWitherBase() {
-        if (witherPatternBase == null) {
-            witherPatternBase = BlockPatternBuilder.start().aisle("   ", "###", "~#~").where('#', (p_235638_0_) -> {
-                return p_235638_0_.getState().is(BlockTags.WITHER_SUMMON_BASE_BLOCKS);
-            }).where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
+    private static BlockPattern getOrCreateSkizzikBase() {
+        if (skizzikPatternBase == null) {
+            skizzikPatternBase = BlockPatternBuilder.start().aisle("   ", "   ", "#@#", "~#~")
+                    .where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
+                    .where('@', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(PA_Blocks.COMMAND_BLOCK.get())))
+                    .where('#', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
         }
 
-        return witherPatternBase;
-    } */
+        return skizzikPatternBase;
+    }
 }
