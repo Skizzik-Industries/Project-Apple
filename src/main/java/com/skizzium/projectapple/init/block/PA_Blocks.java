@@ -152,7 +152,7 @@ public class PA_Blocks {
                 BlockPos blockpos = source.getPos().relative(direction);
 
                 if (world.isEmptyBlock(blockpos) && SkizzikHeadWithGems.canSpawnMob(world, blockpos, itemStack)) {
-                    world.setBlock(blockpos, PA_Blocks.SKIZZIK_HEAD.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(direction.getAxis() == Direction.Axis.Y ? 0 : direction.getOpposite().get2DDataValue() * 4)), 3);
+                    world.setBlock(blockpos, PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(direction.getAxis() == Direction.Axis.Y ? 0 : direction.getOpposite().get2DDataValue() * 4)), 3);
                     TileEntity tileEntity = world.getBlockEntity(blockpos);
 
                     if (tileEntity instanceof SkullTileEntity) {
