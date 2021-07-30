@@ -28,7 +28,6 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Blocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 
         PA_Blocks.SKIZZIK_LOOT_BAG.get().fillItemCategory(this, items);
-        PA_Blocks.SKIZZIE_STATUE.get().fillItemCategory(this, items);
 
         PA_Items.PLATINUM_NUGGET.get().fillItemCategory(this, items);
         PA_Items.PLATINUM_INGOT.get().fillItemCategory(this, items);

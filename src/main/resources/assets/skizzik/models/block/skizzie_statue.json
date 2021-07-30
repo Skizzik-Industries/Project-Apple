@@ -1,7 +1,0 @@
-{
-  "parent": "skizzik:custom/skizzie_statue",
-  "textures": {
-    "all": "skizzik:block/skizzie_statue",
-    "particle": "minecraft:block/stone"
-  }
-}

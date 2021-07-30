@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
     }
     dependencies {
@@ -10,7 +10,6 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 version = '2.0.0-beta-1'
 group = 'com.skizzium.projectapple'
@@ -20,7 +19,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.17'
+    mappings channel: 'official', version: '1.17.1'
+
     runs {
         client {
             workingDirectory project.file('run')
@@ -48,7 +48,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'skizzik', '--all', '--output', file('src/generated/resources'), "--validate", '--existing', file('src/main/resources')
+            args '--mod', 'skizzik', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
                 skizzik {
                     source sourceSets.main
@@ -60,21 +60,22 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+repositories {}
+
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.1'
-    implementation('cpw.mods:securejarhandler') { version { strictly '0.9.45' } }
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.15'
 }
 
 jar {
     manifest {
         attributes([
-            "Specification-Title": "skizzik",
-            "Specification-Vendor": "skizziksareus",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"skizziksareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Specification-Title"     : "skizzik",
+                "Specification-Vendor"    : "skizziksareus",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "skizziksareus",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
@@ -89,7 +90,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/mcmodsrepo"
         }
     }
 }

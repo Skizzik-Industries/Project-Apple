@@ -60,7 +60,6 @@ public class ModLootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
             dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());
-            dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
             add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable()/*.withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()))
