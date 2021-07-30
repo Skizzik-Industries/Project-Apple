@@ -29,7 +29,11 @@ import static com.skizzium.projectapple.ProjectApple.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Entities {
-    public static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = (entity) -> entity.getMobType() != CreatureAttribute.UNDEAD && entity.attackable();
+    public static final Predicate<LivingEntity> SKIZZIK_SELECTOR = (entity) -> entity.getMobType() != CreatureAttribute.UNDEAD &&
+                                                                                !(entity instanceof Skizzie) &&
+                                                                                !(entity instanceof Skizzo) &&
+                                                                                !(entity instanceof Skizzik) &&
+                                                                                entity.attackable();
 
     public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, EntityClassification.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
     public static final EntityType<FriendlySkizzie> FRIENDLY_SKIZZIE = registerEntity("friendly_skizzie", EntityType.Builder.of(FriendlySkizzie::new, EntityClassification.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));

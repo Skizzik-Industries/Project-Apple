@@ -1,27 +1,33 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.PA_SoundEvents;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.PotionEntity;
+import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
@@ -32,12 +38,10 @@ import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
@@ -48,9 +52,15 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     private static final DataParameter<Integer> DATA_TARGET_C = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_D = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_E = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
-
     private static final List<DataParameter<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
+
     private static final DataParameter<Integer> DATA_ID_STAGE = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
+
+    /*private int headCount = this.getStage() == 1 ? 5 :
+                                    this.getStage() == 2 ? 4 :
+                                            this.getStage() == 3 ? 3 :
+                                                    this.getStage() == 4 ? 2 :
+                                                            1;*/
 
     private final float[] xRotHeads = new float[4];
     private final float[] yRotHeads = new float[4];
@@ -62,7 +72,9 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     private final int[] idleHeadUpdates = new int[4];
 
     private int destroyBlocksTick;
-    private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.LIVING_ENTITY_SELECTOR);
+    private int spawnSkizzieTick;
+
+    private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
 
     private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
 
@@ -70,6 +82,11 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        return true;
     }
 
     @Override
@@ -263,13 +280,16 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     @Override
     public void addAdditionalSaveData(CompoundNBT nbt) {
         super.addAdditionalSaveData(nbt);
+
         nbt.putInt("Stage", this.getStage());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundNBT nbt) {
         super.readAdditionalSaveData(nbt);
+
         this.setStage(nbt.getInt("Stage"));
+
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());
         }
@@ -282,7 +302,9 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     private void performRangedAttack(int head, LivingEntity entity) {
-    /* SKIZZIK SKULL LEVEL! */    this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), 1);
+        this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), this.getStage() == 1 || this.getStage() == 2 ? 1 :
+                                                                                                                                this.getStage() == 3 || this.getStage() == 4 ? 2 :
+                                                                                                                                3);
     }
 
     private void performRangedAttack(int head, double x, double y, double z, int level) {
@@ -307,45 +329,33 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
-    protected void registerGoals() {
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, PA_Entities.LIVING_ENTITY_SELECTOR));
-        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 20.0F));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-    }
-
-    @Override
     public void baseTick() {
         super.baseTick();
 
-        World world = getCommandSenderWorld();
-        if (world instanceof ServerWorld) {
-            ((ServerWorld) world).setDayTime(18000);
-        }
+        /*headCount = this.getStage() == 1 ? 5 :
+                            this.getStage() == 2 ? 4 :
+                                    this.getStage() == 3 ? 3 :
+                                            this.getStage() == 4 ? 2 :
+                                                    1;*/
 
         float health = this.getHealth();
         int currentStage = this.getStage();
         int newStage = health > 1020 ? 0 :
-                        health > 870 ? 1 :
-                        health > 670 ? 2 :
-                        health > 470 ? 3 :
-                        health > 270 ? 4 :
-                        health > 20 ? 5 :
-                        6;
+                            health > 870 ? 1 :
+                                    health > 670 ? 2 :
+                                            health > 470 ? 3 :
+                                                    health > 270 ? 4 :
+                                                            health > 20 ? 5 :
+                                                                    6;
 
-        // The sleeping stage's boss bar name is set separately instead of together with the other boss bars.
-        // This is because otherwise this boss bar will appear as just "Skizzik" until the entity is named with a name tag
-        // or it's health is changed to something else and then back to 1021
-        if (health == 1021) {
-            if (this.hasCustomName()) {
-                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+        World world = getCommandSenderWorld();
+        if (world instanceof ServerWorld) {
+            if (currentStage == 3) {
+                ((ServerWorld) world).setDayTime(13000);
             }
-            else {
-                this.bossBar.setName(new StringTextComponent("Skizzik - Sleeping"));
+            else if (currentStage == 4 || currentStage == 5) {
+                ((ServerWorld) world).setDayTime(18000);
             }
-            bossBar.setColor(BossInfo.Color.WHITE);
         }
 
         if (currentStage != newStage) {
@@ -369,65 +379,228 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
             }
             else if (newStage == 6) {
-                bossBar.setColor(BossInfo.Color.WHITE);
-                this.setSpeed(1.2F);
-            }
+                if (!world.isClientSide) {
+                    world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
+                    ((ServerWorld) world).setDayTime(1000);
+                }
 
+                List<Skizzie> skizzies = world.getEntitiesOfClass(Skizzie.class, this.getBoundingBox());
+                for (Skizzie skizzie : skizzies) {
+                    if (skizzie.getOwner() == this) {
+                        skizzie.kill();
+                        ProjectApple.LOGGER.debug("Owner - Yes");
+                    }
+                    ProjectApple.LOGGER.debug("Individual Skizzie");
+                }
 
-            if (newStage != 0 && newStage != 6) {
-                bossBar.setColor(BossInfo.Color.RED);
-            }
-            if (newStage != 6) {
-                this.setSpeed(0.6F);
+                this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundCategory.HOSTILE, 10000.0F, 1.0F);
             }
 
             if (world instanceof ServerWorld) {
-                PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
+                int difference = newStage - currentStage;
+                if (difference > 0) {
+                    for (int i = 0; i <= difference; i++) {
+                        //PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
+                    }
+                }
+                else {
+                    difference = Math.abs(difference);
+                    //((ServerWorld) world).removeEntity();
+                }
             }
+        }
 
-            world.addFreshEntity(EntityType.LIGHTNING_BOLT.create(world));
+        AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, PlayerEntity.class, 25, 1.2D, 1.7D);
+        PanicGoal panicGoal = new PanicGoal(this, 1.5D);
 
-            //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
+        HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
+        NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
+        RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
+        WaterAvoidingRandomWalkingGoal avoidWaterGoal = new WaterAvoidingRandomWalkingGoal(this, 1.0D);
+        LookAtGoal lookGoal = new LookAtGoal(this, PlayerEntity.class, 8.0F);
+        LookRandomlyGoal lookRandomlyGoal = new LookRandomlyGoal(this);
 
-            if (this.hasCustomName()) {
-                if (newStage >= 1 && newStage <= 5) {
-                    this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + newStage));
-                }
-                else if (newStage == 6) {
-                    this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
-                }
+        if (currentStage == 0) {
+            //this.setBoundingBox(new AxisAlignedBB(1, 2, 3, 4, 5, 6));
+            this.goalSelector.removeGoal(avoidPlayerGoal);
+            this.goalSelector.removeGoal(panicGoal);
+
+            this.targetSelector.removeGoal(hurtGoal);
+            this.targetSelector.removeGoal(attackGoal);
+            this.goalSelector.removeGoal(rangedAttackGoal);
+            this.goalSelector.removeGoal(avoidWaterGoal);
+            this.goalSelector.removeGoal(lookGoal);
+            this.goalSelector.removeGoal(lookRandomlyGoal);
+        }
+        else if (currentStage == 6) {
+            this.targetSelector.removeGoal(hurtGoal);
+            this.targetSelector.removeGoal(attackGoal);
+            this.goalSelector.removeGoal(rangedAttackGoal);
+            this.goalSelector.removeGoal(avoidWaterGoal);
+            this.goalSelector.removeGoal(lookGoal);
+            this.goalSelector.removeGoal(lookRandomlyGoal);
+
+            this.goalSelector.addGoal(1, avoidPlayerGoal);
+            this.goalSelector.addGoal(2, panicGoal);
+            this.goalSelector.addGoal(3, avoidWaterGoal);
+            this.goalSelector.addGoal(4, lookGoal);
+            this.goalSelector.addGoal(5, lookRandomlyGoal);
+        }
+        else {
+            this.goalSelector.removeGoal(avoidPlayerGoal);
+            this.goalSelector.removeGoal(panicGoal);
+
+            this.targetSelector.addGoal(1, hurtGoal);
+            this.targetSelector.addGoal(2, attackGoal);
+            this.goalSelector.addGoal(2, rangedAttackGoal);
+            this.goalSelector.addGoal(5, avoidWaterGoal);
+            this.goalSelector.addGoal(6, lookGoal);
+            this.goalSelector.addGoal(7, lookRandomlyGoal);
+        }
+
+        if (currentStage == 0 || currentStage == 6) {
+            bossBar.setColor(BossInfo.Color.WHITE);
+        }
+        else {
+            bossBar.setColor(BossInfo.Color.RED);
+        }
+
+        //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
+
+        if (this.hasCustomName()) {
+            if (currentStage == 0) {
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+            }
+            else if (currentStage <= 5) {
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + currentStage));
             }
             else {
-                if (newStage >= 1 && newStage <= 5) {
-                    this.bossBar.setName(new StringTextComponent("Skizzik - Stage " + newStage));
-                }
-                else if (newStage == 6) {
-                    this.bossBar.setName(new StringTextComponent("Skizzik - FINISH HIM!"));
-                }
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
             }
-
-            this.setStage(newStage);
         }
+        else {
+            if (currentStage == 0) {
+                this.bossBar.setName(new StringTextComponent("Skizzik - Sleeping"));
+            }
+            else if (currentStage <= 5) {
+                this.bossBar.setName(new StringTextComponent("Skizzik - Stage " + currentStage));
+            }
+            else {
+                this.bossBar.setName(new StringTextComponent("Skizzik - FINISH HIM!"));
+            }
+        }
+
+        this.setStage(newStage);
     }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        int stage = this.getStage();
+
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
         World world = this.getCommandSenderWorld();
 
-        if (world instanceof ServerWorld) {
-            LightningBoltEntity[] lightnings = {EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world)};
-            
-            lightnings[0].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x, y, z + 100)));
-            lightnings[1].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x, y, z - 100)));
-            lightnings[2].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x + 100, y, z)));
-            lightnings[3].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x - 100, y, z)));
+        List<Skizzie> skizzies = world.getEntitiesOfClass(Skizzie.class, this.getBoundingBox());
+        for (Skizzie skizzie : skizzies) {
+            if (skizzie.getOwner() == this) {
+                skizzie.kill();
+                ProjectApple.LOGGER.debug("Owner - Yes");
+            }
+            ProjectApple.LOGGER.debug("Individual Skizzie");
+        }
 
-            for (LightningBoltEntity lightning : lightnings) {
-                lightning.setVisualOnly(true);
-                world.addFreshEntity(lightning);
+        if (stage == 0 || stage == 1) {
+            if (source == DamageSource.CACTUS ||
+                    source == DamageSource.FALL ||
+                    source.isExplosion() ||
+                    source == DamageSource.LIGHTNING_BOLT ||
+                    source == DamageSource.HOT_FLOOR ||
+                    source == DamageSource.IN_FIRE ||
+                    source == DamageSource.LAVA ||
+                    source == DamageSource.ON_FIRE ||
+                    source == DamageSource.SWEET_BERRY_BUSH ||
+                    source == DamageSource.WITHER) {
+                return false;
+            }
+        }
+        else if (stage == 2) {
+            if (source == DamageSource.ANVIL ||
+                    source == DamageSource.CACTUS ||
+                    source == DamageSource.FALL ||
+                    source.isExplosion() ||
+                    source == DamageSource.LIGHTNING_BOLT ||
+                    source == DamageSource.HOT_FLOOR ||
+                    source == DamageSource.IN_FIRE ||
+                    source == DamageSource.LAVA ||
+                    source == DamageSource.ON_FIRE ||
+                    source == DamageSource.SWEET_BERRY_BUSH ||
+                    source == DamageSource.WITHER) {
+                return false;
+            }
+        }
+        else if (stage == 3) {
+            if (source == DamageSource.ANVIL ||
+                    source == DamageSource.CACTUS ||
+                    source == DamageSource.DRAGON_BREATH ||
+                    source == DamageSource.FALL ||
+                    source.isExplosion() ||
+                    source == DamageSource.LIGHTNING_BOLT ||
+                    source == DamageSource.HOT_FLOOR ||
+                    source == DamageSource.IN_FIRE ||
+                    source == DamageSource.LAVA ||
+                    source == DamageSource.ON_FIRE ||
+                    source.getDirectEntity() instanceof PotionEntity ||
+                    source == DamageSource.SWEET_BERRY_BUSH ||
+                    source == DamageSource.WITHER) {
+                return false;
+            }
+        }
+        else if (stage == 4) {
+            if (source == DamageSource.ANVIL ||
+                    source == DamageSource.CACTUS ||
+                    source == DamageSource.DRAGON_BREATH ||
+                    source == DamageSource.FALL ||
+                    source.isExplosion() ||
+                    source == DamageSource.LIGHTNING_BOLT ||
+                    source == DamageSource.HOT_FLOOR ||
+                    source == DamageSource.IN_FIRE ||
+                    source == DamageSource.LAVA ||
+                    source == DamageSource.ON_FIRE ||
+                    source.getDirectEntity() instanceof PotionEntity ||
+                    source == DamageSource.SWEET_BERRY_BUSH ||
+                    source.getDirectEntity() instanceof TridentEntity ||
+                    source == DamageSource.WITHER) {
+                return false;
+            }
+        }
+        else if (stage == 5) {
+            if (source == DamageSource.ANVIL ||
+                    source.getDirectEntity() instanceof ArrowEntity ||
+                    source == DamageSource.CACTUS ||
+                    source == DamageSource.DRAGON_BREATH ||
+                    source == DamageSource.FALL ||
+                    source.isExplosion() ||
+                    source == DamageSource.LIGHTNING_BOLT ||
+                    source == DamageSource.HOT_FLOOR ||
+                    source == DamageSource.IN_FIRE ||
+                    source == DamageSource.LAVA ||
+                    source == DamageSource.ON_FIRE ||
+                    source.getDirectEntity() instanceof PotionEntity ||
+                    source == DamageSource.SWEET_BERRY_BUSH ||
+                    source.getDirectEntity() instanceof TridentEntity ||
+                    source == DamageSource.WITHER) {
+                return false;
+            }
+        }
+        else if (stage == 6) {
+            if (source == DamageSource.LIGHTNING_BOLT ||
+                    source == DamageSource.HOT_FLOOR ||
+                    source == DamageSource.IN_FIRE ||
+                    source == DamageSource.LAVA ||
+                    source == DamageSource.ON_FIRE) {
+                return false;
             }
         }
 
@@ -440,17 +613,50 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                 this.destroyBlocksTick = 20;
             }
 
+            if (this.spawnSkizzieTick <= 0) {
+                if (this.getStage() == 1 || this.getStage() == 2) {
+                    this.spawnSkizzieTick = 50;
+                }
+                else if (this.getStage() == 3 || this.getStage() == 4) {
+                    this.spawnSkizzieTick = 35;
+                }
+                else if (this.getStage() == 5) {
+                    this.spawnSkizzieTick = 20;
+                }
+                else {
+                    this.spawnSkizzieTick = 0;
+                }
+            }
+
             for (int i = 0; i < this.idleHeadUpdates.length; ++i) {
                 this.idleHeadUpdates[i] += 3;
+            }
+
+            if (world instanceof ServerWorld) {
+                LightningBoltEntity[] lightnings = {EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world)};
+
+                lightnings[0].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x, y, z + 100)));
+                lightnings[1].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x, y, z - 100)));
+                lightnings[2].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x + 100, y, z)));
+                lightnings[3].moveTo(Vector3d.atBottomCenterOf(new BlockPos(x - 100, y, z)));
+
+                for (LightningBoltEntity lightning : lightnings) {
+                    lightning.setVisualOnly(true);
+                    world.addFreshEntity(lightning);
+                }
             }
 
             return super.hurt(source, amount);
         }
     }
 
-    @Override
-    public void die(DamageSource source) {
-        super.die(source);
+    private void spawnSkizzie(Skizzie entity, double x, double y, double z, World world) {
+        if (world instanceof ServerWorld) {
+            entity.moveTo(x, y, z);
+            entity.finalizeSpawn((ServerWorld) world, world.getCurrentDifficultyAt(entity.blockPosition()), SpawnReason.MOB_SUMMONED, null, null);
+            entity.setOwner(this);
+            world.addFreshEntity(entity);
+        }
     }
 
     @Override
@@ -481,100 +687,111 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
         super.aiStep();
 
-        for(int i = 0; i < 4; ++i) {
-            this.yRotHeads1[i] = this.yRotHeads[i];
-            this.xRotHeads1[i] = this.xRotHeads[i];
-        }
-
-        for(int j = 0; j < 4; ++j) {
-            int k = this.getAlternativeTarget(j + 1);
-            Entity entity1 = null;
-            if (k > 0) {
-                entity1 = this.level.getEntity(k);
+        //if (headCount != 0) {
+            for (int i = 0; i < 4; ++i) {
+                this.yRotHeads1[i] = this.yRotHeads[i];
+                this.xRotHeads1[i] = this.xRotHeads[i];
             }
 
-            if (entity1 != null) {
-                double headX = this.getHeadX(j + 1);
-                double headY = this.getHeadY(j + 1);
-                double headZ = this.getHeadZ(j + 1);
+            for (int j = 0; j < 4; ++j) {
+                int k = this.getAlternativeTarget(j + 1);
+                Entity entity1 = null;
+                if (k > 0) {
+                    entity1 = this.level.getEntity(k);
+                }
 
-                double entityX = entity1.getX() - headX;
-                double entityY = entity1.getEyeY() - headY;
-                double entityZ = entity1.getZ() - headZ;
+                if (entity1 != null) {
+                    double headX = this.getHeadX(j + 1);
+                    double headY = this.getHeadY(j + 1);
+                    double headZ = this.getHeadZ(j + 1);
 
-                double d7 = MathHelper.sqrt(entityX * entityX + entityZ * entityZ);
+                    double entityX = entity1.getX() - headX;
+                    double entityY = entity1.getEyeY() - headY;
+                    double entityZ = entity1.getZ() - headZ;
 
-                float f = (float)(MathHelper.atan2(entityZ, entityX) * (double)(180F / (float)Math.PI)) - 90.0F;
-                float f1 = (float)(-(MathHelper.atan2(entityY, d7) * (double)(180F / (float)Math.PI)));
+                    double d7 = MathHelper.sqrt(entityX * entityX + entityZ * entityZ);
 
-                this.xRotHeads[j] = this.rotlerp(this.xRotHeads[j], f1, 40.0F);
-                this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], f, 10.0F);
+                    float f = (float) (MathHelper.atan2(entityZ, entityX) * (double) (180F / (float) Math.PI)) - 90.0F;
+                    float f1 = (float) (-(MathHelper.atan2(entityY, d7) * (double) (180F / (float) Math.PI)));
+
+                    this.xRotHeads[j] = this.rotlerp(this.xRotHeads[j], f1, 40.0F);
+                    this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], f, 10.0F);
+                }
+                else {
+                    this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], this.yBodyRot, 10.0F);
+                }
+
+                for(int l = 0; l < 5; ++l) {
+                    double headX = this.getHeadX(l);
+                    double heaxY = this.getHeadY(l);
+                    double headZ = this.getHeadZ(l);
+                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.3F, heaxY + this.random.nextGaussian() * (double)0.3F, headZ + this.random.nextGaussian() * (double)0.3F, 0.0D, 0.0D, 0.0D);
+                }
             }
-            else {
-                this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], this.yBodyRot, 10.0F);
-            }
-        }
+        //}
     }
 
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-        for(int headIndex = 1; headIndex < 5; ++headIndex) {
-            if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
-                this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
-                int head = headIndex - 1;
-                int idleHeadUpdate = this.idleHeadUpdates[headIndex - 1];
-                this.idleHeadUpdates[head] = this.idleHeadUpdates[headIndex - 1] + 1;
+        //if (headCount != 0) {
+            for (int headIndex = 1; headIndex < 5; ++headIndex) {
+                if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
+                    this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
+                    int head = headIndex - 1;
+                    int idleHeadUpdate = this.idleHeadUpdates[headIndex - 1];
+                    this.idleHeadUpdates[head] = this.idleHeadUpdates[headIndex - 1] + 1;
 
-                if (idleHeadUpdate > 15) {
-                    double x = MathHelper.nextDouble(this.random, this.getX() - 10.0D, this.getX() + 10.0D);
-                    double y = MathHelper.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
-                    double z = MathHelper.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
+                    if (idleHeadUpdate > 15) {
+                        double x = MathHelper.nextDouble(this.random, this.getX() - 10.0D, this.getX() + 10.0D);
+                        double y = MathHelper.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
+                        double z = MathHelper.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
 
-                    /* SKIZZIK SKULL LEVEL! */ this.performRangedAttack(headIndex + 1, x, y, z, 1);
-                    this.idleHeadUpdates[headIndex - 1] = 0;
-                }
+                        this.performRangedAttack(headIndex + 1, x, y, z, this.getStage() == 1 || this.getStage() == 2 ? 1 :
+                                this.getStage() == 3 || this.getStage() == 4 ? 2 :
+                                        3);
+                        this.idleHeadUpdates[headIndex - 1] = 0;
+                    }
 
-                int alternativeTarget = this.getAlternativeTarget(headIndex);
+                    int alternativeTarget = this.getAlternativeTarget(headIndex);
 
-                if (alternativeTarget > 0) {
-                    Entity target = this.level.getEntity(alternativeTarget);
-                    if (target != null && target.isAlive() && !(this.distanceToSqr(target) > 900.0D) && this.canSee(target)) {
-                        if (target instanceof PlayerEntity && ((PlayerEntity)target).abilities.invulnerable) {
+                    if (alternativeTarget > 0) {
+                        Entity target = this.level.getEntity(alternativeTarget);
+                        if (target != null && target.isAlive() && !(this.distanceToSqr(target) > 900.0D) && this.canSee(target)) {
+                            if (target instanceof PlayerEntity && ((PlayerEntity) target).abilities.invulnerable) {
+                                this.setAlternativeTarget(headIndex, 0);
+                            } else {
+                                this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ(), this.getStage() == 1 || this.getStage() == 2 ? 1 :
+                                        this.getStage() == 3 || this.getStage() == 4 ? 2 :
+                                                3);
+                                this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
+                                this.idleHeadUpdates[headIndex - 1] = 0;
+                            }
+                        } else {
                             this.setAlternativeTarget(headIndex, 0);
                         }
-                        else {
-                            /* SKIZZIK SKULL LEVEL! */    this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double)target.getEyeHeight() * 0.5D, target.getZ(), 1);
-                            this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
-                            this.idleHeadUpdates[headIndex - 1] = 0;
-                        }
-                    }
-                    else {
-                        this.setAlternativeTarget(headIndex, 0);
-                    }
-                }
-                else {
-                    List<LivingEntity> list = this.level.getNearbyEntities(LivingEntity.class, TARGETING_CONDITIONS, this, this.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
+                    } else {
+                        List<LivingEntity> list = this.level.getNearbyEntities(LivingEntity.class, TARGETING_CONDITIONS, this, this.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
 
-                    for(int i = 0; i < 10 && !list.isEmpty(); ++i) {
-                        LivingEntity target = list.get(this.random.nextInt(list.size()));
-                        if (target != this && target.isAlive() && this.canSee(target)) {
-                            if (target instanceof PlayerEntity) {
-                                if (!((PlayerEntity)target).abilities.invulnerable) {
+                        for (int i = 0; i < 10 && !list.isEmpty(); ++i) {
+                            LivingEntity target = list.get(this.random.nextInt(list.size()));
+                            if (target != this && target.isAlive() && this.canSee(target)) {
+                                if (target instanceof PlayerEntity) {
+                                    if (!((PlayerEntity) target).abilities.invulnerable) {
+                                        this.setAlternativeTarget(headIndex, target.getId());
+                                    }
+                                } else {
                                     this.setAlternativeTarget(headIndex, target.getId());
                                 }
+                                break;
                             }
-                            else {
-                                this.setAlternativeTarget(headIndex, target.getId());
-                            }
-                            break;
+                            list.remove(target);
                         }
-                        list.remove(target);
                     }
                 }
             }
-        }
+        //}
 
         if (this.getTarget() != null) {
             this.setAlternativeTarget(0, this.getTarget().getId());
@@ -613,30 +830,118 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
             }
         }
 
+        if (this.spawnSkizzieTick > 0) {
+            --this.spawnSkizzieTick;
+
+            if (this.spawnSkizzieTick == 0) {
+                World world = this.getCommandSenderWorld();
+
+                if (this.getStage() == 1) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                }
+                else if (this.getStage() == 2) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                    }
+                }
+                else if (this.getStage() == 3) {
+                    /*if (Math.random() < 0.05) {
+                        spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {*/
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            if (Math.random() < 0.5) {
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                            else {
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                        }
+                    //}
+                }
+                else if (this.getStage() == 4) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            if (Math.random() < 0.5) {
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                            else {
+                                //if (Math.random() < 0.5) {
+                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                /*}
+                                else {
+                                    spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                }*/
+                            }
+                        }
+                    }
+                }
+                else if (this.getStage() == 5) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            if (Math.random() < 0.5) {
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                            else {
+                                /*if (Math.random() < 0.5) {
+                                    spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                }
+                                else {*/
+                                    spawnSkizzie(new WitchSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                //}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         float health = this.getHealth();
         int stage = this.getStage();
 
-        if (stage == 5 && health < 269) {
+        if (stage == 5 && health <= 269) {
             if (this.tickCount % 20 == 0) {
                 this.heal(1.0F);
             }
         }
-        else if (stage == 4 && health < 469.5) {
+        else if ((stage == 4 && health <= 469.5) || (stage == 3 && health <= 669.5)) {
             if (this.tickCount % 30 == 0) {
                 this.heal(0.5F);
             }
         }
-        else if (stage == 3 && health < 669.5) {
-            if (this.tickCount % 30 == 0) {
-                this.heal(0.5F);
-            }
-        }
-        else if (stage == 2 && health < 869.5) {
-            if (this.tickCount % 40 == 0) {
-                this.heal(0.5F);
-            }
-        }
-        else if (stage == 1 && health < 1019.5) {
+        else if ((stage == 2 && health <= 869.5) || (stage == 1 && health <= 1019.5)) {
             if (this.tickCount % 40 == 0) {
                 this.heal(0.5F);
             }

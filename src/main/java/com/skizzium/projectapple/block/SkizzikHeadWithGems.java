@@ -19,6 +19,7 @@ import net.minecraft.block.pattern.BlockStateMatcher;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -28,6 +29,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.CachedBlockInfo;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -87,6 +89,10 @@ public class SkizzikHeadWithGems extends SkullBlock {
 
                     skizzik.moveTo((double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.55D, (double)blockPos.getZ() + 0.5D, patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F, 0.0F);
                     skizzik.yBodyRot = patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F;
+
+                    LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
+                    lightning.moveTo(Vector3d.atBottomCenterOf(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())));
+                    world.addFreshEntity(lightning);
 
                     for(ServerPlayerEntity player : world.getEntitiesOfClass(ServerPlayerEntity.class, skizzik.getBoundingBox().inflate(50.0D))) {
                         CriteriaTriggers.SUMMONED_ENTITY.trigger(player, skizzik);

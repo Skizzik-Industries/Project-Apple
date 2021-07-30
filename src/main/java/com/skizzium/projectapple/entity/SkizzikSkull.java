@@ -62,9 +62,7 @@ public class SkizzikSkull extends DamagingProjectileEntity {
 
     @Override
     protected float getInertia() {
-        return this.getLevel() == 1 ? super.getInertia()
-                : this.getLevel() == 2 ? 0.73F
-                : 0.50F;
+        return super.getInertia();
     }
 
     @Override
@@ -115,16 +113,33 @@ public class SkizzikSkull extends DamagingProjectileEntity {
             Entity source = this.getOwner();
             boolean hurt;
             if (source instanceof LivingEntity) {
-                LivingEntity livingentity = (LivingEntity)source;
-                hurt = this.getLevel() == 1 ? target.hurt(skizzikSkull(this, livingentity), 8.0F)
-                        : this.getLevel() == 2 ? target.hurt(skizzikSkull(this, livingentity), 10.0F)
-                        : target.hurt(skizzikSkull(this, livingentity), 15.0F);
+                Skizzik skizzik = (Skizzik)source;
+                hurt = this.getLevel() == 1 ? target.hurt(skizzikSkull(this, skizzik), 8.0F)
+                        : this.getLevel() == 2 ? target.hurt(skizzikSkull(this, skizzik), 10.0F)
+                        : target.hurt(skizzikSkull(this, skizzik), 15.0F);
                 if (hurt) {
                     if (target.isAlive()) {
-                        this.doEnchantDamageEffects(livingentity, target);
+                        this.doEnchantDamageEffects(skizzik, target);
                     }
                     else {
-                        livingentity.heal(5.0F);
+                        float health = skizzik.getHealth();
+                        int stage = skizzik.getStage();
+
+                        if (stage == 5 && health <= 264) {
+                            skizzik.heal(6.0F);
+                        }
+                        else if (stage == 4 && health <= 464.76) {
+                            skizzik.heal(5.25F);
+                        }
+                        else if (stage == 3 && health <= 665.5) {
+                            skizzik.heal(4.5F);
+                        }
+                        else if (stage == 2 && health <= 866.25) {
+                            skizzik.heal(3.75F);
+                        }
+                        else if (stage == 1 && health <= 1017) {
+                            skizzik.heal(3.0F);
+                        }
                     }
                 }
             }
