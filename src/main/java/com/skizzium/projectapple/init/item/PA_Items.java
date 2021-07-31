@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
@@ -24,8 +24,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SignItem;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.fmllegacy.RegistryObject;
 

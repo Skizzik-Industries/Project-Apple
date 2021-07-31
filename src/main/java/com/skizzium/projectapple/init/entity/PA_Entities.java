@@ -1,20 +1,14 @@
-package com.skizzium.projectapple.init;
+package com.skizzium.projectapple.init.entity;
 
-import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.CandyPig;
 import com.skizzium.projectapple.entity.Skizzie;
 import com.skizzium.projectapple.entity.model.SkizzieModel;
 import com.skizzium.projectapple.entity.renderer.CandyPigRenderer;
 import com.skizzium.projectapple.entity.renderer.SkizzieRenderer;
-import net.minecraft.client.model.PigModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
+import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -26,7 +20,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.lang.reflect.Field;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static com.skizzium.projectapple.ProjectApple.MOD_ID;
 
@@ -58,7 +51,7 @@ public class PA_Entities {
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(SkizzieRenderer.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
+        event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -68,7 +61,6 @@ public class PA_Entities {
 
         event.registerEntityRenderer(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
         event.registerEntityRenderer(PA_Entities.SKIZZIE, SkizzieRenderer::new);
-        //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
     }
 
     static {
