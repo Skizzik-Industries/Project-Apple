@@ -3,16 +3,16 @@ package com.skizzium.projectapple.init;
 import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.CandyPig;
+import com.skizzium.projectapple.entity.Skizzie;
+import com.skizzium.projectapple.entity.model.SkizzieModel;
 import com.skizzium.projectapple.entity.renderer.CandyPigRenderer;
+import com.skizzium.projectapple.entity.renderer.SkizzieRenderer;
 import net.minecraft.client.model.PigModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.item.Item;
@@ -25,15 +25,24 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.lang.reflect.Field;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static com.skizzium.projectapple.ProjectApple.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Entities {
+    public static final Predicate<LivingEntity> SKIZZIK_SELECTOR = (entity) -> entity.getMobType() != MobType.UNDEAD &&
+                                                                                !(entity instanceof Skizzie) &&
+    //                                                                            !(entity instanceof Skizzo) &&
+    //                                                                            !(entity instanceof Skizzik) &&
+                                                                                entity.attackable();
+
     public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, MobCategory.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
+    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
 
     public static final SpawnEggItem CANDY_PIG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
+    public static final SpawnEggItem SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(MOD_ID, name);
@@ -43,11 +52,13 @@ public class PA_Entities {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(CANDY_PIG, CandyPig.buildAttributes().build());
+
+        event.put(SKIZZIE, Skizzie.buildAttributes().build());
     }
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        //event.registerLayerDefinition(CandyPigRenderer.CANDY_PIG_LAYER, PigModel::createBodyLayer);
+        event.registerLayerDefinition(SkizzieRenderer.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -56,6 +67,7 @@ public class PA_Entities {
         //ClientRegistry.bindTileEntityRenderer(PA_TileEntities.PA_SKULL.get(), SkullTileEntityRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
+        event.registerEntityRenderer(PA_Entities.SKIZZIE, SkizzieRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINIGUN_SKIZZIE, MinigunSkizzieRenderer::new);
     }
 
