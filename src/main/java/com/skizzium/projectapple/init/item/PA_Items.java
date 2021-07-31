@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.init.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
@@ -88,5 +89,6 @@ public class PA_Items {
 
     @SubscribeEvent
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(PA_Entities.CANDY_PIG_SPAWN_EGG);
     }
 }
