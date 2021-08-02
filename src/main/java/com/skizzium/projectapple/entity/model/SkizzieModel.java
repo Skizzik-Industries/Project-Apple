@@ -2,20 +2,19 @@ package com.skizzium.projectapple.entity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.skizzium.projectapple.entity.Skizzie;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.function.Function;
-
 @OnlyIn(Dist.CLIENT)
-public class SkizzieModel<T extends Skizzie> extends EntityModel<T> {
+public class SkizzieModel<T extends LivingEntity> extends EntityModel<T> {
     private final ModelPart lowerBody;
     private final ModelPart upperBody;
     private final ModelPart head;
