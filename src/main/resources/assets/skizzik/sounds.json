@@ -12,5 +12,12 @@
       "name": "skizzik:music/skizzik",
       "stream": true
     }]
+  },
+  "entity.dababy": {
+    "category": "music",
+    "subtitle": "subtitles.entity.dababy",
+    "sounds": [{
+      "name": "skizzik:entity/dababy"
+    }]
   }
 }

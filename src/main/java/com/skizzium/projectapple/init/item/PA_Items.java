@@ -90,6 +90,7 @@ public class PA_Items {
         event.getRegistry().register(PA_Entities.CANDY_PIG_SPAWN_EGG);
 
         event.getRegistry().register(PA_Entities.FRIENDLY_SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(PA_Entities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG);
 
         event.getRegistry().register(PA_Entities.SKIZZIE_SPAWN_EGG);
         event.getRegistry().register(PA_Entities.KABOOM_SKIZZIE_SPAWN_EGG);

@@ -10,11 +10,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class WitchSkizzieModel<T extends WitchSkizzie> extends EntityModel<T> {
+public class WitchSkizzieModel<T extends LivingEntity> extends EntityModel<T> {
 	private final ModelPart lowerBody;
 	private final ModelPart upperBody;
 	private final ModelPart head;
