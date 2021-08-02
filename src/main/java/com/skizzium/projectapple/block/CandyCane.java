@@ -26,7 +26,7 @@ public class CandyCane extends SugarCaneBlock {
 
                 for(Direction direction : Direction.Plane.HORIZONTAL) {
                     FluidState fluidstate = world.getFluidState(blockpos.relative(direction));
-                    if (fluidstate.is(PA_Tags.Fluids.CANDY_FLUIDS)) {
+                    if (fluidstate.is(PA_Tags.Fluids.SKIZZIK_CANDY_FLUIDS)) {
                         return true;
                     }
                 }

@@ -11,6 +11,10 @@ import net.minecraft.server.players.ServerOpList;
 
 public final class PA_Tags {
     public static final class Blocks {
+        public static final Tag.Named<Block> MINEABLE_WITH_PICKAXE = minecraft("mineable/pickaxe");
+        public static final Tag.Named<Block> MINEABLE_WITH_HOE = minecraft("mineable/hoe");
+        public static final Tag.Named<Block> MINEABLE_WITH_AXE = minecraft("mineable/axe");
+
         public static final Tag.Named<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
         public static final Tag.Named<Block> SKIZZIK_HEADS = forge("skizzik_heads");
 
@@ -59,6 +63,9 @@ public final class PA_Tags {
 
         public static final Tag.Named<Block> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
+        public static final Tag.Named<Block> SKIZZIK_ALL_GEM_BLOCKS = forge("skizzik_all_gem_blocks");
+        public static final Tag.Named<Block> SKIZZIK_BASE_GEM_BLOCKS = forge("skizzik_base_gem_blocks");
+
         private static Tag.Named<Block> minecraft(String path) {
             return BlockTags.bind(new ResourceLocation("minecraft", path).toString());
         }
@@ -66,21 +73,17 @@ public final class PA_Tags {
         private static Tag.Named<Block> forge(String path) {
             return BlockTags.bind(new ResourceLocation("forge", path).toString());
         }
-
-        private static Tag.Named<Block> mod(String path) {
-            return BlockTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
-        }
     }
     public static final class Fluids {
         public static final Tag.Named<Fluid> WATER = minecraft("water");
-        public static final Tag.Named<Fluid> CANDY_FLUIDS = mod("candy_fluids");
+        public static final Tag.Named<Fluid> SKIZZIK_CANDY_FLUIDS = forge("skizzik_candy_fluids");
 
         private static Tag.Named<Fluid> minecraft(String path) {
             return FluidTags.bind(new ResourceLocation("minecraft", path).toString());
         }
 
-        private static Tag.Named<Fluid> mod(String path) {
-            return FluidTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
+        private static Tag.Named<Fluid> forge(String path) {
+            return FluidTags.bind(new ResourceLocation("forge", path).toString());
         }
     }
     public static final class Items {
@@ -114,13 +117,13 @@ public final class PA_Tags {
         public static final Tag.Named<Item> LEAVES = minecraft("leaves");
         public static final Tag.Named<Item> LOGS = minecraft("logs");
         public static final Tag.Named<Item> LOGS_THAT_BURN = minecraft("logs_that_burn");
-        public static final Tag.Named<Item> CANDY_LOGS = mod("candy_logs");
+        public static final Tag.Named<Item> CANDY_LOGS = forge("candy_logs");
 
         public static final Tag.Named<Item> BEACON_PAYMENT_ITEMS = minecraft("beacon_payment_items");
         public static final Tag.Named<Item> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
-        public static final Tag.Named<Item> ALL_GEMS = mod("all_gems");
-        public static final Tag.Named<Item> BASE_GEMS = mod("base_gems");
+        public static final Tag.Named<Item> SKIZZIK_ALL_GEMS = forge("skizzik_all_gems");
+        public static final Tag.Named<Item> SKIZZIK_BASE_GEMS = forge("skizzik_base_gems");
 
         private static Tag.Named<Item> minecraft(String path) {
             return ItemTags.bind(new ResourceLocation("minecraft", path).toString());
@@ -128,10 +131,6 @@ public final class PA_Tags {
 
         private static Tag.Named<Item> forge(String path) {
             return ItemTags.bind(new ResourceLocation("forge", path).toString());
-        }
-
-        private static Tag.Named<Item> mod(String path) {
-            return ItemTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
         }
     }
 }

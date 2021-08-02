@@ -14,10 +14,7 @@ public class ModFluidTagsProvider extends FluidTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(PA_Tags.Fluids.WATER).add(PA_Fluids.MAPLE_SYRUP.get());
-        tag(PA_Tags.Fluids.WATER).add(PA_Fluids.FLOWING_MAPLE_SYRUP.get());
-
-        tag(PA_Tags.Fluids.CANDY_FLUIDS).add(PA_Fluids.MAPLE_SYRUP.get());
-        tag(PA_Tags.Fluids.CANDY_FLUIDS).add(PA_Fluids.FLOWING_MAPLE_SYRUP.get());
+        tag(PA_Tags.Fluids.WATER).add(PA_Fluids.MAPLE_SYRUP.get(), PA_Fluids.FLOWING_MAPLE_SYRUP.get());
+        tag(PA_Tags.Fluids.SKIZZIK_CANDY_FLUIDS).add(PA_Fluids.MAPLE_SYRUP.get(), PA_Fluids.FLOWING_MAPLE_SYRUP.get());
     }
 }
