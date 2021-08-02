@@ -1,20 +1,16 @@
 package com.skizzium.projectapple.init.entity;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.CandyPig;
-import com.skizzium.projectapple.entity.KaboomSkizzie;
-import com.skizzium.projectapple.entity.Skizzie;
-import com.skizzium.projectapple.entity.WitchSkizzie;
+import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.model.SkizzieModel;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
-import com.skizzium.projectapple.entity.renderer.CandyPigRenderer;
-import com.skizzium.projectapple.entity.renderer.KaboomSkizzieRenderer;
-import com.skizzium.projectapple.entity.renderer.SkizzieRenderer;
-import com.skizzium.projectapple.entity.renderer.WitchSkizzieRenderer;
+import com.skizzium.projectapple.entity.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -40,11 +36,13 @@ public class PA_Entities {
     public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
     public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
+    public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
 
     public static final SpawnEggItem CANDY_PIG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
     public static final SpawnEggItem SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.SKIZZIE, 0XB40A1A, 0X9A080F, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
     public static final SpawnEggItem KABOOM_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.KABOOM_SKIZZIE, 0XB40A1A, 0X5BE9B7, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
     public static final SpawnEggItem WITCH_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.WITCH_SKIZZIE, 0XB40A1A, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:witch_skizzie_spawn_egg");
+    public static final SpawnEggItem CORRUPTED_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", ChatFormatting.OBFUSCATED)).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
 
     private static final EntityType registerEntity(String name, EntityType.Builder builder) {
         ResourceLocation location = new ResourceLocation(MOD_ID, name);
@@ -58,6 +56,7 @@ public class PA_Entities {
         event.put(SKIZZIE, Skizzie.buildAttributes().build());
         event.put(KABOOM_SKIZZIE, KaboomSkizzie.buildAttributes().build());
         event.put(WITCH_SKIZZIE, WitchSkizzie.buildAttributes().build());
+        event.put(CORRUPTED_SKIZZIE, CorruptedSkizzie.buildAttributes().build());
     }
 
     @SubscribeEvent
@@ -76,6 +75,7 @@ public class PA_Entities {
         event.registerEntityRenderer(PA_Entities.SKIZZIE, SkizzieRenderer::new);
         event.registerEntityRenderer(PA_Entities.KABOOM_SKIZZIE, KaboomSkizzieRenderer::new);
         event.registerEntityRenderer(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
     }
 
     static {
