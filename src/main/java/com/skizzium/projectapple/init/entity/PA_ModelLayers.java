@@ -6,10 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PA_ModelLayers {
     public static final ModelLayerLocation SKIZZIE_LAYER = register("skizzie");
-<<<<<<< Updated upstream
-=======
     public static final ModelLayerLocation WITCH_SKIZZIE_LAYER = register("witch_skizzie");
->>>>>>> Stashed changes
 
     private static ModelLayerLocation register(String layer) {
         return new ModelLayerLocation(new ResourceLocation(ProjectApple.MOD_ID, layer), "main");
