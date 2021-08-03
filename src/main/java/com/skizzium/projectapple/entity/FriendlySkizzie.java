@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -128,11 +131,11 @@ public class FriendlySkizzie extends PathfinderMob {
         }
     }
 
-    /* @Override
+    @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         player.startRiding(this);
-        return SkizzieConvertion.conversion(this, player);
-    } */
+        return SkizzieConversion.conversion(this, player);
+    }
 
     @Override
     public void playerTouch(Player player) {
