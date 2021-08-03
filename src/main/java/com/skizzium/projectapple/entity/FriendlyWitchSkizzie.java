@@ -37,7 +37,7 @@ public class FriendlyWitchSkizzie extends FriendlySkizzie {
     @Override
     public void playerTouch(Player player) {
         Level world = player.getCommandSenderWorld();
-        if (player instanceof LivingEntity && !player.hasEffect(PA_Effects.CORRUPTION.get())) {
+        if (!player.hasEffect(PA_Effects.CORRUPTION.get())) {
             if (player instanceof ServerPlayer) {
                 if (((ServerPlayer) player).gameMode.isSurvival() && Math.random() < 0.05) {
                     if (Math.random() < 0.1) {
@@ -48,7 +48,7 @@ public class FriendlyWitchSkizzie extends FriendlySkizzie {
                     }
                 }
             }
-            else if (player instanceof Player && world.isClientSide()) {
+            else if (world.isClientSide()) {
                 PlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
 
                 if ((network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) && Math.random() < 0.05) {

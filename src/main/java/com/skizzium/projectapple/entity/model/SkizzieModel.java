@@ -46,7 +46,7 @@ public class SkizzieModel<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrix, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha){
+    public void renderToBuffer(PoseStack matrix, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
         lowerBody.render(matrix, buffer, light, overlay);
         upperBody.render(matrix, buffer, light, overlay);
         head.render(matrix, buffer, light, overlay);
