@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class PA_SignBlockEntity extends SignBlockEntity {
-    public PA_SignBlockEntity(BlockPos pos, BlockState state) {
+public class PA_SignTileEntity extends SignBlockEntity {
+    public PA_SignTileEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 

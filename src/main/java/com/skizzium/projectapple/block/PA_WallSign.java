@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.block;
 
-import com.skizzium.projectapple.tileentity.PA_SignBlockEntity;
+import com.skizzium.projectapple.tileentity.PA_SignTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,6 +14,6 @@ public class PA_WallSign extends WallSignBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new PA_SignBlockEntity(pos, state);
+        return new PA_SignTileEntity(pos, state);
     }
 }
