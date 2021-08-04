@@ -3,13 +3,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "skizzik:base_gems"
+      "tag": "forge:skizzik_base_gems"
     },
     {
-      "tag": "skizzik:base_gems"
+      "tag": "forge:skizzik_base_gems"
     },
     {
-      "tag": "skizzik:base_gems"
+      "tag": "forge:skizzik_base_gems"
     }
   ],
   "result": {
