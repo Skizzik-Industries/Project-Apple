@@ -32,6 +32,7 @@ public class LivingCandyTab extends CreativeModeTab {
 
         PA_Blocks.CANDY_BUTTON.get().fillItemCategory(this, items);
         PA_Blocks.CANDY_PRESSURE_PLATE.get().fillItemCategory(this, items);
+        PA_Items.CANDY_SIGN.get().fillItemCategory(this, items);
 
         PA_Blocks.CANDY_FENCE.get().fillItemCategory(this, items);
         PA_Blocks.CANDY_FENCE_GATE.get().fillItemCategory(this, items);
