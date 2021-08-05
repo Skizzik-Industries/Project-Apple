@@ -20,6 +20,7 @@ public class ProjectApple
         PA_Registry.register();
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modBus.addListener(PA_TileEntities::registerSkullPlayerHeadLayers);
         modBus.addListener(PA_Blocks::renderLayers);
         modBus.addListener(PA_Blocks::registerOtherStuff);
         modBus.addListener(PA_TileEntities::registerTileEntityRenders);

@@ -47,12 +47,12 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         copy(PA_Tags.Blocks.BEACON_BASE_BLOCKS, PA_Tags.Items.BEACON_BASE_BLOCKS);
 
-        //tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get(), PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.PANCAKES.get(), PA_Items.SYRUP_PANCAKES.get());
         tag(PA_Tags.Items.SKIZZIK_CHOCOLATE).add(PA_Items.WHITE_CHOCOLATE_BAR.get(), PA_Items.CHOCOLATE_BAR.get(), PA_Items.DARK_CHOCOLATE_BAR.get());
 
-        //tag(PA_Tags.Items.SIGNS).add(PA_Items.CANDY_SIGN.get());
+        tag(PA_Tags.Items.SIGNS).add(PA_Items.CANDY_SIGN.get());
 
         tag(PA_Tags.Items.BEACON_PAYMENT_ITEMS).add(PA_Items.CANDIANITE_INGOT.get(), PA_Items.RAINBOW_GEM.get());
         tag(PA_Tags.Items.SKIZZIK_BASE_GEMS).add(PA_Items.BLACK_GEM.get(), PA_Items.BLUE_GEM.get(), PA_Items.BROWN_GEM.get(), PA_Items.YELLOW_GEM.get(), PA_Items.ORANGE_GEM.get(), PA_Items.GREEN_GEM.get(), PA_Items.PINK_GEM.get());
