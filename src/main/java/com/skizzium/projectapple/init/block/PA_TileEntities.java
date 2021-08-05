@@ -38,16 +38,21 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_TileEntities {
     public static final RegistryObject<BlockEntityType<PA_SignTileEntity>> PA_SIGN = PA_Registry.TILE_ENTITIES.register("pa_sign", () -> BlockEntityType.Builder.of(PA_SignTileEntity::new, PA_Blocks.CANDY_SIGN.get(), PA_Blocks.CANDY_WALL_SIGN.get()).build(null));
-    public static final RegistryObject<BlockEntityType<PA_Skull>> PA_SKULL = PA_Registry.TILE_ENTITIES.register("pa_skull", () -> BlockEntityType.Builder.of(PA_Skull::new, PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(),
+    public static final RegistryObject<BlockEntityType<PA_Skull>> PA_SKULL = PA_Registry.TILE_ENTITIES.register("pa_skull", () -> BlockEntityType.Builder.of(PA_Skull::new, PA_Blocks.SMALL_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(),
+            PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(),
             PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get()).build(null));
 
     public enum CustomSkullTypes implements SkullBlock.Type {
+        SMALL_SKIZZIK,
+        SMALL_SKIZZIK_WITH_GEMS,
         SKIZZIK,
         SKIZZIK_WITH_GEMS
     }
 
     @SubscribeEvent
     public static void registerTileEntityRenders(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER, PA_SkullModel::createSmallSkizzikHeadLayer);
+        event.registerLayerDefinition(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER, PA_SkullModel::createSmallSkizzikHeadLayer);
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_HEAD_LAYER, PA_SkullModel::createSkizzikHeadLayer);
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER, PA_SkullModel::createSkizzikHeadWithGemsLayer);
 
@@ -58,13 +63,15 @@ public class PA_TileEntities {
     public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers() {
         ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder = ImmutableMap.builder();
 
-        builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
-        builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        builder.put(CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
+        builder.put(CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        builder.put(CustomSkullTypes.SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
+        builder.put(CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
 
         return builder.build();
     }
 
-    public static void registerSkullPlayerHeadLayers(EntityRenderersEvent.AddLayers event) {
+    public static void registerSkullHeadLayers(EntityRenderersEvent.AddLayers event) {
         Map<EntityType<?>, EntityRenderer<?>> renderers = Minecraft.getInstance().getEntityRenderDispatcher().renderers;
         for(Map.Entry<EntityType<?>, EntityRenderer<?>> renderer : renderers.entrySet()) {
             if (renderer.getValue() instanceof LivingEntityRenderer) {

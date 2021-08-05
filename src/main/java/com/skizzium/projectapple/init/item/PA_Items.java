@@ -31,6 +31,8 @@ import net.minecraftforge.fmllegacy.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Items {
+    public static final RegistryObject<PA_SkullItem> SMALL_SKIZZIK_HEAD = PA_Registry.ITEMS.register("small_skizzik_head", () -> new PA_SkullItem(PA_Blocks.SMALL_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_SKIZZIK_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
+    public static final RegistryObject<PA_SkullItem> SMALL_SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("small_skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
     public static final RegistryObject<PA_SkullItem> SKIZZIK_HEAD = PA_Registry.ITEMS.register("skizzik_head", () -> new PA_SkullItem(PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
     public static final RegistryObject<PA_SkullItem> SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
 

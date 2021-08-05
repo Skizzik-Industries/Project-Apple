@@ -22,6 +22,8 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.SKIZZIK_FLESH_PANTS.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_FLESH_BOOTS.get().fillItemCategory(this, items);
 
+        PA_Items.SMALL_SKIZZIK_HEAD.get().fillItemCategory(this, items);
+        PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_HEAD.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
 

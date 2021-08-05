@@ -44,6 +44,9 @@ public class PA_Blocks {
     public static final RegistryObject<Block> DEACTIVATED_COMMAND_BLOCK = register("deactivated_command_block", () -> new CommandBlock(BlockBehaviour.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).harvestLevel(2).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.RARE, false);
     public static final RegistryObject<Block> BROKEN_COMMAND_BLOCK = register("broken_command_block", () -> new CommandBlock(BlockBehaviour.Properties.of(Material.METAL).strength(45.0F,1200.0F).harvestLevel(1).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.UNCOMMON, false);
 
+    public static final RegistryObject<Block> SMALL_SKIZZIK_HEAD = registerNoItem("small_skizzik_head", () -> new SmallSkizzikHead(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+    public static final RegistryObject<Block> SMALL_SKIZZIK_HEAD_WITH_GEMS = registerNoItem("small_skizzik_head_with_gems", () -> new SmallSkizzikHead(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+
     public static final RegistryObject<Block> SKIZZIK_HEAD = registerNoItem("skizzik_head", () -> new SkizzikHead(PA_TileEntities.CustomSkullTypes.SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
     public static final RegistryObject<Block> SKIZZIK_WALL_HEAD = registerNoItem("skizzik_wall_head", () -> new SkizzikWallHead(PA_TileEntities.CustomSkullTypes.SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).dropsLike(SKIZZIK_HEAD.get())));
     public static final RegistryObject<Block> SKIZZIK_HEAD_WITH_GEMS = registerNoItem("skizzik_head_with_gems", () -> new SkizzikHeadWithGems(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
@@ -144,6 +147,31 @@ public class PA_Blocks {
         for(SpawnEggItem egg : SpawnEggItem.eggs()) {
             DispenserBlock.registerBehavior(egg, entityDispenseBehavior);
         }
+
+        DispenserBlock.registerBehavior(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseItemBehavior() {
+            protected ItemStack execute(BlockSource source, ItemStack itemStack) {
+                Level world = source.getLevel();
+                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+                BlockPos blockpos = source.getPos().relative(direction);
+
+                if (world.isEmptyBlock(blockpos) && SkizzikHeadWithGems.canSpawnMob(world, blockpos, itemStack)) {
+                    world.setBlock(blockpos, PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(direction.getAxis() == Direction.Axis.Y ? 0 : direction.getOpposite().get2DDataValue() * 4)), 3);
+                    BlockEntity tileEntity = world.getBlockEntity(blockpos);
+
+                    if (tileEntity instanceof SkullBlockEntity) {
+                        SkizzikHeadWithGems.checkSpawn(world, blockpos, (SkullBlockEntity) tileEntity);
+                    }
+
+                    itemStack.shrink(1);
+                    this.setSuccess(true);
+                }
+                else {
+                    this.setSuccess(ArmorItem.dispenseArmor(source, itemStack));
+                }
+
+                return itemStack;
+            }
+        });
 
         DispenserBlock.registerBehavior(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseItemBehavior() {
             protected ItemStack execute(BlockSource source, ItemStack itemStack) {

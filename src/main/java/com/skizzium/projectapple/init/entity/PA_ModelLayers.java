@@ -5,6 +5,8 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
 public class PA_ModelLayers {
+    public static final ModelLayerLocation SMALL_SKIZZIK_HEAD_LAYER = register("small_skizzik_head");
+    public static final ModelLayerLocation SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER = register("small_skizzik_head_with_gems");
     public static final ModelLayerLocation SKIZZIK_HEAD_LAYER = register("skizzik_head");
     public static final ModelLayerLocation SKIZZIK_HEAD_WITH_GEMS_LAYER = register("skizzik_head_with_gems");
 

@@ -15,6 +15,19 @@ public class PA_SkullModel extends SkullModel {
         super(part);
     }
 
+    public static MeshDefinition createSmallHeadModel() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
+
+        root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.ZERO);
+        return mesh;
+    }
+
+    public static LayerDefinition createSmallSkizzikHeadLayer() {
+        MeshDefinition mesh = createSmallHeadModel();
+        return LayerDefinition.create(mesh, 24, 12);
+    }
+
     public static LayerDefinition createSkizzikHeadLayer() {
         MeshDefinition mesh = createHeadModel();
         return LayerDefinition.create(mesh, 32, 16);

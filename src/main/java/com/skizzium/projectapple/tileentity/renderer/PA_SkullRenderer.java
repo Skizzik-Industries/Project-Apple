@@ -40,6 +40,8 @@ public class PA_SkullRenderer extends SkullBlockRenderer implements BlockEntityR
         builder.put(SkullBlock.Types.CREEPER, new SkullModel(set.bakeLayer(ModelLayers.CREEPER_HEAD)));
         builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(set.bakeLayer(ModelLayers.DRAGON_SKULL)));
 
+        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
         builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
         builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
 
@@ -50,6 +52,8 @@ public class PA_SkullRenderer extends SkullBlockRenderer implements BlockEntityR
         super(context);
         super.modelByType = createSkullRenderers(context.getModelSet());
 
+        super.SKIN_BY_TYPE.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, new ResourceLocation("skizzik:textures/block/small_skizzik_head.png"));
+        super.SKIN_BY_TYPE.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new ResourceLocation("skizzik:textures/block/small_skizzik_head_with_gems.png"));
         super.SKIN_BY_TYPE.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new ResourceLocation("skizzik:textures/block/skizzik_head.png"));
         super.SKIN_BY_TYPE.put(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, new ResourceLocation("skizzik:textures/entity/skizzik/skizzik.png"));
 

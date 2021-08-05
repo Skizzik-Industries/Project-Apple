@@ -101,7 +101,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
     }
 
     public static boolean canSpawnMob(Level world, BlockPos pos, ItemStack itemStack) {
-        if ((/*itemStack.getItem() == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get() ||*/ itemStack.getItem() == PA_Items.SKIZZIK_HEAD_WITH_GEMS.get()) && pos.getY() >= 2 && world.getDifficulty() != Difficulty.PEACEFUL && !world.isClientSide) {
+        if ((itemStack.getItem() == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get() || itemStack.getItem() == PA_Items.SKIZZIK_HEAD_WITH_GEMS.get()) && pos.getY() >= 2 && world.getDifficulty() != Difficulty.PEACEFUL && !world.isClientSide) {
             return getOrCreateSkizzikBase().find(world, pos) != null;
         }
         else {
@@ -113,7 +113,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
         if (skizzikPatternFull == null) {
             skizzikPatternFull = BlockPatternBuilder.start().aisle("*~*", "*^*", "#@#", "~#~")
                     .where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR)))
-                    //.where('*', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get())))
+                    .where('*', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get())))
                     .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()).or(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get()))))
                     .where('@', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.COMMAND_BLOCK.get())))
                     .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
