@@ -17,10 +17,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     protected void addTags() {
         tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.COMMAND_BLOCK.get(), PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get(), PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
-        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
-        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_WALL_HEAD.get());
-        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_WALL_HEAD_WITH_GEMS.get());
-        //tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(), PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(), PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.SKIZZIK_LOOT_BAG.get()).addTag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS);;
         tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()).addTag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS);
@@ -36,11 +33,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.BUTTONS).add(PA_Blocks.CANDY_BUTTON.get());
         tag(PA_Tags.Blocks.WOODEN_BUTTONS).add(PA_Blocks.CANDY_BUTTON.get());
 
-        //tag(PA_Tags.Blocks.STANDING_SIGNS).add(PA_Blocks.CANDY_SIGN.get());
-        //tag(PA_Tags.Blocks.WALL_SIGNS).add(PA_Blocks.CANDY_WALL_SIGN.get());
-        //tag(PA_Tags.Blocks.SIGNS).add(PA_Blocks.CANDY_SIGN.get(), PA_Blocks.CANDY_WALL_SIGN.get());
-
-        //tag(PA_Tags.Blocks.WALL_POST_OVERRIDE).add(PA_Blocks.CANDY_PRESSURE_PLATE.get(), PA_Blocks.CANDY_SIGN.get());
+        tag(PA_Tags.Blocks.STANDING_SIGNS).add(PA_Blocks.CANDY_SIGN.get());
+        tag(PA_Tags.Blocks.WALL_SIGNS).add(PA_Blocks.CANDY_WALL_SIGN.get());
+        tag(PA_Tags.Blocks.SIGNS).add(PA_Blocks.CANDY_SIGN.get(), PA_Blocks.CANDY_WALL_SIGN.get());
 
         tag(PA_Tags.Blocks.PLANKS).add(PA_Blocks.CANDY_PLANKS.get());
 
@@ -76,5 +71,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(PA_Tags.Blocks.MINEABLE_WITH_PICKAXE).add(PA_Blocks.COMMAND_BLOCK.get(), PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get(), PA_Blocks.BROKEN_COMMAND_BLOCK.get(), PA_Blocks.CORRUPTED_BLOCK.get(), PA_Blocks.SKIZZIE_STATUE.get(), PA_Blocks.WHITE_CHOCOLATE_BLOCK.get(), PA_Blocks.CHOCOLATE_BLOCK.get(), PA_Blocks.DARK_CHOCOLATE_BLOCK.get(), PA_Blocks.CANDIANITE_ORE.get(), PA_Blocks.CANDY_NYLIUM.get(), PA_Blocks.CANDYRACK.get(), PA_Blocks.RAINBOW_ORE.get()).addTag(PA_Tags.Blocks.SKIZZIK_ALL_GEM_BLOCKS);
         tag(PA_Tags.Blocks.MINEABLE_WITH_HOE).add(PA_Blocks.SKIZZIK_FLESH_BLOCK.get(), PA_Blocks.WAFFLE_BLOCK.get());
+
+        tag(PA_Tags.Blocks.BEACON_BASE_BLOCKS).add(PA_Blocks.RAINBOW_GEM_BLOCK.get());
+        tag(PA_Tags.Blocks.WALL_POST_OVERRIDE).add(PA_Blocks.CANDY_PRESSURE_PLATE.get(), PA_Blocks.CANDY_SIGN.get(), PA_Blocks.CANDY_WALL_SIGN.get());
     }
 }
