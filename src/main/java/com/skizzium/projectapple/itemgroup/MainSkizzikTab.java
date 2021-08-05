@@ -62,6 +62,6 @@ public class MainSkizzikTab extends CreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return new ItemStack(PA_Blocks.COMMAND_BLOCK.get());
+        return new ItemStack(PA_Blocks.SKIZZIK_HEAD.get());
     }
 }
