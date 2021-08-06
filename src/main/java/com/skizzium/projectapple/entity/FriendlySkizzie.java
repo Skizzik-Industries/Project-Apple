@@ -127,7 +127,7 @@ public class FriendlySkizzie extends PathfinderMob {
         else if (world.getBlockState(pos).getBlock() == Blocks.LAVA) {
             world.setBlock(pos, PA_Blocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
             world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
-            this.remove(false);
+            this.discard();
         }
     }
 

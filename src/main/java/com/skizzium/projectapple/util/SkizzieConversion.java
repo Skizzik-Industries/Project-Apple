@@ -54,13 +54,13 @@ public class SkizzieConversion {
                 lightning.moveTo(Vec3.atCenterOf(fromPos));
                 world.addFreshEntity(lightning);
 
-                from.remove(false);
+                from.discard();
             }
         }
         else {
             if (Math.random() < 0.3 && canTurnStone) {
                 world.setBlock(fromPos, skizzieStatueState(from, fromPos, world), 3);
-                from.remove(false);
+                from.discard();
             }
             else {
                 to.moveTo(fromX, fromY, fromZ, from.xRotO, from.yRotO);
@@ -74,7 +74,7 @@ public class SkizzieConversion {
                 lightning.moveTo(Vec3.atCenterOf(fromPos));
                 world.addFreshEntity(lightning);
 
-                from.remove(false);
+                from.discard();
                 item.shrink(1);
             }
         }
