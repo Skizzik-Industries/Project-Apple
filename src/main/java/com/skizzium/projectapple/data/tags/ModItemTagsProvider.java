@@ -47,7 +47,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         copy(PA_Tags.Blocks.BEACON_BASE_BLOCKS, PA_Tags.Items.BEACON_BASE_BLOCKS);
 
-        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get(), PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Items.SKIZZIK_PANCAKES).add(PA_Items.PANCAKES.get(), PA_Items.SYRUP_PANCAKES.get());
         tag(PA_Tags.Items.SKIZZIK_CHOCOLATE).add(PA_Items.WHITE_CHOCOLATE_BAR.get(), PA_Items.CHOCOLATE_BAR.get(), PA_Items.DARK_CHOCOLATE_BAR.get());
