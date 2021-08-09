@@ -4,6 +4,7 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.itemgroup.LivingCandyTab;
 import com.skizzium.projectapple.itemgroup.MainSkizzikTab;
@@ -45,5 +46,6 @@ public class PA_Registry {
         PA_Effects.register();
         PA_Fluids.register();
         PA_Entities.register();
+        PA_TileEntities.register();
     }
 }

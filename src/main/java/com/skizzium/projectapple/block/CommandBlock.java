@@ -8,7 +8,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class CommandBlock extends Block {
-
     public CommandBlock(Properties properties) {
         super(properties);
     }
