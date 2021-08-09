@@ -59,7 +59,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
     public static void checkSpawn(Level world, BlockPos pos, SkullBlockEntity block) {
         if (!world.isClientSide) {
             BlockState state = block.getBlockState();
-            boolean isSkizzikHead = state.is(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
+            boolean isSkizzikHead = state.is(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
             if (isSkizzikHead && pos.getY() >= 0 && world.getDifficulty() != Difficulty.PEACEFUL) {
                 BlockPattern pattern = getOrCreateSkizzikFull();
