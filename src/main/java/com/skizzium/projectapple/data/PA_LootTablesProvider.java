@@ -32,8 +32,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
-public class ModLootTablesProvider extends LootTableProvider {
-    public ModLootTablesProvider(DataGenerator generator) {
+public class PA_LootTablesProvider extends LootTableProvider {
+    public PA_LootTablesProvider(DataGenerator generator) {
         super(generator);
     }
 

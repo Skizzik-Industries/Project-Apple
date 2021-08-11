@@ -1,11 +1,12 @@
 package com.skizzium.projectapple.data;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.data.models.ModBlockStatesProvider;
-import com.skizzium.projectapple.data.models.ModItemModelsProvider;
-import com.skizzium.projectapple.data.tags.ModBlockTagsProvider;
-import com.skizzium.projectapple.data.tags.ModFluidTagsProvider;
-import com.skizzium.projectapple.data.tags.ModItemTagsProvider;
+import com.skizzium.projectapple.data.models.PA_BlockStatesProvider;
+import com.skizzium.projectapple.data.models.PA_ItemModelsProvider;
+import com.skizzium.projectapple.data.tags.PA_BlockTagsProvider;
+import com.skizzium.projectapple.data.tags.PA_EntityTypeTagsProvider;
+import com.skizzium.projectapple.data.tags.PA_FluidTagsProvider;
+import com.skizzium.projectapple.data.tags.PA_ItemTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,14 +22,15 @@ public final class DataGenerators {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        generator.addProvider(new ModBlockStatesProvider(generator, helper));
-        generator.addProvider(new ModItemModelsProvider(generator, helper));
+        generator.addProvider(new PA_BlockStatesProvider(generator, helper));
+        generator.addProvider(new PA_ItemModelsProvider(generator, helper));
 
-        generator.addProvider(new ModLootTablesProvider(generator));
+        generator.addProvider(new PA_LootTablesProvider(generator));
 
-        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(generator, helper);
+        PA_BlockTagsProvider blockTags = new PA_BlockTagsProvider(generator, helper);
         generator.addProvider(blockTags);
-        generator.addProvider(new ModFluidTagsProvider(generator, helper));
-        generator.addProvider(new ModItemTagsProvider(generator, blockTags, helper));
+        generator.addProvider(new PA_EntityTypeTagsProvider(generator, helper));
+        generator.addProvider(new PA_FluidTagsProvider(generator, helper));
+        generator.addProvider(new PA_ItemTagsProvider(generator, blockTags, helper));
     }
 }

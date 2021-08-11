@@ -7,8 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ModBlockStatesProvider extends BlockStateProvider {
-    public ModBlockStatesProvider(DataGenerator generator, ExistingFileHelper helper) {
+public class PA_BlockStatesProvider extends BlockStateProvider {
+    public PA_BlockStatesProvider(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ProjectApple.MOD_ID, helper);
     }
 

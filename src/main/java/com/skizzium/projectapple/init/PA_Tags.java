@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.Item;
@@ -72,6 +73,14 @@ public final class PA_Tags {
 
         private static Tag.Named<Block> forge(String path) {
             return BlockTags.bind(new ResourceLocation("forge", path).toString());
+        }
+    }
+    public static final class EntityTypes {
+        public static final Tag.Named<EntityType<?>> SKIZZIES = forge("skizzies");
+        public static final Tag.Named<EntityType<?>> FRIENDLY_SKIZZIES = forge("friendly_skizzies");
+
+        private static Tag.Named<EntityType<?>> forge(String path) {
+            return EntityTypeTags.bind(new ResourceLocation("forge", path).toString());
         }
     }
     public static final class Fluids {

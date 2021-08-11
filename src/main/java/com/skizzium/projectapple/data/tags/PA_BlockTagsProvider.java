@@ -8,8 +8,8 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ModBlockTagsProvider extends BlockTagsProvider {
-    public ModBlockTagsProvider(DataGenerator generator, ExistingFileHelper helper) {
+public class PA_BlockTagsProvider extends BlockTagsProvider {
+    public PA_BlockTagsProvider(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ProjectApple.MOD_ID, helper);
     }
 

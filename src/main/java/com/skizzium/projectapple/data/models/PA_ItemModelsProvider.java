@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ModItemModelsProvider extends ItemModelProvider {
-    public ModItemModelsProvider(DataGenerator generator, ExistingFileHelper helper) {
+public class PA_ItemModelsProvider extends ItemModelProvider {
+    public PA_ItemModelsProvider(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ProjectApple.MOD_ID, helper);
     }
 
