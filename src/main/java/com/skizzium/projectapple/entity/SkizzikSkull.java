@@ -114,7 +114,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
             Entity source = this.getOwner();
             boolean hurt;
             if (source instanceof LivingEntity) {
-                Pig skizzik = (Pig) source;
+                Skizzik skizzik = (Skizzik) source;
                 hurt = this.getLevel() == 1 ? target.hurt(skizzikSkull(this, skizzik), 8.0F)
                         : this.getLevel() == 2 ? target.hurt(skizzikSkull(this, skizzik), 10.0F)
                         : target.hurt(skizzikSkull(this, skizzik), 15.0F);
@@ -122,7 +122,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
                     if (target.isAlive()) {
                         this.doEnchantDamageEffects(skizzik, target);
                     }
-                    /*else {
+                    else {
                         float health = skizzik.getHealth();
                         int stage = skizzik.getStage();
 
@@ -141,7 +141,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
                         else if (stage == 1 && health <= 1017) {
                             skizzik.heal(3.0F);
                         }
-                    }*/
+                    }
                 }
             }
             else {

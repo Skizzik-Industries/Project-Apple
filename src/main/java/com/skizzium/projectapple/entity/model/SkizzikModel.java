@@ -8,11 +8,8 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.stream.Stream;
 
 @OnlyIn(Dist.CLIENT)
 public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
@@ -107,8 +104,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		this.centerHead.xRot = f3 * 0.017453292F;
 
 		if (entity.getStage() == 0) {
-			//this.centerHead.setPos(1.0F, -1.0F, 0.0F);
-			this.centerHead.setPos(1.0F, -21.0F, 0.0F);
+			this.centerHead.setPos(1.0F, -1.0F, 0.0F);
 			this.bottomRightHead.setPos(19.0F, 18.0F, 0.0F);
 			this.bottomLeftHead.setPos(-18.0F, 18.0F, 1.0F);
 			this.topRightHead.setPos(18.0F, 6.0F, 0.0F);
@@ -117,20 +113,10 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.body.setPos(0.5F, 17.0F, -11.0F);
 			this.tail.setRotation(1.5F, 0.6F, 0.0F);
 			this.tail.setPos(4.0F, 20.9F, 7.5F);
-		}
-		else {
-			this.centerHead.setPos(1.0F, -16.0F, 0.0F);
-			this.bottomRightHead.setPos(19.0F, -9.0F, 0.0F);
-			this.bottomLeftHead.setPos(-18.0F, -11.0F, 1.0F);
-			this.topRightHead.setPos(17.0F, -31.0F, 0.0F);
-			this.topLeftHead.setPos(-13.0F, -34.0F, 1.0F);
 
-			this.body.setPos(0.5F, 4.0F, -11.0F);
-			this.tail.setRotation(0.7F, 0.0F, 0.0F);
-			this.tail.setPos(1.0F, 15.9F, 4.5F);
+			setDefaults(entity);
 		}
-
-		if (entity.getStage() == 5) {
+		else if (entity.getStage() == 5) {
 			this.centerHead.setPos(1.0F, -21.0F, 0.0F);
 
 			this.commandBlock.setPos(0.0F, 0.0F, -10.0F);
@@ -138,18 +124,10 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.rightRibs.setRotation(0.0F, -0.35F, 0.0F);
 			this.leftRibs.setRotation(0.0F, 0.35F, 0.0F);
 			this.bottomRib.setRotation(0.25F, 0.0F, 0.0F);
+
+			setDefaults(entity);
 		}
-		else {
-			this.centerHead.setPos(1.0F, -16.0F, 0.0F);
-
-			this.commandBlock.setPos(0.0F, 0.0F, 0.0F);
-
-			this.rightRibs.setRotation(0.0F, 0.0F, 0.0F);
-			this.leftRibs.setRotation(0.0F, 0.0F, 0.0F);
-			this.bottomRib.setRotation(0.0F, 0.0F, 0.0F);
-		}
-
-		if (entity.getStage() == 6) {
+		else if (entity.getStage() == 6) {
 			this.centerHead.setPos(1.0F, -13.0F, 0.0F);
 
 			this.commandBlock.visible = false;
@@ -158,16 +136,11 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.leftRibs.visible = false;
 			this.bottomRib.visible = false;
 			this.backRibs.visible = false;
+
+			setDefaults(entity);
 		}
 		else {
-			this.centerHead.setPos(1.0F, -16.0F, 0.0F);
-
-			this.commandBlock.visible = true;
-
-			this.rightRibs.visible = true;
-			this.leftRibs.visible = true;
-			this.bottomRib.visible = true;
-			this.backRibs.visible = true;
+			setDefaults(entity);
 		}
 
 		if (entity.getStage() == 2) {
@@ -208,6 +181,40 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		setupHeadRotation(entity, this.bottomLeftHead, 1);
 		setupHeadRotation(entity, this.bottomRightHead, 0);
 		setupHeadRotation(entity, this.bottomLeftHead, 1);
+	}
+
+	private void setDefaults(Skizzik entity) {
+		if (entity.getStage() != 0 && entity.getStage() != 5 && entity.getStage() != 6) {
+			this.centerHead.setPos(1.0F, -16.0F, 0.0F);
+		}
+
+		if (entity.getStage() != 0) {
+			this.bottomRightHead.setPos(19.0F, -9.0F, 0.0F);
+			this.bottomLeftHead.setPos(-18.0F, -11.0F, 1.0F);
+			this.topRightHead.setPos(17.0F, -31.0F, 0.0F);
+			this.topLeftHead.setPos(-13.0F, -34.0F, 1.0F);
+
+			this.body.setPos(0.5F, 4.0F, -11.0F);
+			this.tail.setRotation(0.7F, 0.0F, 0.0F);
+			this.tail.setPos(1.0F, 15.9F, 4.5F);
+		}
+
+		if (entity.getStage() != 5) {
+			this.commandBlock.setPos(0.0F, 0.0F, 0.0F);
+
+			this.rightRibs.setRotation(0.0F, 0.0F, 0.0F);
+			this.leftRibs.setRotation(0.0F, 0.0F, 0.0F);
+			this.bottomRib.setRotation(0.0F, 0.0F, 0.0F);
+		}
+
+		if (entity.getStage() != 6) {
+			this.commandBlock.visible = true;
+
+			this.rightRibs.visible = true;
+			this.leftRibs.visible = true;
+			this.bottomRib.visible = true;
+			this.backRibs.visible = true;
+		}
 	}
 
 	private static <T extends Skizzik> void setupHeadRotation(T entity, ModelPart model, int i) {
