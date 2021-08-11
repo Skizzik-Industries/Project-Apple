@@ -7,8 +7,8 @@ import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 
-public class ModFluidTagsProvider extends FluidTagsProvider {
-    public ModFluidTagsProvider(DataGenerator generator, ExistingFileHelper helper) {
+public class PA_FluidTagsProvider extends FluidTagsProvider {
+    public PA_FluidTagsProvider(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ProjectApple.MOD_ID, helper);
     }
 
