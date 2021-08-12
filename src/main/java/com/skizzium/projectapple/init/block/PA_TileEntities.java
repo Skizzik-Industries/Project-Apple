@@ -63,6 +63,13 @@ public class PA_TileEntities {
     public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers() {
         ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder = ImmutableMap.builder();
 
+        builder.put(SkullBlock.Types.SKELETON, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.SKELETON_SKULL)));
+        builder.put(SkullBlock.Types.WITHER_SKELETON, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.WITHER_SKELETON_SKULL)));
+        builder.put(SkullBlock.Types.PLAYER, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_HEAD)));
+        builder.put(SkullBlock.Types.ZOMBIE, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.ZOMBIE_HEAD)));
+        builder.put(SkullBlock.Types.CREEPER, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.CREEPER_HEAD)));
+        builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.DRAGON_SKULL)));
+
         builder.put(CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
         builder.put(CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
         builder.put(CustomSkullTypes.SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
