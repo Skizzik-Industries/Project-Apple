@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
@@ -8,25 +9,11 @@ import com.skizzium.projectapple.item.PA_SkullItem;
 import com.skizzium.projectapple.item.RainbowSword;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.HorseArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SignItem;
-import net.minecraft.world.item.StandingAndWallBlockItem;
-import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -95,5 +82,16 @@ public class PA_Items {
 
     @SubscribeEvent
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(PA_Entities.CANDY_PIG_SPAWN_EGG);
+
+        event.getRegistry().register(PA_Entities.FRIENDLY_SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(PA_Entities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG);
+
+        event.getRegistry().register(PA_Entities.SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(PA_Entities.KABOOM_SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(PA_Entities.WITCH_SKIZZIE_SPAWN_EGG);
+        event.getRegistry().register(PA_Entities.CORRUPTED_SKIZZIE_SPAWN_EGG);
+
+        event.getRegistry().register(PA_Entities.SKIZZO_SPAWN_EGG);
     }
 }

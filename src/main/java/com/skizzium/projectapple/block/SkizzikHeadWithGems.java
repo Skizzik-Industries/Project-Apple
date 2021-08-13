@@ -1,6 +1,8 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.entity.Skizzik;
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.tileentity.PA_Skull;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -59,7 +61,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
     public static void checkSpawn(Level world, BlockPos pos, SkullBlockEntity block) {
         if (!world.isClientSide) {
             BlockState state = block.getBlockState();
-            boolean isSkizzikHead = state.is(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
+            boolean isSkizzikHead = state.is(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()) || state.is(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
             if (isSkizzikHead && pos.getY() >= 0 && world.getDifficulty() != Difficulty.PEACEFUL) {
                 BlockPattern pattern = getOrCreateSkizzikFull();
@@ -74,7 +76,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
                         }
                     }
 
-                    Pig skizzik = EntityType.PIG.create(world);
+                    Skizzik skizzik = PA_Entities.SKIZZIK.create(world);
                     BlockPos blockPos = patternHelper.getBlock(1, 2, 0).getPos();
 
                     skizzik.moveTo((double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.55D, (double)blockPos.getZ() + 0.5D, patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F, 0.0F);

@@ -3,6 +3,7 @@ package com.skizzium.projectapple.init;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.itemgroup.LivingCandyTab;
@@ -23,7 +24,7 @@ public class PA_Registry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectApple.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ProjectApple.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ProjectApple.MOD_ID);
-    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, ProjectApple.MOD_ID);
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ProjectApple.MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, ProjectApple.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ProjectApple.MOD_ID);
 
@@ -44,6 +45,7 @@ public class PA_Registry {
         PA_SoundEvents.register();
         PA_Effects.register();
         PA_Fluids.register();
+        PA_Entities.register();
         PA_TileEntities.register();
     }
 }

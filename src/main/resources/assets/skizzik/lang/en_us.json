@@ -41,6 +41,8 @@
 
   "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
 
+  "subtitles.entity.dababy": "§bLESS GOOOOO",
+
   "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
   "entity.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie",
 
@@ -52,6 +54,10 @@
 
   "entity.skizzik.skizzik_skull": "Skizzik Skull",
   "entity.skizzik.skizzo": "Skizzo",
+
+  "entity.skizzik.skizzik.sleeping": "Sleeping",
+  "entity.skizzik.skizzik.stage": "Stage",
+  "entity.skizzik.skizzik.finish_him": "FINISH HIM!",
   "entity.skizzik.skizzik": "Skizzik",
 
   "death.attack.skizzikSkull": "%1$s was shot by a skull from %2$s",

@@ -4,6 +4,7 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.data.models.PA_BlockStatesProvider;
 import com.skizzium.projectapple.data.models.PA_ItemModelsProvider;
 import com.skizzium.projectapple.data.tags.PA_BlockTagsProvider;
+import com.skizzium.projectapple.data.tags.PA_EntityTypeTagsProvider;
 import com.skizzium.projectapple.data.tags.PA_FluidTagsProvider;
 import com.skizzium.projectapple.data.tags.PA_ItemTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -28,6 +29,7 @@ public final class DataGenerators {
 
         PA_BlockTagsProvider blockTags = new PA_BlockTagsProvider(generator, helper);
         generator.addProvider(blockTags);
+        generator.addProvider(new PA_EntityTypeTagsProvider(generator, helper));
         generator.addProvider(new PA_FluidTagsProvider(generator, helper));
         generator.addProvider(new PA_ItemTagsProvider(generator, blockTags, helper));
     }
