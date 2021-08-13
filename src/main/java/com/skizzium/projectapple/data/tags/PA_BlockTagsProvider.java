@@ -22,8 +22,8 @@ public class PA_BlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.SKIZZIK_LOOT_BAG.get()).addTag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS);;
         tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()).addTag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS);
 
-        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.SPAWNER, Blocks.STRUCTURE_VOID, Blocks.DRAGON_EGG, PA_Blocks.RAINBOW_GEM_BLOCK.get(), PA_Blocks.RAINBOW_ORE.get()).addTag(PA_Tags.Blocks.WITHER_IMMUNE);
-        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR, Blocks.CAVE_AIR, Blocks.VOID_AIR, PA_Blocks.CORRUPTED_BLOCK.get()).addTag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE);
+        tag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE).add(Blocks.SPAWNER, Blocks.STRUCTURE_VOID, Blocks.DRAGON_EGG, PA_Blocks.RAINBOW_GEM_BLOCK.get(), PA_Blocks.SKIZZIK_LOOT_BAG.get(), PA_Blocks.RAINBOW_ORE.get()).addTag(PA_Tags.Blocks.WITHER_IMMUNE);
+        tag(PA_Tags.Blocks.CORRUPTION_IMMUNE).add(Blocks.AIR, Blocks.CAVE_AIR, Blocks.VOID_AIR, PA_Blocks.CORRUPTED_BLOCK.get(), PA_Blocks.SKIZZIK_LOOT_BAG.get()).addTag(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE);
 
         tag(PA_Tags.Blocks.SKIZZIK_CHOCOLATE_BLOCKS).add(PA_Blocks.WHITE_CHOCOLATE_BLOCK.get(), PA_Blocks.CHOCOLATE_BLOCK.get(), PA_Blocks.DARK_CHOCOLATE_BLOCK.get());
 
