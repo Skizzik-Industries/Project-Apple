@@ -87,6 +87,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
+        this.xpReward = 0;
     }
 
     @Override
