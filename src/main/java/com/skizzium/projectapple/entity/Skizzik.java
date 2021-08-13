@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -431,8 +430,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 }
 
                 this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
-                Minecraft minecraft = Minecraft.getInstance();
-                minecraft.getMusicManager().stopPlaying();
             }
 
             if (world instanceof ServerLevel) {
