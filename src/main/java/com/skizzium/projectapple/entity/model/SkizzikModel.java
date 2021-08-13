@@ -11,6 +11,8 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
 public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 	private final ModelPart root;
@@ -100,8 +102,8 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 //		this.tail.setPos(-2.0F, 6.9F + Mth.cos(this.body.xRot) * 10.0F, -0.5F + Mth.sin(this.body.xRot) * 10.0F);
 //		this.tail.xRot = (0.265F + 0.1F * f5) * 3.1415927F;
 
-		this.centerHead.yRot = f3 * 0.017453292F;
-		this.centerHead.xRot = f3 * 0.017453292F;
+		this.centerHead.yRot = f3 * ((float)Math.PI / 180F);
+		this.centerHead.xRot = f4 * ((float)Math.PI / 180F);
 
 		if (entity.getStage() == 0) {
 			this.centerHead.setPos(1.0F, -1.0F, 0.0F);
@@ -113,8 +115,15 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.body.setPos(0.5F, 17.0F, -11.0F);
 			this.tail.setRotation(1.5F, 0.6F, 0.0F);
 			this.tail.setPos(4.0F, 20.9F, 7.5F);
-
-			setDefaults(entity);
+		}
+		else if (entity.getStage() == 2) {
+			this.topRightHead.setPos(-4.0F, -33.0F, 1.0F);
+		}
+		else if (entity.getStage() == 3) {
+			this.bottomRightHead.setPos(19.0F, -13.0F, 0.0F);
+		}
+		else if (entity.getStage() == 4) {
+			this.bottomRightHead.setPos(11.0F, -32.0F, 0.0F);
 		}
 		else if (entity.getStage() == 5) {
 			this.centerHead.setPos(1.0F, -21.0F, 0.0F);
@@ -124,8 +133,6 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.rightRibs.setRotation(0.0F, -0.35F, 0.0F);
 			this.leftRibs.setRotation(0.0F, 0.35F, 0.0F);
 			this.bottomRib.setRotation(0.25F, 0.0F, 0.0F);
-
-			setDefaults(entity);
 		}
 		else if (entity.getStage() == 6) {
 			this.centerHead.setPos(1.0F, -13.0F, 0.0F);
@@ -136,12 +143,8 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.leftRibs.visible = false;
 			this.bottomRib.visible = false;
 			this.backRibs.visible = false;
-
-			setDefaults(entity);
 		}
-		else {
-			setDefaults(entity);
-		}
+		setDefaults(entity);
 
 		if (entity.getStage() == 2) {
 			this.bottomRightHead.visible = true;
@@ -177,10 +180,12 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 
 	@Override
 	public void prepareMobModel(T entity, float f, float f1, float f2) {
+
+
 		setupHeadRotation(entity, this.bottomRightHead, 0);
 		setupHeadRotation(entity, this.bottomLeftHead, 1);
-		setupHeadRotation(entity, this.bottomRightHead, 0);
-		setupHeadRotation(entity, this.bottomLeftHead, 1);
+		setupHeadRotation(entity, this.topRightHead, 2);
+		setupHeadRotation(entity, this.topLeftHead, 3);
 	}
 
 	private void setDefaults(Skizzik entity) {
@@ -189,9 +194,16 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		}
 
 		if (entity.getStage() != 0) {
-			this.bottomRightHead.setPos(19.0F, -9.0F, 0.0F);
-			this.bottomLeftHead.setPos(-18.0F, -11.0F, 1.0F);
-			this.topRightHead.setPos(17.0F, -31.0F, 0.0F);
+			if (entity.getStage() < 2 && entity.getStage() != 0) {
+				this.topRightHead.setPos(17.0F, -31.0F, 0.0F);
+			}
+			if (entity.getStage() < 4) {
+				this.bottomRightHead.setPos(19.0F, -9.0F, 0.0F);
+				this.bottomLeftHead.setPos(-18.0F, -11.0F, 1.0F);
+			}
+		}
+
+		if (entity.getStage() != 0) {
 			this.topLeftHead.setPos(-13.0F, -34.0F, 1.0F);
 
 			this.body.setPos(0.5F, 4.0F, -11.0F);
@@ -218,7 +230,9 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 	}
 
 	private static <T extends Skizzik> void setupHeadRotation(T entity, ModelPart model, int i) {
-		model.yRot = (entity.getHeadYRot(i) - entity.yBodyRot) * 0.017453292F;
-		model.xRot = entity.getHeadXRot(i) * 0.017453292F;
+		if (model.visible) {
+			model.yRot = (entity.getHeadYRot(i) - entity.yBodyRot) * 0.017453292F;
+			model.xRot = entity.getHeadXRot(i) * 0.017453292F;
+		}
 	}
 }

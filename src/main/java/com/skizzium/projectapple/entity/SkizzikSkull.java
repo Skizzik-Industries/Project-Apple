@@ -73,7 +73,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
 
     @Override
     public float getBlockExplosionResistance(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, FluidState fluidState, float f1) {
-        return this.getLevel() >= 2 && state.canEntityDestroy(world, pos, this) ? Math.min(0.8F, f1) : f1;
+        return /*this.getLevel() >= 2 && state.canEntityDestroy(world, pos, this) ? Math.min(0.8F, f1) :*/ f1;
     }
 
     @Override

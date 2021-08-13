@@ -1,15 +1,16 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
-import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -39,6 +40,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -59,23 +61,21 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private static final EntityDataAccessor<Integer> DATA_ID_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
 
-    /*private int headCount = this.getStage() == 1 ? 5 :
-                                    this.getStage() == 2 ? 4 :
-                                            this.getStage() == 3 ? 3 :
-                                                    this.getStage() == 4 ? 2 :
-                                                            1;*/
+    private int activeHeads = 4;
 
-    private final float[] xRotHeads = new float[4];
-    private final float[] yRotHeads = new float[4];
+    private final float[] xRotHeads = new float[activeHeads];
+    private final float[] yRotHeads = new float[activeHeads];
 
-    private final float[] xRotHeads1 = new float[4];
-    private final float[] yRotHeads1 = new float[4];
+    private final float[] xRotHeads1 = new float[activeHeads];
+    private final float[] yRotHeads1 = new float[activeHeads];
 
-    private final int[] nextHeadUpdate = new int[4];
-    private final int[] idleHeadUpdates = new int[4];
+    private final int[] nextHeadUpdate = new int[activeHeads];
+    private final int[] idleHeadUpdates = new int[activeHeads];
+
+    //private final Skizzo[] skizzos = new Skizzo[4];
 
     private int destroyBlocksTick;
-    private int spawnSkizzieTick;
+    private int spawnSkizzieTicks;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
 
@@ -114,7 +114,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 2.4F;
+        return this.getStage() == 0 ? 1.5F : this.getStage() == 5 ? 2.75F : this.getStage() == 6 ? 2.25F : 2.45F;
     }
 
     @Override
@@ -161,6 +161,23 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        if (this.getStage() == 0) {
+            return new EntityDimensions(2.5F, 2.1F, true);
+        }
+        else if (this.getStage() == 3) {
+            return new EntityDimensions(2.5F, 3.0F, true);
+        }
+        else if (this.getStage() == 5) {
+            return new EntityDimensions(2.5F, 3.4F, true);
+        }
+        else if (this.getStage() == 6) {
+            return new EntityDimensions(1.2F, 2.8F, true);
+        }
+        return super.getDimensions(pose);
+    }
+
+    @Override
     public boolean isPersistenceRequired() {
         return true;
     }
@@ -180,13 +197,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     public static boolean canDestroy(BlockState state) {
-        return !state.isAir() && !BlockTags.WITHER_IMMUNE.contains(state.getBlock());
+        return !state.isAir() && !state.is(BlockTags.WITHER_IMMUNE); //BlockTags.WITHER_IMMUNE.contains(state.getBlock());
     }
 
     public static AttributeSupplier.Builder buildAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 1021.0D)
-                .add(Attributes.ARMOR, 8.0D)
+                .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.FLYING_SPEED, 0.6D);
@@ -332,14 +349,21 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     @Override
+    protected void registerGoals() {
+        super.registerGoals();
+    }
+
+    @Override
     public void baseTick() {
         super.baseTick();
 
-        /*headCount = this.getStage() == 1 ? 5 :
-                            this.getStage() == 2 ? 4 :
-                                    this.getStage() == 3 ? 3 :
-                                            this.getStage() == 4 ? 2 :
-                                                    1;*/
+        this.refreshDimensions();
+
+        activeHeads = this.getStage() == 1 ? 4 :
+                            this.getStage() == 2 ? 3 :
+                                    this.getStage() == 3 ? 2 :
+                                            this.getStage() == 4 ? 1 :
+                                                    0;
 
         float health = this.getHealth();
         int currentStage = this.getStage();
@@ -366,49 +390,78 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 this.setHealth(1020);
             }
 
-            if (newStage == 1) {
-
+            if (newStage == 0) {
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
             }
-            else if (newStage == 2) {
-
+            else if (newStage == 1 || newStage == 2) {
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(4.0D);
             }
             else if (newStage == 3) {
-
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(8.0D);
             }
             else if (newStage == 4) {
-
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(10.0D);
             }
             else if (newStage == 5) {
-
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(12.0D);
             }
             else if (newStage == 6) {
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
+
                 if (!world.isClientSide) {
                     world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
                     ((ServerLevel) world).setDayTime(1000);
                 }
 
-                List<Skizzie> skizzies = world.getEntitiesOfClass(Skizzie.class, this.getBoundingBox());
-                for (Skizzie skizzie : skizzies) {
-                    if (skizzie.getOwner() == this) {
-                        skizzie.kill();
-                        ProjectApple.LOGGER.debug("Owner - Yes");
+                if (world instanceof ServerLevel) {
+                    LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
+                    Iterable<Entity> entities = entityGetter.getAll();
+                    for (Entity entity : entities) {
+                        if (entity instanceof Skizzie) {
+                            if (((Skizzie) entity).getOwner() == this) {
+                                entity.kill();
+                            }
+                        }
+                        else if (entity instanceof Skizzo) {
+                            if (((Skizzo) entity).getOwner() == this) {
+                                entity.kill();
+                            }
+                        }
                     }
-                    ProjectApple.LOGGER.debug("Individual Skizzie");
                 }
 
                 this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
+                Minecraft minecraft = Minecraft.getInstance();
+                minecraft.getMusicManager().stopPlaying();
             }
 
             if (world instanceof ServerLevel) {
-                int difference = newStage - currentStage;
-                if (difference > 0) {
-                    for (int i = 0; i <= difference; i++) {
-                        //PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
+                if (newStage > 1 && newStage <= 5) {
+                    int difference;
+
+                    if (currentStage == 0) {
+                        difference = newStage - currentStage - 1;
                     }
-                }
-                else {
-                    difference = Math.abs(difference);
-                    //((ServerWorld) world).removeEntity();
+                    else if (currentStage == 6) {
+                        difference = newStage - currentStage + 1;
+                    }
+                    else {
+                        difference = newStage - currentStage;
+                    }
+
+                    if (difference > 0) {
+                        for (int i = 1; i <= difference; i++) {
+                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
+                            skizzo.setOwner(this);
+                            //skizzos[i - 1] = skizzo;
+                        }
+                    }
+                    /* else {
+                        difference = Math.abs(difference);
+                        for (int i = 1; i <= difference; i++) {
+                            ((ServerLevel) world).removeEntity(skizzos[i]);
+                        }
+                    } */
                 }
             }
         }
@@ -424,7 +477,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
         RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
 
         if (currentStage == 0) {
-            //this.setBoundingBox(new AxisAlignedBB(1, 2, 3, 4, 5, 6));
             this.goalSelector.removeGoal(avoidPlayerGoal);
             this.goalSelector.removeGoal(panicGoal);
 
@@ -472,24 +524,24 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         if (this.hasCustomName()) {
             if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Sleeping"));
+                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
             }
             else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Stage " + currentStage));
+                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
             }
             else {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
+                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
             }
         }
         else {
             if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent("Skizzik - Sleeping"));
+                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
             }
             else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent("Skizzik - Stage " + currentStage));
+                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
             }
             else {
-                this.bossBar.setName(new TextComponent("Skizzik - FINISH HIM!"));
+                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
             }
         }
 
@@ -504,15 +556,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
         double y = this.getY();
         double z = this.getZ();
         Level world = this.getCommandSenderWorld();
-
-        List<Skizzie> skizzies = world.getEntitiesOfClass(Skizzie.class, this.getBoundingBox());
-        for (Skizzie skizzie : skizzies) {
-            if (skizzie.getOwner() == this) {
-                skizzie.kill();
-                ProjectApple.LOGGER.debug("Owner - Yes");
-            }
-            ProjectApple.LOGGER.debug("Individual Skizzie");
-        }
 
         if (stage == 0 || stage == 1) {
             if (source == DamageSource.CACTUS ||
@@ -613,21 +656,17 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
         else {
             if (this.destroyBlocksTick <= 0) {
-                this.destroyBlocksTick = 20;
-            }
-
-            if (this.spawnSkizzieTick <= 0) {
                 if (this.getStage() == 1 || this.getStage() == 2) {
-                    this.spawnSkizzieTick = 50;
+                    this.destroyBlocksTick = 35;
                 }
                 else if (this.getStage() == 3 || this.getStage() == 4) {
-                    this.spawnSkizzieTick = 35;
+                    this.destroyBlocksTick = 20;
                 }
                 else if (this.getStage() == 5) {
-                    this.spawnSkizzieTick = 20;
+                    this.destroyBlocksTick = 10;
                 }
                 else {
-                    this.spawnSkizzieTick = 0;
+                    this.destroyBlocksTick = 35;
                 }
             }
 
@@ -690,13 +729,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         super.aiStep();
 
-        //if (headCount != 0) {
-            for (int i = 0; i < 4; ++i) {
+        if (this.getStage() != 0 && this.getStage() != 6) {
+            for (int i = 0; i < activeHeads; ++i) {
                 this.yRotHeads1[i] = this.yRotHeads[i];
                 this.xRotHeads1[i] = this.xRotHeads[i];
             }
 
-            for (int j = 0; j < 4; ++j) {
+            for (int j = 0; j < activeHeads; ++j) {
                 int k = this.getAlternativeTarget(j + 1);
                 Entity entity1 = null;
                 if (k > 0) {
@@ -723,23 +762,43 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 else {
                     this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], this.yBodyRot, 10.0F);
                 }
+            }
 
-                for(int l = 0; l < 5; ++l) {
-                    double headX = this.getHeadX(l);
-                    double heaxY = this.getHeadY(l);
-                    double headZ = this.getHeadZ(l);
-                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.3F, heaxY + this.random.nextGaussian() * (double)0.3F, headZ + this.random.nextGaussian() * (double)0.3F, 0.0D, 0.0D, 0.0D);
+            for(int l = 0; l < activeHeads + 1; ++l) {
+                double headX = this.getHeadX(l);
+                double heaxY = this.getHeadY(l);
+                double headZ = this.getHeadZ(l);
+                if (l == 0) {
+                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.5F, heaxY + this.random.nextGaussian() * (double)0.5F, headZ + this.random.nextGaussian() * (double)0.5F, 0.0D, 0.0D, 0.0D);
+                }
+                else {
+                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double) 0.3F, heaxY + this.random.nextGaussian() * (double) 0.3F, headZ + this.random.nextGaussian() * (double) 0.3F, 0.0D, 0.0D, 0.0D);
                 }
             }
-        //}
+        }
     }
 
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-        //if (headCount != 0) {
-            for (int headIndex = 1; headIndex < 5; ++headIndex) {
+        if (this.spawnSkizzieTicks <= 0) {
+            if (this.getStage() == 1 || this.getStage() == 2) {
+                this.spawnSkizzieTicks = 60;
+            }
+            else if (this.getStage() == 3 || this.getStage() == 4) {
+                this.spawnSkizzieTicks = 40;
+            }
+            else if (this.getStage() == 5) {
+                this.spawnSkizzieTicks = 30;
+            }
+            else {
+                this.spawnSkizzieTicks = 0;
+            }
+        }
+
+        if (this.getStage() != 0 || this.getStage() != 6) {
+            for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
                     int head = headIndex - 1;
@@ -794,7 +853,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     }
                 }
             }
-        //}
+        }
 
         if (this.getTarget() != null) {
             this.setAlternativeTarget(0, this.getTarget().getId());
@@ -804,39 +863,44 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
         if (this.destroyBlocksTick > 0) {
-            --this.destroyBlocksTick;
+            if (this.getStage() != 0 && this.getStage() != 6) {
+                --this.destroyBlocksTick;
 
-            if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
-                int y = Mth.floor(this.getY());
-                int x = Mth.floor(this.getX());
-                int z = Mth.floor(this.getZ());
-                boolean canDestroy = false;
+                if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
+                    int y = Mth.floor(this.getY());
+                    int x = Mth.floor(this.getX());
+                    int z = Mth.floor(this.getZ());
+                    boolean canDestroy = false;
 
-                for(int k2 = -1; k2 <= 1; ++k2) {
-                    for(int l2 = -1; l2 <= 1; ++l2) {
-                        for(int j = 0; j <= 3; ++j) {
-                            int i = x + k2;
-                            int k = y + j;
-                            int l = z + l2;
-                            BlockPos pos = new BlockPos(i, k, l);
-                            BlockState state = this.level.getBlockState(pos);
-                            if (state.canEntityDestroy(this.level, pos, this) && canDestroy(state) && onEntityDestroyBlock(this, pos, state)) {
-                                canDestroy = this.level.destroyBlock(pos, true, this) || canDestroy;
+                    for(int k2 = -1; k2 <= 1; ++k2) {
+                        for(int l2 = -1; l2 <= 1; ++l2) {
+                            for(int j = 0; j <= 3; ++j) {
+                                int i = x + k2;
+                                int k = y + j;
+                                int l = z + l2;
+                                BlockPos pos = new BlockPos(i, k, l);
+                                BlockState state = this.level.getBlockState(pos);
+                                if (state.canEntityDestroy(this.level, pos, this) && canDestroy(state) && onEntityDestroyBlock(this, pos, state)) {
+                                    canDestroy = this.level.destroyBlock(pos, true, this) || canDestroy;
+                                }
                             }
                         }
                     }
-                }
 
-                if (canDestroy) {
-                    this.level.levelEvent(null, 1022, this.blockPosition(), 0);
+                    if (canDestroy) {
+                        this.level.levelEvent(null, 1022, this.blockPosition(), 0);
+                    }
                 }
+            }
+            else {
+                this.destroyBlocksTick = 35;
             }
         }
 
-        if (this.spawnSkizzieTick > 0) {
-            --this.spawnSkizzieTick;
+        if (this.spawnSkizzieTicks > 0) {
+            --this.spawnSkizzieTicks;
 
-            if (this.spawnSkizzieTick == 0) {
+            if (this.spawnSkizzieTicks == 0) {
                 Level world = this.getCommandSenderWorld();
 
                 if (this.getStage() == 1) {
@@ -903,7 +967,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     }
                 }
                 else if (this.getStage() == 5) {
-                    if (Math.random() < 0.05) {
+                    if (Math.random() < 0.5) {
                         spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
                         spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
                         spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
@@ -922,7 +986,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                     spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
                                 }
                                 else {*/
-                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
                                 //}
                             }
                         }
