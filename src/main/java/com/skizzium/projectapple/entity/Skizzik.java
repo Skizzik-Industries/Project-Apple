@@ -22,6 +22,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -37,7 +38,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
@@ -352,6 +355,33 @@ public class Skizzik extends Monster implements RangedAttackMob {
         super.registerGoals();
     }
 
+    private void killAllSkizzies(Level world, boolean skizziesOnly) {
+        if (world instanceof ServerLevel) {
+            LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
+            Iterable<Entity> entities = entityGetter.getAll();
+            for (Entity entity : entities) {
+                if (entity instanceof Skizzie) {
+                    if (((Skizzie) entity).getOwner() == this) {
+                        entity.kill();
+                    }
+                }
+                else if (!skizziesOnly && entity instanceof Skizzo) {
+                    if (((Skizzo) entity).getOwner() == this) {
+                        entity.kill();
+                    }
+                }
+            }
+        }
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
+        Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
+        return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
+    }
+
     @Override
     public void baseTick() {
         super.baseTick();
@@ -412,25 +442,12 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     ((ServerLevel) world).setDayTime(1000);
                 }
 
-                if (world instanceof ServerLevel) {
-                    LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
-                    Iterable<Entity> entities = entityGetter.getAll();
-                    for (Entity entity : entities) {
-                        if (entity instanceof Skizzie) {
-                            if (((Skizzie) entity).getOwner() == this) {
-                                entity.kill();
-                            }
-                        }
-                        else if (entity instanceof Skizzo) {
-                            if (((Skizzo) entity).getOwner() == this) {
-                                entity.kill();
-                            }
-                        }
-                    }
-                }
+                this.killAllSkizzies(world, false);
 
                 this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
             }
+
+            this.killAllSkizzies(world, true);
 
             if (world instanceof ServerLevel) {
                 if (newStage > 1 && newStage <= 5) {
