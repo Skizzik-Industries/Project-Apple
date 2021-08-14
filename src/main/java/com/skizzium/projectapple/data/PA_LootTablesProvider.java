@@ -68,6 +68,10 @@ public class PA_LootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
             add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable().withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(PA_Items.MUSIC_DISC_SKIZZIK.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                                                                                   .withPool(LootPool.lootPool()
+                                                                                           .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()))
                                                                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,4))))
                                                                                    .withPool(LootPool.lootPool()
