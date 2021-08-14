@@ -1,9 +1,6 @@
 package com.skizzium.projectapple.entity.renderer;
 
-import com.skizzium.projectapple.entity.FriendlySkizzie;
 import com.skizzium.projectapple.entity.FriendlyWitchSkizzie;
-import com.skizzium.projectapple.entity.Skizzie;
-import com.skizzium.projectapple.entity.WitchSkizzie;
 import com.skizzium.projectapple.entity.layer.WitchSkizzieGlowLayer;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;

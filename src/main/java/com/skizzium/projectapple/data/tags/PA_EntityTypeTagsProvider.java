@@ -5,9 +5,7 @@ import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
-import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import com.skizzium.projectapple.init.block.PA_Fluids;
 
 public class PA_EntityTypeTagsProvider extends EntityTypeTagsProvider {
     public PA_EntityTypeTagsProvider(DataGenerator generator, ExistingFileHelper helper) {

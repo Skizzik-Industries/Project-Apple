@@ -1,13 +1,7 @@
 package com.skizzium.projectapple.entity.renderer;
 
-import com.skizzium.projectapple.entity.CandyPig;
-import net.minecraft.client.model.PigModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.PigRenderer;
-import net.minecraft.client.renderer.entity.layers.SaddleLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraftforge.api.distmarker.Dist;

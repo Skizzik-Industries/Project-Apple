@@ -9,9 +9,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.List;
+import net.minecraftforge.api.distmarker.OnlyIn;;
 
 @OnlyIn(Dist.CLIENT)
 public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {

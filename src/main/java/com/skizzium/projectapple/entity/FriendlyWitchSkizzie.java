@@ -1,23 +1,18 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.PA_Effects;
-import com.skizzium.projectapple.init.PA_SoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
 
 public class FriendlyWitchSkizzie extends FriendlySkizzie {
     public FriendlyWitchSkizzie(EntityType<? extends FriendlyWitchSkizzie> entity, Level world) {

@@ -1,6 +1,5 @@
 package com.skizzium.projectapple.entity.layer;
 
-import com.skizzium.projectapple.entity.WitchSkizzie;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

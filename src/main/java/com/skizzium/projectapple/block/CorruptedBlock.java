@@ -18,8 +18,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import com.skizzium.projectapple.init.PA_Effects;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class CorruptedBlock extends Block {
     public CorruptedBlock(Properties properties) {
         super(properties);
