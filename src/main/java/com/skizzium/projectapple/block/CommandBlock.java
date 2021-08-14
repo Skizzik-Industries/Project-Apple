@@ -15,8 +15,4 @@ public class CommandBlock extends Block {
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.BLOCK;
     }
-
-    public MaterialColor getMaterialColor() {
-        return MaterialColor.METAL;
-    }
 }

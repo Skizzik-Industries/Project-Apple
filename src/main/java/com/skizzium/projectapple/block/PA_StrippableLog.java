@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolAction;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 
 import javax.annotation.Nullable;
@@ -19,10 +19,9 @@ public class PA_StrippableLog extends RotatedPillarBlock {
 
     @Nullable
     @Override
-    public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player, ItemStack stack, ToolType toolType) {
-        if (toolType == ToolType.AXE) {
+    public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player, ItemStack stack, ToolAction toolType) {
+        if (toolType == ToolAction.get("axe_strip")) {
             Block block = state.getBlock();
-            BlockState blockstate = world.getBlockState(pos);
             if (block == PA_Blocks.CANDY_LOG.get()) {
                 return PA_Blocks.STRIPPED_CANDY_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
             }

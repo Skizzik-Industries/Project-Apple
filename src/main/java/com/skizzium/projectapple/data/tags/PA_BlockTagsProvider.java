@@ -72,6 +72,10 @@ public class PA_BlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.MINEABLE_WITH_PICKAXE).add(PA_Blocks.COMMAND_BLOCK.get(), PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get(), PA_Blocks.BROKEN_COMMAND_BLOCK.get(), PA_Blocks.CORRUPTED_BLOCK.get(), PA_Blocks.SKIZZIE_STATUE.get(), PA_Blocks.WHITE_CHOCOLATE_BLOCK.get(), PA_Blocks.CHOCOLATE_BLOCK.get(), PA_Blocks.DARK_CHOCOLATE_BLOCK.get(), PA_Blocks.CANDIANITE_ORE.get(), PA_Blocks.CANDY_NYLIUM.get(), PA_Blocks.CANDYRACK.get(), PA_Blocks.RAINBOW_ORE.get()).addTag(PA_Tags.Blocks.SKIZZIK_ALL_GEM_BLOCKS);
         tag(PA_Tags.Blocks.MINEABLE_WITH_HOE).add(PA_Blocks.SKIZZIK_FLESH_BLOCK.get(), PA_Blocks.WAFFLE_BLOCK.get());
 
+        tag(PA_Tags.Blocks.NEEDS_STONE_TOOL).add(PA_Blocks.CANDIANITE_ORE.get());
+        tag(PA_Tags.Blocks.NEEDS_IRON_TOOL).add(PA_Blocks.BROKEN_COMMAND_BLOCK.get()).addTag(PA_Tags.Blocks.SKIZZIK_BASE_GEM_BLOCKS);
+        tag(PA_Tags.Blocks.NEEDS_DIAMOND_TOOL).add(PA_Blocks.COMMAND_BLOCK.get(), PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get(), PA_Blocks.RAINBOW_ORE.get(), PA_Blocks.RAINBOW_GEM_BLOCK.get());
+
         tag(PA_Tags.Blocks.BEACON_BASE_BLOCKS).add(PA_Blocks.RAINBOW_GEM_BLOCK.get());
         tag(PA_Tags.Blocks.WALL_POST_OVERRIDE).add(PA_Blocks.CANDY_PRESSURE_PLATE.get(), PA_Blocks.CANDY_SIGN.get(), PA_Blocks.CANDY_WALL_SIGN.get());
     }

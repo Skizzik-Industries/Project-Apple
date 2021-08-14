@@ -14,7 +14,10 @@ public final class PA_Tags {
     public static final class Blocks {
         public static final Tag.Named<Block> MINEABLE_WITH_PICKAXE = minecraft("mineable/pickaxe");
         public static final Tag.Named<Block> MINEABLE_WITH_HOE = minecraft("mineable/hoe");
-        public static final Tag.Named<Block> MINEABLE_WITH_AXE = minecraft("mineable/axe");
+
+        public static final Tag.Named<Block> NEEDS_STONE_TOOL = minecraft("needs_stone_tool");
+        public static final Tag.Named<Block> NEEDS_IRON_TOOL = minecraft("needs_iron_tool");
+        public static final Tag.Named<Block> NEEDS_DIAMOND_TOOL = minecraft("needs_diamond_tool");
 
         public static final Tag.Named<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
         public static final Tag.Named<Block> SKIZZIK_HEADS = forge("skizzik_heads");
