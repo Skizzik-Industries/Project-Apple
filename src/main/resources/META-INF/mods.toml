@@ -1,15 +1,16 @@
 modLoader="javafml"
 loaderVersion="[36,)"
 license="GPLv3"
+issueTrackerURL="https://github.com/Skizzium/Project-Apple/issues"
 [[mods]]
 modId="skizzik"
 version="${file.jarVersion}"
 displayName="Skizzik & Co. [Project Apple]"
-updateJSONURL=""
+#updateJSONURL=""
 displayURL="https://skizzium.com/"
 logoFile="logo.png"
 credits=""
-authors="Skizzium [Ownership] ,uSkizzik [Coding & Concept], LazTheArtist [Assets & Coding]"
+authors="Skizzium [Ownership], uSkizzik [Coding & Concept], LazTheArtist [Assets & Coding]"
 description='''
 A lot of candy pigs were harmed in the making of this mod!
 Lorem Ipsum.
