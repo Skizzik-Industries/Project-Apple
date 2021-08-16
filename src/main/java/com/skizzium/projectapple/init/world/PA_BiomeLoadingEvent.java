@@ -15,6 +15,8 @@ public class PA_BiomeLoadingEvent {
         Biome.BiomeCategory biomeCategory = event.getCategory();
         BiomeGenerationSettingsBuilder builder = event.getGeneration();
 
-        PA_Features.addOres(builder);
+        if (biomeCategory.equals(Biome.BiomeCategory.PLAINS)) {
+            PA_Features.addOres(builder);
+        }
     }
 }
