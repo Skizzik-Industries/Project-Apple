@@ -6,12 +6,14 @@ import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
+import com.skizzium.projectapple.init.world.PA_Biomes;
 import com.skizzium.projectapple.itemgroup.LivingCandyTab;
 import com.skizzium.projectapple.itemgroup.MainSkizzikTab;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
@@ -27,6 +29,7 @@ public class PA_Registry {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ProjectApple.MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, ProjectApple.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ProjectApple.MOD_ID);
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ProjectApple.MOD_ID);
 
     public static final CreativeModeTab MAIN_SKIZZIK_TAB = new MainSkizzikTab("main_skizzik_tab");
     public static final CreativeModeTab LIVING_CANDY_TAB = new LivingCandyTab("living_candy_tab");
@@ -39,6 +42,7 @@ public class PA_Registry {
         EFFECTS.register(modEventBus);
         FLUIDS.register(modEventBus);
         TILE_ENTITIES.register(modEventBus);
+        BIOMES.register(modEventBus);
 
         PA_Blocks.register();
         PA_Items.register();
@@ -47,5 +51,6 @@ public class PA_Registry {
         PA_Fluids.register();
         PA_Entities.register();
         PA_TileEntities.register();
+        PA_Biomes.register();
     }
 }
