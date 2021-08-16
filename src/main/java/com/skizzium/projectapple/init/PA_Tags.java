@@ -22,8 +22,8 @@ public final class PA_Tags {
         public static final Tag.Named<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
         public static final Tag.Named<Block> SKIZZIK_HEADS = forge("skizzik_heads");
 
-        public static final Tag.Named<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
-        public static final Tag.Named<Block> CORRUPTION_IMMUNE = forge("corruption_immune");
+        public static final Tag.Named<Block> RAINBOW_SWORD_IMMUNE = forge("skizzik_rainbow_sword_immune");
+        public static final Tag.Named<Block> CORRUPTION_IMMUNE = forge("skizzik_corruption_immune");
 
         public static final Tag.Named<Block> DRAGON_IMMUNE = minecraft("dragon_immune");
         public static final Tag.Named<Block> WITHER_IMMUNE = minecraft("wither_immune");
