@@ -11,12 +11,10 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID)
 public class PA_BiomeLoadingEvent {
     @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void biomeLoadingAdd(BiomeLoadingEvent event) {
+    public static void addFeatures(BiomeLoadingEvent event) {
         Biome.BiomeCategory biomeCategory = event.getCategory();
         BiomeGenerationSettingsBuilder builder = event.getGeneration();
 
-        if (biomeCategory.equals(Biome.BiomeCategory.PLAINS)) {
-            PA_Features.addOres(builder);
-        }
+        PA_Features.addOres(builder, biomeCategory);
     }
 }
