@@ -12,6 +12,11 @@ public class PA_Features {
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.PATCH_GRASS_PLAIN);
     }
 
+    public static void addCandyPlainsLakes(BiomeGenerationSettings.Builder p_126799_) {
+        p_126799_.addFeature(GenerationStep.Decoration.LAKES, PA_ConfiguredFeatures.LAKE_SYRUP);
+        p_126799_.addFeature(GenerationStep.Decoration.LAKES, Features.LAKE_LAVA);
+    }
+
     public static void addOres(BiomeGenerationSettings.Builder builder, Biome.BiomeCategory biomeCategory) {
         int stageOre = GenerationStep.Decoration.UNDERGROUND_ORES.ordinal();
         if (biomeCategory == Biome.BiomeCategory.PLAINS) {

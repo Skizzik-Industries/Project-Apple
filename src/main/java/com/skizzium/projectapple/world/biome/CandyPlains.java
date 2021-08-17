@@ -3,10 +3,8 @@ package com.skizzium.projectapple.world.biome;
 import com.skizzium.projectapple.init.world.PA_Features;
 import com.skizzium.projectapple.init.world.PA_SurfaceBuilders;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
-import net.minecraft.data.worldgen.Features;
 import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class CandyPlains implements PA_BiomeInterface {
 
@@ -63,14 +61,14 @@ public class CandyPlains implements PA_BiomeInterface {
 
     @Override
     public BiomeGenerationSettings getBiomeGenerationSettings() {
-        BiomeGenerationSettings.Builder settings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(PA_SurfaceBuilders.CANDY_NYLIUM);
+        BiomeGenerationSettings.Builder settings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(PA_SurfaceBuilders.CANDY);
         //settings.addStructureStart(StructureFeatures.VILLAGE_PLAINS).addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
         settings.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
 
+        PA_Features.addCandyPlainsLakes(settings);
         PA_Features.addCandyPlainVegetation(settings); // CUSTOM FOLIAGE
         BiomeDefaultFeatures.addDefaultOverworldLandStructures(settings);
         BiomeDefaultFeatures.addDefaultCarvers(settings);
-        BiomeDefaultFeatures.addDefaultLakes(settings); // MAPLE SYRUP
         BiomeDefaultFeatures.addDefaultCrystalFormations(settings);
         BiomeDefaultFeatures.addDefaultMonsterRoom(settings);
         BiomeDefaultFeatures.addPlainGrass(settings); // CUSTOM FOLIAGE

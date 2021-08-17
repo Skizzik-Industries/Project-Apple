@@ -13,10 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
@@ -29,9 +26,10 @@ import net.minecraft.world.level.levelgen.placement.FrequencyWithExtraChanceDeco
 import java.util.OptionalInt;
 
 public class PA_ConfiguredFeatures {
+    public static final ConfiguredFeature<?, ?> LAKE_SYRUP = register("lake_syrup", Feature.LAKE.configured(new BlockStateConfiguration(PA_ConfiguredFeatures.BlockStates.MAPLE_SYRUP)).range(Features.Decorators.FULL_RANGE).squared().rarity(4));
+
     public static final ConfiguredFeature<TreeConfiguration, ?> CANDY = register("candy", Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_LOG), new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_LEAVES), new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_SAPLING), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
     public static final ConfiguredFeature<TreeConfiguration, ?> FANCY_CANDY = register("fancy_candy", Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_LOG), new FancyTrunkPlacer(3, 11, 0), new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_LEAVES), new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_SAPLING), new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build()));
-
     public static final ConfiguredFeature<TreeConfiguration, ?> CANDY_BEES_005 = register("candy_bees_005", Feature.TREE.configured(CANDY.config().withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005))));
     public static final ConfiguredFeature<TreeConfiguration, ?> FANCY_CANDY_BEES_005 = register("fancy_candy_bees_005", Feature.TREE.configured(FANCY_CANDY.config().withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005))));
 
@@ -45,6 +43,8 @@ public class PA_ConfiguredFeatures {
     }
 
     public static class BlockStates {
+        public static final BlockState MAPLE_SYRUP = PA_Blocks.MAPLE_SYRUP.get().defaultBlockState();
+
         public static final BlockState CANDY_SAPLING = Blocks.OAK_SAPLING.defaultBlockState();
         public static final BlockState CANDY_LEAVES = PA_Blocks.CANDY_LEAVES.get().defaultBlockState();
         public static final BlockState CANDY_LOG = PA_Blocks.CANDY_LOG.get().defaultBlockState();
