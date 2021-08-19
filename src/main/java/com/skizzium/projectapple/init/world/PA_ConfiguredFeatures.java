@@ -43,7 +43,7 @@ public class PA_ConfiguredFeatures {
     }
 
     public static class BlockStates {
-        public static final BlockState MAPLE_SYRUP = PA_Blocks.MAPLE_SYRUP.get().defaultBlockState();
+        public static final BlockState MAPLE_SYRUP = Blocks.WATER.defaultBlockState();
 
         public static final BlockState CANDY_SAPLING = Blocks.OAK_SAPLING.defaultBlockState();
         public static final BlockState CANDY_LEAVES = PA_Blocks.CANDY_LEAVES.get().defaultBlockState();
