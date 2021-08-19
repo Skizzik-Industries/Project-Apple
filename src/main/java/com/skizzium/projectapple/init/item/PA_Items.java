@@ -11,6 +11,7 @@ import com.skizzium.projectapple.item.RainbowSword;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -41,7 +42,7 @@ public class PA_Items {
     public static final RegistryObject<BlockItem> CANDY_CANE = PA_Registry.ITEMS.register("candy_cane", () -> new BlockItem(PA_Blocks.CANDY_CANE.get(), new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).food(PA_Foods.CANDY_CANE)));
     public static final RegistryObject<SignItem> CANDY_SIGN = PA_Registry.ITEMS.register("candy_sign", () -> new SignItem((new Item.Properties()).stacksTo(16).tab(PA_Registry.LIVING_CANDY_TAB), PA_Blocks.CANDY_SIGN.get(), PA_Blocks.CANDY_WALL_SIGN.get()));
 
-    public static final RegistryObject<BucketItem> MAPLE_SYRUP_BUCKET = PA_Registry.ITEMS.register("maple_syrup_bucket", () -> new BucketItem(PA_Fluids.MAPLE_SYRUP, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
+    public static final RegistryObject<BucketItem> MAPLE_SYRUP_BUCKET = PA_Registry.ITEMS.register("maple_syrup_bucket", () -> new BucketItem(Fluids.WATER /*PA_Fluids.MAPLE_SYRUP*/, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
     public static final RegistryObject<Item> WAFFLE = PA_Registry.ITEMS.register("waffle", () -> new Item(new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).food(PA_Foods.WAFFLE)));
 
     public static final RegistryObject<Item> PANCAKES = PA_Registry.ITEMS.register("pancakes", () -> new Item(new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).food(PA_Foods.PANCAKES)));
