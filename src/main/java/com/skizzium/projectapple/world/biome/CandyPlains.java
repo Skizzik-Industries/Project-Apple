@@ -54,7 +54,7 @@ public class CandyPlains implements PA_BiomeInterface {
     @Override
     public MobSpawnSettings getMobSpawnSettings() {
         MobSpawnSettings.Builder mobSpawns = new MobSpawnSettings.Builder();
-        BiomeDefaultFeatures.plainsSpawns(mobSpawns);
+        PA_Features.candyPlainsSpawns(mobSpawns);
         mobSpawns.setPlayerCanSpawn();
         return mobSpawns.build();
     }
@@ -67,6 +67,8 @@ public class CandyPlains implements PA_BiomeInterface {
 
         PA_Features.addCandyPlainsLakes(settings);
         PA_Features.addCandyPlainVegetation(settings); // CUSTOM FOLIAGE
+        PA_Features.addCandyPlainsExtraVegetation(settings);
+
         BiomeDefaultFeatures.addDefaultOverworldLandStructures(settings);
         BiomeDefaultFeatures.addDefaultCarvers(settings);
         BiomeDefaultFeatures.addDefaultCrystalFormations(settings);
@@ -76,7 +78,6 @@ public class CandyPlains implements PA_BiomeInterface {
         BiomeDefaultFeatures.addDefaultOres(settings);
         BiomeDefaultFeatures.addDefaultSoftDisks(settings);
         BiomeDefaultFeatures.addDefaultMushrooms(settings);
-        BiomeDefaultFeatures.addDefaultExtraVegetation(settings); // CUSTOM FOLIAGE?
         BiomeDefaultFeatures.addDefaultSprings(settings);
         BiomeDefaultFeatures.addSurfaceFreezing(settings);
 

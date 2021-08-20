@@ -20,6 +20,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.lang.reflect.Field;
 import java.util.function.Predicate;
@@ -76,6 +77,11 @@ public class PA_Entities {
     }
 
     @SubscribeEvent
+    public static void registerSpawns(FMLCommonSetupEvent event) {
+        SpawnPlacements.register(CANDY_PIG, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
+    }
+
+    @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.WITCH_SKIZZIE_LAYER, WitchSkizzieModel::createBodyLayer);
@@ -98,10 +104,6 @@ public class PA_Entities {
         event.registerEntityRenderer(PA_Entities.SKIZZIK_SKULL, SkizzikSkullRenderer::new);
         event.registerEntityRenderer(PA_Entities.SKIZZO, SkizzoRenderer::new);
         event.registerEntityRenderer(PA_Entities.SKIZZIK, SkizzikRenderer::new);
-    }
-
-    static {
-        SpawnPlacements.register(CANDY_PIG, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
     }
 
     @SubscribeEvent

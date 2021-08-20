@@ -7,12 +7,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.Features;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.blockplacers.ColumnPlacer;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
@@ -26,6 +28,8 @@ import net.minecraft.world.level.levelgen.placement.FrequencyWithExtraChanceDeco
 import java.util.OptionalInt;
 
 public class PA_ConfiguredFeatures {
+    public static final ConfiguredFeature<?, ?> PATCH_CANDY_CANE = register("patch_candy_cane", Feature.RANDOM_PATCH.configured(PA_ConfiguredFeatures.Configs.CANDY_CANE_CONFIG).decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE).count(10));
+
     public static final ConfiguredFeature<?, ?> LAKE_SYRUP = register("lake_syrup", Feature.LAKE.configured(new BlockStateConfiguration(PA_ConfiguredFeatures.BlockStates.MAPLE_SYRUP)).range(Features.Decorators.FULL_RANGE).squared().rarity(4));
 
     public static final ConfiguredFeature<TreeConfiguration, ?> CANDY = register("candy", Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_LOG), new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_LEAVES), new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_SAPLING), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
@@ -42,7 +46,13 @@ public class PA_ConfiguredFeatures {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(ProjectApple.MOD_ID, name), feature);
     }
 
-    public static class BlockStates {
+    private static class Configs {
+        public static final RandomPatchConfiguration CANDY_CANE_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(PA_ConfiguredFeatures.BlockStates.CANDY_CANE), new ColumnPlacer(BiasedToBottomInt.of(2, 4)))).tries(20).xspread(4).yspread(0).zspread(4).noProjection().needWater().build();
+    }
+
+    private static class BlockStates {
+        public static final BlockState CANDY_CANE = PA_Blocks.CANDY_CANE.get().defaultBlockState();
+
         public static final BlockState MAPLE_SYRUP = Blocks.WATER.defaultBlockState();
 
         public static final BlockState CANDY_SAPLING = Blocks.OAK_SAPLING.defaultBlockState();

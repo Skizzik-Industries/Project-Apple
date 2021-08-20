@@ -3,6 +3,7 @@ package com.skizzium.projectapple.entity;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
+import com.skizzium.projectapple.init.world.PA_Biomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
@@ -41,6 +42,6 @@ public class CandyPig extends Pig {
     }
 
     public static boolean canEntitySpawn(EntityType<? extends CandyPig> animal, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.below()).is(PA_Blocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos);
+        return world.getBlockState(pos.below()).is(PA_Blocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos) && world.getBiome(pos).equals(PA_Biomes.CANDY_PLAINS.get());
     }
 }
