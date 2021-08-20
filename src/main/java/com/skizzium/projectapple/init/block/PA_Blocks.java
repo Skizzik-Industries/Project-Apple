@@ -3,6 +3,7 @@ package com.skizzium.projectapple.init.block;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.CommandBlock;
 import com.skizzium.projectapple.block.*;
+import com.skizzium.projectapple.block.grower.CandyTreeGrower;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.ChatFormatting;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.level.block.grower.OakTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -84,7 +86,9 @@ public class PA_Blocks {
     public static final RegistryObject<TrapDoorBlock> CANDY_TRAPDOOR = register("candy_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD, PA_Blocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(3.0F).sound(SoundType.SLIME_BLOCK).noOcclusion()), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<DoorBlock> CANDY_DOOR = register("candy_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(CANDY_TRAPDOOR.get())), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
 
-    public static final RegistryObject<RotatedPillarBlock> CANDY_LOG = register("candy_log", () -> new PA_StrippableLog(BlockBehaviour.Properties.of(Material.WOOD, (rotation) -> rotation.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? PA_Blocks.CANDY_PLANKS.get().defaultMaterialColor() : MaterialColor.CRIMSON_NYLIUM).strength(2.0F,2.0F).sound(SoundType.SLIME_BLOCK)), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
+    public static final RegistryObject<SaplingBlock> CANDY_SAPLING = register("candy_sapling", () -> new SaplingBlock(new CandyTreeGrower(), BlockBehaviour.Properties.of(Material.PLANT).sound(SoundType.SLIME_BLOCK).noCollission().randomTicks().instabreak()), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
+
+    public static final RegistryObject<RotatedPillarBlock> CANDY_LOG = register("candy_log", () -> new PA_StrippableLog(BlockBehaviour.Properties.of(Material.WOOD, PA_Blocks.CANDY_PLANKS.get().defaultMaterialColor()).strength(2.0F,2.0F).sound(SoundType.SLIME_BLOCK)), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CANDY_LOG = register("stripped_candy_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(CANDY_LOG.get())), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<RotatedPillarBlock> CANDY_WOOD = register("candy_wood", () -> new PA_StrippableLog(BlockBehaviour.Properties.copy(CANDY_LOG.get())), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_CANDY_WOOD = register("stripped_candy_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(CANDY_LOG.get())), PA_Registry.LIVING_CANDY_TAB, Rarity.COMMON, false);
@@ -209,7 +213,9 @@ public class PA_Blocks {
         ItemBlockRenderTypes.setRenderLayer(CANDY_TRAPDOOR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CANDY_DOOR.get(), RenderType.cutout());
 
+        ItemBlockRenderTypes.setRenderLayer(CANDY_SAPLING.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CANDY_CANE.get(), RenderType.cutout());
+
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.MAPLE_SYRUP.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
     }
