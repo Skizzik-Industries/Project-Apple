@@ -127,6 +127,8 @@
   "block.skizzik.candy_trapdoor": "Candy Trapdoor",
   "block.skizzik.candy_door": "Candy Door",
 
+  "block.skizzik.candy_sapling": "Candy Sapling",
+
   "block.skizzik.candy_log": "Candy Log",
   "block.skizzik.stripped_candy_log": "Stripped Candy Log",
   "block.skizzik.candy_wood": "Candy Wood",
@@ -135,6 +137,8 @@
   "block.skizzik.candy_leaves": "Candy Leaves",
   "block.skizzik.candy_nylium": "Candy Nylium",
   "block.skizzik.candyrack": "Candyrack",
+
+  "biome.skizzik.candy_plains": "Candy Plains",
 
   "item.skizzik.rainbow_sword": "Rainbow Sword",
 

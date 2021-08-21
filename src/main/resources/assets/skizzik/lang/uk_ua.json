@@ -81,6 +81,9 @@
   "block.skizzik.candy_trapdoor": "Цукерковий люк",
   "block.skizzik.candy_door": "Цукеркові двері",
 
+
+  "block.skizzik.candy_sapling": "Candy Sapling",
+
   "block.skizzik.candy_log": "Цукеркова колода",
   "block.skizzik.stripped_candy_log": "Обтесана цукеркова колода",
   "block.skizzik.candy_wood": "Цукеркове дерево",
@@ -89,6 +92,8 @@
   "block.skizzik.candy_leaves": "Листя цукеркового дерева",
   "block.skizzik.candy_nylium": "Цукерковий ніліум",
   "block.skizzik.candyrack": "Цукеррак",
+
+  "biome.skizzik.candy_plains": "Candy Plains",
 
   "item.skizzik.rainbow_sword": "Веселковий меч",
 

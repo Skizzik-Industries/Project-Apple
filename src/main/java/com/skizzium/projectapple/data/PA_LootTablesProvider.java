@@ -123,7 +123,7 @@ public class PA_LootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.CANDY_WOOD.get());
             dropSelf(PA_Blocks.STRIPPED_CANDY_WOOD.get());
 
-            add(PA_Blocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, Blocks.OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
+            add(PA_Blocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, PA_Blocks.CANDY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
             add(PA_Blocks.CANDY_NYLIUM.get(), (drops) -> createSingleItemTableWithSilkTouch(drops, PA_Blocks.CANDYRACK.get()));
             dropSelf(PA_Blocks.CANDYRACK.get());
 
