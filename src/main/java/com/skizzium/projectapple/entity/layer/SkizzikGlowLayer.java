@@ -22,19 +22,10 @@ public class SkizzikGlowLayer<T extends Skizzik, M extends EntityModel<T>> exten
     @Override
     public void render(PoseStack matrix, MultiBufferSource buffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float age, float headYaw, float headPitch) {
         int stage = entity.getStage();
-        ResourceLocation texture = null;
-        if (stage == 0) {
-            texture = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_sleeping_glow.png");
-        }
-        else if (stage >= 1 && stage <= 4) {
-            texture = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_glow.png");
-        }
-        else if (stage == 5) {
-            texture = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_stage-5_glow.png");
-        }
-        else {
-            texture = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_empty_glow.png");
-        }
+        ResourceLocation texture = stage == 0 ? new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_sleeping_glow.png") :
+                                    stage >= 1 && stage <= 4 ? new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_glow.png") :
+                                    stage == 5 ? new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_stage-5_glow.png") :
+                                    new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_empty_glow.png"); //Using a completely transparent texture to remove the glow
 
         VertexConsumer builder = buffer.getBuffer(RenderType.eyes(texture));
         this.getParentModel().renderToBuffer(matrix, builder, 15728640, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
