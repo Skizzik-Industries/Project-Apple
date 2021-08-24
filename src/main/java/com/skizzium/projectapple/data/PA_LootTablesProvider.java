@@ -49,7 +49,7 @@ public class PA_LootTablesProvider extends LootTableProvider {
         map.forEach((p_218436_2_, p_218436_3_) -> LootTables.validate(validationtracker, p_218436_2_, p_218436_3_));
     }
 
-    public static class ModBlockLootTables extends BlockLoot {
+    public static class PB_BlockLootTables extends BlockLoot {
         private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
         @Override
