@@ -1,17 +1,14 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
-import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.PA_Entities;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,13 +23,16 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
@@ -40,13 +40,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
 
-public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRangedAttackMob {
+public class Skizzik extends MonsterEntity implements IRangedAttackMob {
     private static final DataParameter<Integer> DATA_TARGET_A = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_B = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
     private static final DataParameter<Integer> DATA_TARGET_C = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
@@ -56,32 +56,30 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
     private static final DataParameter<Integer> DATA_ID_STAGE = EntityDataManager.defineId(Skizzik.class, DataSerializers.INT);
 
-    /*private int headCount = this.getStage() == 1 ? 5 :
-                                    this.getStage() == 2 ? 4 :
-                                            this.getStage() == 3 ? 3 :
-                                                    this.getStage() == 4 ? 2 :
-                                                            1;*/
+    private int activeHeads = 4;
 
-    private final float[] xRotHeads = new float[4];
-    private final float[] yRotHeads = new float[4];
+    private final float[] xRotHeads = new float[activeHeads];
+    private final float[] yRotHeads = new float[activeHeads];
 
-    private final float[] xRotHeads1 = new float[4];
-    private final float[] yRotHeads1 = new float[4];
+    private final float[] xRotHeads1 = new float[activeHeads];
+    private final float[] yRotHeads1 = new float[activeHeads];
 
-    private final int[] nextHeadUpdate = new int[4];
-    private final int[] idleHeadUpdates = new int[4];
+    private final int[] nextHeadUpdate = new int[activeHeads];
+    private final int[] idleHeadUpdates = new int[activeHeads];
+
+    //private final Skizzo[] skizzos = new Skizzo[4];
 
     private int destroyBlocksTick;
     private int spawnSkizzieTick;
 
     private static final EntityPredicate TARGETING_CONDITIONS = (new EntityPredicate()).range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
-
-    private final ServerBossInfo bossBar = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
+    private final ServerBossInfo bossBar = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, World world) {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
+        this.xpReward = 0;
     }
 
     @Override
@@ -111,7 +109,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntitySize size) {
-        return 2.4F;
+        return this.getStage() == 0 ? 1.5F : this.getStage() == 5 ? 2.75F : this.getStage() == 6 ? 2.25F : 2.45F;
     }
 
     @Override
@@ -158,6 +156,23 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
+    public EntitySize getDimensions(Pose pose) {
+        if (this.getStage() == 0) {
+            return new EntitySize(2.5F, 2.1F, true);
+        }
+        else if (this.getStage() == 3) {
+            return new EntitySize(2.5F, 3.0F, true);
+        }
+        else if (this.getStage() == 5) {
+            return new EntitySize(2.5F, 3.4F, true);
+        }
+        else if (this.getStage() == 6) {
+            return new EntitySize(1.2F, 2.8F, true);
+        }
+        return super.getDimensions(pose);
+    }
+
+    @Override
     public boolean isPersistenceRequired() {
         return true;
     }
@@ -177,13 +192,13 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     public static boolean canDestroy(BlockState state) {
-        return !state.isAir() && !BlockTags.WITHER_IMMUNE.contains(state.getBlock());
+        return !state.isAir() && !state.is(BlockTags.WITHER_IMMUNE); //BlockTags.WITHER_IMMUNE.contains(state.getBlock());
     }
 
     public static AttributeModifierMap.MutableAttribute buildAttributes() {
         return MonsterEntity.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 1021.0D)
-                .add(Attributes.ARMOR, 8.0D)
+                .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.FLYING_SPEED, 0.6D);
@@ -329,14 +344,48 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
     }
 
     @Override
+    protected void registerGoals() {
+        super.registerGoals();
+    }
+
+    private void killAllSkizzies(World world, boolean skizziesOnly) {
+        if (world instanceof ServerWorld) {
+            Stream<Entity> entityGetter = ((ServerWorld) world).getEntities();
+            Iterable<Entity> entities = entityGetter.toList();
+            for (Entity entity : entities) {
+                if (entity instanceof Skizzie) {
+                    if (((Skizzie) entity).getOwner() == this) {
+                        entity.kill();
+                    }
+                }
+                else if (!skizziesOnly && entity instanceof Skizzo) {
+                    if (((Skizzo) entity).getOwner() == this) {
+                        entity.kill();
+                    }
+                }
+            }
+        }
+    }
+
+    @Nullable
+    @Override
+    public ILivingEntityData finalizeSpawn(IServerWorld level, DifficultyInstance difficulty, SpawnReason spawnReason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT nbt) {
+        Explosion.Mode explosion = getMobGriefingEvent(this.level, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
+        return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
+    }
+
+    @Override
     public void baseTick() {
         super.baseTick();
 
-        /*headCount = this.getStage() == 1 ? 5 :
-                            this.getStage() == 2 ? 4 :
-                                    this.getStage() == 3 ? 3 :
-                                            this.getStage() == 4 ? 2 :
-                                                    1;*/
+        this.refreshDimensions();
+
+        activeHeads = this.getStage() == 1 ? 4 :
+                            this.getStage() == 2 ? 3 :
+                                    this.getStage() == 3 ? 2 :
+                                            this.getStage() == 4 ? 1 :
+                                                    0;
 
         float health = this.getHealth();
         int currentStage = this.getStage();
@@ -363,50 +412,64 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                 this.setHealth(1020);
             }
 
-            if (newStage == 1) {
-
+            if (newStage == 0) {
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
             }
-            else if (newStage == 2) {
-
+            else if (newStage == 1 || newStage == 2) {
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(4.0D);
             }
             else if (newStage == 3) {
-
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(8.0D);
             }
             else if (newStage == 4) {
-
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(10.0D);
             }
             else if (newStage == 5) {
-
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(12.0D);
             }
             else if (newStage == 6) {
+                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
+
                 if (!world.isClientSide) {
                     world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
                     ((ServerWorld) world).setDayTime(1000);
                 }
 
-                List<Skizzie> skizzies = world.getEntitiesOfClass(Skizzie.class, this.getBoundingBox());
-                for (Skizzie skizzie : skizzies) {
-                    if (skizzie.getOwner() == this) {
-                        skizzie.kill();
-                        ProjectApple.LOGGER.debug("Owner - Yes");
-                    }
-                    ProjectApple.LOGGER.debug("Individual Skizzie");
-                }
+                this.killAllSkizzies(world, false);
 
                 this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundCategory.HOSTILE, 10000.0F, 1.0F);
             }
+        }
 
-            if (world instanceof ServerWorld) {
-                int difference = newStage - currentStage;
-                if (difference > 0) {
-                    for (int i = 0; i <= difference; i++) {
-                        //PA_Entities.SKIZZO.spawn((ServerWorld)world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
-                    }
+        this.killAllSkizzies(world, true);
+
+        if (world instanceof ServerWorld) {
+            if (newStage > 1 && newStage <= 5) {
+                int difference;
+
+                if (currentStage == 0) {
+                    difference = newStage - currentStage - 1;
+                }
+                else if (currentStage == 6) {
+                    difference = newStage - currentStage + 1;
                 }
                 else {
-                    difference = Math.abs(difference);
-                    //((ServerWorld) world).removeEntity();
+                    difference = newStage - currentStage;
                 }
+
+                if (difference > 0) {
+                    for (int i = 1; i <= difference; i++) {
+                        Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.spawn((ServerWorld) world, null, null, this.blockPosition(), SpawnReason.MOB_SUMMONED, true, true);
+                        skizzo.setOwner(this);
+                        //skizzos[i - 1] = skizzo;
+                    }
+                }
+                /* else {
+                    difference = Math.abs(difference);
+                    for (int i = 1; i <= difference; i++) {
+                        ((ServerLevel) world).removeEntity(skizzos[i]);
+                    }
+                } */
             }
         }
 
@@ -421,7 +484,6 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         LookRandomlyGoal lookRandomlyGoal = new LookRandomlyGoal(this);
 
         if (currentStage == 0) {
-            //this.setBoundingBox(new AxisAlignedBB(1, 2, 3, 4, 5, 6));
             this.goalSelector.removeGoal(avoidPlayerGoal);
             this.goalSelector.removeGoal(panicGoal);
 
@@ -469,24 +531,24 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
         if (this.hasCustomName()) {
             if (currentStage == 0) {
-                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Sleeping"));
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - " + new TranslationTextComponent("entity.skizzik.skizzik.sleeping").getString()));
             }
             else if (currentStage <= 5) {
-                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - Stage " + currentStage));
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - " + new TranslationTextComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
             }
             else {
-                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
+                this.bossBar.setName(new StringTextComponent(this.getDisplayName().getString() + " - " + new TranslationTextComponent("entity.skizzik.skizzik.finish_him").getString()));
             }
         }
         else {
             if (currentStage == 0) {
-                this.bossBar.setName(new StringTextComponent("Skizzik - Sleeping"));
+                this.bossBar.setName(new StringTextComponent(new TranslationTextComponent("entity.skizzik.skizzik").getString() + " - " + new TranslationTextComponent("entity.skizzik.skizzik.sleeping").getString()));
             }
             else if (currentStage <= 5) {
-                this.bossBar.setName(new StringTextComponent("Skizzik - Stage " + currentStage));
+                this.bossBar.setName(new StringTextComponent(new TranslationTextComponent("entity.skizzik.skizzik").getString() + " - " + new TranslationTextComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
             }
             else {
-                this.bossBar.setName(new StringTextComponent("Skizzik - FINISH HIM!"));
+                this.bossBar.setName(new StringTextComponent(new TranslationTextComponent("entity.skizzik.skizzik").getString() + " - " + new TranslationTextComponent("entity.skizzik.skizzik.finish_him").getString()));
             }
         }
 
@@ -501,15 +563,6 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         double y = this.getY();
         double z = this.getZ();
         World world = this.getCommandSenderWorld();
-
-        List<Skizzie> skizzies = world.getEntitiesOfClass(Skizzie.class, this.getBoundingBox());
-        for (Skizzie skizzie : skizzies) {
-            if (skizzie.getOwner() == this) {
-                skizzie.kill();
-                ProjectApple.LOGGER.debug("Owner - Yes");
-            }
-            ProjectApple.LOGGER.debug("Individual Skizzie");
-        }
 
         if (stage == 0 || stage == 1) {
             if (source == DamageSource.CACTUS ||
@@ -605,12 +658,23 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         }
 
         Entity entity = source.getEntity();
-        if (entity != null && !(entity instanceof PlayerEntity) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
+        if (!(entity instanceof PlayerEntity) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
             return false;
         }
         else {
             if (this.destroyBlocksTick <= 0) {
-                this.destroyBlocksTick = 20;
+                if (this.getStage() == 1 || this.getStage() == 2) {
+                    this.destroyBlocksTick = 35;
+                }
+                else if (this.getStage() == 3 || this.getStage() == 4) {
+                    this.destroyBlocksTick = 20;
+                }
+                else if (this.getStage() == 5) {
+                    this.destroyBlocksTick = 10;
+                }
+                else {
+                    this.destroyBlocksTick = 35;
+                }
             }
 
             if (this.spawnSkizzieTick <= 0) {
@@ -687,13 +751,13 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
 
         super.aiStep();
 
-        //if (headCount != 0) {
-            for (int i = 0; i < 4; ++i) {
+        if (this.getStage() != 0 && this.getStage() != 6) {
+            for (int i = 0; i < activeHeads; ++i) {
                 this.yRotHeads1[i] = this.yRotHeads[i];
                 this.xRotHeads1[i] = this.xRotHeads[i];
             }
 
-            for (int j = 0; j < 4; ++j) {
+            for (int j = 0; j < activeHeads; ++j) {
                 int k = this.getAlternativeTarget(j + 1);
                 Entity entity1 = null;
                 if (k > 0) {
@@ -709,7 +773,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                     double entityY = entity1.getEyeY() - headY;
                     double entityZ = entity1.getZ() - headZ;
 
-                    double d7 = MathHelper.sqrt(entityX * entityX + entityZ * entityZ);
+                    double d7 = Math.sqrt(entityX * entityX + entityZ * entityZ);
 
                     float f = (float) (MathHelper.atan2(entityZ, entityX) * (double) (180F / (float) Math.PI)) - 90.0F;
                     float f1 = (float) (-(MathHelper.atan2(entityY, d7) * (double) (180F / (float) Math.PI)));
@@ -720,23 +784,43 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                 else {
                     this.yRotHeads[j] = this.rotlerp(this.yRotHeads[j], this.yBodyRot, 10.0F);
                 }
+            }
 
-                for(int l = 0; l < 5; ++l) {
-                    double headX = this.getHeadX(l);
-                    double heaxY = this.getHeadY(l);
-                    double headZ = this.getHeadZ(l);
-                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.3F, heaxY + this.random.nextGaussian() * (double)0.3F, headZ + this.random.nextGaussian() * (double)0.3F, 0.0D, 0.0D, 0.0D);
+            for(int l = 0; l < activeHeads + 1; ++l) {
+                double headX = this.getHeadX(l);
+                double heaxY = this.getHeadY(l);
+                double headZ = this.getHeadZ(l);
+                if (l == 0) {
+                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.5F, heaxY + this.random.nextGaussian() * (double)0.5F, headZ + this.random.nextGaussian() * (double)0.5F, 0.0D, 0.0D, 0.0D);
+                }
+                else {
+                    this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double) 0.3F, heaxY + this.random.nextGaussian() * (double) 0.3F, headZ + this.random.nextGaussian() * (double) 0.3F, 0.0D, 0.0D, 0.0D);
                 }
             }
-        //}
+        }
     }
 
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-        //if (headCount != 0) {
-            for (int headIndex = 1; headIndex < 5; ++headIndex) {
+        if (this.spawnSkizzieTick <= 0) {
+            if (this.getStage() == 1 || this.getStage() == 2) {
+                this.spawnSkizzieTick = 60;
+            }
+            else if (this.getStage() == 3 || this.getStage() == 4) {
+                this.spawnSkizzieTick = 40;
+            }
+            else if (this.getStage() == 5) {
+                this.spawnSkizzieTick = 30;
+            }
+            else {
+                this.spawnSkizzieTick = 0;
+            }
+        }
+
+        if (this.getStage() != 0 || this.getStage() != 6) {
+            for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
                     int head = headIndex - 1;
@@ -791,7 +875,7 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
                     }
                 }
             }
-        //}
+        }
 
         if (this.getTarget() != null) {
             this.setAlternativeTarget(0, this.getTarget().getId());
@@ -801,31 +885,134 @@ public class Skizzik extends MonsterEntity implements /*IChargeableMob,*/ IRange
         }
 
         if (this.destroyBlocksTick > 0) {
-            --this.destroyBlocksTick;
+            if (this.getStage() != 0 && this.getStage() != 6) {
+                --this.destroyBlocksTick;
 
-            if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
-                int y = MathHelper.floor(this.getY());
-                int x = MathHelper.floor(this.getX());
-                int z = MathHelper.floor(this.getZ());
-                boolean canDestroy = false;
+                if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
+                    int y = MathHelper.floor(this.getY());
+                    int x = MathHelper.floor(this.getX());
+                    int z = MathHelper.floor(this.getZ());
+                    boolean canDestroy = false;
 
-                for(int k2 = -1; k2 <= 1; ++k2) {
-                    for(int l2 = -1; l2 <= 1; ++l2) {
-                        for(int j = 0; j <= 3; ++j) {
-                            int i = x + k2;
-                            int k = y + j;
-                            int l = z + l2;
-                            BlockPos pos = new BlockPos(i, k, l);
-                            BlockState state = this.level.getBlockState(pos);
-                            if (state.canEntityDestroy(this.level, pos, this) && canDestroy(state) && onEntityDestroyBlock(this, pos, state)) {
-                                canDestroy = this.level.destroyBlock(pos, true, this) || canDestroy;
+                    for(int k2 = -1; k2 <= 1; ++k2) {
+                        for(int l2 = -1; l2 <= 1; ++l2) {
+                            for(int j = 0; j <= 3; ++j) {
+                                int i = x + k2;
+                                int k = y + j;
+                                int l = z + l2;
+                                BlockPos pos = new BlockPos(i, k, l);
+                                BlockState state = this.level.getBlockState(pos);
+                                if (state.canEntityDestroy(this.level, pos, this) && canDestroy(state) && onEntityDestroyBlock(this, pos, state)) {
+                                    canDestroy = this.level.destroyBlock(pos, true, this) || canDestroy;
+                                }
+                            }
+                        }
+                    }
+
+                    if (canDestroy) {
+                        this.level.levelEvent(null, 1022, this.blockPosition(), 0);
+                    }
+                }
+            }
+            else {
+                this.destroyBlocksTick = 35;
+            }
+        }
+
+        if (this.spawnSkizzieTick > 0) {
+            --this.spawnSkizzieTick;
+
+            if (this.spawnSkizzieTick == 0) {
+                World world = this.getCommandSenderWorld();
+
+                if (this.getStage() == 1) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                }
+                else if (this.getStage() == 2) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                    }
+                }
+                else if (this.getStage() == 3) {
+                    /*if (Math.random() < 0.05) {
+                        spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {*/
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            if (Math.random() < 0.5) {
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                            else {
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                        }
+                    //}
+                }
+                else if (this.getStage() == 4) {
+                    if (Math.random() < 0.05) {
+                        spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            if (Math.random() < 0.5) {
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                            else {
+                                //if (Math.random() < 0.5) {
+                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                /*}
+                                else {
+                                    spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                }*/
                             }
                         }
                     }
                 }
-
-                if (canDestroy) {
-                    this.level.levelEvent(null, 1022, this.blockPosition(), 0);
+                else if (this.getStage() == 5) {
+                    if (Math.random() < 0.5) {
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                    }
+                    else {
+                        if (Math.random() < 0.5) {
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        }
+                        else {
+                            if (Math.random() < 0.5) {
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            }
+                            else {
+                                /*if (Math.random() < 0.5) {
+                                    spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                }
+                                else {*/
+                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                //}
+                            }
+                        }
+                    }
                 }
             }
         }

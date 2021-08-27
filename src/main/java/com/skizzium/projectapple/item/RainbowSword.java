@@ -44,7 +44,7 @@ public class RainbowSword extends SwordItem {
         int y = pos.getY();
         int z = pos.getZ();
         
-        if (!PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
+        if (!world.getBlockState(pos).is(PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE)) {
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 
             if (world instanceof ServerWorld) {

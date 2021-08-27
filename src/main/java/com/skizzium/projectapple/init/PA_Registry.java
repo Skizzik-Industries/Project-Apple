@@ -3,7 +3,10 @@ package com.skizzium.projectapple.init;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
+import com.skizzium.projectapple.init.entity.PA_TileEntities;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
+import com.skizzium.projectapple.init.world.PA_Biomes;
 import com.skizzium.projectapple.itemgroup.LivingCandyTab;
 import com.skizzium.projectapple.itemgroup.MainSkizzikTab;
 import net.minecraft.block.Block;
@@ -13,6 +16,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,6 +29,7 @@ public class PA_Registry {
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, ProjectApple.MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, ProjectApple.MOD_ID);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ProjectApple.MOD_ID);
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ProjectApple.MOD_ID);
 
     public static final ItemGroup MAIN_SKIZZIK_TAB = new MainSkizzikTab("main_skizzik_tab");
     public static final ItemGroup LIVING_CANDY_TAB = new LivingCandyTab("living_candy_tab");
@@ -37,6 +42,7 @@ public class PA_Registry {
         EFFECTS.register(modEventBus);
         FLUIDS.register(modEventBus);
         TILE_ENTITIES.register(modEventBus);
+        BIOMES.register(modEventBus);
 
         PA_Blocks.register();
         PA_Items.register();
@@ -45,5 +51,6 @@ public class PA_Registry {
         PA_Fluids.register();
         PA_Entities.register();
         PA_TileEntities.register();
+        PA_Biomes.register();
     }
 }

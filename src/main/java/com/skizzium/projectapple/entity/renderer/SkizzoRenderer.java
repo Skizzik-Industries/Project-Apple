@@ -11,14 +11,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SkizzoRenderer extends MobRenderer<Skizzo, SkizzoModel<Skizzo>> {
-   private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzo.png");
+    private static final ResourceLocation SKIZZO_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzo.png");
 
-   public SkizzoRenderer(EntityRendererManager manager) {
-      super(manager, new SkizzoModel(), 0.65F);
-      this.addLayer(new SkizzoGlowLayer(this));
-   }
+    public SkizzoRenderer(EntityRendererManager renderer) {
+        super(renderer, new SkizzoModel<>(), 0.45F);
+        this.addLayer(new SkizzoGlowLayer<>(this));
+    }
 
-   public ResourceLocation getTextureLocation(Skizzo entity) {
-      return TEXTURE_LOCATION;
-   }
+    @Override
+    public ResourceLocation getTextureLocation(Skizzo entity) {
+        return SKIZZO_LOCATION;
+    }
 }

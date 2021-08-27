@@ -57,11 +57,11 @@ public class SkizzieStatue extends FallingBlock implements IWaterLoggable {
         switch (state.getValue(FACING)) {
             case SOUTH :
             default :
-                return VoxelShapes.or(box(9.5, 2.1, 10.5, 6.5, 17.1, 7.5),
-                        box(12, 17, 14, 4, 25, 6),
-                        box(13.5, 13.6, 10, 2.5, 15.6, 8),
-                        box(13.5, 11.1, 10, 2.5, 13.1, 8),
-                        box(13.5, 8.6, 10, 2.5, 10.6, 8));
+                return VoxelShapes.or(box(6.5, 2.1, 7.5, 9.5, 17.1, 10.5),
+                        box(4, 17, 6, 12, 25, 14),
+                        box(2.5, 13.6, 8, 13.5, 15.6, 10),
+                        box(2.5, 11.1, 8, 13.5, 13.1, 10),
+                        box(2.5, 8.6, 8, 13.5, 10.6, 10));
             case NORTH :
                 return VoxelShapes.or(box(6.5, 2.1, 5.5, 9.5, 17.1, 8.5),
                         box(4, 17, 2, 12, 25, 10),
@@ -69,17 +69,17 @@ public class SkizzieStatue extends FallingBlock implements IWaterLoggable {
                         box(2.5, 11.1, 6, 13.5, 13.1, 8),
                         box(2.5, 8.6, 6, 13.5, 10.6, 8));
             case EAST :
-                return VoxelShapes.or(box(10.5, 2.1, 6.5, 7.5, 17.1, 9.5),
-                        box(14, 17, 4, 6, 25, 12),
-                        box(10, 13.6, 2.5, 8, 15.6, 13.5),
-                        box(10, 11.1, 2.5, 8, 13.1, 13.5),
-                        box(10, 8.6, 2.5, 8, 10.6, 13.5));
+                return VoxelShapes.or(box(7.5, 2.1, 6.5, 10.5, 17.1, 9.5),
+                        box(6, 17, 4, 14, 25, 12),
+                        box(8, 13.6, 2.5, 10, 15.6, 13.5),
+                        box(8, 11.1, 2.5, 10, 13.1, 13.5),
+                        box(8, 8.6, 2.5, 10, 10.6, 13.5));
             case WEST :
-                return VoxelShapes.or(box(5.5, 2.1, 9.5, 8.5, 17.1, 6.5),
-                        box(2, 17, 12, 10, 25, 4),
-                        box(6, 13.6, 13.5, 8, 15.6, 2.5),
-                        box(6, 11.1, 13.5, 8, 13.1, 2.5),
-                        box(6, 8.6, 13.5, 8, 10.6, 2.5));
+                return VoxelShapes.or(box(5.5, 2.1, 6.5, 8.5, 17.1, 9.5),
+                        box(2, 17, 4, 10, 25, 12),
+                        box(6, 13.6, 2.5, 8, 15.6, 13.5),
+                        box(6, 11.1, 2.5, 8, 13.1, 13.5),
+                        box(6, 8.6, 2.5, 8, 10.6, 13.5));
         }
 
     }
@@ -89,6 +89,7 @@ public class SkizzieStatue extends FallingBlock implements IWaterLoggable {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    @Override
     public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
         if (state.getValue(WATERLOGGED)) {
             world.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(world));

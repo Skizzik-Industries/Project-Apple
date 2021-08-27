@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;

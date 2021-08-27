@@ -29,7 +29,6 @@ public class KaboomSkizzie extends Skizzie implements IChargeableMob {
     private int swell;
     private int maxSwell = 30;
     private int explosionRadius = 3;
-    private int droppedSkulls;
 
     public KaboomSkizzie(EntityType<? extends Skizzie> entity, World world) {
         super(entity, world);

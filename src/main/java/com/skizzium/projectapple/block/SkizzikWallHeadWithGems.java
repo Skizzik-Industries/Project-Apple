@@ -25,12 +25,12 @@ public class SkizzikWallHeadWithGems extends WallSkullBlock {
     }
 
     @Override
-    public TileEntity newBlockEntity(IBlockReader reader) {
-        return new PA_Skull();
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public TileEntity newBlockEntity(IBlockReader reader) {
+        return new PA_Skull();
     }
 }

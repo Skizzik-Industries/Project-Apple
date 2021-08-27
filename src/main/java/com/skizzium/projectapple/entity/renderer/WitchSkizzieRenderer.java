@@ -11,14 +11,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class WitchSkizzieRenderer extends MobRenderer<WitchSkizzie, WitchSkizzieModel<WitchSkizzie>> {
-   private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("skizzik:textures/entity/witch_skizzie/witch_skizzie.png");
+    private static final ResourceLocation SKIZZIE_LOCATION = new ResourceLocation("skizzik:textures/entity/witch_skizzie/witch_skizzie.png");
 
-   public WitchSkizzieRenderer(EntityRendererManager manager) {
-      super(manager, new WitchSkizzieModel(), 0.45F);
-      this.addLayer(new WitchSkizzieGlowLayer(this));
-   }
+    public WitchSkizzieRenderer(EntityRendererManager renderer) {
+        super(renderer, new WitchSkizzieModel<>(), 0.45F);
+        this.addLayer(new WitchSkizzieGlowLayer<>(this));
+    }
 
-   public ResourceLocation getTextureLocation(WitchSkizzie entity) {
-      return TEXTURE_LOCATION;
-   }
+    public ResourceLocation getTextureLocation(WitchSkizzie entity) {
+        return SKIZZIE_LOCATION;
+    }
 }

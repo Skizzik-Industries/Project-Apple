@@ -1,27 +1,24 @@
 package com.skizzium.projectapple.entity.layer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class WitchSkizzieGlowLayer<T extends Entity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
-    public WitchSkizzieGlowLayer(IEntityRenderer<T, M> entity) {
-        super(entity);
+public class WitchSkizzieGlowLayer<T extends LivingEntity, M extends WitchSkizzieModel<T>> extends AbstractEyesLayer<T, M> {
+    private static final RenderType WITCH_SKIZZIE_GLOW = RenderType.eyes(new ResourceLocation("skizzik:textures/entity/witch_skizzie/witch_skizzie_glow.png"));
+
+    public WitchSkizzieGlowLayer(IEntityRenderer<T, M> renderer) {
+        super(renderer);
     }
 
     @Override
-    public void render(MatrixStack matrix, IRenderTypeBuffer buffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float age, float headYaw, float headPitch) {
-        IVertexBuilder builder = buffer.getBuffer(RenderType.eyes(new ResourceLocation("skizzik:textures/entity/witch_skizzie/witch_skizzie_glow.png")));
-        this.getParentModel().renderToBuffer(matrix, builder, 15728640, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+    public RenderType renderType() {
+        return WITCH_SKIZZIE_GLOW;
     }
 }

@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -72,7 +72,7 @@ public class SkizzikSkull extends DamagingProjectileEntity {
 
     @Override
     public float getBlockExplosionResistance(Explosion explosion, IBlockReader world, BlockPos pos, BlockState state, FluidState fluidState, float f1) {
-        return this.getLevel() >= 2 && state.canEntityDestroy(world, pos, this) ? Math.min(0.8F, f1) : f1;
+        return /*this.getLevel() >= 2 && state.canEntityDestroy(world, pos, this) ? Math.min(0.8F, f1) :*/ f1;
     }
 
     @Override

@@ -4,11 +4,11 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import com.skizzium.projectapple.init.PA_SoundEvents;
+import net.minecraft.util.SoundEvent;
 
 import java.util.function.Supplier;
 
@@ -41,12 +41,12 @@ public enum PA_ArmorMaterials implements IArmorMaterial {
         this.repairIngredient = new LazyValue<>(repairIngredient);
     }
 
-    public int getDurabilityForSlot(EquipmentSlotType p_200896_1_) {
-        return HEALTH_PER_SLOT[p_200896_1_.getIndex()] * this.durabilityMultiplier;
+    public int getDurabilityForSlot(EquipmentSlotType slot) {
+        return HEALTH_PER_SLOT[slot.getIndex()] * this.durabilityMultiplier;
     }
 
-    public int getDefenseForSlot(EquipmentSlotType p_200902_1_) {
-        return this.slotProtections[p_200902_1_.getIndex()];
+    public int getDefenseForSlot(EquipmentSlotType slot) {
+        return this.slotProtections[slot.getIndex()];
     }
 
     public int getEnchantmentValue() {

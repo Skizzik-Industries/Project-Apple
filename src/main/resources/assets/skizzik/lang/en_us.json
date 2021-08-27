@@ -25,6 +25,9 @@
   "block.skizzik.skizzik_head_with_gems": "Skizzik Head with Gems",
   "block.skizzik.skizzik_wall_head_with_gems": "Skizzik Wall Head with Gems",
 
+  "item.skizzik.music_disc_skizzik": "Music Disc",
+  "item.skizzik.music_disc_skizzik.desc": "uSkizzik - Skizzik Theme",
+
   "item.skizzik.skizzik_bone": "Skizzik Bone",
   "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
@@ -41,6 +44,8 @@
 
   "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
 
+  "subtitles.entity.dababy": "§bLESS GOOOOO",
+
   "entity.skizzik.friendly_skizzie": "Friendly Skizzie",
   "entity.skizzik.friendly_witch_skizzie": "Friendly Witch Skizzie",
 
@@ -52,6 +57,10 @@
 
   "entity.skizzik.skizzik_skull": "Skizzik Skull",
   "entity.skizzik.skizzo": "Skizzo",
+
+  "entity.skizzik.skizzik.sleeping": "Sleeping",
+  "entity.skizzik.skizzik.stage": "Stage",
+  "entity.skizzik.skizzik.finish_him": "FINISH HIM!",
   "entity.skizzik.skizzik": "Skizzik",
 
   "death.attack.skizzikSkull": "%1$s was shot by a skull from %2$s",
@@ -119,6 +128,8 @@
   "block.skizzik.candy_trapdoor": "Candy Trapdoor",
   "block.skizzik.candy_door": "Candy Door",
 
+  "block.skizzik.candy_sapling": "Candy Sapling",
+
   "block.skizzik.candy_log": "Candy Log",
   "block.skizzik.stripped_candy_log": "Stripped Candy Log",
   "block.skizzik.candy_wood": "Candy Wood",
@@ -127,6 +138,8 @@
   "block.skizzik.candy_leaves": "Candy Leaves",
   "block.skizzik.candy_nylium": "Candy Nylium",
   "block.skizzik.candyrack": "Candyrack",
+
+  "biome.skizzik.candy_plains": "Candy Plains",
 
   "item.skizzik.rainbow_sword": "Rainbow Sword",
 

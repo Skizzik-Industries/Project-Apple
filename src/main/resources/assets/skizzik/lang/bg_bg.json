@@ -16,9 +16,49 @@
   "block.skizzik.skizzik_loot_bag": "Чанта с Плячка от Скиззик",
 
   "block.skizzik.small_skizzik_head": "Малка Глава на Скиззик",
-  "block.skizzik.small_skizzik_head_gems": "Малка Глава на Скиззик със Скъпоценни Камъни",
+  "block.skizzik.small_skizzik_wall_head": "Малка Стенна Глава на Скиззик",
+  "block.skizzik.small_skizzik_head_with_gems": "Малка Глава на Скиззик със Скъпоценни Камъни",
+  "block.skizzik.small_skizzik_wall_head_with_gems": "Малка Стенна Глава на Скиззик със Скъпоценни Камъни",
+
   "block.skizzik.skizzik_head": "Глава на Скиззик",
-  "block.skizzik.skizzik_head_gems": "Глава на Скиззик със Скъпоценни Камъни",
+  "block.skizzik.skizzik_wall_head": "Стенна Глава на Скиззик",
+  "block.skizzik.skizzik_head_with_gems": "Глава на Скиззик със Скъпоценни Камъни",
+  "block.skizzik.skizzik_wall_head_with_gems": "Стенна Глава на Скиззик със Скъпоценни Камъни",
+
+  "item.skizzik.music_disc_skizzik": "Музикална Плоча",
+  "item.skizzik.music_disc_skizzik.desc": "uSkizzik - Skizzik Theme",
+
+  "item.skizzik.friendly_skizzie_spawn_egg": "Яйце на Приятелско Скиззи",
+  "item.skizzik.friendly_witch_skizzie_spawn_egg": "Яйце на Приятелско Вещерско Скиззи",
+
+  "item.skizzik.skizzie_spawn_egg": "ЯЙце на Скиззи",
+  "item.skizzik.kaboom_skizzie_spawn_egg": "Яйце на Гърмящо Скиззи",
+  "item.skizzik.minigun_skizzie_spawn_egg": "Яйце на Минигън Скиззи",
+  "item.skizzik.corrupted_skizzie_spawn_egg": "Яйце на Повредено Скиззи",
+  "item.skizzik.witch_skizzie_spawn_egg": "Яйце на Вещреско Скиззи",
+
+  "item.skizzik.skizzo_spawn_egg": "Яйце на Скиззо",
+
+  "subtitles.entity.dababy": "§bLESS GOOOOO",
+
+  "entity.skizzik.friendly_skizzie": "Приятелско Скиззи",
+  "entity.skizzik.friendly_witch_skizzie": "Приятелско Вещерско Скиззи",
+
+  "entity.skizzik.skizzie": "Скиззи",
+  "entity.skizzik.kaboom_skizzie": "Гърмящо Скиззи",
+  "entity.skizzik.minigun_skizzie": "Минигън Скиззи",
+  "entity.skizzik.corrupted_skizzie": "§kПовредено Скиззи",
+  "entity.skizzik.witch_skizzie": "Вещерско Скиззи",
+
+  "entity.skizzik.skizzik_skull": "Череп на Скиззик",
+  "entity.skizzik.skizzo": "Скиззо",
+
+  "entity.skizzik.skizzik.sleeping": "Спящ",
+  "entity.skizzik.skizzik.stage": "Етап",
+  "entity.skizzik.skizzik.finish_him": "ДОВЪРШИ ГО!",
+  "entity.skizzik.skizzik": "Скиззик",
+
+  "death.attack.skizzikSkull": "%1$s беше застрелян от череп от %2$s",
 
   "item.skizzik.skizzik_bone": "Кокал на Скиззик",
   "item.skizzik.raw_skizzik_flesh": "Сурова Плът на Скиззик",
@@ -29,6 +69,8 @@
   "item.skizzik.butter": "Маргарин (Калиакра)",
 
   "block.skizzik.candy_cane": "Захарно Бастунче",
+  "item.skizzik.candy_pig_spawn_egg": "Яйце на Захарно Прасе",
+  "entity.skizzik.candy_pig": "Захарно Прасе",
 
   "item.skizzik.maple_syrup_bucket": "Кофа с Кленов Сироп",
   "block.skizzik.maple_syrup": "Кленов Сироп",
@@ -64,34 +106,38 @@
   "item.skizzik.candianite_leggings": "Кандианитови Панталони",
   "item.skizzik.candianite_boots": "Кандианитови Ботуши",
 
-  "block.skizzik.corrupted_block": "Corrupted Block",
-  "effect.skizzik.corruption": "§kCorruption",
-  "death.attack.corrupted": "%1$s got §kcorrupted",
+  "block.skizzik.corrupted_block": "Повреден Блок",
+  "effect.skizzik.corruption": "§kПовреда",
+  "death.attack.corrupted": "%1$s беше §kповреден",
 
   "item.skizzik.platinum_nugget": "Платинен Къшей",
   "item.skizzik.platinum_ingot": "Платинено Килче",
 
-  "block.skizzik.candy_pressure_plate": "Бонбонена Претегляща Сигнална Плоча",
-  "block.skizzik.candy_button": "Бонбонен Бутон",
+  "block.skizzik.candy_pressure_plate": "Захарна Претегляща Сигнална Плоча",
+  "block.skizzik.candy_button": "Захарен Бутон",
 
-  "block.skizzik.candy_planks": "Бонбонени Дъски",
-  "block.skizzik.candy_slab": "Бонбонена Плоча",
-  "block.skizzik.candy_stairs": "Бонбонени Стъпала",
+  "block.skizzik.candy_planks": "Захарни Дъски",
+  "block.skizzik.candy_slab": "Захарна Плоча",
+  "block.skizzik.candy_stairs": "Захарни Стъпала",
 
-  "block.skizzik.candy_fence": "Бонбонена Ограда",
-  "block.skizzik.candy_fence_gate": "Бонбонена Порта",
+  "block.skizzik.candy_fence": "Захарна Ограда",
+  "block.skizzik.candy_fence_gate": "Захарна Порта",
 
-  "block.skizzik.candy_trapdoor": "Бонбонен Люк",
-  "block.skizzik.candy_door": "Бонбонена Врата",
+  "block.skizzik.candy_trapdoor": "Захарен Люк",
+  "block.skizzik.candy_door": "Захарна Врата",
 
-  "block.skizzik.candy_log": "Бонбонен Дънер",
-  "block.skizzik.stripped_candy_log": "Оголен Бонбонен Дънер",
-  "block.skizzik.candy_wood": "Бонбонена Дървесина",
-  "block.skizzik.stripped_candy_wood": "Оголена Бонбонена Дървесина",
+  "block.skizzik.candy_sapling": "Захарна Фиданка",
 
-  "block.skizzik.candy_leaves": "Бонбонени Листа",
-  "block.skizzik.candy_nylium": "Бонбонен Найлиум",
-  "block.skizzik.candyrack": "Бонбонен Камък",
+  "block.skizzik.candy_log": "Захарен Дънер",
+  "block.skizzik.stripped_candy_log": "Оголен Захарен Дънер",
+  "block.skizzik.candy_wood": "Захарна Дървесина",
+  "block.skizzik.stripped_candy_wood": "Оголена Захарна Дървесина",
+
+  "block.skizzik.candy_leaves": "Захарни Листа",
+  "block.skizzik.candy_nylium": "Захарен Найлиум",
+  "block.skizzik.candyrack": "Захарен Камък",
+
+  "biome.skizzik.candy_plains": "Захарна Равнина",
 
   "item.skizzik.rainbow_sword": "Разноцветен Меч",
 

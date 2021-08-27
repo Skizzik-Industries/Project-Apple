@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.itemgroup;
 
-import com.skizzium.projectapple.init.PA_Entities;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.item.ItemGroup;

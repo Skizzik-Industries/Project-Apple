@@ -62,22 +62,15 @@ public class CorruptionPotion extends Effect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (!(entity instanceof CorruptedSkizzie)) {
-            super.applyEffectTick(entity, amplifier);
-        }
-        else {
-            entity.removeEffect(PA_Effects.CORRUPTION.get());
-        }
+        super.applyEffectTick(entity, amplifier);
     }
 
     @Override
     public void removeAttributeModifiers(LivingEntity entity, AttributeModifierManager attribute, int amplifier) {
         super.removeAttributeModifiers(entity, attribute, amplifier);
 
-        if (!(entity instanceof CorruptedSkizzie)) {
             if (entity instanceof LivingEntity) {
                 entity.hurt(new DamageSource("corrupted").bypassArmor(), Float.MAX_VALUE);
             }
-        }
     }
 }

@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import com.skizzium.projectapple.util.SkizzieConvertion;
+import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
@@ -40,10 +40,12 @@ public class FriendlySkizzie extends CreatureEntity {
         return new Vector3d(0.0D, this.getEyeHeight() * 0.8F, this.getBbWidth() * 0.05F);
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.GENERIC_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.GENERIC_DEATH;
     }
@@ -123,7 +125,7 @@ public class FriendlySkizzie extends CreatureEntity {
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         player.startRiding(this);
-        return SkizzieConvertion.conversion(this, player);
+        return SkizzieConversion.conversion(this, player);
     }
 
     @Override

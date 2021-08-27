@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity;
 
-import com.skizzium.projectapple.init.PA_Entities;
-import com.skizzium.projectapple.util.SkizzieConvertion;
+import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.entity.*;
@@ -179,7 +179,7 @@ public class Skizzie extends MonsterEntity {
 
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
-        return SkizzieConvertion.conversion(this, player);
+        return SkizzieConversion.conversion(this, player);
     }
 
     @Override

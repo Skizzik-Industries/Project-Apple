@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.init;
 
-import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.*;
@@ -12,8 +12,8 @@ public final class PA_Tags {
         public static final ITag.INamedTag<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
         public static final ITag.INamedTag<Block> SKIZZIK_HEADS = forge("skizzik_heads");
 
-        public static final ITag.INamedTag<Block> RAINBOW_SWORD_IMMUNE = forge("rainbow_sword_immune");
-        public static final ITag.INamedTag<Block> CORRUPTION_IMMUNE = forge("corruption_immune");
+        public static final ITag.INamedTag<Block> RAINBOW_SWORD_IMMUNE = forge("skizzik_rainbow_sword_immune");
+        public static final ITag.INamedTag<Block> CORRUPTION_IMMUNE = forge("skizzik_corruption_immune");
 
         public static final ITag.INamedTag<Block> DRAGON_IMMUNE = minecraft("dragon_immune");
         public static final ITag.INamedTag<Block> WITHER_IMMUNE = minecraft("wither_immune");
@@ -57,6 +57,9 @@ public final class PA_Tags {
 
         public static final ITag.INamedTag<Block> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
+        public static final ITag.INamedTag<Block> SKIZZIK_ALL_GEM_BLOCKS = forge("skizzik_all_gem_blocks");
+        public static final ITag.INamedTag<Block> SKIZZIK_BASE_GEM_BLOCKS = forge("skizzik_base_gem_blocks");
+
         private static ITag.INamedTag<Block> minecraft(String path) {
             return BlockTags.bind(new ResourceLocation("minecraft", path).toString());
         }
@@ -64,21 +67,25 @@ public final class PA_Tags {
         private static ITag.INamedTag<Block> forge(String path) {
             return BlockTags.bind(new ResourceLocation("forge", path).toString());
         }
+    }
+    public static final class EntityTypes {
+        public static final ITag.INamedTag<EntityType<?>> SKIZZIES = forge("skizzies");
+        public static final ITag.INamedTag<EntityType<?>> FRIENDLY_SKIZZIES = forge("friendly_skizzies");
 
-        private static ITag.INamedTag<Block> mod(String path) {
-            return BlockTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
+        private static ITag.INamedTag<EntityType<?>> forge(String path) {
+            return EntityTypeTags.bind(new ResourceLocation("forge", path).toString());
         }
     }
     public static final class Fluids {
         public static final ITag.INamedTag<Fluid> WATER = minecraft("water");
-        public static final ITag.INamedTag<Fluid> CANDY_FLUIDS = mod("candy_fluids");
+        public static final ITag.INamedTag<Fluid> SKIZZIK_CANDY_FLUIDS = forge("skizzik_candy_fluids");
 
         private static ITag.INamedTag<Fluid> minecraft(String path) {
             return FluidTags.bind(new ResourceLocation("minecraft", path).toString());
         }
 
-        private static ITag.INamedTag<Fluid> mod(String path) {
-            return FluidTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
+        private static ITag.INamedTag<Fluid> forge(String path) {
+            return FluidTags.bind(new ResourceLocation("forge", path).toString());
         }
     }
     public static final class Items {
@@ -112,13 +119,13 @@ public final class PA_Tags {
         public static final ITag.INamedTag<Item> LEAVES = minecraft("leaves");
         public static final ITag.INamedTag<Item> LOGS = minecraft("logs");
         public static final ITag.INamedTag<Item> LOGS_THAT_BURN = minecraft("logs_that_burn");
-        public static final ITag.INamedTag<Item> CANDY_LOGS = mod("candy_logs");
+        public static final ITag.INamedTag<Item> CANDY_LOGS = forge("candy_logs");
 
         public static final ITag.INamedTag<Item> BEACON_PAYMENT_ITEMS = minecraft("beacon_payment_items");
         public static final ITag.INamedTag<Item> BEACON_BASE_BLOCKS = minecraft("beacon_base_blocks");
 
-        public static final ITag.INamedTag<Item> ALL_GEMS = mod("all_gems");
-        public static final ITag.INamedTag<Item> BASE_GEMS = mod("base_gems");
+        public static final ITag.INamedTag<Item> SKIZZIK_ALL_GEMS = forge("skizzik_all_gems");
+        public static final ITag.INamedTag<Item> SKIZZIK_BASE_GEMS = forge("skizzik_base_gems");
 
         private static ITag.INamedTag<Item> minecraft(String path) {
             return ItemTags.bind(new ResourceLocation("minecraft", path).toString());
@@ -126,10 +133,6 @@ public final class PA_Tags {
 
         private static ITag.INamedTag<Item> forge(String path) {
             return ItemTags.bind(new ResourceLocation("forge", path).toString());
-        }
-
-        private static ITag.INamedTag<Item> mod(String path) {
-            return ItemTags.bind(new ResourceLocation(ProjectApple.MOD_ID, path).toString());
         }
     }
 }

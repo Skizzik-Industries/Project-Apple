@@ -21,19 +21,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SkizzikSkullRenderer extends EntityRenderer<SkizzikSkull> {
-   private static final ResourceLocation LEVEL_1 = new ResourceLocation("skizzik:textures/entity/skizzik_head/level_1.png");
-   private static final ResourceLocation LEVEL_2 = new ResourceLocation("skizzik:textures/entity/skizzik_head/level_2.png");
-   private static final ResourceLocation LEVEL_3 = new ResourceLocation("skizzik:textures/entity/skizzik_head/level_3.png");
+   private static final ResourceLocation LEVEL_1 = new ResourceLocation("skizzik:textures/entity/skizzik_skull/level_1.png");
+   private static final ResourceLocation LEVEL_2 = new ResourceLocation("skizzik:textures/entity/skizzik_skull/level_2.png");
+   private static final ResourceLocation LEVEL_3 = new ResourceLocation("skizzik:textures/entity/skizzik_skull/level_3.png");
    private final GenericHeadModel model = new GenericHeadModel(0, 0, 32, 16);
 
    public SkizzikSkullRenderer(EntityRendererManager renderer) {
       super(renderer);
    }
 
+   @Override
    protected int getBlockLightLevel(SkizzikSkull skull, BlockPos pos) {
       return 15;
    }
 
+   @Override
    public void render(SkizzikSkull skull, float yaw, float pitch, MatrixStack matrix, IRenderTypeBuffer renderer, int light) {
       matrix.pushPose();
       matrix.scale(-1.0F, -1.0F, 1.0F);
@@ -49,6 +51,7 @@ public class SkizzikSkullRenderer extends EntityRenderer<SkizzikSkull> {
       super.render(skull, yaw, pitch, matrix, renderer, light);
    }
 
+   @Override
    public ResourceLocation getTextureLocation(SkizzikSkull skull) {
       return skull.getLevel() == 1 ? LEVEL_1
               : skull.getLevel() == 2 ? LEVEL_2

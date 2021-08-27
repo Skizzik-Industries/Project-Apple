@@ -11,14 +11,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class FriendlySkizzieRenderer extends MobRenderer<FriendlySkizzie, SkizzieModel<FriendlySkizzie>> {
-   private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("skizzik:textures/entity/friendly_skizzie/friendly_skizzie.png");
+    private static final ResourceLocation FRIENDLY_SKIZZIE_LOCATION = new ResourceLocation("skizzik:textures/entity/friendly_skizzie/friendly_skizzie.png");
 
-   public FriendlySkizzieRenderer(EntityRendererManager manager) {
-      super(manager, new SkizzieModel(), 0.45F);
-      this.addLayer(new SkizzieGlowLayer(this));
-   }
+    public FriendlySkizzieRenderer(EntityRendererManager renderer) {
+        super(renderer, new SkizzieModel<>(), 0.45F);
+        this.addLayer(new SkizzieGlowLayer<>(this));
+    }
 
-   public ResourceLocation getTextureLocation(FriendlySkizzie entity) {
-      return TEXTURE_LOCATION;
-   }
+    public ResourceLocation getTextureLocation(FriendlySkizzie entity) {
+        return FRIENDLY_SKIZZIE_LOCATION;
+    }
 }

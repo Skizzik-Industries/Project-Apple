@@ -1,7 +1,10 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.IGrowable;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +25,7 @@ public class CandyNylium extends Block implements IGrowable {
         super(properties);
     }
 
+    @Override
     public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction direction, IPlantable plantable) {
         return true;
     }
