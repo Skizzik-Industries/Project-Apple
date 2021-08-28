@@ -16,7 +16,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 	private final ModelPart root;
 
 	private final ModelPart tail;
-	private final ModelPart body;
+	private final ModelPart spine;
 
 	private final ModelPart commandBlock;
 
@@ -35,14 +35,14 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		this.root = part;
 
 		this.tail = part.getChild("tail");
-		this.body = part.getChild("body");
+		this.spine = part.getChild("spine");
 
-		this.commandBlock = this.body.getChild("command_block");
+		this.commandBlock = this.spine.getChild("command_block");
 
-		this.rightRibs = this.body.getChild("right_ribs");
-		this.leftRibs = this.body.getChild("left_ribs");
-		this.bottomRib = this.body.getChild("bottom_rib");
-		this.backRibs = this.body.getChild("back_ribs");
+		this.rightRibs = this.spine.getChild("right_ribs");
+		this.leftRibs = this.spine.getChild("left_ribs");
+		this.bottomRib = this.spine.getChild("bottom_rib");
+		this.backRibs = this.spine.getChild("back_ribs");
 
 		this.centerHead = part.getChild("center_head");
 		this.bottomRightHead = part.getChild("bottom_right_head");
@@ -56,25 +56,25 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		PartDefinition root = mesh.getRoot();
 
 		root.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(101, 101).addBox(-4.0F, -7.0F, -3.4F, 7.0F, 13.0F, 7.0F, false), PartPose.offsetAndRotation(1.0F, 15.9F, 4.5F, 0.7F, 0.0F, 0.0F));
-		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(73, 100).addBox(-3.5F, -9.7F, 8.4F, 7.0F, 19.0F, 7.0F, false), PartPose.offset(0.5F, 4.0F, -11.0F));
+		PartDefinition spine = root.addOrReplaceChild("spine", CubeListBuilder.create().texOffs(73, 100).addBox(-3.5F, -9.7F, 8.4F, 7.0F, 19.0F, 7.0F, false), PartPose.offset(0.5F, 4.0F, -11.0F));
 
-		body.addOrReplaceChild("command_block", CubeListBuilder.create().texOffs(0, 32).addBox(-7.5F, -8.7F, -6.6F, 15.0F, 15.0F, 15.0F, false), PartPose.ZERO);
+		spine.addOrReplaceChild("command_block", CubeListBuilder.create().texOffs(0, 32).addBox(-7.5F, -8.7F, -6.6F, 15.0F, 15.0F, 15.0F, false), PartPose.ZERO);
 
-		body.addOrReplaceChild("right_ribs", CubeListBuilder.create().texOffs(0, 86).addBox(-2.0F, -6.6F, -21.0F, 3.0F, 2.0F, 20.0F, false)
+		spine.addOrReplaceChild("right_ribs", CubeListBuilder.create().texOffs(0, 86).addBox(-2.0F, -6.6F, -21.0F, 3.0F, 2.0F, 20.0F, false)
 																				.texOffs(90, 76).addBox(-2.0F, -1.6F, -21.0F, 3.0F, 3.0F, 19.0F, false)
 																				.texOffs(76, 54).addBox(-2.0F, 4.4F, -21.0F, 3.0F, 2.0F, 20.0F, false)
 																				.texOffs(0, 37).addBox(-5.0F, 4.4F, -21.0F, 3.0F, 2.0F, 3.0F, false)
 																				.texOffs(0, 4).addBox(-5.0F, -1.6F, -21.0F, 3.0F, 3.0F, 3.0F, false)
 																				.texOffs(0, 42).addBox(-5.0F, -6.6F, -21.0F, 3.0F, 2.0F, 3.0F, false), PartPose.offset(9.5F, -1.0F, 12.0F));
-		body.addOrReplaceChild("left_ribs", CubeListBuilder.create().texOffs(64, 78).addBox(-1.5F, 3.9F, -21.0F, 3.0F, 2.0F, 20.0F, false)
+		spine.addOrReplaceChild("left_ribs", CubeListBuilder.create().texOffs(64, 78).addBox(-1.5F, 3.9F, -21.0F, 3.0F, 2.0F, 20.0F, false)
 																				.texOffs(0, 32).addBox(1.5F, 3.9F, -21.0F, 3.0F, 2.0F, 3.0F, false)
 																				.texOffs(88, 0).addBox(-1.5F, -2.1F, -21.0F, 3.0F, 3.0F, 19.0F, false)
 																				.texOffs(0, 10).addBox(1.5F, -2.1F, -21.0F, 3.0F, 3.0F, 3.0F, false)
 																				.texOffs(80, 24).addBox(-1.5F, -7.1F, -21.0F, 3.0F, 2.0F, 20.0F, false)
 																				.texOffs(60, 44).addBox(1.5F, -7.1F, -21.0F, 3.0F, 2.0F, 3.0F, false), PartPose.offset(-9.0F, -0.5F, 12.0F));
-		body.addOrReplaceChild("bottom_rib", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, -2.0F, -20.5F, 5.0F, 2.0F, 2.0F, false)
+		spine.addOrReplaceChild("bottom_rib", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, -2.0F, -20.5F, 5.0F, 2.0F, 2.0F, false)
 																				.texOffs(29, 98).addBox(-2.5F, -1.0F, -18.5F, 5.0F, 1.0F, 17.0F, false), PartPose.offset(0.0F, 7.0F, 12.0F));
-		body.addOrReplaceChild("back_ribs", CubeListBuilder.create().texOffs(48, 0).addBox(-11.5F, 3.5F, -2.0F, 23.0F, 4.0F, 4.0F, false)
+		spine.addOrReplaceChild("back_ribs", CubeListBuilder.create().texOffs(48, 0).addBox(-11.5F, 3.5F, -2.0F, 23.0F, 4.0F, 4.0F, false)
 																				.texOffs(84, 46).addBox(-11.5F, -7.5F, -2.0F, 23.0F, 4.0F, 4.0F, false)
 																				.texOffs(48, 8).addBox(-11.5F, -2.0F, -2.0F, 23.0F, 4.0F, 4.0F, false), PartPose.offset(0.0F, -1.1F, 12.0F));
 
@@ -110,7 +110,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.topRightHead.setPos(18.0F, 6.0F, 0.0F);
 			this.topLeftHead.setPos(-17.0F, 5.0F, 1.0F);
 
-			this.body.setPos(0.5F, 17.0F, -11.0F);
+			this.spine.setPos(0.5F, 17.0F, -11.0F);
 			this.tail.setRotation(1.5F, 0.6F, 0.0F);
 			this.tail.setPos(4.0F, 20.9F, 7.5F);
 		}
@@ -178,8 +178,6 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 
 	@Override
 	public void prepareMobModel(T entity, float f, float f1, float f2) {
-
-
 		setupHeadRotation(entity, this.bottomRightHead, 0);
 		setupHeadRotation(entity, this.bottomLeftHead, 1);
 		setupHeadRotation(entity, this.topRightHead, 2);
@@ -204,7 +202,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		if (entity.getStage() != 0) {
 			this.topLeftHead.setPos(-13.0F, -34.0F, 1.0F);
 
-			this.body.setPos(0.5F, 4.0F, -11.0F);
+			this.spine.setPos(0.5F, 4.0F, -11.0F);
 			this.tail.setRotation(0.7F, 0.0F, 0.0F);
 			this.tail.setPos(1.0F, 15.9F, 4.5F);
 		}
