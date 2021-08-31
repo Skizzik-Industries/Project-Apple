@@ -1,9 +1,13 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
+
+import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.network.BossMusicStartPacket;
+import com.skizzium.projectapple.network.BossMusicStopPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -42,13 +46,17 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
@@ -121,15 +129,19 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     @Override
-    public void startSeenByPlayer(ServerPlayer player) {
-        super.startSeenByPlayer(player);
-        this.bossBar.addPlayer(player);
+    public void startSeenByPlayer(ServerPlayer serverPlayer) {
+        super.startSeenByPlayer(serverPlayer);
+        this.bossBar.addPlayer(serverPlayer);
+        if (this.getStage() != 0 && this.getStage() != 6) {
+            PA_PacketHandler.INSTANCE.sendTo(new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        }
     }
 
     @Override
-    public void stopSeenByPlayer(ServerPlayer player) {
-        super.stopSeenByPlayer(player);
-        this.bossBar.removePlayer(player);
+    public void stopSeenByPlayer(ServerPlayer serverPlayer) {
+        super.stopSeenByPlayer(serverPlayer);
+        this.bossBar.removePlayer(serverPlayer);
+        PA_PacketHandler.INSTANCE.sendTo(new BossMusicStopPacket(), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
@@ -416,6 +428,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
         if (currentStage != newStage) {
+            if (newStage != 0 && newStage != 6) {
+                PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> this), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
+            }
+            else {
+                PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> this), new BossMusicStopPacket());
+            }
+
             if (currentStage == 0 && newStage == 1) {
                 this.setHealth(1020);
             }
