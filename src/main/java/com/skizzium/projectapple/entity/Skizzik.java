@@ -428,11 +428,12 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
         if (currentStage != newStage) {
-            if (newStage != 0 && newStage != 6) {
-                PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> this), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
-            }
-            else {
-                PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> this), new BossMusicStopPacket());
+            if (world instanceof ServerLevel) {
+                if (newStage != 0 && newStage != 6) {
+                    PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
+                } else {
+                    PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new BossMusicStopPacket());
+                }
             }
 
             if (currentStage == 0 && newStage == 1) {
