@@ -2,6 +2,7 @@ package com.skizzium.projectapple.util;
 
 import com.skizzium.projectapple.block.SkizzieStatue;
 import com.skizzium.projectapple.entity.*;
+import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
@@ -35,6 +36,25 @@ public class SkizzieConversion {
         return statue.defaultBlockState().setValue(statue.FACING, statueFacing).setValue(statue.WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
+    // Required since the way I randomize the statue spawnment requires a float between 0.0 and 1.0
+    private static float getChanceFromConfig() {
+        int configValue = PA_Config.commonInstance.entities.skizzieStatueChances.get();
+        String valueString = Integer.toString(configValue);
+        int digitCount = valueString.length();
+
+        if (digitCount == 1) {
+            return Float.parseFloat("0.0" + valueString);
+        }
+        else if (digitCount == 2) {
+            return Float.parseFloat("0." + valueString);
+        }
+        else if (digitCount == 3) {
+            return 1.0F;
+        }
+
+        return 0.3F;
+    }
+
     private static InteractionResult convert(LivingEntity from, LivingEntity to, ItemStack item, Player player, Level world, boolean canTurnStone) {
         double fromX = from.getX();
         double fromY = from.getY();
@@ -58,7 +78,7 @@ public class SkizzieConversion {
             }
         }
         else {
-            if (Math.random() < 0.3 && canTurnStone) {
+            if (Math.random() < getChanceFromConfig() && canTurnStone) {
                 world.setBlock(fromPos, skizzieStatueState(from, fromPos, world), 3);
                 from.discard();
             }
@@ -86,42 +106,40 @@ public class SkizzieConversion {
         ItemStack itemStack = player.getMainHandItem();
         Level world = player.level;
 
-        if (!world.isClientSide) {
-            if (!(skizzie instanceof FriendlySkizzie) && item == Items.WATER_BUCKET) {
-                if (skizzie instanceof WitchSkizzie) {
-                    return convert(skizzie, new FriendlyWitchSkizzie(PA_Entities.FRIENDLY_WITCH_SKIZZIE, world), itemStack, player, world, true);
+        if (PA_Config.commonInstance.entities.allowSkizzieConversion.get()) {
+            if (!world.isClientSide) {
+                if (!(skizzie instanceof FriendlySkizzie) && item == Items.WATER_BUCKET) {
+                    if (skizzie instanceof WitchSkizzie) {
+                        return convert(skizzie, new FriendlyWitchSkizzie(PA_Entities.FRIENDLY_WITCH_SKIZZIE, world), itemStack, player, world, true);
+                    } else if (skizzie instanceof Skizzie) {
+                        return convert(skizzie, new FriendlySkizzie(PA_Entities.FRIENDLY_SKIZZIE, world), itemStack, player, world, true);
+                    }
+                } else if (skizzie instanceof FriendlySkizzie && !(skizzie instanceof FriendlyWitchSkizzie) && item == Items.POTION) {
+                    return convert(skizzie, new FriendlyWitchSkizzie(PA_Entities.FRIENDLY_WITCH_SKIZZIE, world), itemStack, player, world, false);
                 }
-                else if (skizzie instanceof Skizzie) {
-                    return convert(skizzie, new FriendlySkizzie(PA_Entities.FRIENDLY_SKIZZIE, world), itemStack, player, world, true);
+                /*else if (skizzie instanceof FriendlySkizzie && item == PA_Blocks.SMALL_SKIZZIK_HEAD.get().asItem()) {
+                    return convert(skizzie, new FriendlySkizzie(PA_Entities.FRIENDLY_SKIZZIE, world), itemStack, player, world, false);
+                }*/
+                else if (!(skizzie instanceof Skizzie) && item == Items.LAVA_BUCKET) {
+                    if (skizzie instanceof FriendlyWitchSkizzie) {
+                        return convert(skizzie, new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), itemStack, player, world, true);
+                    } else if (skizzie instanceof FriendlySkizzie) {
+                        return convert(skizzie, new Skizzie(PA_Entities.SKIZZIE, world), itemStack, player, world, true);
+                    }
+                } else if (!(skizzie instanceof KaboomSkizzie) && !(skizzie instanceof FriendlySkizzie) && item == Items.GUNPOWDER) {
+                    return convert(skizzie, new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), itemStack, player, world, false);
+                } else if (!(skizzie instanceof CorruptedSkizzie) && !(skizzie instanceof FriendlySkizzie) && item == PA_Blocks.CORRUPTED_BLOCK.get().asItem()) {
+                    return convert(skizzie, new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), itemStack, player, world, false);
+                } else if (!(skizzie instanceof WitchSkizzie) && !(skizzie instanceof FriendlySkizzie) && item == Items.POTION) {
+                    return convert(skizzie, new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), itemStack, player, world, false);
                 }
+                /*else if (!(skizzie instanceof FriendlySkizzie) && item == PA_Blocks.SMALL_SKIZZIK_HEAD.get().asItem()) {
+                    return convert(skizzie, new Skizzie(PA_Entities.SKIZZIE, world), itemStack, player, world, false);
+                }*/
+                return InteractionResult.PASS;
+            } else {
+                return InteractionResult.PASS;
             }
-            else if (skizzie instanceof FriendlySkizzie && !(skizzie instanceof FriendlyWitchSkizzie) && item == Items.POTION) {
-                return convert(skizzie, new FriendlyWitchSkizzie(PA_Entities.FRIENDLY_WITCH_SKIZZIE, world), itemStack, player, world, false);
-            }
-            /*else if (skizzie instanceof FriendlySkizzie && item == PA_Blocks.SMALL_SKIZZIK_HEAD.get().asItem()) {
-                return convert(skizzie, new FriendlySkizzie(PA_Entities.FRIENDLY_SKIZZIE, world), itemStack, player, world, false);
-            }*/
-            else if (!(skizzie instanceof Skizzie) && item == Items.LAVA_BUCKET) {
-                if (skizzie instanceof FriendlyWitchSkizzie) {
-                    return convert(skizzie, new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), itemStack, player, world, true);
-                }
-                else if (skizzie instanceof FriendlySkizzie) {
-                    return convert(skizzie, new Skizzie(PA_Entities.SKIZZIE, world), itemStack, player, world, true);
-                }
-            }
-            else if (!(skizzie instanceof KaboomSkizzie) && !(skizzie instanceof FriendlySkizzie) && item == Items.GUNPOWDER) {
-                return convert(skizzie, new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), itemStack, player, world, false);
-            }
-            else if (!(skizzie instanceof CorruptedSkizzie) && !(skizzie instanceof FriendlySkizzie) && item == PA_Blocks.CORRUPTED_BLOCK.get().asItem()) {
-                return convert(skizzie, new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), itemStack, player, world, false);
-            }
-            else if (!(skizzie instanceof WitchSkizzie) && !(skizzie instanceof FriendlySkizzie) && item == Items.POTION) {
-                return convert(skizzie, new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), itemStack, player, world, false);
-            }
-            /*else if (!(skizzie instanceof FriendlySkizzie) && item == PA_Blocks.SMALL_SKIZZIK_HEAD.get().asItem()) {
-                return convert(skizzie, new Skizzie(PA_Entities.SKIZZIE, world), itemStack, player, world, false);
-            }*/
-            return InteractionResult.PASS;
         }
         else {
             return InteractionResult.PASS;

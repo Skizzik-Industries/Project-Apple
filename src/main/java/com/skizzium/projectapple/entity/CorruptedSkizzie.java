@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Effects;
 import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -42,8 +43,10 @@ public class CorruptedSkizzie extends Skizzie {
         double z = this.getZ();
         BlockPos pos = new BlockPos(x, y-1, z);
 
-        if (!PA_Tags.Blocks.CORRUPTION_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
-            world.setBlock(pos, PA_Blocks.CORRUPTED_BLOCK.get().defaultBlockState(), 3);
+        if (PA_Config.commonInstance.entities.allowCorruptedSkizzieAbility.get()) {
+            if (!PA_Tags.Blocks.CORRUPTION_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
+                world.setBlock(pos, PA_Blocks.CORRUPTED_BLOCK.get().defaultBlockState(), 3);
+            }
         }
     }
 
