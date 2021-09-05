@@ -1,8 +1,11 @@
 package com.skizzium.projectapple.itemgroup;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
@@ -10,6 +13,11 @@ import net.minecraft.core.NonNullList;
 public class MainSkizzikTab extends CreativeModeTab {
     public MainSkizzikTab(String label) {
         super(label);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId("itemGroup.main_skizzik_tab"));
     }
 
     @Override

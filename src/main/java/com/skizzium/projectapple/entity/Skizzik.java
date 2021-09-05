@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -81,13 +82,19 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
 
-    private final ServerBossEvent bossBar = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+    private static final BossEvent.BossBarColor defaultBarColor = BossEvent.BossBarColor.RED;
+    private final ServerBossEvent bossBar = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(), defaultBarColor, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
+    }
+
+    @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
     }
 
     @Override
@@ -532,7 +539,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
             bossBar.setColor(BossEvent.BossBarColor.WHITE);
         }
         else {
-            bossBar.setColor(BossEvent.BossBarColor.RED);
+            bossBar.setColor(defaultBarColor);
         }
 
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
@@ -550,13 +557,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
         else {
             if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
+                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
             }
             else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
+                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
             }
             else {
-                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
+                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
             }
         }
 

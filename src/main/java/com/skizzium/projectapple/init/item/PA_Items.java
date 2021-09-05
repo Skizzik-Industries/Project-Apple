@@ -25,7 +25,12 @@ public class PA_Items {
     public static final RegistryObject<PA_SkullItem> SKIZZIK_HEAD = PA_Registry.ITEMS.register("skizzik_head", () -> new PA_SkullItem(PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
     public static final RegistryObject<PA_SkullItem> SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
 
-    public static final RegistryObject<Item> SKIZZIK_BONE = PA_Registry.ITEMS.register("skizzik_bone", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SKIZZIK_BONE = PA_Registry.ITEMS.register("skizzik_bone", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)) {
+        @Override
+        public String getDescriptionId() {
+            return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
+        }
+    });
     public static final RegistryObject<Item> RAW_SKIZZIK_FLESH = PA_Registry.ITEMS.register("raw_skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> SKIZZIK_FLESH = PA_Registry.ITEMS.register("skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
 

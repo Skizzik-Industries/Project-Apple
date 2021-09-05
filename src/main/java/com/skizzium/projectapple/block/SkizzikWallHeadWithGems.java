@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.tileentity.PA_Skull;
 import net.minecraft.core.BlockPos;
@@ -28,5 +29,10 @@ public class SkizzikWallHeadWithGems extends WallSkullBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PA_Skull(pos, state);
+    }
+
+    @Override
+    public String getDescriptionId() {
+        return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
     }
 }

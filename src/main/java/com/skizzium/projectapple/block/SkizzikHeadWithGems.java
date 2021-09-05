@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.Skizzik;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -45,6 +46,11 @@ public class SkizzikHeadWithGems extends SkullBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PA_Skull(pos, state);
+    }
+
+    @Override
+    public String getDescriptionId() {
+        return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
     }
 
     @Override

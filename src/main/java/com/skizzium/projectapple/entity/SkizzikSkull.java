@@ -1,9 +1,12 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -47,6 +50,11 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
 
     public SkizzikSkull(Level world) {
         super(PA_Entities.SKIZZIK_SKULL, world);
+    }
+
+    @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
     }
 
     @Override
@@ -102,7 +110,12 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
     }
 
     public static DamageSource skizzikSkull(SkizzikSkull skull, Entity entity) {
-        return (new IndirectEntityDamageSource("skizzikSkull", skull, entity)).setProjectile();
+        return (new IndirectEntityDamageSource("skizzikSkull", skull, entity) {
+            @Override
+            public Component getLocalizedDeathMessage(LivingEntity entity) {
+                return new TranslatableComponent(ProjectApple.getThemedDescriptionId("death.attack.skizzikSkull"));
+            }
+        }).setProjectile();
     }
 
     @Override

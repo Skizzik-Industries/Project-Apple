@@ -1,6 +1,9 @@
 {
-  "itemGroup.main_skizzik_tab": "Skizzik",
-  "itemGroup.living_candy_tab": "Skizzik: Living Candy",
+  "itemGroup.main_skizzik_tab": "Skizzik & Co.: Main",
+  "itemGroup.living_candy_tab": "Skizzik & Co.: Living Candy",
+
+  "spooktober.itemGroup.main_skizzik_tab": "Spookzik & Co.: Main",
+  "spooktober.itemGroup.living_candy_tab": "Spookzik & Co.: Living Candy",
 
   "block.skizzik.command_block": "Command Block",
   "block.skizzik.deactivated_command_block": "Deactivated Command Block",
@@ -14,6 +17,7 @@
 
   "block.skizzik.skizzie_statue": "Skizzie Statue",
   "block.skizzik.skizzik_loot_bag": "Skizzik Loot Bag",
+  "spooktober.block.skizzik.skizzik_loot_bag": "Spookzik Loot Bag",
 
   "block.skizzik.small_skizzik_head": "Small Skizzik Head",
   "block.skizzik.small_skizzik_wall_head": "Small Skizzik Wall Head",
@@ -25,10 +29,22 @@
   "block.skizzik.skizzik_head_with_gems": "Skizzik Head with Gems",
   "block.skizzik.skizzik_wall_head_with_gems": "Skizzik Wall Head with Gems",
 
+  "spooktober.block.skizzik.small_skizzik_head": "Small Spookzik Head",
+  "spooktober.block.skizzik.small_skizzik_wall_head": "Small Spookzik Wall Head",
+  "spooktober.block.skizzik.small_skizzik_head_with_gems": "Small Spookzik Head with Gems",
+  "spooktober.block.skizzik.small_skizzik_wall_head_with_gems": "Small Spookzik Wall Head with Gems",
+
+  "spooktober.block.skizzik.skizzik_head": "Spookzik Head",
+  "spooktober.block.skizzik.skizzik_wall_head": "Spookzik Wall Head",
+  "spooktober.block.skizzik.skizzik_head_with_gems": "Spookzik Head with Gems",
+  "spooktober.block.skizzik.skizzik_wall_head_with_gems": "Spookzik Wall Head with Gems",
+
   "item.skizzik.music_disc_skizzik": "Music Disc",
   "item.skizzik.music_disc_skizzik.desc": "uSkizzik - Skizzik Theme",
 
   "item.skizzik.skizzik_bone": "Skizzik Bone",
+  "spooktober.item.skizzik.skizzik_bone": "Spookzik Bone",
+  
   "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
@@ -43,6 +59,14 @@
   "item.skizzik.witch_skizzie_spawn_egg": "Witch Skizzie Spawn Egg",
 
   "item.skizzik.skizzo_spawn_egg": "Skizzo Spawn Egg",
+
+  "spooktober.item.skizzik.skizzie_spawn_egg": "Spookzie Spawn Egg",
+  "spooktober.item.skizzik.kaboom_skizzie_spawn_egg": "Kaboom Spookzie Spawn Egg",
+  "spooktober.item.skizzik.minigun_skizzie_spawn_egg": "Minigun Spookzie Spawn Egg",
+  "spooktober.item.skizzik.corrupted_skizzie_spawn_egg": "Corrupted Spookzie Spawn Egg",
+  "spooktober.item.skizzik.witch_skizzie_spawn_egg": "Witch Spookzie Spawn Egg",
+
+  "spooktober.item.skizzik.skizzo_spawn_egg": "Spookzo Spawn Egg",
 
   "subtitles.entity.dababy": "§bLESS GOOOOO",
 
@@ -64,6 +88,22 @@
   "entity.skizzik.skizzik": "Skizzik",
 
   "death.attack.skizzikSkull": "%1$s was shot by a skull from %2$s",
+
+  "spooktober.entity.skizzik.skizzie": "Spookzie",
+  "spooktober.entity.skizzik.kaboom_skizzie": "Kaboom Spookzie",
+  "spooktober.entity.skizzik.minigun_skizzie": "Minigun Spookzie",
+  "spooktober.entity.skizzik.corrupted_skizzie": "§kCorrupted Spookzie",
+  "spooktober.entity.skizzik.witch_skizzie": "Witch Spookzie",
+
+  "spooktober.entity.skizzik.skizzik_skull": "Spookzik Pumpkin",
+  "spooktober.entity.skizzik.skizzo": "Spookzo",
+
+  "spooktober.entity.skizzik.skizzik.sleeping": "Sleeping",
+  "spooktober.entity.skizzik.skizzik.stage": "Stage",
+  "spooktober.entity.skizzik.skizzik.finish_him": "FINISH HIM!",
+  "spooktober.entity.skizzik.skizzik": "Spookzik",
+
+  "spooktober.death.attack.skizzikSkull": "%1$s was shot by a pumpkin from %2$s",
 
   "item.skizzik.salt": "Salt",
   "item.skizzik.butter": "Butter",

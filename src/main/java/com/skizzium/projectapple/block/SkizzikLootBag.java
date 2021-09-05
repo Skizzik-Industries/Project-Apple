@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -48,6 +49,11 @@ public class SkizzikLootBag extends FallingBlock implements SimpleWaterloggedBlo
     @Override
     public boolean propagatesSkylightDown(BlockState state, BlockGetter world, BlockPos pos) {
         return true;
+    }
+
+    @Override
+    public String getDescriptionId() {
+        return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
     }
 
     @Override

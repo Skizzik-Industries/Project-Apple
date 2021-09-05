@@ -1,11 +1,14 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -45,6 +48,11 @@ public class Skizzie extends Monster {
     }
 
     @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
+    }
+
+    @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return 1.30F;
     }
@@ -53,10 +61,6 @@ public class Skizzie extends Monster {
     public boolean canBeLeashed(Player player) {
         return false;
     }
-
-    //protected SoundEvent getAmbientSound() {
-    //    return SoundEvents.PIG_AMBIENT;
-    //}
 
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.GENERIC_HURT;
