@@ -35,6 +35,7 @@ public class PA_Items {
     public static final RegistryObject<Item> SKIZZIK_FLESH = PA_Registry.ITEMS.register("skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<RecordItem> MUSIC_DISC_SKIZZIK = PA_Registry.ITEMS.register("music_disc_skizzik", () -> new RecordItem(14, PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC)));
+    public static final RegistryObject<RecordItem> MUSIC_DISC_SPOOKZIK = PA_Registry.ITEMS.register("music_disc_spookzik", () -> new RecordItem(15, PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC)));
 
     public static final RegistryObject<ArmorItem> SKIZZIK_FLESH_CAP = PA_Registry.ITEMS.register("skizzik_flesh_cap", () -> new ArmorItem(PA_ArmorMaterials.SKIZZIK_FLESH, EquipmentSlot.HEAD, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> SKIZZIK_FLESH_TUNIC = PA_Registry.ITEMS.register("skizzik_flesh_tunic", () -> new ArmorItem(PA_ArmorMaterials.SKIZZIK_FLESH, EquipmentSlot.CHEST, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.COMMON)));

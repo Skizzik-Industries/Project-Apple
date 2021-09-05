@@ -118,6 +118,8 @@ public class PA_LootTablesProvider extends LootTableProvider {
             dropSelf(PA_Blocks.CANDY_TRAPDOOR.get());
             add(PA_Blocks.CANDY_DOOR.get(), BlockLoot::createDoorTable);
 
+            dropSelf(PA_Blocks.CANDY_SAPLING.get());
+
             dropSelf(PA_Blocks.CANDY_LOG.get());
             dropSelf(PA_Blocks.STRIPPED_CANDY_LOG.get());
             dropSelf(PA_Blocks.CANDY_WOOD.get());

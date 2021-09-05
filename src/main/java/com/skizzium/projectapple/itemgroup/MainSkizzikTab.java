@@ -37,6 +37,7 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
 
         PA_Items.MUSIC_DISC_SKIZZIK.get().fillItemCategory(this, items);
+        PA_Items.MUSIC_DISC_SPOOKZIK.get().fillItemCategory(this, items);
 
         PA_Items.SKIZZIK_BONE.get().fillItemCategory(this, items);
         PA_Items.RAW_SKIZZIK_FLESH.get().fillItemCategory(this, items);

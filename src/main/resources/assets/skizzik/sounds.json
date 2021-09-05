@@ -6,6 +6,13 @@
       "name": "skizzik:entity/skizzik_flesh_equip"
     }]
   },
+  "music.spookzik": {
+    "category": "music",
+    "sounds": [{
+      "name": "skizzik:music/spookzik",
+      "stream": true
+    }]
+  },
   "music.skizzik": {
     "category": "music",
     "sounds": [{

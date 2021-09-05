@@ -45,6 +45,7 @@ public class PA_ItemModelsProvider extends ItemModelProvider {
         withExistingParent("waffle_block", modLoc("block/waffle_block"));
 
         withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
+        withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
 
         withExistingParent("candy_button", modLoc("block/candy_button_inventory"));
         withExistingParent("candy_pressure_plate", modLoc("block/candy_pressure_plate"));
@@ -85,6 +86,7 @@ public class PA_ItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "skizzik_flesh");
 
         defaultBuilder(generated, "music_disc_skizzik");
+        defaultBuilder(generated, "music_disc_spookzik");
 
         defaultBuilder(generated, "skizzik_flesh_cap");
         defaultBuilder(generated, "skizzik_flesh_tunic");
