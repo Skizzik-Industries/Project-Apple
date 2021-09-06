@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.tileentity.model;
 
+import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -23,11 +24,21 @@ public class PA_SkullModel extends SkullModel {
 
     public static LayerDefinition createSmallSkizzikHeadLayer() {
         MeshDefinition mesh = createSmallHeadModel();
+
+        if (ProjectApple.isSpooktober) {
+            return LayerDefinition.create(mesh, 48, 24);
+        }
+
         return LayerDefinition.create(mesh, 24, 12);
     }
 
     public static LayerDefinition createSkizzikHeadLayer() {
         MeshDefinition mesh = createHeadModel();
+
+        if (ProjectApple.isSpooktober) {
+            return LayerDefinition.create(mesh, 64, 32);
+        }
+
         return LayerDefinition.create(mesh, 32, 16);
     }
 

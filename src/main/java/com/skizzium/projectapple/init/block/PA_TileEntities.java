@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.dragon.DragonHeadModel;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -56,20 +57,23 @@ public class PA_TileEntities {
         BlockEntityRenderers.register(PA_SKULL.get(), PA_SkullRenderer::new);
     }
 
-    public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers() {
+    public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {
         ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder = ImmutableMap.builder();
+        if (set == null) {
+            set = Minecraft.getInstance().getEntityModels();
+        }
 
-        builder.put(SkullBlock.Types.SKELETON, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.SKELETON_SKULL)));
-        builder.put(SkullBlock.Types.WITHER_SKELETON, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.WITHER_SKELETON_SKULL)));
-        builder.put(SkullBlock.Types.PLAYER, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_HEAD)));
-        builder.put(SkullBlock.Types.ZOMBIE, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.ZOMBIE_HEAD)));
-        builder.put(SkullBlock.Types.CREEPER, new SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.CREEPER_HEAD)));
-        builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.DRAGON_SKULL)));
+        builder.put(SkullBlock.Types.SKELETON, new SkullModel(set.bakeLayer(ModelLayers.SKELETON_SKULL)));
+        builder.put(SkullBlock.Types.WITHER_SKELETON, new SkullModel(set.bakeLayer(ModelLayers.WITHER_SKELETON_SKULL)));
+        builder.put(SkullBlock.Types.PLAYER, new SkullModel(set.bakeLayer(ModelLayers.PLAYER_HEAD)));
+        builder.put(SkullBlock.Types.ZOMBIE, new SkullModel(set.bakeLayer(ModelLayers.ZOMBIE_HEAD)));
+        builder.put(SkullBlock.Types.CREEPER, new SkullModel(set.bakeLayer(ModelLayers.CREEPER_HEAD)));
+        builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(set.bakeLayer(ModelLayers.DRAGON_SKULL)));
 
-        builder.put(CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
-        builder.put(CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
-        builder.put(CustomSkullTypes.SKIZZIK, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
-        builder.put(CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        builder.put(CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
+        builder.put(CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        builder.put(CustomSkullTypes.SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
+        builder.put(CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
 
         return builder.build();
     }
@@ -81,7 +85,7 @@ public class PA_TileEntities {
                 List<? extends RenderLayer<?, ?>> layers = ((LivingEntityRenderer<?, ?>) renderer.getValue()).layers;
                 for (RenderLayer<?, ?> layer : layers) {
                     if (layer instanceof CustomHeadLayer) {
-                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers();
+                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers(null);
                     }
                 }
             }
@@ -93,7 +97,7 @@ public class PA_TileEntities {
                 List<? extends RenderLayer<?, ?>> layers = ((LivingEntityRenderer<?, ?>) renderer.getValue()).layers;
                 for (RenderLayer<?, ?> layer : layers) {
                     if (layer instanceof CustomHeadLayer) {
-                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers();
+                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers(null);
                     }
                 }
             }

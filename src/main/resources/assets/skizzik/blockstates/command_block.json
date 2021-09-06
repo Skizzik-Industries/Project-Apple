@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "holiday=0": {
+      "model": "skizzik:block/command_block"
+    },
+    "holiday=1": {
+      "model": "skizzik:block/spooktober/command_block"
+    },
+    "holiday=2": {
+      "model": "skizzik:block/command_block"
+    }
+  }
+}

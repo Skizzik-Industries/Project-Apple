@@ -48,4 +48,8 @@ public class ProjectApple {
 
         return descriptionId;
     }
+
+    public static int getHolidayState() {
+        return isNightmareDay ? 2 : isSpooktober ? 1 : 0;
+    }
 }

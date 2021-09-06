@@ -1,6 +1,8 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.init.block.PA_BlockStates;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -38,6 +40,7 @@ public class SkizzikLootBag extends FallingBlock implements SimpleWaterloggedBlo
         super(properties);
     }
 
+    public static final IntegerProperty HOLIDAY = PA_BlockStates.HOLIDAY;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -64,7 +67,7 @@ public class SkizzikLootBag extends FallingBlock implements SimpleWaterloggedBlo
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+        return this.defaultBlockState().setValue(HOLIDAY, ProjectApple.getHolidayState()).setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class SkizzikLootBag extends FallingBlock implements SimpleWaterloggedBlo
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> state) {
-        state.add(FACING, WATERLOGGED);
+        state.add(HOLIDAY, FACING, WATERLOGGED);
     }
 
     @Override
