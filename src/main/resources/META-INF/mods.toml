@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[36,)"
+loaderVersion="[37,)"
 license="GPLv3"
 issueTrackerURL="https://github.com/Skizzium/Project-Apple/issues"
 [[mods]]
@@ -17,7 +17,7 @@ From seemingly harmless candies and rainbows, to dark back stories, suffering mu
 [[dependencies.skizzik]]
     modId="forge"
     mandatory=true
-    versionRange="[36,)"
+    versionRange="[37,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]

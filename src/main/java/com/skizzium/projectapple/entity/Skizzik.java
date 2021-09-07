@@ -5,6 +5,8 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.util.PA_ServerBossEvent;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -82,8 +84,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
 
-    private static final BossEvent.BossBarColor defaultBarColor = BossEvent.BossBarColor.RED;
-    private final ServerBossEvent bossBar = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(), defaultBarColor, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+    private static final ChatFormatting defaultBarColor = ChatFormatting.DARK_RED;
+    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
@@ -536,7 +538,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
         if (currentStage == 0 || currentStage == 6) {
-            bossBar.setColor(BossEvent.BossBarColor.WHITE);
+            bossBar.setColor(ChatFormatting.WHITE);
         }
         else {
             bossBar.setColor(defaultBarColor);
