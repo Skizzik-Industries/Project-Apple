@@ -4,13 +4,12 @@ import com.google.common.collect.Maps;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import com.skizzium.projectapple.util.PA_LerpingBossEvent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.components.BossHealthOverlay;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBossEventPacket;
 import net.minecraft.world.BossEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
@@ -111,30 +110,31 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
 
     public void handlePacket(PA_BossEventPacket packet) {
         packet.dispatch(new PA_BossEventPacket.Handler() {
+            final Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
             public void add(UUID uuid, Component displayName, float progress, ChatFormatting color, BossEvent.BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
-                events.put(uuid, new PA_LerpingBossEvent(uuid, displayName, progress, color, overlay, darkenScreen, fog));
+                vanillaEvents.put(uuid, new PA_LerpingBossEvent(uuid, displayName, progress, color, overlay, darkenScreen, fog));
             }
 
             public void remove(UUID uuid) {
-                events.remove(uuid);
+                vanillaEvents.remove(uuid);
             }
 
             public void updateProgress(UUID uuid, float progress) {
-                events.get(uuid).setProgress(progress);
+                vanillaEvents.get(uuid).setProgress(progress);
             }
 
             public void updateName(UUID uuid, Component displayName) {
-                events.get(uuid).setName(displayName);
+                vanillaEvents.get(uuid).setName(displayName);
             }
 
             public void updateStyle(UUID uuid, ChatFormatting color, BossEvent.BossBarOverlay overlay) {
-                PA_LerpingBossEvent lerpingBossEvent = events.get(uuid);
-                lerpingBossEvent.setColor(color);
+                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
+                lerpingBossEvent.setCustomColor(color);
                 lerpingBossEvent.setOverlay(overlay);
             }
 
             public void updateProperties(UUID uuid, boolean darkenScreen, boolean fog) {
-                PA_LerpingBossEvent lerpingBossEvent = events.get(uuid);
+                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
                 lerpingBossEvent.setDarkenScreen(darkenScreen);
                 lerpingBossEvent.setCreateWorldFog(fog);
             }
