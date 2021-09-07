@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.skizzium.projectapple.network.PA_BossEventPacket;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -20,7 +19,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     private final Set<ServerPlayer> unmodifiablePlayers = Collections.unmodifiableSet(this.players);
     private boolean visible = true;
 
-    public PA_ServerBossEvent(Component displayName, ChatFormatting color, BossEvent.BossBarOverlay overlay) {
+    public PA_ServerBossEvent(Component displayName, PA_BossBarColor color, BossEvent.BossBarOverlay overlay) {
         super(Mth.createInsecureUUID(), displayName, color, overlay);
     }
 
@@ -32,7 +31,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
 
     }
 
-    public void setColor(ChatFormatting newColor) {
+    public void setColor(PA_BossBarColor newColor) {
         if (newColor != this.color) {
             super.setColor(newColor);
             this.broadcast(PA_BossEventPacket::createUpdateStylePacket);

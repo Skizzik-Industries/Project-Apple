@@ -10,12 +10,12 @@ public abstract class PA_BossEvent {
     private final UUID id;
     protected Component name;
     protected float progress;
-    protected ChatFormatting color;
+    protected PA_BossBarColor color;
     protected BossEvent.BossBarOverlay overlay;
     protected boolean darkenScreen;
     protected boolean createWorldFog;
 
-    public PA_BossEvent(UUID uuid, Component displayName, ChatFormatting assignedColor, BossEvent.BossBarOverlay choosenOverlay) {
+    public PA_BossEvent(UUID uuid, Component displayName, PA_BossBarColor assignedColor, BossEvent.BossBarOverlay choosenOverlay) {
         this.id = uuid;
         this.name = displayName;
         this.color = assignedColor;
@@ -43,11 +43,11 @@ public abstract class PA_BossEvent {
         this.progress = newProgress;
     }
 
-    public ChatFormatting getColor() {
+    public PA_BossBarColor getColor() {
         return this.color;
     }
 
-    public void setColor(ChatFormatting newColor) {
+    public void setColor(PA_BossBarColor newColor) {
         this.color = newColor;
     }
 
@@ -77,21 +77,28 @@ public abstract class PA_BossEvent {
         return this.createWorldFog;
     }
 
-    public static enum BossBarColor {
-        PINK("pink", ChatFormatting.RED),
-        BLUE("blue", ChatFormatting.BLUE),
-        RED("red", ChatFormatting.DARK_RED),
-        GREEN("green", ChatFormatting.GREEN),
+    public static enum PA_BossBarColor {
+        RED("red",ChatFormatting.DARK_RED),
+        ORANGE("orange", ChatFormatting.GOLD),
+        GOLD("gold", ChatFormatting.GOLD),
         YELLOW("yellow", ChatFormatting.YELLOW),
-        PURPLE("purple", ChatFormatting.DARK_BLUE),
-        WHITE("white", ChatFormatting.WHITE);
+        LIME("lime", ChatFormatting.GREEN),
+        GREEN("green", ChatFormatting.DARK_GREEN),
+        CYAN("cyan",ChatFormatting.DARK_AQUA),
+        AQUA("aqua", ChatFormatting.AQUA),
+        BLUE("blue", ChatFormatting.BLUE),
+        DARK_BLUE("dark_blue", ChatFormatting.DARK_BLUE),
+        PURPLE("purple", ChatFormatting.DARK_PURPLE),
+        PINK("pink", ChatFormatting.LIGHT_PURPLE),
+        WHITE("white", ChatFormatting.WHITE),
+        BLACK("black", ChatFormatting.BLACK);
 
         private final String name;
         private final ChatFormatting formatting;
 
-        private BossBarColor(String p_18881_, ChatFormatting p_18882_) {
-            this.name = p_18881_;
-            this.formatting = p_18882_;
+        private PA_BossBarColor(String givenName, ChatFormatting color) {
+            this.name = givenName;
+            this.formatting = color;
         }
 
         public ChatFormatting getFormatting() {
@@ -102,10 +109,10 @@ public abstract class PA_BossEvent {
             return this.name;
         }
 
-        public static BossEvent.BossBarColor byName(String p_18885_) {
-            for(BossEvent.BossBarColor bossevent$bossbarcolor : values()) {
-                if (bossevent$bossbarcolor.name.equals(p_18885_)) {
-                    return bossevent$bossbarcolor;
+        public static PA_BossBarColor byName(String nameToSearch) {
+            for(PA_BossBarColor colorEnum : values()) {
+                if (colorEnum.name.equals(nameToSearch)) {
+                    return colorEnum;
                 }
             }
 
