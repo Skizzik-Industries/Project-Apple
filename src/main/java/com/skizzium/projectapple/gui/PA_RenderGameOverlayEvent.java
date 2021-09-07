@@ -61,7 +61,7 @@ public class PA_RenderGameOverlayEvent {
 
         int i = (int)(bossEvent.getProgress() * 183.0F);
         if (i > 0) {
-            GuiComponent.blit(pose, windowWidth, windowHeight, 0, 0, bossEvent.getColor().ordinal() * 5 * 2 + 5, 182, 5, 256, 256);
+            GuiComponent.blit(pose, windowWidth, windowHeight, 0, 0, bossEvent.getColor().ordinal() * 5 * 2 + 5, i, 5, 256, 256);
             if (bossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS) {
                 GuiComponent.blit(pose, windowWidth, windowHeight, 0, 0, 80 + (bossEvent.getOverlay().ordinal() - 1) * 5 * 2 + 5, i, 5, 256, 256);
             }
