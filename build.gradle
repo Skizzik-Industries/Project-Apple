@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '2.0.0-beta-3.1'
+version = '2.0.0-beta.4'
 group = 'com.skizzium.projectapple'
 archivesBaseName = 'skizzik'
 
@@ -75,7 +75,7 @@ repositories {
 dependencies {
     //implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
     //implementation group: "com.sk89q.worldedit", name: "worldedit-core", version: "7.3.0-20210815.030932-39", changing: true
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.33'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.55'
     //compileOnly fg.deobf('com.sk89q.worldedit:worldedit-forge-mc1.17.1:7.3.0-SNAPSHOT:dev')
 }
 
