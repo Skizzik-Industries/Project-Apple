@@ -24,11 +24,18 @@ public class WitchSkizzieGlowLayer<T extends LivingEntity> extends RenderLayer<T
     private static final ResourceLocation FRIENDLY_WITCH_SKIZZIE_GLOW = new ResourceLocation("skizzik:textures/entity/friendly_witch_skizzie/friendly_witch_skizzie_glow.png");
     private static final ResourceLocation WITCH_SKIZZIE_GLOW = new ResourceLocation("skizzik:textures/entity/witch_skizzie/witch_skizzie_glow.png");
 
+    private static final ResourceLocation FRIENDLY_WITCH_SPOOKZIE_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/friendly_witch_spookzie/friendly_witch_spookzie_glow.png");
+    private static final ResourceLocation WITCH_SPOOKZIE_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/witch_spookzie/witch_spookzie_glow.png");
+
     public WitchSkizzieGlowLayer(RenderLayerParent<T, WitchSkizzieModel<T>> renderer) {
         super(renderer);
     }
 
     private ResourceLocation getTexture(T entity) {
+        if (ProjectApple.holiday == 1) {
+            return entity instanceof FriendlyWitchSkizzie ? FRIENDLY_WITCH_SPOOKZIE_GLOW : WITCH_SPOOKZIE_GLOW;
+        }
+
         return entity instanceof FriendlyWitchSkizzie ? FRIENDLY_WITCH_SKIZZIE_GLOW : WITCH_SKIZZIE_GLOW;
     }
 
