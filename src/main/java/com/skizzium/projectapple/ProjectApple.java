@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,14 +18,10 @@ public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static boolean isSpooktober;
-    public static boolean isNightmareDay;
+    public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
 
     public ProjectApple() {
-        String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
-        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
-        isSpooktober = true; //currentMonth.equals("10");
-        isNightmareDay = currentDay.equals("31") && currentMonth.equals("10");
+        holiday = checkForHolidays();
 
         PA_Registry.register();
 
@@ -38,18 +35,26 @@ public class ProjectApple {
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
     }
 
-    public static String getThemedDescriptionId(String descriptionId) {
-        if (isNightmareDay) {
-            return "nightmare." + descriptionId;
-        }
-        else if (isSpooktober) {
-            return "spooktober." + descriptionId;
-        }
+    private static int checkForHolidays() {
+        return 1;
 
-        return descriptionId;
+        /*String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
+        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
+        if (currentMonth.equals("10")) {
+            if (currentDay.equals("31"))
+                return 2;
+
+            return 1;
+        }
+        return 0;*/
     }
 
-    public static int getHolidayState() {
-        return isNightmareDay ? 2 : isSpooktober ? 1 : 0;
+    public static String getThemedDescriptionId(String descriptionId) {
+        if (holiday == 1)
+            return "spooktober." + descriptionId;
+        else if (holiday == 2)
+            return "nightmare." + descriptionId;
+
+        return descriptionId;
     }
 }

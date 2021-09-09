@@ -12,10 +12,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PA_SkullRenderer extends SkullBlockRenderer implements BlockEntityRenderer<SkullBlockEntity> {
-    private static final ResourceLocation SMALL_SKIZZIK_LOCATION = ProjectApple.isSpooktober ? new ResourceLocation("skizzik:textures/block/spooktober/small_skizzik_head.png") : new ResourceLocation("skizzik:textures/block/small_skizzik_head.png");
-    private static final ResourceLocation SMALL_SKIZZIK_WITH_GEMS_LOCATION = ProjectApple.isSpooktober ? new ResourceLocation("skizzik:textures/block/spooktober/small_skizzik_head_with_gems.png") : new ResourceLocation("skizzik:textures/block/small_skizzik_head_with_gems.png");
-    private static final ResourceLocation SKIZZIK_LOCATION = ProjectApple.isSpooktober ? new ResourceLocation("skizzik:textures/block/spooktober/skizzik_head.png") : new ResourceLocation("skizzik:textures/block/skizzik_head.png");
-    private static final ResourceLocation SKIZZIK_WITH_GEMS_LOCATION = ProjectApple.isSpooktober ? new ResourceLocation("skizzik:textures/entity/spookzik/spookzik.png") : new ResourceLocation("skizzik:textures/entity/skizzik/skizzik.png");
+    private static final ResourceLocation SMALL_SKIZZIK_LOCATION = ProjectApple.holiday == 1 ? new ResourceLocation("skizzik:textures/block/spooktober/small_skizzik_head.png") : new ResourceLocation("skizzik:textures/block/small_skizzik_head.png");
+    private static final ResourceLocation SMALL_SKIZZIK_WITH_GEMS_LOCATION = ProjectApple.holiday == 1 ? new ResourceLocation("skizzik:textures/block/spooktober/small_skizzik_head_with_gems.png") : new ResourceLocation("skizzik:textures/block/small_skizzik_head_with_gems.png");
+    private static final ResourceLocation SKIZZIK_LOCATION = ProjectApple.holiday == 1 ? new ResourceLocation("skizzik:textures/block/spooktober/skizzik_head.png") : new ResourceLocation("skizzik:textures/block/skizzik_head.png");
+    private static final ResourceLocation SKIZZIK_WITH_GEMS_LOCATION = ProjectApple.holiday == 1 ? new ResourceLocation("skizzik:textures/entity/spookzik/spookzik.png") : new ResourceLocation("skizzik:textures/entity/skizzik/skizzik.png");
 
     public PA_SkullRenderer(BlockEntityRendererProvider.Context context) {
         super(context);

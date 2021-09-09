@@ -25,7 +25,7 @@ public class CommandBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(HOLIDAY, ProjectApple.getHolidayState());
+        return this.defaultBlockState().setValue(HOLIDAY, ProjectApple.holiday);
     }
 
     @Override

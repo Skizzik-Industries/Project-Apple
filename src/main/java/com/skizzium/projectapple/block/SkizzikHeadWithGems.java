@@ -123,7 +123,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
                     .where('*', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get())))
                     .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()).or(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get()))))
                     .where('@', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.COMMAND_BLOCK.get())))
-                    .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(ProjectApple.isSpooktober ? Blocks.SPRUCE_PLANKS : PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
+                    .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(ProjectApple.holiday == 1 ? Blocks.SPRUCE_PLANKS : PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
         }
 
         return skizzikPatternFull;

@@ -25,7 +25,7 @@ public class PA_SkullModel extends SkullModel {
     public static LayerDefinition createSmallSkizzikHeadLayer() {
         MeshDefinition mesh = createSmallHeadModel();
 
-        if (ProjectApple.isSpooktober) {
+        if (ProjectApple.holiday == 1) {
             return LayerDefinition.create(mesh, 48, 24);
         }
 
@@ -35,7 +35,7 @@ public class PA_SkullModel extends SkullModel {
     public static LayerDefinition createSkizzikHeadLayer() {
         MeshDefinition mesh = createHeadModel();
 
-        if (ProjectApple.isSpooktober) {
+        if (ProjectApple.holiday == 1) {
             return LayerDefinition.create(mesh, 64, 32);
         }
 
