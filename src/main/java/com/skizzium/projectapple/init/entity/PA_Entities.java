@@ -98,13 +98,13 @@ public class PA_Entities {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
 
-        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIE, FriendlySkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE, FriendlyWitchSkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIE, SkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE, WitchSkizzieRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.SKIZZIE, SkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.KABOOM_SKIZZIE, KaboomSkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.KABOOM_SKIZZIE, SkizzieRenderer::new);
         event.registerEntityRenderer(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.CORRUPTED_SKIZZIE, CorruptedSkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.CORRUPTED_SKIZZIE, SkizzieRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.SKIZZIK_SKULL, SkizzikSkullRenderer::new);
         event.registerEntityRenderer(PA_Entities.SKIZZO, SkizzoRenderer::new);
