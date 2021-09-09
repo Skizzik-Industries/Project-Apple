@@ -30,6 +30,10 @@ import static com.skizzium.projectapple.ProjectApple.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Entities {
+    public static final Predicate<LivingEntity> SKIZZIE_SELECTOR = (entity) -> (entity.getMobType() != MobType.UNDEAD || entity instanceof FriendlySkizzie || entity instanceof Skizzie) &&
+                                                                                                    !(entity instanceof Skizzo) &&
+                                                                                                    !(entity instanceof Skizzik) &&
+                                                                                                    entity.attackable();
     public static final Predicate<LivingEntity> SKIZZIK_SELECTOR = (entity) -> (entity.getMobType() != MobType.UNDEAD || entity instanceof FriendlySkizzie) &&
                                                                                 !(entity instanceof Skizzie) &&
                                                                                 !(entity instanceof Skizzo) &&
