@@ -16,16 +16,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SkizzikGlowLayer<T extends Skizzik, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private static final ResourceLocation EMPTY_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_empty_glow.png");
+    private static final ResourceLocation EMPTY_GLOW = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_empty_glow.png");
 
-    private static final ResourceLocation SLEEPING_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_sleeping_glow.png");
-    private static final ResourceLocation NORMAL_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_glow.png");
-    private static final ResourceLocation STAGE_5_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_stage-5_glow.png");
+    private static final ResourceLocation SLEEPING_GLOW = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_sleeping_glow.png");
+    private static final ResourceLocation NORMAL_GLOW = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_glow.png");
+    private static final ResourceLocation STAGE_5_GLOW = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_stage-5_glow.png");
 
-    private static final ResourceLocation SPOOKZIK_SLEEPING_LOCATION = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_sleeping_glow.png");
-    private static final ResourceLocation SPOOKZIK_LOCATION = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_glow.png");
-    private static final ResourceLocation SPOOKZIK_STAGE_5_LOCATION = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_stage-5_glow.png");
-    private static final ResourceLocation SPOOKZIK_FINISH_HIM_LOCATION = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_finish-him_glow.png");
+    private static final ResourceLocation SPOOKZIK_SLEEPING_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_sleeping_glow.png");
+    private static final ResourceLocation SPOOKZIK_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_glow.png");
+    private static final ResourceLocation SPOOKZIK_STAGE_5_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_stage-5_glow.png");
+    private static final ResourceLocation SPOOKZIK_FINISH_HIM_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzik_finish-him_glow.png");
 
     public SkizzikGlowLayer(RenderLayerParent<T, M> renderer) {
         super(renderer);
@@ -35,14 +35,14 @@ public class SkizzikGlowLayer<T extends Skizzik, M extends EntityModel<T>> exten
         int stage = entity.getStage();
 
         if (ProjectApple.holiday == 1) {
-            return stage == 0 ? SPOOKZIK_SLEEPING_LOCATION :
-                   stage >= 1 && stage <= 4 ? SPOOKZIK_LOCATION :
-                   stage == 5 ? SPOOKZIK_STAGE_5_LOCATION : SPOOKZIK_FINISH_HIM_LOCATION;
+            return stage == 0 ? SPOOKZIK_SLEEPING_GLOW :
+                   stage >= 1 && stage <= 4 ? SPOOKZIK_GLOW :
+                   stage == 5 ? SPOOKZIK_STAGE_5_GLOW : SPOOKZIK_FINISH_HIM_GLOW;
         }
 
-        return stage == 0 ? SLEEPING_LOCATION :
-               stage >= 1 && stage <= 4 ? NORMAL_LOCATION :
-               stage == 5 ? STAGE_5_LOCATION : EMPTY_LOCATION;
+        return stage == 0 ? SLEEPING_GLOW :
+               stage >= 1 && stage <= 4 ? NORMAL_GLOW :
+               stage == 5 ? STAGE_5_GLOW : EMPTY_GLOW;
     }
 
     @Override
