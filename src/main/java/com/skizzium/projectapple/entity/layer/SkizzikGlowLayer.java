@@ -22,10 +22,10 @@ public class SkizzikGlowLayer<T extends Skizzik, M extends EntityModel<T>> exten
     private static final ResourceLocation NORMAL_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_glow.png");
     private static final ResourceLocation STAGE_5_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzik_stage-5_glow.png");
 
-    private static final ResourceLocation SPOOKZIK_SLEEPING_LOCATION = new ResourceLocation("skizzik:textures/entity/spookzik/spookzik_sleeping_glow.png");
-    private static final ResourceLocation SPOOKZIK_LOCATION = new ResourceLocation("skizzik:textures/entity/spookzik/spookzik_glow.png");
-    private static final ResourceLocation SPOOKZIK_STAGE_5_LOCATION = new ResourceLocation("skizzik:textures/entity/spookzik/spookzik_stage-5_glow.png");
-    private static final ResourceLocation SPOOKZIK_FINISH_HIM_LOCATION = new ResourceLocation("skizzik:textures/entity/spookzik/spookzik_finish-him_glow.png");
+    private static final ResourceLocation SPOOKZIK_SLEEPING_LOCATION = new ResourceLocation("skizzik:textures/entity/holiday/spooktober/spookzik/spookzik_sleeping_glow.png");
+    private static final ResourceLocation SPOOKZIK_LOCATION = new ResourceLocation("skizzik:textures/entity/holiday/spooktober/spookzik/spookzik_glow.png");
+    private static final ResourceLocation SPOOKZIK_STAGE_5_LOCATION = new ResourceLocation("skizzik:textures/entity/holiday/spooktober/spookzik/spookzik_stage-5_glow.png");
+    private static final ResourceLocation SPOOKZIK_FINISH_HIM_LOCATION = new ResourceLocation("skizzik:textures/entity/holiday/spooktober/spookzik/spookzik_finish-him_glow.png");
 
     public SkizzikGlowLayer(RenderLayerParent<T, M> renderer) {
         super(renderer);

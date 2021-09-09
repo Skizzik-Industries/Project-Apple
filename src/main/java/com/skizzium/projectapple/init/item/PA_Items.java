@@ -5,7 +5,6 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.item.PA_SkullItem;
 import com.skizzium.projectapple.item.RainbowSword;
 import net.minecraft.world.entity.EquipmentSlot;
