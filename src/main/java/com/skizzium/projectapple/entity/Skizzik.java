@@ -85,6 +85,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private static final PA_BossEvent.PA_BossBarColor defaultBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
     private static final PA_BossEvent.PA_BossBarColor weakBarColor = PA_BossEvent.PA_BossBarColor.WHITE;
+    private static final PA_BossEvent.PA_BossBarColor overpoweredBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
     private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
@@ -539,6 +540,9 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         if (currentStage == 0 || currentStage == 6) {
             bossBar.setColor(weakBarColor);
+        }
+        else if (currentStage == 5) {
+            bossBar.setColor(overpoweredBarColor);
         }
         else {
             bossBar.setColor(defaultBarColor);
