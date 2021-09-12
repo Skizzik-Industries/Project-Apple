@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.itemgroup;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.network.chat.Component;
@@ -44,15 +43,15 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.SKIZZIK_FLESH.get().fillItemCategory(this, items);
         PA_Blocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 
-        /*PA_Entities.FRIENDLY_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
-        PA_Entities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
 
-        PA_Entities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
-        PA_Entities.KABOOM_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
-        PA_Entities.WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
-        PA_Entities.CORRUPTED_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        PA_Items.SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
+        PA_Items.KABOOM_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
+        PA_Items.WITCH_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
+        PA_Items.CORRUPTED_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
 
-        PA_Entities.SKIZZO_SPAWN_EGG.asItem().fillItemCategory(this, items);*/
+        PA_Items.SKIZZO_SPAWN_EGG.get().fillItemCategory(this, items);
 
         PA_Blocks.SKIZZIE_STATUE.get().fillItemCategory(this, items);
         PA_Blocks.SPOOKZIE_STATUE.get().fillItemCategory(this, items);
