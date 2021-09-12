@@ -87,6 +87,7 @@ public class FriendlySkizzie extends PathfinderMob {
         return this.entityData.get(DATA_HOLIDAY_VARIATION);
     }
 
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_HOLIDAY_VARIATION, 0);

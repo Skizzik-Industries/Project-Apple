@@ -9,6 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -36,6 +39,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class Skizzie extends Monster {
+    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
     private UUID ownerUUID;
     private int ownerNetworkId;
 
@@ -117,6 +121,14 @@ public class Skizzie extends Monster {
                 .add(Attributes.FLYING_SPEED, 0.3D);
     }
 
+    public void setHolidayVariation(int variation) {
+        this.entityData.set(DATA_HOLIDAY_VARIATION, variation);
+    }
+
+    public int getHolidayVariation() {
+        return this.entityData.get(DATA_HOLIDAY_VARIATION);
+    }
+    
     public void setOwner(@Nullable Entity entity) {
         if (entity != null) {
             this.ownerUUID = entity.getUUID();
@@ -148,6 +160,12 @@ public class Skizzie extends Monster {
         }
     }
 
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_HOLIDAY_VARIATION, 0);
+    }
+    
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));

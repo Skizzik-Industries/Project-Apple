@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.FriendlyWitchSkizzie;
+import com.skizzium.projectapple.entity.WitchSkizzie;
 import com.skizzium.projectapple.entity.layer.WitchSkizzieGlowLayer;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
@@ -30,6 +31,6 @@ public class WitchSkizzieRenderer extends MobRenderer<Mob, WitchSkizzieModel<Mob
             return ((FriendlyWitchSkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_WITCH_SPOOKZIE_LOCATION : FRIENDLY_WITCH_SKIZZIE_LOCATION;
         }
 
-        return ProjectApple.holiday == 1 ? WITCH_SPOOKZIE_LOCATION : WITCH_SKIZZIE_LOCATION;
+        return ((WitchSkizzie) entity).getHolidayVariation() == 1 ? WITCH_SPOOKZIE_LOCATION : WITCH_SKIZZIE_LOCATION;
     }
 }

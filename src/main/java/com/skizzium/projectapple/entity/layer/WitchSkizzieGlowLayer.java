@@ -3,10 +3,7 @@ package com.skizzium.projectapple.entity.layer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.CorruptedSkizzie;
-import com.skizzium.projectapple.entity.FriendlySkizzie;
-import com.skizzium.projectapple.entity.FriendlyWitchSkizzie;
-import com.skizzium.projectapple.entity.KaboomSkizzie;
+import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -36,7 +33,7 @@ public class WitchSkizzieGlowLayer<T extends LivingEntity> extends RenderLayer<T
             return ((FriendlyWitchSkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_WITCH_SPOOKZIE_GLOW : FRIENDLY_WITCH_SKIZZIE_GLOW;
         }
 
-        return ProjectApple.holiday == 1 ? WITCH_SPOOKZIE_GLOW : WITCH_SKIZZIE_GLOW;
+        return ((WitchSkizzie) entity).getHolidayVariation() == 1 ? WITCH_SPOOKZIE_GLOW : WITCH_SKIZZIE_GLOW;
     }
 
     @Override
