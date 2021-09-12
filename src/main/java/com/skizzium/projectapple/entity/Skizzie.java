@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class Skizzie extends Monster {
-    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
+    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(Skizzie.class, EntityDataSerializers.INT);
     private UUID ownerUUID;
     private int ownerNetworkId;
 
