@@ -14,7 +14,7 @@ public class PA_EntityTypeTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(PA_Tags.EntityTypes.SKIZZIES).add(PA_Entities.SKIZZIE, PA_Entities.KABOOM_SKIZZIE, PA_Entities.WITCH_SKIZZIE, PA_Entities.CORRUPTED_SKIZZIE);
-        tag(PA_Tags.EntityTypes.FRIENDLY_SKIZZIES).add(PA_Entities.FRIENDLY_SKIZZIE, PA_Entities.FRIENDLY_WITCH_SKIZZIE);
+        tag(PA_Tags.EntityTypes.SKIZZIES).add(PA_Entities.SKIZZIE.get(), PA_Entities.KABOOM_SKIZZIE.get(), PA_Entities.WITCH_SKIZZIE.get(), PA_Entities.CORRUPTED_SKIZZIE.get());
+        tag(PA_Tags.EntityTypes.FRIENDLY_SKIZZIES).add(PA_Entities.FRIENDLY_SKIZZIE.get(), PA_Entities.FRIENDLY_WITCH_SKIZZIE.get());
     }
 }

@@ -34,7 +34,7 @@ public class CandyPig extends Pig {
 
     @Override
     public CandyPig getBreedOffspring(ServerLevel world, AgeableMob entity) {
-        return PA_Entities.CANDY_PIG.create(this.level);
+        return PA_Entities.CANDY_PIG.get().create(this.level);
     }
 
     public static AttributeSupplier.Builder buildAttributes() {

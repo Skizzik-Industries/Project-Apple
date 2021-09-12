@@ -44,7 +44,7 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.SKIZZIK_FLESH.get().fillItemCategory(this, items);
         PA_Blocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 
-        PA_Entities.FRIENDLY_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        /*PA_Entities.FRIENDLY_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         PA_Entities.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
         PA_Entities.SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
@@ -52,7 +52,7 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Entities.WITCH_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
         PA_Entities.CORRUPTED_SKIZZIE_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
-        PA_Entities.SKIZZO_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        PA_Entities.SKIZZO_SPAWN_EGG.asItem().fillItemCategory(this, items);*/
 
         PA_Blocks.SKIZZIE_STATUE.get().fillItemCategory(this, items);
         PA_Blocks.SPOOKZIE_STATUE.get().fillItemCategory(this, items);

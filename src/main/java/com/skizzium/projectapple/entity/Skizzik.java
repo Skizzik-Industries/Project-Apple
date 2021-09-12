@@ -476,7 +476,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
-                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
+                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
                             skizzo.setOwner(this);
                             //skizzos[i - 1] = skizzo;
                         }
@@ -722,6 +722,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private void spawnSkizzie(Skizzie entity, double x, double y, double z, Level world) {
         if (world instanceof ServerLevel) {
+            entity.setHolidayVariation(ProjectApple.holiday);
             entity.moveTo(x, y, z);
             entity.finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
             entity.setOwner(this);
@@ -933,22 +934,22 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
                 if (this.getStage() == 1) {
                     if (Math.random() < 0.05) {
-                        spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                 }
                 else if (this.getStage() == 2) {
                     if (Math.random() < 0.05) {
-                        spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                     }
                 }
@@ -958,34 +959,34 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     }
                     else {*/
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
                             if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                             else {
-                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                         }
                     //}
                 }
                 else if (this.getStage() == 4) {
                     if (Math.random() < 0.05) {
-                        spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
                             if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                             else {
                                 //if (Math.random() < 0.5) {
-                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                                 /*}
                                 else {
                                     spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
@@ -996,25 +997,25 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 }
                 else if (this.getStage() == 5) {
                     if (Math.random() < 0.5) {
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
                             if (Math.random() < 0.5) {
-                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                             else {
                                 /*if (Math.random() < 0.5) {
                                     spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
                                 }
                                 else {*/
-                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                                 //}
                             }
                         }

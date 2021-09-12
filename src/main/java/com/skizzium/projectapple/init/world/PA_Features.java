@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class PA_Features {
     public static void candyPlainsSpawns(MobSpawnSettings.Builder builder) {
-        builder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(PA_Entities.CANDY_PIG, 10, 4, 4));
+        //builder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(PA_Entities.CANDY_PIG.get(), 10, 4, 4));
         BiomeDefaultFeatures.commonSpawns(builder);
     }
 

@@ -89,7 +89,7 @@ public class PA_Items {
 
     public static void register() {}
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(PA_Entities.CANDY_PIG_SPAWN_EGG);
 
@@ -102,5 +102,5 @@ public class PA_Items {
         event.getRegistry().register(PA_Entities.CORRUPTED_SKIZZIE_SPAWN_EGG);
 
         event.getRegistry().register(PA_Entities.SKIZZO_SPAWN_EGG);
-    }
+    }*/
 }

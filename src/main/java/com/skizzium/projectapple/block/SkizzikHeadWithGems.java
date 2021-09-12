@@ -81,7 +81,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
                         }
                     }
 
-                    Skizzik skizzik = PA_Entities.SKIZZIK.create(world);
+                    Skizzik skizzik = PA_Entities.SKIZZIK.get().create(world);
                     BlockPos blockPos = patternHelper.getBlock(1, 2, 0).getPos();
 
                     skizzik.moveTo((double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.55D, (double)blockPos.getZ() + 0.5D, patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F, 0.0F);

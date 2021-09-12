@@ -18,13 +18,12 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fmllegacy.RegistryObject;
 
-import java.lang.reflect.Field;
 import java.util.function.Predicate;
 
 import static com.skizzium.projectapple.ProjectApple.MOD_ID;
@@ -41,50 +40,45 @@ public class PA_Entities {
                                                                                 !(entity instanceof Skizzik) &&
                                                                                 entity.attackable();
 
-    public static final EntityType<CandyPig> CANDY_PIG = registerEntity("candy_pig", EntityType.Builder.of(CandyPig::new, MobCategory.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10));
-    public static final EntityType<FriendlySkizzie> FRIENDLY_SKIZZIE = registerEntity("friendly_skizzie", EntityType.Builder.of(FriendlySkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<FriendlyWitchSkizzie> FRIENDLY_WITCH_SKIZZIE = registerEntity("friendly_witch_skizzie", EntityType.Builder.of(FriendlyWitchSkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<Skizzie> SKIZZIE = registerEntity("skizzie", EntityType.Builder.of(Skizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<KaboomSkizzie> KABOOM_SKIZZIE = registerEntity("kaboom_skizzie", EntityType.Builder.of(KaboomSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<WitchSkizzie> WITCH_SKIZZIE = registerEntity("witch_skizzie", EntityType.Builder.of(WitchSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<CorruptedSkizzie> CORRUPTED_SKIZZIE = registerEntity("corrupted_skizzie", EntityType.Builder.of(CorruptedSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10));
-    public static final EntityType<SkizzikSkull> SKIZZIK_SKULL = registerEntity("skizzik_skull", EntityType.Builder.<SkizzikSkull>of(SkizzikSkull::new, MobCategory.MISC).updateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4).setCustomClientFactory(((spawnEntity, world) -> new SkizzikSkull(world))));
-    public static final EntityType<Skizzo> SKIZZO = registerEntity("skizzo", EntityType.Builder.of(Skizzo::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10));
-    public static final EntityType<Skizzik> SKIZZIK = registerEntity("skizzik", EntityType.Builder.of(Skizzik::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(2.5F, 4.0F).clientTrackingRange(10));
+    public static final RegistryObject<EntityType<CandyPig>> CANDY_PIG = PA_Registry.ENTITIES.register("candy_pig", () -> EntityType.Builder.of(CandyPig::new, MobCategory.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10).build("candy_pig"));
+    public static final RegistryObject<EntityType<FriendlySkizzie>> FRIENDLY_SKIZZIE = PA_Registry.ENTITIES.register("friendly_skizzie", () -> EntityType.Builder.of(FriendlySkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10).build("friendly_skizzie"));
+    public static final RegistryObject<EntityType<FriendlyWitchSkizzie>> FRIENDLY_WITCH_SKIZZIE = PA_Registry.ENTITIES.register("friendly_witch_skizzie", () -> EntityType.Builder.of(FriendlyWitchSkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10).build("friendly_witch_skizzie"));
+    public static final RegistryObject<EntityType<Skizzie>> SKIZZIE = PA_Registry.ENTITIES.register("skizzie", () -> EntityType.Builder.of(Skizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10).build("skizzie"));
+    public static final RegistryObject<EntityType<KaboomSkizzie>> KABOOM_SKIZZIE = PA_Registry.ENTITIES.register("kaboom_skizzie", () -> EntityType.Builder.of(KaboomSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10).build("kaboom_skizzie"));
+    public static final RegistryObject<EntityType<WitchSkizzie>> WITCH_SKIZZIE = PA_Registry.ENTITIES.register("witch_skizzie", () -> EntityType.Builder.of(WitchSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10).build("witch_skizzie"));
+    public static final RegistryObject<EntityType<CorruptedSkizzie>> CORRUPTED_SKIZZIE = PA_Registry.ENTITIES.register("corrupted_skizzie", () -> EntityType.Builder.of(CorruptedSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10).build("corrupted_skizzie"));
+    public static final RegistryObject<EntityType<SkizzikSkull>> SKIZZIK_SKULL = PA_Registry.ENTITIES.register("skizzik_skull", () -> EntityType.Builder.<SkizzikSkull>of(SkizzikSkull::new, MobCategory.MISC).updateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4).setCustomClientFactory(((spawnEntity, world) -> new SkizzikSkull(world))).build("skizzik_skull"));
+    public static final RegistryObject<EntityType<Skizzo>> SKIZZO = PA_Registry.ENTITIES.register("skizzo", () -> EntityType.Builder.of(Skizzo::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10).build("skizzo"));
+    public static final RegistryObject<EntityType<Skizzik>> SKIZZIK = PA_Registry.ENTITIES.register("skizzik", () -> EntityType.Builder.of(Skizzik::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(2.5F, 4.0F).clientTrackingRange(10).build("skizzik"));
 
-    public static final SpawnEggItem CANDY_PIG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
-    public static final SpawnEggItem FRIENDLY_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_skizzie_spawn_egg");
-    public static final SpawnEggItem FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.FRIENDLY_WITCH_SKIZZIE, 0X17D1C7, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_witch_skizzie_spawn_egg");
-    public static final SpawnEggItem SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
-    public static final SpawnEggItem KABOOM_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.KABOOM_SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.KA_BOOM_SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
-    public static final SpawnEggItem WITCH_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.WITCH_SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:witch_skizzie_spawn_egg");
-    public static final SpawnEggItem CORRUPTED_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", ChatFormatting.OBFUSCATED)).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
-    public static final SpawnEggItem SKIZZO_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.SKIZZO, PA_ThemeableSpawnEggColors.SKIZZO_PRIMARY, 0X330000, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzo_spawn_egg");
-
-    private static final EntityType registerEntity(String name, EntityType.Builder builder) {
-        ResourceLocation location = new ResourceLocation(MOD_ID, name);
-        return (EntityType) builder.build(name).setRegistryName(location);
-    }
+    /*public static final SpawnEggItem CANDY_PIG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.CANDY_PIG.get(), 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)).setRegistryName("skizzik:candy_pig_spawn_egg");
+    public static final SpawnEggItem FRIENDLY_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.FRIENDLY_SKIZZIE.get(), 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_skizzie_spawn_egg");
+    public static final SpawnEggItem FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(PA_Entities.FRIENDLY_WITCH_SKIZZIE.get(), 0X17D1C7, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:friendly_witch_skizzie_spawn_egg");
+    public static final SpawnEggItem SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.SKIZZIE.get(), PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzie_spawn_egg");
+    public static final SpawnEggItem KABOOM_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.KABOOM_SKIZZIE.get(), PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.KA_BOOM_SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:kaboom_skizzie_spawn_egg");
+    public static final SpawnEggItem WITCH_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.WITCH_SKIZZIE.get(), PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:witch_skizzie_spawn_egg");
+    public static final SpawnEggItem CORRUPTED_SKIZZIE_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.CORRUPTED_SKIZZIE.get(), 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(Rarity.create("CORRUPTED", ChatFormatting.OBFUSCATED)).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:corrupted_skizzie_spawn_egg");
+    public static final SpawnEggItem SKIZZO_SPAWN_EGG = (SpawnEggItem) new ThemeableSpawnEgg(PA_Entities.SKIZZO.get(), PA_ThemeableSpawnEggColors.SKIZZO_PRIMARY, 0X330000, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)).setRegistryName("skizzik:skizzo_spawn_egg");*/
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(CANDY_PIG, CandyPig.buildAttributes().build());
+        event.put(CANDY_PIG.get(), CandyPig.buildAttributes().build());
 
-        event.put(FRIENDLY_SKIZZIE, FriendlySkizzie.buildAttributes().build());
-        event.put(FRIENDLY_WITCH_SKIZZIE, FriendlyWitchSkizzie.buildAttributes().build());
+        event.put(FRIENDLY_SKIZZIE.get(), FriendlySkizzie.buildAttributes().build());
+        event.put(FRIENDLY_WITCH_SKIZZIE.get(), FriendlyWitchSkizzie.buildAttributes().build());
 
-        event.put(SKIZZIE, Skizzie.buildAttributes().build());
-        event.put(KABOOM_SKIZZIE, KaboomSkizzie.buildAttributes().build());
-        event.put(WITCH_SKIZZIE, WitchSkizzie.buildAttributes().build());
-        event.put(CORRUPTED_SKIZZIE, CorruptedSkizzie.buildAttributes().build());
+        event.put(SKIZZIE.get(), Skizzie.buildAttributes().build());
+        event.put(KABOOM_SKIZZIE.get(), KaboomSkizzie.buildAttributes().build());
+        event.put(WITCH_SKIZZIE.get(), WitchSkizzie.buildAttributes().build());
+        event.put(CORRUPTED_SKIZZIE.get(), CorruptedSkizzie.buildAttributes().build());
 
-        event.put(SKIZZO, Skizzo.buildAttributes().build());
-        event.put(SKIZZIK, Skizzik.buildAttributes().build());
+        event.put(SKIZZO.get(), Skizzo.buildAttributes().build());
+        event.put(SKIZZIK.get(), Skizzik.buildAttributes().build());
     }
 
     @SubscribeEvent
     public static void registerSpawns(FMLCommonSetupEvent event) {
-        SpawnPlacements.register(CANDY_PIG, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
+        SpawnPlacements.register(CANDY_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
     }
 
     @SubscribeEvent
@@ -97,39 +91,19 @@ public class PA_Entities {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(PA_Entities.CANDY_PIG, CandyPigRenderer::new);
+        event.registerEntityRenderer(PA_Entities.CANDY_PIG.get(), CandyPigRenderer::new);
 
-        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIE, SkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE, WitchSkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIE.get(), SkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE.get(), WitchSkizzieRenderer::new);
 
-        event.registerEntityRenderer(PA_Entities.SKIZZIE, SkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.KABOOM_SKIZZIE, SkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.WITCH_SKIZZIE, WitchSkizzieRenderer::new);
-        event.registerEntityRenderer(PA_Entities.CORRUPTED_SKIZZIE, SkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.SKIZZIE.get(), SkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.KABOOM_SKIZZIE.get(), SkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.WITCH_SKIZZIE.get(), WitchSkizzieRenderer::new);
+        event.registerEntityRenderer(PA_Entities.CORRUPTED_SKIZZIE.get(), SkizzieRenderer::new);
 
-        event.registerEntityRenderer(PA_Entities.SKIZZIK_SKULL, SkizzikSkullRenderer::new);
-        event.registerEntityRenderer(PA_Entities.SKIZZO, SkizzoRenderer::new);
-        event.registerEntityRenderer(PA_Entities.SKIZZIK, SkizzikRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void registerEntities(final RegistryEvent.Register<EntityType<?>> event) {
-        try {
-            for (Field field : PA_Entities.class.getDeclaredFields()) {
-                Object object = field.get(null);
-                if (object instanceof EntityType) {
-                    event.getRegistry().register((EntityType) object);
-                }
-                else if (object instanceof EntityType[]) {
-                    for (EntityType type : (EntityType[]) object) {
-                        event.getRegistry().register(type);
-                    }
-                }
-            }
-        }
-        catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        event.registerEntityRenderer(PA_Entities.SKIZZIK_SKULL.get(), SkizzikSkullRenderer::new);
+        event.registerEntityRenderer(PA_Entities.SKIZZO.get(), SkizzoRenderer::new);
+        event.registerEntityRenderer(PA_Entities.SKIZZIK.get(), SkizzikRenderer::new);
     }
 
     public static void register() {}

@@ -40,16 +40,16 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
     }
 
     public SkizzikSkull(Level world, LivingEntity entity, double x, double y, double z) {
-        super(PA_Entities.SKIZZIK_SKULL, entity, x, y, z, world);
+        super(PA_Entities.SKIZZIK_SKULL.get(), entity, x, y, z, world);
     }
 
     @OnlyIn(Dist.CLIENT)
     public SkizzikSkull(Level world, double d0, double d1, double d2, double d3, double d4, double d5) {
-        super(PA_Entities.SKIZZIK_SKULL, d0, d1, d2, d3, d4, d5, world);
+        super(PA_Entities.SKIZZIK_SKULL.get(), d0, d1, d2, d3, d4, d5, world);
     }
 
     public SkizzikSkull(Level world) {
-        super(PA_Entities.SKIZZIK_SKULL, world);
+        super(PA_Entities.SKIZZIK_SKULL.get(), world);
     }
 
     @Override
