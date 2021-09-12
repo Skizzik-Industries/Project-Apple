@@ -66,7 +66,7 @@ public class SkizzieConversion {
             to.setYBodyRot(from.yBodyRot);
             to.setYHeadRot(from.yHeadRot);
 
-            ((Mob) to).finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(to.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
+            ((Mob) to).finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(to.blockPosition()), MobSpawnType.CONVERSION, null, null);
             world.addFreshEntity(to);
 
             LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
