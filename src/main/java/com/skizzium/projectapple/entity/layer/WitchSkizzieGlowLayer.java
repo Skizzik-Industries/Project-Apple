@@ -32,11 +32,11 @@ public class WitchSkizzieGlowLayer<T extends LivingEntity> extends RenderLayer<T
     }
 
     private ResourceLocation getTexture(T entity) {
-        if (ProjectApple.holiday == 1) {
-            return entity instanceof FriendlyWitchSkizzie ? FRIENDLY_WITCH_SPOOKZIE_GLOW : WITCH_SPOOKZIE_GLOW;
+        if (entity instanceof FriendlyWitchSkizzie) {
+            return ((FriendlyWitchSkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_WITCH_SPOOKZIE_GLOW : FRIENDLY_WITCH_SKIZZIE_GLOW;
         }
 
-        return entity instanceof FriendlyWitchSkizzie ? FRIENDLY_WITCH_SKIZZIE_GLOW : WITCH_SKIZZIE_GLOW;
+        return ProjectApple.holiday == 1 ? WITCH_SPOOKZIE_GLOW : WITCH_SKIZZIE_GLOW;
     }
 
     @Override

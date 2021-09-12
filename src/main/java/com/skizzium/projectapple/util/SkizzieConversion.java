@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.util;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.SkizzieStatue;
 import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -47,6 +48,9 @@ public class SkizzieConversion {
                 from.discard();
                 return InteractionResult.SUCCESS;
             }
+
+            if (to instanceof FriendlySkizzie)
+                ((FriendlySkizzie) to).setHolidayVariation(ProjectApple.holiday);
 
             to.moveTo(fromX, fromY, fromZ, from.xRotO, from.yRotO);
             to.setYBodyRot(from.yBodyRot);

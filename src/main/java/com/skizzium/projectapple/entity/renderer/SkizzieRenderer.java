@@ -30,14 +30,16 @@ public class SkizzieRenderer extends MobRenderer<Mob, SkizzieModel<Mob>> {
     }
 
     public ResourceLocation getTextureLocation(Mob entity) {
+        if (entity instanceof FriendlySkizzie) {
+            return ((FriendlySkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_SPOOKZIE_LOCATION : FRIENDLY_SKIZZIE_LOCATION;
+        }
+
         if (ProjectApple.holiday == 1) {
-            return entity instanceof FriendlySkizzie ? FRIENDLY_SPOOKZIE_LOCATION :
-                   entity instanceof KaboomSkizzie ? KABOOM_SPOOKZIE_LOCATION :
+            return entity instanceof KaboomSkizzie ? KABOOM_SPOOKZIE_LOCATION :
                    entity instanceof CorruptedSkizzie ? CORRUPTED_SPOOKZIE_LOCATION : SPOOKZIE_LOCATION;
         }
 
-        return entity instanceof FriendlySkizzie ? FRIENDLY_SKIZZIE_LOCATION :
-               entity instanceof KaboomSkizzie ? KABOOM_SKIZZIE_LOCATION :
+        return entity instanceof KaboomSkizzie ? KABOOM_SKIZZIE_LOCATION :
                entity instanceof CorruptedSkizzie ? CORRUPTED_SKIZZIE_LOCATION : SKIZZIE_LOCATION;
     }
 }

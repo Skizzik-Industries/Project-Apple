@@ -5,7 +5,9 @@ import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -31,9 +33,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
+
 public class FriendlySkizzie extends PathfinderMob {
+    private int holidayVariation;
+
     public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {
         super(entity, world);
+        this.holidayVariation = 0;
         this.xpReward = 7;
         this.moveControl = new FlyingMoveControl(this, 10, true);
         this.navigation = new FlyingPathNavigation(this, this.getCommandSenderWorld());
@@ -72,6 +79,24 @@ public class FriendlySkizzie extends PathfinderMob {
     @Override
     public boolean isNoGravity() {
         return true;
+    }
+
+    public void setHolidayVariation(int variation) {
+        this.holidayVariation = variation;
+    }
+
+    public int getHolidayVariation() {
+        return this.holidayVariation;
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        nbt.putInt("HolidayVariation", this.holidayVariation);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        this.holidayVariation = nbt.getInt("HolidayVariation");
     }
 
     @Override
@@ -134,7 +159,7 @@ public class FriendlySkizzie extends PathfinderMob {
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         player.startRiding(this);
-        return SkizzieConversion.conversion(this, player);
+        return SkizzieConversion.convert(this, player);
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.skizzium.projectapple.entity.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.CorruptedSkizzie;
-import com.skizzium.projectapple.entity.FriendlySkizzie;
 import com.skizzium.projectapple.entity.FriendlyWitchSkizzie;
-import com.skizzium.projectapple.entity.KaboomSkizzie;
 import com.skizzium.projectapple.entity.layer.WitchSkizzieGlowLayer;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
@@ -29,10 +26,10 @@ public class WitchSkizzieRenderer extends MobRenderer<Mob, WitchSkizzieModel<Mob
     }
 
     public ResourceLocation getTextureLocation(Mob entity) {
-        if (ProjectApple.holiday == 1) {
-            return entity instanceof FriendlyWitchSkizzie ? FRIENDLY_WITCH_SPOOKZIE_LOCATION : WITCH_SPOOKZIE_LOCATION;
+        if (entity instanceof FriendlyWitchSkizzie) {
+            return ((FriendlyWitchSkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_WITCH_SPOOKZIE_LOCATION : FRIENDLY_WITCH_SKIZZIE_LOCATION;
         }
 
-        return entity instanceof FriendlyWitchSkizzie ? FRIENDLY_WITCH_SKIZZIE_LOCATION : WITCH_SKIZZIE_LOCATION;
+        return ProjectApple.holiday == 1 ? WITCH_SPOOKZIE_LOCATION : WITCH_SKIZZIE_LOCATION;
     }
 }
