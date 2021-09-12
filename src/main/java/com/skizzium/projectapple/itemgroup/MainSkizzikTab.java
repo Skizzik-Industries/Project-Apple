@@ -55,6 +55,7 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Entities.SKIZZO_SPAWN_EGG.asItem().fillItemCategory(this, items);
 
         PA_Blocks.SKIZZIE_STATUE.get().fillItemCategory(this, items);
+        PA_Blocks.SPOOKZIE_STATUE.get().fillItemCategory(this, items);
         PA_Blocks.SKIZZIK_LOOT_BAG.get().fillItemCategory(this, items);
 
         PA_Items.PLATINUM_NUGGET.get().fillItemCategory(this, items);
