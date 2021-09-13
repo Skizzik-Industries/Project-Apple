@@ -93,7 +93,7 @@ public class Skizzie extends Monster {
 
     @Override
     public boolean isSensitiveToWater() {
-        return true;
+        return ProjectApple.holiday != 1;
     }
 
     @Override

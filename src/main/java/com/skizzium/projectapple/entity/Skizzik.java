@@ -417,11 +417,15 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         Level world = getCommandSenderWorld();
         if (world instanceof ServerLevel) {
-            if (currentStage == 3) {
-                ((ServerLevel) world).setDayTime(13000);
-            }
-            else if (currentStage == 4 || currentStage == 5) {
+            if (ProjectApple.holiday == 1) {
                 ((ServerLevel) world).setDayTime(18000);
+            }
+            else {
+                if (currentStage == 3) {
+                    ((ServerLevel) world).setDayTime(13000);
+                } else if (currentStage == 4 || currentStage == 5) {
+                    ((ServerLevel) world).setDayTime(18000);
+                }
             }
         }
 

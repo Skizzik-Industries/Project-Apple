@@ -24,26 +24,16 @@ public class PA_SkullModel extends SkullModel {
 
     public static LayerDefinition createSmallSkizzikHeadLayer() {
         MeshDefinition mesh = createSmallHeadModel();
-
-        if (ProjectApple.holiday == 1) {
-            return LayerDefinition.create(mesh, 48, 24);
-        }
-
         return LayerDefinition.create(mesh, 24, 12);
     }
 
     public static LayerDefinition createSkizzikHeadLayer() {
         MeshDefinition mesh = createHeadModel();
-
-        if (ProjectApple.holiday == 1) {
-            return LayerDefinition.create(mesh, 64, 32);
-        }
-
         return LayerDefinition.create(mesh, 32, 16);
     }
 
     public static LayerDefinition createSkizzikHeadWithGemsLayer() {
         MeshDefinition mesh = createHeadModel();
-        return LayerDefinition.create(mesh, 128, 128);
+        return LayerDefinition.create(mesh, 78, 53);
     }
 }
