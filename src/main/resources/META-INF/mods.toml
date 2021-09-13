@@ -17,7 +17,7 @@ From seemingly harmless candies and rainbows, to dark back stories, suffering mu
 [[dependencies.skizzik]]
     modId="forge"
     mandatory=true
-    versionRange="[37,)"
+    versionRange="[37.0.31,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
