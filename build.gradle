@@ -5,21 +5,23 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '2.0.0-beta-3.1'
-group = 'com.skizzium.projectapple'
-archivesBaseName = 'skizzik'
+version = '${mod_version}'
+group = '${mod_base_package}'
+archivesBaseName = mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: mappings_channel, version: mappings_version
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
@@ -54,7 +56,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'skizzik', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
                 skizzik {
                     source sourceSets.main
@@ -75,19 +77,19 @@ repositories {
 dependencies {
     //implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
     //implementation group: "com.sk89q.worldedit", name: "worldedit-core", version: "7.3.0-20210815.030932-39", changing: true
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.33'
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     //compileOnly fg.deobf('com.sk89q.worldedit:worldedit-forge-mc1.17.1:7.3.0-SNAPSHOT:dev')
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "skizzik",
-                "Specification-Vendor"    : "skizziksareus",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "skizziksareus",
+                "Specification-Title": mod_id,
+                "Specification-Vendor": "Skizzium",
+                "Specification-Version": "1",
+                "Implementation-Title": project.name,
+                "Implementation-Version": mod_version,
+                "Implementation-Vendor": "Skizzium",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
