@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.tileentity.model;
 
+import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -33,6 +34,6 @@ public class PA_SkullModel extends SkullModel {
 
     public static LayerDefinition createSkizzikHeadWithGemsLayer() {
         MeshDefinition mesh = createHeadModel();
-        return LayerDefinition.create(mesh, 128, 128);
+        return LayerDefinition.create(mesh, 78, 53);
     }
 }

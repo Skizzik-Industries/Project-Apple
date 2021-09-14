@@ -27,13 +27,13 @@ public class SkizzoModel<T extends Skizzo> extends EntityModel<T> {
 		PartDefinition part = mesh.getRoot();
 
 		part.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -27.0F, -6.0F, 12.0F, 12.0F, 12.0F, false)
-																		.texOffs(0, 24).addBox(-4.0F, -15.0F, -4.0F, 8.0F, 1.0F, 8.0F, false)
-																		.texOffs(26, 27).addBox(-3.0F, -14.0F, -3.0F, 6.0F, 3.0F, 6.0F, false)
-																		.texOffs(0, 33).addBox(-2.0F, -11.0F, -2.0F, 4.0F, 3.0F, 4.0F, false)
-																		.texOffs(0, 0).addBox(-1.0F, -8.0F, -1.0F, 2.0F, 3.0F, 2.0F, false)
-																		.texOffs(0, 5).addBox(-1.0F, -5.0F, 0.0F, 1.0F, 5.0F, 1.0F, false), PartPose.offset(0.0F, 18.0F, 0.0F));
+																		.texOffs(71, 15).addBox(-4.0F, -15.0F, -4.0F, 8.0F, 1.0F, 8.0F, false)
+																		.texOffs(75, 5).addBox(-3.0F, -14.0F, -3.0F, 6.0F, 3.0F, 6.0F, false)
+																		.texOffs(54, 17).addBox(-2.0F, -11.0F, -2.0F, 4.0F, 3.0F, 4.0F, false)
+																		.texOffs(58, 11).addBox(-1.0F, -8.0F, -1.0F, 2.0F, 3.0F, 2.0F, false)
+																		.texOffs(49, 18).addBox(-1.0F, -5.0F, 0.0F, 1.0F, 5.0F, 1.0F, false), PartPose.offset(0.0F, 18.0F, 0.0F));
 
-		return LayerDefinition.create(mesh, 64, 64);
+		return LayerDefinition.create(mesh, 103, 24);
 	}
 
 	@Override

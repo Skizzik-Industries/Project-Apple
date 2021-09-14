@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.SkizzikSkull;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.tileentity.model.PA_SkullModel;
@@ -20,6 +21,11 @@ public class SkizzikSkullRenderer extends EntityRenderer<SkizzikSkull> {
    private static final ResourceLocation LEVEL_1 = new ResourceLocation("skizzik:textures/entity/skizzik_skull/level_1.png");
    private static final ResourceLocation LEVEL_2 = new ResourceLocation("skizzik:textures/entity/skizzik_skull/level_2.png");
    private static final ResourceLocation LEVEL_3 = new ResourceLocation("skizzik:textures/entity/skizzik_skull/level_3.png");
+
+   private static final ResourceLocation SPOOKZIK_LEVEL_1 = new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/holidays/spooktober/spookzik_skull/level_1.png");
+   private static final ResourceLocation SPOOKZIK_LEVEL_2 = new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/holidays/spooktober/spookzik_skull/level_2.png");
+   private static final ResourceLocation SPOOKZIK_LEVEL_3 = new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/holidays/spooktober/spookzik_skull/level_3.png");
+
    private final PA_SkullModel model;
 
    public SkizzikSkullRenderer(EntityRendererProvider.Context renderer) {
@@ -50,6 +56,11 @@ public class SkizzikSkullRenderer extends EntityRenderer<SkizzikSkull> {
 
    @Override
    public ResourceLocation getTextureLocation(SkizzikSkull skull) {
+      if (ProjectApple.holiday == 1) {
+         return skull.getLevel() == 1 ? SPOOKZIK_LEVEL_1
+                 : skull.getLevel() == 2 ? SPOOKZIK_LEVEL_2 : SPOOKZIK_LEVEL_3;
+      }
+
       return skull.getLevel() == 1 ? LEVEL_1
               : skull.getLevel() == 2 ? LEVEL_2
               : LEVEL_3;

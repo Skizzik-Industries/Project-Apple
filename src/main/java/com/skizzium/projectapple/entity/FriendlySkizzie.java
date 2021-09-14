@@ -1,15 +1,21 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -27,11 +33,16 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
+
 public class FriendlySkizzie extends PathfinderMob {
+    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
+
     public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {
         super(entity, world);
         this.xpReward = 7;
@@ -74,6 +85,20 @@ public class FriendlySkizzie extends PathfinderMob {
         return true;
     }
 
+    public void setHolidayVariation(int variation) {
+        this.entityData.set(DATA_HOLIDAY_VARIATION, variation);
+    }
+
+    public int getHolidayVariation() {
+        return this.entityData.get(DATA_HOLIDAY_VARIATION);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_HOLIDAY_VARIATION, 0);
+    }
+
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (source == DamageSource.DRAGON_BREATH ||
@@ -106,6 +131,16 @@ public class FriendlySkizzie extends PathfinderMob {
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData data, @Nullable CompoundTag nbt) {
+        if (reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER) {
+            this.setHolidayVariation(ProjectApple.holiday);
+        }
+        
+        return super.finalizeSpawn(world, difficulty, reason, data, nbt);
+    }
+
     @Override
     public void baseTick() {
         super.baseTick();
@@ -134,7 +169,7 @@ public class FriendlySkizzie extends PathfinderMob {
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         player.startRiding(this);
-        return SkizzieConversion.conversion(this, player);
+        return SkizzieConversion.convert(this, player);
     }
 
     @Override

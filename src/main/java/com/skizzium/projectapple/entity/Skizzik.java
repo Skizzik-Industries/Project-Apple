@@ -1,9 +1,12 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.util.PA_BossEvent;
+import com.skizzium.projectapple.util.PA_ServerBossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -13,7 +16,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -81,13 +83,21 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
 
-    private final ServerBossEvent bossBar = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+    private static final PA_BossEvent.PA_BossBarColor defaultBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
+    private static final PA_BossEvent.PA_BossBarColor weakBarColor = PA_BossEvent.PA_BossBarColor.WHITE;
+    private static final PA_BossEvent.PA_BossBarColor overpoweredBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
+    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
+    }
+
+    @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
     }
 
     @Override
@@ -407,11 +417,15 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         Level world = getCommandSenderWorld();
         if (world instanceof ServerLevel) {
-            if (currentStage == 3) {
-                ((ServerLevel) world).setDayTime(13000);
-            }
-            else if (currentStage == 4 || currentStage == 5) {
+            if (ProjectApple.holiday == 1) {
                 ((ServerLevel) world).setDayTime(18000);
+            }
+            else {
+                if (currentStage == 3) {
+                    ((ServerLevel) world).setDayTime(13000);
+                } else if (currentStage == 4 || currentStage == 5) {
+                    ((ServerLevel) world).setDayTime(18000);
+                }
             }
         }
 
@@ -466,7 +480,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
-                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
+                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
                             skizzo.setOwner(this);
                             //skizzos[i - 1] = skizzo;
                         }
@@ -529,10 +543,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
         if (currentStage == 0 || currentStage == 6) {
-            bossBar.setColor(BossEvent.BossBarColor.WHITE);
+            bossBar.setColor(weakBarColor);
+        }
+        else if (currentStage == 5) {
+            bossBar.setColor(overpoweredBarColor);
         }
         else {
-            bossBar.setColor(BossEvent.BossBarColor.RED);
+            bossBar.setColor(defaultBarColor);
         }
 
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
@@ -550,13 +567,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
         else {
             if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
+                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
             }
             else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
+                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
             }
             else {
-                this.bossBar.setName(new TextComponent(new TranslatableComponent("entity.skizzik.skizzik").getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
+                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
             }
         }
 
@@ -709,6 +726,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     private void spawnSkizzie(Skizzie entity, double x, double y, double z, Level world) {
         if (world instanceof ServerLevel) {
+            entity.setHolidayVariation(ProjectApple.holiday);
             entity.moveTo(x, y, z);
             entity.finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
             entity.setOwner(this);
@@ -920,22 +938,22 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
                 if (this.getStage() == 1) {
                     if (Math.random() < 0.05) {
-                        spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                 }
                 else if (this.getStage() == 2) {
                     if (Math.random() < 0.05) {
-                        spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                     }
                 }
@@ -945,34 +963,34 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     }
                     else {*/
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
                             if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                             else {
-                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                         }
                     //}
                 }
                 else if (this.getStage() == 4) {
                     if (Math.random() < 0.05) {
-                        spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
                             if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                             else {
                                 //if (Math.random() < 0.5) {
-                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                                 /*}
                                 else {
                                     spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
@@ -983,25 +1001,25 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 }
                 else if (this.getStage() == 5) {
                     if (Math.random() < 0.5) {
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                        spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                     }
                     else {
                         if (Math.random() < 0.5) {
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
+                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                         }
                         else {
                             if (Math.random() < 0.5) {
-                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                             }
                             else {
                                 /*if (Math.random() < 0.5) {
                                     spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
                                 }
                                 else {*/
-                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
+                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
                                 //}
                             }
                         }

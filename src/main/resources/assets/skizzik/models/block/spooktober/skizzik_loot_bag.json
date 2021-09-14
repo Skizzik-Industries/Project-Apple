@@ -1,0 +1,7 @@
+{
+  "parent": "skizzik:custom/skizzik_loot_bag",
+  "textures": {
+    "all": "skizzik:block/spooktober/skizzik_loot_bag",
+    "particle": "minecraft:block/orange_wool"
+  }
+}

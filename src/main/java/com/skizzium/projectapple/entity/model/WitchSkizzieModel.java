@@ -19,40 +19,54 @@ public class WitchSkizzieModel<T extends LivingEntity> extends EntityModel<T> {
 	private final ModelPart upperBody;
 	private final ModelPart head;
 
+	private final ModelPart hat;
+	private final ModelPart layer1;
+	private final ModelPart layer2;
+	private final ModelPart layer3;
+	private final ModelPart top;
+
 	public WitchSkizzieModel(ModelPart part) {
-		this.lowerBody = part.getChild("lowerBody");
-		this.upperBody = part.getChild("upperBody");
+		this.lowerBody = part.getChild("lower_body");
+		this.upperBody = part.getChild("upper_body");
 		this.head = part.getChild("head");
+
+		this.hat = head.getChild("hat");
+		this.layer1 = hat.getChild("layer_1");
+		this.layer2 = hat.getChild("layer_2");
+		this.layer3 = hat.getChild("layer_3");
+		this.top = hat.getChild("top");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition part = mesh.getRoot();
+		PartDefinition root = mesh.getRoot();
 
-		part.addOrReplaceChild("lowerBody", CubeListBuilder.create().texOffs(12, 29).addBox(-4.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F, false), PartPose.offsetAndRotation(2.0F, 17.0F, -0.5F, 0.5F, 0.0F, 0.0F));
-		part.addOrReplaceChild("upperBody", CubeListBuilder.create().texOffs(0, 28).addBox(-4.0F, 0.0F, 0.0F, 3.0F, 10.0F, 3.0F, false)
-																			 .texOffs(0, 24).addBox(-8.0F, 1.5F, 0.5F, 11.0F, 2.0F, 2.0F, false)
-																			 .texOffs(0, 20).addBox(-8.0F, 4.0F, 0.5F, 11.0F, 2.0F, 2.0F, false)
-																			 .texOffs(0, 16).addBox(-8.0F, 6.5F, 0.5F, 11.0F, 2.0F, 2.0F, false), PartPose.offset(2.0F, 7.0F, -0.5F));
-		part.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, false)
-																		.texOffs(30, 19).addBox(-1.5F, -9.0F, -2.0F, 2.0F, 2.0F, 4.0F, false)
-																		.texOffs(24, 0).addBox(-1.5F, -7.0F, -3.0F, 2.0F, 2.0F, 6.0F, false)
-																		.texOffs(24, 16).addBox(-1.5F, -12.0F, -1.0F, 1.0F, 1.0F, 1.0F, false)
-																		.texOffs(0, 0).addBox(-1.5F, -11.0F, -1.0F, 2.0F, 2.0F, 2.0F, false)
-																		.texOffs(32, 8).addBox(-2.5F, -9.0F, -1.0F, 4.0F, 2.0F, 2.0F, false)
-																		.texOffs(24, 29).addBox(-3.5F, -7.0F, -1.0F, 6.0F, 2.0F, 2.0F, false)
-																		.texOffs(26, 16).addBox(-4.5F, -5.0F, -1.0F, 8.0F, 1.0F, 2.0F, false)
-																		.texOffs(30, 25).addBox(-3.5F, -5.0F, 1.0F, 2.0F, 1.0F, 2.0F, false)
-																		.texOffs(32, 12).addBox(0.5F, -5.0F, 1.0F, 2.0F, 1.0F, 2.0F, false)
-																		.texOffs(0, 4).addBox(0.5F, -5.0F, -3.0F, 2.0F, 1.0F, 2.0F, false)
-																		.texOffs(24, 0).addBox(-2.5F, -7.0F, 1.0F, 1.0F, 2.0F, 1.0F, false)
-																		.texOffs(24, 3).addBox(0.5F, -7.0F, 1.0F, 1.0F, 2.0F, 1.0F, false)
-																		.texOffs(9, 28).addBox(0.5F, -7.0F, -2.0F, 1.0F, 2.0F, 1.0F, false)
-																		.texOffs(30, 19).addBox(-2.5F, -7.0F, -2.0F, 1.0F, 2.0F, 1.0F, false)
-																		.texOffs(24, 33).addBox(-3.5F, -5.0F, -3.0F, 2.0F, 1.0F, 2.0F, false)
-																		.texOffs(18, 20).addBox(-1.5F, -5.0F, -4.0F, 2.0F, 1.0F, 8.0F, false), PartPose.offset(0.0F, 3.0F, 0.0F));
-
-		return LayerDefinition.create(mesh, 64, 64);
+		root.addOrReplaceChild("lower_body", CubeListBuilder.create().texOffs(13, 26).addBox(-4.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F, false), PartPose.offsetAndRotation(2.0F, 17.0F, -0.5F, 0.5F, 0.0F, 0.0F));
+		root.addOrReplaceChild("upper_body", CubeListBuilder.create().texOffs(0, 22).addBox(-4.0F, 0.0F, 0.0F, 3.0F, 10.0F, 3.0F, false)
+																			 .texOffs(3, 17).addBox(-8.0F, 1.5F, 0.5F, 11.0F, 2.0F, 2.0F, false)
+																			 .texOffs(3, 17).addBox(-8.0F, 4.0F, 0.5F, 11.0F, 2.0F, 2.0F, false)
+																			 .texOffs(3, 17).addBox(-8.0F, 6.5F, 0.5F, 11.0F, 2.0F, 2.0F, false), PartPose.offset(2.0F, 7.0F, -0.5F));
+		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, false), PartPose.offset(0.0F, 3.0F, 0.0F));
+		
+		PartDefinition hat = head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(-0.5F, 21.0F, 0.0F));
+		hat.addOrReplaceChild("layer_1", CubeListBuilder.create().texOffs(59, 12).addBox(-1.0F, -26.0F, -4.0F, 2.0F, 1.0F, 8.0F, false)
+																		  .texOffs(59, 22).addBox(-4.0F, -26.0F, -1.0F, 8.0F, 1.0F, 2.0F, false)
+																		  .texOffs(33, 16).addBox(-3.0F, -26.0F, -3.0F, 2.0F, 1.0F, 2.0F, false)
+																		  .texOffs(33, 16).addBox(1.0F, -26.0F, -3.0F, 2.0F, 1.0F, 2.0F, false)
+																		  .texOffs(33, 16).addBox(1.0F, -26.0F, 1.0F, 2.0F, 1.0F, 2.0F, false)
+																		  .texOffs(33, 16).addBox(-3.0F, -26.0F, 1.0F, 2.0F, 1.0F, 2.0F, false), PartPose.ZERO);
+		hat.addOrReplaceChild("layer_2", CubeListBuilder.create().texOffs(42, 8).addBox(-1.0F, -28.0F, -3.0F, 2.0F, 2.0F, 6.0F, false)
+																		  .texOffs(42, 17).addBox(-3.0F, -28.0F, -1.0F, 6.0F, 2.0F, 2.0F, false)
+																		  .texOffs(35, 0).addBox(-2.0F, -28.0F, -2.0F, 1.0F, 2.0F, 1.0F, false)
+																		  .texOffs(35, 4).addBox(1.0F, -28.0F, -2.0F, 1.0F, 2.0F, 1.0F, false)
+																		  .texOffs(35, 8).addBox(1.0F, -28.0F, 1.0F, 1.0F, 2.0F, 1.0F, false)
+																		  .texOffs(35, 12).addBox(-2.0F, -28.0F, 1.0F, 1.0F, 2.0F, 1.0F, false), PartPose.ZERO);
+		hat.addOrReplaceChild("layer_3", CubeListBuilder.create().texOffs(63, 0).addBox(-1.0F, -30.0F, -2.0F, 2.0F, 2.0F, 4.0F, false)
+															  			  .texOffs(63, 7).addBox(-2.0F, -30.0F, -1.0F, 4.0F, 2.0F, 2.0F, false), PartPose.ZERO);
+		hat.addOrReplaceChild("top", CubeListBuilder.create().texOffs(48, 0).addBox(-1.0F, -33.0F, -1.0F, 1.0F, 1.0F, 1.0F, false)
+																	  .texOffs(46, 3).addBox(-1.0F, -32.0F, -1.0F, 2.0F, 2.0F, 2.0F, false), PartPose.ZERO);
+		
+		return LayerDefinition.create(mesh, 79, 35);
 	}
 
 	@Override

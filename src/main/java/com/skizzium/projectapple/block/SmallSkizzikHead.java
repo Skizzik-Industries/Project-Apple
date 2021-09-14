@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.tileentity.PA_Skull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -26,5 +27,10 @@ public class SmallSkizzikHead extends SkullBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PA_Skull(pos, state);
+    }
+
+    @Override
+    public String getDescriptionId() {
+        return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
     }
 }

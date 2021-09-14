@@ -10,13 +10,19 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Mod(ProjectApple.MOD_ID)
-public class ProjectApple
-{
+public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
 
+    public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
+
     public ProjectApple() {
+        holiday = checkForHolidays();
+
         PA_Registry.register();
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -27,5 +33,28 @@ public class ProjectApple
 
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+    }
+
+    private static int checkForHolidays() {
+        return 1;
+
+        /*String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
+        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
+        if (currentMonth.equals("10")) {
+            if (currentDay.equals("31"))
+                return 2;
+
+            return 1;
+        }
+        return 0;*/
+    }
+
+    public static String getThemedDescriptionId(String descriptionId) {
+        if (holiday == 1)
+            return "spooktober." + descriptionId;
+        else if (holiday == 2)
+            return "nightmare." + descriptionId;
+
+        return descriptionId;
     }
 }
