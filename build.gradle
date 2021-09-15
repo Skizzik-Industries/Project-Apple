@@ -117,7 +117,7 @@ jar {
 }
 
 curseforge {
-    apiKey = cf_skizzik_token
+    apiKey = cf_token
 
     project {
         id = cf_id
@@ -147,16 +147,18 @@ tasks.getByName("curseforge").doLast {
     try {
         def name = tasks.getByName("curseforge${cf_id}").property('mainArtifact').displayName
         def file = tasks.getByName("curseforge${cf_id}").property('mainArtifact').fileID
-        def webhook = new Webhook(dc_skizzik_webhook, "${mod_name} Gradle Upload")
+        def webhook = new Webhook(dc_mods_news_webhook, "${mod_name} Gradle Upload")
     
         def message = new Message()
+        message.setUsername(mod_name)
+        message.setAvatarUrl(logo_url)
         message.setContent("**${name}** for Minecraft ${mc_version} is out!")
     
         def embed = new Embed()
         embed.addField('Changelog', "Available at ${cf_page}/files/${file}", false)
         embed.addField('Download', "${cf_page}/download/${file}", false)
     
-        embed.setColor(0XB40A1A)
+        embed.setColor(mod_color)
         message.addEmbed(embed)
     
         webhook.sendMessage(message)
