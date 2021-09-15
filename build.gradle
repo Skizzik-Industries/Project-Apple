@@ -92,6 +92,7 @@ dependencies {
     //compileOnly fg.deobf('com.sk89q.worldedit:worldedit-forge-mc1.17.1:7.3.0-SNAPSHOT:dev')
 }
 
+// Credits to SizableShrimp for making this neat thingy that allows me to use variables in my mods.toml and pack.mcmeta
 def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
 def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
 def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version, toml_name: toml_name, mod_license: mod_license, mod_issues: mod_issues,
@@ -184,7 +185,7 @@ tasks.getByName("curseforge").doLast {
         embed.addField('Changelog', "Available at ${cf_page}/files/${file}", false)
         embed.addField('Download', "${cf_page}/download/${file}", false)
     
-        embed.setColor(mod_color)
+        embed.setColor(mod_color as Integer)
         message.addEmbed(embed)
     
         webhook.sendMessage(message)
