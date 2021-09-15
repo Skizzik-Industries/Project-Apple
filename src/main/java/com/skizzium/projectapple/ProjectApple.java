@@ -36,17 +36,15 @@ public class ProjectApple {
     }
 
     private static int checkForHolidays() {
-        return 1;
-
-        /*String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
+        String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
         String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
         if (currentMonth.equals("10")) {
-            if (currentDay.equals("31"))
-                return 2;
+//            if (currentDay.equals("31"))
+//                return 2;
 
             return 1;
         }
-        return 0;*/
+        return 0;
     }
 
     public static String getThemedDescriptionId(String descriptionId) {

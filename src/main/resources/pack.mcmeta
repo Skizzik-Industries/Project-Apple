@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Skizzik & Co. Resources",
+        "description": "${mod_name} Resources",
         "pack_format": 7
     }
 }
