@@ -1,9 +1,12 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -37,16 +40,21 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
     }
 
     public SkizzikSkull(Level world, LivingEntity entity, double x, double y, double z) {
-        super(PA_Entities.SKIZZIK_SKULL, entity, x, y, z, world);
+        super(PA_Entities.SKIZZIK_SKULL.get(), entity, x, y, z, world);
     }
 
     @OnlyIn(Dist.CLIENT)
     public SkizzikSkull(Level world, double d0, double d1, double d2, double d3, double d4, double d5) {
-        super(PA_Entities.SKIZZIK_SKULL, d0, d1, d2, d3, d4, d5, world);
+        super(PA_Entities.SKIZZIK_SKULL.get(), d0, d1, d2, d3, d4, d5, world);
     }
 
     public SkizzikSkull(Level world) {
-        super(PA_Entities.SKIZZIK_SKULL, world);
+        super(PA_Entities.SKIZZIK_SKULL.get(), world);
+    }
+
+    @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
     }
 
     @Override
@@ -102,7 +110,12 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
     }
 
     public static DamageSource skizzikSkull(SkizzikSkull skull, Entity entity) {
-        return (new IndirectEntityDamageSource("skizzikSkull", skull, entity)).setProjectile();
+        return (new IndirectEntityDamageSource("skizzikSkull", skull, entity) {
+            @Override
+            public Component getLocalizedDeathMessage(LivingEntity entity) {
+                return new TranslatableComponent(ProjectApple.getThemedDescriptionId("death.attack.skizzikSkull"));
+            }
+        }).setProjectile();
     }
 
     @Override

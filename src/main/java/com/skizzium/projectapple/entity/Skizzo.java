@@ -1,10 +1,13 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -44,6 +47,11 @@ public class Skizzo extends Monster {
         this.moveControl = new FlyingMoveControl(this, 10, true);
         this.navigation = new FlyingPathNavigation(this, this.getCommandSenderWorld());
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
+    }
+
+    @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
     }
 
     @Override

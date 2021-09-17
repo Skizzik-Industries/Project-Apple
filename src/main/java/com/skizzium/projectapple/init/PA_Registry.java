@@ -11,6 +11,7 @@ import com.skizzium.projectapple.itemgroup.LivingCandyTab;
 import com.skizzium.projectapple.itemgroup.MainSkizzikTab;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -24,6 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class PA_Registry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectApple.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, ProjectApple.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ProjectApple.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ProjectApple.MOD_ID);
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ProjectApple.MOD_ID);
@@ -37,6 +39,7 @@ public class PA_Registry {
     public static void register() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(modEventBus);
+        ENTITIES.register(modEventBus);
         ITEMS.register(modEventBus);
         SOUND_EVENTS.register(modEventBus);
         EFFECTS.register(modEventBus);
@@ -45,11 +48,11 @@ public class PA_Registry {
         BIOMES.register(modEventBus);
 
         PA_Blocks.register();
+        PA_Entities.register();
         PA_Items.register();
         PA_SoundEvents.register();
         PA_Effects.register();
         PA_Fluids.register();
-        PA_Entities.register();
         PA_TileEntities.register();
         PA_Biomes.register();
     }

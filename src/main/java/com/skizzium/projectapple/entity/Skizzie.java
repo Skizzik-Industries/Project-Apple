@@ -1,15 +1,22 @@
 package com.skizzium.projectapple.entity;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -26,6 +33,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.WitherSkull;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 
@@ -33,6 +41,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class Skizzie extends Monster {
+    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(Skizzie.class, EntityDataSerializers.INT);
     private UUID ownerUUID;
     private int ownerNetworkId;
 
@@ -45,6 +54,11 @@ public class Skizzie extends Monster {
     }
 
     @Override
+    protected Component getTypeName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
+    }
+
+    @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return 1.30F;
     }
@@ -53,10 +67,6 @@ public class Skizzie extends Monster {
     public boolean canBeLeashed(Player player) {
         return false;
     }
-
-    //protected SoundEvent getAmbientSound() {
-    //    return SoundEvents.PIG_AMBIENT;
-    //}
 
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.GENERIC_HURT;
@@ -83,7 +93,7 @@ public class Skizzie extends Monster {
 
     @Override
     public boolean isSensitiveToWater() {
-        return true;
+        return ProjectApple.holiday != 1;
     }
 
     @Override
@@ -113,6 +123,14 @@ public class Skizzie extends Monster {
                 .add(Attributes.FLYING_SPEED, 0.3D);
     }
 
+    public void setHolidayVariation(int variation) {
+        this.entityData.set(DATA_HOLIDAY_VARIATION, variation);
+    }
+
+    public int getHolidayVariation() {
+        return this.entityData.get(DATA_HOLIDAY_VARIATION);
+    }
+    
     public void setOwner(@Nullable Entity entity) {
         if (entity != null) {
             this.ownerUUID = entity.getUUID();
@@ -145,18 +163,34 @@ public class Skizzie extends Monster {
     }
 
     @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_HOLIDAY_VARIATION, 0);
+    }
+    
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.SKIZZIK_SELECTOR));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.SKIZZIE_SELECTOR));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
     }
 
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData data, @Nullable CompoundTag nbt) {
+        if (reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER) {
+            this.setHolidayVariation(ProjectApple.holiday);
+        }
+
+        return super.finalizeSpawn(world, difficulty, reason, data, nbt);
+    }
+    
     @Override
     public void baseTick() {
         super.baseTick();
@@ -179,7 +213,7 @@ public class Skizzie extends Monster {
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        return SkizzieConversion.conversion(this, player);
+        return SkizzieConversion.convert(this, player);
     }
 
     @Override

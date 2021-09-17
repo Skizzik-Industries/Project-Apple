@@ -1,8 +1,10 @@
 package com.skizzium.projectapple.itemgroup;
 
-import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
@@ -10,6 +12,11 @@ import net.minecraft.core.NonNullList;
 public class LivingCandyTab extends CreativeModeTab {
     public LivingCandyTab(String label) {
         super(label);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return new TranslatableComponent(ProjectApple.getThemedDescriptionId("itemGroup.living_candy_tab"));
     }
 
     @Override
@@ -53,7 +60,7 @@ public class LivingCandyTab extends CreativeModeTab {
         PA_Blocks.CANDY_SAPLING.get().fillItemCategory(this, items);
         PA_Blocks.CANDY_LEAVES.get().fillItemCategory(this, items);
 
-        PA_Entities.CANDY_PIG_SPAWN_EGG.asItem().fillItemCategory(this, items);
+        PA_Items.CANDY_PIG_SPAWN_EGG.get().fillItemCategory(this, items);
         PA_Blocks.CANDY_NYLIUM.get().fillItemCategory(this, items);
         PA_Blocks.CANDYRACK.get().fillItemCategory(this, items);
 

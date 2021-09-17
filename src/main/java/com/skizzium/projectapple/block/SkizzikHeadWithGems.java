@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.block;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.Skizzik;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -48,6 +49,11 @@ public class SkizzikHeadWithGems extends SkullBlock {
     }
 
     @Override
+    public String getDescriptionId() {
+        return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
+    }
+
+    @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
         super.setPlacedBy(world, pos, state, entity, stack);
         BlockEntity block = world.getBlockEntity(pos);
@@ -75,7 +81,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
                         }
                     }
 
-                    Skizzik skizzik = PA_Entities.SKIZZIK.create(world);
+                    Skizzik skizzik = PA_Entities.SKIZZIK.get().create(world);
                     BlockPos blockPos = patternHelper.getBlock(1, 2, 0).getPos();
 
                     skizzik.moveTo((double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.55D, (double)blockPos.getZ() + 0.5D, patternHelper.getForwards().getAxis() == Direction.Axis.X ? 0.0F : 90.0F, 0.0F);
@@ -117,7 +123,7 @@ public class SkizzikHeadWithGems extends SkullBlock {
                     .where('*', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get())))
                     .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get()).or(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get()))))
                     .where('@', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.COMMAND_BLOCK.get())))
-                    .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
+                    .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(ProjectApple.holiday == 1 ? Blocks.SPRUCE_PLANKS : PA_Blocks.SKIZZIK_FLESH_BLOCK.get()))).build();
         }
 
         return skizzikPatternFull;

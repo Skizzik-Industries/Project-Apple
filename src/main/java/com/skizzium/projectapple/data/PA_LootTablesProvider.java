@@ -2,9 +2,11 @@ package com.skizzium.projectapple.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.DataGenerator;
@@ -66,9 +68,11 @@ public class PA_LootTablesProvider extends LootTableProvider {
 
             dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());
             dropSelf(PA_Blocks.SKIZZIE_STATUE.get());
+            dropSelf(PA_Blocks.SPOOKZIE_STATUE.get());
+
             add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable().withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
-                                                                                           .add(LootItem.lootTableItem(PA_Items.MUSIC_DISC_SKIZZIK.get()))
+                                                                                           .add(LootItem.lootTableItem(ProjectApple.holiday == 1 ? PA_Items.MUSIC_DISC_SPOOKZIK.get() : PA_Items.MUSIC_DISC_SKIZZIK.get()))
                                                                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
                                                                                    .withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
@@ -84,16 +88,16 @@ public class PA_LootTablesProvider extends LootTableProvider {
                                                                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3))))
                                                                                    .withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
-                                                                                           .add(LootItem.lootTableItem(PA_Items.SKIZZIK_BONE.get()))
-                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(5,15))))
-                                                                                   .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantValue.exactly(1))
-                                                                                           .add(LootItem.lootTableItem(PA_Items.SKIZZIK_FLESH.get()))
-                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(5,15))))
-                                                                                   .withPool(LootPool.lootPool()
-                                                                                           .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(PA_Blocks.BROKEN_COMMAND_BLOCK.get()))
-                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))));
+                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                                                                                   .withPool(LootPool.lootPool()
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(ProjectApple.holiday == 1 ? Blocks.AIR.asItem() : PA_Items.SKIZZIK_BONE.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(5,15))))
+                                                                                   .withPool(LootPool.lootPool()
+                                                                                           .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(ProjectApple.holiday == 1 ? Blocks.SPRUCE_PLANKS.asItem() : PA_Items.SKIZZIK_FLESH.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(ProjectApple.holiday == 1 ? UniformGenerator.between(2, 3) : UniformGenerator.between(5, 15)))));
 
             dropSelf(PA_Blocks.CANDY_CANE.get());
             dropSelf(PA_Blocks.CANDY_SIGN.get());
@@ -117,6 +121,8 @@ public class PA_LootTablesProvider extends LootTableProvider {
 
             dropSelf(PA_Blocks.CANDY_TRAPDOOR.get());
             add(PA_Blocks.CANDY_DOOR.get(), BlockLoot::createDoorTable);
+
+            dropSelf(PA_Blocks.CANDY_SAPLING.get());
 
             dropSelf(PA_Blocks.CANDY_LOG.get());
             dropSelf(PA_Blocks.STRIPPED_CANDY_LOG.get());

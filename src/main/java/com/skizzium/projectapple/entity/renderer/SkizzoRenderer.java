@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.entity.renderer;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.Skizzo;
 import com.skizzium.projectapple.entity.layer.SkizzoGlowLayer;
 import com.skizzium.projectapple.entity.model.SkizzoModel;
@@ -13,6 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SkizzoRenderer extends MobRenderer<Skizzo, SkizzoModel<Skizzo>> {
     private static final ResourceLocation SKIZZO_LOCATION = new ResourceLocation("skizzik:textures/entity/skizzik/skizzo.png");
+    private static final ResourceLocation SPOOKZO_LOCATION = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzo.png");
 
     public SkizzoRenderer(EntityRendererProvider.Context renderer) {
         super(renderer, new SkizzoModel<>(renderer.bakeLayer(PA_ModelLayers.SKIZZO_LAYER)), 0.45F);
@@ -20,6 +22,6 @@ public class SkizzoRenderer extends MobRenderer<Skizzo, SkizzoModel<Skizzo>> {
     }
 
     public ResourceLocation getTextureLocation(Skizzo entity) {
-        return SKIZZO_LOCATION;
+        return ProjectApple.holiday == 1 ? SPOOKZO_LOCATION : SKIZZO_LOCATION;
     }
 }

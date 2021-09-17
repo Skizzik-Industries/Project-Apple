@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.entity.layer;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.Skizzo;
 import com.skizzium.projectapple.entity.model.SkizzoModel;
 import net.minecraft.client.renderer.RenderType;
@@ -12,6 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SkizzoGlowLayer<T extends Skizzo> extends EyesLayer<T, SkizzoModel<T>> {
     private static final RenderType SKIZZO_GLOW = RenderType.eyes(new ResourceLocation("skizzik:textures/entity/skizzik/skizzo_glow.png"));
+    private static final RenderType SPOOKZO_GLOW = RenderType.eyes(new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzo_glow.png"));
 
     public SkizzoGlowLayer(RenderLayerParent<T, SkizzoModel<T>> renderer) {
         super(renderer);
@@ -19,6 +21,6 @@ public class SkizzoGlowLayer<T extends Skizzo> extends EyesLayer<T, SkizzoModel<
 
     @Override
     public RenderType renderType() {
-        return SKIZZO_GLOW;
+        return ProjectApple.holiday == 1 ? SPOOKZO_GLOW : SKIZZO_GLOW;
     }
 }

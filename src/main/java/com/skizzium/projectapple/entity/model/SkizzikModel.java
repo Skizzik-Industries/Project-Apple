@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
@@ -84,7 +84,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		root.addOrReplaceChild("top_right_head", CubeListBuilder.create().texOffs(67, 8).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, false), PartPose.offset(17.0F, -31.0F, 0.0F));
 		root.addOrReplaceChild("top_left_head", CubeListBuilder.create().texOffs(67, 8).addBox(-6.0F, -5.0F, -6.0F, 12.0F, 12.0F, 12.0F, false), PartPose.offset(-13.0F, -34.0F, 1.0F));
 
-		return LayerDefinition.create(mesh, 155, 105);
+		return LayerDefinition.create(mesh, 156, 106);
 	}
 
 	@Override

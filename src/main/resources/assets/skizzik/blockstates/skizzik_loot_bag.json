@@ -1,17 +1,47 @@
 {
   "variants": {
-    "facing=north": {
+    "holiday=0,facing=north": {
       "model": "skizzik:block/skizzik_loot_bag"
     },
-    "facing=east": {
+    "holiday=0,facing=east": {
       "model": "skizzik:block/skizzik_loot_bag",
       "y": 90
     },
-    "facing=south": {
+    "holiday=0,facing=south": {
       "model": "skizzik:block/skizzik_loot_bag",
       "y": 180
     },
-    "facing=west": {
+    "holiday=0,facing=west": {
+      "model": "skizzik:block/skizzik_loot_bag",
+      "y": 270
+    },
+    "holiday=1,facing=north": {
+      "model": "skizzik:block/spooktober/skizzik_loot_bag"
+    },
+    "holiday=1,facing=east": {
+      "model": "skizzik:block/spooktober/skizzik_loot_bag",
+      "y": 90
+    },
+    "holiday=1,facing=south": {
+      "model": "skizzik:block/spooktober/skizzik_loot_bag",
+      "y": 180
+    },
+    "holiday=1,facing=west": {
+      "model": "skizzik:block/spooktober/skizzik_loot_bag",
+      "y": 270
+    },
+    "holiday=2,facing=north": {
+      "model": "skizzik:block/skizzik_loot_bag"
+    },
+    "holiday=2,facing=east": {
+      "model": "skizzik:block/skizzik_loot_bag",
+      "y": 90
+    },
+    "holiday=2,facing=south": {
+      "model": "skizzik:block/skizzik_loot_bag",
+      "y": 180
+    },
+    "holiday=2,facing=west": {
       "model": "skizzik:block/skizzik_loot_bag",
       "y": 270
     }
