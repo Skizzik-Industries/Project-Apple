@@ -1,13 +1,13 @@
 package com.skizzium.projectapple.entity;
 
 import com.google.common.collect.ImmutableList;
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
-import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import com.skizzium.projectapple.util.PA_ServerBossEvent;
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -47,7 +46,6 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -57,7 +55,6 @@ import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Supplier;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
@@ -93,7 +90,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     private static final PA_BossEvent.PA_BossBarColor defaultBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
     private static final PA_BossEvent.PA_BossBarColor weakBarColor = PA_BossEvent.PA_BossBarColor.WHITE;
     private static final PA_BossEvent.PA_BossBarColor overpoweredBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
-    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
@@ -339,7 +336,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
     }
-
+    
     @Override
     public void performRangedAttack(LivingEntity entity, float f) {
         this.performRangedAttack(0, entity);
@@ -455,21 +452,27 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
             if (newStage == 0) {
                 this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
+                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1021.0D);
             }
             else if (newStage == 1 || newStage == 2) {
                 this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(4.0D);
+                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
             }
             else if (newStage == 3) {
                 this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(8.0D);
+                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
             }
             else if (newStage == 4) {
                 this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(10.0D);
+                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
             }
             else if (newStage == 5) {
                 this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(12.0D);
+                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
             }
             else if (newStage == 6) {
                 this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
+                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(20.0D);
 
                 if (!world.isClientSide) {
                     world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
@@ -562,12 +565,15 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
 
         if (currentStage == 0 || currentStage == 6) {
+            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.PROGRESS);
             bossBar.setColor(weakBarColor);
         }
         else if (currentStage == 5) {
+            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.NOTCHED_5);
             bossBar.setColor(overpoweredBarColor);
         }
         else {
+            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.NOTCHED_5);
             bossBar.setColor(defaultBarColor);
         }
 

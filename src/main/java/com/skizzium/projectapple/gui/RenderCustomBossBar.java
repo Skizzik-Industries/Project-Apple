@@ -74,14 +74,14 @@ public class RenderCustomBossBar {
     private static void drawBar(PoseStack pose, int xPos, int yPos, PA_LerpingBossEvent bossEvent) {
         GuiComponent.blit(pose, xPos, yPos, 0, 0, bossEvent.getCustomColor().ordinal() * 5 * 2, 182, 5, 256, 256);
         if (bossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS) {
-            GuiComponent.blit(pose, xPos, yPos, 0, 0, 150 + (bossEvent.getOverlay().ordinal() - 1) * 5 * 2, 182, 5, 256, 256);
+            GuiComponent.blit(pose, xPos, yPos, 0, 0, 150 + (bossEvent.getCustomOverlay().ordinal() - 1) * 5 * 2, 182, 5, 256, 256);
         }
 
         int i2 = (int)(bossEvent.getProgress() * 183.0F);
         if (i2 > 0) {
             GuiComponent.blit(pose, xPos, yPos, 0, 0, bossEvent.getCustomColor().ordinal() * 5 * 2 + 5, i2, 5, 256, 256);
             if (bossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS) {
-                GuiComponent.blit(pose, xPos, yPos, 0, 0, 150 + (bossEvent.getOverlay().ordinal() - 1) * 5 * 2 + 5, i2, 5, 256, 256);
+                GuiComponent.blit(pose, xPos, yPos, 0, 0, 150 + (bossEvent.getCustomOverlay().ordinal() - 1) * 5 * 2 + 5, i2, 5, 256, 256);
             }
         }
     }
