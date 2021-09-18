@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.item;
 
 import com.skizzium.projectapple.init.PA_Tags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -42,13 +43,14 @@ public class RainbowSword extends SwordItem {
         InteractionResult retrieval = super.useOn(context);
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        Player entity = context.getPlayer();
+        Player player = context.getPlayer();
+        boolean isCreative = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId()).getGameMode().isCreative();
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
         ItemStack item = context.getItemInHand();
         
-        if (!PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
+        if (isCreative || !PA_Tags.Blocks.RAINBOW_SWORD_IMMUNE.contains(world.getBlockState(pos).getBlock())) {
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 
             if (world instanceof ServerLevel) {
@@ -56,7 +58,9 @@ public class RainbowSword extends SwordItem {
             }
 
             world.playSound(null, new BlockPos(x, y,z), SoundEvents.PORTAL_TRAVEL, SoundSource.PLAYERS, (float) 1, (float) 1);
-            item.hurtAndBreak(1, entity, (breakevent) -> breakevent.broadcastBreakEvent(context.getHand()));
+            if (!isCreative) {
+                item.hurtAndBreak(1, player, (breakevent) -> breakevent.broadcastBreakEvent(context.getHand()));
+            }
         }
         return retrieval;
     }
