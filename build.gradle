@@ -103,7 +103,9 @@ dependencies {
     //implementation group: "com.sk89q.worldedit", name: "worldedit-core", version: "7.3.0-20210815.030932-39", changing: true
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     //implementation fileTree(include: ['*.jar'], dir: 'libs')
+    library 'net.java.dev.jna:jna:4.5.1'
     library 'com.github.Vatuu:discord-rpc:1.6.2'
+    library 'com.github.Vatuu:discord-rpc-binaries:3.4.0'
     //compileOnly fg.deobf('com.sk89q.worldedit:worldedit-forge-mc1.17.1:7.3.0-SNAPSHOT:dev')
 }
 
