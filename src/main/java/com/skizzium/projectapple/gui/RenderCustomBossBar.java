@@ -3,6 +3,7 @@ package com.skizzium.projectapple.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.util.PA_BossEvent;
 import com.skizzium.projectapple.util.PA_LerpingBossEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
@@ -73,14 +74,14 @@ public class RenderCustomBossBar {
     
     private static void drawBar(PoseStack pose, int xPos, int yPos, PA_LerpingBossEvent bossEvent) {
         GuiComponent.blit(pose, xPos, yPos, 0, 0, bossEvent.getCustomColor().ordinal() * 5 * 2, 182, 5, 256, 256);
-        if (bossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS) {
+        if (bossEvent.getCustomOverlay() != PA_BossEvent.PA_BossBarOverlay.PROGRESS) {
             GuiComponent.blit(pose, xPos, yPos, 0, 0, 150 + (bossEvent.getCustomOverlay().ordinal() - 1) * 5 * 2, 182, 5, 256, 256);
         }
 
         int i2 = (int)(bossEvent.getProgress() * 183.0F);
         if (i2 > 0) {
             GuiComponent.blit(pose, xPos, yPos, 0, 0, bossEvent.getCustomColor().ordinal() * 5 * 2 + 5, i2, 5, 256, 256);
-            if (bossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS) {
+            if (bossEvent.getCustomOverlay() != PA_BossEvent.PA_BossBarOverlay.PROGRESS) {
                 GuiComponent.blit(pose, xPos, yPos, 0, 0, 150 + (bossEvent.getCustomOverlay().ordinal() - 1) * 5 * 2 + 5, i2, 5, 256, 256);
             }
         }

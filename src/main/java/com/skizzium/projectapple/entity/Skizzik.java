@@ -416,10 +416,10 @@ public class Skizzik extends Monster implements RangedAttackMob {
         float health = this.getHealth();
         int currentStage = this.getStage();
         int newStage = health > 1020 ? 0 :
-                            health > 870 ? 1 :
-                                    health > 670 ? 2 :
-                                            health > 470 ? 3 :
-                                                    health > 270 ? 4 :
+                            health > 820 ? 1 :
+                                    health > 620 ? 2 :
+                                            health > 420 ? 3 :
+                                                    health > 220 ? 4 :
                                                             health > 20 ? 5 :
                                                                     6;
 
@@ -568,13 +568,14 @@ public class Skizzik extends Monster implements RangedAttackMob {
             bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.PROGRESS);
             bossBar.setColor(weakBarColor);
         }
-        else if (currentStage == 5) {
-            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.NOTCHED_5);
-            bossBar.setColor(overpoweredBarColor);
-        }
         else {
+            if (currentStage == 5) {
+                bossBar.setColor(overpoweredBarColor);
+            }
+            else {
+                bossBar.setColor(defaultBarColor);
+            }
             bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.NOTCHED_5);
-            bossBar.setColor(defaultBarColor);
         }
 
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
@@ -1056,22 +1057,27 @@ public class Skizzik extends Monster implements RangedAttackMob {
         float health = this.getHealth();
         int stage = this.getStage();
 
-        if (stage == 5 && health <= 269) {
+        if (stage == 5 && health <= 219) {
             if (this.tickCount % 20 == 0) {
                 this.heal(1.0F);
             }
         }
-        else if ((stage == 4 && health <= 469.5) || (stage == 3 && health <= 669.5)) {
+        else if ((stage == 4 && health <= 419.5) || (stage == 3 && health <= 619.5)) {
             if (this.tickCount % 30 == 0) {
                 this.heal(0.5F);
             }
         }
-        else if ((stage == 2 && health <= 869.5) || (stage == 1 && health <= 1019.5)) {
+        else if ((stage == 2 && health <= 819.5) || (stage == 1 && health <= 1019.5)) {
             if (this.tickCount % 40 == 0) {
                 this.heal(0.5F);
             }
         }
 
-        this.bossBar.setProgress(this.getHealth() / this.getMaxHealth());
+        if (stage == 5 && health >= 210) {
+            this.bossBar.setProgress(210 / this.getMaxHealth());
+        }
+        else {
+            this.bossBar.setProgress(this.getHealth() / this.getMaxHealth());
+        }
     }
 }

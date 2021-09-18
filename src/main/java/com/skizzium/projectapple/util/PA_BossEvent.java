@@ -77,7 +77,7 @@ public abstract class PA_BossEvent {
     }
 
     public static enum PA_BossBarColor {
-        RED("red",ChatFormatting.DARK_RED),
+        RED("red", ChatFormatting.DARK_RED),
         ORANGE("orange", ChatFormatting.GOLD),
         GOLD("gold", ChatFormatting.GOLD),
         YELLOW("yellow", ChatFormatting.YELLOW),
