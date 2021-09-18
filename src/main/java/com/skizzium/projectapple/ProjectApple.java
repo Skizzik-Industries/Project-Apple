@@ -5,6 +5,8 @@ import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -36,6 +38,8 @@ public class ProjectApple {
     private static List<ResourceLocation> rainbowSwordImmuneBlocksList;
 
     public ProjectApple() {
+        DiscordRPC.discordInitialize("878393951994929184", new DiscordEventHandlers(), true);
+        
         holiday = checkForHolidays();
 
         PA_Registry.register();
