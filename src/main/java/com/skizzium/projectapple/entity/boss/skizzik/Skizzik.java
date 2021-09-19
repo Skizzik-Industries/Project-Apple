@@ -88,11 +88,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     private int spawnSkizzieTicks;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
-
-    private static final PA_BossEvent.PA_BossBarColor defaultBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
-    private static final PA_BossEvent.PA_BossBarColor weakBarColor = PA_BossEvent.PA_BossBarColor.WHITE;
-    private static final PA_BossEvent.PA_BossBarColor overpoweredBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
-    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     private boolean preview = false;
     
@@ -576,23 +572,11 @@ public class Skizzik extends Monster implements RangedAttackMob {
             this.goalSelector.addGoal(7, lookRandomlyGoal);
         }
 
-        if (currentStage == 0 || currentStage == 6) {
-            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.PROGRESS);
-            bossBar.setColor(weakBarColor);
-        }
-        else {
-            if (currentStage == 5) {
-                bossBar.setColor(overpoweredBarColor);
-            }
-            else {
-                bossBar.setColor(defaultBarColor);
-            }
-            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.NOTCHED_5);
-        }
-
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
 
         this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
+        this.bossBar.setColor(this.stageManager.getCurrentStage().barColor());
+        this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
 
         this.setStage(newStage);
     }
