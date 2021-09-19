@@ -593,29 +593,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
 
         this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
-        
-//        if (this.hasCustomName()) {
-//            if (currentStage == 0) {
-//                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
-//            }
-//            else if (currentStage <= 5) {
-//                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
-//            }
-//            else {
-//                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
-//            }
-//        }
-//        else {
-//            if (currentStage == 0) {
-//                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
-//            }
-//            else if (currentStage <= 5) {
-//                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
-//            }
-//            else {
-//                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
-//            }
-//        }
 
         this.setStage(newStage);
     }
