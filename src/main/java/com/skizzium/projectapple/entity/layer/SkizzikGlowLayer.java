@@ -3,7 +3,7 @@ package com.skizzium.projectapple.entity.layer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

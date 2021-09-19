@@ -1,7 +1,8 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -67,7 +68,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     private static final EntityDataAccessor<Integer> DATA_TARGET_E = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
-    private static final EntityDataAccessor<Integer> DATA_ID_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> DATA_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
 
     private int activeHeads = 4;
 
@@ -82,6 +83,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     //private final Skizzo[] skizzos = new Skizzo[4];
 
+    public final SkizzikStageManager stageManager;
     private int destroyBlocksTick;
     private int spawnSkizzieTicks;
 
@@ -96,6 +98,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
+        this.stageManager = new SkizzikStageManager(this);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
@@ -233,11 +236,11 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     public int getStage() {
-        return this.entityData.get(DATA_ID_STAGE);
+        return this.entityData.get(DATA_STAGE);
     }
 
     public void setStage(int stage) {
-        this.entityData.set(DATA_ID_STAGE, stage);
+        this.entityData.set(DATA_STAGE, stage);
     }
 
     public boolean getPreview() {
@@ -319,7 +322,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     protected void defineSynchedData() {
         super.defineSynchedData();
 
-        this.entityData.define(DATA_ID_STAGE, 0);
+        this.entityData.define(DATA_STAGE, 0);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -589,28 +592,30 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
 
-        if (this.hasCustomName()) {
-            if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
-            }
-            else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
-            }
-            else {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
-            }
-        }
-        else {
-            if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
-            }
-            else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
-            }
-            else {
-                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
-            }
-        }
+        this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
+        
+//        if (this.hasCustomName()) {
+//            if (currentStage == 0) {
+//                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
+//            }
+//            else if (currentStage <= 5) {
+//                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
+//            }
+//            else {
+//                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
+//            }
+//        }
+//        else {
+//            if (currentStage == 0) {
+//                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
+//            }
+//            else if (currentStage <= 5) {
+//                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
+//            }
+//            else {
+//                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
+//            }
+//        }
 
         this.setStage(newStage);
     }

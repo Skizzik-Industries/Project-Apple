@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity.model;
 
-import com.skizzium.projectapple.entity.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

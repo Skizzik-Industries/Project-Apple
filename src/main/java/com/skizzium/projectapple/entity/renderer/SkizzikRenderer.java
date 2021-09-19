@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.layer.SkizzikGlowLayer;
 import com.skizzium.projectapple.entity.model.*;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
