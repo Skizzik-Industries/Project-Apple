@@ -634,7 +634,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     source == DamageSource.LAVA ||
                     source == DamageSource.ON_FIRE ||
                     source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER) {
+                    source == DamageSource.WITHER ||
+                    source == DamageSource.STALAGMITE) {
                 return false;
             }
         }
@@ -649,7 +650,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     source == DamageSource.LAVA ||
                     source == DamageSource.ON_FIRE ||
                     source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER) {
+                    source == DamageSource.WITHER ||
+                    source == DamageSource.STALAGMITE) {
                 return false;
             }
         }
@@ -666,7 +668,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     source == DamageSource.ON_FIRE ||
                     source.getDirectEntity() instanceof ThrownPotion ||
                     source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER) {
+                    source == DamageSource.WITHER ||
+                    source == DamageSource.STALAGMITE) {
                 return false;
             }
         }
@@ -684,7 +687,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     source.getDirectEntity() instanceof ThrownPotion ||
                     source == DamageSource.SWEET_BERRY_BUSH ||
                     source.getDirectEntity() instanceof ThrownTrident ||
-                    source == DamageSource.WITHER) {
+                    source == DamageSource.WITHER ||
+                    source == DamageSource.STALAGMITE) {
                 return false;
             }
         }
@@ -703,7 +707,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     source.getDirectEntity() instanceof ThrownPotion ||
                     source == DamageSource.SWEET_BERRY_BUSH ||
                     source.getDirectEntity() instanceof ThrownTrident ||
-                    source == DamageSource.WITHER) {
+                    source == DamageSource.WITHER ||
+                    source == DamageSource.STALAGMITE) {
                 return false;
             }
         }
@@ -713,6 +718,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
                     source == DamageSource.IN_FIRE ||
                     source == DamageSource.LAVA ||
                     source == DamageSource.ON_FIRE) {
+                return false;
+            }
+            
+            if (preview &&
+                    source != DamageSource.CRAMMING &&
+                    source != DamageSource.OUT_OF_WORLD &&
+                    source != DamageSource.MAGIC) {
                 return false;
             }
         }
@@ -1068,6 +1080,11 @@ public class Skizzik extends Monster implements RangedAttackMob {
             }
         }
 
-        this.bossBar.setProgress((this.getHealth() - 20) / (this.getMaxHealth() - 20));
+        if (stage != 6) {
+            this.bossBar.setProgress((this.getHealth() - 20) / (this.getMaxHealth() - 20));
+        }
+        else {
+            this.bossBar.setProgress(this.getHealth() / this.getMaxHealth());
+        }
     }
 }
