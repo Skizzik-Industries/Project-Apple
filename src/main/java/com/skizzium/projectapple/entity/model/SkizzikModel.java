@@ -226,7 +226,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 	}
 
 	private static <T extends Skizzik> void setupHeadRotation(T entity, ModelPart model, int i) {
-		if (model.visible) {
+		if (!entity.getPreview() && model.visible) {
 			model.yRot = (entity.getHeadYRot(i) - entity.yBodyRot) * 0.017453292F;
 			model.xRot = entity.getHeadXRot(i) * 0.017453292F;
 		}

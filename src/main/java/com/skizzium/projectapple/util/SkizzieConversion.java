@@ -70,16 +70,16 @@ public class SkizzieConversion {
             }
 
             if (to instanceof FriendlySkizzie && from instanceof Skizzie) {
-                ((FriendlySkizzie) to).setHolidayVariation(((Skizzie) from).getHolidayVariation());
+                ((FriendlySkizzie) to).setHoliday(((Skizzie) from).getHoliday());
             }
             else if (to instanceof FriendlySkizzie) {
-                ((FriendlySkizzie) to).setHolidayVariation(((FriendlySkizzie) from).getHolidayVariation());
+                ((FriendlySkizzie) to).setHoliday(((FriendlySkizzie) from).getHoliday());
             }
             else if (to instanceof Skizzie && from instanceof FriendlySkizzie) {
-                ((Skizzie) to).setHolidayVariation(((FriendlySkizzie) from).getHolidayVariation());
+                ((Skizzie) to).setHoliday(((FriendlySkizzie) from).getHoliday());
             }
             else if (to instanceof Skizzie) {
-                ((Skizzie) to).setHolidayVariation(((Skizzie) from).getHolidayVariation());
+                ((Skizzie) to).setHoliday(((Skizzie) from).getHoliday());
             }
             
             to.moveTo(fromX, fromY, fromZ, from.xRotO, from.yRotO);

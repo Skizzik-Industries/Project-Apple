@@ -2,13 +2,11 @@ package com.skizzium.projectapple.entity.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
@@ -30,10 +28,10 @@ public class WitchSkizzieGlowLayer<T extends LivingEntity> extends RenderLayer<T
 
     private ResourceLocation getTexture(T entity) {
         if (entity instanceof FriendlyWitchSkizzie) {
-            return ((FriendlyWitchSkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_WITCH_SPOOKZIE_GLOW : FRIENDLY_WITCH_SKIZZIE_GLOW;
+            return ((FriendlyWitchSkizzie) entity).getHoliday() == 1 ? FRIENDLY_WITCH_SPOOKZIE_GLOW : FRIENDLY_WITCH_SKIZZIE_GLOW;
         }
 
-        return ((WitchSkizzie) entity).getHolidayVariation() == 1 ? WITCH_SPOOKZIE_GLOW : WITCH_SKIZZIE_GLOW;
+        return ((WitchSkizzie) entity).getHoliday() == 1 ? WITCH_SPOOKZIE_GLOW : WITCH_SKIZZIE_GLOW;
     }
 
     @Override

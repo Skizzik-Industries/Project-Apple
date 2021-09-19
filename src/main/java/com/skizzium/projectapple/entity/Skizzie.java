@@ -41,7 +41,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class Skizzie extends Monster {
-    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(Skizzie.class, EntityDataSerializers.INT);
+    private static EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(Skizzie.class, EntityDataSerializers.INT);
     private UUID ownerUUID;
     private int ownerNetworkId;
 
@@ -123,12 +123,12 @@ public class Skizzie extends Monster {
                 .add(Attributes.FLYING_SPEED, 0.3D);
     }
 
-    public void setHolidayVariation(int variation) {
-        this.entityData.set(DATA_HOLIDAY_VARIATION, variation);
+    public void setHoliday(int variation) {
+        this.entityData.set(DATA_HOLIDAY, variation);
     }
 
-    public int getHolidayVariation() {
-        return this.entityData.get(DATA_HOLIDAY_VARIATION);
+    public int getHoliday() {
+        return this.entityData.get(DATA_HOLIDAY);
     }
     
     public void setOwner(@Nullable Entity entity) {
@@ -165,7 +165,7 @@ public class Skizzie extends Monster {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_HOLIDAY_VARIATION, 0);
+        this.entityData.define(DATA_HOLIDAY, 0);
     }
     
     @Override
@@ -185,7 +185,7 @@ public class Skizzie extends Monster {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData data, @Nullable CompoundTag nbt) {
         if (reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER) {
-            this.setHolidayVariation(ProjectApple.holiday);
+            this.setHoliday(ProjectApple.holiday);
         }
 
         return super.finalizeSpawn(world, difficulty, reason, data, nbt);

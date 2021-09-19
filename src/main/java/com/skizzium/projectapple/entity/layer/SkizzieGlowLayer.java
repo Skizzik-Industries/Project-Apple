@@ -2,7 +2,6 @@ package com.skizzium.projectapple.entity.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.model.SkizzieModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -33,10 +32,10 @@ public class SkizzieGlowLayer<T extends LivingEntity> extends RenderLayer<T, Ski
 
     private ResourceLocation getTexture(T entity) {
         if (entity instanceof FriendlySkizzie) {
-            return ((FriendlySkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_SPOOKZIE_GLOW : FRIENDLY_SKIZZIE_GLOW;
+            return ((FriendlySkizzie) entity).getHoliday() == 1 ? FRIENDLY_SPOOKZIE_GLOW : FRIENDLY_SKIZZIE_GLOW;
         }
 
-        if (((Skizzie) entity).getHolidayVariation() == 1) {
+        if (((Skizzie) entity).getHoliday() == 1) {
             return entity instanceof KaboomSkizzie ? KABOOM_SPOOKZIE_GLOW :
                    entity instanceof CorruptedSkizzie ? CORRUPTED_SPOOKZIE_GLOW : SPOOKZIE_GLOW;
         }
