@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class SkizzikStage<T extends SkizzikStageInterface> {
     private static SkizzikStage<?>[] stages = new SkizzikStage[0];
     public static final SkizzikStage<SkizzikSleeping> SLEEPING = create(SkizzikSleeping.class);
+    public static final SkizzikStage<SkizzikFinishHim> FINISH_HIM = create(SkizzikFinishHim.class);
     
     private final Class<? extends SkizzikStageInterface> stageClass;
     private final int id;
