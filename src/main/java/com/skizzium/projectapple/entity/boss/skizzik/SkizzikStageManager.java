@@ -13,15 +13,29 @@ public class SkizzikStageManager {
         this.setStage(SkizzikStage.SLEEPING);
     }
 
-    public void setStage(SkizzikStage<?> phase) {
-        if (this.currentStage == null || phase != this.currentStage.getStage()) {
+    public void updateStage() {
+        float health = skizzik.getHealth();
+        int newStageId = health > 1020 ? 0 :
+                            health > 820 ? 1 :
+                                health > 620 ? 2 :
+                                    health > 420 ? 3 :
+                                        health > 220 ? 4 :
+                                            health > 20 ? 5 : 6;
+        
+        if (newStageId != this.getCurrentStage().getStage().getId()) {
+            this.setStage(SkizzikStage.getById(newStageId));
+        }
+    }
+    
+    public void setStage(SkizzikStage<?> stage) {
+        if (this.currentStage == null || stage != this.currentStage.getStage()) {
             if (this.currentStage != null) {
                 this.currentStage.end();
             }
 
-            this.currentStage = this.getStage(phase);
+            this.currentStage = this.getStage(stage);
             if (!this.skizzik.level.isClientSide) {
-                this.skizzik.getEntityData().set(Skizzik.DATA_STAGE, phase.getId());
+                this.skizzik.getEntityData().set(Skizzik.DATA_STAGE, stage.getId());
             }
             
             this.currentStage.begin();

@@ -3,6 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -37,6 +38,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.boss.enderdragon.phases.EnderDragonPhase;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -326,20 +328,28 @@ public class Skizzik extends Monster implements RangedAttackMob {
         this.entityData.define(DATA_TARGET_D, 0);
         this.entityData.define(DATA_TARGET_E, 0);
     }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        if (DATA_STAGE.equals(key) && this.level.isClientSide) {
+            this.stageManager.setStage(SkizzikStage.getById(this.getEntityData().get(DATA_STAGE)));
+        }
+
+        super.onSyncedDataUpdated(key);
+    }
     
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
 
+        nbt.putInt("Stage", this.stageManager.getCurrentStage().getStage().getId());
         nbt.putBoolean("Preview", this.getPreview());
-        nbt.putInt("Stage", this.getStage());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
-        this.setStage(nbt.getInt("Stage"));
+        this.stageManager.setStage(SkizzikStage.getById(nbt.getInt("Stage")));
         this.setPreview(nbt.getBoolean("Preview"));
 
         if (this.hasCustomName()) {
@@ -414,7 +424,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
     @Override
     public void baseTick() {
         super.baseTick();
-
+        
+        this.stageManager.updateStage();
         this.refreshDimensions();
 
         activeHeads = this.getStage() == 1 ? 4 :
