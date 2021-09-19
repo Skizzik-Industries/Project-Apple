@@ -38,7 +38,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.boss.enderdragon.phases.EnderDragonPhase;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -477,30 +476,10 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 this.setHealth(1020);
             }
 
-            if (newStage == 0) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1021.0D);
-            }
-            else if (newStage == 1 || newStage == 2) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(4.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 3) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(8.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 4) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(10.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 5) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(12.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 6) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(20.0D);
-
+            this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
+            this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
+            
+            if (newStage == 6) {
                 if (!world.isClientSide) {
                     world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
                     ((ServerLevel) world).setDayTime(1000);

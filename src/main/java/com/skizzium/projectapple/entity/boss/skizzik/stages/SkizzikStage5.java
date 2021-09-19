@@ -13,7 +13,12 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     public PA_BossEvent.PA_BossBarColor barColor() {
         return ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
     }
-    
+
+    @Override
+    public int armorValue() {
+        return 12;
+    }
+
     @Override
     public SkizzikStage<? extends SkizzikStageInterface> getStage() {
         return SkizzikStage.STAGE_5;

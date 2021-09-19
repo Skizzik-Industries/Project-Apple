@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
+import com.skizzium.projectapple.entity.boss.skizzik.SkizzikStageManager;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 
@@ -10,9 +11,13 @@ public interface SkizzikStageInterface {
 
     PA_BossEvent.PA_BossBarOverlay barOverlay();
     
-    void begin();
+    int armorValue();
 
-    void end();
+    int maxHealth();
+    
+    void begin(SkizzikStageManager stageManager);
+
+    void end(SkizzikStageManager stageManager);
     
     SkizzikStage<? extends SkizzikStageInterface> getStage();
 }

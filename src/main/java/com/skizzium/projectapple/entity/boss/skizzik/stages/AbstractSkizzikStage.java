@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.SkizzikStageManager;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -29,10 +30,20 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public void begin() {
+    public int armorValue() {
+        return 4;
     }
 
     @Override
-    public void end() {
+    public int maxHealth() {
+        return 1020;
+    }
+
+    @Override
+    public void begin(SkizzikStageManager stageManager) {
+    }
+
+    @Override
+    public void end(SkizzikStageManager stageManager) {
     }
 }

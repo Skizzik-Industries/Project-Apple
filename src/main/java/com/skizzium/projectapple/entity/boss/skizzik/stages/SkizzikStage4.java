@@ -6,7 +6,12 @@ public class SkizzikStage4 extends AbstractSkizzikStage {
     public SkizzikStage4(Skizzik skizzik) {
         super(skizzik);
     }
-    
+
+    @Override
+    public int armorValue() {
+        return 10;
+    }
+
     @Override
     public SkizzikStage<? extends SkizzikStageInterface> getStage() {
         return SkizzikStage.STAGE_4;

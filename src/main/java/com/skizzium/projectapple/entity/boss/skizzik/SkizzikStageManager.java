@@ -7,6 +7,7 @@ public class SkizzikStageManager {
     private final Skizzik skizzik;
     private final SkizzikStageInterface[] stages = new SkizzikStageInterface[SkizzikStage.getCount()];
     private SkizzikStageInterface currentStage;
+    private SkizzikStageInterface previousStage;
     
     public SkizzikStageManager(Skizzik skizzik) {
         this.skizzik = skizzik;
@@ -30,20 +31,26 @@ public class SkizzikStageManager {
     public void setStage(SkizzikStage<?> stage) {
         if (this.currentStage == null || stage != this.currentStage.getStage()) {
             if (this.currentStage != null) {
-                this.currentStage.end();
+                this.currentStage.end(this);
             }
 
+            this.previousStage = this.currentStage;
             this.currentStage = this.getStage(stage);
+            
             if (!this.skizzik.level.isClientSide) {
                 this.skizzik.getEntityData().set(Skizzik.DATA_STAGE, stage.getId());
             }
             
-            this.currentStage.begin();
+            this.currentStage.begin(this);
         }
     }
 
     public SkizzikStageInterface getCurrentStage() {
         return this.currentStage;
+    }
+
+    public SkizzikStageInterface getPreviousStage() {
+        return this.previousStage;
     }
 
     public <T extends SkizzikStageInterface> T getStage(SkizzikStage<T> phase) {

@@ -24,7 +24,17 @@ public class SkizzikSleeping extends AbstractSkizzikStage {
     public PA_BossEvent.PA_BossBarOverlay barOverlay() {
         return PA_BossEvent.PA_BossBarOverlay.PROGRESS;
     }
-    
+
+    @Override
+    public int armorValue() {
+        return 0;
+    }
+
+    @Override
+    public int maxHealth() {
+        return 1021;
+    }
+
     @Override
     public SkizzikStage<? extends SkizzikStageInterface> getStage() {
         return SkizzikStage.SLEEPING;
