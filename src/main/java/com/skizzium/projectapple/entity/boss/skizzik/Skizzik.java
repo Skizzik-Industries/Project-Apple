@@ -39,9 +39,6 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -516,120 +513,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        int stage = this.getStage();
-
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
         Level world = this.getCommandSenderWorld();
-
-        if (stage == 0 || stage == 1) {
-            if (source == DamageSource.CACTUS ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 2) {
-            if (source == DamageSource.ANVIL ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 3) {
-            if (source == DamageSource.ANVIL ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.DRAGON_BREATH ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source.getDirectEntity() instanceof ThrownPotion ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 4) {
-            if (source == DamageSource.ANVIL ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.DRAGON_BREATH ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source.getDirectEntity() instanceof ThrownPotion ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source.getDirectEntity() instanceof ThrownTrident ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 5) {
-            if (source == DamageSource.ANVIL ||
-                    source.getDirectEntity() instanceof Arrow ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.DRAGON_BREATH ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source.getDirectEntity() instanceof ThrownPotion ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source.getDirectEntity() instanceof ThrownTrident ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 6) {
-            if (source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE) {
-                return false;
-            }
-            
-            if (preview &&
-                    source != DamageSource.CRAMMING &&
-                    source != DamageSource.OUT_OF_WORLD &&
-                    source != DamageSource.MAGIC) {
-                return false;
-            }
-        }
-
+        
         Entity entity = source.getEntity();
-        if (!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
+        if (!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType() && SkizzikStage.isImmune(this, source)) {
             return false;
         }
         else {
