@@ -1,8 +1,8 @@
-package com.skizzium.projectapple.entity.layer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.Skizzo;
-import com.skizzium.projectapple.entity.model.SkizzoModel;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;

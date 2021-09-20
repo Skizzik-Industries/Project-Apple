@@ -1,9 +1,9 @@
-package com.skizzium.projectapple.entity.renderer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.layer.SkizzikGlowLayer;
-import com.skizzium.projectapple.entity.model.*;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzikModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.SkizzikGlowLayer;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

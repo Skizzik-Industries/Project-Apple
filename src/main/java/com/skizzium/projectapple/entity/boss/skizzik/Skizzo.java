@@ -1,53 +1,50 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.FriendlySkizzie;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.WitherSkull;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class Skizzie extends Monster {
-    private static EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(Skizzie.class, EntityDataSerializers.INT);
+public class Skizzo extends Monster {
     private UUID ownerUUID;
     private int ownerNetworkId;
 
-    public Skizzie(EntityType<? extends Skizzie> entity, Level world) {
+    public Skizzo(EntityType<? extends Skizzo> entity, Level world) {
         super(entity, world);
-        this.xpReward = 7;
+        this.xpReward = 25;
         this.moveControl = new FlyingMoveControl(this, 10, true);
         this.navigation = new FlyingPathNavigation(this, this.getCommandSenderWorld());
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
@@ -60,7 +57,7 @@ public class Skizzie extends Monster {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.30F;
+        return 1.75F;
     }
 
     @Override
@@ -93,12 +90,15 @@ public class Skizzie extends Monster {
 
     @Override
     public boolean isSensitiveToWater() {
-        return ProjectApple.holiday != 1;
+        return true;
     }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source == DamageSource.DRAGON_BREATH ||
+        if (source == DamageSource.ANVIL ||
+                source.getDirectEntity() instanceof Arrow ||
+                source == DamageSource.CACTUS ||
+                source == DamageSource.DRAGON_BREATH ||
                 source == DamageSource.FALL ||
                 source.isExplosion() ||
                 source == DamageSource.LIGHTNING_BOLT ||
@@ -106,8 +106,10 @@ public class Skizzie extends Monster {
                 source == DamageSource.IN_FIRE ||
                 source == DamageSource.LAVA ||
                 source == DamageSource.ON_FIRE ||
-                source == DamageSource.WITHER ||
-                source.getDirectEntity() instanceof WitherSkull) {
+                source.getDirectEntity() instanceof ThrownPotion ||
+                source == DamageSource.SWEET_BERRY_BUSH ||
+                source.getDirectEntity() instanceof ThrownTrident ||
+                source == DamageSource.WITHER) {
             return false;
         }
         return super.hurt(source, amount);
@@ -115,22 +117,24 @@ public class Skizzie extends Monster {
 
     public static AttributeSupplier.Builder buildAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 8.0D)
-                .add(Attributes.MAX_HEALTH, 20.0D)
-                .add(Attributes.ARMOR, 3.0D)
+                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.FLYING_SPEED, 0.3D);
+                .add(Attributes.MOVEMENT_SPEED, 0.2D)
+                .add(Attributes.FLYING_SPEED, 0.2D);
     }
 
-    public void setHoliday(int variation) {
-        this.entityData.set(DATA_HOLIDAY, variation);
+    protected void registerGoals() {
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.SKIZZIK_SELECTOR));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
-    public int getHoliday() {
-        return this.entityData.get(DATA_HOLIDAY);
-    }
-    
     public void setOwner(@Nullable Entity entity) {
         if (entity != null) {
             this.ownerUUID = entity.getUUID();
@@ -163,57 +167,25 @@ public class Skizzie extends Monster {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_HOLIDAY, 0);
-    }
-    
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.SKIZZIE_SELECTOR));
-        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-    }
-
-    @Nullable
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData data, @Nullable CompoundTag nbt) {
-        if (reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER) {
-            this.setHoliday(ProjectApple.holiday);
-        }
-
-        return super.finalizeSpawn(world, difficulty, reason, data, nbt);
-    }
-    
-    @Override
     public void baseTick() {
         super.baseTick();
         this.setNoGravity(true);
-    }
 
-    @Override
-    public void die(DamageSource source) {
-        super.die(source);
-
-        Level world = this.getCommandSenderWorld();
-        double x = this.getX();
+        /* double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
+        World world = this.getCommandSenderWorld();
 
-        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
-        lightning.moveTo(Vec3.atCenterOf(new BlockPos(x, y, z)));
-        world.addFreshEntity(lightning);
-    }
-
-    @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        return SkizzieConversion.convert(this, player);
+        BlockPos[] blockPositions = {new BlockPos(x, y, z), new BlockPos(x + 1, y, z), new BlockPos(x - 1, y, z), new BlockPos(x, y, z + 1), new BlockPos(x, y, z - 1), new BlockPos(x + 1, y, z + 1), new BlockPos(x + 1, y, z - 1), new BlockPos(x - 1, y, z + 1), new BlockPos(x - 1, y, z - 1)};
+        for (BlockPos pos : blockPositions) {
+            Block blockBelow = world.getBlockState(pos.below()).getBlock();
+            if (blockBelow != Blocks.FIRE &&
+                blockBelow != Blocks.AIR &&
+                blockBelow != Blocks.CAVE_AIR &&
+                blockBelow != Blocks.VOID_AIR) {
+                world.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
+            }
+        } */
     }
 
     @Override
@@ -238,5 +210,19 @@ public class Skizzie extends Monster {
                 player.setSecondsOnFire(10);
             }
         }
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+
+        Level world = this.getCommandSenderWorld();
+        double x = this.getX();
+        double y = this.getY();
+        double z = this.getZ();
+
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
+        lightning.moveTo(Vec3.atCenterOf(new BlockPos(x, y, z)));
+        world.addFreshEntity(lightning);
     }
 }

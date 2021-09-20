@@ -1,9 +1,10 @@
-package com.skizzium.projectapple.entity.layer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.skizzium.projectapple.entity.*;
-import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

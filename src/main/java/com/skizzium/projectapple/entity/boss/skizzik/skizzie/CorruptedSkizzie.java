@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik.skizzie;
 
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Effects;

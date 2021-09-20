@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.layer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
