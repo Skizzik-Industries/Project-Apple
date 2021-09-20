@@ -431,6 +431,11 @@ public class Skizzik extends Monster implements RangedAttackMob {
         this.refreshDimensions();
         this.stageManager.updateStage();
 
+        int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
+        this.activeHeads = currentStageId == 1 ? 4 :
+                                currentStageId == 2 ? 3 :
+                                        currentStageId == 3 ? 2 :
+                                                currentStageId == 4 ? 1 : 0;
         Level world = this.level;
 
         this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
@@ -459,27 +464,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 }
             }
         }
-        
-        // Old
-        activeHeads = this.getStage() == 1 ? 4 :
-                            this.getStage() == 2 ? 3 :
-                                    this.getStage() == 3 ? 2 :
-                                            this.getStage() == 4 ? 1 :
-                                                    0;
-
-        float health = this.getHealth();
-        int currentStage = this.getStage();
-        int newStage = health > 1020 ? 0 :
-                            health > 820 ? 1 :
-                                    health > 620 ? 2 :
-                                            health > 420 ? 3 :
-                                                    health > 220 ? 4 :
-                                                            health > 20 ? 5 :
-                                                                    6;
-        
-        //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
-
-        this.setStage(newStage);
     }
 
     @Override
