@@ -48,6 +48,11 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
+    public int destroyBlocksTick() {
+        return 35;
+    }
+
+    @Override
     public void begin(SkizzikStageManager stageManager) {
         int id = this.getStage().getId();
         int previousId = stageManager.getPreviousStage().getStage().getId();
@@ -87,6 +92,21 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                     } */
                 }
             }
+        }
+
+        if (skizzik.getPreview()) {
+            skizzik.goalSelector.removeAllGoals();
+        }
+        else {
+            skizzik.goalSelector.removeGoal(skizzik.avoidPlayerGoal);
+            skizzik.goalSelector.removeGoal(skizzik.panicGoal);
+
+            skizzik.targetSelector.addGoal(1, skizzik.hurtGoal);
+            skizzik.targetSelector.addGoal(2, skizzik.attackGoal);
+            skizzik.goalSelector.addGoal(2, skizzik.rangedAttackGoal);
+            skizzik.goalSelector.addGoal(5, skizzik.avoidWaterGoal);
+            skizzik.goalSelector.addGoal(6, skizzik.lookGoal);
+            skizzik.goalSelector.addGoal(7, skizzik.lookRandomlyGoal);
         }
     }
     

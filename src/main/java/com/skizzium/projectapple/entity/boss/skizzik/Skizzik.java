@@ -85,6 +85,16 @@ public class Skizzik extends Monster implements RangedAttackMob {
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
     private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
+    public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
+    public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
+
+    public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
+    public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
+    public RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
+    public WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
+    public LookAtPlayerGoal lookGoal = new LookAtPlayerGoal(this, Player.class, 8.0F);
+    public RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
+
     private boolean preview = false;
     
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
@@ -425,6 +435,10 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
         this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
+
+        this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
+        this.bossBar.setColor(this.stageManager.getCurrentStage().barColor());
+        this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
         
         if (this.preview) {
             killAllSkizzies(world, false);
@@ -462,51 +476,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                                     health > 220 ? 4 :
                                                             health > 20 ? 5 :
                                                                     6;
-
-        AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
-        PanicGoal panicGoal = new PanicGoal(this, 1.5D);
-
-        HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
-        NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
-        RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
-        WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
-        LookAtPlayerGoal lookGoal = new LookAtPlayerGoal(this, Player.class, 8.0F);
-        RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
-
-        if (currentStage == 0 || this.preview) {
-            this.goalSelector.removeAllGoals();
-        }
-        else if (currentStage == 6) {
-            this.targetSelector.removeGoal(hurtGoal);
-            this.targetSelector.removeGoal(attackGoal);
-            this.goalSelector.removeGoal(rangedAttackGoal);
-            this.goalSelector.removeGoal(avoidWaterGoal);
-            this.goalSelector.removeGoal(lookGoal);
-            this.goalSelector.removeGoal(lookRandomlyGoal);
-
-            this.goalSelector.addGoal(1, avoidPlayerGoal);
-            this.goalSelector.addGoal(2, panicGoal);
-            this.goalSelector.addGoal(3, avoidWaterGoal);
-            this.goalSelector.addGoal(4, lookGoal);
-            this.goalSelector.addGoal(5, lookRandomlyGoal);
-        }
-        else {
-            this.goalSelector.removeGoal(avoidPlayerGoal);
-            this.goalSelector.removeGoal(panicGoal);
-
-            this.targetSelector.addGoal(1, hurtGoal);
-            this.targetSelector.addGoal(2, attackGoal);
-            this.goalSelector.addGoal(2, rangedAttackGoal);
-            this.goalSelector.addGoal(5, avoidWaterGoal);
-            this.goalSelector.addGoal(6, lookGoal);
-            this.goalSelector.addGoal(7, lookRandomlyGoal);
-        }
-
+        
         //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
-
-        this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
-        this.bossBar.setColor(this.stageManager.getCurrentStage().barColor());
-        this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
 
         this.setStage(newStage);
     }
@@ -524,18 +495,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         }
         else {
             if (this.destroyBlocksTick <= 0) {
-                if (this.getStage() == 1 || this.getStage() == 2) {
-                    this.destroyBlocksTick = 35;
-                }
-                else if (this.getStage() == 3 || this.getStage() == 4) {
-                    this.destroyBlocksTick = 20;
-                }
-                else if (this.getStage() == 5) {
-                    this.destroyBlocksTick = 10;
-                }
-                else {
-                    this.destroyBlocksTick = 35;
-                }
+                this.destroyBlocksTick = this.stageManager.getCurrentStage().destroyBlocksTick();
             }
 
             for (int i = 0; i < this.idleHeadUpdates.length; ++i) {

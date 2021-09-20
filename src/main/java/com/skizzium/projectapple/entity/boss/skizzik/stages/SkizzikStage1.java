@@ -9,6 +9,8 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
 
     @Override
     public void begin(SkizzikStageManager stageManager) {
+        super.begin(stageManager);
+        
         if (stageManager.getPreviousStage() instanceof SkizzikSleeping) {
             skizzik.setHealth(1020);
         }

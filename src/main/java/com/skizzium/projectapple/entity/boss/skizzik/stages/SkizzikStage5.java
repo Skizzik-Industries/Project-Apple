@@ -20,6 +20,11 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
+    public int destroyBlocksTick() {
+        return 10;
+    }
+
+    @Override
     public SkizzikStage<? extends SkizzikStageInterface> getStage() {
         return SkizzikStage.STAGE_5;
     }

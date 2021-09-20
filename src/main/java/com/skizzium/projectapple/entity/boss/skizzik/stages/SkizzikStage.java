@@ -54,7 +54,7 @@ public class SkizzikStage<T extends SkizzikStageInterface> {
             if (stage >= 3 && source.getDirectEntity() instanceof ThrownPotion)
                 return true;
 
-            if (stage == 4 && source.getDirectEntity() instanceof ThrownTrident)
+            if (stage >= 4 && source.getDirectEntity() instanceof ThrownTrident)
                 return true;
             
             if (stage == 5 && (source.getDirectEntity() instanceof Arrow) || source == DamageSource.DRAGON_BREATH)
