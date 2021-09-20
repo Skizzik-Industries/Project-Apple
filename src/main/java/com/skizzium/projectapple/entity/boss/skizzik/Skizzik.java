@@ -469,10 +469,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                                             health > 20 ? 5 :
                                                                     6;
 
-        if (currentStage != newStage) {
-            
-        }
-
         AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
         PanicGoal panicGoal = new PanicGoal(this, 1.5D);
 
