@@ -46,6 +46,8 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public void begin(SkizzikStageManager stageManager) {
+        skizzik.killAllSkizzies(skizzik.level, true);
+        
         if (skizzik.level instanceof ServerLevel) {
             PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
         }

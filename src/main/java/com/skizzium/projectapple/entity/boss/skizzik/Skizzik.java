@@ -52,6 +52,7 @@ import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
 
 import javax.annotation.Nullable;
@@ -392,7 +393,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         super.registerGoals();
     }
 
-    private void killAllSkizzies(Level world, boolean skizziesOnly) {
+    public void killAllSkizzies(Level world, boolean skizziesOnly) {
         if (world instanceof ServerLevel) {
             LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
             Iterable<Entity> entities = entityGetter.getAll();
@@ -426,7 +427,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         this.refreshDimensions();
         this.stageManager.updateStage();
 
-        Level world = getCommandSenderWorld();
+        Level world = this.level;
 
         this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
         this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
@@ -439,7 +440,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
             if (world instanceof ServerLevel) {
                 if (ProjectApple.holiday == 1) {
                     ((ServerLevel) world).setDayTime(18000);
-                } else {
+                } 
+                else {
                     if (this.stageManager.getCurrentStage() instanceof SkizzikStage3) {
                         ((ServerLevel) world).setDayTime(13000);
                     } 
@@ -468,19 +470,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                                                     6;
 
         if (currentStage != newStage) {
-            if (newStage == 6) {
-                if (!world.isClientSide) {
-                    world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
-                    ((ServerLevel) world).setDayTime(1000);
-                }
-
-                this.killAllSkizzies(world, false);
-
-                this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
-            }
-
-            this.killAllSkizzies(world, true);
-
             if (!this.preview) {
                 if (world instanceof ServerLevel) {
                     if (newStage > 1 && newStage <= 5) {
