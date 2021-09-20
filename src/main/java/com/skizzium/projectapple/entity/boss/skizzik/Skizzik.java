@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage3;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage4;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage5;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -423,10 +426,31 @@ public class Skizzik extends Monster implements RangedAttackMob {
     @Override
     public void baseTick() {
         super.baseTick();
-        
-        this.stageManager.updateStage();
         this.refreshDimensions();
+        this.stageManager.updateStage();
 
+        Level world = getCommandSenderWorld();
+        
+        if (this.preview) {
+            killAllSkizzies(world, false);
+        }
+
+        if (!this.preview) {
+            if (world instanceof ServerLevel) {
+                if (ProjectApple.holiday == 1) {
+                    ((ServerLevel) world).setDayTime(18000);
+                } else {
+                    if (this.stageManager.getCurrentStage() instanceof SkizzikStage3) {
+                        ((ServerLevel) world).setDayTime(13000);
+                    } 
+                    else if (this.stageManager.getCurrentStage() instanceof SkizzikStage4 || this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
+                        ((ServerLevel) world).setDayTime(18000);
+                    }
+                }
+            }
+        }
+        
+        // Old
         activeHeads = this.getStage() == 1 ? 4 :
                             this.getStage() == 2 ? 3 :
                                     this.getStage() == 3 ? 2 :
@@ -443,35 +467,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                                             health > 20 ? 5 :
                                                                     6;
 
-        Level world = getCommandSenderWorld();
-        
-        if (this.preview) {
-            killAllSkizzies(world, false);
-        }
-        
-        if (!this.preview) {
-            if (world instanceof ServerLevel) {
-                if (ProjectApple.holiday == 1) {
-                    ((ServerLevel) world).setDayTime(18000);
-                } else {
-                    if (currentStage == 3) {
-                        ((ServerLevel) world).setDayTime(13000);
-                    } else if (currentStage == 4 || currentStage == 5) {
-                        ((ServerLevel) world).setDayTime(18000);
-                    }
-                }
-            }
-        }
-
         if (currentStage != newStage) {
-            if (world instanceof ServerLevel) {
-                if (newStage != 0 && newStage != 6) {
-                    PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
-                } else {
-                    PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new BossMusicStopPacket());
-                }
-            }
-
             if (currentStage == 0 && newStage == 1) {
                 this.setHealth(1020);
             }

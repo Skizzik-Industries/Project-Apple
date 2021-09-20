@@ -33,11 +33,6 @@ public class BossMusicStartPacket {
     }
 
     public void handlePacket(BossMusicStartPacket packet, Supplier<NetworkEvent.Context> context) {
-        /*final MusicManager musicManager = Minecraft.getInstance().getMusicManager();
-        if (!musicManager.isPlayingMusic(music)) {
-            musicManager.startPlaying(music);
-        }*/
-
         Minecraft.getInstance().getMusicManager().stopPlaying();
         if (!isPlaying) {
             Minecraft.getInstance().getSoundManager().play(new BossMusic(musicEvent, Minecraft.getInstance()));
