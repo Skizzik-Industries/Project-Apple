@@ -31,7 +31,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         super.begin(stageManager);
 
         Level world = skizzik.level;
-        if (!world.isClientSide) {
+        if (world instanceof  ServerLevel) {
             world.setBlock(new BlockPos(skizzik.getX(), skizzik.getY(), skizzik.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
             ((ServerLevel) world).setDayTime(1000);
         }

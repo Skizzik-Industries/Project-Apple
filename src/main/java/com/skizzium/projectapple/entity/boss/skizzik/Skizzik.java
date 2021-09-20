@@ -470,35 +470,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                                                     6;
 
         if (currentStage != newStage) {
-            if (!this.preview) {
-                if (world instanceof ServerLevel) {
-                    if (newStage > 1 && newStage <= 5) {
-                        int difference;
-
-                        if (currentStage == 0) {
-                            difference = newStage - currentStage - 1;
-                        } else if (currentStage == 6) {
-                            difference = newStage - currentStage + 1;
-                        } else {
-                            difference = newStage - currentStage;
-                        }
-
-                        if (difference > 0) {
-                            for (int i = 1; i <= difference; i++) {
-                                Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
-                                skizzo.setOwner(this);
-                                //skizzos[i - 1] = skizzo;
-                            }
-                        }
-                        /* else {
-                            difference = Math.abs(difference);
-                            for (int i = 1; i <= difference; i++) {
-                                ((ServerLevel) world).removeEntity(skizzos[i]);
-                            }
-                        } */
-                    }
-                }
-            }
+            
         }
 
         AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
