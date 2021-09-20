@@ -1,7 +1,6 @@
-package com.skizzium.projectapple.entity.boss.skizzik;
+package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 
 public class SkizzikStageManager {
     private final Skizzik skizzik;

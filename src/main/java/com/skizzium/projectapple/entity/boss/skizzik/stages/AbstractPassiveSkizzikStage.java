@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.SkizzikStageManager;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectapple.util.PA_BossEvent;

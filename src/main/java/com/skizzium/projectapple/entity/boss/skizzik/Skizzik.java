@@ -3,10 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage3;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage4;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStage5;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -56,7 +53,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -426,10 +422,14 @@ public class Skizzik extends Monster implements RangedAttackMob {
     @Override
     public void baseTick() {
         super.baseTick();
+        
         this.refreshDimensions();
         this.stageManager.updateStage();
 
         Level world = getCommandSenderWorld();
+
+        this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
+        this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
         
         if (this.preview) {
             killAllSkizzies(world, false);
@@ -468,13 +468,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
                                                                     6;
 
         if (currentStage != newStage) {
-            if (currentStage == 0 && newStage == 1) {
-                this.setHealth(1020);
-            }
-
-            this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
-            this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
-            
             if (newStage == 6) {
                 if (!world.isClientSide) {
                     world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);

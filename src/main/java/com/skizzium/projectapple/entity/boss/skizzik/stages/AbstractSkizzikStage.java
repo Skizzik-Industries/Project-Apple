@@ -2,7 +2,6 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.SkizzikStageManager;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
@@ -10,6 +9,7 @@ import com.skizzium.projectapple.util.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
