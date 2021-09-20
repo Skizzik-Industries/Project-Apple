@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.Skizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;

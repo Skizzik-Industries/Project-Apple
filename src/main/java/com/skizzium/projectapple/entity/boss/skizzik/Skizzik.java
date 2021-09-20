@@ -2,11 +2,10 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.*;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
-import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
@@ -25,7 +24,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
@@ -52,7 +50,6 @@ import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
 
 import javax.annotation.Nullable;

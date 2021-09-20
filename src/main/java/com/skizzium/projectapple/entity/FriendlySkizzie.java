@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
