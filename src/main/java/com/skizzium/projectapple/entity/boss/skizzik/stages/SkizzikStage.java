@@ -27,7 +27,6 @@ public class SkizzikStage<T extends SkizzikStageInterface> {
         this.stageClass = clazz;
     }
     
-    // This is to make sure that the Skizzik isn't immune to a damage source
     public static boolean isImmune(Skizzik skizzik, DamageSource source) {
         int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
 

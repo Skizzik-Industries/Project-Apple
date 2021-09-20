@@ -513,13 +513,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        Entity entity = source.getEntity();
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-        Level world = this.getCommandSenderWorld();
+        Level world = this.level;
         
-        Entity entity = source.getEntity();
-        if (!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType() && SkizzikStage.isImmune(this, source)) {
+        if ((!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) || SkizzikStage.isImmune(this, source)) {
             return false;
         }
         else {
