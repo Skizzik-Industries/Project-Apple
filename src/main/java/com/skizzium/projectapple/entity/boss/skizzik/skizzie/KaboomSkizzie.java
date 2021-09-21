@@ -1,6 +1,6 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik.skizzie;
 
-import com.skizzium.projectapple.entity.ai.KaboomSkizzieSwellGoal;
+import com.skizzium.projectapple.entity.boss.skizzik.ai.KaboomSkizzieSwellGoal;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;

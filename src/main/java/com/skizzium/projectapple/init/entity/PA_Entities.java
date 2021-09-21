@@ -2,20 +2,18 @@ package com.skizzium.projectapple.init.entity;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.*;
-import com.skizzium.projectapple.entity.model.SkizzieModel;
-import com.skizzium.projectapple.entity.model.SkizzikModel;
-import com.skizzium.projectapple.entity.model.SkizzoModel;
-import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.SkizzikSkull;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.*;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzikModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
 import com.skizzium.projectapple.entity.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
-import com.skizzium.projectapple.init.item.PA_ThemeableSpawnEggColors;
-import com.skizzium.projectapple.item.ThemeableSpawnEgg;
-import net.minecraft.ChatFormatting;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -25,8 +23,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
 import java.util.function.Predicate;
-
-import static com.skizzium.projectapple.ProjectApple.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Entities {

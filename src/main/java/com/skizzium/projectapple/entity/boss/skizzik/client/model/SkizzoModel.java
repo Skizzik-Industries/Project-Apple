@@ -1,9 +1,9 @@
-package com.skizzium.projectapple.entity.model;
+package com.skizzium.projectapple.entity.boss.skizzik.client.model;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.skizzium.projectapple.entity.Skizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

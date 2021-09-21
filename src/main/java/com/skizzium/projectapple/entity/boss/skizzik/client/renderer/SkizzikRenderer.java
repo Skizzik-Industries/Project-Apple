@@ -1,9 +1,9 @@
-package com.skizzium.projectapple.entity.renderer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.Skizzik;
-import com.skizzium.projectapple.entity.layer.SkizzikGlowLayer;
-import com.skizzium.projectapple.entity.model.*;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzikModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.SkizzikGlowLayer;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -32,12 +32,13 @@ public class SkizzikRenderer extends MobRenderer<Skizzik, EntityModel<Skizzik>> 
 
    @Override
    protected int getBlockLightLevel(Skizzik entity, BlockPos pos) {
-      return entity.getStage() <= 0 || entity.getStage() >= 6 ? 0 : 15;
+      int stage = entity.stageManager.getCurrentStage().getStage().getId();
+      return stage <= 0 || stage >= 6 ? 0 : 15;
    }
 
    @Override
    public ResourceLocation getTextureLocation(Skizzik entity) {
-      int stage = entity.getStage();
+      int stage = entity.stageManager.getCurrentStage().getStage().getId();
 
       if (ProjectApple.holiday == 1) {
          return stage == 0 ? SPOOKZIK_SLEEPING_LOCATION :

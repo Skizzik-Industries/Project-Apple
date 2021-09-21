@@ -1,6 +1,6 @@
-package com.skizzium.projectapple.entity.ai;
+package com.skizzium.projectapple.entity.boss.skizzik.ai;
 
-import com.skizzium.projectapple.entity.KaboomSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 

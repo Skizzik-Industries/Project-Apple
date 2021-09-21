@@ -1,9 +1,9 @@
-package com.skizzium.projectapple.entity.renderer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
 import com.skizzium.projectapple.entity.FriendlyWitchSkizzie;
-import com.skizzium.projectapple.entity.WitchSkizzie;
-import com.skizzium.projectapple.entity.layer.WitchSkizzieGlowLayer;
-import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.WitchSkizzieGlowLayer;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

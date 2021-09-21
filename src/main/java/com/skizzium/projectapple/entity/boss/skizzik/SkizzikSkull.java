@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -136,18 +136,18 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
                     }
                     else {
                         float health = skizzik.getHealth();
-                        int stage = skizzik.getStage();
+                        int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
 
-                        if (stage == 5 && health <= 264) {
+                        if (stage == 5 && health <= 214) {
                             skizzik.heal(6.0F);
                         }
-                        else if (stage == 4 && health <= 464.76) {
+                        else if (stage == 4 && health <= 414.76) {
                             skizzik.heal(5.25F);
                         }
-                        else if (stage == 3 && health <= 665.5) {
+                        else if (stage == 3 && health <= 615.5) {
                             skizzik.heal(4.5F);
                         }
-                        else if (stage == 2 && health <= 866.25) {
+                        else if (stage == 2 && health <= 816.25) {
                             skizzik.heal(3.75F);
                         }
                         else if (stage == 1 && health <= 1017) {

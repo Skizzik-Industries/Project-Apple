@@ -1,10 +1,11 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
-import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
@@ -23,7 +24,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
@@ -39,9 +39,6 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -51,7 +48,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -67,7 +63,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     private static final EntityDataAccessor<Integer> DATA_TARGET_E = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
-    private static final EntityDataAccessor<Integer> DATA_ID_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> DATA_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
 
     private int activeHeads = 4;
 
@@ -82,20 +78,28 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     //private final Skizzo[] skizzos = new Skizzo[4];
 
+    public final SkizzikStageManager stageManager;
     private int destroyBlocksTick;
     private int spawnSkizzieTicks;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
+    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
-    private static final PA_BossEvent.PA_BossBarColor defaultBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
-    private static final PA_BossEvent.PA_BossBarColor weakBarColor = PA_BossEvent.PA_BossBarColor.WHITE;
-    private static final PA_BossEvent.PA_BossBarColor overpoweredBarColor = ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
-    private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), defaultBarColor, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+    public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
+    public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
+
+    public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
+    public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
+    public RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
+    public WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
+    public LookAtPlayerGoal lookGoal = new LookAtPlayerGoal(this, Player.class, 8.0F);
+    public RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
 
     private boolean preview = false;
     
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
+        this.stageManager = new SkizzikStageManager(this);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
@@ -133,14 +137,15 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return this.getStage() == 0 ? 1.5F : this.getStage() == 5 ? 2.75F : this.getStage() == 6 ? 2.25F : 2.45F;
+        int stage = this.stageManager.getCurrentStage().getStage().getId();
+        return stage == 0 ? 1.5F : stage == 5 ? 2.75F : stage == 6 ? 2.25F : 2.45F;
     }
 
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        if (!this.preview && this.getStage() != 0 && this.getStage() != 6) {
+        if (!this.preview && this.stageManager.getCurrentStage().getStage().getId() != 0 && this.stageManager.getCurrentStage().getStage().getId() != 6) {
             PA_PacketHandler.INSTANCE.sendTo(new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
@@ -155,17 +160,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     @Override
     public void setCustomName(@Nullable Component name) {
         super.setCustomName(name);
-
-        int stage = this.getStage();
-        if (stage == 0) {
-            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Sleeping"));
-        }
-        else if (stage >= 1 && stage <= 5) {
-            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Stage " + stage));
-        }
-        else if (stage == 6) {
-            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
-        }
+        this.bossBar.setName(new TextComponent(this.getDisplayName().getString()));
     }
 
     @Override
@@ -185,16 +180,17 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        if (this.getStage() == 0) {
+        int stage = this.stageManager.getCurrentStage().getStage().getId();
+        if (stage == 0) {
             return new EntityDimensions(2.5F, 2.1F, true);
         }
-        else if (this.getStage() == 3) {
+        else if (stage == 3) {
             return new EntityDimensions(2.5F, 3.0F, true);
         }
-        else if (this.getStage() == 5) {
+        else if (stage == 5) {
             return new EntityDimensions(2.5F, 3.4F, true);
         }
-        else if (this.getStage() == 6) {
+        else if (stage == 6) {
             return new EntityDimensions(1.2F, 2.8F, true);
         }
         return super.getDimensions(pose);
@@ -233,11 +229,11 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     public int getStage() {
-        return this.entityData.get(DATA_ID_STAGE);
+        return this.entityData.get(DATA_STAGE);
     }
 
     public void setStage(int stage) {
-        this.entityData.set(DATA_ID_STAGE, stage);
+        this.entityData.set(DATA_STAGE, stage);
     }
 
     public boolean getPreview() {
@@ -319,7 +315,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     protected void defineSynchedData() {
         super.defineSynchedData();
 
-        this.entityData.define(DATA_ID_STAGE, 0);
+        this.entityData.define(DATA_STAGE, 0);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -327,20 +323,28 @@ public class Skizzik extends Monster implements RangedAttackMob {
         this.entityData.define(DATA_TARGET_D, 0);
         this.entityData.define(DATA_TARGET_E, 0);
     }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        if (DATA_STAGE.equals(key) && this.level.isClientSide) {
+            this.stageManager.setStage(SkizzikStage.getById(this.getEntityData().get(DATA_STAGE)));
+        }
+
+        super.onSyncedDataUpdated(key);
+    }
     
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
 
+        nbt.putInt("Stage", this.stageManager.getCurrentStage().getStage().getId());
         nbt.putBoolean("Preview", this.getPreview());
-        nbt.putInt("Stage", this.getStage());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
-        this.setStage(nbt.getInt("Stage"));
+        this.stageManager.setStage(SkizzikStage.getById(nbt.getInt("Stage")));
         this.setPreview(nbt.getBoolean("Preview"));
 
         if (this.hasCustomName()) {
@@ -354,9 +358,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     private void performRangedAttack(int head, LivingEntity entity) {
-        this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), this.getStage() == 1 || this.getStage() == 2 ? 1 :
-                                                                                                                                this.getStage() == 3 || this.getStage() == 4 ? 2 :
-                                                                                                                                3);
+        this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), this.stageManager.getCurrentStage().skullLevel());
     }
 
     private void performRangedAttack(int head, double x, double y, double z, int level) {
@@ -385,7 +387,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         super.registerGoals();
     }
 
-    private void killAllSkizzies(Level world, boolean skizziesOnly) {
+    public void killAllSkizzies(Level world, boolean skizziesOnly) {
         if (world instanceof ServerLevel) {
             LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
             Iterable<Entity> entities = entityGetter.getAll();
@@ -415,338 +417,59 @@ public class Skizzik extends Monster implements RangedAttackMob {
     @Override
     public void baseTick() {
         super.baseTick();
-
+        
         this.refreshDimensions();
+        this.stageManager.updateStage();
 
-        activeHeads = this.getStage() == 1 ? 4 :
-                            this.getStage() == 2 ? 3 :
-                                    this.getStage() == 3 ? 2 :
-                                            this.getStage() == 4 ? 1 :
-                                                    0;
+        int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
+        this.activeHeads = currentStageId == 1 ? 4 :
+                                currentStageId == 2 ? 3 :
+                                        currentStageId == 3 ? 2 :
+                                                currentStageId == 4 ? 1 : 0;
+        Level world = this.level;
 
-        float health = this.getHealth();
-        int currentStage = this.getStage();
-        int newStage = health > 1020 ? 0 :
-                            health > 820 ? 1 :
-                                    health > 620 ? 2 :
-                                            health > 420 ? 3 :
-                                                    health > 220 ? 4 :
-                                                            health > 20 ? 5 :
-                                                                    6;
+        this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
+        this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
 
-        Level world = getCommandSenderWorld();
+        this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
+        this.bossBar.setColor(this.stageManager.getCurrentStage().barColor());
+        this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
         
         if (this.preview) {
             killAllSkizzies(world, false);
         }
-        
+
         if (!this.preview) {
             if (world instanceof ServerLevel) {
                 if (ProjectApple.holiday == 1) {
                     ((ServerLevel) world).setDayTime(18000);
-                } else {
-                    if (currentStage == 3) {
+                } 
+                else {
+                    if (this.stageManager.getCurrentStage() instanceof SkizzikStage3) {
                         ((ServerLevel) world).setDayTime(13000);
-                    } else if (currentStage == 4 || currentStage == 5) {
+                    } 
+                    else if (this.stageManager.getCurrentStage() instanceof SkizzikStage4 || this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
                         ((ServerLevel) world).setDayTime(18000);
                     }
                 }
             }
         }
-
-        if (currentStage != newStage) {
-            if (world instanceof ServerLevel) {
-                if (newStage != 0 && newStage != 6) {
-                    PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
-                } else {
-                    PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new BossMusicStopPacket());
-                }
-            }
-
-            if (currentStage == 0 && newStage == 1) {
-                this.setHealth(1020);
-            }
-
-            if (newStage == 0) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1021.0D);
-            }
-            else if (newStage == 1 || newStage == 2) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(4.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 3) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(8.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 4) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(10.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 5) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(12.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020.0D);
-            }
-            else if (newStage == 6) {
-                this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(0.0D);
-                this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(20.0D);
-
-                if (!world.isClientSide) {
-                    world.setBlock(new BlockPos(this.getX(), this.getY(), this.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
-                    ((ServerLevel) world).setDayTime(1000);
-                }
-
-                this.killAllSkizzies(world, false);
-
-                this.level.playSound(null, this.getX(), this.getY(), this.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
-            }
-
-            this.killAllSkizzies(world, true);
-
-            if (!this.preview) {
-                if (world instanceof ServerLevel) {
-                    if (newStage > 1 && newStage <= 5) {
-                        int difference;
-
-                        if (currentStage == 0) {
-                            difference = newStage - currentStage - 1;
-                        } else if (currentStage == 6) {
-                            difference = newStage - currentStage + 1;
-                        } else {
-                            difference = newStage - currentStage;
-                        }
-
-                        if (difference > 0) {
-                            for (int i = 1; i <= difference; i++) {
-                                Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, this.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
-                                skizzo.setOwner(this);
-                                //skizzos[i - 1] = skizzo;
-                            }
-                        }
-                        /* else {
-                            difference = Math.abs(difference);
-                            for (int i = 1; i <= difference; i++) {
-                                ((ServerLevel) world).removeEntity(skizzos[i]);
-                            }
-                        } */
-                    }
-                }
-            }
-        }
-
-        AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
-        PanicGoal panicGoal = new PanicGoal(this, 1.5D);
-
-        HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
-        NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
-        RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
-        WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
-        LookAtPlayerGoal lookGoal = new LookAtPlayerGoal(this, Player.class, 8.0F);
-        RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
-
-        if (currentStage == 0 || this.preview) {
-            this.goalSelector.removeAllGoals();
-        }
-        else if (currentStage == 6) {
-            this.targetSelector.removeGoal(hurtGoal);
-            this.targetSelector.removeGoal(attackGoal);
-            this.goalSelector.removeGoal(rangedAttackGoal);
-            this.goalSelector.removeGoal(avoidWaterGoal);
-            this.goalSelector.removeGoal(lookGoal);
-            this.goalSelector.removeGoal(lookRandomlyGoal);
-
-            this.goalSelector.addGoal(1, avoidPlayerGoal);
-            this.goalSelector.addGoal(2, panicGoal);
-            this.goalSelector.addGoal(3, avoidWaterGoal);
-            this.goalSelector.addGoal(4, lookGoal);
-            this.goalSelector.addGoal(5, lookRandomlyGoal);
-        }
-        else {
-            this.goalSelector.removeGoal(avoidPlayerGoal);
-            this.goalSelector.removeGoal(panicGoal);
-
-            this.targetSelector.addGoal(1, hurtGoal);
-            this.targetSelector.addGoal(2, attackGoal);
-            this.goalSelector.addGoal(2, rangedAttackGoal);
-            this.goalSelector.addGoal(5, avoidWaterGoal);
-            this.goalSelector.addGoal(6, lookGoal);
-            this.goalSelector.addGoal(7, lookRandomlyGoal);
-        }
-
-        if (currentStage == 0 || currentStage == 6) {
-            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.PROGRESS);
-            bossBar.setColor(weakBarColor);
-        }
-        else {
-            if (currentStage == 5) {
-                bossBar.setColor(overpoweredBarColor);
-            }
-            else {
-                bossBar.setColor(defaultBarColor);
-            }
-            bossBar.setOverlay(PA_BossEvent.PA_BossBarOverlay.NOTCHED_5);
-        }
-
-        //After Invul - world.playSound(null, new BlockPos(x, y,z), SoundEvents.ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, (float) 10, (float) 1);
-
-        if (this.hasCustomName()) {
-            if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
-            }
-            else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
-            }
-            else {
-                this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
-            }
-        }
-        else {
-            if (currentStage == 0) {
-                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.sleeping").getString()));
-            }
-            else if (currentStage <= 5) {
-                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.stage").getString() + " " + currentStage));
-            }
-            else {
-                this.bossBar.setName(new TextComponent(this.getTypeName().getString() + " - " + new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
-            }
-        }
-
-        this.setStage(newStage);
     }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        int stage = this.getStage();
-
+        Entity entity = source.getEntity();
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-        Level world = this.getCommandSenderWorld();
-
-        if (stage == 0 || stage == 1) {
-            if (source == DamageSource.CACTUS ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 2) {
-            if (source == DamageSource.ANVIL ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 3) {
-            if (source == DamageSource.ANVIL ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.DRAGON_BREATH ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source.getDirectEntity() instanceof ThrownPotion ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 4) {
-            if (source == DamageSource.ANVIL ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.DRAGON_BREATH ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source.getDirectEntity() instanceof ThrownPotion ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source.getDirectEntity() instanceof ThrownTrident ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 5) {
-            if (source == DamageSource.ANVIL ||
-                    source.getDirectEntity() instanceof Arrow ||
-                    source == DamageSource.CACTUS ||
-                    source == DamageSource.DRAGON_BREATH ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE ||
-                    source.getDirectEntity() instanceof ThrownPotion ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source.getDirectEntity() instanceof ThrownTrident ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return false;
-            }
-        }
-        else if (stage == 6) {
-            if (source == DamageSource.LIGHTNING_BOLT ||
-                    source == DamageSource.HOT_FLOOR ||
-                    source == DamageSource.IN_FIRE ||
-                    source == DamageSource.LAVA ||
-                    source == DamageSource.ON_FIRE) {
-                return false;
-            }
-            
-            if (preview &&
-                    source != DamageSource.CRAMMING &&
-                    source != DamageSource.OUT_OF_WORLD &&
-                    source != DamageSource.MAGIC) {
-                return false;
-            }
-        }
-
-        Entity entity = source.getEntity();
-        if (!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
+        Level world = this.level;
+        
+        if ((!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) || SkizzikStage.isImmune(this, source)) {
             return false;
         }
         else {
             if (this.destroyBlocksTick <= 0) {
-                if (this.getStage() == 1 || this.getStage() == 2) {
-                    this.destroyBlocksTick = 35;
-                }
-                else if (this.getStage() == 3 || this.getStage() == 4) {
-                    this.destroyBlocksTick = 20;
-                }
-                else if (this.getStage() == 5) {
-                    this.destroyBlocksTick = 10;
-                }
-                else {
-                    this.destroyBlocksTick = 35;
-                }
+                this.destroyBlocksTick = this.stageManager.getCurrentStage().destroyBlocksTick();
             }
 
             for (int i = 0; i < this.idleHeadUpdates.length; ++i) {

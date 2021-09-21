@@ -1,9 +1,9 @@
-package com.skizzium.projectapple.entity.renderer;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.SkizzikSkull;
+import com.skizzium.projectapple.entity.boss.skizzik.SkizzikSkull;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.tileentity.model.PA_SkullModel;
 import net.minecraft.client.renderer.MultiBufferSource;
