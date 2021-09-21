@@ -137,14 +137,15 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return this.getStage() == 0 ? 1.5F : this.getStage() == 5 ? 2.75F : this.getStage() == 6 ? 2.25F : 2.45F;
+        int stage = this.stageManager.getCurrentStage().getStage().getId();
+        return stage == 0 ? 1.5F : stage == 5 ? 2.75F : stage == 6 ? 2.25F : 2.45F;
     }
 
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        if (!this.preview && this.getStage() != 0 && this.getStage() != 6) {
+        if (!this.preview && this.stageManager.getCurrentStage().getStage().getId() != 0 && this.stageManager.getCurrentStage().getStage().getId() != 6) {
             PA_PacketHandler.INSTANCE.sendTo(new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
@@ -159,17 +160,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     @Override
     public void setCustomName(@Nullable Component name) {
         super.setCustomName(name);
-
-        int stage = this.getStage();
-        if (stage == 0) {
-            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Sleeping"));
-        }
-        else if (stage >= 1 && stage <= 5) {
-            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - Stage " + stage));
-        }
-        else if (stage == 6) {
-            this.bossBar.setName(new TextComponent(this.getDisplayName().getString() + " - FINISH HIM!"));
-        }
+        this.bossBar.setName(new TextComponent(this.getDisplayName().getString()));
     }
 
     @Override
@@ -189,16 +180,17 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        if (this.getStage() == 0) {
+        int stage = this.stageManager.getCurrentStage().getStage().getId();
+        if (stage == 0) {
             return new EntityDimensions(2.5F, 2.1F, true);
         }
-        else if (this.getStage() == 3) {
+        else if (stage == 3) {
             return new EntityDimensions(2.5F, 3.0F, true);
         }
-        else if (this.getStage() == 5) {
+        else if (stage == 5) {
             return new EntityDimensions(2.5F, 3.4F, true);
         }
-        else if (this.getStage() == 6) {
+        else if (stage == 6) {
             return new EntityDimensions(1.2F, 2.8F, true);
         }
         return super.getDimensions(pose);
@@ -366,9 +358,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     }
 
     private void performRangedAttack(int head, LivingEntity entity) {
-        this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), this.getStage() == 1 || this.getStage() == 2 ? 1 :
-                                                                                                                                this.getStage() == 3 || this.getStage() == 4 ? 2 :
-                                                                                                                                3);
+        this.performRangedAttack(head, entity.getX(), entity.getY() + (double)entity.getEyeHeight() * 0.5D, entity.getZ(), this.stageManager.getCurrentStage().skullLevel());
     }
 
     private void performRangedAttack(int head, double x, double y, double z, int level) {

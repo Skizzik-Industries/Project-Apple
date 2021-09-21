@@ -48,6 +48,11 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
+    public int skullLevel() {
+        return 1;
+    }
+
+    @Override
     public int destroyBlocksTick() {
         return 35;
     }

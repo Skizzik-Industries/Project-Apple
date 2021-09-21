@@ -13,6 +13,11 @@ public class SkizzikStage3 extends AbstractSkizzikStage {
     }
 
     @Override
+    public int skullLevel() {
+        return 2;
+    }
+    
+    @Override
     public int destroyBlocksTick() {
         return 20;
     }

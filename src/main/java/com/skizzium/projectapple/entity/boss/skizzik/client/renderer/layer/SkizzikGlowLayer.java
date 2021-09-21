@@ -32,7 +32,7 @@ public class SkizzikGlowLayer<T extends Skizzik, M extends EntityModel<T>> exten
     }
 
     private ResourceLocation getTexture(T entity) {
-        int stage = entity.getStage();
+        int stage = entity.stageManager.getCurrentStage().getStage().getId();
 
         if (ProjectApple.holiday == 1) {
             return stage == 0 ? SPOOKZIK_SLEEPING_GLOW :

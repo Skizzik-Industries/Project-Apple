@@ -32,12 +32,13 @@ public class SkizzikRenderer extends MobRenderer<Skizzik, EntityModel<Skizzik>> 
 
    @Override
    protected int getBlockLightLevel(Skizzik entity, BlockPos pos) {
-      return entity.getStage() <= 0 || entity.getStage() >= 6 ? 0 : 15;
+      int stage = entity.stageManager.getCurrentStage().getStage().getId();
+      return stage <= 0 || stage >= 6 ? 0 : 15;
    }
 
    @Override
    public ResourceLocation getTextureLocation(Skizzik entity) {
-      int stage = entity.getStage();
+      int stage = entity.stageManager.getCurrentStage().getStage().getId();
 
       if (ProjectApple.holiday == 1) {
          return stage == 0 ? SPOOKZIK_SLEEPING_LOCATION :

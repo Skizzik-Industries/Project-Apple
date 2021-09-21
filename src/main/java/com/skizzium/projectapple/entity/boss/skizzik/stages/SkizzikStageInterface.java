@@ -14,6 +14,8 @@ public interface SkizzikStageInterface {
 
     int maxHealth();
     
+    int skullLevel();
+    
     int destroyBlocksTick();
     
     void begin(SkizzikStageManager stageManager);
