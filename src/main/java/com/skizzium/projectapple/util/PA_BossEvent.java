@@ -2,7 +2,6 @@ package com.skizzium.projectapple.util;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.BossEvent;
 
 import java.util.UUID;
 
@@ -11,11 +10,11 @@ public abstract class PA_BossEvent {
     protected Component name;
     protected float progress;
     protected PA_BossBarColor color;
-    protected BossEvent.BossBarOverlay overlay;
+    protected PA_BossBarOverlay overlay;
     protected boolean darkenScreen;
     protected boolean createWorldFog;
 
-    public PA_BossEvent(UUID uuid, Component displayName, PA_BossBarColor assignedColor, BossEvent.BossBarOverlay choosenOverlay) {
+    public PA_BossEvent(UUID uuid, Component displayName, PA_BossBarColor assignedColor, PA_BossBarOverlay choosenOverlay) {
         this.id = uuid;
         this.name = displayName;
         this.color = assignedColor;
@@ -51,11 +50,11 @@ public abstract class PA_BossEvent {
         this.color = newColor;
     }
 
-    public BossEvent.BossBarOverlay getOverlay() {
+    public PA_BossBarOverlay getOverlay() {
         return this.overlay;
     }
 
-    public void setOverlay(BossEvent.BossBarOverlay newOverlay) {
+    public void setOverlay(PA_BossBarOverlay newOverlay) {
         this.overlay = newOverlay;
     }
 
@@ -78,7 +77,7 @@ public abstract class PA_BossEvent {
     }
 
     public static enum PA_BossBarColor {
-        RED("red",ChatFormatting.DARK_RED),
+        RED("red", ChatFormatting.DARK_RED),
         ORANGE("orange", ChatFormatting.GOLD),
         GOLD("gold", ChatFormatting.GOLD),
         YELLOW("yellow", ChatFormatting.YELLOW),
@@ -117,6 +116,35 @@ public abstract class PA_BossEvent {
             }
 
             return WHITE;
+        }
+    }
+    
+    public static enum PA_BossBarOverlay {
+        PROGRESS("progress"),
+        NOTCHED_5("notched_5"),
+        NOTCHED_6("notched_6"),
+        NOTCHED_10("notched_10"),
+        NOTCHED_12("notched_12"),
+        NOTCHED_20("notched_20");
+
+        private final String name;
+
+        private PA_BossBarOverlay(String givenName) {
+            this.name = givenName;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public static PA_BossEvent.PA_BossBarOverlay byName(String nameToSearch) {
+            for(PA_BossEvent.PA_BossBarOverlay overlayEnum : values()) {
+                if (overlayEnum.name.equals(nameToSearch)) {
+                    return overlayEnum;
+                }
+            }
+
+            return PROGRESS;
         }
     }
 }

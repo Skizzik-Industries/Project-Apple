@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.ai.PA_BegGoal;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
@@ -9,17 +10,26 @@ import com.skizzium.projectapple.item.PA_SkullItem;
 import com.skizzium.projectapple.item.PA_SpawnEgg;
 import com.skizzium.projectapple.item.RainbowSword;
 import com.skizzium.projectapple.item.ThemeableSpawnEgg;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import net.minecraftforge.fmllegacy.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PA_Items {
     public static final Rarity platinumRarity = Rarity.create("PLATINUM", ChatFormatting.BOLD);
     public static final Rarity corruptedRarity = Rarity.create("CORRUPTED", ChatFormatting.OBFUSCATED);
@@ -35,8 +45,8 @@ public class PA_Items {
             return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
         }
     });
-    public static final RegistryObject<Item> RAW_SKIZZIK_FLESH = PA_Registry.ITEMS.register("raw_skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> SKIZZIK_FLESH = PA_Registry.ITEMS.register("skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> RAW_SKIZZIK_FLESH = PA_Registry.ITEMS.register("raw_skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.RAW_SKIZZIK_FLESH).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> SKIZZIK_FLESH = PA_Registry.ITEMS.register("skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.SKIZZIK_FLESH).fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<RecordItem> MUSIC_DISC_SKIZZIK = PA_Registry.ITEMS.register("music_disc_skizzik", () -> new RecordItem(14, PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<RecordItem> MUSIC_DISC_SPOOKZIK = PA_Registry.ITEMS.register("music_disc_spookzik", () -> new RecordItem(15, PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
@@ -101,5 +111,39 @@ public class PA_Items {
     public static final RegistryObject<SpawnEggItem> CORRUPTED_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("corrupted_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(corruptedRarity).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
     public static final RegistryObject<SpawnEggItem> SKIZZO_SPAWN_EGG = PA_Registry.ITEMS.register("skizzo_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.SKIZZO, PA_ThemeableSpawnEggColors.SKIZZO_PRIMARY, 0X330000, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
 
+    @SubscribeEvent
+    public static void wolfTick(LivingEvent.LivingUpdateEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        if (entity instanceof Wolf)
+            ((Wolf) entity).goalSelector.addGoal(9, new PA_BegGoal((Wolf) entity, 8.0F));
+    }
+    
+    @SubscribeEvent
+    public static void wolfBehavior(PlayerInteractEvent.EntityInteract event) {
+        Entity entity = event.getTarget();
+        if (entity instanceof Wolf) {
+            
+            Player player = event.getPlayer();
+            ItemStack itemstack = player.getItemInHand(event.getHand());
+
+            if (itemstack.is(PA_Items.SKIZZIK_BONE.get()) && !((Wolf) entity).isAngry() && !((Wolf) entity).isTame()) {
+                if (!player.getAbilities().instabuild) {
+                    itemstack.shrink(1);
+                }
+
+                if (!net.minecraftforge.event.ForgeEventFactory.onAnimalTame((Wolf) entity, player)) {
+                    ((Wolf) entity).tame(player);
+                    ((Wolf) entity).getNavigation().stop();
+                    ((Wolf) entity).setTarget(null);
+                    ((Wolf) entity).setOrderedToSit(true);
+                    entity.level.broadcastEntityEvent(entity, (byte)7);
+                } 
+                else {
+                    entity.level.broadcastEntityEvent(entity, (byte)6);
+                }
+            }
+        }
+    }
+    
     public static void register() {}
 }

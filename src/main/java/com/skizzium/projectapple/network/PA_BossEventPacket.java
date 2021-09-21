@@ -110,7 +110,7 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
     public void handlePacket(PA_BossEventPacket packet) {
         packet.dispatch(new PA_BossEventPacket.Handler() {
             final Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-            public void add(UUID uuid, Component displayName, float progress, PA_BossEvent.PA_BossBarColor color, BossEvent.BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
+            public void add(UUID uuid, Component displayName, float progress, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
                 vanillaEvents.put(uuid, new PA_LerpingBossEvent(uuid, displayName, progress, color, overlay, darkenScreen, fog));
             }
 
@@ -126,10 +126,10 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
                 vanillaEvents.get(uuid).setName(displayName);
             }
 
-            public void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, BossEvent.BossBarOverlay overlay) {
+            public void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay) {
                 PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
                 lerpingBossEvent.setCustomColor(color);
-                lerpingBossEvent.setOverlay(overlay);
+                lerpingBossEvent.setCustomOverlay(overlay);
             }
 
             public void updateProperties(UUID uuid, boolean darkenScreen, boolean fog) {
@@ -148,7 +148,7 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
         private final Component name;
         private final float progress;
         private final PA_BossEvent.PA_BossBarColor color;
-        private final BossEvent.BossBarOverlay overlay;
+        private final PA_BossEvent.PA_BossBarOverlay overlay;
         private final boolean darkenScreen;
         private final boolean createWorldFog;
 
@@ -165,7 +165,7 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
             this.name = buffer.readComponent();
             this.progress = buffer.readFloat();
             this.color = buffer.readEnum(PA_BossEvent.PA_BossBarColor.class);
-            this.overlay = buffer.readEnum(BossEvent.BossBarOverlay.class);
+            this.overlay = buffer.readEnum(PA_BossEvent.PA_BossBarOverlay.class);
             int i = buffer.readUnsignedByte();
             this.darkenScreen = (i & 1) > 0;
             this.createWorldFog = (i & 4) > 0;
@@ -189,7 +189,7 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
     }
 
     public interface Handler {
-        default void add(UUID uuid, Component name, float progress, PA_BossEvent.PA_BossBarColor color, BossEvent.BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
+        default void add(UUID uuid, Component name, float progress, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
         }
 
         default void remove(UUID uuid) {
@@ -201,7 +201,7 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
         default void updateName(UUID uuid, Component name) {
         }
 
-        default void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, BossEvent.BossBarOverlay overlay) {
+        default void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay) {
         }
 
         default void updateProperties(UUID uuid, boolean darkenScreen, boolean fog) {
@@ -309,16 +309,16 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
 
     static class UpdateStyleOperation implements PA_BossEventPacket.Operation {
         private final PA_BossEvent.PA_BossBarColor color;
-        private final BossEvent.BossBarOverlay overlay;
+        private final PA_BossEvent.PA_BossBarOverlay overlay;
 
-        UpdateStyleOperation(PA_BossEvent.PA_BossBarColor newColor, BossEvent.BossBarOverlay newOverlay) {
+        UpdateStyleOperation(PA_BossEvent.PA_BossBarColor newColor, PA_BossEvent.PA_BossBarOverlay newOverlay) {
             this.color = newColor;
             this.overlay = newOverlay;
         }
 
         private UpdateStyleOperation(FriendlyByteBuf buffer) {
             this.color = buffer.readEnum(PA_BossEvent.PA_BossBarColor.class);
-            this.overlay = buffer.readEnum(BossEvent.BossBarOverlay.class);
+            this.overlay = buffer.readEnum(PA_BossEvent.PA_BossBarOverlay.class);
         }
 
         public PA_BossEventPacket.OperationType getType() {

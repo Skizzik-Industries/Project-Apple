@@ -1,6 +1,5 @@
 package com.skizzium.projectapple.entity.renderer;
 
-import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.FriendlyWitchSkizzie;
 import com.skizzium.projectapple.entity.WitchSkizzie;
 import com.skizzium.projectapple.entity.layer.WitchSkizzieGlowLayer;
@@ -28,9 +27,9 @@ public class WitchSkizzieRenderer extends MobRenderer<Mob, WitchSkizzieModel<Mob
 
     public ResourceLocation getTextureLocation(Mob entity) {
         if (entity instanceof FriendlyWitchSkizzie) {
-            return ((FriendlyWitchSkizzie) entity).getHolidayVariation() == 1 ? FRIENDLY_WITCH_SPOOKZIE_LOCATION : FRIENDLY_WITCH_SKIZZIE_LOCATION;
+            return ((FriendlyWitchSkizzie) entity).getHoliday() == 1 ? FRIENDLY_WITCH_SPOOKZIE_LOCATION : FRIENDLY_WITCH_SKIZZIE_LOCATION;
         }
 
-        return ((WitchSkizzie) entity).getHolidayVariation() == 1 ? WITCH_SPOOKZIE_LOCATION : WITCH_SKIZZIE_LOCATION;
+        return ((WitchSkizzie) entity).getHoliday() == 1 ? WITCH_SPOOKZIE_LOCATION : WITCH_SKIZZIE_LOCATION;
     }
 }

@@ -19,7 +19,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     private final Set<ServerPlayer> unmodifiablePlayers = Collections.unmodifiableSet(this.players);
     private boolean visible = true;
 
-    public PA_ServerBossEvent(Component displayName, PA_BossBarColor color, BossEvent.BossBarOverlay overlay) {
+    public PA_ServerBossEvent(Component displayName, PA_BossBarColor color, PA_BossBarOverlay overlay) {
         super(Mth.createInsecureUUID(), displayName, color, overlay);
     }
 
@@ -39,7 +39,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
 
     }
 
-    public void setOverlay(BossEvent.BossBarOverlay newOverlay) {
+    public void setOverlay(PA_BossBarOverlay newOverlay) {
         if (newOverlay != this.overlay) {
             super.setOverlay(newOverlay);
             this.broadcast(PA_BossEventPacket::createUpdateStylePacket);
