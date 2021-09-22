@@ -3,6 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -11,6 +12,7 @@ import com.skizzium.projectapple.util.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
@@ -53,8 +55,23 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
+    public int skizzieSpawnTicks() {
+        return 60;
+    }
+
+    @Override
     public int destroyBlocksTick() {
         return 35;
+    }
+
+    @Override
+    public float eyeHeight() {
+        return 2.45F;
+    }
+
+    @Override
+    public EntityDimensions hitbox() {
+        return new EntityDimensions(2.5F, 4.0F, true);
     }
 
     @Override
@@ -63,6 +80,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         int previousId = stageManager.getPreviousStage().getStage().getId();
         Level world = skizzik.level;
         
+        skizzik.eyeHeight = this.eyeHeight();
         skizzik.killAllSkizzies(world, true);
         
         if (world instanceof ServerLevel) {
@@ -112,6 +130,16 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             skizzik.goalSelector.addGoal(5, skizzik.avoidWaterGoal);
             skizzik.goalSelector.addGoal(6, skizzik.lookGoal);
             skizzik.goalSelector.addGoal(7, skizzik.lookRandomlyGoal);
+        }
+    }
+
+    public void spawnSkizzie(Skizzie entity, double x, double y, double z, Level world) {
+        if (world instanceof ServerLevel) {
+            entity.setHoliday(ProjectApple.holiday);
+            entity.moveTo(x, y, z);
+            entity.finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
+            entity.setOwner(skizzik);
+            world.addFreshEntity(entity);
         }
     }
     

@@ -79,6 +79,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     //private final Skizzo[] skizzos = new Skizzo[4];
 
     public final SkizzikStageManager stageManager;
+    public float eyeHeight;
     private int destroyBlocksTick;
     private int spawnSkizzieTicks;
 
@@ -103,6 +104,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
+        this.eyeHeight = 1.5F;
     }
 
     @Override
@@ -137,8 +139,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        int stage = this.stageManager.getCurrentStage().getStage().getId();
-        return stage == 0 ? 1.5F : stage == 5 ? 2.75F : stage == 6 ? 2.25F : 2.45F;
+        return eyeHeight;
     }
 
     @Override
@@ -180,20 +181,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        int stage = this.stageManager.getCurrentStage().getStage().getId();
-        if (stage == 0) {
-            return new EntityDimensions(2.5F, 2.1F, true);
-        }
-        else if (stage == 3) {
-            return new EntityDimensions(2.5F, 3.0F, true);
-        }
-        else if (stage == 5) {
-            return new EntityDimensions(2.5F, 3.4F, true);
-        }
-        else if (stage == 6) {
-            return new EntityDimensions(1.2F, 2.8F, true);
-        }
-        return super.getDimensions(pose);
+        return this.stageManager.getCurrentStage().hitbox();
     }
 
     @Override
@@ -506,6 +494,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     @Override
     public void aiStep() {
+        int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
@@ -532,7 +521,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         super.aiStep();
 
-        if (!this.preview && this.getStage() != 0 && this.getStage() != 6) {
+        if (!this.preview && currentStageId != 0 && currentStageId != 6) {
             for (int i = 0; i < activeHeads; ++i) {
                 this.yRotHeads1[i] = this.yRotHeads[i];
                 this.xRotHeads1[i] = this.xRotHeads[i];
@@ -585,22 +574,12 @@ public class Skizzik extends Monster implements RangedAttackMob {
     protected void customServerAiStep() {
         super.customServerAiStep();
 
+        int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         if (this.spawnSkizzieTicks <= 0) {
-            if (this.getStage() == 1 || this.getStage() == 2) {
-                this.spawnSkizzieTicks = 60;
-            }
-            else if (this.getStage() == 3 || this.getStage() == 4) {
-                this.spawnSkizzieTicks = 40;
-            }
-            else if (this.getStage() == 5) {
-                this.spawnSkizzieTicks = 30;
-            }
-            else {
-                this.spawnSkizzieTicks = 0;
-            }
+            this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();
         }
 
-        if (!this.preview && this.getStage() != 0 && this.getStage() != 6) {
+        if (!this.preview && currentStageId != 0 && currentStageId != 6) {
             for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
@@ -613,8 +592,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                         double y = Mth.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
                         double z = Mth.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
 
-                        this.performRangedAttack(headIndex + 1, x, y, z, this.getStage() == 1 || this.getStage() == 2 ? 1 :
-                                this.getStage() == 3 || this.getStage() == 4 ? 2 :
+                        this.performRangedAttack(headIndex + 1, x, y, z, currentStageId == 1 || currentStageId == 2 ? 1 :
+                                currentStageId == 3 || currentStageId == 4 ? 2 :
                                         3);
                         this.idleHeadUpdates[headIndex - 1] = 0;
                     }
@@ -627,8 +606,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                             if (target instanceof Player && ((Player) target).getAbilities().invulnerable) {
                                 this.setAlternativeTarget(headIndex, 0);
                             } else {
-                                this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ(), this.getStage() == 1 || this.getStage() == 2 ? 1 :
-                                        this.getStage() == 3 || this.getStage() == 4 ? 2 :
+                                this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ(), currentStageId == 1 || currentStageId == 2 ? 1 :
+                                        currentStageId == 3 || currentStageId == 4 ? 2 :
                                                 3);
                                 this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
                                 this.idleHeadUpdates[headIndex - 1] = 0;
@@ -636,7 +615,8 @@ public class Skizzik extends Monster implements RangedAttackMob {
                         } else {
                             this.setAlternativeTarget(headIndex, 0);
                         }
-                    } else {
+                    } 
+                    else {
                         List<LivingEntity> list = this.level.getNearbyEntities(LivingEntity.class, TARGETING_CONDITIONS, this, this.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
 
                         for (int i = 0; i < 10 && !list.isEmpty(); ++i) {
@@ -667,7 +647,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
         if (!this.preview) {
             if (this.destroyBlocksTick > 0) {
-                if (this.getStage() != 0 && this.getStage() != 6) {
+                if (currentStageId != 0 && currentStageId != 6) {
                     --this.destroyBlocksTick;
 
                     if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
@@ -704,88 +684,13 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 --this.spawnSkizzieTicks;
 
                 if (this.spawnSkizzieTicks == 0) {
-                    Level world = this.getCommandSenderWorld();
-
-                    if (this.getStage() == 1) {
-                        if (Math.random() < 0.05) {
-                            spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                        } else {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                        }
-                    } else if (this.getStage() == 2) {
-                        if (Math.random() < 0.05) {
-                            spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                        } else {
-                            if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            } else {
-                                spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            }
-                        }
-                    } else if (this.getStage() == 3) {
-                        /*if (Math.random() < 0.05) {
-                            spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                        }
-                        else {*/
-                        if (Math.random() < 0.5) {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                        } else {
-                            if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            } else {
-                                spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            }
-                        }
-                        //}
-                    } else if (this.getStage() == 4) {
-                        if (Math.random() < 0.05) {
-                            spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                        } else {
-                            if (Math.random() < 0.5) {
-                                spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                                spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            } else {
-                                if (Math.random() < 0.5) {
-                                    spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                                } else {
-                                    //if (Math.random() < 0.5) {
-                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                                    /*}
-                                    else {
-                                        spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                                    }*/
-                                }
-                            }
-                        }
-                    } else if (this.getStage() == 5) {
-                        if (Math.random() < 0.5) {
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                        } else {
-                            if (Math.random() < 0.5) {
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                                spawnSkizzie(new KaboomSkizzie(PA_Entities.KABOOM_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                            } else {
-                                if (Math.random() < 0.5) {
-                                    spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                                } else {
-                                    /*if (Math.random() < 0.5) {
-                                        spawnSkizzie(new MinigunSkizzie(PA_Entities.MINIGUN_SKIZZIE, world), this.getX(), this.getY(), this.getZ(), world);
-                                    }
-                                    else {*/
-                                    spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), world), this.getX(), this.getY(), this.getZ(), world);
-                                    //}
-                                }
-                            }
-                        }
-                    }
+                    this.stageManager.getCurrentStage().skizzieSpawning();
                 }
             }
         }
 
         float health = this.getHealth();
-        int stage = this.getStage();
+        int stage = currentStageId;
 
         if (stage == 5 && health <= 219) {
             if (this.tickCount % 20 == 0) {

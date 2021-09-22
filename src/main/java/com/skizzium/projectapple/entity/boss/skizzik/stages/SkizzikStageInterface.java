@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.util.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.EntityDimensions;
 
 public interface SkizzikStageInterface {
     TextComponent displayName();
@@ -16,9 +17,17 @@ public interface SkizzikStageInterface {
     
     int skullLevel();
     
+    int skizzieSpawnTicks();
+    
     int destroyBlocksTick();
     
+    float eyeHeight();
+    
+    EntityDimensions hitbox();
+    
     void begin(SkizzikStageManager stageManager);
+    
+    void skizzieSpawning();
 
     void end(SkizzikStageManager stageManager);
     

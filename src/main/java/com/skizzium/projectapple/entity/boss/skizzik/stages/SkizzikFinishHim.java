@@ -8,8 +8,8 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Constants;
 
 public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     public SkizzikFinishHim(Skizzik skizzik) {
@@ -26,6 +26,16 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         return 20;
     }
 
+    @Override
+    public float eyeHeight() {
+        return 2.25F;
+    }
+
+    @Override
+    public EntityDimensions hitbox() {
+        return new EntityDimensions(1.2F, 2.8F, true);
+    }
+    
     @Override
     public void begin(SkizzikStageManager stageManager) {
         super.begin(stageManager);
