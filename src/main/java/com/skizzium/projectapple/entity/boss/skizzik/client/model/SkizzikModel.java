@@ -103,7 +103,8 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		this.centerHead.yRot = f3 * ((float)Math.PI / 180F);
 		this.centerHead.xRot = f4 * ((float)Math.PI / 180F);
 
-		if (entity.getStage() == 0) {
+		int currentStageId = entity.stageManager.getCurrentStage().getStage().getId();
+		if (currentStageId == 0) {
 			this.centerHead.setPos(1.0F, -1.0F, 0.0F);
 			this.bottomRightHead.setPos(19.0F, 18.0F, 0.0F);
 			this.bottomLeftHead.setPos(-18.0F, 18.0F, 1.0F);
@@ -114,16 +115,16 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.tail.setRotation(1.5F, 0.6F, 0.0F);
 			this.tail.setPos(4.0F, 20.9F, 7.5F);
 		}
-		else if (entity.getStage() == 2) {
+		else if (currentStageId == 2) {
 			this.topRightHead.setPos(-4.0F, -33.0F, 1.0F);
 		}
-		else if (entity.getStage() == 3) {
+		else if (currentStageId == 3) {
 			this.bottomRightHead.setPos(19.0F, -13.0F, 0.0F);
 		}
-		else if (entity.getStage() == 4) {
+		else if (currentStageId == 4) {
 			this.bottomRightHead.setPos(11.0F, -32.0F, 0.0F);
 		}
-		else if (entity.getStage() == 5) {
+		else if (currentStageId == 5) {
 			this.centerHead.setPos(1.0F, -21.0F, 0.0F);
 
 			this.commandBlock.setPos(0.0F, 0.0F, -10.0F);
@@ -132,7 +133,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.leftRibs.setRotation(0.0F, 0.35F, 0.0F);
 			this.bottomRib.setRotation(0.25F, 0.0F, 0.0F);
 		}
-		else if (entity.getStage() == 6) {
+		else if (currentStageId == 6) {
 			this.centerHead.setPos(1.0F, -13.0F, 0.0F);
 
 			this.commandBlock.visible = false;
@@ -144,25 +145,25 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		}
 		setDefaults(entity);
 
-		if (entity.getStage() == 2) {
+		if (currentStageId == 2) {
 			this.bottomRightHead.visible = true;
 			this.bottomLeftHead.visible = true;
 			this.topRightHead.visible = true;
 			this.topLeftHead.visible = false;
 		}
-		else if (entity.getStage() == 3) {
+		else if (currentStageId == 3) {
 			this.bottomRightHead.visible = true;
 			this.bottomLeftHead.visible = true;
 			this.topRightHead.visible = false;
 			this.topLeftHead.visible = false;
 		}
-		else if (entity.getStage() == 4) {
+		else if (currentStageId == 4) {
 			this.bottomRightHead.visible = true;
 			this.bottomLeftHead.visible = false;
 			this.topRightHead.visible = false;
 			this.topLeftHead.visible = false;
 		}
-		else if (entity.getStage() == 5 || entity.getStage() == 6) {
+		else if (currentStageId == 5 || currentStageId == 6) {
 			this.bottomRightHead.visible = false;
 			this.bottomLeftHead.visible = false;
 			this.topRightHead.visible = false;
@@ -185,21 +186,23 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 	}
 
 	private void setDefaults(Skizzik entity) {
-		if (entity.getStage() != 0 && entity.getStage() != 5 && entity.getStage() != 6) {
+		int currentStageId = entity.stageManager.getCurrentStage().getStage().getId();
+		
+		if (currentStageId != 0 && currentStageId != 5 && currentStageId != 6) {
 			this.centerHead.setPos(1.0F, -16.0F, 0.0F);
 		}
 
-		if (entity.getStage() != 0) {
-			if (entity.getStage() < 2 && entity.getStage() != 0) {
+		if (currentStageId != 0) {
+			if (currentStageId < 2 && currentStageId != 0) {
 				this.topRightHead.setPos(17.0F, -31.0F, 0.0F);
 			}
-			if (entity.getStage() < 4) {
+			if (currentStageId < 4) {
 				this.bottomRightHead.setPos(19.0F, -9.0F, 0.0F);
 				this.bottomLeftHead.setPos(-18.0F, -11.0F, 1.0F);
 			}
 		}
 
-		if (entity.getStage() != 0) {
+		if (currentStageId != 0) {
 			this.topLeftHead.setPos(-13.0F, -34.0F, 1.0F);
 
 			this.body.setPos(0.5F, 4.0F, -11.0F);
@@ -207,7 +210,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.tail.setPos(1.0F, 15.9F, 4.5F);
 		}
 
-		if (entity.getStage() != 5) {
+		if (currentStageId != 5) {
 			this.commandBlock.setPos(0.0F, 0.0F, 0.0F);
 
 			this.rightRibs.setRotation(0.0F, 0.0F, 0.0F);
@@ -215,7 +218,7 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.bottomRib.setRotation(0.0F, 0.0F, 0.0F);
 		}
 
-		if (entity.getStage() != 6) {
+		if (currentStageId != 6) {
 			this.commandBlock.visible = true;
 
 			this.rightRibs.visible = true;

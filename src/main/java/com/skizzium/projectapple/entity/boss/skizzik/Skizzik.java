@@ -216,14 +216,6 @@ public class Skizzik extends Monster implements RangedAttackMob {
                 .add(Attributes.FLYING_SPEED, 0.6D);
     }
 
-    public int getStage() {
-        return this.entityData.get(DATA_STAGE);
-    }
-
-    public void setStage(int stage) {
-        this.entityData.set(DATA_STAGE, stage);
-    }
-
     public boolean getPreview() {
         return this.preview;
     }
