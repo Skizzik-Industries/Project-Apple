@@ -84,7 +84,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         skizzik.killAllSkizzies(world, true);
         
         if (world instanceof ServerLevel) {
-            PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStartPacket(PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
+            PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
         }
 
         if (!skizzik.getPreview()) {

@@ -29,6 +29,7 @@ public class PA_SoundEvents {
 
     private static final Map<Integer, SoundEvent> BOSS_THEMES = Util.make(Maps.newHashMap(), (builder) -> {
         builder.put(ID++, MUSIC_SKIZZIK_LAZY.get());
+        builder.put(ID++, MUSIC_SPOOKZIK_LAZY.get());
     });
 
     public static int getID(SoundEvent music) {
