@@ -19,6 +19,7 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +38,8 @@ public class ProjectApple {
 
     public ProjectApple() {
         holiday = checkForHolidays();
-
+        GeckoLib.initialize();
+        
         PA_Registry.register();
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();

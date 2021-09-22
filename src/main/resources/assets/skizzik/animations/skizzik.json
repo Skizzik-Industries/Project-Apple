@@ -1,0 +1,116 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.skizzik.sleepingToFirst": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 3.125,
+			"bones": {
+				"body": {
+					"position": {
+						"0.4167": {
+							"vector": [0, 0, 0]
+						},
+						"2.5833": {
+							"vector": [0, 13, 0],
+							"easing": "easeInOutBack"
+						}
+					}
+				},
+				"tail": {
+					"rotation": {
+						"0.625": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [0, -34, 0],
+							"easing": "easeInOutQuart"
+						},
+						"1.5833": {
+							"vector": [0, -34, 0]
+						},
+						"2.5417": {
+							"vector": [-45.8367, -34, 0],
+							"easing": "easeInOutQuart"
+						}
+					},
+					"position": {
+						"0.625": {
+							"vector": [0, 0, 0]
+						},
+						"2.0": {
+							"vector": [-3, 4.4, -3],
+							"easing": "easeInOutQuart"
+						}
+					}
+				},
+				"center_head": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, 15, 0],
+							"easing": "easeInOutBack",
+							"easingArgs": [1]
+						}
+					}
+				},
+				"bottom_right_head": {
+					"position": {
+						"1.25": {
+							"vector": [0, 0, 0]
+						},
+						"2.7917": {
+							"vector": [0, 29, 0],
+							"easing": "easeInOutBack"
+						}
+					}
+				},
+				"bottom_left_head": {
+					"position": {
+						"1.0417": {
+							"vector": [0, 0, 0]
+						},
+						"2.7083": {
+							"vector": [0, 29, 0],
+							"easing": "easeInOutBack"
+						}
+					}
+				},
+				"top_left_head": {
+					"position": {
+						"0.625": {
+							"vector": [0, 0, 0]
+						},
+						"2.5417": {
+							"vector": [0, 39, 0],
+							"easing": "easeInOutBack"
+						},
+						"3.125": {
+							"vector": [4, 39, 0],
+							"easing": "easeInOutBack",
+							"easingArgs": [3]
+						}
+					}
+				},
+				"top_right_head": {
+					"position": {
+						"0.8333": {
+							"vector": [0, 0, 0]
+						},
+						"2.625": {
+							"vector": [0, 37, 0],
+							"easing": "easeInOutBack"
+						},
+						"3.125": {
+							"vector": [-1, 37, 0],
+							"easing": "easeInOutBack",
+							"easingArgs": [3]
+						}
+					}
+				}
+			},
+			"sound_effects": {}
+		}
+	}
+}

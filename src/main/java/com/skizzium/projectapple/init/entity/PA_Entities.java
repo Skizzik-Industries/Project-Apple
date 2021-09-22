@@ -8,17 +8,20 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.*;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzikModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.OldSkizzikModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
 import com.skizzium.projectapple.entity.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
@@ -73,7 +76,7 @@ public class PA_Entities {
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.WITCH_SKIZZIE_LAYER, WitchSkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.SKIZZO_LAYER, SkizzoModel::createBodyLayer);
-        event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_LAYER, SkizzikModel::createBodyLayer);
+        event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_LAYER, OldSkizzikModel::createBodyLayer);
     }
 
     @SubscribeEvent
