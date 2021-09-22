@@ -177,6 +177,13 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 		}
 	}
 
+	private static <T extends Skizzik> void setupHeadRotation(T entity, ModelPart model, int i) {
+		if (!entity.getPreview() && model.visible) {
+			model.yRot = (entity.getHeadYRot(i) - entity.yBodyRot) * 0.017453292F;
+			model.xRot = entity.getHeadXRot(i) * 0.017453292F;
+		}
+	}
+	
 	@Override
 	public void prepareMobModel(T entity, float f, float f1, float f2) {
 		setupHeadRotation(entity, this.bottomRightHead, 0);
@@ -225,13 +232,6 @@ public class SkizzikModel<T extends Skizzik> extends HierarchicalModel<T> {
 			this.leftRibs.visible = true;
 			this.bottomRib.visible = true;
 			this.backRibs.visible = true;
-		}
-	}
-
-	private static <T extends Skizzik> void setupHeadRotation(T entity, ModelPart model, int i) {
-		if (!entity.getPreview() && model.visible) {
-			model.yRot = (entity.getHeadYRot(i) - entity.yBodyRot) * 0.017453292F;
-			model.xRot = entity.getHeadXRot(i) * 0.017453292F;
 		}
 	}
 }

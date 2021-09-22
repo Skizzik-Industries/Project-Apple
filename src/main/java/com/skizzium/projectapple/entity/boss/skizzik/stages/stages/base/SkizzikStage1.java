@@ -1,8 +1,12 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 
 public class SkizzikStage1 extends AbstractSkizzikStage {
@@ -30,7 +34,7 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     }
 
     @Override
-    public SkizzikStage<? extends SkizzikStageInterface> getStage() {
-        return SkizzikStage.STAGE_1;
+    public SkizzikStages<? extends SkizzikStageInterface> getStage() {
+        return SkizzikStages.STAGE_1;
     }
 }

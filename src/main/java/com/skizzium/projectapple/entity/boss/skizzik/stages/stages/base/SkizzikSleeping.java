@@ -1,6 +1,10 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractPassiveSkizzikStage;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EntityDimensions;
@@ -37,7 +41,7 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     }
 
     @Override
-    public SkizzikStage<? extends SkizzikStageInterface> getStage() {
-        return SkizzikStage.SLEEPING;
+    public SkizzikStages<? extends SkizzikStageInterface> getStage() {
+        return SkizzikStages.SLEEPING;
     }
 }

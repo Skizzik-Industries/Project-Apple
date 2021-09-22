@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
@@ -6,6 +6,9 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.CorruptedSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import net.minecraft.world.entity.EntityDimensions;
@@ -76,7 +79,7 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
-    public SkizzikStage<? extends SkizzikStageInterface> getStage() {
-        return SkizzikStage.STAGE_5;
+    public SkizzikStages<? extends SkizzikStageInterface> getStage() {
+        return SkizzikStages.STAGE_5;
     }
 }

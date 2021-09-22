@@ -1,6 +1,10 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractPassiveSkizzikStage;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.core.BlockPos;
@@ -64,7 +68,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
-    public SkizzikStage<? extends SkizzikStageInterface> getStage() {
-        return SkizzikStage.FINISH_HIM;
+    public SkizzikStages<? extends SkizzikStageInterface> getStage() {
+        return SkizzikStages.FINISH_HIM;
     }
 }

@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.network;
 
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.network.FriendlyByteBuf;
@@ -27,7 +28,7 @@ public class BossMusicStopPacket {
     public void handlePacket(BossMusicStopPacket packet, Supplier<NetworkEvent.Context> context) {
         //Minecraft.getInstance().getMusicManager().stopPlaying();
 
-        Minecraft.getInstance().getSoundManager().stop();
+        Minecraft.getInstance().getSoundManager().stop(BossMusicStartPacket.getMusic());
         BossMusicStartPacket.isPlaying = false;
 
         Music music = Minecraft.getInstance().getSituationalMusic();

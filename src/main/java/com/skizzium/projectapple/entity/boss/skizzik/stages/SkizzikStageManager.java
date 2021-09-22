@@ -4,13 +4,13 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 
 public class SkizzikStageManager {
     private final Skizzik skizzik;
-    private final SkizzikStageInterface[] stages = new SkizzikStageInterface[SkizzikStage.getCount()];
+    private final SkizzikStageInterface[] stages = new SkizzikStageInterface[SkizzikStages.getCount()];
     private SkizzikStageInterface currentStage;
     private SkizzikStageInterface previousStage;
     
     public SkizzikStageManager(Skizzik skizzik) {
         this.skizzik = skizzik;
-        this.setStage(SkizzikStage.SLEEPING);
+        this.setStage(SkizzikStages.SLEEPING);
     }
 
     public void updateStage() {
@@ -23,11 +23,11 @@ public class SkizzikStageManager {
                                             health > 20 ? 5 : 6;
         
         if (newStageId != this.getCurrentStage().getStage().getId()) {
-            this.setStage(SkizzikStage.getById(newStageId));
+            this.setStage(SkizzikStages.getById(newStageId));
         }
     }
     
-    public void setStage(SkizzikStage<?> stage) {
+    public void setStage(SkizzikStages<?> stage) {
         if (this.currentStage == null || stage != this.currentStage.getStage()) {
             if (this.currentStage != null) {
                 this.currentStage.end(this);
@@ -52,7 +52,7 @@ public class SkizzikStageManager {
         return this.previousStage;
     }
 
-    public <T extends SkizzikStageInterface> T getStage(SkizzikStage<T> phase) {
+    public <T extends SkizzikStageInterface> T getStage(SkizzikStages<T> phase) {
         int i = phase.getId();
         if (this.stages[i] == null) {
             this.stages[i] = phase.createInstance(this.skizzik);

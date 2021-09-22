@@ -31,5 +31,5 @@ public interface SkizzikStageInterface {
 
     void end(SkizzikStageManager stageManager);
     
-    SkizzikStage<? extends SkizzikStageInterface> getStage();
+    SkizzikStages<? extends SkizzikStageInterface> getStage();
 }

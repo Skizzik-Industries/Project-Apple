@@ -3,6 +3,7 @@ package com.skizzium.projectapple.network;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.sound.BossMusic;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,11 +15,16 @@ import java.util.function.Supplier;
 public class BossMusicStartPacket {
     private final SoundEvent musicEvent;
     public static boolean isPlaying = false;
+    private static SoundInstance music;
 
     public BossMusicStartPacket(SoundEvent musicToPlay) {
         this.musicEvent = musicToPlay;
     }
 
+    public static SoundInstance getMusic() {
+        return music;
+    }
+    
     public void encode(FriendlyByteBuf buffer) {
         buffer.writeInt(PA_SoundEvents.getID(this.musicEvent));
     }
@@ -35,7 +41,8 @@ public class BossMusicStartPacket {
     public void handlePacket(BossMusicStartPacket packet, Supplier<NetworkEvent.Context> context) {
         Minecraft.getInstance().getMusicManager().stopPlaying();
         if (!isPlaying) {
-            Minecraft.getInstance().getSoundManager().play(new BossMusic(musicEvent, Minecraft.getInstance()));
+            music = new BossMusic(musicEvent, Minecraft.getInstance());
+            Minecraft.getInstance().getSoundManager().play(music);
             isPlaying = true;
         }
     }

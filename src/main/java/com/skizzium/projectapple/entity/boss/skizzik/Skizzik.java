@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage3;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage4;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage5;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -306,7 +309,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
         if (DATA_STAGE.equals(key) && this.level.isClientSide) {
-            this.stageManager.setStage(SkizzikStage.getById(this.getEntityData().get(DATA_STAGE)));
+            this.stageManager.setStage(SkizzikStages.getById(this.getEntityData().get(DATA_STAGE)));
         }
 
         super.onSyncedDataUpdated(key);
@@ -324,7 +327,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
-        this.stageManager.setStage(SkizzikStage.getById(nbt.getInt("Stage")));
+        this.stageManager.setStage(SkizzikStages.getById(nbt.getInt("Stage")));
         this.setPreview(nbt.getBoolean("Preview"));
 
         if (this.hasCustomName()) {
@@ -444,7 +447,7 @@ public class Skizzik extends Monster implements RangedAttackMob {
         double z = this.getZ();
         Level world = this.level;
         
-        if ((!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) || SkizzikStage.isImmune(this, source)) {
+        if ((!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) || SkizzikStages.isImmune(this, source)) {
             return false;
         }
         else {
