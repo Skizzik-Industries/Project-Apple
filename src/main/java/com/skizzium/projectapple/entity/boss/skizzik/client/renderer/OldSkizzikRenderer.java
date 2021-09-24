@@ -3,7 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.OldSkizzikModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.SkizzikGlowLayer;
+import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.OldSkizzikGlowLayer;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -27,7 +27,7 @@ public class OldSkizzikRenderer extends MobRenderer<Skizzik, EntityModel<Skizzik
 
    public OldSkizzikRenderer(EntityRendererProvider.Context renderer) {
       super(renderer, new OldSkizzikModel<>(renderer.bakeLayer(PA_ModelLayers.SKIZZIK_LAYER)), 1.0F);
-      this.addLayer(new SkizzikGlowLayer<>(this));
+      this.addLayer(new OldSkizzikGlowLayer<>(this));
    }
 
    @Override

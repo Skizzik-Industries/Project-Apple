@@ -117,6 +117,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.eyeHeight = 1.5F;
     }
 
+    public Component getTranslationKey() {
+        return this.getTypeName();
+    }
+    
     @Override
     protected Component getTypeName() {
         return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
@@ -248,13 +252,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState test(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.sleepingToFirst", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.spawn", true));
         return PlayState.CONTINUE;
     }
     
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 0, this::test));
+        data.addAnimationController(new AnimationController(this, "transitions", 0, this::test));
     }
 
     @Override

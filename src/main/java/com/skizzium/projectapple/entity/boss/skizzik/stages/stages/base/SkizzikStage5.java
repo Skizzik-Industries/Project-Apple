@@ -24,6 +24,11 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
+    public String resourceLocation() {
+        return String.format("%s/%s_stage-5", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+    
+    @Override
     public int armorValue() {
         return 12;
     }

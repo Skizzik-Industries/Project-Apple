@@ -26,6 +26,11 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public String resourceLocation() {
+        return String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+    
+    @Override
     public int maxHealth() {
         return 20;
     }

@@ -11,6 +11,8 @@ public interface SkizzikStageInterface {
 
     PA_BossEvent.PA_BossBarOverlay barOverlay();
     
+    String resourceLocation();
+    
     int armorValue();
 
     int maxHealth();

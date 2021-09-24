@@ -1,0 +1,46 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.skizzik_finish_him",
+				"texture_width": 156,
+				"texture_height": 106,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 4.5,
+				"visible_bounds_offset": [0, 1.75, 0]
+			},
+			"bones": [
+				{
+					"name": "last_stage",
+					"pivot": [0, 18.1, -9.5]
+				},
+				{
+					"name": "body",
+					"parent": "last_stage",
+					"pivot": [0, 18.1, -9.5],
+					"cubes": [
+						{"origin": [-3, 10.1, -3.5], "size": [7, 19, 7], "uv": [0, 79]}
+					]
+				},
+				{
+					"name": "body2",
+					"parent": "last_stage",
+					"pivot": [1, 7.1, 3.5],
+					"rotation": [39.99818, 0, 0],
+					"cubes": [
+						{"origin": [-3, 1.1026, 0.1414], "size": [7, 13, 7], "uv": [31, 85]}
+					]
+				},
+				{
+					"name": "head1",
+					"parent": "last_stage",
+					"pivot": [1, 39, -1],
+					"cubes": [
+						{"origin": [-7.5, 29, -9], "size": [16, 16, 16], "uv": [0, 0]}
+					]
+				}
+			]
+		}
+	]
+}

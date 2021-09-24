@@ -20,6 +20,11 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public String resourceLocation() {
+        return String.format("%s/%s_sleeping", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+    
+    @Override
     public int maxHealth() {
         return 1021;
     }

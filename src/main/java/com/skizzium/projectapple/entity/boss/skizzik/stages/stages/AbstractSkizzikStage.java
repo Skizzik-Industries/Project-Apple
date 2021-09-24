@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages.stages;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
@@ -11,6 +11,7 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.util.PA_BossEvent;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -39,6 +40,11 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     @Override
     public PA_BossEvent.PA_BossBarOverlay barOverlay() {
         return PA_BossEvent.PA_BossBarOverlay.NOTCHED_5;
+    }
+
+    @Override
+    public String resourceLocation() {
+        return String.format("%s/%s", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
 
     @Override
