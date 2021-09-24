@@ -19,8 +19,6 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
     public static final SkizzikStages<SkizzikStage4> STAGE_4 = create(SkizzikStage4.class);
     public static final SkizzikStages<SkizzikStage5> STAGE_5 = create(SkizzikStage5.class);
     public static final SkizzikStages<SkizzikFinishHim> FINISH_HIM = create(SkizzikFinishHim.class);
-
-    public static final SkizzikStages<SkizzikFinishHim> SPAWNING = create(SkizzikFinishHim.class);
     
     private final Class<? extends SkizzikStageInterface> stageClass;
     private final int id;
@@ -33,6 +31,10 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
     public static boolean isImmune(Skizzik skizzik, DamageSource source) {
         int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
 
+        if (skizzik.getInvulnerableTicks() > 0 && source != DamageSource.OUT_OF_WORLD) {
+            return true;
+        }
+        
         if (source == DamageSource.LIGHTNING_BOLT ||
                 source == DamageSource.HOT_FLOOR ||
                 source == DamageSource.IN_FIRE ||

@@ -24,8 +24,13 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
-    public String resourceLocation() {
+    public String textureLocation() {
         return String.format("%s/%s_stage-5", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+    
+    @Override
+    public String modelLocation() {
+        return "skizzik/skizzik_stage-5";
     }
     
     @Override

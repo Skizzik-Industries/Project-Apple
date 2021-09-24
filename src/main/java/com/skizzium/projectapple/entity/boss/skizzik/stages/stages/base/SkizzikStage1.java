@@ -15,12 +15,28 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     }
 
     @Override
-    public void begin(SkizzikStageManager stageManager) {
-        super.begin(stageManager);
-        
-        if (stageManager.getPreviousStage() instanceof SkizzikSleeping) {
-            skizzik.setHealth(1020);
+    public String modelLocation() {
+        if (skizzik.isTransitioning()) {
+            return "skizzik/skizzik_sleeping";
         }
+        return super.modelLocation();
+    }
+
+    @Override
+    public boolean hostileAI() {
+        if (skizzik.isTransitioning()) {
+            return false;
+        }
+        return super.hostileAI();
+    }
+
+    @Override
+    public void begin(SkizzikStageManager stageManager) {
+        skizzik.setHealth(1020);
+        skizzik.setInvulnerableTicks(73);
+        skizzik.setTransitioning(true);
+
+        super.begin(stageManager);
     }
 
     @Override
@@ -30,6 +46,18 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
         } 
         else {
             spawnSkizzie(new Skizzie(PA_Entities.SKIZZIE.get(), this.skizzik.level), skizzik.getX(), skizzik.getY(), skizzik.getZ(), skizzik.level);
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        
+        if (skizzik.getInvulnerableTicks() > 0) {
+            skizzik.setInvulnerableTicks(skizzik.getInvulnerableTicks() - 1);
+        }
+        else {
+            skizzik.setTransitioning(false);
         }
     }
 

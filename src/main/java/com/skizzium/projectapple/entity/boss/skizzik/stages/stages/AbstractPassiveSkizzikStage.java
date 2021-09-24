@@ -37,10 +37,15 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
     public int skizzieSpawnTicks() {
         return 0;
     }
-    
+
+    @Override
+    public boolean hostileAI() {
+        return false;
+    }
+
     @Override
     public void begin(SkizzikStageManager stageManager) {
-        skizzik.eyeHeight = this.eyeHeight();
+        skizzik.setEyeHeight(this.eyeHeight());
         if (skizzik.level instanceof ServerLevel) {
             PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStopPacket());
         }

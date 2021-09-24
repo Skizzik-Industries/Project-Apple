@@ -26,8 +26,13 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
-    public String resourceLocation() {
+    public String textureLocation() {
         return String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+    
+    @Override
+    public String modelLocation() {
+        return "skizzik/skizzik_finish-him";
     }
     
     @Override

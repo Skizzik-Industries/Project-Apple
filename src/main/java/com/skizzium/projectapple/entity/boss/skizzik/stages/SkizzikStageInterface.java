@@ -10,8 +10,10 @@ public interface SkizzikStageInterface {
     PA_BossEvent.PA_BossBarColor barColor();
 
     PA_BossEvent.PA_BossBarOverlay barOverlay();
-    
-    String resourceLocation();
+
+    String textureLocation();
+
+    String modelLocation();
     
     int armorValue();
 
@@ -27,9 +29,13 @@ public interface SkizzikStageInterface {
     
     EntityDimensions hitbox();
     
+    boolean hostileAI();
+    
     void begin(SkizzikStageManager stageManager);
     
     void skizzieSpawning();
+    
+    void tick();
 
     void end(SkizzikStageManager stageManager);
     

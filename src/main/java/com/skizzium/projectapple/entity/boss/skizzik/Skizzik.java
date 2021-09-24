@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage3;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage4;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage5;
@@ -89,8 +90,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     //private final Skizzo[] skizzos = new Skizzo[4];
 
     public final SkizzikStageManager stageManager;
-    public float eyeHeight;
-    private int destroyBlocksTick;
+    private float eyeHeight;
+    private boolean transitioning;
+    
+    private int invulnerableTicks;
+    private int destroyBlocksTicks;
     private int spawnSkizzieTicks;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
@@ -160,7 +164,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        if (!this.preview && this.stageManager.getCurrentStage().getStage().getId() != 0 && this.stageManager.getCurrentStage().getStage().getId() != 6) {
+        if (stageManager.getCurrentStage().hostileAI()) {
             PA_PacketHandler.INSTANCE.sendTo(new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
@@ -238,6 +242,26 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.preview = flag;
     }
 
+    public void setEyeHeight(float height) {
+        this.eyeHeight = height;
+    }
+
+    public boolean isTransitioning() {
+        return this.transitioning;
+    }
+
+    public void setTransitioning(boolean flag) {
+        this.transitioning = flag;
+    }
+
+    public int getInvulnerableTicks() {
+        return this.invulnerableTicks;
+    }
+
+    public void setInvulnerableTicks(int flag) {
+        this.invulnerableTicks = flag;
+    }
+
     public int getAlternativeTarget(int head) {
         return this.entityData.get(DATA_TARGETS.get(head));
     }
@@ -251,14 +275,16 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         return false;
     }
 
-    private <E extends IAnimatable> PlayState test(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.spawn", true));
+    private <E extends IAnimatable> PlayState transitions(AnimationEvent<E> event) {
+        if (this.transitioning && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.spawn"));
+        }
         return PlayState.CONTINUE;
     }
     
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "transitions", 0, this::test));
+        data.addAnimationController(new AnimationController(this, "transitions", 0, this::transitions));
     }
 
     @Override
@@ -346,6 +372,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         super.addAdditionalSaveData(nbt);
 
         nbt.putInt("Stage", this.stageManager.getCurrentStage().getStage().getId());
+        nbt.putInt("Invul", this.getInvulnerableTicks());
+        nbt.putBoolean("Transitioning", this.isTransitioning());
         nbt.putBoolean("Preview", this.getPreview());
     }
 
@@ -354,6 +382,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         super.readAdditionalSaveData(nbt);
 
         this.stageManager.setStage(SkizzikStages.getById(nbt.getInt("Stage")));
+        this.setInvulnerableTicks(nbt.getInt("Invul"));
         this.setPreview(nbt.getBoolean("Preview"));
 
         if (this.hasCustomName()) {
@@ -477,8 +506,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             return false;
         }
         else {
-            if (this.destroyBlocksTick <= 0) {
-                this.destroyBlocksTick = this.stageManager.getCurrentStage().destroyBlocksTick();
+            if (this.destroyBlocksTicks <= 0) {
+                this.destroyBlocksTicks = this.stageManager.getCurrentStage().destroyBlocksTick();
             }
 
             for (int i = 0; i < this.idleHeadUpdates.length; ++i) {
@@ -500,16 +529,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             }
 
             return super.hurt(source, amount);
-        }
-    }
-
-    private void spawnSkizzie(Skizzie entity, double x, double y, double z, Level world) {
-        if (world instanceof ServerLevel) {
-            entity.setHoliday(ProjectApple.holiday);
-            entity.moveTo(x, y, z);
-            entity.finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
-            entity.setOwner(this);
-            world.addFreshEntity(entity);
         }
     }
 
@@ -542,7 +561,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
         super.aiStep();
 
-        if (!this.preview && currentStageId != 0 && currentStageId != 6) {
+        if (stageManager.getCurrentStage().hostileAI()) {
             for (int i = 0; i < activeHeads; ++i) {
                 this.yRotHeads1[i] = this.yRotHeads[i];
                 this.xRotHeads1[i] = this.xRotHeads[i];
@@ -600,7 +619,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();
         }
 
-        if (!this.preview && currentStageId != 0 && currentStageId != 6) {
+        if (stageManager.getCurrentStage().hostileAI()) {
             for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
@@ -667,11 +686,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
 
         if (!this.preview) {
-            if (this.destroyBlocksTick > 0) {
-                if (currentStageId != 0 && currentStageId != 6) {
-                    --this.destroyBlocksTick;
+            if (this.destroyBlocksTicks > 0) {
+                if (stageManager.getCurrentStage().hostileAI()) {
+                    --this.destroyBlocksTicks;
 
-                    if (this.destroyBlocksTick == 0 && getMobGriefingEvent(this.level, this)) {
+                    if (this.destroyBlocksTicks == 0 && getMobGriefingEvent(this.level, this)) {
                         int y = Mth.floor(this.getY());
                         int x = Mth.floor(this.getX());
                         int z = Mth.floor(this.getZ());
@@ -697,7 +716,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                         }
                     }
                 } else {
-                    this.destroyBlocksTick = 35;
+                    this.destroyBlocksTicks = 35;
                 }
             }
 

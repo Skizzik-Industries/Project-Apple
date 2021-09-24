@@ -11,7 +11,6 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.util.PA_BossEvent;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -43,8 +42,13 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public String resourceLocation() {
+    public String textureLocation() {
         return String.format("%s/%s", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+
+    @Override
+    public String modelLocation() {
+        return "skizzik/skizzik";
     }
 
     @Override
@@ -83,12 +87,21 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
+    public boolean hostileAI() {
+        if (skizzik.getPreview()) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    @Override
     public void begin(SkizzikStageManager stageManager) {
         int id = this.getStage().getId();
         int previousId = stageManager.getPreviousStage().getStage().getId();
         Level world = skizzik.level;
-        
-        skizzik.eyeHeight = this.eyeHeight();
+
+        skizzik.setEyeHeight(this.eyeHeight());
         skizzik.killAllSkizzies(world, true);
         
         if (world instanceof ServerLevel) {
@@ -125,7 +138,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             }
         }
 
-        if (skizzik.getPreview()) {
+        if (skizzik.getPreview() || skizzik.isTransitioning()) {
             skizzik.goalSelector.removeAllGoals();
         }
         else {
@@ -150,7 +163,12 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             world.addFreshEntity(entity);
         }
     }
-    
+
+    @Override
+    public void tick() {
+        
+    }
+
     @Override
     public void end(SkizzikStageManager stageManager) {}
 }

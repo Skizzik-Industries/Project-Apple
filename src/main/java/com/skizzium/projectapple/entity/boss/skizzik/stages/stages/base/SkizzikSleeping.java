@@ -20,8 +20,13 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     }
 
     @Override
-    public String resourceLocation() {
+    public String textureLocation() {
         return String.format("%s/%s_sleeping", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+    }
+
+    @Override
+    public String modelLocation() {
+        return "skizzik/skizzik_sleeping";
     }
     
     @Override

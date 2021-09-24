@@ -25,6 +25,8 @@ public class SkizzikStageManager {
         if (newStageId != this.getCurrentStage().getStage().getId()) {
             this.setStage(SkizzikStages.getById(newStageId));
         }
+        
+        this.currentStage.tick();
     }
     
     public void setStage(SkizzikStages<?> stage) {
