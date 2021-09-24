@@ -90,9 +90,7 @@ minecraft.runs.all {
 }
 
 repositories {
-    maven {
-        url "https://jitpack.io/"
-    }
+    jcenter()
     maven {
         url "https://maven.enginehub.org/repo/"
     }
@@ -102,8 +100,7 @@ dependencies {
     //implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
     //implementation group: "com.sk89q.worldedit", name: "worldedit-core", version: "7.3.0-20210815.030932-39", changing: true
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    library 'com.github.Vatuu:discord-rpc:1.6.2'
-    library 'com.github.Vatuu:discord-rpc-binaries:3.4.0'
+    library 'club.minnced:java-discord-rpc:2.0.1'
     //compileOnly fg.deobf('com.sk89q.worldedit:worldedit-forge-mc1.17.1:7.3.0-SNAPSHOT:dev')
 }
 

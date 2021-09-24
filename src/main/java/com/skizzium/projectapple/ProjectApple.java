@@ -1,12 +1,13 @@
 package com.skizzium.projectapple;
 
+import club.minnced.discord.rpc.DiscordEventHandlers;
+import club.minnced.discord.rpc.DiscordRPC;
+import club.minnced.discord.rpc.DiscordRichPresence;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
-import net.arikia.dev.drpc.DiscordEventHandlers;
-import net.arikia.dev.drpc.DiscordRPC;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,13 +33,22 @@ public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
 
+    DiscordRPC rpc = DiscordRPC.INSTANCE;
+    String applicationId = "";
+    String steamId = "";
+    DiscordEventHandlers handlers = new DiscordEventHandlers();
+    DiscordRichPresence presence = new DiscordRichPresence();
+
     public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
     
     private static List<ResourceLocation> corruptionImmuneBlocksList;
     private static List<ResourceLocation> rainbowSwordImmuneBlocksList;
 
     public ProjectApple() {
-        DiscordRPC.discordInitialize("878393951994929184", new DiscordEventHandlers(), true);
+        rpc.Discord_Initialize(applicationId, handlers, true, steamId);
+        presence.startTimestamp = System.currentTimeMillis() / 1000;
+        presence.details = "Testing RPC";
+        rpc.Discord_UpdatePresence(presence);
         
         holiday = checkForHolidays();
 
@@ -53,7 +63,15 @@ public class ProjectApple {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
 
         MinecraftForge.EVENT_BUS.register(this);
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+        
+        new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                rpc.Discord_RunCallbacks();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {}
+            }
+        }, "Skizzik & Co. RPC").start();
     }
 
     private static int checkForHolidays() {
