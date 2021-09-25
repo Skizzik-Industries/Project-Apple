@@ -303,7 +303,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         return this.xRotHeads[head];
     }
 
-    private double getHeadX(int head) {
+    public double getHeadX(int head) {
         if (head <= 0) {
             return this.getX();
         }
@@ -317,14 +317,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
-    private double getHeadY(int head) {
+    public double getHeadY(int head) {
         return head == 0 ? this.getY() + 2.5D :
                 head == 1 || head == 2 ? this.getY() + 1.8 :
                 head == 3 ? this.getY() + 3.3 :
                 this.getY() + 3.4;
     }
 
-    private double getHeadZ(int head) {
+    public double getHeadZ(int head) {
         if (head <= 0) {
             return this.getZ();
         } else {

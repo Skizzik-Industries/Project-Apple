@@ -11,10 +11,12 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.util.PA_BossEvent;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
@@ -123,7 +125,10 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
-                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, skizzik.blockPosition(), MobSpawnType.MOB_SUMMONED, true, true);
+                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(skizzik.getHeadX(id - 1), skizzik.getHeadY(id - 1), skizzik.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
+                            skizzo.setYBodyRot(skizzik.getHeadXRot(id - 1));
+                            skizzo.setYHeadRot(skizzik.getHeadYRot(id - 1));
+                            skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
                             //skizzos[i - 1] = skizzo;
                         }

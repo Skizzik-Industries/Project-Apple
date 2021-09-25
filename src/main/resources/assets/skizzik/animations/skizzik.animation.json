@@ -3,7 +3,7 @@
 	"animations": {
 		"animation.skizzik.spawning": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 3.58333,
+			"animation_length": 3.6,
 			"bones": {
 				"tail": {
 					"rotation": {
