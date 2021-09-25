@@ -1,20 +1,10 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.skizzik.spawn": {
-			"animation_length": 3.125,
+		"animation.skizzik.spawning": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 3.58333,
 			"bones": {
-				"body": {
-					"position": {
-						"0.4167": {
-							"vector": [0, 0, 0]
-						},
-						"2.5833": {
-							"vector": [0, 13, 0],
-							"easing": "easeInOutBack"
-						}
-					}
-				},
 				"tail": {
 					"rotation": {
 						"0.625": {
@@ -24,12 +14,13 @@
 							"vector": [0, -34, 0],
 							"easing": "easeInOutQuart"
 						},
-						"1.5833": {
+						"2.7083": {
 							"vector": [0, -34, 0]
 						},
-						"2.5417": {
+						"3.125": {
 							"vector": [-45.8367, -34, 0],
-							"easing": "easeInOutQuart"
+							"easing": "easeInOutBack",
+							"easingArgs": [2]
 						}
 					},
 					"position": {
@@ -39,6 +30,17 @@
 						"2.0": {
 							"vector": [-3, 4.4, -3],
 							"easing": "easeInOutQuart"
+						}
+					}
+				},
+				"body": {
+					"position": {
+						"0.4167": {
+							"vector": [0, 0, 0]
+						},
+						"2.5833": {
+							"vector": [0, 13, 0],
+							"easing": "easeInOutBack"
 						}
 					}
 				},
@@ -108,8 +110,7 @@
 						}
 					}
 				}
-			},
-			"sound_effects": {}
+			}
 		}
 	}
 }

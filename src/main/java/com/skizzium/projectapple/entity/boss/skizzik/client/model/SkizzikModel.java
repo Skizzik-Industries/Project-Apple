@@ -29,25 +29,32 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
         return new ResourceLocation(ProjectApple.MOD_ID, String.format("geo/%s.geo.json", skizzik.stageManager.getCurrentStage().modelLocation()));
     }
 
-    private static <T extends Skizzik> void setupHeadRotation(Skizzik entity, IBone model, int head) {
-        if (!entity.getPreview() && !model.isHidden()) {
-            model.setRotationY((entity.getHeadYRot(head) - entity.yBodyRot) * 0.017453292F);
-            model.setRotationX(entity.getHeadXRot(head) * 0.017453292F);
+    private static <T extends Skizzik> void setupHeadRotation(Skizzik skizzik, IBone model, int head) {
+        if (!skizzik.getPreview() && !model.isHidden()) {
+            model.setRotationX(skizzik.getHeadXRot(head) * 0.017453292F);
+            model.setRotationY((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * 0.017453292F);
         }
     }
     
     @Override
-    public void setLivingAnimations(Skizzik entity, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
-        super.setLivingAnimations(entity, uniqueID, customPredicate);
-        /*IBone head = this.getAnimationProcessor().getBone("head");
+    public void setLivingAnimations(Skizzik skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
+        super.setLivingAnimations(skizzik, uniqueID, customPredicate);
+        IBone centerHead = this.getAnimationProcessor().getBone("center_head");
 
         EntityModelData data = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
-        head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
-        head.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
-
-        setupHeadRotation(entity, this.getAnimationProcessor().getBone("bottomRightHead"), 0);
-        setupHeadRotation(entity, this.getAnimationProcessor().getBone("bottomLeftHead"), 1);
-        setupHeadRotation(entity, this.getAnimationProcessor().getBone("topRightHead"), 2);
-        setupHeadRotation(entity, this.getAnimationProcessor().getBone("topLeftHead"), 3);*/
+        centerHead.setRotationX(data.headPitch * ((float) Math.PI / 180F));
+        centerHead.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
+        
+        int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
+        if (stage < 6) {
+            if (stage <= 1)
+                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_right_head"), 0);
+            if (stage <= 2)
+                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_left_head"), 1);
+            if (stage <= 3)
+                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_right_head"), 2);
+            if (stage <= 4)
+                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_left_head"), 3);
+        }
     }
 }
