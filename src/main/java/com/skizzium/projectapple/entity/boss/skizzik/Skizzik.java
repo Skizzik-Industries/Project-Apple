@@ -40,6 +40,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -74,6 +75,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_TARGET_E = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
+    private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
 
     private int activeHeads = 4;
@@ -91,10 +93,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
-    private boolean transitioning;
     private AnimationFactory factory = new AnimationFactory(this);
+    private boolean transitioning;
     
-    private int invulnerableTicks;
     private int destroyBlocksTicks;
     private int spawnSkizzieTicks;
 
@@ -256,11 +257,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     public int getInvulnerableTicks() {
-        return this.invulnerableTicks;
+        return this.entityData.get(DATA_ID_INV);
     }
 
-    public void setInvulnerableTicks(int flag) {
-        this.invulnerableTicks = flag;
+    public void setInvulnerableTicks(int i) {
+        this.entityData.set(DATA_ID_INV, i);
     }
 
     public int getAlternativeTarget(int head) {
@@ -351,6 +352,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     protected void defineSynchedData() {
         super.defineSynchedData();
 
+        this.entityData.define(DATA_ID_INV, 0);
         this.entityData.define(DATA_STAGE, 0);
 
         this.entityData.define(DATA_TARGET_A, 0);
@@ -384,6 +386,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
         this.stageManager.setStage(SkizzikStages.getById(nbt.getInt("Stage")));
         this.setInvulnerableTicks(nbt.getInt("Invul"));
+        this.setTransitioning(nbt.getBoolean("Transitioning"));
         this.setPreview(nbt.getBoolean("Preview"));
 
         if (this.hasCustomName()) {
