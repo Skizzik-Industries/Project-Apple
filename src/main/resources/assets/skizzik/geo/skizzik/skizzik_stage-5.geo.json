@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.skizzik_stage_5",
+				"identifier": "geometry.skizzik_stage-5",
 				"texture_width": 156,
 				"texture_height": 106,
 				"visible_bounds_width": 4,

@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.SkizzikSleeping",
+				"identifier": "geometry.skizzik_sleeping",
 				"texture_width": 156,
 				"texture_height": 106,
 				"visible_bounds_width": 4,
@@ -101,17 +101,17 @@
 					]
 				},
 				{
-					"name": "top_left_head",
-					"pivot": [-17, 19, 1],
-					"cubes": [
-						{"origin": [-23, 12, -5], "size": [12, 12, 12], "uv": [67, 8]}
-					]
-				},
-				{
 					"name": "top_right_head",
 					"pivot": [18, 18, 0],
 					"cubes": [
 						{"origin": [12, 12, -6], "size": [12, 12, 12], "uv": [67, 8]}
+					]
+				},
+				{
+					"name": "top_left_head",
+					"pivot": [-17, 19, 1],
+					"cubes": [
+						{"origin": [-23, 12, -5], "size": [12, 12, 12], "uv": [67, 8]}
 					]
 				}
 			]

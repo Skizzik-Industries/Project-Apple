@@ -19,7 +19,7 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
         if (skizzik.isTransitioning()) {
             return "skizzik/skizzik_sleeping";
         }
-        return super.modelLocation();
+        return "skizzik/skizzik";
     }
 
     @Override

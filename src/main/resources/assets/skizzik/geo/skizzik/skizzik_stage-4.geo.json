@@ -3,10 +3,10 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.skizzik",
+				"identifier": "geometry.skizzik_stage-4",
 				"texture_width": 156,
 				"texture_height": 106,
-				"visible_bounds_width": 4,
+				"visible_bounds_width": 3,
 				"visible_bounds_height": 5.5,
 				"visible_bounds_offset": [0, 2.25, 0]
 			},
@@ -88,30 +88,9 @@
 				},
 				{
 					"name": "bottom_right_head",
-					"pivot": [19, 33, 0],
+					"pivot": [11, 56, 0],
 					"cubes": [
-						{"origin": [13, 27, -6], "size": [12, 12, 12], "uv": [67, 8]}
-					]
-				},
-				{
-					"name": "bottom_left_head",
-					"pivot": [-18, 35, 1],
-					"cubes": [
-						{"origin": [-24, 29, -5], "size": [12, 12, 12], "uv": [67, 8]}
-					]
-				},
-				{
-					"name": "top_right_head",
-					"pivot": [17, 55, 0],
-					"cubes": [
-						{"origin": [11, 49, -6], "size": [12, 12, 12], "uv": [67, 8]}
-					]
-				},
-				{
-					"name": "top_left_head",
-					"pivot": [-13, 58, 1],
-					"cubes": [
-						{"origin": [-19, 51, -5], "size": [12, 12, 12], "uv": [67, 8]}
+						{"origin": [5, 50, -6], "size": [12, 12, 12], "uv": [67, 8]}
 					]
 				}
 			]

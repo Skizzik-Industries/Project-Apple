@@ -50,7 +50,10 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public String modelLocation() {
-        return "skizzik/skizzik";
+        if (skizzik.isTransitioning()) {
+            return String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getPreviousStage().getStage().getId());
+        }
+        return String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getCurrentStage().getStage().getId());
     }
 
     @Override
@@ -126,8 +129,8 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
                             Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(skizzik.getHeadX(id - 1), skizzik.getHeadY(id - 1), skizzik.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
-                            skizzo.setYBodyRot(skizzik.getHeadXRot(id - 1));
-                            skizzo.setYHeadRot(skizzik.getHeadYRot(id - 1));
+                            skizzo.setYBodyRot(skizzik.getHeadXRot(id - 2));
+                            skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
                             //skizzos[i - 1] = skizzo;

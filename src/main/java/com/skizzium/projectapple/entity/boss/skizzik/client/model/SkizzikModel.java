@@ -30,7 +30,7 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
     }
 
     private static <T extends Skizzik> void setupHeadRotation(Skizzik skizzik, IBone model, int head) {
-        if (!skizzik.getPreview() && !model.isHidden()) {
+        if (!skizzik.getPreview() && model != null) {
             model.setRotationX(skizzik.getHeadXRot(head) * 0.017453292F);
             model.setRotationY((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * 0.017453292F);
         }
@@ -46,15 +46,9 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
         centerHead.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
         
         int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
-        if (stage < 6) {
-            if (stage <= 1)
-                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_right_head"), 0);
-            if (stage <= 2)
-                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_left_head"), 1);
-            if (stage <= 3)
-                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_right_head"), 2);
-            if (stage <= 4)
-                setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_left_head"), 3);
-        }
+        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_right_head"), 0);
+        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_left_head"), 1);
+        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_right_head"), 2);
+        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_left_head"), 3);
     }
 }
