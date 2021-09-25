@@ -33,6 +33,8 @@ public interface SkizzikStageInterface {
     
     void begin(SkizzikStageManager stageManager);
     
+    void addGoals();
+    
     void skizzieSpawning();
     
     void tick();

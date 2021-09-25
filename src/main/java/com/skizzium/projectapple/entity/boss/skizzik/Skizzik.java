@@ -92,6 +92,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
     private boolean transitioning;
+    private AnimationFactory factory = new AnimationFactory(this);
     
     private int invulnerableTicks;
     private int destroyBlocksTicks;
@@ -289,7 +290,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public AnimationFactory getFactory() {
-        return new AnimationFactory(this);
+        return this.factory;
     }
     
     @OnlyIn(Dist.CLIENT)

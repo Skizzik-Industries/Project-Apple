@@ -62,7 +62,10 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
         skizzik.killAllSkizzies(world, false);
         skizzik.level.playSound(null, skizzik.getX(), skizzik.getY(), skizzik.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
+    }
 
+    @Override
+    public void addGoals() {
         skizzik.targetSelector.removeGoal(skizzik.hurtGoal);
         skizzik.targetSelector.removeGoal(skizzik.attackGoal);
         skizzik.goalSelector.removeGoal(skizzik.rangedAttackGoal);

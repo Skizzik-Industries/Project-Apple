@@ -142,16 +142,20 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             skizzik.goalSelector.removeAllGoals();
         }
         else {
-            skizzik.goalSelector.removeGoal(skizzik.avoidPlayerGoal);
-            skizzik.goalSelector.removeGoal(skizzik.panicGoal);
-
-            skizzik.targetSelector.addGoal(1, skizzik.hurtGoal);
-            skizzik.targetSelector.addGoal(2, skizzik.attackGoal);
-            skizzik.goalSelector.addGoal(2, skizzik.rangedAttackGoal);
-            skizzik.goalSelector.addGoal(5, skizzik.avoidWaterGoal);
-            skizzik.goalSelector.addGoal(6, skizzik.lookGoal);
-            skizzik.goalSelector.addGoal(7, skizzik.lookRandomlyGoal);
+            this.addGoals();
         }
+    }
+
+    public void addGoals() {
+        skizzik.goalSelector.removeGoal(skizzik.avoidPlayerGoal);
+        skizzik.goalSelector.removeGoal(skizzik.panicGoal);
+
+        skizzik.targetSelector.addGoal(1, skizzik.hurtGoal);
+        skizzik.targetSelector.addGoal(2, skizzik.attackGoal);
+        skizzik.goalSelector.addGoal(2, skizzik.rangedAttackGoal);
+        skizzik.goalSelector.addGoal(5, skizzik.avoidWaterGoal);
+        skizzik.goalSelector.addGoal(6, skizzik.lookGoal);
+        skizzik.goalSelector.addGoal(7, skizzik.lookRandomlyGoal);
     }
 
     public void spawnSkizzie(Skizzie entity, double x, double y, double z, Level world) {

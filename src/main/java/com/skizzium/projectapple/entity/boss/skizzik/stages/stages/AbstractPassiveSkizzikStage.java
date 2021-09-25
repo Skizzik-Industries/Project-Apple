@@ -49,6 +49,13 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
         if (skizzik.level instanceof ServerLevel) {
             PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStopPacket());
         }
+
+        if (skizzik.getPreview() || skizzik.isTransitioning()) {
+            skizzik.goalSelector.removeAllGoals();
+        }
+        else {
+            this.addGoals();
+        }
     }
 
     @Override

@@ -47,9 +47,13 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     @Override
     public void begin(SkizzikStageManager stageManager) {
         super.begin(stageManager);
-        skizzik.goalSelector.removeAllGoals();
     }
 
+    @Override
+    public void addGoals() {
+        skizzik.goalSelector.removeAllGoals();
+    }
+    
     @Override
     public SkizzikStages<? extends SkizzikStageInterface> getStage() {
         return SkizzikStages.SLEEPING;

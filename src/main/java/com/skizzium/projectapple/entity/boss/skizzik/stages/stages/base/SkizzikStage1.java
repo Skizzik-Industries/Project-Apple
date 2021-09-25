@@ -33,7 +33,7 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     @Override
     public void begin(SkizzikStageManager stageManager) {
         skizzik.setHealth(1020);
-        skizzik.setInvulnerableTicks(73);
+        skizzik.setInvulnerableTicks(62);
         skizzik.setTransitioning(true);
 
         super.begin(stageManager);
@@ -58,6 +58,7 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
         }
         else {
             skizzik.setTransitioning(false);
+            this.addGoals();
         }
     }
 
