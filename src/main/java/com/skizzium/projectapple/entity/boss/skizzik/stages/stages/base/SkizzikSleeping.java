@@ -20,6 +20,11 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public int transitionTime() {
+        return 0;
+    }
+
+    @Override
     public String textureLocation() {
         return String.format("%s/%s_sleeping", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
@@ -42,11 +47,6 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     @Override
     public EntityDimensions hitbox() {
         return new EntityDimensions(2.5F, 2.1F, true);
-    }
-    
-    @Override
-    public void begin(SkizzikStageManager stageManager) {
-        super.begin(stageManager);
     }
 
     @Override

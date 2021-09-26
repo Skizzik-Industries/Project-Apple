@@ -4,10 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage3;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage4;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage5;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -278,8 +275,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState transitions(AnimationEvent<E> event) {
-        if (this.transitioning && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.spawning"));
+        if (this.transitioning) {
+            if (this.stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.to_finish-him"));
+            } 
+            else {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(String.format("animation.skizzik.to_stage-%d", this.stageManager.getCurrentStage().getStage().getId())));
+            }
         }
         return PlayState.CONTINUE;
     }

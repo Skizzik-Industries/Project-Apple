@@ -16,6 +16,11 @@ public class SkizzikStage3 extends AbstractSkizzikStage {
     }
 
     @Override
+    public int transitionTime() {
+        return 7;
+    }
+
+    @Override
     public int armorValue() {
         return 8;
     }

@@ -16,6 +16,9 @@ import javax.annotation.Nullable;
 public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
     @Override
     public ResourceLocation getTextureLocation(Skizzik skizzik) {
+        if (ProjectApple.holiday > 0) {
+            return new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/holidays/%s/%s.png", ProjectApple.holidayNames.get(ProjectApple.holiday), skizzik.stageManager.getCurrentStage().textureLocation()));
+        }
         return new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/%s.png", skizzik.stageManager.getCurrentStage().textureLocation()));
     }
 
@@ -35,20 +38,35 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
             model.setRotationY((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * 0.017453292F);
         }
     }
+
+    private void setRot(IBone bone, float x, float y, float z) {
+        bone.setRotationX(x);
+        bone.setRotationY(y);
+        bone.setRotationZ(z);
+    }
+    
+    private void setPos(IBone bone, float x, float y, float z) {
+        bone.setPositionX(x);
+        bone.setPositionY(y);
+        bone.setPositionZ(z);
+    }
     
     @Override
     public void setLivingAnimations(Skizzik skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
         super.setLivingAnimations(skizzik, uniqueID, customPredicate);
         IBone centerHead = this.getAnimationProcessor().getBone("center_head");
+        IBone bottomRightHead = this.getAnimationProcessor().getBone("bottom_right_head");
+        IBone bottomLeftHead = this.getAnimationProcessor().getBone("bottom_left_head");
+        IBone topRightHead = this.getAnimationProcessor().getBone("top_right_head");
+        IBone topLeftHead = this.getAnimationProcessor().getBone("top_left_head");
 
         EntityModelData data = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
         centerHead.setRotationX(data.headPitch * ((float) Math.PI / 180F));
         centerHead.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
-        
-        int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
-        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_right_head"), 0);
-        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("bottom_left_head"), 1);
-        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_right_head"), 2);
-        setupHeadRotation(skizzik, this.getAnimationProcessor().getBone("top_left_head"), 3);
+
+        setupHeadRotation(skizzik, bottomRightHead, 0);
+        setupHeadRotation(skizzik, bottomLeftHead, 1);
+        setupHeadRotation(skizzik, topRightHead, 2);
+        setupHeadRotation(skizzik, topLeftHead, 3);
     }
 }

@@ -11,6 +11,8 @@ public interface SkizzikStageInterface {
 
     PA_BossEvent.PA_BossBarOverlay barOverlay();
 
+    int transitionTime();
+    
     String textureLocation();
 
     String modelLocation();

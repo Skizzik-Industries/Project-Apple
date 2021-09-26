@@ -26,12 +26,20 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public int transitionTime() {
+        return 16;
+    }
+    
+    @Override
     public String textureLocation() {
         return String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
     
     @Override
     public String modelLocation() {
+        if (skizzik.isTransitioning()) {
+            return "skizzik/skizzik_stage-5";
+        }
         return "skizzik/skizzik_finish-him";
     }
     

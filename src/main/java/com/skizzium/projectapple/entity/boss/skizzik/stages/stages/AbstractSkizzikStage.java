@@ -6,6 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
 import com.skizzium.projectapple.init.PA_PacketHandler;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -106,6 +107,9 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         int previousId = stageManager.getPreviousStage().getStage().getId();
         Level world = skizzik.level;
 
+        skizzik.setInvulnerableTicks(this.transitionTime());
+        skizzik.setTransitioning(true);
+        
         skizzik.setEyeHeight(this.eyeHeight());
         skizzik.killAllSkizzies(world, true);
         
@@ -178,7 +182,15 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public void tick() {
-        
+        if (skizzik.getInvulnerableTicks() > 0) {
+            skizzik.setInvulnerableTicks(skizzik.getInvulnerableTicks() - 1);
+            if (skizzik.getInvulnerableTicks() - 1 == 0) {
+                this.addGoals();
+            }
+        }
+        else {
+            skizzik.setTransitioning(false);
+        }
     }
 
     @Override

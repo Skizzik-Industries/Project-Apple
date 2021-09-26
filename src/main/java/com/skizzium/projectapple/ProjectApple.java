@@ -1,11 +1,14 @@
 package com.skizzium.projectapple;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
+import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.SkullBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
@@ -22,9 +25,8 @@ import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Mod(ProjectApple.MOD_ID)
 public class ProjectApple {
@@ -32,6 +34,10 @@ public class ProjectApple {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
+    public static final Map<Integer, String> holidayNames = Util.make(Maps.newHashMap(), (builder) -> {
+        builder.put(1, "spooktober");
+        builder.put(2, "nightmare");
+    });
     
     private static List<ResourceLocation> corruptionImmuneBlocksList;
     private static List<ResourceLocation> rainbowSwordImmuneBlocksList;
@@ -55,22 +61,20 @@ public class ProjectApple {
     }
 
     private static int checkForHolidays() {
-        String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
-        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
-        if (currentMonth.equals("10")) {
+//        String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
+//        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
+//        if (currentMonth.equals("10")) {
 //            if (currentDay.equals("31"))
 //                return 2;
 
             return 1;
-        }
-        return 0;
+//        }
+//        return 0;
     }
 
     public static String getThemedDescriptionId(String descriptionId) {
-        if (holiday == 1)
-            return "spooktober." + descriptionId;
-        else if (holiday == 2)
-            return "nightmare." + descriptionId;
+        if (holiday > 0)
+            return holidayNames.get(holiday) + "." + descriptionId;
 
         return descriptionId;
     }
