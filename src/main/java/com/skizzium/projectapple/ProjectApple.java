@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -49,10 +50,12 @@ public class ProjectApple {
         PA_Registry.register();
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modBus.addListener(PA_TileEntities::registerSkullHeadLayers);
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            modBus.addListener(PA_TileEntities::registerSkullHeadLayers);
+            modBus.addListener(PA_TileEntities::registerTileEntityRenders);
+        }
         modBus.addListener(PA_Blocks::renderLayers);
         modBus.addListener(PA_Blocks::registerOtherStuff);
-        modBus.addListener(PA_TileEntities::registerTileEntityRenders);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
 
@@ -85,11 +88,11 @@ public class ProjectApple {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void playerLogin(ClientPlayerNetworkEvent.LoggedInEvent event) {
         this.updateLists();
-    }
+    }*/
 
     private void updateLists() {
         corruptionImmuneBlocksList = ImmutableList.copyOf(PA_Config.commonInstance.blocks.corruptionImmuneBlocks.get().stream().map(ResourceLocation::new).collect(Collectors.toList()));
