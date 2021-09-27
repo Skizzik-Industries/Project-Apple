@@ -3,6 +3,7 @@ package com.skizzium.projectapple.init.network;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectapple.network.PA_BossEventPacket;
+import com.skizzium.projectapple.network.PA_BossEventOperations;
 import com.skizzium.projectapple.sound.BossMusic;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import com.skizzium.projectapple.util.PA_LerpingBossEvent;
@@ -41,35 +42,35 @@ public class PA_PacketHandler {
     }
 
     public static void handleBossEventPacket(PA_BossEventPacket packet) {
-        packet.dispatch(new PA_BossEventPacket.Handler() {
-            final Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-            public void add(UUID uuid, Component displayName, float progress, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
-                vanillaEvents.put(uuid, new PA_LerpingBossEvent(uuid, displayName, progress, color, overlay, darkenScreen, fog));
-            }
-
-            public void remove(UUID uuid) {
-                vanillaEvents.remove(uuid);
-            }
-
-            public void updateProgress(UUID uuid, float progress) {
-                vanillaEvents.get(uuid).setProgress(progress);
-            }
-
-            public void updateName(UUID uuid, Component displayName) {
-                vanillaEvents.get(uuid).setName(displayName);
-            }
-
-            public void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay) {
-                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
-                lerpingBossEvent.setCustomColor(color);
-                lerpingBossEvent.setCustomOverlay(overlay);
-            }
-
-            public void updateProperties(UUID uuid, boolean darkenScreen, boolean fog) {
-                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
-                lerpingBossEvent.setDarkenScreen(darkenScreen);
-                lerpingBossEvent.setCreateWorldFog(fog);
-            }
-        });
+//        packet.dispatch(new PA_BossEventOperations.Handler() {
+//            final Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
+//            public void add(UUID uuid, Component displayName, float progress, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
+//                vanillaEvents.put(uuid, new PA_LerpingBossEvent(uuid, displayName, progress, color, overlay, darkenScreen, fog));
+//            }
+//
+//            public void remove(UUID uuid) {
+//                vanillaEvents.remove(uuid);
+//            }
+//
+//            public void updateProgress(UUID uuid, float progress) {
+//                vanillaEvents.get(uuid).setProgress(progress);
+//            }
+//
+//            public void updateName(UUID uuid, Component displayName) {
+//                vanillaEvents.get(uuid).setName(displayName);
+//            }
+//
+//            public void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay) {
+//                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
+//                lerpingBossEvent.setCustomColor(color);
+//                lerpingBossEvent.setCustomOverlay(overlay);
+//            }
+//
+//            public void updateProperties(UUID uuid, boolean darkenScreen, boolean fog) {
+//                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
+//                lerpingBossEvent.setDarkenScreen(darkenScreen);
+//                lerpingBossEvent.setCreateWorldFog(fog);
+//            }
+//        });
     }
 }
