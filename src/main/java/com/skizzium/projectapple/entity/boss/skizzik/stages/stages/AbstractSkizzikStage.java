@@ -6,8 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
-import com.skizzium.projectapple.init.PA_PacketHandler;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
@@ -51,10 +50,25 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public String modelLocation() {
+        String model;
         if (skizzik.isTransitioning()) {
-            return String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getPreviousStage().getStage().getId());
+            model = String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getPreviousStage().getStage().getId());
         }
-        return String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getCurrentStage().getStage().getId());
+        else {
+            model = String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getCurrentStage().getStage().getId());
+        }
+        
+        if (model.equals("skizzik/skizzik_stage-0")) {
+            model = "skizzik/skizzik_sleeping";
+        }
+        else if (model.equals("skizzik/skizzik_stage-1")) {
+            model = "skizzik/skizzik";
+        }
+        else if (model.equals("skizzik/skizzik_stage-6")) {
+            model = "skizzik/skizzik_finish-him";
+        }
+        
+        return model;
     }
 
     @Override
@@ -114,7 +128,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         skizzik.killAllSkizzies(world, true);
         
         if (world instanceof ServerLevel) {
-            PA_PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
+            PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
         }
 
         if (!skizzik.getPreview()) {

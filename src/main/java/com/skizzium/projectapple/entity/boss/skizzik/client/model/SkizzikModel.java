@@ -38,18 +38,6 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
             model.setRotationY((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * 0.017453292F);
         }
     }
-
-    private void setRot(IBone bone, float x, float y, float z) {
-        bone.setRotationX(x);
-        bone.setRotationY(y);
-        bone.setRotationZ(z);
-    }
-    
-    private void setPos(IBone bone, float x, float y, float z) {
-        bone.setPositionX(x);
-        bone.setPositionY(y);
-        bone.setPositionZ(z);
-    }
     
     @Override
     public void setLivingAnimations(Skizzik skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {

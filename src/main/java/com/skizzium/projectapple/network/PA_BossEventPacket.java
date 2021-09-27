@@ -1,15 +1,13 @@
 package com.skizzium.projectapple.network;
 
 import com.google.common.collect.Maps;
+import com.skizzium.projectapple.init.network.PA_PacketHandler;
 import com.skizzium.projectapple.util.PA_BossEvent;
 import com.skizzium.projectapple.util.PA_LerpingBossEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.world.BossEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fmllegacy.network.NetworkEvent;
@@ -99,45 +97,12 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
     }
 
     public void handle(ClientGamePacketListener listener) {
-        handlePacket(this);
+        PA_PacketHandler.handleBossEventPacket(this);
     }
 
     public static void handle(PA_BossEventPacket packet, Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> packet.handlePacket(packet)));
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PA_PacketHandler.handleBossEventPacket(packet)));
         context.get().setPacketHandled(true);
-    }
-
-    public void handlePacket(PA_BossEventPacket packet) {
-        packet.dispatch(new PA_BossEventPacket.Handler() {
-            final Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-            public void add(UUID uuid, Component displayName, float progress, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay, boolean darkenScreen, boolean fog) {
-                vanillaEvents.put(uuid, new PA_LerpingBossEvent(uuid, displayName, progress, color, overlay, darkenScreen, fog));
-            }
-
-            public void remove(UUID uuid) {
-                vanillaEvents.remove(uuid);
-            }
-
-            public void updateProgress(UUID uuid, float progress) {
-                vanillaEvents.get(uuid).setProgress(progress);
-            }
-
-            public void updateName(UUID uuid, Component displayName) {
-                vanillaEvents.get(uuid).setName(displayName);
-            }
-
-            public void updateStyle(UUID uuid, PA_BossEvent.PA_BossBarColor color, PA_BossEvent.PA_BossBarOverlay overlay) {
-                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
-                lerpingBossEvent.setCustomColor(color);
-                lerpingBossEvent.setCustomOverlay(overlay);
-            }
-
-            public void updateProperties(UUID uuid, boolean darkenScreen, boolean fog) {
-                PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent) vanillaEvents.get(uuid);
-                lerpingBossEvent.setDarkenScreen(darkenScreen);
-                lerpingBossEvent.setCreateWorldFog(fog);
-            }
-        });
     }
 
     public void dispatch(PA_BossEventPacket.Handler handler) {

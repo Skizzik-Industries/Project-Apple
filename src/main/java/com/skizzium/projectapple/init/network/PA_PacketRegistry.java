@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.init;
+package com.skizzium.projectapple.init.network;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
@@ -12,7 +12,7 @@ import net.minecraftforge.fmllegacy.network.NetworkRegistry;
 import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class PA_PacketHandler {
+public class PA_PacketRegistry {
     private static int ID = 0;
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(

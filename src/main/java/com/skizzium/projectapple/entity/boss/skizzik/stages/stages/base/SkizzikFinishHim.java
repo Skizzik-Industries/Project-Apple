@@ -36,14 +36,6 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
     
     @Override
-    public String modelLocation() {
-        if (skizzik.isTransitioning()) {
-            return "skizzik/skizzik_stage-5";
-        }
-        return "skizzik/skizzik_finish-him";
-    }
-    
-    @Override
     public int maxHealth() {
         return 20;
     }

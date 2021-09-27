@@ -5,7 +5,7 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
-import com.skizzium.projectapple.init.PA_PacketHandler;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
@@ -37,7 +37,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -164,7 +163,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
         if (stageManager.getCurrentStage().hostileAI()) {
-            PA_PacketHandler.INSTANCE.sendTo(new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+            PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
 
@@ -172,7 +171,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
         this.bossBar.removePlayer(serverPlayer);
-        PA_PacketHandler.INSTANCE.sendTo(new BossMusicStopPacket(), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStopPacket(), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
@@ -485,7 +484,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
         if (!this.preview) {
             if (world instanceof ServerLevel) {
-                if (ProjectApple.holiday == 1) {
+                if (ProjectApple.holiday == 1 && !(this.stageManager.getCurrentStage() instanceof SkizzikFinishHim)) {
                     ((ServerLevel) world).setDayTime(18000);
                 } 
                 else {

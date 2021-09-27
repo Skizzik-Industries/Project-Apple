@@ -20,14 +20,6 @@ public class SkizzikStage2 extends AbstractSkizzikStage {
     }
     
     @Override
-    public String modelLocation() {
-        if (skizzik.isTransitioning()) {
-            return "skizzik/skizzik";
-        }
-        return "skizzik/skizzik_stage-2";
-    }
-    
-    @Override
     public void skizzieSpawning() {
         if (Math.random() < 0.05) {
             spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), this.skizzik.level), skizzik.getX(), skizzik.getY(), skizzik.getZ(), skizzik.level);

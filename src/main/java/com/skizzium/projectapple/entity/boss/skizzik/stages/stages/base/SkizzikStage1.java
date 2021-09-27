@@ -18,14 +18,6 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     public int transitionTime() {
         return 73;
     }
-    
-    @Override
-    public String modelLocation() {
-        if (skizzik.isTransitioning()) {
-            return "skizzik/skizzik_sleeping";
-        }
-        return "skizzik/skizzik";
-    }
 
     @Override
     public boolean hostileAI() {

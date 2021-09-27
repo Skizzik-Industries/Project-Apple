@@ -4,17 +4,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
-import com.skizzium.projectapple.init.block.PA_Blocks;
-import com.skizzium.projectapple.init.block.PA_TileEntities;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.SkullBlock;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -45,18 +39,12 @@ public class ProjectApple {
 
     public ProjectApple() {
         holiday = checkForHolidays();
-        GeckoLib.initialize();
         
         PA_Registry.register();
 
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            modBus.addListener(PA_TileEntities::registerSkullHeadLayers);
-            modBus.addListener(PA_TileEntities::registerTileEntityRenders);
-        }
-        modBus.addListener(PA_Blocks::renderLayers);
-        modBus.addListener(PA_Blocks::registerOtherStuff);
-
+        if (FMLEnvironment.dist == Dist.CLIENT)
+            GeckoLib.initialize();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
 
         MinecraftForge.EVENT_BUS.register(this);
