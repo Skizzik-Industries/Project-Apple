@@ -34,8 +34,8 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
 
     private static <T extends Skizzik> void setupHeadRotation(Skizzik skizzik, IBone model, int head) {
         if (!skizzik.getPreview() && model != null) {
-            model.setRotationX(skizzik.getHeadXRot(head) * 0.017453292F);
-            model.setRotationY((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * 0.017453292F);
+            model.setRotationX(skizzik.getHeadXRot(head) * ((float) Math.PI / 180F));
+            model.setRotationY((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * ((float) Math.PI / 180F));
         }
     }
     

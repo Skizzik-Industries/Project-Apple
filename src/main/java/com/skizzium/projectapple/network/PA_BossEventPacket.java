@@ -97,7 +97,7 @@ public class PA_BossEventPacket implements Packet<ClientGamePacketListener> {
     }
 
     public void handle(ClientGamePacketListener listener) {
-        PA_PacketHandler.handleBossEventPacket(this);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PA_PacketHandler.handleBossEventPacket(this));
     }
 
     public static void handle(PA_BossEventPacket packet, Supplier<NetworkEvent.Context> context) {
