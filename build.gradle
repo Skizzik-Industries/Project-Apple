@@ -93,11 +93,15 @@ repositories {
     maven {
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' 
     }
+    maven {
+        url 'https://raw.github.com/Skizzium/Project-Lib/main/mcmodsrepo/'
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.17.1:3.0.2')
+    implementation fg.deobf("com.skizzium.projectlib:BossUtilities-1.17.1:1.0.0-beta.1.3")
 }
 
 // Credits to SizableShrimp for making this neat thingy that allows me to use variables in my mods.toml and pack.mcmeta

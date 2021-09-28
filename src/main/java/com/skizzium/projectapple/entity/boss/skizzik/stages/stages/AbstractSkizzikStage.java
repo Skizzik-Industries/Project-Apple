@@ -10,7 +10,7 @@ import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
-import com.skizzium.projectapple.util.PA_BossEvent;
+import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -34,13 +34,13 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public PA_BossEvent.PA_BossBarColor barColor() {
-        return ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
+    public PL_BossEvent.PL_BossBarColor barColor() {
+        return ProjectApple.holiday == 1 ? PL_BossEvent.PL_BossBarColor.ORANGE : PL_BossEvent.PL_BossBarColor.RED;
     }
 
     @Override
-    public PA_BossEvent.PA_BossBarOverlay barOverlay() {
-        return PA_BossEvent.PA_BossBarOverlay.NOTCHED_5;
+    public PL_BossEvent.PL_BossBarOverlay barOverlay() {
+        return PL_BossEvent.PL_BossBarOverlay.NOTCHED_5;
     }
 
     @Override

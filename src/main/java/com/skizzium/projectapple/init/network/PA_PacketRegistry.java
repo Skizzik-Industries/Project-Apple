@@ -3,7 +3,6 @@ package com.skizzium.projectapple.init.network;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
-import com.skizzium.projectapple.network.PA_BossEventPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +25,5 @@ public class PA_PacketRegistry {
     public static void registerMessages(FMLCommonSetupEvent event) {
         INSTANCE.registerMessage(ID++, BossMusicStartPacket.class, BossMusicStartPacket::encode, BossMusicStartPacket::decode, BossMusicStartPacket::handle);
         INSTANCE.registerMessage(ID++, BossMusicStopPacket.class, BossMusicStopPacket::encode, BossMusicStopPacket::decode, BossMusicStopPacket::handle);
-        INSTANCE.registerMessage(ID++, PA_BossEventPacket.class, PA_BossEventPacket::write, PA_BossEventPacket::decode, PA_BossEventPacket::handle);
     }
 }

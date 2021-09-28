@@ -10,7 +10,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterfac
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import com.skizzium.projectapple.util.PA_BossEvent;
+import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.world.entity.EntityDimensions;
 
 public class SkizzikStage5 extends AbstractSkizzikStage {
@@ -19,8 +19,8 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
-    public PA_BossEvent.PA_BossBarColor barColor() {
-        return ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.GOLD : PA_BossEvent.PA_BossBarColor.AQUA;
+    public PL_BossEvent.PL_BossBarColor barColor() {
+        return ProjectApple.holiday == 1 ? PL_BossEvent.PL_BossBarColor.GOLD : PL_BossEvent.PL_BossBarColor.AQUA;
     }
 
     @Override
