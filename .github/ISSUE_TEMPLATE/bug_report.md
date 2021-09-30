@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help us improve
 title: Bug Report
 labels: Bug
-assignees: uSkizzik
+assignees: ''
 
 ---
 
@@ -24,8 +24,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Please complete the following information:**
- - Minecraft Version [e.g. 1.16.5]
-- Crash Log [Pastebin Only!]
+- Applicable Branch / Mod Version
+- Minecraft Version [e.g. 1.17.1]
+- Crash Log [via Gist, Pastebin or any other]
 
 **Additional context**
 Add any other context about the problem here.
