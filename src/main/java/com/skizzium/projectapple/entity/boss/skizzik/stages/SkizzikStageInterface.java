@@ -1,15 +1,15 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
-import com.skizzium.projectlib.gui.PL_BossEvent;
+import com.skizzium.projectapple.gui.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.EntityDimensions;
 
 public interface SkizzikStageInterface {
     TextComponent displayName();
 
-    PL_BossEvent.PL_BossBarColor barColor();
+    PA_BossEvent.PA_BossBarColor barColor();
 
-    PL_BossEvent.PL_BossBarOverlay barOverlay();
+    PA_BossEvent.PA_BossBarOverlay barOverlay();
 
     int transitionTime();
     

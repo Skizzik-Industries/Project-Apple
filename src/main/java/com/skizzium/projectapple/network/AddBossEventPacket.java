@@ -3,7 +3,6 @@ package com.skizzium.projectapple.network;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketHandler;
-import com.skizzium.projectlib.ProjectLib;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;

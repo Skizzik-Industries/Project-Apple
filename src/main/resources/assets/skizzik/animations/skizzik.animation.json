@@ -1,8 +1,41 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
+		"animation.skizzik.body_movement": {
+			"loop": true,
+			"animation_length": 3,
+			"bones": {
+				"tail": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [20, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"body": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [15, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
 		"animation.skizzik.to_stage-1": {
-			"animation_length": 3.6,
+			"loop": "hold_on_last_frame",
+			"animation_length": 3.58333,
 			"bones": {
 				"tail": {
 					"rotation": {
@@ -112,6 +145,7 @@
 			}
 		},
 		"animation.skizzik.to_stage-2": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 1,
 			"bones": {
 				"top_right_head": {
@@ -134,7 +168,8 @@
 			}
 		},
 		"animation.skizzik.to_stage-3": {
-			"animation_length": 0.3,
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.29167,
 			"bones": {
 				"bottom_right_head": {
 					"position": {
@@ -156,6 +191,7 @@
 			}
 		},
 		"animation.skizzik.to_stage-4": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 1,
 			"bones": {
 				"bottom_right_head": {
@@ -183,6 +219,7 @@
 			}
 		},
 		"animation.skizzik.to_stage-5": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 2,
 			"bones": {
 				"command_block": {
@@ -257,6 +294,7 @@
 			}
 		},
 		"animation.skizzik.to_finish-him": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 0.75,
 			"bones": {
 				"command_block": {

@@ -6,11 +6,11 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
+import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
-import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -34,13 +34,13 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public PL_BossEvent.PL_BossBarColor barColor() {
-        return ProjectApple.holiday == 1 ? PL_BossEvent.PL_BossBarColor.ORANGE : PL_BossEvent.PL_BossBarColor.RED;
+    public PA_BossEvent.PA_BossBarColor barColor() {
+        return ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
     }
 
     @Override
-    public PL_BossEvent.PL_BossBarOverlay barOverlay() {
-        return PL_BossEvent.PL_BossBarOverlay.NOTCHED_5;
+    public PA_BossEvent.PA_BossBarOverlay barOverlay() {
+        return PA_BossEvent.PA_BossBarOverlay.NOTCHED_5;
     }
 
     @Override

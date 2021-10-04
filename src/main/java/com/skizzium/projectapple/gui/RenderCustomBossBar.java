@@ -20,7 +20,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class RenderCustomBossBar {
     private static final ResourceLocation GUI_BARS_LOCATION = new ResourceLocation("textures/gui/bars.png");
-    private static final ResourceLocation PA_GUI_BARS_LOCATION = new ResourceLocation("bossutils", "textures/gui/pa_bars.png");
+    private static final ResourceLocation PA_GUI_BARS_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/pa_bars.png");
     private static final Minecraft minecraft = Minecraft.getInstance();
 
     @SubscribeEvent
@@ -28,26 +28,24 @@ public class RenderCustomBossBar {
         event.setCanceled(true);
         int i = minecraft.getWindow().getGuiScaledWidth();
         int j = 12;
-        Iterator var3 = minecraft.gui.getBossOverlay().events.values().iterator();
 
-        while(var3.hasNext()) {
-            LerpingBossEvent lerpingEvent = (LerpingBossEvent)var3.next();
+        for (LerpingBossEvent lerpingEvent : minecraft.gui.getBossOverlay().events.values()) {
             int k = i / 2 - 91;
             UUID id = lerpingEvent.getId();
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             if (!(minecraft.gui.getBossOverlay().events.get(id) instanceof PA_LerpingBossEvent)) {
                 RenderSystem.setShaderTexture(0, GUI_BARS_LOCATION);
-                drawBar(event.getMatrixStack(), k, j, (BossEvent)lerpingEvent);
+                drawBar(event.getMatrixStack(), k, j, lerpingEvent);
             } else {
                 RenderSystem.setShaderTexture(0, PA_GUI_BARS_LOCATION);
-                drawBar(event.getMatrixStack(), k, j, (PA_LerpingBossEvent)lerpingEvent);
+                drawBar(event.getMatrixStack(), k, j, (PA_LerpingBossEvent) lerpingEvent);
             }
 
             Component component = lerpingEvent.getName();
             int l = minecraft.font.width(component);
             int i1 = i / 2 - l / 2;
             int j1 = j - 9;
-            minecraft.font.drawShadow(event.getMatrixStack(), component, (float)i1, (float)j1, 16777215);
+            minecraft.font.drawShadow(event.getMatrixStack(), component, (float) i1, (float) j1, 16777215);
             j += event.getIncrement();
             if (j >= minecraft.getWindow().getGuiScaledHeight() / 3) {
                 break;

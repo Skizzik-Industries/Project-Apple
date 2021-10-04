@@ -3,9 +3,9 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages.stages;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikSleeping;
+import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
-import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
@@ -15,13 +15,13 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
     }
 
     @Override
-    public PL_BossEvent.PL_BossBarColor barColor() {
-        return PL_BossEvent.PL_BossBarColor.WHITE;
+    public PA_BossEvent.PA_BossBarColor barColor() {
+        return PA_BossEvent.PA_BossBarColor.WHITE;
     }
 
     @Override
-    public PL_BossEvent.PL_BossBarOverlay barOverlay() {
-        return PL_BossEvent.PL_BossBarOverlay.PROGRESS;
+    public PA_BossEvent.PA_BossBarOverlay barOverlay() {
+        return PA_BossEvent.PA_BossBarOverlay.PROGRESS;
     }
 
     @Override
