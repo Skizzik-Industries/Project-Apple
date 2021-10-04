@@ -1,8 +1,7 @@
 package com.skizzium.projectapple.init.network;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.network.BossMusicStartPacket;
-import com.skizzium.projectapple.network.BossMusicStopPacket;
+import com.skizzium.projectapple.network.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,5 +24,12 @@ public class PA_PacketRegistry {
     public static void registerMessages(FMLCommonSetupEvent event) {
         INSTANCE.registerMessage(ID++, BossMusicStartPacket.class, BossMusicStartPacket::encode, BossMusicStartPacket::decode, BossMusicStartPacket::handle);
         INSTANCE.registerMessage(ID++, BossMusicStopPacket.class, BossMusicStopPacket::encode, BossMusicStopPacket::decode, BossMusicStopPacket::handle);
+
+        INSTANCE.registerMessage(ID++, AddBossEventPacket.class, AddBossEventPacket::encode, AddBossEventPacket::decode, AddBossEventPacket::handle);
+        INSTANCE.registerMessage(ID++, RemoveBossEventPacket.class, RemoveBossEventPacket::encode, RemoveBossEventPacket::decode, RemoveBossEventPacket::handle);
+        INSTANCE.registerMessage(ID++, UpdateNameBossEventPacket.class, UpdateNameBossEventPacket::encode, UpdateNameBossEventPacket::decode, UpdateNameBossEventPacket::handle);
+        INSTANCE.registerMessage(ID++, UpdateStyleBossEventPacket.class, UpdateStyleBossEventPacket::encode, UpdateStyleBossEventPacket::decode, UpdateStyleBossEventPacket::handle);
+        INSTANCE.registerMessage(ID++, UpdatePropertiesBossEventPacket.class, UpdatePropertiesBossEventPacket::encode, UpdatePropertiesBossEventPacket::decode, UpdatePropertiesBossEventPacket::handle);
+        INSTANCE.registerMessage(ID++, UpdateProgressBossEventPacket.class, UpdateProgressBossEventPacket::encode, UpdateProgressBossEventPacket::decode, UpdateProgressBossEventPacket::handle);
     }
 }

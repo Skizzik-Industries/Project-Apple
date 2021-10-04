@@ -21,6 +21,8 @@ import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.resource.ResourceListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,15 +54,15 @@ public class ProjectApple {
     }
 
     private static int checkForHolidays() {
-//        String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
-//        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
-//        if (currentMonth.equals("10")) {
+        String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
+        String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
+        if (currentMonth.equals("10")) {
 //            if (currentDay.equals("31"))
 //                return 2;
 
             return 1;
-//        }
-//        return 0;
+        }
+        return 0;
     }
 
     public static String getThemedDescriptionId(String descriptionId) {
@@ -68,6 +70,19 @@ public class ProjectApple {
             return holidayNames.get(holiday) + "." + descriptionId;
 
         return descriptionId;
+    }
+
+    public static int encodeBossEventProperties(boolean darkenFlag, boolean fogFlag) {
+        int i = 0;
+        if (darkenFlag) {
+            i |= 1;
+        }
+
+        if (fogFlag) {
+            i |= 2;
+        }
+
+        return i;
     }
     
     private void configLoad(ModConfigEvent event) {
