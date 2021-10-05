@@ -73,6 +73,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    private static EntityDataAccessor<Boolean> DATA_TRANSITIONING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
 
     private int activeHeads = 4;
 
@@ -90,7 +91,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
     private AnimationFactory factory = new AnimationFactory(this);
-    private boolean transitioning;
     
     private int destroyBlocksTicks;
     private int spawnSkizzieTicks;
@@ -245,11 +245,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     public boolean isTransitioning() {
-        return this.transitioning;
+        return this.entityData.get(DATA_TRANSITIONING);
     }
 
     public void setTransitioning(boolean flag) {
-        this.transitioning = flag;
+        this.entityData.set(DATA_TRANSITIONING, flag);
     }
 
     public int getInvulnerableTicks() {
@@ -275,11 +275,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
         if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
-            if (this.transitioning && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
+            if (this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
                 return PlayState.STOP;
             }
             
-            if (!this.transitioning && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
+            if (!this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement_stage-5"));
                 return PlayState.CONTINUE;
             }
@@ -291,7 +291,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
     
     private <E extends IAnimatable> PlayState transitions(AnimationEvent<E> event) {
-        if (this.transitioning) {
+        if (this.isTransitioning()) {
             if (this.stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.to_finish-him"));
             } 
@@ -373,6 +373,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
         this.entityData.define(DATA_ID_INV, 0);
         this.entityData.define(DATA_STAGE, 0);
+        this.entityData.define(DATA_TRANSITIONING, false);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
