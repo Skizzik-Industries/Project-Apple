@@ -18,6 +18,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -37,6 +38,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -96,6 +98,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private int destroyBlocksTicks;
     private int spawnSkizzieTicks;
 
+    private final SkizzikPart[] parts;
+    private final SkizzikPart bodyPart;
+    private final SkizzikPart commandBlockPart;
+    
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
     private final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) (new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
@@ -118,6 +124,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
         this.eyeHeight = 1.5F;
+        
+        this.bodyPart = new SkizzikPart(this, "body", 2.5F, 4.0F);
+        this.commandBlockPart = new SkizzikPart(this, "commandBlock", 1.0F, 1.0F);
+        this.parts = new SkizzikPart[]{this.bodyPart, this.commandBlockPart};
     }
 
     public Component getTranslationKey() {
@@ -275,6 +285,30 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public void setAlternativeTarget(int head, int target) {
         this.entityData.set(DATA_TARGETS.get(head), target);
+    }
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+    
+    public SkizzikPart[] getPartArray() {
+        return this.parts;
+    }
+
+    @Override
+    public net.minecraftforge.entity.PartEntity<?>[] getParts() {
+        return this.parts;
+    }
+
+    @Override
+    public void recreateFromPacket(ClientboundAddMobPacket packet) {
+        super.recreateFromPacket(packet);
+        SkizzikPart[] parts = this.getPartArray();
+
+        for(int i = 0; i < parts.length; ++i) {
+            parts[i].setId(i + packet.getId());
+        }
     }
 
     @Override
@@ -487,12 +521,18 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
     }
 
+    private void tickPart(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
+        part.setPos(this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
+    }
+    
     @Override
     public void baseTick() {
         super.baseTick();
         
         this.refreshDimensions();
         this.stageManager.updateStage();
+
+        this.tickPart(this.commandBlockPart, 0.0F, 0.0D, 0.0F);
 
         int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         this.activeHeads = currentStageId == 1 ? 4 :
@@ -565,6 +605,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
             return super.hurt(source, amount);
         }
+    }
+    
+    public boolean hurt(SkizzikPart part, DamageSource source, float amount) {
+        if (part == this.commandBlockPart && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
+            amount *= 1.5;
+        }
+            
+        return this.hurt(source, amount);
     }
 
     @Override
