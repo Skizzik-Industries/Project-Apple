@@ -279,6 +279,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 return PlayState.STOP;
             }
             
+            if (!this.transitioning && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement_stage-5"));
+                return PlayState.CONTINUE;
+            }
+            
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement"));
             return PlayState.CONTINUE;
         }
