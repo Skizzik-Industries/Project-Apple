@@ -160,7 +160,7 @@
 							"vector": [0, -34, 0]
 						},
 						"3.125": {
-							"vector": [-45.8367, -34, 0],
+							"vector": [-60.8367, -34, 0],
 							"easing": "easeInOutBack",
 							"easingArgs": [2]
 						}
@@ -170,8 +170,7 @@
 							"vector": [0, 0, 0]
 						},
 						"2.0": {
-							"vector": [-3, 4.4, -3],
-							"easing": "easeInOutQuart"
+							"vector": [0.5, -4.7, -2.15]
 						}
 					}
 				},
