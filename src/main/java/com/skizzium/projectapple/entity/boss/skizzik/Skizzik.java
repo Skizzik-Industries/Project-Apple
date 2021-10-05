@@ -73,7 +73,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
-    private static EntityDataAccessor<Boolean> DATA_TRANSITIONING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_TRANSITIONING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
 
     private int activeHeads = 4;
 
@@ -90,6 +90,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
+    private boolean debug;
     private AnimationFactory factory = new AnimationFactory(this);
     
     private int destroyBlocksTicks;
@@ -238,6 +239,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     
     public void setPreview(boolean flag) {
         this.preview = flag;
+    }
+
+    public boolean getDebug() {
+        return debug;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     public void setEyeHeight(float height) {
@@ -398,6 +407,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         nbt.putInt("Invul", this.getInvulnerableTicks());
         nbt.putBoolean("Transitioning", this.isTransitioning());
         nbt.putBoolean("Preview", this.getPreview());
+        nbt.putBoolean("Debug", this.getDebug());
     }
 
     @Override
@@ -408,6 +418,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.setInvulnerableTicks(nbt.getInt("Invul"));
         this.setTransitioning(nbt.getBoolean("Transitioning"));
         this.setPreview(nbt.getBoolean("Preview"));
+        this.setDebug(nbt.getBoolean("Debug"));
 
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());

@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
 
 public class SkizzikStageManager {
     private final Skizzik skizzik;
@@ -17,12 +18,16 @@ public class SkizzikStageManager {
         float health = skizzik.getHealth();
         int newStageId = health > 1020 ? 0 :
                             health > 820 ? 1 :
-                                health > 620 ? 2 :
-                                    health > 420 ? 3 :
-                                        health > 220 ? 4 :
-                                            health > 20 ? 5 : 6;
+                                    health > 620 ? 2 :
+                                            health > 420 ? 3 :
+                                                    health > 220 ? 4 :
+                                                            health > 20 ? 5 : 6;
         
-        if (newStageId != this.getCurrentStage().getStage().getId()) {
+        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
+            this.setStage(this.getNextStage().getStage());
+        }
+
+        if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
             this.setStage(SkizzikStages.getById(newStageId));
         }
         
@@ -46,6 +51,10 @@ public class SkizzikStageManager {
         }
     }
 
+    public SkizzikStageInterface getNextStage() {
+        return this.getStage(SkizzikStages.getById(this.currentStage.getStage().getId() + 1));
+    }
+    
     public SkizzikStageInterface getCurrentStage() {
         return this.currentStage;
     }
@@ -54,10 +63,10 @@ public class SkizzikStageManager {
         return this.previousStage;
     }
 
-    public <T extends SkizzikStageInterface> T getStage(SkizzikStages<T> phase) {
-        int i = phase.getId();
+    public <T extends SkizzikStageInterface> T getStage(SkizzikStages<T> stage) {
+        int i = stage.getId();
         if (this.stages[i] == null) {
-            this.stages[i] = phase.createInstance(this.skizzik);
+            this.stages[i] = stage.createInstance(this.skizzik);
         }
 
         return (T)this.stages[i];

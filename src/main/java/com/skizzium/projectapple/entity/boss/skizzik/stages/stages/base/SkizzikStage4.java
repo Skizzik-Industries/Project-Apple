@@ -19,7 +19,12 @@ public class SkizzikStage4 extends AbstractSkizzikStage {
     public int transitionTime() {
         return 21;
     }
-    
+
+    @Override
+    public int maxStageHealth() {
+        return 420;
+    }
+
     @Override
     public int armorValue() {
         return 10;

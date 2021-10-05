@@ -34,10 +34,15 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     public String textureLocation() {
         return String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
-    
+
+    @Override
+    public int maxStageHealth() {
+        return 20;
+    }
+
     @Override
     public int maxHealth() {
-        return 20;
+        return this.maxStageHealth();
     }
 
     @Override

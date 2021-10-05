@@ -32,7 +32,12 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     public String textureLocation() {
         return String.format("%s/%s_stage-5", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
-    
+
+    @Override
+    public int maxStageHealth() {
+        return 220;
+    }
+
     @Override
     public int armorValue() {
         return 12;

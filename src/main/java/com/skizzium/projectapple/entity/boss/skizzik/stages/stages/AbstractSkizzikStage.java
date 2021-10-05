@@ -108,11 +108,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public boolean hostileAI() {
-        if (skizzik.getPreview()) {
-            return false;
-        }
-        
-        return true;
+        return !skizzik.getPreview();
     }
 
     @Override
@@ -121,6 +117,8 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         int previousId = stageManager.getPreviousStage().getStage().getId();
         Level world = skizzik.level;
 
+        skizzik.setHealth(this.maxStageHealth());
+        
         skizzik.setInvulnerableTicks(this.transitionTime());
         skizzik.setTransitioning(true);
         

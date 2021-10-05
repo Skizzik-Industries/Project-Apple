@@ -21,6 +21,11 @@ public class SkizzikStage3 extends AbstractSkizzikStage {
     }
 
     @Override
+    public int maxStageHealth() {
+        return 620;
+    }
+
+    @Override
     public int armorValue() {
         return 8;
     }

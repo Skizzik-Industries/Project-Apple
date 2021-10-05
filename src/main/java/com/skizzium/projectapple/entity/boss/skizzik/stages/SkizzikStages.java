@@ -89,6 +89,10 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
         return this.stageClass.getConstructor(Skizzik.class);
     }
 
+    public Class<T> getStageClass() {
+        return (Class<T>) this.stageClass;
+    }
+    
     public int getId() {
         return this.id;
     }

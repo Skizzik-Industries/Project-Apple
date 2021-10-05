@@ -18,7 +18,12 @@ public class SkizzikStage2 extends AbstractSkizzikStage {
     public int transitionTime() {
         return 21;
     }
-    
+
+    @Override
+    public int maxStageHealth() {
+        return 820;
+    }
+
     @Override
     public void skizzieSpawning() {
         if (Math.random() < 0.05) {

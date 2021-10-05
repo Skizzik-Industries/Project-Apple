@@ -20,6 +20,11 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     }
 
     @Override
+    public int maxStageHealth() {
+        return 1020;
+    }
+
+    @Override
     public boolean hostileAI() {
         if (skizzik.isTransitioning()) {
             return false;
@@ -30,7 +35,6 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     @Override
     public void begin(SkizzikStageManager stageManager) {
         super.begin(stageManager);
-        skizzik.setHealth(1020);
     }
 
     @Override

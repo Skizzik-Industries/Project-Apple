@@ -28,10 +28,15 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     public String textureLocation() {
         return String.format("%s/%s_sleeping", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
-    
+
+    @Override
+    public int maxStageHealth() {
+        return 1021;
+    }
+
     @Override
     public int maxHealth() {
-        return 1021;
+        return this.maxStageHealth();
     }
 
     @Override

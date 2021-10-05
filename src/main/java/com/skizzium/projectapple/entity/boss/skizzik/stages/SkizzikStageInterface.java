@@ -17,6 +17,8 @@ public interface SkizzikStageInterface {
 
     String modelLocation();
     
+    int maxStageHealth();
+    
     int armorValue();
 
     int maxHealth();

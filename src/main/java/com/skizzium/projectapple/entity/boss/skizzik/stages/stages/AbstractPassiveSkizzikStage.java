@@ -46,7 +46,9 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
 
     @Override
     public void begin(SkizzikStageManager stageManager) {
+        skizzik.setHealth(this.maxStageHealth());
         skizzik.setEyeHeight(this.eyeHeight());
+        
         if (!(stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
             skizzik.setInvulnerableTicks(this.transitionTime());
             skizzik.setTransitioning(true);
