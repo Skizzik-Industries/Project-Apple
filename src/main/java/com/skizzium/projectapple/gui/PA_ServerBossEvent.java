@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.bossevent.*;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
@@ -31,7 +32,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
                 PA_PacketRegistry.INSTANCE.sendTo(new UpdateBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
             }
         }
-
     }
 
     public void setName(Component newName) {
@@ -39,7 +39,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setName(newName);
             this.broadcastUpdatePacket();
         }
-
     }
 
     public void setColor(PA_BossBarColor color) {
@@ -47,7 +46,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setColor(color);
             this.broadcastUpdatePacket();
         }
-
     }
 
     public void setOverlay(PA_BossBarOverlay overlay) {
@@ -55,7 +53,13 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setOverlay(overlay);
             this.broadcastUpdatePacket();
         }
+    }
 
+    public void setTexture(ResourceLocation location) {
+        if (location != this.customTexture) {
+            super.setCustomTexture(location);
+            this.broadcastUpdatePacket();
+        }
     }
 
     public PA_BossEvent setDarkenScreen(boolean flag) {

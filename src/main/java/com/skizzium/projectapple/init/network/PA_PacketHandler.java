@@ -39,7 +39,7 @@ public class PA_PacketHandler {
 
     public static void handleAddBossEventPacket(AddBossEventPacket packet) {
         Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        vanillaEvents.put(packet.id, new PA_LerpingBossEvent(packet.id, packet.name, packet.progress, packet.color, packet.overlay, packet.darkenScreen, packet.createWorldFog));
+        vanillaEvents.put(packet.id, new PA_LerpingBossEvent(packet.id, packet.name, packet.progress, packet.color, packet.overlay, packet.customTexture, packet.darkenScreen, packet.createWorldFog));
     }
 
     public static void handleRemoveBossEventPacket(RemoveBossEventPacket packet) {
@@ -56,6 +56,7 @@ public class PA_PacketHandler {
         
         lerpingBossEvent.setCustomColor(packet.color);
         lerpingBossEvent.setCustomOverlay(packet.overlay);
+        lerpingBossEvent.setCustomTexture(packet.customTexture);
 
         lerpingBossEvent.setDarkenScreen(packet.darkenScreen);
         lerpingBossEvent.setCreateWorldFog(packet.createWorldFog);

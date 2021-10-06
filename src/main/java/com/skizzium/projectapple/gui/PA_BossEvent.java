@@ -2,7 +2,9 @@ package com.skizzium.projectapple.gui;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public abstract class PA_BossEvent {
@@ -11,6 +13,7 @@ public abstract class PA_BossEvent {
     protected float progress;
     protected PA_BossEvent.PA_BossBarColor color;
     protected PA_BossEvent.PA_BossBarOverlay overlay;
+    protected ResourceLocation customTexture;
     protected boolean darkenScreen;
     protected boolean createWorldFog;
 
@@ -58,10 +61,23 @@ public abstract class PA_BossEvent {
         this.overlay = newOverlay;
     }
 
+    public ResourceLocation getCustomTexture() {
+        return this.customTexture;
+    }
+
+    public PA_BossEvent setCustomTexture(ResourceLocation location) {
+        this.customTexture = location;
+        return this;
+    }
+
     public boolean shouldDarkenScreen() {
         return this.darkenScreen;
     }
 
+    public boolean shouldCreateWorldFog() {
+        return this.createWorldFog;
+    }
+    
     public PA_BossEvent setDarkenScreen(boolean newValue) {
         this.darkenScreen = newValue;
         return this;
@@ -70,10 +86,6 @@ public abstract class PA_BossEvent {
     public PA_BossEvent setCreateWorldFog(boolean newValue) {
         this.createWorldFog = newValue;
         return this;
-    }
-
-    public boolean shouldCreateWorldFog() {
-        return this.createWorldFog;
     }
 
     public enum PA_BossBarColor {
