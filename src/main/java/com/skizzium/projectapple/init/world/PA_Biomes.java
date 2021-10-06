@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.init.world;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.world.biome.CandyPlains;
 import net.minecraft.world.level.biome.Biome;
@@ -18,9 +19,10 @@ public class PA_Biomes {
 
     @SubscribeEvent
     public static void registerBiomes(FMLCommonSetupEvent event) {
-        BiomeDictionary.addTypes(PA_BiomeKeys.CANDY_PLAINS, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.OVERWORLD);
-
-        BiomeManager.addBiome(BiomeManager.BiomeType.COOL, PA_Biomes.CANDY_PLAINS_ENTRY);
+        if (PA_Config.commonInstance.worldGen.generateCandyPlains.get()) {
+            BiomeDictionary.addTypes(PA_BiomeKeys.CANDY_PLAINS, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.OVERWORLD);
+            BiomeManager.addBiome(BiomeManager.BiomeType.COOL, PA_Biomes.CANDY_PLAINS_ENTRY);
+        }
     }
 
     public static void register() {}

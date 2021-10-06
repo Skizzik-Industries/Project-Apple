@@ -23,7 +23,7 @@
   "entity.skizzik.finish_him": {
     "subtitle": "subtitles.entity.skizzik.finish_him",
     "sounds": [{
-      "name": "skizzik:entity/skizzik/finish_him"
+      "name": "skizzik:entity/skizzik_finish_him"
     }]
   },
   "entity.dababy": {

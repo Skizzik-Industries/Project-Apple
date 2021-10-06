@@ -3,6 +3,11 @@ package com.skizzium.projectapple.util;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.SkizzieStatue;
 import com.skizzium.projectapple.entity.*;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.CorruptedSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
+import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
@@ -36,30 +41,49 @@ public class SkizzieConversion {
         return statue.defaultBlockState().setValue(SkizzieStatue.FACING, statueFacing).setValue(SkizzieStatue.WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
+    // Required since the way I randomize the statue spawnment requires a float between 0.0 and 1.0
+    private static float getChanceFromConfig() {
+        int configValue = PA_Config.commonInstance.entities.skizzieStatueChances.get();
+        String valueString = Integer.toString(configValue);
+        int digitCount = valueString.length();
+
+        if (digitCount == 1) {
+            return Float.parseFloat("0.0" + valueString);
+        }
+        else if (digitCount == 2) {
+            return Float.parseFloat("0." + valueString);
+        }
+        else if (digitCount == 3) {
+            return 1.0F;
+        }
+
+        return 0.3F;
+    }
+
     private static InteractionResult spawn(LivingEntity from, LivingEntity to, ItemStack item, Player player, Level world, boolean canBeStatue) {
         double fromX = from.getX();
         double fromY = from.getY();
         double fromZ = from.getZ();
         BlockPos fromPos = new BlockPos(fromX, fromY, fromZ);
-
+        
         if (world instanceof ServerLevel) {
-            if (!((ServerPlayer) player).gameMode.isCreative() && Math.random() < 0.3 && canBeStatue) {
+            if (!((ServerPlayer) player).gameMode.isCreative() && Math.random() < getChanceFromConfig() && canBeStatue) {
                 world.setBlock(fromPos, skizzieStatueState(from, fromPos, world), 3);
                 from.discard();
                 return InteractionResult.SUCCESS;
             }
 
             if (to instanceof FriendlySkizzie && from instanceof Skizzie) {
-                ((FriendlySkizzie) to).setHolidayVariation(((Skizzie) from).getHolidayVariation());
+                ((FriendlySkizzie) to).setHoliday(((Skizzie) from).getHoliday());
             }
             else if (to instanceof FriendlySkizzie) {
-                ((FriendlySkizzie) to).setHolidayVariation(((FriendlySkizzie) from).getHolidayVariation());
+                ((FriendlySkizzie) to).setHoliday(((FriendlySkizzie) from).getHoliday());
             }
             else if (to instanceof Skizzie && from instanceof FriendlySkizzie) {
-                ((Skizzie) to).setHolidayVariation(((FriendlySkizzie) from).getHolidayVariation());
+                ((Skizzie) to).setHoliday(((FriendlySkizzie) from).getHoliday());
             }
             else if (to instanceof Skizzie) {
-                ((Skizzie) to).setHolidayVariation(((Skizzie) from).getHolidayVariation());
+                ((Skizzie) to).setHoliday(((Skizzie) from).getHoliday());
             }
             
             to.moveTo(fromX, fromY, fromZ, from.xRotO, from.yRotO);

@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.block;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;

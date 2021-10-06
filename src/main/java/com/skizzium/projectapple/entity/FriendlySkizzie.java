@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
@@ -41,7 +42,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 
 public class FriendlySkizzie extends PathfinderMob {
-    private static EntityDataAccessor<Integer> DATA_HOLIDAY_VARIATION = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
+    private static EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
 
     public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {
         super(entity, world);
@@ -85,18 +86,18 @@ public class FriendlySkizzie extends PathfinderMob {
         return true;
     }
 
-    public void setHolidayVariation(int variation) {
-        this.entityData.set(DATA_HOLIDAY_VARIATION, variation);
+    public void setHoliday(int variation) {
+        this.entityData.set(DATA_HOLIDAY, variation);
     }
 
-    public int getHolidayVariation() {
-        return this.entityData.get(DATA_HOLIDAY_VARIATION);
+    public int getHoliday() {
+        return this.entityData.get(DATA_HOLIDAY);
     }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_HOLIDAY_VARIATION, 0);
+        this.entityData.define(DATA_HOLIDAY, 0);
     }
 
     @Override
@@ -135,7 +136,7 @@ public class FriendlySkizzie extends PathfinderMob {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData data, @Nullable CompoundTag nbt) {
         if (reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER) {
-            this.setHolidayVariation(ProjectApple.holiday);
+            this.setHoliday(ProjectApple.holiday);
         }
         
         return super.finalizeSpawn(world, difficulty, reason, data, nbt);
