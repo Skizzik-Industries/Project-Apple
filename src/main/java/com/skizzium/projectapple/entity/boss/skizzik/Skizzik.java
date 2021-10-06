@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.skizzik.ai.SkizzikRunAwayGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
@@ -12,6 +13,7 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
+import com.skizzium.projectapple.util.SafeSpotConditions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -49,6 +51,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import org.apache.commons.lang3.Range;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -91,6 +94,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
     private boolean debug;
+    private boolean regenerating;
     private AnimationFactory factory = new AnimationFactory(this);
     
     private int destroyBlocksTicks;
@@ -101,6 +105,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
+    public SkizzikRunAwayGoal runAwayGoal = new SkizzikRunAwayGoal(this, new SafeSpotConditions().heightRange(Range.between(0, 35)));
 
     public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
     public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
@@ -247,6 +252,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+    }
+
+    public boolean isRegenerating() {
+        return regenerating;
+    }
+
+    public void setRegenerating(boolean regenerating) {
+        this.regenerating = regenerating;
     }
 
     public void setEyeHeight(float height) {

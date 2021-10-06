@@ -81,8 +81,9 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         skizzik.goalSelector.addGoal(1, skizzik.avoidPlayerGoal);
         skizzik.goalSelector.addGoal(2, skizzik.panicGoal);
         skizzik.goalSelector.addGoal(3, skizzik.avoidWaterGoal);
-        skizzik.goalSelector.addGoal(4, skizzik.lookGoal);
-        skizzik.goalSelector.addGoal(5, skizzik.lookRandomlyGoal);
+        skizzik.goalSelector.addGoal(4, skizzik.runAwayGoal);
+        skizzik.goalSelector.addGoal(5, skizzik.lookGoal);
+        skizzik.goalSelector.addGoal(6, skizzik.lookRandomlyGoal);
     }
 
     @Override

@@ -51,6 +51,8 @@ public class PA_Config {
         public final ForgeConfigSpec.BooleanValue allowSkizzieConversion;
         public final ForgeConfigSpec.IntValue skizzieStatueChances;
         public final ForgeConfigSpec.BooleanValue allowCorruptedSkizzieAbility;
+        
+        public final ForgeConfigSpec.BooleanValue skizzikComeback;
 
         Entities(ForgeConfigSpec.Builder builder) {
             builder.comment("Entity Settings").push("entities");
@@ -64,6 +66,10 @@ public class PA_Config {
             this.allowCorruptedSkizzieAbility = builder
                     .comment("Determines whether or not Corrupted Skizzies will turn blocks under them into Corrupted Blocks.")
                     .define("allowCorruptedSkizzieAbility", true);
+            
+            this.skizzikComeback = builder
+                    .comment("Determines whether or not the Skizzik can do his comeback by running away, hiding and slowly regenerating.")
+                    .define("skizzikComeback", true);
 
             builder.pop();
         }
