@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.network;
+package com.skizzium.projectapple.network.bossevent;
 
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketHandler;

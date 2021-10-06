@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
-import com.skizzium.projectapple.network.*;
+import com.skizzium.projectapple.network.bossevent.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -25,10 +25,10 @@ public class PA_ServerBossEvent extends PA_BossEvent {
         this.visible = true;
     }
 
-    private void broadcast(Object packet) {
+    private void broadcastUpdatePacket() {
         if (this.visible) {
             for (ServerPlayer player : this.players) {
-                PA_PacketRegistry.INSTANCE.sendTo(packet, player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+                PA_PacketRegistry.INSTANCE.sendTo(new UpdateBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
             }
         }
 
@@ -37,7 +37,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public void setName(Component newName) {
         if (!Objects.equal(newName, this.name)) {
             super.setName(newName);
-            this.broadcast(new UpdateNameBossEventPacket(this));
+            this.broadcastUpdatePacket();
         }
 
     }
@@ -45,7 +45,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public void setColor(PA_BossBarColor color) {
         if (color != this.color) {
             super.setColor(color);
-            this.broadcast(new UpdateStyleBossEventPacket(this));
+            this.broadcastUpdatePacket();
         }
 
     }
@@ -53,7 +53,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public void setOverlay(PA_BossBarOverlay overlay) {
         if (overlay != this.overlay) {
             super.setOverlay(overlay);
-            this.broadcast(new UpdateStyleBossEventPacket(this));
+            this.broadcastUpdatePacket();
         }
 
     }
@@ -61,7 +61,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public PA_BossEvent setDarkenScreen(boolean flag) {
         if (flag != this.darkenScreen) {
             super.setDarkenScreen(flag);
-            this.broadcast(new UpdatePropertiesBossEventPacket(this));
+            this.broadcastUpdatePacket();
         }
 
         return this;
@@ -70,7 +70,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public PA_BossEvent setCreateWorldFog(boolean flag) {
         if (flag != this.createWorldFog) {
             super.setCreateWorldFog(flag);
-            this.broadcast(new UpdatePropertiesBossEventPacket(this));
+            this.broadcastUpdatePacket();
         }
 
         return this;
@@ -79,7 +79,7 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public void setProgress(float f) {
         if (f != this.progress) {
             super.setProgress(f);
-            this.broadcast(new UpdateProgressBossEventPacket(this));
+            this.broadcastUpdatePacket();
         }
 
     }

@@ -2,6 +2,7 @@ package com.skizzium.projectapple.init.network;
 
 import com.skizzium.projectapple.gui.PA_LerpingBossEvent;
 import com.skizzium.projectapple.network.*;
+import com.skizzium.projectapple.network.bossevent.*;
 import com.skizzium.projectapple.sound.BossMusic;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.LerpingBossEvent;
@@ -46,27 +47,17 @@ public class PA_PacketHandler {
         vanillaEvents.remove(packet.id);
     }
 
-    public static void handleUpdateNameBossEventPacket(UpdateNameBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        ((LerpingBossEvent)vanillaEvents.get(packet.id)).setName(packet.name);
-    }
-
-    public static void handleUpdateStyleBossEventPacket(UpdateStyleBossEventPacket packet) {
+    public static void handleUpdateBossEventPacket(UpdateBossEventPacket packet) {
         Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
         PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent)vanillaEvents.get(packet.id);
+
+        vanillaEvents.get(packet.id).setName(packet.name);
+        vanillaEvents.get(packet.id).setProgress(packet.progress);
+        
         lerpingBossEvent.setCustomColor(packet.color);
         lerpingBossEvent.setCustomOverlay(packet.overlay);
-    }
 
-    public static void handleUpdatePropertiesBossEventPacket(UpdatePropertiesBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent)vanillaEvents.get(packet.id);
         lerpingBossEvent.setDarkenScreen(packet.darkenScreen);
         lerpingBossEvent.setCreateWorldFog(packet.createWorldFog);
-    }
-
-    public static void handleUpdateProgressBossEventPacket(UpdateProgressBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        ((LerpingBossEvent)vanillaEvents.get(packet.id)).setProgress(packet.progress);
     }
 }

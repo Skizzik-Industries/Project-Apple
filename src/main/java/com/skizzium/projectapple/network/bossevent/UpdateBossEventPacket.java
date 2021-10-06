@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.network;
+package com.skizzium.projectapple.network.bossevent;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.gui.PA_BossEvent;
@@ -12,7 +12,7 @@ import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class AddBossEventPacket {
+public class UpdateBossEventPacket {
     public final UUID id;
     public final Component name;
     public final float progress;
@@ -21,7 +21,7 @@ public class AddBossEventPacket {
     public final boolean darkenScreen;
     public final boolean createWorldFog;
 
-    public AddBossEventPacket(PA_BossEvent event) {
+    public UpdateBossEventPacket(PA_BossEvent event) {
         this.id = event.getId();
         this.name = event.getName();
         this.progress = event.getProgress();
@@ -31,7 +31,7 @@ public class AddBossEventPacket {
         this.createWorldFog = event.shouldCreateWorldFog();
     }
 
-    public AddBossEventPacket(FriendlyByteBuf buffer) {
+    public UpdateBossEventPacket(FriendlyByteBuf buffer) {
         this.id = buffer.readUUID();
         this.name = buffer.readComponent();
         this.progress = buffer.readFloat();
@@ -51,12 +51,12 @@ public class AddBossEventPacket {
         buffer.writeByte(ProjectApple.encodeBossEventProperties(this.darkenScreen, this.createWorldFog));
     }
 
-    public static AddBossEventPacket decode(FriendlyByteBuf buffer) {
-        return new AddBossEventPacket(buffer);
+    public static UpdateBossEventPacket decode(FriendlyByteBuf buffer) {
+        return new UpdateBossEventPacket(buffer);
     }
 
-    public static void handle(AddBossEventPacket packet, Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PA_PacketHandler.handleAddBossEventPacket(packet)));
+    public static void handle(UpdateBossEventPacket packet, Supplier<NetworkEvent.Context> context) {
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PA_PacketHandler.handleUpdateBossEventPacket(packet)));
         context.get().setPacketHandled(true);
     }
 }
