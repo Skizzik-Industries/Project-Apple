@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
 
 public class SkizzikStageManager {
     private final Skizzik skizzik;
@@ -23,11 +24,11 @@ public class SkizzikStageManager {
                                                     health > 220 ? 4 :
                                                             health > 20 ? 5 : 6;
         
-        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
+        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && (!skizzik.isTransitioning() && !(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
             this.setStage(this.getNextStage().getStage());
         }
 
-        if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
+        if (skizzik.getDebug() && (!skizzik.isTransitioning() && !(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) && newStageId != this.getCurrentStage().getStage().getId()) {
             this.setStage(SkizzikStages.getById(newStageId));
         }
         
