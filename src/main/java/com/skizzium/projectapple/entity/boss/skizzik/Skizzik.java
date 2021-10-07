@@ -71,9 +71,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_TARGET_E = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
-    private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_STAGE = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_TRANSITIONING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_TRANSITION_TIME = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_INVUL = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
 
     private int activeHeads = 4;
 
@@ -163,7 +164,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        if (stageManager.getCurrentStage().hostileAI()) {
+        if (stageManager.getCurrentStage().playMusic()) {
             PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
@@ -261,12 +262,20 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.entityData.set(DATA_TRANSITIONING, flag);
     }
 
-    public int getInvulnerableTicks() {
-        return this.entityData.get(DATA_ID_INV);
+    public int getTransitionTicks() {
+        return this.entityData.get(DATA_TRANSITION_TIME);
     }
 
-    public void setInvulnerableTicks(int i) {
-        this.entityData.set(DATA_ID_INV, i);
+    public void setTransitionsTicks(int i) {
+        this.entityData.set(DATA_TRANSITION_TIME, i);
+    }
+
+    public boolean isInvul() {
+        return this.entityData.get(DATA_INVUL);
+    }
+
+    public void setInvul(boolean flag) {
+        this.entityData.set(DATA_INVUL, flag);
     }
 
     public int getAlternativeTarget(int head) {
@@ -380,9 +389,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     protected void defineSynchedData() {
         super.defineSynchedData();
 
-        this.entityData.define(DATA_ID_INV, 0);
+        this.entityData.define(DATA_TRANSITION_TIME, 0);
         this.entityData.define(DATA_STAGE, 0);
         this.entityData.define(DATA_TRANSITIONING, false);
+        this.entityData.define(DATA_INVUL, false);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -404,10 +414,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         super.addAdditionalSaveData(nbt);
 
         nbt.putInt("Stage", this.stageManager.getCurrentStage().getStage().getId());
-        nbt.putInt("Invul", this.getInvulnerableTicks());
         nbt.putBoolean("Transitioning", this.isTransitioning());
+        nbt.putInt("TransitionTime", this.getTransitionTicks());
         nbt.putBoolean("Preview", this.getPreview());
         nbt.putBoolean("Debug", this.getDebug());
+        nbt.putBoolean("Invul", this.isInvul());
     }
 
     @Override
@@ -415,10 +426,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         super.readAdditionalSaveData(nbt);
 
         this.stageManager.setStage(SkizzikStages.getById(nbt.getInt("Stage")));
-        this.setInvulnerableTicks(nbt.getInt("Invul"));
+        this.setTransitionsTicks(nbt.getInt("TransitionTime"));
         this.setTransitioning(nbt.getBoolean("Transitioning"));
         this.setPreview(nbt.getBoolean("Preview"));
         this.setDebug(nbt.getBoolean("Debug"));
+        this.setInvul(nbt.getBoolean("Invul"));
 
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());
@@ -504,8 +516,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
         this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(this.stageManager.getCurrentStage().maxHealth());
 
-        this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
-        this.bossBar.setColor(this.stageManager.getCurrentStage().barColor());
+        if (!this.isInvul()) {
+            this.bossBar.setName(this.stageManager.getCurrentStage().displayName());
+            this.bossBar.setColor(this.stageManager.getCurrentStage().barColor());
+        }
+        else {
+            this.bossBar.setName(new TextComponent(String.format("%s - %s", this.getDisplayName().getString(), new TranslatableComponent("entity.skizzik.skizzik.invulnerable").getString())));
+            this.bossBar.setColor(PA_BossEvent.PA_BossBarColor.AQUA);
+        }
         this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
         
         if (this.preview) {
@@ -596,7 +614,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
         super.aiStep();
 
-        if (stageManager.getCurrentStage().hostileAI()) {
+        if (stageManager.getCurrentStage().attackStatically()) {
             for (int i = 0; i < activeHeads; ++i) {
                 this.yRotHeads1[i] = this.yRotHeads[i];
                 this.xRotHeads1[i] = this.xRotHeads[i];
@@ -654,7 +672,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();
         }
 
-        if (stageManager.getCurrentStage().hostileAI()) {
+        if (stageManager.getCurrentStage().attackStatically()) {
             for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
@@ -722,7 +740,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
         if (!this.preview) {
             if (this.destroyBlocksTicks > 0) {
-                if (stageManager.getCurrentStage().hostileAI()) {
+                if (stageManager.getCurrentStage().attackStatically()) {
                     --this.destroyBlocksTicks;
 
                     if (this.destroyBlocksTicks == 0 && getMobGriefingEvent(this.level, this)) {

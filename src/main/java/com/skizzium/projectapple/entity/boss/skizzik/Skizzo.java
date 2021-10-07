@@ -224,5 +224,7 @@ public class Skizzo extends Monster {
         LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
         lightning.moveTo(Vec3.atCenterOf(new BlockPos(x, y, z)));
         world.addFreshEntity(lightning);
+
+        ((Skizzik) this.getOwner()).setInvul(false);
     }
 }

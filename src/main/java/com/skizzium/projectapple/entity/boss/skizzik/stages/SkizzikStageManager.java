@@ -24,12 +24,26 @@ public class SkizzikStageManager {
                                                     health > 220 ? 4 :
                                                             health > 20 ? 5 : 6;
         
-        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && (!skizzik.isTransitioning() && !(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
-            this.setStage(this.getNextStage().getStage());
+        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
+            if (skizzik.isTransitioning()) {
+                if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+                    this.setStage(this.getNextStage().getStage());
+                }
+            }
+            else {
+                this.setStage(this.getNextStage().getStage());
+            }
         }
 
-        if (skizzik.getDebug() && (!skizzik.isTransitioning() && !(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) && newStageId != this.getCurrentStage().getStage().getId()) {
-            this.setStage(SkizzikStages.getById(newStageId));
+        if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
+            if (skizzik.isTransitioning()) {
+                if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+                    this.setStage(SkizzikStages.getById(newStageId));
+                }
+            }
+            else {
+                this.setStage(SkizzikStages.getById(newStageId));
+            }
         }
         
         this.currentStage.tick();

@@ -26,11 +26,11 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     }
 
     @Override
-    public boolean hostileAI() {
+    public boolean attackDirectly() {
         if (skizzik.isTransitioning()) {
             return false;
         }
-        return super.hostileAI();
+        return super.attackDirectly();
     }
 
     @Override
@@ -42,8 +42,8 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
 
     @Override
     public void tick() {
-        if (skizzik.getInvulnerableTicks() > 0) {
-            int i = skizzik.getInvulnerableTicks() - 1;
+        if (skizzik.getTransitionTicks() > 0) {
+            int i = skizzik.getTransitionTicks() - 1;
             skizzik.bossBar.setProgress(1.0F - (float) i / 73.0F);
             if (i <= 0) {
                 Explosion.BlockInteraction explosion = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(skizzik.level, skizzik) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;

@@ -23,6 +23,7 @@ import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     protected final Skizzik skizzik;
+    public boolean hasGoals = false;
     
     public AbstractSkizzikStage(Skizzik skizzik) {
         this.skizzik = skizzik;
@@ -107,8 +108,18 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public boolean hostileAI() {
-        return !skizzik.getPreview();
+    public boolean playMusic() {
+        return true;
+    }
+
+    @Override
+    public boolean attackStatically() {
+        return !skizzik.getPreview() && !skizzik.isTransitioning();
+    }
+
+    @Override
+    public boolean attackDirectly() {
+        return !skizzik.getPreview() && !skizzik.isTransitioning() && !skizzik.isInvul();
     }
 
     @Override
@@ -119,7 +130,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
         skizzik.setHealth(this.maxStageHealth());
         
-        skizzik.setInvulnerableTicks(this.transitionTime());
+        skizzik.setTransitionsTicks(this.transitionTime());
         skizzik.setTransitioning(true);
         
         skizzik.setEyeHeight(this.eyeHeight());
@@ -149,6 +160,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                             //skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
+                            skizzik.setInvul(true);
                             //skizzos[i - 1] = skizzo;
                         }
                     }
@@ -160,13 +172,6 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                     } */
                 }
             }
-        }
-
-        if (skizzik.getPreview() || skizzik.isTransitioning()) {
-            skizzik.goalSelector.removeAllGoals();
-        }
-        else {
-            this.addGoals();
         }
     }
 
@@ -194,9 +199,20 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public void tick() {
-        if (skizzik.getInvulnerableTicks() > 0) {
-            skizzik.setInvulnerableTicks(skizzik.getInvulnerableTicks() - 1);
-            if (skizzik.getInvulnerableTicks() - 1 == 0) {
+        if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
+            skizzik.goalSelector.removeAllGoals();
+            this.hasGoals = false;
+        }
+        else {
+            if (!this.hasGoals) {
+                this.addGoals();
+                this.hasGoals = true;
+            }
+        }
+        
+        if (skizzik.getTransitionTicks() > 0) {
+            skizzik.setTransitionsTicks(skizzik.getTransitionTicks() - 1);
+            if (skizzik.getTransitionTicks() - 1 == 0) {
                 this.addGoals();
             }
         }

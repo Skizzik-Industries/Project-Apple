@@ -40,7 +40,17 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
     }
 
     @Override
-    public boolean hostileAI() {
+    public boolean playMusic() {
+        return false;
+    }
+
+    @Override
+    public boolean attackStatically() {
+        return false;
+    }
+    
+    @Override
+    public boolean attackDirectly() {
         return false;
     }
 
@@ -50,24 +60,15 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
         skizzik.setEyeHeight(this.eyeHeight());
         
         if (!(stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
-            skizzik.setInvulnerableTicks(this.transitionTime());
+            skizzik.setTransitionsTicks(this.transitionTime());
             skizzik.setTransitioning(true);
         }
         
         if (skizzik.level instanceof ServerLevel) {
             PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStopPacket());
         }
-
-        if (skizzik.getPreview() || skizzik.isTransitioning()) {
-            skizzik.goalSelector.removeAllGoals();
-        }
-        else {
-            this.addGoals();
-        }
     }
 
     @Override
-    public void skizzieSpawning() {
-        
-    }
+    public void skizzieSpawning() {}
 }
