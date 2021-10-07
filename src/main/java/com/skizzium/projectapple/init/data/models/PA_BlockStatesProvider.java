@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.data.models;
+package com.skizzium.projectapple.init.data.models;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
