@@ -15,10 +15,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
@@ -199,6 +201,25 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public void tick() {
+        boolean hasAliveSkizzo = false;
+        Level world = skizzik.level;
+        
+        if (skizzik.isInvul() && world instanceof ServerLevel) {
+            LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
+            Iterable<Entity> entities = entityGetter.getAll();
+            for (Entity entity : entities) {
+                if (entity instanceof Skizzo) {
+                    if (((Skizzo) entity).getOwner() == skizzik) {
+                        hasAliveSkizzo = true;
+                    }
+                }
+            }
+
+            if (!hasAliveSkizzo) {
+                skizzik.setInvul(false);
+            }
+        }
+        
         if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
             skizzik.goalSelector.removeAllGoals();
             this.hasGoals = false;
