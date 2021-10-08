@@ -66,6 +66,54 @@ public class PA_ClientSetup {
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
     }
     
+    public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {
+        ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder = ImmutableMap.builder();
+        if (set == null) {
+            set = Minecraft.getInstance().getEntityModels();
+        }
+
+        builder.put(SkullBlock.Types.SKELETON, new SkullModel(set.bakeLayer(ModelLayers.SKELETON_SKULL)));
+        builder.put(SkullBlock.Types.WITHER_SKELETON, new SkullModel(set.bakeLayer(ModelLayers.WITHER_SKELETON_SKULL)));
+        builder.put(SkullBlock.Types.PLAYER, new SkullModel(set.bakeLayer(ModelLayers.PLAYER_HEAD)));
+        builder.put(SkullBlock.Types.ZOMBIE, new SkullModel(set.bakeLayer(ModelLayers.ZOMBIE_HEAD)));
+        builder.put(SkullBlock.Types.CREEPER, new SkullModel(set.bakeLayer(ModelLayers.CREEPER_HEAD)));
+        builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(set.bakeLayer(ModelLayers.DRAGON_SKULL)));
+
+        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+
+        return builder.build();
+    }
+
+    @SubscribeEvent
+    public static void registerSkullHeadLayers(EntityRenderersEvent.AddLayers event) {
+        Map<EntityType<?>, EntityRenderer<?>> renderers = Minecraft.getInstance().getEntityRenderDispatcher().renderers;
+        for(Map.Entry<EntityType<?>, EntityRenderer<?>> renderer : renderers.entrySet()) {
+            if (renderer.getValue() instanceof LivingEntityRenderer) {
+                List<? extends RenderLayer<?, ?>> layers = ((LivingEntityRenderer<?, ?>) renderer.getValue()).layers;
+                for (RenderLayer<?, ?> layer : layers) {
+                    if (layer instanceof CustomHeadLayer) {
+                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers(null);
+                    }
+                }
+            }
+        }
+
+        Map<String, EntityRenderer<? extends Player>> skins = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
+        for(Map.Entry<String, EntityRenderer<? extends Player>> renderer : skins.entrySet()) {
+            if (renderer.getValue() instanceof LivingEntityRenderer) {
+                List<? extends RenderLayer<?, ?>> layers = ((LivingEntityRenderer<?, ?>) renderer.getValue()).layers;
+                for (RenderLayer<?, ?> layer : layers) {
+                    if (layer instanceof CustomHeadLayer) {
+                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers(null);
+                    }
+                }
+            }
+        }
+    }
+
     @SubscribeEvent
     public static void registerOtherStuff(final FMLClientSetupEvent event) {
         ComposterBlock.COMPOSTABLES.put(PA_Blocks.CANDY_CANE.get(), 0.5F);
@@ -161,53 +209,5 @@ public class PA_ClientSetup {
         event.enqueueWork(() -> {
             Sheets.addWoodType(PA_Blocks.CANDY_WOOD_TYPE);
         });
-    }
-    
-    public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {
-        ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder = ImmutableMap.builder();
-        if (set == null) {
-            set = Minecraft.getInstance().getEntityModels();
-        }
-
-        builder.put(SkullBlock.Types.SKELETON, new SkullModel(set.bakeLayer(ModelLayers.SKELETON_SKULL)));
-        builder.put(SkullBlock.Types.WITHER_SKELETON, new SkullModel(set.bakeLayer(ModelLayers.WITHER_SKELETON_SKULL)));
-        builder.put(SkullBlock.Types.PLAYER, new SkullModel(set.bakeLayer(ModelLayers.PLAYER_HEAD)));
-        builder.put(SkullBlock.Types.ZOMBIE, new SkullModel(set.bakeLayer(ModelLayers.ZOMBIE_HEAD)));
-        builder.put(SkullBlock.Types.CREEPER, new SkullModel(set.bakeLayer(ModelLayers.CREEPER_HEAD)));
-        builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(set.bakeLayer(ModelLayers.DRAGON_SKULL)));
-
-        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
-        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
-        builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
-        builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
-
-        return builder.build();
-    }
-
-    @SubscribeEvent
-    public static void registerSkullHeadLayers(EntityRenderersEvent.AddLayers event) {
-        Map<EntityType<?>, EntityRenderer<?>> renderers = Minecraft.getInstance().getEntityRenderDispatcher().renderers;
-        for(Map.Entry<EntityType<?>, EntityRenderer<?>> renderer : renderers.entrySet()) {
-            if (renderer.getValue() instanceof LivingEntityRenderer) {
-                List<? extends RenderLayer<?, ?>> layers = ((LivingEntityRenderer<?, ?>) renderer.getValue()).layers;
-                for (RenderLayer<?, ?> layer : layers) {
-                    if (layer instanceof CustomHeadLayer) {
-                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers(null);
-                    }
-                }
-            }
-        }
-
-        Map<String, EntityRenderer<? extends Player>> skins = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
-        for(Map.Entry<String, EntityRenderer<? extends Player>> renderer : skins.entrySet()) {
-            if (renderer.getValue() instanceof LivingEntityRenderer) {
-                List<? extends RenderLayer<?, ?>> layers = ((LivingEntityRenderer<?, ?>) renderer.getValue()).layers;
-                for (RenderLayer<?, ?> layer : layers) {
-                    if (layer instanceof CustomHeadLayer) {
-                        ((CustomHeadLayer) layer).skullModels = createSkullRenderers(null);
-                    }
-                }
-            }
-        }
     }
 }

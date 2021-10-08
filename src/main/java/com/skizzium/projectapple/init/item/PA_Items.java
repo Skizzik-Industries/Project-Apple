@@ -10,6 +10,7 @@ import com.skizzium.projectapple.item.PA_SkullItem;
 import com.skizzium.projectapple.item.RainbowSword;
 import com.skizzium.projectapple.item.ThemeableSpawnEgg;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -77,7 +78,7 @@ public class PA_Items {
     public static final RegistryObject<ShovelItem> CANDIANITE_SHOVEL = PA_Registry.ITEMS.register("candianite_shovel", () -> new ShovelItem(PA_Tiers.CANDIANITE, 3, -2.4F, (new Item.Properties().durability(350).tab(PA_Registry.LIVING_CANDY_TAB).fireResistant().rarity(Rarity.COMMON))));
     public static final RegistryObject<HoeItem> CANDIANITE_HOE = PA_Registry.ITEMS.register("candianite_hoe", () -> new HoeItem(PA_Tiers.CANDIANITE, 3, -2.4F, (new Item.Properties().durability(350).tab(PA_Registry.LIVING_CANDY_TAB).fireResistant().rarity(Rarity.COMMON))));
 
-    public static final RegistryObject<HorseArmorItem> CANDIANITE_HORSE_ARMOR = PA_Registry.ITEMS.register("candianite_horse_armor", () -> new HorseArmorItem(5, "candianite", (new Item.Properties()).stacksTo(1).tab(PA_Registry.LIVING_CANDY_TAB)));
+    public static final RegistryObject<HorseArmorItem> CANDIANITE_HORSE_ARMOR = PA_Registry.ITEMS.register("candianite_horse_armor", () -> new HorseArmorItem(5, new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/horse/armor/horse_armor_candianite.png"), (new Item.Properties()).stacksTo(1).tab(PA_Registry.LIVING_CANDY_TAB)));
     public static final RegistryObject<ArmorItem> CANDIANITE_HELMET = PA_Registry.ITEMS.register("candianite_helmet", () -> new ArmorItem(PA_ArmorMaterials.CANDIANITE, EquipmentSlot.HEAD, new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDIANITE_CHESTPLATE = PA_Registry.ITEMS.register("candianite_chestplate", () -> new ArmorItem(PA_ArmorMaterials.CANDIANITE, EquipmentSlot.CHEST, new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDIANITE_LEGGINGS = PA_Registry.ITEMS.register("candianite_leggings", () -> new ArmorItem(PA_ArmorMaterials.CANDIANITE, EquipmentSlot.LEGS, new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
