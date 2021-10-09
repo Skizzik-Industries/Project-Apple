@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
-import com.skizzium.projectapple.network.bossevent.*;
+import com.skizzium.projectapple.network.BossEventPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -25,21 +25,11 @@ public class PA_ServerBossEvent extends PA_BossEvent {
         this.visible = true;
     }
 
-    private void broadcastUpdatePacket() {
-        if (this.visible) {
-            for (ServerPlayer player : this.players) {
-                PA_PacketRegistry.INSTANCE.sendTo(new UpdateBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-            }
-        }
-
-    }
-
     public void setName(Component newName) {
         if (!Objects.equal(newName, this.name)) {
             super.setName(newName);
             this.broadcastUpdatePacket();
         }
-
     }
 
     public void setColor(PA_BossBarColor color) {
@@ -47,7 +37,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setColor(color);
             this.broadcastUpdatePacket();
         }
-
     }
 
     public void setOverlay(PA_BossBarOverlay overlay) {
@@ -55,7 +44,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setOverlay(overlay);
             this.broadcastUpdatePacket();
         }
-
     }
 
     public PA_BossEvent setDarkenScreen(boolean flag) {
@@ -63,7 +51,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setDarkenScreen(flag);
             this.broadcastUpdatePacket();
         }
-
         return this;
     }
 
@@ -72,7 +59,6 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setCreateWorldFog(flag);
             this.broadcastUpdatePacket();
         }
-
         return this;
     }
 
@@ -81,21 +67,18 @@ public class PA_ServerBossEvent extends PA_BossEvent {
             super.setProgress(f);
             this.broadcastUpdatePacket();
         }
-
     }
 
     public void addPlayer(ServerPlayer player) {
         if (this.players.add(player) && this.visible) {
-            PA_PacketRegistry.INSTANCE.sendTo(new AddBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+            this.sendStartRemovePacket(BossEventPacket.OperationType.ADD, player);
         }
-
     }
 
     public void removePlayer(ServerPlayer player) {
         if (this.players.remove(player) && this.visible) {
-            PA_PacketRegistry.INSTANCE.sendTo(new RemoveBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+            this.sendStartRemovePacket(BossEventPacket.OperationType.REMOVE, player);
         }
-
     }
 
     public void removeAllPlayers() {
@@ -104,9 +87,8 @@ public class PA_ServerBossEvent extends PA_BossEvent {
                 this.removePlayer(serverplayer);
             }
         }
-
     }
-
+    
     public boolean isVisible() {
         return this.visible;
     }
@@ -114,20 +96,26 @@ public class PA_ServerBossEvent extends PA_BossEvent {
     public void setVisible(boolean newValue) {
         if (newValue != this.visible) {
             this.visible = newValue;
-
             for (ServerPlayer player : this.players) {
-                if (newValue) {
-                    PA_PacketRegistry.INSTANCE.sendTo(new AddBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-                } else {
-                    PA_PacketRegistry.INSTANCE.sendTo(new RemoveBossEventPacket(this), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-                }
+                this.sendStartRemovePacket(newValue ? BossEventPacket.OperationType.ADD : BossEventPacket.OperationType.REMOVE, player);
             }
         }
-
     }
 
     public Collection<ServerPlayer> getPlayers() {
         return this.unmodifiablePlayers;
+    }
+
+    private void sendStartRemovePacket(BossEventPacket.OperationType operation, ServerPlayer player) {
+        PA_PacketRegistry.INSTANCE.sendTo(new BossEventPacket(this, operation), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+    }
+
+    private void broadcastUpdatePacket() {
+        if (this.visible) {
+            for (ServerPlayer player : this.players) {
+                PA_PacketRegistry.INSTANCE.sendTo(new BossEventPacket(this, BossEventPacket.OperationType.UPDATE), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+            }
+        }
     }
 }
 
