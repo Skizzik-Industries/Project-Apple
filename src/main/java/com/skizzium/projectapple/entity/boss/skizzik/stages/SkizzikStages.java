@@ -31,7 +31,7 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
     public static boolean isImmune(Skizzik skizzik, DamageSource source) {
         int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
 
-        if (skizzik.getTransitionTicks() > 0 && source != DamageSource.OUT_OF_WORLD) {
+        if ((skizzik.getTransitionTicks() > 0 || skizzik.getPreview() || skizzik.isInvul()) && source != DamageSource.OUT_OF_WORLD) {
             return true;
         }
         
@@ -64,13 +64,6 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
             
             if (stage == 5 && (source.getDirectEntity() instanceof Arrow) || source == DamageSource.DRAGON_BREATH)
                 return true;
-        }
-        else if (skizzik.getPreview() &&
-                source != DamageSource.CRAMMING &&
-                source != DamageSource.OUT_OF_WORLD &&
-                source != DamageSource.MAGIC) {
-            
-            return true;
         }
         
         return false;
