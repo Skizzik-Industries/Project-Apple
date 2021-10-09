@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
@@ -203,7 +204,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     public void tick() {
         boolean hasAliveSkizzo = false;
         Level world = skizzik.level;
-        
+
         if (skizzik.isInvul() && world instanceof ServerLevel) {
             LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
             Iterable<Entity> entities = entityGetter.getAll();
@@ -219,15 +220,17 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                 skizzik.setInvul(false);
             }
         }
-        
-        if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
-            skizzik.goalSelector.removeAllGoals();
-            this.hasGoals = false;
-        }
-        else {
-            if (!this.hasGoals) {
-                this.addGoals();
-                this.hasGoals = true;
+
+        if (skizzik.level instanceof ServerLevel) {
+            if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
+                skizzik.goalSelector.removeAllGoals();
+                skizzik.targetSelector.removeAllGoals();
+                this.hasGoals = false;
+            } else {
+                if (!this.hasGoals) {
+                    this.addGoals();
+                    this.hasGoals = true;
+                }
             }
         }
         
