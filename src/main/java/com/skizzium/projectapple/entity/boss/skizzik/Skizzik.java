@@ -170,6 +170,21 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     @Override
+    protected void doPush(Entity entity) {
+        if (this.isPushable()) {
+            super.doPush(entity);
+        }
+    }
+
+    @Override
+    public boolean isPushable() {
+        if (this.getPreview() || this.isTransitioning() || this.isInvul() || this.stageManager.getCurrentStage() instanceof SkizzikSleeping) {
+            return false;
+        }
+        return super.isPushable();
+    }
+
+    @Override
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
         this.bossBar.removePlayer(serverPlayer);

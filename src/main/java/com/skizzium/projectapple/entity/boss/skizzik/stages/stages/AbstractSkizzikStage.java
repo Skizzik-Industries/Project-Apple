@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
@@ -222,12 +223,16 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         }
 
         if (skizzik.level instanceof ServerLevel) {
+            double originalKnockbackRes = skizzik.getAttribute(Attributes.KNOCKBACK_RESISTANCE).getBaseValue();
             if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
+                skizzik.getAttributes().getInstance(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
                 skizzik.goalSelector.removeAllGoals();
                 skizzik.targetSelector.removeAllGoals();
                 this.hasGoals = false;
-            } else {
+            } 
+            else {
                 if (!this.hasGoals) {
+                    skizzik.getAttributes().getInstance(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(originalKnockbackRes);
                     this.addGoals();
                     this.hasGoals = true;
                 }
