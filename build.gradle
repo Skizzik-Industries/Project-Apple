@@ -117,14 +117,17 @@ shadowJar {
 
 repositories {
     maven {
-        name 'Geckolib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' 
+    }
+    maven {
+        url "https://cursemaven.com"
     }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     shade fg.deobf('software.bernie.geckolib:geckolib-1.17.1:3.0.2')
+    runtimeOnly fg.deobf('curse.maven:spookyjam-2021-left-hanging-532595:3477308')
 }
 
 task deobfJar(type: Jar) {
