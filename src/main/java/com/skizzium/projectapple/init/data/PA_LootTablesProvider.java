@@ -71,6 +71,10 @@ public class PA_LootTablesProvider extends LootTableProvider {
 
             add(PA_Blocks.SKIZZIK_LOOT_BAG.get(), (loot) -> LootTable.lootTable().withPool(LootPool.lootPool()
                                                                                            .setRolls(ConstantValue.exactly(1))
+                                                                                           .add(LootItem.lootTableItem(ProjectApple.holiday == 1 ? PA_Items.SPOOKZIK_SEAL.get() : PA_Items.SKIZZIK_SEAL.get()))
+                                                                                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                                                                                   .withPool(LootPool.lootPool()
+                                                                                           .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(ProjectApple.holiday == 1 ? PA_Items.MUSIC_DISC_SPOOKZIK.get() : PA_Items.MUSIC_DISC_SKIZZIK.get()))
                                                                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
                                                                                    .withPool(LootPool.lootPool()

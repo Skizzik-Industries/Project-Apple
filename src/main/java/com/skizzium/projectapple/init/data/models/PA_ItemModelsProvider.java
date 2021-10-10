@@ -85,6 +85,9 @@ public class PA_ItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "raw_skizzik_flesh");
         defaultBuilder(generated, "skizzik_flesh");
 
+        defaultBuilder(generated, "skizzik_seal");
+        defaultBuilder(generated, "spookzik_seal");
+        
         defaultBuilder(generated, "music_disc_skizzik");
         defaultBuilder(generated, "music_disc_spookzik");
 
