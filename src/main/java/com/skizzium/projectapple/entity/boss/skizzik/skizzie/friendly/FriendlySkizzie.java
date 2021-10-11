@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
@@ -16,7 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,9 +38,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -165,13 +162,13 @@ public class FriendlySkizzie extends PathfinderMob {
         this.clearFire();
 
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE || world.getBlockState(pos).getBlock() == Blocks.SOUL_FIRE) {
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
+            world.playSound(null, new BlockPos(x, y,z), SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, (float) 1, (float) 1);
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             this.clearFire();
         }
         else if (world.getBlockState(pos).getBlock() == Blocks.LAVA) {
             world.setBlock(pos, PA_Blocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
+            world.playSound(null, new BlockPos(x, y,z), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, (float) 1, (float) 1);
             this.discard();
         }
     }
@@ -194,7 +191,7 @@ public class FriendlySkizzie extends PathfinderMob {
             player.startRiding(this);
         }
     }
-    
+
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         InteractionResult convert = SkizzieConversion.convert(this, player);
@@ -210,23 +207,36 @@ public class FriendlySkizzie extends PathfinderMob {
         if (this.isAlive()) {
             if (this.isVehicle() && this.canBeControlledByRider()) {
                 LivingEntity livingentity = (LivingEntity)this.getControllingPassenger();
-                this.setYRot(livingentity.getYRot());
-                this.yRotO = this.getYRot();
-                this.setXRot(livingentity.getXRot() * 0.5F);
+                
                 this.setRot(this.getYRot(), this.getXRot());
-                this.yBodyRot = this.getYRot();
+                this.setXRot(livingentity.getXRot() * 0.5F);
+                this.setYRot(livingentity.getYRot());
+
+                this.yRotO = this.getYRot();
                 this.yHeadRot = this.yBodyRot;
-                float f = livingentity.xxa * 0.5F;
-                float f1 = livingentity.zza;
-                double yPos = pos.y;
-                if (f1 <= 0.0F) {
-                    f1 *= 0.25F;
+                this.yBodyRot = this.getYRot();
+                
+                float moveX = livingentity.xxa * 0.5F;
+                double moveY = pos.y;
+                float moveZ = livingentity.zza;
+                if (moveZ <= 0.0F) {
+                    moveZ *= 0.25F;
                 }
 
                 this.flyingSpeed = this.getSpeed() * 0.3F;
                 if (this.isControlledByLocalInstance()) {
+                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                        moveY = 0.5F;
+                    }
+                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                        moveY = -0.5F;
+                    }
+                    else {
+                        moveY = 0.0F;
+                    }
+                    
                     this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                    super.travel(new Vec3(f, yPos, f1));
+                    super.travel(new Vec3(moveX, moveY, moveZ));
                 }
                 else if (livingentity instanceof Player) {
                     this.setDeltaMovement(Vec3.ZERO);
