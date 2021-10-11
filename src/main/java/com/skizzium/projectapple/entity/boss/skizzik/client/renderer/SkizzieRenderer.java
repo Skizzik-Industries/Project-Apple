@@ -1,11 +1,11 @@
 package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
-import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.CorruptedSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.SkizzieGlowLayer;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

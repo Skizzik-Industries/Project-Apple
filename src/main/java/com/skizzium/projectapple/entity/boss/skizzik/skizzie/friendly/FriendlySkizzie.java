@@ -1,7 +1,8 @@
-package com.skizzium.projectapple.entity;
+package com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
@@ -74,6 +75,11 @@ public class FriendlySkizzie extends PathfinderMob {
     @Override
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public boolean isPushable() {
+        return !this.isVehicle();
     }
 
     @Override
@@ -156,21 +162,94 @@ public class FriendlySkizzie extends PathfinderMob {
         this.clearFire();
 
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE || world.getBlockState(pos).getBlock() == Blocks.SOUL_FIRE) {
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
+            world.playSound(null, new BlockPos(x, y,z), SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, (float) 1, (float) 1);
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             this.clearFire();
         }
         else if (world.getBlockState(pos).getBlock() == Blocks.LAVA) {
             world.setBlock(pos, PA_Blocks.SKIZZIE_STATUE.get().defaultBlockState(), 3);
-            world.playSound(null, new BlockPos(x, y,z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.fire.extinguish")), SoundSource.BLOCKS, (float) 1, (float) 1);
+            world.playSound(null, new BlockPos(x, y,z), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, (float) 1, (float) 1);
             this.discard();
+        }
+    }
+
+    @Nullable
+    @Override
+    public Entity getControllingPassenger() {
+        return this.getFirstPassenger();
+    }
+
+    @Override
+    public boolean canBeControlledByRider() {
+        return this.getControllingPassenger() instanceof LivingEntity;
+    }
+
+    private void doPlayerRide(Player player) {
+        if (!this.level.isClientSide) {
+            player.setYRot(this.getYRot());
+            player.setXRot(this.getXRot());
+            player.startRiding(this);
         }
     }
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        player.startRiding(this);
-        return SkizzieConversion.convert(this, player);
+        InteractionResult convert = SkizzieConversion.convert(this, player);
+        if (convert == InteractionResult.PASS) {
+            this.doPlayerRide(player);
+            return InteractionResult.SUCCESS;
+        }
+        return convert;
+    }
+
+    @Override
+    public void travel(Vec3 pos) {
+        if (this.isAlive()) {
+            if (this.isVehicle() && this.canBeControlledByRider()) {
+                LivingEntity livingentity = (LivingEntity)this.getControllingPassenger();
+                
+                this.setRot(this.getYRot(), this.getXRot());
+                this.setXRot(livingentity.getXRot() * 0.5F);
+                this.setYRot(livingentity.getYRot());
+
+                this.yRotO = this.getYRot();
+                this.yHeadRot = this.yBodyRot;
+                this.yBodyRot = this.getYRot();
+                
+                float moveX = livingentity.xxa * 0.5F;
+                double moveY = pos.y;
+                float moveZ = livingentity.zza;
+                if (moveZ <= 0.0F) {
+                    moveZ *= 0.25F;
+                }
+
+                this.flyingSpeed = this.getSpeed() * 0.3F;
+                if (this.isControlledByLocalInstance()) {
+                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                        moveY = 0.5F;
+                    }
+                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                        moveY = -0.5F;
+                    }
+                    else {
+                        moveY = 0.0F;
+                    }
+                    
+                    this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                    super.travel(new Vec3(moveX, moveY, moveZ));
+                }
+                else if (livingentity instanceof Player) {
+                    this.setDeltaMovement(Vec3.ZERO);
+                }
+
+                this.calculateEntityAnimation(this, false);
+                this.tryCheckInsideBlocks();
+            }
+            else {
+                this.flyingSpeed = 0.02F;
+                super.travel(pos);
+            }
+        }
     }
 
     @Override

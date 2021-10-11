@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;

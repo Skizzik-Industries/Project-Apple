@@ -50,7 +50,11 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class PA_ClientSetup {
+public class PA_ClientHelper {
+    public static Minecraft getClient() {
+        return Minecraft.getInstance();
+    }
+    
     @SubscribeEvent
     public static void renderLayers(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
