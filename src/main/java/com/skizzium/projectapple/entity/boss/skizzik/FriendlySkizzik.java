@@ -10,6 +10,7 @@ import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectapple.util.SkizzieConversion;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +20,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -82,6 +84,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final int[] idleHeadUpdates = new int[activeHeads];
 
     //private final Skizzo[] skizzos = new Skizzo[4];
+    public SkizzikGem[] gems = {new SkizzikGem(SkizzikGem.GemType.BLACK), new SkizzikGem(SkizzikGem.GemType.BLUE), new SkizzikGem(SkizzikGem.GemType.BROWN), new SkizzikGem(SkizzikGem.GemType.GREEN), new SkizzikGem(SkizzikGem.GemType.LIME_1), new SkizzikGem(SkizzikGem.GemType.LIME_2), new SkizzikGem(SkizzikGem.GemType.ORANGE), new SkizzikGem(SkizzikGem.GemType.PINK), new SkizzikGem(SkizzikGem.GemType.YELLOW)};
     
     private float eyeHeight;
     private AnimationFactory factory = new AnimationFactory(this);
