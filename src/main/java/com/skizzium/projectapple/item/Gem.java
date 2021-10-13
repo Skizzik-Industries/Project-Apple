@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.item;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.SkizzikGem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
