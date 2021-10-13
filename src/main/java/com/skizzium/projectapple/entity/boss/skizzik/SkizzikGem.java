@@ -1,11 +1,12 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
 public class SkizzikGem {
     private final GemType gem;
-    private boolean isAvailable;
+    private boolean isPlaced;
     
     public SkizzikGem(GemType gem) {
         this.gem = gem;
@@ -15,21 +16,30 @@ public class SkizzikGem {
         return gem;
     }
     
-    public boolean isAvailable() {
-        return isAvailable;
+    public boolean isPlaced() {
+        return isPlaced;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public SkizzikGem setPlaced(boolean placed) {
+        isPlaced = placed;
+        return this;
+    }
+
+    public CompoundTag toNbt() {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("GemType", gem.name());
+        tag.putBoolean("IsGemPlaced", isPlaced);
+        return tag;
+    }
+
+    public static SkizzikGem fromNbt(CompoundTag nbt) {
+        return new SkizzikGem(SkizzikGem.GemType.valueOf(nbt.getString("GemType"))).setPlaced(nbt.getBoolean("IsGemPlaced"));
     }
 
     public enum GemType {
         BLACK("black"),
         BLUE("blue"),
-        BROWN("brown"),
         GREEN("green"),
-        LIME_1("lime_1"),
-        LIME_2("lime_2"),
         ORANGE("orange"),
         PINK("pink"),
         YELLOW("yellow");

@@ -100,7 +100,7 @@ public class SkizzieConversion {
 
             from.discard();
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.sidedSuccess(!world.isClientSide);
     }
 
     public static InteractionResult convert(LivingEntity skizzie, Player player) {
@@ -143,10 +143,7 @@ public class SkizzieConversion {
             /*else if (!(skizzie instanceof FriendlySkizzie) && item == PA_Blocks.SMALL_SKIZZIK_HEAD.get().asItem()) {
                 return convert(skizzie, new Skizzie(PA_Entities.SKIZZIE, world), itemStack, player, world, false);
             }*/
-            return InteractionResult.PASS;
         }
-        else {
-            return InteractionResult.PASS;
-        }
+        return InteractionResult.PASS;
     }
 }

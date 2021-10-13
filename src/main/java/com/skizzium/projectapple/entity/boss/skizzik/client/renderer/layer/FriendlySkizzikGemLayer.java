@@ -1,8 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.SkizzikGem;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.FriendlySkizzikModel;
@@ -28,7 +26,7 @@ public class FriendlySkizzikGemLayer<T extends FriendlySkizzik> extends GeoLayer
     @Override
     public void render(PoseStack matrix, MultiBufferSource buffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         for (SkizzikGem gem : entity.gems) {
-            if (gem.isAvailable()) {
+            if (gem.isPlaced()) {
                 RenderType texture = this.getRenderType(gem.getGemType().getLocation());
                 this.renderer.render(this.getEntityModel().getModel(FriendlySkizzikModel.modelLocation(entity)), entity, partialTicks, texture, matrix, buffer, buffer.getBuffer(texture), 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             }

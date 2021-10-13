@@ -197,7 +197,7 @@ public class FriendlySkizzie extends PathfinderMob {
         InteractionResult convert = SkizzieConversion.convert(this, player);
         if (convert == InteractionResult.PASS) {
             this.doPlayerRide(player);
-            return InteractionResult.SUCCESS;
+            return InteractionResult.sidedSuccess(!player.level.isClientSide);
         }
         return convert;
     }

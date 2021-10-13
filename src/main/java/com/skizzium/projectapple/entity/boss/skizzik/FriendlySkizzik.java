@@ -6,21 +6,22 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.gui.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
+import com.skizzium.projectapple.item.Gem;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
-import com.skizzium.projectapple.util.SkizzieConversion;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -42,6 +43,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -84,7 +86,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final int[] idleHeadUpdates = new int[activeHeads];
 
     //private final Skizzo[] skizzos = new Skizzo[4];
-    public SkizzikGem[] gems = {new SkizzikGem(SkizzikGem.GemType.BLACK), new SkizzikGem(SkizzikGem.GemType.BLUE), new SkizzikGem(SkizzikGem.GemType.BROWN), new SkizzikGem(SkizzikGem.GemType.GREEN), new SkizzikGem(SkizzikGem.GemType.LIME_1), new SkizzikGem(SkizzikGem.GemType.LIME_2), new SkizzikGem(SkizzikGem.GemType.ORANGE), new SkizzikGem(SkizzikGem.GemType.PINK), new SkizzikGem(SkizzikGem.GemType.YELLOW)};
+    public SkizzikGem[] gems = {new SkizzikGem(SkizzikGem.GemType.BLACK), new SkizzikGem(SkizzikGem.GemType.BLUE), new SkizzikGem(SkizzikGem.GemType.GREEN), new SkizzikGem(SkizzikGem.GemType.ORANGE), new SkizzikGem(SkizzikGem.GemType.PINK), new SkizzikGem(SkizzikGem.GemType.YELLOW)};
     
     private float eyeHeight;
     private AnimationFactory factory = new AnimationFactory(this);
@@ -353,9 +355,25 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     }
 
     @Override
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
+        
+        ListTag gemNBTList = new ListTag();
+        for (SkizzikGem gem : this.gems) {
+            gemNBTList.add(gem.toNbt());
+        }
+    }
+
+    @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
+        int index = 0;
+        for (Tag nbtTag : nbt.getList("Gems", Tag.TAG_COMPOUND)) {
+            this.gems[index] = SkizzikGem.fromNbt((CompoundTag) nbtTag);
+            index += 1;
+        }
+        
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());
         }
@@ -389,12 +407,14 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        InteractionResult convert = SkizzieConversion.convert(this, player);
-        if (convert == InteractionResult.PASS) {
-            this.doPlayerRide(player);
-            return InteractionResult.SUCCESS;
+        Item item = player.getMainHandItem().getItem();
+        if (item instanceof Gem && PA_Tags.Items.SKIZZIK_BASE_GEMS.contains(item)) {
+            if (!this.gems[((Gem) item).getType().ordinal()].isPlaced()) {
+                this.gems[((Gem) item).getType().ordinal()].setPlaced(true);
+            }
+            return InteractionResult.sidedSuccess(!player.level.isClientSide);
         }
-        return convert;
+        return super.mobInteract(player, hand);
     }
 
     @Override
