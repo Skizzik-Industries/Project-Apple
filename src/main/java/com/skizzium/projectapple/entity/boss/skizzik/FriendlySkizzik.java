@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -62,11 +63,15 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 
 public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimatable {
+    private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+    
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_C = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
@@ -75,6 +80,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
     private int activeHeads = 4;
+    private EnumSet<Gem.GemType> addedGems = EnumSet.noneOf(Gem.GemType.class);
 
     private final float[] xRotHeads = new float[activeHeads];
     private final float[] yRotHeads = new float[activeHeads];
@@ -86,7 +92,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final int[] idleHeadUpdates = new int[activeHeads];
 
     //private final Skizzo[] skizzos = new Skizzo[4];
-    public SkizzikGem[] gems = {new SkizzikGem(SkizzikGem.GemType.BLACK), new SkizzikGem(SkizzikGem.GemType.BLUE), new SkizzikGem(SkizzikGem.GemType.GREEN), new SkizzikGem(SkizzikGem.GemType.ORANGE), new SkizzikGem(SkizzikGem.GemType.PINK), new SkizzikGem(SkizzikGem.GemType.YELLOW)};
     
     private float eyeHeight;
     private AnimationFactory factory = new AnimationFactory(this);
@@ -343,10 +348,39 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         return f1 + f;
     }
 
+    public void addGem(Gem.GemType gem) {
+        this.entityData.set(DATA_ADDED_GEMS, this.entityData.get(DATA_ADDED_GEMS) | 1 << gem.ordinal());
+    }
+
+    public Set<Gem.GemType> getGems() {
+        return addedGems;
+    }
+
+    private void updateAddedGems() {
+        var set = EnumSet.noneOf(Gem.GemType.class);
+        int addedGems = this.entityData.get(DATA_ADDED_GEMS);
+        for (Gem.GemType gem : Gem.GemType.values()) {
+            if ((addedGems & (1 << gem.ordinal())) != 0) {
+                set.add(gem);
+            }
+        }
+        this.addedGems = set;
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        super.onSyncedDataUpdated(key);
+        if (key == DATA_ADDED_GEMS) {
+            this.updateAddedGems();
+        }
+    }
+    
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
 
+        this.entityData.define(DATA_ADDED_GEMS, 0);
+        
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
         this.entityData.define(DATA_TARGET_C, 0);
@@ -357,10 +391,10 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        
+
         ListTag gemNBTList = new ListTag();
-        for (SkizzikGem gem : this.gems) {
-            gemNBTList.add(gem.toNbt());
+        for (Gem.GemType gem : getGems()) {
+            gemNBTList.add(StringTag.valueOf(gem.getName()));
         }
         nbt.put("Gems", gemNBTList);
     }
@@ -369,11 +403,11 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
-        int index = 0;
-        for (Tag nbtTag : nbt.getList("Gems", Tag.TAG_COMPOUND)) {
-            this.gems[index] = SkizzikGem.fromNbt((CompoundTag) nbtTag);
-            index += 1;
+        int addedGems = 0;
+        for (Tag nbtTag : nbt.getList("Gems", Tag.TAG_STRING)) {
+            addedGems |= 1 << Gem.GemType.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
         }
+        this.entityData.set(DATA_ADDED_GEMS, addedGems);
         
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());
@@ -410,11 +444,12 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         Item item = player.getMainHandItem().getItem();
         if (item instanceof Gem && PA_Tags.Items.SKIZZIK_BASE_GEMS.contains(item)) {
-            if (!this.gems[((Gem) item).getType().ordinal()].isPlaced()) {
-                this.gems[((Gem) item).getType().ordinal()].setPlaced(true);
+            if (!this.getGems().contains(((Gem) item).getType())) {
+                this.addGem(((Gem) item).getType());
             }
             return InteractionResult.sidedSuccess(!player.level.isClientSide);
         }
+        this.doPlayerRide(player);
         return super.mobInteract(player, hand);
     }
 

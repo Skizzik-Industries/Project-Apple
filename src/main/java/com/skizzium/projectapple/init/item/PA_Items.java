@@ -2,7 +2,6 @@ package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.ai.PA_BegGoal;
-import com.skizzium.projectapple.entity.boss.skizzik.SkizzikGem;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -98,13 +97,13 @@ public class PA_Items {
     public static final RegistryObject<Item> RAINBOW_SWORD = PA_Registry.ITEMS.register("rainbow_sword", () -> new RainbowSword(PA_Tiers.RAINBOW, 3, -2.4F, (new Item.Properties().durability(2100).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.EPIC))));
 
     public static final RegistryObject<Item> RAINBOW_GEM = PA_Registry.ITEMS.register("rainbow_gem", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> BLACK_GEM = PA_Registry.ITEMS.register("black_gem", () -> new Gem(SkizzikGem.GemType.BLACK, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> BLUE_GEM = PA_Registry.ITEMS.register("blue_gem", () -> new Gem(SkizzikGem.GemType.BLUE, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> BLACK_GEM = PA_Registry.ITEMS.register("black_gem", () -> new Gem(Gem.GemType.BLACK, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> BLUE_GEM = PA_Registry.ITEMS.register("blue_gem", () -> new Gem(Gem.GemType.BLUE, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> BROWN_GEM = PA_Registry.ITEMS.register("brown_gem", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> YELLOW_GEM = PA_Registry.ITEMS.register("yellow_gem", () -> new Gem(SkizzikGem.GemType.YELLOW, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> ORANGE_GEM = PA_Registry.ITEMS.register("orange_gem", () -> new Gem(SkizzikGem.GemType.ORANGE, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> GREEN_GEM = PA_Registry.ITEMS.register("green_gem", () -> new Gem(SkizzikGem.GemType.GREEN, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> PINK_GEM = PA_Registry.ITEMS.register("pink_gem", () -> new Gem(SkizzikGem.GemType.PINK, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> YELLOW_GEM = PA_Registry.ITEMS.register("yellow_gem", () -> new Gem(Gem.GemType.YELLOW, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> ORANGE_GEM = PA_Registry.ITEMS.register("orange_gem", () -> new Gem(Gem.GemType.ORANGE, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> GREEN_GEM = PA_Registry.ITEMS.register("green_gem", () -> new Gem(Gem.GemType.GREEN, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> PINK_GEM = PA_Registry.ITEMS.register("pink_gem", () -> new Gem(Gem.GemType.PINK, new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
 
     public static final RegistryObject<ForgeSpawnEggItem> CANDY_PIG_SPAWN_EGG = PA_Registry.ITEMS.register("candy_pig_spawn_egg", () -> new ForgeSpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)));
     
