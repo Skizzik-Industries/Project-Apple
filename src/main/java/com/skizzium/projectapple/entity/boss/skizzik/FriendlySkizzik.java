@@ -362,6 +362,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         for (SkizzikGem gem : this.gems) {
             gemNBTList.add(gem.toNbt());
         }
+        nbt.put("Gems", gemNBTList);
     }
 
     @Override

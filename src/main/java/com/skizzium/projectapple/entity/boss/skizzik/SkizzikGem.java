@@ -28,7 +28,7 @@ public class SkizzikGem {
     public CompoundTag toNbt() {
         CompoundTag tag = new CompoundTag();
         tag.putString("GemType", gem.name());
-        tag.putBoolean("IsGemPlaced", isPlaced);
+        tag.putBoolean("IsPlaced", isPlaced);
         return tag;
     }
 
