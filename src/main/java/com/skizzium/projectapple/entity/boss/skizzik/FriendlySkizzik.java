@@ -459,6 +459,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                     }
 
                     this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                    this.setDeltaMovement(this.getDeltaMovement().scale(0.9F));
                     super.travel(new Vec3(moveX, moveY, moveZ));
                 }
                 else if (livingentity instanceof Player) {
