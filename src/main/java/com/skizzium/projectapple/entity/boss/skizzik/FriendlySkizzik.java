@@ -8,6 +8,7 @@ import com.skizzium.projectapple.gui.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.item.Gem;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
@@ -71,6 +72,7 @@ import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 
 public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_ACTIVE_HEADS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
@@ -79,25 +81,18 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private static final EntityDataAccessor<Integer> DATA_TARGET_E = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
-    private int activeHeads = 4;
     private EnumSet<Gem.GemType> addedGems = EnumSet.noneOf(Gem.GemType.class);
 
-    private final float[] xRotHeads = new float[activeHeads];
-    private final float[] yRotHeads = new float[activeHeads];
+    private final float[] xRotHeads = new float[4];
+    private final float[] yRotHeads = new float[4];
 
-    private final float[] xRotHeads1 = new float[activeHeads];
-    private final float[] yRotHeads1 = new float[activeHeads];
+    private final float[] xRotHeads1 = new float[4];
+    private final float[] yRotHeads1 = new float[4];
 
-    private final int[] nextHeadUpdate = new int[activeHeads];
-    private final int[] idleHeadUpdates = new int[activeHeads];
-
-    //private final Skizzo[] skizzos = new Skizzo[4];
+    private final int[] nextHeadUpdate = new int[4];
+    private final int[] idleHeadUpdates = new int[4];
     
-    private float eyeHeight;
-    private AnimationFactory factory = new AnimationFactory(this);
-
-    private int destroyBlocksTicks;
-    private int spawnSkizzieTicks;
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
     public final PA_ServerBossEvent bossBar = new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.AQUA, PA_BossEvent.PA_BossBarOverlay.PROGRESS);
@@ -117,11 +112,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
-        this.eyeHeight = 1.5F;
-    }
-
-    public Component getTranslationKey() {
-        return this.getTypeName();
     }
 
     @Override
@@ -156,20 +146,13 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return eyeHeight;
+        return 1.5F;
     }
 
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-    }
-
-    @Override
-    protected void doPush(Entity entity) {
-        if (this.isPushable()) {
-            super.doPush(entity);
-        }
     }
 
     @Override
@@ -221,8 +204,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     }
 
     @Override
-    public void makeStuckInBlock(BlockState state, Vec3 vector) {
-    }
+    public void makeStuckInBlock(BlockState state, Vec3 vector) {}
 
     public static boolean canDestroy(BlockState state) {
         return !state.isAir() && !state.is(BlockTags.WITHER_IMMUNE); //BlockTags.WITHER_IMMUNE.contains(state.getBlock());
@@ -230,17 +212,25 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     public static AttributeSupplier.Builder buildAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 1021.0D)
+                .add(Attributes.MAX_HEALTH, 1020.0D)
                 .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.FLYING_SPEED, 0.6D);
     }
 
-    public void setEyeHeight(float height) {
-        this.eyeHeight = height;
+    public int getActiveHeads() {
+        return this.entityData.get(DATA_ACTIVE_HEADS);
     }
 
+    public void addHead() {
+        this.entityData.set(DATA_ACTIVE_HEADS, this.getActiveHeads() + 1);
+    }
+    
+    public void setActiveHeads(int value) {
+        this.entityData.set(DATA_ACTIVE_HEADS, value);
+    }
+    
     public int getAlternativeTarget(int head) {
         return this.entityData.get(DATA_TARGETS.get(head));
     }
@@ -255,38 +245,13 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
-//        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
-//            if (this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
-//                return PlayState.STOP;
-//            }
-//
-//            if (!this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
-//                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement_stage-5"));
-//                return PlayState.CONTINUE;
-//            }
-
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement"));
-            return PlayState.CONTINUE;
-//        }
-//        return PlayState.STOP;
-    }
-
-    private <E extends IAnimatable> PlayState transitions(AnimationEvent<E> event) {
-//        if (this.isTransitioning()) {
-//            if (this.stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
-//                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.to_finish-him"));
-//            }
-//            else {
-//                event.getController().setAnimation(new AnimationBuilder().addAnimation(String.format("animation.skizzik.to_stage-%d", this.stageManager.getCurrentStage().getStage().getId())));
-//            }
-//        }
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement"));
         return PlayState.CONTINUE;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
-        data.addAnimationController(new AnimationController(this, "transitions", 0, this::transitions));
     }
 
     @Override
@@ -380,6 +345,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         super.defineSynchedData();
 
         this.entityData.define(DATA_ADDED_GEMS, 0);
+        this.entityData.define(DATA_ACTIVE_HEADS, 0);
         
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -447,6 +413,10 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             if (!this.getGems().contains(((Gem) item).getType())) {
                 this.addGem(((Gem) item).getType());
             }
+            return InteractionResult.sidedSuccess(!player.level.isClientSide);
+        }
+        else if (item == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()) {
+            this.addHead();
             return InteractionResult.sidedSuccess(!player.level.isClientSide);
         }
         this.doPlayerRide(player);
@@ -577,7 +547,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 //                                currentStageId == 2 ? 3 :
 //                                        currentStageId == 3 ? 2 :
 //                                                currentStageId == 4 ? 1 : 0;
-        this.activeHeads = 4;
+//        this.activeHeads = 4;
         Level world = this.level;
 
 //        this.getAttributes().getInstance(Attributes.ARMOR).setBaseValue(this.stageManager.getCurrentStage().armorValue());
@@ -620,9 +590,9 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             return false;
         }
         else {
-            if (this.destroyBlocksTicks <= 0) {
-                this.destroyBlocksTicks = 35;
-            }
+//            if (this.destroyBlocksTicks <= 0) {
+//                this.destroyBlocksTicks = 35;
+//            }
 
             for (int i = 0; i < this.idleHeadUpdates.length; ++i) {
                 this.idleHeadUpdates[i] += 3;
@@ -677,12 +647,12 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         super.aiStep();
 
         //if (stageManager.getCurrentStage().attackStatically()) {
-            for (int i = 0; i < activeHeads; ++i) {
+            for (int i = 0; i < this.getActiveHeads(); ++i) {
                 this.yRotHeads1[i] = this.yRotHeads[i];
                 this.xRotHeads1[i] = this.xRotHeads[i];
             }
 
-            for (int j = 0; j < activeHeads; ++j) {
+            for (int j = 0; j < this.getActiveHeads(); ++j) {
                 int k = this.getAlternativeTarget(j + 1);
                 Entity entity1 = null;
                 if (k > 0) {
@@ -711,7 +681,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 }
             }
 
-            for(int l = 0; l < activeHeads + 1; ++l) {
+            for(int l = 0; l < this.getActiveHeads() + 1; ++l) {
                 double headX = this.getHeadX(l);
                 double heaxY = this.getHeadY(l);
                 double headZ = this.getHeadZ(l);
@@ -730,12 +700,12 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         super.customServerAiStep();
 
         int currentStageId = 1;
-        if (this.spawnSkizzieTicks <= 0) {
-            this.spawnSkizzieTicks = 60;
-        }
+//        if (this.spawnSkizzieTicks <= 0) {
+//            this.spawnSkizzieTicks = 60;
+//        }
 
         //if (stageManager.getCurrentStage().attackStatically()) {
-            for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
+            for (int headIndex = 1; headIndex < this.getActiveHeads() + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
                     int head = headIndex - 1;

@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.client.model;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
@@ -31,7 +32,7 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
     }
 
     private static <T extends FriendlySkizzik> void setupHeadRotation(FriendlySkizzik skizzik, IBone model, int head) {
-        if (model != null) {
+        if (head <= skizzik.getActiveHeads() - 1 && model != null) {
             model.setRotationX((skizzik.getHeadXRot(head) * ((float) Math.PI / 180F) * -1));
             model.setRotationY(((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
         }
@@ -54,5 +55,36 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         setupHeadRotation(skizzik, bottomLeftHead, 1);
         setupHeadRotation(skizzik, topRightHead, 2);
         setupHeadRotation(skizzik, topLeftHead, 3);
+
+        if (skizzik.getActiveHeads() == 3) {
+            bottomRightHead.setHidden(false);
+            bottomLeftHead.setHidden(false);
+            topRightHead.setHidden(false);
+            topLeftHead.setHidden(true);
+        }
+        else if (skizzik.getActiveHeads() == 2) {
+            bottomRightHead.setHidden(false);
+            bottomLeftHead.setHidden(false);
+            topRightHead.setHidden(true);
+            topLeftHead.setHidden(true);
+        }
+        else if (skizzik.getActiveHeads() == 1) {
+            bottomRightHead.setHidden(false);
+            bottomLeftHead.setHidden(true);
+            topRightHead.setHidden(true);
+            topLeftHead.setHidden(true);
+        }
+        else if (skizzik.getActiveHeads() == 0) {
+            bottomRightHead.setHidden(true);
+            bottomLeftHead.setHidden(true);
+            topRightHead.setHidden(true);
+            topLeftHead.setHidden(true);
+        }
+        else {
+            bottomRightHead.setHidden(false);
+            bottomLeftHead.setHidden(false);
+            topRightHead.setHidden(false);
+            topLeftHead.setHidden(false);
+        }
     }
 }
