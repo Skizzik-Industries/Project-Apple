@@ -224,7 +224,9 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     }
 
     public void addHead() {
-        this.entityData.set(DATA_ACTIVE_HEADS, this.getActiveHeads() + 1);
+        if (this.getActiveHeads() + 1 <= 4) {
+            this.entityData.set(DATA_ACTIVE_HEADS, this.getActiveHeads() + 1);
+        }
     }
     
     public void setActiveHeads(int value) {
