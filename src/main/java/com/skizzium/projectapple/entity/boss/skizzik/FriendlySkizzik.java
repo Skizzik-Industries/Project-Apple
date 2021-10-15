@@ -342,7 +342,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
         super.onSyncedDataUpdated(key);
-        if (key == DATA_ADDED_GEMS) {
+        if (key.equals(DATA_ADDED_GEMS)) {
             this.updateAddedGems();
         }
     }
@@ -440,12 +440,12 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             if (!this.getGems().contains(((Gem) item).getType()) && !this.level.isClientSide) {
                 this.addGem(((Gem) item).getType());
             }
-            return InteractionResult.sidedSuccess(!player.level.isClientSide);
+            return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
         else if (item == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()) {
             // TODO: Check if there are available heads
             this.addHead();
-            return InteractionResult.sidedSuccess(!player.level.isClientSide);
+            return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
         this.doPlayerRide(player);
         return super.mobInteract(player, hand);
