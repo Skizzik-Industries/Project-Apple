@@ -82,6 +82,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
     private EnumSet<Gem.GemType> addedGems = EnumSet.noneOf(Gem.GemType.class);
+    private int riddenHeads = 0;
 
     private final float[] xRotHeads = new float[4];
     private final float[] yRotHeads = new float[4];
@@ -219,6 +220,10 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 .add(Attributes.FLYING_SPEED, 0.6D);
     }
 
+    public int getRiddenHeads() {
+        return riddenHeads;
+    }
+    
     public int getActiveHeads() {
         return this.entityData.get(DATA_ACTIVE_HEADS);
     }
@@ -382,6 +387,19 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         }
     }
 
+    @Override
+    public void positionRider(Entity passenger) {
+        if (this.hasPassenger(passenger)) {
+            Vec3 vec3 = new Vec3(this.getHeadX(this.getPassengers().indexOf(passenger)), this.getHeadY(this.getPassengers().indexOf(passenger)), this.getHeadZ(this.getPassengers().indexOf(passenger)));
+            passenger.setPos(vec3.x, vec3.y, vec3.z);
+        }
+    }
+
+    @Override
+    protected boolean canAddPassenger(Entity passenger) {
+        return this.getPassengers().size() < 5;
+    }
+
     @Nullable
     @Override
     public Entity getControllingPassenger() {
@@ -396,6 +414,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity pLivingEntity) {
         this.setNoGravity(false);
+        this.riddenHeads = this.getPassengers().size() - 1;
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
 
@@ -405,6 +424,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             player.setXRot(this.getXRot());
             player.startRiding(this);
             this.setNoGravity(true);
+            this.riddenHeads = 4; //this.getPassengers().size() - 1;
         }
     }
 
@@ -418,6 +438,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             return InteractionResult.sidedSuccess(!player.level.isClientSide);
         }
         else if (item == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()) {
+            // TODO: Check if there are available heads
             this.addHead();
             return InteractionResult.sidedSuccess(!player.level.isClientSide);
         }

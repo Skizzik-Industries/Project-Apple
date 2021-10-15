@@ -31,10 +31,16 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         return new ResourceLocation(ProjectApple.MOD_ID, "geo/skizzik/skizzik.geo.json");
     }
 
-    private static <T extends FriendlySkizzik> void setupHeadRotation(FriendlySkizzik skizzik, IBone model, int head) {
+    private static void setupHeadRotation(FriendlySkizzik skizzik, IBone model, int head) {
         if (head <= skizzik.getActiveHeads() - 1 && model != null) {
-            model.setRotationX((skizzik.getHeadXRot(head) * ((float) Math.PI / 180F) * -1));
-            model.setRotationY(((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
+            if (skizzik.getPassengers().size() >= 2) {
+                model.setRotationX((skizzik.getPassengers().get(head + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
+                model.setRotationY((skizzik.getPassengers().get(head + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
+            }
+            else {
+                model.setRotationX((skizzik.getHeadXRot(head) * ((float) Math.PI / 180F) * -1));
+                model.setRotationY(((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
+            }
         }
     }
     
