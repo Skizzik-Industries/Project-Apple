@@ -39,6 +39,12 @@ minecraft {
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
+        mainClient {
+            parent(null, "client")
+            args '--username', 'uSkizzik'
+            args '--uuid', '390ce263032d40ad8d0824ac54d60128'
+        }
+        
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
@@ -52,7 +58,25 @@ minecraft {
 
         client2 {
             parent(null, "client")
-            args '--username', 'Dev2'
+            args '--username', 'Dev'
+        }
+
+        client3 {
+            parent(null, "client")
+            args '--username', 'jeb_'
+            args '--uuid', '853c80ef3c3749fdaa49938b674adae6'
+        }
+
+        client4 {
+            parent(null, "client")
+            args '--username', 'deadmau5'
+            args '--uuid', '1e18d5ff643d45c8b50943b8461d8614'
+        }
+
+        client5 {
+            parent(null, "client")
+            args '--username', 'MumboJumbo'
+            args '--uuid', 'c7da90d56a054217b94a7d427cbbcad8'
         }
 
         server {
