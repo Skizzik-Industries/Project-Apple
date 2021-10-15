@@ -413,8 +413,10 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity pLivingEntity) {
-        this.setNoGravity(false);
         this.riddenHeads = this.getPassengers().size() - 1;
+        if (this.getPassengers().size() <= 0) {
+            this.setNoGravity(false);
+        }
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
 
@@ -424,7 +426,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             player.setXRot(this.getXRot());
             player.startRiding(this);
             this.setNoGravity(true);
-            this.riddenHeads = 4; //this.getPassengers().size() - 1;
+            this.riddenHeads = this.getPassengers().size() - 1;
         }
     }
 
