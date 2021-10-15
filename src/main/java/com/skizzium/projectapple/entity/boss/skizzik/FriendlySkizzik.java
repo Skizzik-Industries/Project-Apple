@@ -370,12 +370,15 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             gemNBTList.add(StringTag.valueOf(gem.getName()));
         }
         nbt.put("Gems", gemNBTList);
+        nbt.putInt("ActiveHeads", this.getActiveHeads());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
+        this.setActiveHeads(nbt.getInt("ActiveHeads"));
+        
         int addedGems = 0;
         for (Tag nbtTag : nbt.getList("Gems", Tag.TAG_STRING)) {
             addedGems |= 1 << Gem.GemType.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
