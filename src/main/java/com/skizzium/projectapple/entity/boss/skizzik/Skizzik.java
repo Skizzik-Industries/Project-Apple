@@ -12,6 +12,7 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
+import com.skizzium.projectapple.potion.ConversionEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -137,7 +138,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean canBeLeashed(Player player) {
-        return false;
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim;
     }
 
     @Override
@@ -229,7 +230,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean addEffect(MobEffectInstance effect, @Nullable Entity entity) {
-        return false;
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect;
     }
 
     @Override
@@ -303,7 +304,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return false;
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect;
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
@@ -602,7 +603,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public void aiStep() {
-        int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));

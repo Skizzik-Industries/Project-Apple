@@ -14,20 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CorruptionPotion extends MobEffect {
+public class CorruptionEffect extends MobEffect {
     private final Map<Attribute, AttributeModifier> attributeModifiers = Maps.newHashMap();
 
-    public CorruptionPotion(MobEffectCategory harmful, int amplifier) {
+    public CorruptionEffect(MobEffectCategory harmful, int amplifier) {
         super(harmful, amplifier);
     }
 
     @Override
     public boolean isBeneficial() {
-        return false;
-    }
-
-    @Override
-    public boolean isInstantenous() {
         return false;
     }
 
@@ -51,8 +46,8 @@ public class CorruptionPotion extends MobEffect {
     public void removeAttributeModifiers(LivingEntity entity, AttributeMap attribute, int amplifier) {
         super.removeAttributeModifiers(entity, attribute, amplifier);
 
-            if (entity instanceof LivingEntity) {
-                entity.hurt(new DamageSource("corrupted").bypassArmor(), Float.MAX_VALUE);
-            }
+        if (entity instanceof LivingEntity) {
+            entity.hurt(new DamageSource("corrupted").bypassArmor(), Float.MAX_VALUE);
+        }
     }
 }
