@@ -2,7 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
-import com.skizzium.projectapple.init.PA_Effects;
+import com.skizzium.projectapple.init.effects.PA_Effects;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ThrownPotion;

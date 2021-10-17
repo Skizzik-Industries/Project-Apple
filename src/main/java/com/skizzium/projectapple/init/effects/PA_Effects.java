@@ -1,5 +1,6 @@
-package com.skizzium.projectapple.init;
+package com.skizzium.projectapple.init.effects;
 
+import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.potion.ConversionEffect;
 import com.skizzium.projectapple.potion.CorruptionEffect;
 import net.minecraft.world.effect.MobEffect;

@@ -7,7 +7,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.gui.PA_ServerBossEvent;
-import com.skizzium.projectapple.init.PA_Effects;
+import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
