@@ -26,7 +26,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     @Override
     public TextComponent displayName() {
         if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
-            if ((skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0) {
+            if ((skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 4 == 0) {
                 return new TextComponent(new TranslatableComponent(ProjectApple.getThemedDescriptionId("entity.skizzik.friendly_skizzik")).getString());
             }
             else {
@@ -39,7 +39,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     @Override
     public PA_BossEvent.PA_BossBarColor barColor() {
         if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
-            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
+            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 4 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
         }
         return super.barColor();
     }
@@ -51,6 +51,9 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     
     @Override
     public String textureLocation() {
+        if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0 ? String.format("friendly_%s/friendly_%s", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase()) : String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
+        }
         return String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
     }
 

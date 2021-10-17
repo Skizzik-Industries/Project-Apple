@@ -1,8 +1,7 @@
-package com.skizzium.projectapple.potion;
+package com.skizzium.projectapple.effect;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +36,10 @@ public class ConversionEffect extends MobEffect {
     }
 
     @Override
-    public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
-        super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
+        super.removeAttributeModifiers(entity, attributes, amplifier);
+        if (entity instanceof Skizzik && ((Skizzik) entity).stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
+            ((Skizzik) entity).setConverting(false);
+        }
     }
 }

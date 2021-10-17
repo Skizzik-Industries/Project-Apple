@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.potion;
+package com.skizzium.projectapple.effect;
 
 import com.google.common.collect.Maps;
 import net.minecraft.world.damagesource.DamageSource;

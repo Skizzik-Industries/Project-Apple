@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.init.effects;
 
 import com.skizzium.projectapple.init.PA_Registry;
-import com.skizzium.projectapple.potion.ConversionEffect;
-import com.skizzium.projectapple.potion.CorruptionEffect;
+import com.skizzium.projectapple.effect.ConversionEffect;
+import com.skizzium.projectapple.effect.CorruptionEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.fmllegacy.RegistryObject;
