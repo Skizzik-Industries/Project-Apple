@@ -21,7 +21,7 @@ public class PA_Potions {
 
     @SubscribeEvent
     public static void registerRecipes(FMLCommonSetupEvent event) {
-        BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LONG_REGENERATION)), Ingredient.of(Items.DRAGON_EGG), PotionUtils.setPotion(new ItemStack(Items.POTION), PA_Potions.CONVERSION.get()));
+        BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LONG_REGENERATION)), Ingredient.of(Items.ENCHANTED_GOLDEN_APPLE), PotionUtils.setPotion(new ItemStack(Items.POTION), PA_Potions.CONVERSION.get()));
     }
     
     public static void register() {}

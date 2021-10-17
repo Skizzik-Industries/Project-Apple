@@ -39,7 +39,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     @Override
     public PA_BossEvent.PA_BossBarColor barColor() {
         if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
-            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : PA_BossEvent.PA_BossBarColor.RED;
+            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
         }
         return super.barColor();
     }
