@@ -189,7 +189,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean isPushable() {
-        if (this.getPreview() || this.isTransitioning() || this.isInvul() || this.stageManager.getCurrentStage() instanceof SkizzikSleeping) {
+        if (this.getPreview() || this.isTransitioning() || this.isInvul() || this.isConverting() || this.stageManager.getCurrentStage() instanceof SkizzikSleeping) {
             return false;
         }
         return super.isPushable();
