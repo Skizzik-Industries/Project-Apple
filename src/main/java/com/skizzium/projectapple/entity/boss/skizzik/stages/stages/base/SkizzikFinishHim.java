@@ -25,7 +25,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public TextComponent displayName() {
-        if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+        if (skizzik.isConverting() && skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
             if ((skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 5) % 8 == 0) {
                 return new TextComponent(new TranslatableComponent(ProjectApple.getThemedDescriptionId("entity.skizzik.friendly_skizzik")).getString());
             }
@@ -38,7 +38,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public PA_BossEvent.PA_BossBarColor barColor() {
-        if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+        if (skizzik.isConverting() && skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
             return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 5) % 8 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
         }
         return super.barColor();
@@ -51,7 +51,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     
     @Override
     public String textureLocation() {
-        if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+        if (skizzik.isConverting() && skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
             return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 5) % 8 == 0 ? String.format("friendly_%s/friendly_%s", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase()) : String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
         }
         return String.format("%s/%s_finish-him", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());

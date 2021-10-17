@@ -85,7 +85,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Boolean> DATA_TRANSITIONING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_TRANSITION_TIME = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_INVUL = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
-
+    private static final EntityDataAccessor<Boolean> DATA_CONVERTING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    
     private int activeHeads = 4;
 
     private final float[] xRotHeads = new float[activeHeads];
@@ -102,7 +103,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
     private boolean debug;
-    private boolean converting;
     private AnimationFactory factory = new AnimationFactory(this);
     
     private int destroyBlocksTicks;
@@ -241,7 +241,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     @Override
     public boolean addEffect(MobEffectInstance effect, @Nullable Entity entity) {
         super.addEffect(effect, entity);
-        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect;
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect && !this.isConverting();
     }
 
     @Override
@@ -278,11 +278,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     public boolean isConverting() {
-        return converting;
+        return this.entityData.get(DATA_CONVERTING);
     }
 
     public void setConverting(boolean converting) {
-        this.converting = converting;
+        this.entityData.set(DATA_CONVERTING, converting);
     }
 
     public void setEyeHeight(float height) {
@@ -323,7 +323,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect;
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect && !this.isConverting();
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
@@ -455,6 +455,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.entityData.define(DATA_STAGE, 0);
         this.entityData.define(DATA_TRANSITIONING, false);
         this.entityData.define(DATA_INVUL, false);
+        this.entityData.define(DATA_CONVERTING, false);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -559,11 +560,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         if (this.hasEffect(PA_Effects.CONVERSION.get())) {
             this.removeAllEffects();
             this.addEffect(new MobEffectInstance(PA_Effects.CONVERSION.get(), 12000));
+
+            this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020);
+            this.setHealth(20.0F);
             
             Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5.0F, false, explosion);
             
-            this.converting = true;
+            this.setConverting(true);
         }
     }
     
@@ -571,7 +575,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack item = player.getItemInHand(hand);
         if (item.is(Items.DRAGON_EGG)) {
-            if (!this.converting && this.hasEffect(PA_Effects.CONVERSION.get())) {
+            if (!this.isConverting() && this.hasEffect(PA_Effects.CONVERSION.get())) {
                 if (!player.getAbilities().instabuild) {
                     item.shrink(1);
                 }
@@ -591,7 +595,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
-        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, false, explosion);
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
     }
 

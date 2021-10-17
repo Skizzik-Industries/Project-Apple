@@ -16,36 +16,36 @@ public class SkizzikStageManager {
     }
 
     public void updateStage() {
-        float health = skizzik.getHealth();
-        int newStageId = health > 1020 ? 0 :
-                            health > 820 ? 1 :
-                                    health > 620 ? 2 :
-                                            health > 420 ? 3 :
-                                                    health > 220 ? 4 :
-                                                            health > 20 ? 5 : 6;
-        
-        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
-            if (skizzik.isTransitioning()) {
-                if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+        if (!skizzik.isConverting()) {
+            float health = skizzik.getHealth();
+            int newStageId = health > 1020 ? 0 :
+                    health > 820 ? 1 :
+                            health > 620 ? 2 :
+                                    health > 420 ? 3 :
+                                            health > 220 ? 4 :
+                                                    health > 20 ? 5 : 6;
+
+            if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
+                if (skizzik.isTransitioning()) {
+                    if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+                        this.setStage(this.getNextStage().getStage());
+                    }
+                } else {
                     this.setStage(this.getNextStage().getStage());
                 }
             }
-            else {
-                this.setStage(this.getNextStage().getStage());
-            }
-        }
 
-        if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
-            if (skizzik.isTransitioning()) {
-                if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+            if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
+                if (skizzik.isTransitioning()) {
+                    if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+                        this.setStage(SkizzikStages.getById(newStageId));
+                    }
+                } else {
                     this.setStage(SkizzikStages.getById(newStageId));
                 }
             }
-            else {
-                this.setStage(SkizzikStages.getById(newStageId));
-            }
         }
-        
+            
         this.currentStage.tick();
     }
     

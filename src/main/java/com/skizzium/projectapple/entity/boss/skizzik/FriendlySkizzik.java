@@ -560,7 +560,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
-        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, false, explosion);
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
     }
 
