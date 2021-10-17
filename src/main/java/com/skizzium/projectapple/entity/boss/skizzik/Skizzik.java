@@ -327,7 +327,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
-        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping) && !this.hasEffect(PA_Effects.CONVERSION.get())) {
+        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping) && !this.isConverting()) {
             if (this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
                 return PlayState.STOP;
             }
@@ -352,8 +352,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(String.format("animation.skizzik.to_stage-%d", this.stageManager.getCurrentStage().getStage().getId())));
             }
         }
-        else if (this.hasEffect(PA_Effects.CONVERSION.get())) {
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.converting"));
+        else if (this.isConverting() && this.hasEffect(PA_Effects.CONVERSION.get())) {
+            if (this.getEffect(PA_Effects.CONVERSION.get()).getDuration() >= 11880) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.begin_convert"));
+            }
+            else {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.converting"));
+            }
         }
         return PlayState.CONTINUE;
     }
@@ -561,7 +566,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.removeAllEffects();
             this.addEffect(new MobEffectInstance(PA_Effects.CONVERSION.get(), 12000));
 
-            this.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(1020);
             this.setHealth(20.0F);
             
             Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
@@ -576,9 +580,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         ItemStack item = player.getItemInHand(hand);
         if (item.is(Items.DRAGON_EGG)) {
             if (!this.isConverting() && this.hasEffect(PA_Effects.CONVERSION.get())) {
-                if (!player.getAbilities().instabuild) {
-                    item.shrink(1);
-                }
+//                if (!player.getAbilities().instabuild) {
+//                    item.shrink(1);
+//                }
 
                 if (!this.level.isClientSide) {
                     this.startConverting();
@@ -588,7 +592,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 return InteractionResult.sidedSuccess(player.level.isClientSide);
             }
         }
-        return InteractionResult.PASS;
+        return super.mobInteract(player, hand);
     }
 
     @Nullable

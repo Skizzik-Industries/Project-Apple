@@ -55,10 +55,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.CustomInstructionKeyframeEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -73,6 +75,7 @@ import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_ACTIVE_HEADS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_CONVERTED = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
     
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
@@ -223,6 +226,14 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     public int getRiddenHeads() {
         return riddenHeads;
     }
+
+    public boolean isConverted() {
+        return this.entityData.get(DATA_CONVERTED);
+    }
+
+    public void setConverted(boolean flag) {
+        this.entityData.set(DATA_CONVERTED, flag);
+    }
     
     public int getActiveHeads() {
         return this.entityData.get(DATA_ACTIVE_HEADS);
@@ -252,10 +263,17 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
+        if (this.isConverted()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.end_convert"));
+            if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                this.setConverted(false);
+            }
+            return PlayState.CONTINUE;
+        }
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement"));
         return PlayState.CONTINUE;
     }
-
+    
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
@@ -353,6 +371,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
         this.entityData.define(DATA_ADDED_GEMS, 0);
         this.entityData.define(DATA_ACTIVE_HEADS, 0);
+        this.entityData.define(DATA_CONVERTED, false);
         
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -559,6 +578,10 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
+        if (spawnReason == MobSpawnType.CONVERSION) {
+            this.setConverted(true);
+        }
+        
         Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
         this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, false, explosion);
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);

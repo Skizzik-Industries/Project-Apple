@@ -224,7 +224,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
         if (skizzik.level instanceof ServerLevel) {
             double originalKnockbackRes = skizzik.getAttribute(Attributes.KNOCKBACK_RESISTANCE).getBaseValue();
-            if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul() || skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+            if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul() || skizzik.isConverting()) {
                 skizzik.getAttributes().getInstance(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
                 skizzik.goalSelector.removeAllGoals();
                 skizzik.targetSelector.removeAllGoals();

@@ -64,7 +64,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public int maxHealth() {
-        return skizzik.hasEffect(PA_Effects.CONVERSION.get()) ? 1020 : this.maxStageHealth();
+        return skizzik.isConverting() ? 1020 : this.maxStageHealth();
     }
 
     @Override
