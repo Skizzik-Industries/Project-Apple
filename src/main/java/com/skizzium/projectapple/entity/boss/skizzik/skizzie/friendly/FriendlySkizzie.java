@@ -194,7 +194,7 @@ public class FriendlySkizzie extends PathfinderMob {
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        InteractionResult convert = SkizzieConversion.convert(this, player);
+        InteractionResult convert = SkizzieConversion.convert(this, player, hand);
         if (convert == InteractionResult.PASS) {
             this.doPlayerRide(player);
             return InteractionResult.sidedSuccess(player.level.isClientSide);

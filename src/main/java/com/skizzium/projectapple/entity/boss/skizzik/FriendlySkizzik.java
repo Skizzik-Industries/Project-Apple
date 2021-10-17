@@ -435,7 +435,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        Item item = player.getMainHandItem().getItem();
+        Item item = player.getItemInHand(hand).getItem();
         if (item instanceof Gem && PA_Tags.Items.SKIZZIK_BASE_GEMS.contains(item)) {
             if (!this.getGems().contains(((Gem) item).getType()) && !this.level.isClientSide) {
                 this.addGem(((Gem) item).getType());

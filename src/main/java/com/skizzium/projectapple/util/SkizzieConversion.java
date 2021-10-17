@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
@@ -103,9 +104,9 @@ public class SkizzieConversion {
         return InteractionResult.sidedSuccess(!world.isClientSide);
     }
 
-    public static InteractionResult convert(LivingEntity skizzie, Player player) {
-        Item item = player.getMainHandItem().getItem();
-        ItemStack itemStack = player.getMainHandItem();
+    public static InteractionResult convert(LivingEntity skizzie, Player player, InteractionHand hand) {
+        Item item = player.getItemInHand(hand).getItem();
+        ItemStack itemStack = player.getItemInHand(hand);
         Level world = player.level;
 
         if (!world.isClientSide) {
