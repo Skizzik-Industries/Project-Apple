@@ -7,6 +7,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.gui.PA_ServerBossEvent;
+import com.skizzium.projectapple.init.PA_Effects;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -230,6 +231,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean addEffect(MobEffectInstance effect, @Nullable Entity entity) {
+        super.addEffect(effect, entity);
         return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect;
     }
 
@@ -308,7 +310,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
-        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
+        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping) && !this.hasEffect(PA_Effects.CONVERSION.get())) {
             if (this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
                 return PlayState.STOP;
             }
@@ -332,6 +334,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(String.format("animation.skizzik.to_stage-%d", this.stageManager.getCurrentStage().getStage().getId())));
             }
+        }
+        else if (this.hasEffect(PA_Effects.CONVERSION.get())) {
+            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.converting"));
         }
         return PlayState.CONTINUE;
     }

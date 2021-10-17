@@ -1,10 +1,13 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
 
+import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractPassiveSkizzikStage;
+import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.init.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.core.BlockPos;
@@ -22,9 +25,25 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public TextComponent displayName() {
+        if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+            if ((skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0) {
+                return new TextComponent(new TranslatableComponent(ProjectApple.getThemedDescriptionId("entity.skizzik.friendly_skizzik")).getString());
+            }
+            else {
+                return new TextComponent(skizzik.getDisplayName().getString());
+            }
+        }
         return new TextComponent(String.format("%s - %s", skizzik.getDisplayName().getString(), new TranslatableComponent("entity.skizzik.skizzik.finish_him").getString()));
     }
 
+    @Override
+    public PA_BossEvent.PA_BossBarColor barColor() {
+        if (skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
+            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 20) % 2 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : PA_BossEvent.PA_BossBarColor.RED;
+        }
+        return super.barColor();
+    }
+    
     @Override
     public int transitionTime() {
         return 16;
@@ -42,7 +61,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public int maxHealth() {
-        return this.maxStageHealth();
+        return skizzik.hasEffect(PA_Effects.CONVERSION.get()) ? 1020 : this.maxStageHealth();
     }
 
     @Override

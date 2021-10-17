@@ -7,6 +7,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.init.PA_Effects;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -224,7 +225,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
         if (skizzik.level instanceof ServerLevel) {
             double originalKnockbackRes = skizzik.getAttribute(Attributes.KNOCKBACK_RESISTANCE).getBaseValue();
-            if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
+            if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul() || skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
                 skizzik.getAttributes().getInstance(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
                 skizzik.goalSelector.removeAllGoals();
                 skizzik.targetSelector.removeAllGoals();
