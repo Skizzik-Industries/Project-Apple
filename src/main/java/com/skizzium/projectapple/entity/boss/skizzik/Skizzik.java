@@ -426,19 +426,25 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     @Override
     protected void onEffectAdded(MobEffectInstance effect, @Nullable Entity entity) {
         super.onEffectAdded(effect, entity);
-        PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+        if (!this.level.isClientSide()) {
+            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+        }
     }
 
     @Override
     protected void onEffectUpdated(MobEffectInstance effect, boolean reapplyModifiers, @Nullable Entity entity) {
         super.onEffectUpdated(effect, reapplyModifiers, entity);
-        PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+        if (!this.level.isClientSide()) {
+            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+        }
     }
 
     @Override
     protected void onEffectRemoved(MobEffectInstance effect) {
         super.onEffectRemoved(effect);
-        PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundRemoveMobEffectPacket(this.getId(), effect.getEffect()));
+        if (!this.level.isClientSide()) {
+            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundRemoveMobEffectPacket(this.getId(), effect.getEffect()));
+        }
     }
 
     @Override
