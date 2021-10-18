@@ -386,6 +386,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             if (event.getController().getAnimationState() == AnimationState.Stopped) {
                 this.setInterupted(false);
             }
+            return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
     }
@@ -730,10 +731,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             return false;
         }
         
-        if (entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType() || SkizzikStages.isImmune(this, source)) {
+        if (SkizzikStages.isImmune(this, source)) {
             return false;
         }
         else {
+            if (!this.isConverting() && !(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
+                return false;
+            }
+            
             if (this.destroyBlocksTicks <= 0) {
                 this.destroyBlocksTicks = this.stageManager.getCurrentStage().destroyBlocksTick();
             }
