@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
+import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -32,6 +33,10 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
     public static boolean isImmune(Skizzik skizzik, DamageSource source) {
         int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
 
+        if (skizzik.wasInterupted() && PA_Config.commonInstance.entities.convertWithDragonEgg.get()) {
+            return true;
+        }
+        
         if ((skizzik.getTransitionTicks() > 0 || skizzik.getPreview() || skizzik.isInvul()) && source != DamageSource.OUT_OF_WORLD) {
             return true;
         }
