@@ -52,6 +52,11 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         IBone bottomLeftHead = this.getAnimationProcessor().getBone("bottom_left_head");
         IBone topRightHead = this.getAnimationProcessor().getBone("top_right_head");
         IBone topLeftHead = this.getAnimationProcessor().getBone("top_left_head");
+        
+        IBone commandBlock = this.getAnimationProcessor().getBone("command_block");
+        IBone rightRibs = this.getAnimationProcessor().getBone("right_ribs");
+        IBone leftRibs = this.getAnimationProcessor().getBone("left_ribs");
+        IBone bottomRib = this.getAnimationProcessor().getBone("bottom_rib");
 
         EntityModelData data = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
         centerHead.setRotationX(data.headPitch * ((float) Math.PI / 180F));
@@ -62,6 +67,19 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         setupHeadRotation(skizzik, topRightHead, 2);
         setupHeadRotation(skizzik, topLeftHead, 3);
 
+        if (!skizzik.isCommandBlockPlaced()) {
+            commandBlock.setHidden(true);
+            rightRibs.setHidden(true);
+            leftRibs.setHidden(true);
+            bottomRib.setHidden(true);
+        }
+        else {
+            commandBlock.setHidden(false);
+            rightRibs.setHidden(false);
+            leftRibs.setHidden(false);
+            bottomRib.setHidden(false);
+        }
+        
         if (skizzik.getActiveHeads() == 3) {
             bottomRightHead.setHidden(false);
             bottomLeftHead.setHidden(false);

@@ -7,6 +7,7 @@ import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.gui.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
@@ -75,6 +76,7 @@ import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_ACTIVE_HEADS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_COMMAND_BLOCK = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_CONVERTED = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
     
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
@@ -227,6 +229,14 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         return riddenHeads;
     }
 
+    public boolean isCommandBlockPlaced() {
+        return this.entityData.get(DATA_COMMAND_BLOCK);
+    }
+
+    public void setCommandBlockPlaced(boolean flag) {
+        this.entityData.set(DATA_COMMAND_BLOCK, flag);
+    }
+    
     public boolean isConverted() {
         return this.entityData.get(DATA_CONVERTED);
     }
@@ -371,6 +381,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
         this.entityData.define(DATA_ADDED_GEMS, 0);
         this.entityData.define(DATA_ACTIVE_HEADS, 0);
+        this.entityData.define(DATA_COMMAND_BLOCK, false);
         this.entityData.define(DATA_CONVERTED, false);
         
         this.entityData.define(DATA_TARGET_A, 0);
@@ -390,6 +401,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         }
         nbt.put("Gems", gemNBTList);
         nbt.putInt("ActiveHeads", this.getActiveHeads());
+        nbt.putBoolean("CommandBlock", this.isCommandBlockPlaced());
     }
 
     @Override
@@ -397,6 +409,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         super.readAdditionalSaveData(nbt);
 
         this.setActiveHeads(nbt.getInt("ActiveHeads"));
+        this.setCommandBlockPlaced(nbt.getBoolean("CommandBlock"));
         
         int addedGems = 0;
         for (Tag nbtTag : nbt.getList("Gems", Tag.TAG_STRING)) {
@@ -466,6 +479,11 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             this.addHead();
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
+        else if (item == PA_Blocks.COMMAND_BLOCK.get().asItem()) {
+            this.setCommandBlockPlaced(true);
+            return InteractionResult.sidedSuccess(player.level.isClientSide);
+        }
+        
         this.doPlayerRide(player);
         return super.mobInteract(player, hand);
     }
