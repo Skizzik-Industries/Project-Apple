@@ -2,6 +2,8 @@ package com.skizzium.projectapple.effect;
 
 import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -12,7 +14,11 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.entity.LevelEntityGetter;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class ConversionEffect extends MobEffect {
     public ConversionEffect(MobEffectCategory harmful, int amplifier) {
@@ -39,6 +45,10 @@ public class ConversionEffect extends MobEffect {
         super.applyEffectTick(entity, amplifier);
         if (entity instanceof Skizzik) {
             if (((Skizzik) entity).isConverting() && ((Skizzik) entity).stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
+                if (entity.getHealth() < entity.getMaxHealth()) {
+                    entity.heal(0.085F);
+                }
+                
                 if (entity.level instanceof ServerLevel) {
                     if (entity.tickCount % 20 == 0) {
                         LightningBolt[] lightnings = {EntityType.LIGHTNING_BOLT.create(entity.level), EntityType.LIGHTNING_BOLT.create(entity.level), EntityType.LIGHTNING_BOLT.create(entity.level), EntityType.LIGHTNING_BOLT.create(entity.level)};
@@ -54,9 +64,12 @@ public class ConversionEffect extends MobEffect {
                         }
                     }
                 }
-                
-                if (entity.getHealth() < entity.getMaxHealth()) {
-                    entity.heal(0.085F);
+
+                List<Entity> entities = entity.level.getEntities(entity, entity.getBoundingBox().inflate(100, 100, 100));
+                for (Entity forEntity : entities) {
+                    if (forEntity instanceof Mob && !(forEntity instanceof Skizzik) && !(forEntity instanceof FriendlySkizzik)) {
+                        ((Mob) forEntity).setTarget(entity);
+                    }
                 }
             }
         }

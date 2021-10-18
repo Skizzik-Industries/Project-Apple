@@ -726,7 +726,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         double z = this.getZ();
         Level world = this.level;
         
-        if ((!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) || SkizzikStages.isImmune(this, source)) {
+        if (!this.isConverting() && (!(entity instanceof Player) && entity instanceof LivingEntity)) {
+            return false;
+        }
+        
+        if (entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType() || SkizzikStages.isImmune(this, source)) {
             return false;
         }
         else {
