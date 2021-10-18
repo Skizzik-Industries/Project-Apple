@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
-import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.EntityDimensions;
 

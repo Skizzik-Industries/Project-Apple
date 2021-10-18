@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.gui;
+package com.skizzium.projectapple.gui.bossevent;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,7 +14,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Iterator;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -35,10 +34,16 @@ public class RenderCustomBossBar {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             if (!(minecraft.gui.getBossOverlay().events.get(id) instanceof PA_LerpingBossEvent)) {
                 RenderSystem.setShaderTexture(0, GUI_BARS_LOCATION);
+                RenderSystem.enableBlend();
+                RenderSystem.defaultBlendFunc();
                 drawBar(event.getMatrixStack(), k, j, lerpingEvent);
+                RenderSystem.disableBlend();
             } else {
                 RenderSystem.setShaderTexture(0, PA_GUI_BARS_LOCATION);
+                RenderSystem.enableBlend();
+                RenderSystem.defaultBlendFunc();
                 drawBar(event.getMatrixStack(), k, j, (PA_LerpingBossEvent) lerpingEvent);
+                RenderSystem.disableBlend();
             }
 
             Component component = lerpingEvent.getName();

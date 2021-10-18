@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.network;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

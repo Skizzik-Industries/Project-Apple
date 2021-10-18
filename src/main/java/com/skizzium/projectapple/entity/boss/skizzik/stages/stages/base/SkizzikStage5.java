@@ -9,7 +9,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
-import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.world.entity.EntityDimensions;
 

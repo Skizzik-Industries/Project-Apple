@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.gui;
+package com.skizzium.projectapple.gui.bossevent;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

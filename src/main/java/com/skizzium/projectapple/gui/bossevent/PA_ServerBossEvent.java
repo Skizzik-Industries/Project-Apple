@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.gui;
+package com.skizzium.projectapple.gui.bossevent;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;

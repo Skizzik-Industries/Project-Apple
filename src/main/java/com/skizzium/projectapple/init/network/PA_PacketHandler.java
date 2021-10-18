@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.init.network;
 
-import com.skizzium.projectapple.gui.PA_LerpingBossEvent;
+import com.skizzium.projectapple.gui.bossevent.PA_LerpingBossEvent;
 import com.skizzium.projectapple.network.*;
 import com.skizzium.projectapple.sound.BossMusic;
 import net.minecraft.client.Minecraft;

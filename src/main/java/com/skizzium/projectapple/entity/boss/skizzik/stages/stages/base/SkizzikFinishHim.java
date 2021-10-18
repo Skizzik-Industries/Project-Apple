@@ -6,7 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterfac
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractPassiveSkizzikStage;
-import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;

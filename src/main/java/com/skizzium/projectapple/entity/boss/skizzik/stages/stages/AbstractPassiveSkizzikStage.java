@@ -3,7 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages.stages;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikSleeping;
-import com.skizzium.projectapple.gui.PA_BossEvent;
+import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
 import net.minecraft.server.level.ServerLevel;
