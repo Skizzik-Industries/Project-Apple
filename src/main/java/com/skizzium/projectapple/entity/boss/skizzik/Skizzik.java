@@ -7,6 +7,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.gui.PA_ServerBossEvent;
+import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
@@ -46,6 +47,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
@@ -59,6 +61,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -86,6 +89,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_TRANSITION_TIME = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_INVUL = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_CONVERTING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_INTERUPTED = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_WAS_INTERUPTED = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
     
     private int activeHeads = 4;
 
@@ -285,6 +290,22 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.entityData.set(DATA_CONVERTING, converting);
     }
 
+    public boolean isInterupted() {
+        return this.entityData.get(DATA_INTERUPTED);
+    }
+
+    public void setInterupted(boolean interupted) {
+        this.entityData.set(DATA_INTERUPTED, interupted);
+    }
+
+    public boolean wasInterupted() {
+        return this.entityData.get(DATA_WAS_INTERUPTED);
+    }
+
+    public void setWasInterupted(boolean interupted) {
+        this.entityData.set(DATA_WAS_INTERUPTED, interupted);
+    }
+
     public void setEyeHeight(float height) {
         this.eyeHeight = height;
     }
@@ -358,6 +379,12 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             }
             else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.converting"));
+            }
+        }
+        else if (this.isInterupted()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.end_convert"));
+            if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                this.setInterupted(false);
             }
         }
         return PlayState.CONTINUE;
@@ -461,6 +488,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.entityData.define(DATA_TRANSITIONING, false);
         this.entityData.define(DATA_INVUL, false);
         this.entityData.define(DATA_CONVERTING, false);
+        this.entityData.define(DATA_INTERUPTED, false);
+        this.entityData.define(DATA_WAS_INTERUPTED, false);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -561,7 +590,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
-    public void startConverting() {
+    public void beginConversion() {
         if (this.hasEffect(PA_Effects.CONVERSION.get())) {
             this.removeAllEffects();
             this.addEffect(new MobEffectInstance(PA_Effects.CONVERSION.get(), 12000));
@@ -574,18 +603,31 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.setConverting(true);
         }
     }
+
+    public void endConversion() {
+        this.removeAllEffects();
+        this.setConverting(false);
+        
+        this.setInterupted(true);
+        this.setWasInterupted(true);
+        
+        this.setHealth(20.0F);
+        ((ServerLevel) this.level).setDayTime(1000);
+    }
     
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack item = player.getItemInHand(hand);
-        if (item.is(Items.DRAGON_EGG)) {
-            if (!this.isConverting() && this.hasEffect(PA_Effects.CONVERSION.get())) {
-//                if (!player.getAbilities().instabuild) {
-//                    item.shrink(1);
-//                }
+        Item requiredItem = this.wasInterupted() ? Items.NETHER_STAR : PA_Config.commonInstance.entities.convertWithDragonEgg.get() ? Items.DRAGON_EGG : Items.NETHER_STAR;
+        
+        if (item.is(requiredItem)) {
+            if (!this.isConverting() && !this.preview && this.hasEffect(PA_Effects.CONVERSION.get())) {
+                if (!player.getAbilities().instabuild) {
+                    item.shrink(1);
+                }
 
                 if (!this.level.isClientSide) {
-                    this.startConverting();
+                    this.beginConversion();
                 }
 
                 this.gameEvent(GameEvent.MOB_INTERACT, this.eyeBlockPosition());
@@ -640,6 +682,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                     ((ServerLevel) world).setDayTime(18000);
                 } 
                 else {
+//                    if (this.isConverting() && this.stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
+//                        ((ServerLevel) world).setDayTime(world.getDayTime() + 10L);
+//                    }
+                    
                     if (this.stageManager.getCurrentStage() instanceof SkizzikStage3) {
                         ((ServerLevel) world).setDayTime(13000);
                     } 
@@ -685,6 +731,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 }
             }
 
+            if (this.isConverting()) {
+                this.endConversion();
+                return super.hurt(source, 0);
+            }
+            
             return super.hurt(source, amount);
         }
     }

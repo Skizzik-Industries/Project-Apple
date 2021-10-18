@@ -32,7 +32,7 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
     public static boolean isImmune(Skizzik skizzik, DamageSource source) {
         int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
 
-        if ((skizzik.getTransitionTicks() > 0 || skizzik.getPreview() || skizzik.isInvul() || skizzik.hasEffect(PA_Effects.CONVERSION.get())) && source != DamageSource.OUT_OF_WORLD) {
+        if ((skizzik.getTransitionTicks() > 0 || skizzik.getPreview() || skizzik.isInvul()) && source != DamageSource.OUT_OF_WORLD) {
             return true;
         }
         

@@ -16,7 +16,12 @@ public class SkizzikRenderer extends GeoEntityRenderer<Skizzik> {
 
     @Override
     protected int getBlockLightLevel(Skizzik entity, BlockPos pos) {
-        int stage = entity.stageManager.getCurrentStage().getStage().getId();
-        return stage <= 0 || stage >= 6 ? 0 : 15;
+        if (!entity.isConverting()) {
+            int stage = entity.stageManager.getCurrentStage().getStage().getId();
+            return stage <= 0 || stage >= 6 ? 0 : 15;
+        }
+        else {
+            return 15;
+        }
     }
 }
