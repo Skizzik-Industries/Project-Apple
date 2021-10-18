@@ -612,7 +612,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.setWasInterupted(true);
         
         this.setHealth(20.0F);
-        ((ServerLevel) this.level).setDayTime(1000);
+        if (this.level instanceof ServerLevel) {
+            ((ServerLevel) this.level).setDayTime(1000);
+        }
     }
     
     @Override
