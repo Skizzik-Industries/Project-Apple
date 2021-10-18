@@ -49,7 +49,7 @@ public class ConversionEffect extends MobEffect {
     public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
         super.removeAttributeModifiers(entity, attributes, amplifier);
         if (entity instanceof Skizzik) {
-            if (((Skizzik) entity).isConverting() && ((Skizzik) entity).stageManager.getCurrentStage() instanceof SkizzikFinishHim && entity.level instanceof ServerLevel) {
+            if (((Skizzik) entity).isConverting() && !((Skizzik) entity).wasInterupted() && ((Skizzik) entity).stageManager.getCurrentStage() instanceof SkizzikFinishHim && entity.level instanceof ServerLevel) {
                 FriendlySkizzik friendlySkizzik = new FriendlySkizzik(PA_Entities.FRIENDLY_SKIZZIK.get(), entity.level);
 
                 friendlySkizzik.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.xRotO, entity.yRotO);

@@ -600,16 +600,18 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5.0F, false, explosion);
             
+            this.setWasInterupted(false);
             this.setConverting(true);
         }
     }
 
     public void endConversion() {
-        this.removeAllEffects();
         this.setConverting(false);
         
         this.setInterupted(true);
         this.setWasInterupted(true);
+
+        this.removeAllEffects();
         
         this.setHealth(20.0F);
         if (this.level instanceof ServerLevel) {
