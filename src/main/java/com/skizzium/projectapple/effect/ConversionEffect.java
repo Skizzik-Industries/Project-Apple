@@ -5,6 +5,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -38,6 +39,22 @@ public class ConversionEffect extends MobEffect {
         super.applyEffectTick(entity, amplifier);
         if (entity instanceof Skizzik) {
             if (((Skizzik) entity).isConverting() && ((Skizzik) entity).stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
+                if (entity.level instanceof ServerLevel) {
+                    if (entity.tickCount % 20 == 0) {
+                        LightningBolt[] lightnings = {EntityType.LIGHTNING_BOLT.create(entity.level), EntityType.LIGHTNING_BOLT.create(entity.level), EntityType.LIGHTNING_BOLT.create(entity.level), EntityType.LIGHTNING_BOLT.create(entity.level)};
+
+                        lightnings[0].moveTo(Vec3.atBottomCenterOf(new BlockPos(entity.getX(), entity.getY(), entity.getZ() + 100)));
+                        lightnings[1].moveTo(Vec3.atBottomCenterOf(new BlockPos(entity.getX(), entity.getY(), entity.getZ() - 100)));
+                        lightnings[2].moveTo(Vec3.atBottomCenterOf(new BlockPos(entity.getX() + 100, entity.getY(), entity.getZ())));
+                        lightnings[3].moveTo(Vec3.atBottomCenterOf(new BlockPos(entity.getX() - 100, entity.getY(), entity.getZ())));
+
+                        for (LightningBolt lightning : lightnings) {
+                            lightning.setVisualOnly(true);
+                            entity.level.addFreshEntity(lightning);
+                        }
+                    }
+                }
+                
                 if (entity.getHealth() < entity.getMaxHealth()) {
                     entity.heal(0.085F);
                 }

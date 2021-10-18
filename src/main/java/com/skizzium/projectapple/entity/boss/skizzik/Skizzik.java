@@ -596,6 +596,15 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.addEffect(new MobEffectInstance(PA_Effects.CONVERSION.get(), 12000));
 
             this.setHealth(20.0F);
+
+            if (this.level instanceof ServerLevel) {
+                ((ServerLevel) this.level).setDayTime(18000);
+            }
+
+            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
+            lightning.moveTo(Vec3.atBottomCenterOf(this.blockPosition()));
+            lightning.setVisualOnly(true);
+            this.level.addFreshEntity(lightning);
             
             Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5.0F, false, explosion);
@@ -617,6 +626,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         if (this.level instanceof ServerLevel) {
             ((ServerLevel) this.level).setDayTime(1000);
         }
+
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
+        lightning.moveTo(Vec3.atBottomCenterOf(this.blockPosition()));
+        lightning.setVisualOnly(true);
+        this.level.addFreshEntity(lightning);
+        
+        Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5.0F, false, explosion);
     }
     
     @Override
