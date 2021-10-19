@@ -6,6 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.gui.bossevent.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.init.PA_GUI;
 import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -55,6 +56,7 @@ import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -451,6 +453,11 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         if (this.getPassengers().size() <= 0) {
             this.setNoGravity(false);
         }
+        
+        if (this.level.isClientSide) {
+            OverlayRegistry.enableOverlay(PA_GUI.HEAD_STATUS, false);
+        }
+        
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
 
@@ -461,6 +468,9 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             player.startRiding(this);
             this.setNoGravity(true);
             this.riddenHeads = this.getPassengers().size() - 1;
+        }
+        else {
+            OverlayRegistry.enableOverlay(PA_GUI.HEAD_STATUS, true);
         }
     }
 

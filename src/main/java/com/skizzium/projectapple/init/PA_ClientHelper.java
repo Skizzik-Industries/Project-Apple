@@ -3,6 +3,7 @@ package com.skizzium.projectapple.init;
 import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.SkizzikHeadWithGems;
+import com.skizzium.projectapple.gui.friendlyskizzik.HeadStatus;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
@@ -42,6 +43,8 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -56,7 +59,7 @@ public class PA_ClientHelper {
     }
     
     @SubscribeEvent
-    public static void renderLayers(final FMLClientSetupEvent event) {
+    public static void renderLayers(FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIE_STATUE.get(), RenderType.cutoutMipped());
 
