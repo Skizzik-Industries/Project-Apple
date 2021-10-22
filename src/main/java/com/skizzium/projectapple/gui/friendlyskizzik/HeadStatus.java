@@ -15,6 +15,7 @@ import net.minecraftforge.client.gui.IIngameOverlay;
 
 public class HeadStatus extends GuiComponent implements IIngameOverlay {
     private static final ResourceLocation HEAD_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head.png");
+    private static final ResourceLocation RIDDEN_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_ridden.png");
     private static final ResourceLocation ELIMINATED_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_eliminated.png");
 
     @Override
@@ -22,7 +23,7 @@ public class HeadStatus extends GuiComponent implements IIngameOverlay {
         Minecraft minecraft = PA_ClientHelper.getClient();
         Entity vehicle = minecraft.player.getVehicle();
         if (vehicle instanceof FriendlySkizzik) {
-            int activeHeads = ((FriendlySkizzik) vehicle).getActiveHeads();
+            int activeHeads = ((FriendlySkizzik) vehicle).getAddedHeads();
 
             for (int i = 0; i < 4 ; i++) {
                 RenderSystem.enableBlend();
@@ -41,6 +42,13 @@ public class HeadStatus extends GuiComponent implements IIngameOverlay {
                     RenderSystem.setShaderTexture(0, ELIMINATED_LOCATION);
                     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                     GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
+                }
+                else {
+                    if (((FriendlySkizzik) vehicle).getRiddenHeads().contains(FriendlySkizzik.Heads.values()[i])) {
+                        RenderSystem.setShaderTexture(0, RIDDEN_LOCATION);
+                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                        GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
+                    }
                 }
                 
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

@@ -2,7 +2,6 @@ package com.skizzium.projectapple.entity.boss.skizzik.client.model;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
@@ -32,8 +31,8 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
     }
 
     private static void setupHeadRotation(FriendlySkizzik skizzik, IBone model, int head) {
-        if (head <= skizzik.getActiveHeads() - 1 && model != null) {
-            if (skizzik.getPassengers().size() >= 2) {
+        if (head <= skizzik.getAddedHeads() - 1 && model != null) {
+            if (skizzik.getPassengers().size() > 2) {
                 model.setRotationX((skizzik.getPassengers().get(head + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
                 model.setRotationY((skizzik.getPassengers().get(head + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
             }
@@ -80,25 +79,25 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
             bottomRib.setHidden(false);
         }
         
-        if (skizzik.getActiveHeads() == 3) {
+        if (skizzik.getAddedHeads() == 3) {
             bottomRightHead.setHidden(false);
             bottomLeftHead.setHidden(false);
             topRightHead.setHidden(false);
             topLeftHead.setHidden(true);
         }
-        else if (skizzik.getActiveHeads() == 2) {
+        else if (skizzik.getAddedHeads() == 2) {
             bottomRightHead.setHidden(false);
             bottomLeftHead.setHidden(false);
             topRightHead.setHidden(true);
             topLeftHead.setHidden(true);
         }
-        else if (skizzik.getActiveHeads() == 1) {
+        else if (skizzik.getAddedHeads() == 1) {
             bottomRightHead.setHidden(false);
             bottomLeftHead.setHidden(true);
             topRightHead.setHidden(true);
             topLeftHead.setHidden(true);
         }
-        else if (skizzik.getActiveHeads() == 0) {
+        else if (skizzik.getAddedHeads() == 0) {
             bottomRightHead.setHidden(true);
             bottomLeftHead.setHidden(true);
             topRightHead.setHidden(true);

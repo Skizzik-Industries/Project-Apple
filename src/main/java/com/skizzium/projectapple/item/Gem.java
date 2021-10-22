@@ -17,40 +17,21 @@ public class Gem extends Item {
     }
 
     public enum GemType {
-        BLACK("black"),
-        BLUE("blue"),
-        GREEN("green"),
-        ORANGE("orange"),
-        PINK("pink"),
-        YELLOW("yellow");
+        BLACK,
+        BLUE,
+        GREEN,
+        ORANGE,
+        PINK,
+        YELLOW;
         
-        private final String name;
         private final ResourceLocation location;
 
-        GemType(String name) {
-            this.name = name;
-            this.location = new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/friendly_skizzik/gems/%s_gem.png", name));
-        }
-
-        public String getName() {
-            return this.name;
+        GemType() {
+            this.location = new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/friendly_skizzik/gems/%s_gem.png", this.name().toLowerCase()));
         }
         
         public ResourceLocation getLocation() {
             return this.location;
-        }
-
-        public static Gem.GemType byName(String name) {
-            Gem.GemType[] values = values();
-            int length = values.length;
-
-            for (GemType gemTypes : values) {
-                if (gemTypes.name.equals(name)) {
-                    return gemTypes;
-                }
-            }
-
-            return BLACK;
         }
     }
 }
