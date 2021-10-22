@@ -2,8 +2,8 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.ai.FSkizzikRangedAttackGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.gui.bossevent.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_ClientHelper;
@@ -41,9 +41,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -71,7 +68,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
@@ -102,25 +98,17 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final int[] nextHeadUpdate = new int[4];
     
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final FriendlySkizzikGoalController goalController;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.FRIENDLY_SKIZZIK_SELECTOR);
     public final PA_ServerBossEvent bossBar = new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.AQUA, PA_BossEvent.PA_BossBarOverlay.PROGRESS);
-
-    public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
-    public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
-
-    public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
-    public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.FRIENDLY_SKIZZIK_SELECTOR);
-    public FSkizzikRangedAttackGoal rangedAttackGoal = new FSkizzikRangedAttackGoal(this, 1.0D, 40, 20.0F);
-    public WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
-    public LookAtPlayerGoal lookGoal = new LookAtPlayerGoal(this, Player.class, 8.0F);
-    public RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
-
+    
     public FriendlySkizzik(EntityType<? extends FriendlySkizzik> entity, Level world) {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
+        this.goalController = new FriendlySkizzikGoalController(this);
     }
 
     @Override
@@ -626,11 +614,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         this.level.addFreshEntity(skull);
     }
 
-    @Override
-    protected void registerGoals() {
-        
-    }
-
     public void killAllSkizzies(Level world, boolean skizziesOnly) {
         if (world instanceof ServerLevel) {
             LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
@@ -659,13 +642,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         
         Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
         this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, false, explosion);
-
-        this.targetSelector.addGoal(1, this.hurtGoal);
-        this.targetSelector.addGoal(2, this.attackGoal);
-        this.goalSelector.addGoal(2, this.rangedAttackGoal);
-        this.goalSelector.addGoal(5, this.avoidWaterGoal);
-        this.goalSelector.addGoal(6, this.lookGoal);
-        this.goalSelector.addGoal(7, this.lookRandomlyGoal);
         
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
     }
@@ -828,12 +804,13 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-        int currentStageId = 1;
 //        if (this.spawnSkizzieTicks <= 0) {
 //            this.spawnSkizzieTicks = 60;
 //        }
 
         if (this.getPassengers().isEmpty()) {
+            this.goalController.addDefaultGoals();
+            
             for (int headIndex = 1; headIndex < this.getAddedHeads() + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);

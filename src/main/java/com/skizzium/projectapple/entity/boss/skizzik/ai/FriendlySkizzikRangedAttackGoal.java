@@ -4,10 +4,10 @@ import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 
-public class FSkizzikRangedAttackGoal extends RangedAttackGoal {
+public class FriendlySkizzikRangedAttackGoal extends RangedAttackGoal {
     private final FriendlySkizzik mob;
     
-    public FSkizzikRangedAttackGoal(RangedAttackMob pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
+    public FriendlySkizzikRangedAttackGoal(RangedAttackMob pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
         super(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackRadius);
         this.mob = (FriendlySkizzik) pRangedAttackMob;
     }
