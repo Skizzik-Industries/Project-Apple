@@ -1,11 +1,11 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.util.stage;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
@@ -179,12 +179,13 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     public void addGoals() {
-        skizzik.goalSelector.removeGoal(skizzik.avoidPlayerGoal);
-        skizzik.goalSelector.removeGoal(skizzik.panicGoal);
+        skizzik.goalSelector.removeAllGoals();
+        skizzik.targetSelector.removeAllGoals();
 
         skizzik.targetSelector.addGoal(1, skizzik.hurtGoal);
-        skizzik.targetSelector.addGoal(2, skizzik.attackGoal);
-        skizzik.goalSelector.addGoal(2, skizzik.rangedAttackGoal);
+        skizzik.targetSelector.addGoal(2, skizzik.attackFSkizzikGoal);
+        skizzik.targetSelector.addGoal(3, skizzik.attackGoal);
+        skizzik.goalSelector.addGoal(3, skizzik.rangedAttackGoal);
         skizzik.goalSelector.addGoal(5, skizzik.avoidWaterGoal);
         skizzik.goalSelector.addGoal(6, skizzik.lookGoal);
         skizzik.goalSelector.addGoal(7, skizzik.lookRandomlyGoal);

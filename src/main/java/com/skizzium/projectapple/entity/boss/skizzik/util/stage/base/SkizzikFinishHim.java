@@ -1,11 +1,11 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
+package com.skizzium.projectapple.entity.boss.skizzik.util.stage.base;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractPassiveSkizzikStage;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStages;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.AbstractPassiveSkizzikStage;
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
@@ -93,12 +93,8 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public void addGoals() {
-        skizzik.targetSelector.removeGoal(skizzik.hurtGoal);
-        skizzik.targetSelector.removeGoal(skizzik.attackGoal);
-        skizzik.goalSelector.removeGoal(skizzik.rangedAttackGoal);
-        skizzik.goalSelector.removeGoal(skizzik.avoidWaterGoal);
-        skizzik.goalSelector.removeGoal(skizzik.lookGoal);
-        skizzik.goalSelector.removeGoal(skizzik.lookRandomlyGoal);
+        skizzik.goalSelector.removeAllGoals();
+        skizzik.targetSelector.removeAllGoals();
 
         skizzik.goalSelector.addGoal(1, skizzik.avoidPlayerGoal);
         skizzik.goalSelector.addGoal(2, skizzik.panicGoal);

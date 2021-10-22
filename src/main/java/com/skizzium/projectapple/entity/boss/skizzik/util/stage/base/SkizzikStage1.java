@@ -1,12 +1,12 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
+package com.skizzium.projectapple.entity.boss.skizzik.util.stage.base;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStages;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.AbstractSkizzikStage;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.world.level.Explosion;
 

@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.util;
 
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;

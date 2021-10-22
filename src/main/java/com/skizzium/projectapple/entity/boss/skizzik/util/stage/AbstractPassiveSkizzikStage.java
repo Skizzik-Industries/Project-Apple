@@ -1,8 +1,8 @@
-package com.skizzium.projectapple.entity.boss.skizzik.stages.stages;
+package com.skizzium.projectapple.entity.boss.skizzik.util.stage;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikSleeping;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikSleeping;
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.BossMusicStopPacket;

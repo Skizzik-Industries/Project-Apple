@@ -3,8 +3,8 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
+import com.skizzium.projectapple.entity.boss.skizzik.util.*;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.*;
 import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.gui.bossevent.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_Config;
@@ -120,6 +120,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
 
     public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
+    public NearestAttackableTargetGoal attackFSkizzikGoal = new NearestAttackableTargetGoal<>(this, FriendlySkizzik.class, false, false);
     public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
     public RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
     public WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);

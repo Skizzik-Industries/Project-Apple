@@ -42,7 +42,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 
-public class FriendlySkizzie extends PathfinderMob {
+public class FriendlySkizzie extends Monster {
     private static EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
 
     public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {

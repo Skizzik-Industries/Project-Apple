@@ -2,10 +2,7 @@ package com.skizzium.projectapple.effect;
 
 import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikFinishHim;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -13,9 +10,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.level.entity.LevelEntityGetter;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
