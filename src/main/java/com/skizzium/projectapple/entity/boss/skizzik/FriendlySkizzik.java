@@ -95,6 +95,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final float[] xRotHeads1 = new float[4];
     private final float[] yRotHeads1 = new float[4];
 
+    private float skullCooldown;
     private final int[] nextHeadUpdate = new int[4];
     
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -143,7 +144,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.5F;
+        return 2.45F;
     }
 
     @Override
@@ -608,9 +609,26 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         double targetZ = z - headZ;
 
         FriendlySkizzikSkull skull = new FriendlySkizzikSkull(this.level, this, targetX, targetY, targetZ);
-        skull.setOwner(this);
 
         skull.setPosRaw(headX, headY, headZ);
+        this.level.addFreshEntity(skull);
+    }
+
+    private void performRangedAttack(Player player) {
+        if (!this.isSilent()) {
+            this.level.levelEvent(null, 1024, this.blockPosition(), 0);
+        }
+
+        float xRot = player.getXRot();
+        float yRot = player.getYRot();
+        float zRot = 0.0F;
+        
+        float x = -Mth.sin(yRot * ((float)Math.PI / 180F)) * Mth.cos(xRot * ((float)Math.PI / 180F));
+        float y = -Mth.sin((xRot + zRot) * ((float)Math.PI / 180F));
+        float z = Mth.cos(yRot * ((float)Math.PI / 180F)) * Mth.cos(xRot * ((float)Math.PI / 180F));
+
+        FriendlySkizzikSkull skull = new FriendlySkizzikSkull(this.level, player, x, y, z);
+        skull.setPosRaw(this.getX(), this.getEyeY() + (player.getEyeY() - this.getEyeY()), this.getZ());
         this.level.addFreshEntity(skull);
     }
 
@@ -849,6 +867,13 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                     }
                 }
             }
+        }
+        else {
+            if (skullCooldown <= 0.0F && PA_ClientHelper.getClient().options.keyUse.isDown()) {
+                this.performRangedAttack(PA_ClientHelper.getClient().player);
+                skullCooldown = 0.5F;
+            }
+            skullCooldown -= 0.1F;
         }
         
         if (this.getTarget() != null) {
