@@ -30,15 +30,15 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         return new ResourceLocation(ProjectApple.MOD_ID, "geo/skizzik/skizzik.geo.json");
     }
 
-    private static void setupHeadRotation(FriendlySkizzik skizzik, IBone model, int head) {
-        if (head <= skizzik.getAddedHeads() - 1 && model != null) {
+    private static void setupHeadRotation(FriendlySkizzik skizzik, IBone model, FriendlySkizzik.Heads head) {
+        if (skizzik.getAddedHeads().contains(head) && model != null) {
             if (skizzik.getPassengers().size() > 2) {
-                model.setRotationX((skizzik.getPassengers().get(head + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
-                model.setRotationY((skizzik.getPassengers().get(head + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
+                model.setRotationX((skizzik.getPassengers().get(head.ordinal() + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
+                model.setRotationY((skizzik.getPassengers().get(head.ordinal() + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
             }
             else {
-                model.setRotationX((skizzik.getHeadXRot(head) * ((float) Math.PI / 180F) * -1));
-                model.setRotationY(((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
+                model.setRotationX((skizzik.getHeadXRot(head.ordinal()) * ((float) Math.PI / 180F) * -1));
+                model.setRotationY(((skizzik.getHeadYRot(head.ordinal()) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
             }
         }
     }
@@ -61,10 +61,10 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         centerHead.setRotationX(data.headPitch * ((float) Math.PI / 180F));
         centerHead.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
 
-        setupHeadRotation(skizzik, bottomRightHead, 0);
-        setupHeadRotation(skizzik, bottomLeftHead, 1);
-        setupHeadRotation(skizzik, topRightHead, 2);
-        setupHeadRotation(skizzik, topLeftHead, 3);
+        setupHeadRotation(skizzik, bottomRightHead, FriendlySkizzik.Heads.BOTTOM_RIGHT_HEAD);
+        setupHeadRotation(skizzik, bottomLeftHead, FriendlySkizzik.Heads.BOTTOM_LEFT_HEAD);
+        setupHeadRotation(skizzik, topRightHead, FriendlySkizzik.Heads.TOP_RIGHT_HEAD);
+        setupHeadRotation(skizzik, topLeftHead, FriendlySkizzik.Heads.TOP_LEFT_HEAD);
 
         if (!skizzik.isCommandBlockPlaced()) {
             commandBlock.setHidden(true);
@@ -78,36 +78,10 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
             leftRibs.setHidden(false);
             bottomRib.setHidden(false);
         }
-        
-        if (skizzik.getAddedHeads() == 3) {
-            bottomRightHead.setHidden(false);
-            bottomLeftHead.setHidden(false);
-            topRightHead.setHidden(false);
-            topLeftHead.setHidden(true);
-        }
-        else if (skizzik.getAddedHeads() == 2) {
-            bottomRightHead.setHidden(false);
-            bottomLeftHead.setHidden(false);
-            topRightHead.setHidden(true);
-            topLeftHead.setHidden(true);
-        }
-        else if (skizzik.getAddedHeads() == 1) {
-            bottomRightHead.setHidden(false);
-            bottomLeftHead.setHidden(true);
-            topRightHead.setHidden(true);
-            topLeftHead.setHidden(true);
-        }
-        else if (skizzik.getAddedHeads() == 0) {
-            bottomRightHead.setHidden(true);
-            bottomLeftHead.setHidden(true);
-            topRightHead.setHidden(true);
-            topLeftHead.setHidden(true);
-        }
-        else {
-            bottomRightHead.setHidden(false);
-            bottomLeftHead.setHidden(false);
-            topRightHead.setHidden(false);
-            topLeftHead.setHidden(false);
-        }
+
+        bottomRightHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.BOTTOM_RIGHT_HEAD));
+        bottomLeftHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.BOTTOM_LEFT_HEAD));
+        topRightHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.TOP_RIGHT_HEAD));
+        topLeftHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.TOP_LEFT_HEAD));
     }
 }

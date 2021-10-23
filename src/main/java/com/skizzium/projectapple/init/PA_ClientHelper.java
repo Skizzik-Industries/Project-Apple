@@ -54,6 +54,8 @@ import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_ClientHelper {
+    public static final PA_Keybinds keybinds = new PA_Keybinds();
+    
     public static Minecraft getClient() {
         return Minecraft.getInstance();
     }
