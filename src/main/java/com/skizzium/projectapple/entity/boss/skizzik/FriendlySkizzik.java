@@ -828,45 +828,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
         if (this.getPassengers().isEmpty()) {
             this.goalController.addDefaultGoals();
-            
-            for (int headIndex = 1; headIndex < this.getAddedHeads() + 1; ++headIndex) {
-                if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
-                    this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
-
-                    int alternativeTarget = this.getAlternativeTarget(headIndex);
-
-                    if (alternativeTarget > 0) {
-                        Entity target = this.level.getEntity(alternativeTarget);
-                        if (target != null && target.isAlive() && !(this.distanceToSqr(target) > 900.0D) && this.hasLineOfSight(target)) {
-                            if (target instanceof Player && ((Player) target).getAbilities().invulnerable) {
-                                this.setAlternativeTarget(headIndex, 0);
-                            } else {
-                                this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ());
-                                this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
-                            }
-                        } else {
-                            this.setAlternativeTarget(headIndex, 0);
-                        }
-                    } else {
-                        List<LivingEntity> list = this.level.getNearbyEntities(LivingEntity.class, TARGETING_CONDITIONS, this, this.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
-
-                        for (int i = 0; i < 10 && !list.isEmpty(); ++i) {
-                            LivingEntity target = list.get(this.random.nextInt(list.size()));
-                            if (target != this && target.isAlive() && this.hasLineOfSight(target)) {
-                                if (target instanceof Player) {
-                                    if (!((Player) target).getAbilities().invulnerable) {
-                                        this.setAlternativeTarget(headIndex, target.getId());
-                                    }
-                                } else {
-                                    this.setAlternativeTarget(headIndex, target.getId());
-                                }
-                                break;
-                            }
-                            list.remove(target);
-                        }
-                    }
-                }
-            }
         }
         else {
             if (skullCooldown <= 0.0F && PA_ClientHelper.getClient().options.keyUse.isDown()) {
@@ -874,6 +835,45 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 skullCooldown = 0.5F;
             }
             skullCooldown -= 0.1F;
+        }
+
+        for (int headIndex = 1; headIndex < this.getAddedHeads() + 1; ++headIndex) {
+            if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
+                this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);
+
+                int alternativeTarget = this.getAlternativeTarget(headIndex);
+
+                if (alternativeTarget > 0) {
+                    Entity target = this.level.getEntity(alternativeTarget);
+                    if (target != null && target.isAlive() && !(this.distanceToSqr(target) > 900.0D) && this.hasLineOfSight(target)) {
+                        if (target instanceof Player && ((Player) target).getAbilities().invulnerable) {
+                            this.setAlternativeTarget(headIndex, 0);
+                        } else {
+                            this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ());
+                            this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
+                        }
+                    } else {
+                        this.setAlternativeTarget(headIndex, 0);
+                    }
+                } else {
+                    List<LivingEntity> list = this.level.getNearbyEntities(LivingEntity.class, TARGETING_CONDITIONS, this, this.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
+
+                    for (int i = 0; i < 10 && !list.isEmpty(); ++i) {
+                        LivingEntity target = list.get(this.random.nextInt(list.size()));
+                        if (target != this && target.isAlive() && this.hasLineOfSight(target)) {
+                            if (target instanceof Player) {
+                                if (!((Player) target).getAbilities().invulnerable) {
+                                    this.setAlternativeTarget(headIndex, target.getId());
+                                }
+                            } else {
+                                this.setAlternativeTarget(headIndex, target.getId());
+                            }
+                            break;
+                        }
+                        list.remove(target);
+                    }
+                }
+            }
         }
         
         if (this.getTarget() != null) {
