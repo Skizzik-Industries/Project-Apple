@@ -40,6 +40,7 @@ public class PA_Entities {
 
     public static final Predicate<LivingEntity> FRIENDLY_SKIZZIK_SELECTOR = (entity) -> entity instanceof Monster &&
                                                                                         !(entity instanceof FriendlySkizzie) &&
+                                                                                        !(entity instanceof FriendlySkizzo) &&
                                                                                         !(entity instanceof FriendlySkizzik) &&
                                                                                         entity.attackable();
 
@@ -49,6 +50,7 @@ public class PA_Entities {
     public static final RegistryObject<EntityType<FriendlyWitchSkizzie>> FRIENDLY_WITCH_SKIZZIE = PA_Registry.ENTITIES.register("friendly_witch_skizzie", () -> EntityType.Builder.of(FriendlyWitchSkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10).build("friendly_witch_skizzie"));
 
     public static final RegistryObject<EntityType<FriendlySkizzikSkull>> FRIENDLY_SKIZZIK_SKULL = PA_Registry.ENTITIES.register("friendly_skizzik_skull", () -> EntityType.Builder.<FriendlySkizzikSkull>of(FriendlySkizzikSkull::new, MobCategory.MISC).updateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4).setCustomClientFactory(((spawnEntity, world) -> new FriendlySkizzikSkull(world))).build("friendly_skizzik_skull"));
+    public static final RegistryObject<EntityType<FriendlySkizzo>> FRIENDLY_SKIZZO = PA_Registry.ENTITIES.register("friendly_skizzo", () -> EntityType.Builder.of(FriendlySkizzo::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.8F, 2.1F).clientTrackingRange(10).build("friendly_skizzo"));
     public static final RegistryObject<EntityType<FriendlySkizzik>> FRIENDLY_SKIZZIK = PA_Registry.ENTITIES.register("friendly_skizzik", () -> EntityType.Builder.of(FriendlySkizzik::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(2.5F, 4.0F).clientTrackingRange(10).build("friendly_skizzik"));
     
     public static final RegistryObject<EntityType<Skizzie>> SKIZZIE = PA_Registry.ENTITIES.register("skizzie", () -> EntityType.Builder.of(Skizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10).build("skizzie"));
@@ -66,7 +68,8 @@ public class PA_Entities {
 
         event.put(FRIENDLY_SKIZZIE.get(), FriendlySkizzie.buildAttributes().build());
         event.put(FRIENDLY_WITCH_SKIZZIE.get(), FriendlyWitchSkizzie.buildAttributes().build());
-        
+
+        event.put(FRIENDLY_SKIZZO.get(), FriendlySkizzo.buildAttributes().build());
         event.put(FRIENDLY_SKIZZIK.get(), FriendlySkizzik.buildAttributes().build());
         
         event.put(SKIZZIE.get(), Skizzie.buildAttributes().build());
@@ -99,6 +102,7 @@ public class PA_Entities {
         event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE.get(), WitchSkizzieRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIK_SKULL.get(), FriendlySkizzikSkullRenderer::new);
+        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZO.get(), FriendlySkizzoRenderer::new);
         event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIK.get(), FriendlySkizzikRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.SKIZZIE.get(), SkizzieRenderer::new);

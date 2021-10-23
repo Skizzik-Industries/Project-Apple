@@ -24,14 +24,11 @@ public class Gem extends Item {
         PINK,
         YELLOW;
         
-        private final ResourceLocation location;
-
-        GemType() {
-            this.location = new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/friendly_skizzik/gems/%s_gem.png", this.name().toLowerCase()));
-        }
-        
         public ResourceLocation getLocation() {
-            return this.location;
+            if (ProjectApple.holiday == 1) {
+                return new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/holidays/spooktober/friendly_spookzik/gems/%s_gem.png", this.name().toLowerCase()));
+            }
+            return new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/friendly_skizzik/gems/%s_gem.png", this.name().toLowerCase()));
         }
     }
 }

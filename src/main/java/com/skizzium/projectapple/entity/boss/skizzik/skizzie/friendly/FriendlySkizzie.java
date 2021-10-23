@@ -4,6 +4,7 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -43,7 +44,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 
 public class FriendlySkizzie extends Monster {
-    private static EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
 
     public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {
         super(entity, world);
@@ -131,7 +132,7 @@ public class FriendlySkizzie extends Monster {
 
     protected void registerGoals() {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Skizzie.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Monster.class, true, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.FRIENDLY_SKIZZIK_SELECTOR));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));

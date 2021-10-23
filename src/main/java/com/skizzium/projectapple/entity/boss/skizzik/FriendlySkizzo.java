@@ -38,11 +38,11 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class Skizzo extends Monster {
+public class FriendlySkizzo extends Monster {
     private UUID ownerUUID;
     private int ownerNetworkId;
 
-    public Skizzo(EntityType<? extends Skizzo> entity, Level world) {
+    public FriendlySkizzo(EntityType<? extends FriendlySkizzo> entity, Level world) {
         super(entity, world);
         this.xpReward = 25;
         this.moveControl = new FlyingMoveControl(this, 10, true);
@@ -126,13 +126,11 @@ public class Skizzo extends Monster {
 
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.SKIZZIK_SELECTOR));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, FriendlySkizzie.class, true, true));
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.FRIENDLY_SKIZZIK_SELECTOR));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
     }
 
     public void setOwner(@Nullable Entity entity) {
@@ -170,46 +168,6 @@ public class Skizzo extends Monster {
     public void baseTick() {
         super.baseTick();
         this.setNoGravity(true);
-
-        /* double x = this.getX();
-        double y = this.getY();
-        double z = this.getZ();
-        World world = this.getCommandSenderWorld();
-
-        BlockPos[] blockPositions = {new BlockPos(x, y, z), new BlockPos(x + 1, y, z), new BlockPos(x - 1, y, z), new BlockPos(x, y, z + 1), new BlockPos(x, y, z - 1), new BlockPos(x + 1, y, z + 1), new BlockPos(x + 1, y, z - 1), new BlockPos(x - 1, y, z + 1), new BlockPos(x - 1, y, z - 1)};
-        for (BlockPos pos : blockPositions) {
-            Block blockBelow = world.getBlockState(pos.below()).getBlock();
-            if (blockBelow != Blocks.FIRE &&
-                blockBelow != Blocks.AIR &&
-                blockBelow != Blocks.CAVE_AIR &&
-                blockBelow != Blocks.VOID_AIR) {
-                world.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
-            }
-        } */
-    }
-
-    @Override
-    public void playerTouch(Player player) {
-        super.playerTouch(player);
-        Level world = player.getCommandSenderWorld();
-
-        if (player instanceof ServerPlayer) {
-            if (((ServerPlayer) player).gameMode.isSurvival()) {
-                player.setSecondsOnFire(10);
-            }
-        }
-        else if (player instanceof Player && world.isClientSide()) {
-            PlayerInfo network = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
-
-            if (network.getGameMode() == GameType.SURVIVAL || network.getGameMode() == GameType.ADVENTURE) {
-                player.setSecondsOnFire(10);
-            }
-        }
-        else {
-            if (!player.fireImmune()) {
-                player.setSecondsOnFire(10);
-            }
-        }
     }
 
     @Override

@@ -60,6 +60,8 @@
   "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
   "item.skizzik.friendly_witch_skizzie_spawn_egg": "Friendly Witch Skizzie Spawn Egg",
 
+  "item.skizzik.friendly_skizzo_spawn_egg": "Friendly Skizzo Spawn Egg",
+  
   "item.skizzik.skizzie_spawn_egg": "Skizzie Spawn Egg",
   "item.skizzik.kaboom_skizzie_spawn_egg": "Kaboom Skizzie Spawn Egg",
   "item.skizzik.minigun_skizzie_spawn_egg": "Minigun Skizzie Spawn Egg",
@@ -91,6 +93,7 @@
   "key.categories.skizzik.friendly_skizzik": "Friendly Skizzik",
   
   "entity.skizzik.friendly_skizzik_skull": "Friendly Skizzik Skull",
+  "entity.skizzik.friendly_skizzo": "Friendly Skizzo",
   "entity.skizzik.friendly_skizzik": "Friendly Skizzik",
 
   "entity.skizzik.skizzik_skull": "Skizzik Skull",
@@ -106,6 +109,7 @@
   "item.minecraft.potion.effect.conversion": "Potion of Conversion",
   "item.minecraft.splash_potion.effect.conversion": "Splash Potion of Conversion",
   "item.minecraft.lingering_potion.effect.conversion": "Lingering Potion of Conversion",
+  "item.minecraft.tipped_arrow.effect.conversion": "Arrow of Conversion",
   
   "death.attack.skizzikSkull": "%1$s was shot by a skull from %2$s",
   "subtitles.entity.skizzik.finish_him": "§4§l!!! FINISH HIM !!!",
@@ -116,6 +120,8 @@
   "spooktober.entity.skizzik.corrupted_skizzie": "§kCorrupted Spookzie",
   "spooktober.entity.skizzik.witch_skizzie": "Witch Spookzie",
 
+  "spooktober.entity.skizzik.friendly_skizzik_skull": "Friendly Spookzik Pumpkin",
+  "spooktober.entity.skizzik.friendly_skizzo": "Friendly Spookzo",
   "spooktober.entity.skizzik.friendly_skizzik": "Friendly Spookzik",
   
   "spooktober.entity.skizzik.skizzik_skull": "Spookzik Pumpkin",

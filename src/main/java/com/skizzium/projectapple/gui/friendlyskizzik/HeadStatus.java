@@ -18,6 +18,8 @@ public class HeadStatus extends GuiComponent implements IIngameOverlay {
     private static final ResourceLocation RIDDEN_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_ridden.png");
     private static final ResourceLocation ELIMINATED_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_eliminated.png");
 
+    private static final ResourceLocation SPOOKTOBER_HEAD_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/holidays/spooktober/gui/friendly_spookzik/small_head.png");
+
     @Override
     public void render(ForgeIngameGui gui, PoseStack matrix, float partialTicks, int width, int height) {
         Minecraft minecraft = PA_ClientHelper.getClient();
@@ -34,7 +36,7 @@ public class HeadStatus extends GuiComponent implements IIngameOverlay {
 
                 this.blit(matrix, x, y, 141, 166, 24, 24);
 
-                RenderSystem.setShaderTexture(0, HEAD_LOCATION);
+                RenderSystem.setShaderTexture(0, ProjectApple.holiday == 1 ? SPOOKTOBER_HEAD_LOCATION : HEAD_LOCATION);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
 

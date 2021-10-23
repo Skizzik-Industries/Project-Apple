@@ -29,6 +29,8 @@ public class PA_ItemModelsProvider extends ItemModelProvider {
         withExistingParent("friendly_skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));
         withExistingParent("friendly_witch_skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));
 
+        withExistingParent("friendly_skizzo_spawn_egg", mcLoc("item/template_spawn_egg"));
+        
         withExistingParent("skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));
         withExistingParent("kaboom_skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));
         withExistingParent("minigun_skizzie_spawn_egg", mcLoc("item/template_spawn_egg"));
