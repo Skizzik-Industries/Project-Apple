@@ -16,6 +16,7 @@ import net.minecraftforge.client.gui.IIngameOverlay;
 public class HeadStatus extends GuiComponent implements IIngameOverlay {
     private static final ResourceLocation HEAD_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head.png");
     private static final ResourceLocation RIDDEN_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_ridden.png");
+    private static final ResourceLocation DETACHED_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_detached.png");
     private static final ResourceLocation ELIMINATED_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_eliminated.png");
 
     private static final ResourceLocation SPOOKTOBER_HEAD_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/holidays/spooktober/friendly_spookzik/small_head.png");
@@ -38,18 +39,18 @@ public class HeadStatus extends GuiComponent implements IIngameOverlay {
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
 
-                if (((FriendlySkizzik) vehicle).getAddedHeads().contains(FriendlySkizzik.Heads.values()[i])) {
+                if (!((FriendlySkizzik) vehicle).getAddedHeads().contains(FriendlySkizzik.Heads.values()[i])) {
                     RenderSystem.setShaderTexture(0, ELIMINATED_LOCATION);
                     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                     GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
                 }
-//                else {
-//                    if (((FriendlySkizzik) vehicle).getAddedHeads().contains(FriendlySkizzik.Heads.values()[i])) {
-//                        RenderSystem.setShaderTexture(0, RIDDEN_LOCATION);
-//                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-//                        GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
-//                    }
-//                }
+                else {
+                    if (((FriendlySkizzik) vehicle).getDetachedHeads().contains(FriendlySkizzik.Heads.values()[i])) {
+                        RenderSystem.setShaderTexture(0, DETACHED_LOCATION);
+                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                        GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
+                    }
+                }
                 
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             }

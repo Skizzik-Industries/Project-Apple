@@ -9,6 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -39,6 +42,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class FriendlySkizzo extends Monster {
+    private int head;
     private UUID ownerUUID;
     private int ownerNetworkId;
 
@@ -133,13 +137,14 @@ public class FriendlySkizzo extends Monster {
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
     }
 
-    public void setOwner(@Nullable Entity entity) {
-        if (entity != null) {
-            this.ownerUUID = entity.getUUID();
-            this.ownerNetworkId = entity.getId();
-        }
+    public int getHead() {
+        return this.head;
     }
 
+    public void setHead(int head) {
+        this.head = head;
+    }
+    
     @Nullable
     public Entity getOwner() {
         if (this.ownerUUID != null && this.level instanceof ServerLevel) {
@@ -150,8 +155,16 @@ public class FriendlySkizzo extends Monster {
         }
     }
 
+    public void setOwner(@Nullable Entity entity) {
+        if (entity != null) {
+            this.ownerUUID = entity.getUUID();
+            this.ownerNetworkId = entity.getId();
+        }
+    }
+
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
+        nbt.putInt("Head", this.head);
         if (this.ownerUUID != null) {
             nbt.putUUID("Owner", this.ownerUUID);
         }
@@ -159,6 +172,7 @@ public class FriendlySkizzo extends Monster {
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
+        this.head = nbt.getInt("Head");
         if (nbt.hasUUID("Owner")) {
             this.ownerUUID = nbt.getUUID("Owner");
         }

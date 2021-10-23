@@ -30,15 +30,19 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         return new ResourceLocation(ProjectApple.MOD_ID, "geo/skizzik/skizzik.geo.json");
     }
 
-    private static void setupHeadRotation(FriendlySkizzik skizzik, IBone model, FriendlySkizzik.Heads head) {
-        if (skizzik.getAddedHeads().contains(head) && model != null) {
-            if (skizzik.getPassengers().size() > 2) {
-                model.setRotationX((skizzik.getPassengers().get(head.ordinal() + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
-                model.setRotationY((skizzik.getPassengers().get(head.ordinal() + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
-            }
-            else {
-                model.setRotationX((skizzik.getHeadXRot(head.ordinal()) * ((float) Math.PI / 180F) * -1));
-                model.setRotationY(((skizzik.getHeadYRot(head.ordinal()) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
+    private static void setupHead(FriendlySkizzik skizzik, IBone model, FriendlySkizzik.Heads head) {
+        if (model != null) {
+            model.setHidden(skizzik.getDetachedHeads().contains(head) || !skizzik.getAddedHeads().contains(head));
+            
+            if (skizzik.getAddedHeads().contains(head) && !skizzik.getDetachedHeads().contains(head)) {
+                if (skizzik.getPassengers().size() > 2) {
+                    model.setRotationX((skizzik.getPassengers().get(head.ordinal() + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
+                    model.setRotationY((skizzik.getPassengers().get(head.ordinal() + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
+                } 
+                else {
+                    model.setRotationX((skizzik.getHeadXRot(head.ordinal()) * ((float) Math.PI / 180F) * -1));
+                    model.setRotationY(((skizzik.getHeadYRot(head.ordinal()) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
+                }
             }
         }
     }
@@ -61,11 +65,11 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         centerHead.setRotationX(data.headPitch * ((float) Math.PI / 180F));
         centerHead.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
 
-        setupHeadRotation(skizzik, bottomRightHead, FriendlySkizzik.Heads.BOTTOM_RIGHT_HEAD);
-        setupHeadRotation(skizzik, bottomLeftHead, FriendlySkizzik.Heads.BOTTOM_LEFT_HEAD);
-        setupHeadRotation(skizzik, topRightHead, FriendlySkizzik.Heads.TOP_RIGHT_HEAD);
-        setupHeadRotation(skizzik, topLeftHead, FriendlySkizzik.Heads.TOP_LEFT_HEAD);
-
+        setupHead(skizzik, bottomRightHead, FriendlySkizzik.Heads.BOTTOM_RIGHT_HEAD);
+        setupHead(skizzik, bottomLeftHead, FriendlySkizzik.Heads.BOTTOM_LEFT_HEAD);
+        setupHead(skizzik, topRightHead, FriendlySkizzik.Heads.TOP_RIGHT_HEAD);
+        setupHead(skizzik, topLeftHead, FriendlySkizzik.Heads.TOP_LEFT_HEAD);
+        
         if (!skizzik.isCommandBlockPlaced()) {
             commandBlock.setHidden(true);
             rightRibs.setHidden(true);
@@ -78,10 +82,5 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
             leftRibs.setHidden(false);
             bottomRib.setHidden(false);
         }
-
-        bottomRightHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.BOTTOM_RIGHT_HEAD));
-        bottomLeftHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.BOTTOM_LEFT_HEAD));
-        topRightHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.TOP_RIGHT_HEAD));
-        topLeftHead.setHidden(!skizzik.getAddedHeads().contains(FriendlySkizzik.Heads.TOP_LEFT_HEAD));
     }
 }

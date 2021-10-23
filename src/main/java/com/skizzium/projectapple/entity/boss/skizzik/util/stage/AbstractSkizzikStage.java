@@ -164,15 +164,8 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
                             skizzik.setInvul(!skizzik.getDebug());
-                            //skizzos[i - 1] = skizzo;
                         }
                     }
-                    /* else {
-                        difference = Math.abs(difference);
-                        for (int i = 1; i <= difference; i++) {
-                            ((ServerLevel) world).removeEntity(skizzos[i]);
-                        }
-                    } */
                 }
             }
         }
