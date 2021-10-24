@@ -22,7 +22,6 @@ public class PA_PacketRegistry {
 
     @SubscribeEvent
     public static void registerMessages(FMLCommonSetupEvent event) {
-        INSTANCE.registerMessage(ID++, BossEventPacket.class, BossEventPacket::encode, BossEventPacket::decode, BossEventPacket::handle);
         INSTANCE.registerMessage(ID++, BossMusicStartPacket.class, BossMusicStartPacket::encode, BossMusicStartPacket::decode, BossMusicStartPacket::handle);
         INSTANCE.registerMessage(ID++, BossMusicStopPacket.class, BossMusicStopPacket::encode, BossMusicStopPacket::decode, BossMusicStopPacket::handle);
     }

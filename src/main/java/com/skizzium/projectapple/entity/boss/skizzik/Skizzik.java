@@ -5,8 +5,6 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.*;
-import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
-import com.skizzium.projectapple.gui.bossevent.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
@@ -15,6 +13,8 @@ import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectapple.effect.ConversionEffect;
+import com.skizzium.projectlib.gui.PL_BossEvent;
+import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -114,7 +114,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private int spawnSkizzieTicks;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
-    public final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS).setDarkenScreen(true);
+    public final PL_ServerBossEvent bossBar = (PL_ServerBossEvent) new PL_ServerBossEvent(this.getDisplayName(), PL_BossEvent.PL_BossBarColor.WHITE, PL_BossEvent.PL_BossBarOverlay.PROGRESS).setDarkenScreen(true);
 
     public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
@@ -691,7 +691,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
         else {
             this.bossBar.setName(new TextComponent(String.format("%s - %s", this.getDisplayName().getString(), new TranslatableComponent("entity.skizzik.skizzik.invulnerable").getString())));
-            this.bossBar.setColor(PA_BossEvent.PA_BossBarColor.AQUA);
+            this.bossBar.setColor(PL_BossEvent.PL_BossBarColor.AQUA);
         }
         this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
         

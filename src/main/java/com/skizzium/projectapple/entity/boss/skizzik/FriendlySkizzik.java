@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
-import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
-import com.skizzium.projectapple.gui.bossevent.PA_ServerBossEvent;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
 import com.skizzium.projectapple.init.PA_Tags;
@@ -15,6 +13,8 @@ import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.item.Gem;
 import com.skizzium.projectapple.network.BossMusicStopPacket;
+import com.skizzium.projectlib.gui.PL_BossEvent;
+import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
@@ -105,7 +105,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final FriendlySkizzikGoalController goalController;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.FRIENDLY_SKIZZIK_SELECTOR);
-    public final PA_ServerBossEvent bossBar = new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.AQUA, PA_BossEvent.PA_BossBarOverlay.PROGRESS);
+    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this.getDisplayName(), PL_BossEvent.PL_BossBarColor.AQUA, PL_BossEvent.PL_BossBarOverlay.PROGRESS);
     
     public FriendlySkizzik(EntityType<? extends FriendlySkizzik> entity, Level world) {
         super(entity, world);

@@ -6,10 +6,10 @@ import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.AbstractPassiveSkizzikStage;
-import com.skizzium.projectapple.gui.bossevent.PA_BossEvent;
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -37,9 +37,9 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
-    public PA_BossEvent.PA_BossBarColor barColor() {
+    public PL_BossEvent.PL_BossBarColor barColor() {
         if (skizzik.isConverting() && skizzik.hasEffect(PA_Effects.CONVERSION.get())) {
-            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 5) % 8 == 0 ? PA_BossEvent.PA_BossBarColor.AQUA : ProjectApple.holiday == 1 ? PA_BossEvent.PA_BossBarColor.ORANGE : PA_BossEvent.PA_BossBarColor.RED;
+            return (skizzik.getEffect(PA_Effects.CONVERSION.get()).getDuration() / 5) % 8 == 0 ? PL_BossEvent.PL_BossBarColor.AQUA : ProjectApple.holiday == 1 ? PL_BossEvent.PL_BossBarColor.ORANGE : PL_BossEvent.PL_BossBarColor.RED;
         }
         return super.barColor();
     }
