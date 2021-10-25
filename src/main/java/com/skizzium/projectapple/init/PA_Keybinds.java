@@ -5,8 +5,9 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class PA_Keybinds {
     public final KeyMapping keyDetachHead = new KeyMapping("key.skizzik.detach_head", 293, "key.categories.skizzik.friendly_skizzik");
+    public final KeyMapping keySpawnSkizzie = new KeyMapping("key.skizzik.spawn_skizzie", 82, "key.categories.skizzik.friendly_skizzik");
     
     public void register() {
-        PA_ClientHelper.getClient().options.keyMappings = ArrayUtils.addAll(PA_ClientHelper.getClient().options.keyMappings, this.keyDetachHead);
+        PA_ClientHelper.getClient().options.keyMappings = ArrayUtils.addAll(PA_ClientHelper.getClient().options.keyMappings, this.keyDetachHead, this.keySpawnSkizzie);
     }
 }

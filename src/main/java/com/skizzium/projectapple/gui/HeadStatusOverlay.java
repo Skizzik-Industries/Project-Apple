@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.IIngameOverlay;
 
-public class HeadStatus extends GuiComponent implements IIngameOverlay {
+public class HeadStatusOverlay extends GuiComponent implements IIngameOverlay {
     private static final ResourceLocation HEAD_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head.png");
     private static final ResourceLocation RIDDEN_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_ridden.png");
     private static final ResourceLocation DETACHED_LOCATION = new ResourceLocation(ProjectApple.MOD_ID, "textures/gui/friendly_skizzik/small_head_detached.png");
