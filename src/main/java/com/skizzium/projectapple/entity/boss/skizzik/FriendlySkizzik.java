@@ -100,7 +100,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final float[] yRotHeads1 = new float[4];
 
     private float skullCooldown = 0.5F;
-    private float detachCooldown = 0.5F;
+    private boolean canDetach = true;
     
     private final int[] nextHeadUpdate = new int[4];
     
@@ -907,21 +907,21 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 skullCooldown = 0.5F;
             }
             
-            if (detachCooldown <= 0.0F && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+            if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
                 int i = 0;
                 for(KeyMapping key : options.keyHotbarSlots) {
-                    if (i < 4) {
-                        if (key.isDown()) {
-                            this.changeHeadAttachment(i);
-                            detachCooldown = 0.5F; // Cooldown is needed because otherwise the head get detached and then reattached immediately
-                        }
-                        i += 1;
+                    if (i < 4 && key.isDown()) {
+                        this.changeHeadAttachment(i);
+                        canDetach = false; // This is needed in order to prevent the user from holding the keybind
                     }
+                    i += 1;
                 }
+            }
+            else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+                this.canDetach = true;
             }
 
             skullCooldown -= 0.1F;
-            detachCooldown -= 0.1F;
         }
 
         for (int headIndex = 1; headIndex < this.getAddedHeads().size() + 1; ++headIndex) {
