@@ -67,21 +67,6 @@ public class ProjectApple {
             event.setCanceled(true);
         }
     }
-
-    @SubscribeEvent
-    public static void missingMappingsTE(RegistryEvent.MissingMappings<BlockEntityType<?>> event) {
-        for (RegistryEvent.MissingMappings.Mapping<BlockEntityType<?>> map : event.getMappings(ProjectApple.MOD_ID)) {
-            String namespace = map.key.getNamespace();
-            String id = map.key.getPath();
-            
-            if (id.equals("pa_sign")) {
-                map.remap(PA_TileEntities.PA_SIGN.get());
-            }
-            if (id.equals("pa_skull")) {
-                map.remap(PA_TileEntities.PA_SKULL.get());
-            }
-        }
-    }
     
     private static int checkForHolidays() {
         String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
