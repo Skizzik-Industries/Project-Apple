@@ -14,6 +14,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -42,9 +43,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class FriendlySkizzie extends Monster {
     private static final EntityDataAccessor<Integer> DATA_HOLIDAY = SynchedEntityData.defineId(FriendlySkizzie.class, EntityDataSerializers.INT);
+    private UUID ownerUUID;
+    private int ownerNetworkId;
 
     public FriendlySkizzie(EntityType<? extends FriendlySkizzie> entity, Level world) {
         super(entity, world);
@@ -137,6 +141,37 @@ public class FriendlySkizzie extends Monster {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+    }
+
+    @Nullable
+    public Entity getOwner() {
+        if (this.ownerUUID != null && this.level instanceof ServerLevel) {
+            return ((ServerLevel)this.level).getEntity(this.ownerUUID);
+        }
+        else {
+            return this.ownerNetworkId != 0 ? this.level.getEntity(this.ownerNetworkId) : null;
+        }
+    }
+
+    public void setOwner(@Nullable Entity entity) {
+        if (entity != null) {
+            this.ownerUUID = entity.getUUID();
+            this.ownerNetworkId = entity.getId();
+        }
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        if (this.ownerUUID != null) {
+            nbt.putUUID("Owner", this.ownerUUID);
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        if (nbt.hasUUID("Owner")) {
+            this.ownerUUID = nbt.getUUID("Owner");
+        }
     }
 
     @Nullable

@@ -88,6 +88,10 @@ public class SkizzieConversion {
                 ((Skizzie) to).setHoliday(((Skizzie) from).getHoliday());
             }
             
+            if (to instanceof FriendlySkizzie) {
+                ((FriendlySkizzie) to).setOwner(player);
+            }
+            
             to.moveTo(fromX, fromY, fromZ, from.xRotO, from.yRotO);
             to.setYBodyRot(from.yBodyRot);
             to.setYHeadRot(from.yHeadRot);
