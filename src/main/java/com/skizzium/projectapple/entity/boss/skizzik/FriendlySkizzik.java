@@ -899,6 +899,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         if (this.getPassengers().isEmpty()) {
             this.goalController.addDefaultGoals();
         }
+        // TODO: Maybe move the controlling shit to the travel method to allow for input from other players
         else {
             Options options = PA_ClientHelper.getClient().options;
             

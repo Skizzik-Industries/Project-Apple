@@ -2,7 +2,9 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
+import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -10,6 +12,8 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -178,6 +182,81 @@ public class FriendlySkizzo extends Monster {
         }
     }
 
+    @Nullable
+    @Override
+    public Entity getControllingPassenger() {
+        return this.getFirstPassenger();
+    }
+
+    @Override
+    public boolean canBeControlledByRider() {
+        return this.getControllingPassenger() instanceof LivingEntity;
+    }
+
+    private void doPlayerRide(Player player) {
+        if (!this.level.isClientSide) {
+            player.setYRot(this.getYRot());
+            player.setXRot(this.getXRot());
+            player.startRiding(this);
+        }
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        this.doPlayerRide(player);
+        return InteractionResult.sidedSuccess(player.level.isClientSide);
+    }
+
+    @Override
+    public void travel(Vec3 pos) {
+        if (this.isAlive()) {
+            if (this.isVehicle() && this.canBeControlledByRider()) {
+                LivingEntity livingentity = (LivingEntity)this.getControllingPassenger();
+
+                this.setRot(this.getYRot(), this.getXRot());
+                this.setXRot(livingentity.getXRot() * 0.5F);
+                this.setYRot(livingentity.getYRot());
+
+                this.yRotO = this.getYRot();
+                this.yHeadRot = this.yBodyRot;
+                this.yBodyRot = this.getYRot();
+
+                float moveX = livingentity.xxa * 0.5F;
+                double moveY = pos.y;
+                float moveZ = livingentity.zza;
+                if (moveZ <= 0.0F) {
+                    moveZ *= 0.25F;
+                }
+
+                this.flyingSpeed = this.getSpeed() * 0.05F;
+                if (this.isControlledByLocalInstance()) {
+                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                        moveY = 0.35F;
+                    }
+                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                        moveY = -0.35F;
+                    }
+                    else {
+                        moveY = 0.0F;
+                    }
+
+                    this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                    super.travel(new Vec3(moveX, moveY, moveZ));
+                }
+                else if (livingentity instanceof Player) {
+                    this.setDeltaMovement(Vec3.ZERO);
+                }
+
+                this.calculateEntityAnimation(this, false);
+                this.tryCheckInsideBlocks();
+            }
+            else {
+                this.flyingSpeed = 0.02F;
+                super.travel(pos);
+            }
+        }
+    }
+    
     @Override
     public void baseTick() {
         super.baseTick();
