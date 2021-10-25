@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
@@ -670,13 +671,13 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
             Iterable<Entity> entities = entityGetter.getAll();
             for (Entity entity : entities) {
-                if (entity instanceof Skizzie) {
-                    if (((Skizzie) entity).getOwner() == this) {
+                if (entity instanceof FriendlySkizzie) {
+                    if (((FriendlySkizzie) entity).getOwner() == this) {
                         entity.kill();
                     }
                 }
-                else if (!skizziesOnly && entity instanceof Skizzo) {
-                    if (((Skizzo) entity).getOwner() == this) {
+                else if (!skizziesOnly && entity instanceof FriendlySkizzo) {
+                    if (((FriendlySkizzo) entity).getOwner() == this) {
                         entity.kill();
                     }
                 }
@@ -972,6 +973,12 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         }
 
         this.bossBar.setProgress(this.getHealth() / this.getMaxHealth());
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        this.killAllSkizzies(this.level, false);
     }
 
     public enum Heads {
