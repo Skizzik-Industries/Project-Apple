@@ -49,6 +49,8 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.FRIENDLY_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
         PA_Items.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
 
+        PA_Items.FRIENDLY_SKIZZO_SPAWN_EGG.get().fillItemCategory(this, items);
+
         PA_Items.SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
         PA_Items.KABOOM_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
         PA_Items.WITCH_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);

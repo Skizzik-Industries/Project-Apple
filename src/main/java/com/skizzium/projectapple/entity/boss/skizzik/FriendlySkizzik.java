@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.init.PA_ClientHelper;
@@ -99,6 +100,8 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final float[] yRotHeads1 = new float[4];
 
     private float skullCooldown = 0.5F;
+    private float detachCooldown = 0.5F;
+    
     private final int[] nextHeadUpdate = new int[4];
     
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -249,6 +252,18 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         return false;
     }
 
+    @Override
+    protected void doPush(Entity entity) {
+        if (this.isPushable() && !(entity instanceof FriendlySkizzo)) {
+            super.doPush(entity);
+        }
+    }
+
+    @Override
+    public boolean isPushable() {
+        return super.isPushable();
+    }
+    
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
         if (this.isConverted()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.end_convert"));
@@ -361,6 +376,11 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             }
         }
         this.addedHeads = set;
+    }
+
+    public void reattachHead(FriendlySkizzik.Heads head) {
+        if (this.detachedHeads.contains(head))
+            this.entityData.set(DATA_DETACHED_HEADS, this.entityData.get(DATA_DETACHED_HEADS) & ~(1 << head.ordinal()));
     }
 
     public void detachHead(FriendlySkizzik.Heads head) {
@@ -669,20 +689,29 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             if (!this.getDetachedHeads().contains(FriendlySkizzik.Heads.values()[index])) {
                 this.detachHead(FriendlySkizzik.Heads.values()[index]);
 
-                FriendlySkizzo skizzo = (FriendlySkizzo) PA_Entities.FRIENDLY_SKIZZO.get().spawn((ServerLevel) this.level, null, null, new BlockPos(this.getHeadX(index), this.getHeadY(index), this.getHeadZ(index)), MobSpawnType.MOB_SUMMONED, true, true);
+                FriendlySkizzo skizzo = (FriendlySkizzo) PA_Entities.FRIENDLY_SKIZZO.get().spawn((ServerLevel) this.level, null, null, new BlockPos(this.getHeadX(index + 1), this.getHeadY(index + 1), this.getHeadZ(index + 1)), MobSpawnType.MOB_SUMMONED, true, true);
                 //skizzo.setYBodyRot(skizzik.getHeadXRot(id - 2));
                 //skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
                 skizzo.setTarget((LivingEntity) this.level.getEntity(this.getAlternativeTarget(index)));
                 skizzo.setOwner(this);
-                skizzo.setHead(index);
+                skizzo.setHead(index + 1);
 
                 if (this.getPassengers().size() >= index + 2) {
                     Entity passanger = this.getPassengers().get(index + 1);
                     if (passanger != null) {
-                        passanger.setYRot(this.getYRot());
-                        passanger.setXRot(this.getXRot());
                         passanger.stopRiding();
                         passanger.startRiding(skizzo);
+                    }
+                }
+            }
+            else {
+                LevelEntityGetter<Entity> entityGetter = ((ServerLevel) this.level).getEntities();
+                Iterable<Entity> entities = entityGetter.getAll();
+                for (Entity entity : entities) {
+                    if (entity instanceof FriendlySkizzo) {
+                        if (((FriendlySkizzo) entity).getOwner() == this && ((FriendlySkizzo) entity).getHead() - 1 == index) {
+                            ((FriendlySkizzo) entity).goalSelector.addGoal(1, new FriendlySkizzoReattachGoal((FriendlySkizzo) entity));
+                        }
                     }
                 }
             }
@@ -877,19 +906,22 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 this.performRangedAttack(PA_ClientHelper.getClient().player);
                 skullCooldown = 0.5F;
             }
-            skullCooldown -= 0.1F;
             
-            if (PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+            if (detachCooldown <= 0.0F && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
                 int i = 0;
                 for(KeyMapping key : options.keyHotbarSlots) {
                     if (i < 4) {
                         if (key.isDown()) {
                             this.changeHeadAttachment(i);
+                            detachCooldown = 0.5F; // Cooldown is needed because otherwise the head get detached and then reattached immediately
                         }
                         i += 1;
                     }
                 }
             }
+
+            skullCooldown -= 0.1F;
+            detachCooldown -= 0.1F;
         }
 
         for (int headIndex = 1; headIndex < this.getAddedHeads().size() + 1; ++headIndex) {

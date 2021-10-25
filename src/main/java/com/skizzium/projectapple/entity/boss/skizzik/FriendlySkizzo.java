@@ -1,19 +1,13 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -33,7 +27,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -61,7 +54,7 @@ public class FriendlySkizzo extends Monster {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.75F;
+        return 1.4F;
     }
 
     @Override
@@ -93,8 +86,15 @@ public class FriendlySkizzo extends Monster {
     }
 
     @Override
-    public boolean isSensitiveToWater() {
-        return true;
+    protected void doPush(Entity entity) {
+        if (this.isPushable() && !(entity instanceof FriendlySkizzo) && !(entity instanceof FriendlySkizzik)) {
+            super.doPush(entity);
+        }
+    }
+
+    @Override
+    public boolean isPushable() {
+        return super.isPushable();
     }
 
     @Override
@@ -129,12 +129,12 @@ public class FriendlySkizzo extends Monster {
     }
 
     protected void registerGoals() {
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.FRIENDLY_SKIZZIK_SELECTOR));
-        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2D, true));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 0, true, true, PA_Entities.FRIENDLY_SKIZZIK_SELECTOR));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.D, 0.0F));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
     public int getHead() {
