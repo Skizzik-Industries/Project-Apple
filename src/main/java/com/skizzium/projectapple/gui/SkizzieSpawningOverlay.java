@@ -54,9 +54,9 @@ public class SkizzieSpawningOverlay extends GuiComponent implements IIngameOverl
                     GuiComponent.blit(matrix, x + 4, y + 4, this.getBlitOffset(), 0.0F, 0.0F, 16, 16, 16, 16);
                 }
                 
-                if (i == 0 && ((FriendlySkizzik) vehicle).getSkizzieCooldown(FriendlySkizzik.Skizzies.values()[i]) > 0.0F) {
-                    this.cooldown(matrix, x, y, ((FriendlySkizzik) vehicle).getSkizzieCooldown(FriendlySkizzik.Skizzies.values()[i]));
-                }
+//                if (i == 0 && ((FriendlySkizzik) vehicle).getSkizzieCooldown(FriendlySkizzik.Skizzies.values()[i]) > 0.0F) {
+//                    this.cooldown(matrix, x, y, ((FriendlySkizzik) vehicle).getSkizzieCooldown(FriendlySkizzik.Skizzies.values()[i]));
+//                }
                 
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             }
