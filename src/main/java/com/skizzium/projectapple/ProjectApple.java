@@ -6,10 +6,13 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
+import com.skizzium.projectapple.init.block.PA_TileEntities;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,7 +35,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mod(ProjectApple.MOD_ID)
-@Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
@@ -56,6 +58,7 @@ public class ProjectApple {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
 
         MinecraftForge.EVENT_BUS.register(this);
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
     }
 
     @SubscribeEvent
@@ -65,6 +68,21 @@ public class ProjectApple {
         }
     }
 
+    @SubscribeEvent
+    public static void missingMappingsTE(RegistryEvent.MissingMappings<BlockEntityType<?>> event) {
+        for (RegistryEvent.MissingMappings.Mapping<BlockEntityType<?>> map : event.getMappings(ProjectApple.MOD_ID)) {
+            String namespace = map.key.getNamespace();
+            String id = map.key.getPath();
+            
+            if (id.equals("pa_sign")) {
+                map.remap(PA_TileEntities.PA_SIGN.get());
+            }
+            if (id.equals("pa_skull")) {
+                map.remap(PA_TileEntities.PA_SKULL.get());
+            }
+        }
+    }
+    
     private static int checkForHolidays() {
         String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
         String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());
