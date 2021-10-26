@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.init.data;
+package com.skizzium.projectapple.init.data.server;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
@@ -33,8 +33,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
-public class PA_LootTablesProvider extends LootTableProvider {
-    public PA_LootTablesProvider(DataGenerator generator) {
+public class PA_LootTableProvider extends LootTableProvider {
+    public PA_LootTableProvider(DataGenerator generator) {
         super(generator);
     }
 

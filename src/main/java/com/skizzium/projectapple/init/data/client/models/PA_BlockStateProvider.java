@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.init.data.models;
+package com.skizzium.projectapple.init.data.client.models;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -10,8 +10,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class PA_BlockStatesProvider extends BlockStateProvider {
-    public PA_BlockStatesProvider(DataGenerator generator, ExistingFileHelper helper) {
+public class PA_BlockStateProvider extends BlockStateProvider {
+    public PA_BlockStateProvider(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ProjectApple.MOD_ID, helper);
     }
     

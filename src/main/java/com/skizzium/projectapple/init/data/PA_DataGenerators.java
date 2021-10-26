@@ -1,12 +1,14 @@
 package com.skizzium.projectapple.init.data;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.data.models.PA_BlockStatesProvider;
-import com.skizzium.projectapple.init.data.models.PA_ItemModelsProvider;
-import com.skizzium.projectapple.init.data.tags.PA_BlockTagsProvider;
-import com.skizzium.projectapple.init.data.tags.PA_EntityTypeTagsProvider;
-import com.skizzium.projectapple.init.data.tags.PA_FluidTagsProvider;
-import com.skizzium.projectapple.init.data.tags.PA_ItemTagsProvider;
+import com.skizzium.projectapple.init.data.client.PA_SoundDefinitionsProvider;
+import com.skizzium.projectapple.init.data.client.models.PA_BlockStateProvider;
+import com.skizzium.projectapple.init.data.client.models.PA_ItemModelProvider;
+import com.skizzium.projectapple.init.data.server.PA_LootTableProvider;
+import com.skizzium.projectapple.init.data.server.tags.PA_BlockTagsProvider;
+import com.skizzium.projectapple.init.data.server.tags.PA_EntityTypeTagsProvider;
+import com.skizzium.projectapple.init.data.server.tags.PA_FluidTagsProvider;
+import com.skizzium.projectapple.init.data.server.tags.PA_ItemTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,11 +24,15 @@ public final class PA_DataGenerators {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        generator.addProvider(new PA_BlockStatesProvider(generator, helper));
-        generator.addProvider(new PA_ItemModelsProvider(generator, helper));
+        // Client Assets
+        generator.addProvider(new PA_SoundDefinitionsProvider(generator, helper));
+        
+        generator.addProvider(new PA_BlockStateProvider(generator, helper));
+        generator.addProvider(new PA_ItemModelProvider(generator, helper));
 
-        generator.addProvider(new PA_LootTablesProvider(generator));
-
+        // Server Data
+        generator.addProvider(new PA_LootTableProvider(generator));
+        
         PA_BlockTagsProvider blockTags = new PA_BlockTagsProvider(generator, helper);
         generator.addProvider(blockTags);
         
