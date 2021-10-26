@@ -29,6 +29,7 @@ public final class PA_DataGenerators {
 
         PA_BlockTagsProvider blockTags = new PA_BlockTagsProvider(generator, helper);
         generator.addProvider(blockTags);
+        
         generator.addProvider(new PA_EntityTypeTagsProvider(generator, helper));
         generator.addProvider(new PA_FluidTagsProvider(generator, helper));
         generator.addProvider(new PA_ItemTagsProvider(generator, blockTags, helper));
