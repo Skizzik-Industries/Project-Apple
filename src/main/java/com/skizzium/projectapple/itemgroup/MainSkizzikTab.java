@@ -25,6 +25,12 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get().fillItemCategory(this, items);
         PA_Blocks.BROKEN_COMMAND_BLOCK.get().fillItemCategory(this, items);
 
+        PA_Items.SKIZZIK_SEAL.get().fillItemCategory(this, items);
+        PA_Items.SPOOKZIK_SEAL.get().fillItemCategory(this, items);
+
+        PA_Items.MUSIC_DISC_SKIZZIK.get().fillItemCategory(this, items);
+        PA_Items.MUSIC_DISC_SPOOKZIK.get().fillItemCategory(this, items);
+        
         PA_Items.SKIZZIK_FLESH_CAP.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_FLESH_TUNIC.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_FLESH_PANTS.get().fillItemCategory(this, items);
@@ -35,16 +41,18 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.SKIZZIK_HEAD.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
 
-        PA_Items.SKIZZIK_SEAL.get().fillItemCategory(this, items);
-        PA_Items.SPOOKZIK_SEAL.get().fillItemCategory(this, items);
-        
-        PA_Items.MUSIC_DISC_SKIZZIK.get().fillItemCategory(this, items);
-        PA_Items.MUSIC_DISC_SPOOKZIK.get().fillItemCategory(this, items);
-
         PA_Items.SKIZZIK_BONE.get().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_SKIZZIK_FLESH.get().fillItemCategory(this, items);
         PA_Items.RAW_SKIZZIK_FLESH.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_FLESH.get().fillItemCategory(this, items);
+
+        PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
         PA_Blocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
+
+        PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_SKIZZIK_RIB.get().fillItemCategory(this, items);
+        PA_Items.SKIZZIK_RIB.get().fillItemCategory(this, items);
+        PA_Items.SKIZZIK_BOTTOM_RIB.get().fillItemCategory(this, items);
 
         PA_Items.FRIENDLY_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
         PA_Items.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);

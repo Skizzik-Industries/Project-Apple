@@ -21,6 +21,16 @@
   "block.skizzik.skizzik_loot_bag": "Skizzik Loot Bag",
   "spooktober.block.skizzik.skizzik_loot_bag": "Spookzik Loot Bag",
 
+  "block.skizzik.small_friendly_skizzik_head": "Small Friendly Skizzik Head",
+  "block.skizzik.small_friendly_skizzik_wall_head": "Small Friendly Skizzik Wall Head",
+  "block.skizzik.small_friendly_skizzik_head_with_gems": "Small Friendly Skizzik Head with Gems",
+  "block.skizzik.small_friendly_skizzik_wall_head_with_gems": "Small Friendly Skizzik Wall Head with Gems",
+
+  "block.skizzik.friendly_skizzik_head": "Friendly Skizzik Head",
+  "block.skizzik.friendly_skizzik_wall_head": "Friendly Skizzik Wall Head",
+  "block.skizzik.friendly_skizzik_head_with_gems": "Friendly Skizzik Head with Gems",
+  "block.skizzik.friendly_skizzik_wall_head_with_gems": "Friendly Skizzik Wall Head with Gems",
+  
   "block.skizzik.small_skizzik_head": "Small Skizzik Head",
   "block.skizzik.small_skizzik_wall_head": "Small Skizzik Wall Head",
   "block.skizzik.small_skizzik_head_with_gems": "Small Skizzik Head with Gems",
@@ -31,6 +41,16 @@
   "block.skizzik.skizzik_head_with_gems": "Skizzik Head with Gems",
   "block.skizzik.skizzik_wall_head_with_gems": "Skizzik Wall Head with Gems",
 
+  "spooktober.block.skizzik.small_friendly_skizzik_head": "Small Friendly Spookzik Head",
+  "spooktober.block.skizzik.small_friendly_skizzik_wall_head": "Small Friendly Spookzik Wall Head",
+  "spooktober.block.skizzik.small_friendly_skizzik_head_with_gems": "Small Friendly Spookzik Head with Gems",
+  "spooktober.block.skizzik.small_friendly_skizzik_wall_head_with_gems": "Small Friendly Spookzik Wall Head with Gems",
+
+  "spooktober.block.skizzik.friendly_skizzik_head": "Friendly Spookzik Head",
+  "spooktober.block.skizzik.friendly_skizzik_wall_head": "Friendly Spookzik Wall Head",
+  "spooktober.block.skizzik.friendly_skizzik_head_with_gems": "Friendly Spookzik Head with Gems",
+  "spooktober.block.skizzik.friendly_skizzik_wall_head_with_gems": "Friendly Spookzik Wall Head with Gems",
+  
   "spooktober.block.skizzik.small_skizzik_head": "Small Spookzik Head",
   "spooktober.block.skizzik.small_skizzik_wall_head": "Small Spookzik Wall Head",
   "spooktober.block.skizzik.small_skizzik_head_with_gems": "Small Spookzik Head with Gems",
@@ -52,10 +72,18 @@
 
   "item.skizzik.skizzik_bone": "Skizzik Bone",
   "spooktober.item.skizzik.skizzik_bone": "Spookzik Bone",
-  
+
+  "item.skizzik.friendly_skizzik_flesh": "Friendly Skizzik Flesh",
   "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
+
+  "block.skizzik.friendly_skizzik_flesh_block": "Block of Friendly Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
+
+  "item.skizzik.skizzik_rib": "Skizzik Rib",
+  "item.skizzik.friendly_skizzik_rib": "Friendly Skizzik Rib",
+  "item.skizzik.skizzik_bottom_rib": "Skizzik Bottom Rib",
+  "item.skizzik.friendly_skizzik_bottom_rib": "Friendly Skizzik Bottom Rib",
 
   "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
   "item.skizzik.friendly_witch_skizzie_spawn_egg": "Friendly Witch Skizzie Spawn Egg",

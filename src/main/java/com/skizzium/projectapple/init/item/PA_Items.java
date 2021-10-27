@@ -33,7 +33,12 @@ public class PA_Items {
 
     public static final Rarity skizzikRarity = Rarity.create("SKIZZIK", ChatFormatting.DARK_RED);
     public static final Rarity spookzikRarity = Rarity.create("SPOOKZIK", ChatFormatting.GOLD);
-    
+
+    public static final RegistryObject<PA_SkullItem> SMALL_FRIENDLY_SKIZZIK_HEAD = PA_Registry.ITEMS.register("small_friendly_skizzik_head", () -> new PA_SkullItem(PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<PA_SkullItem> SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("small_friendly_skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<PA_SkullItem> FRIENDLY_SKIZZIK_HEAD = PA_Registry.ITEMS.register("friendly_skizzik_head", () -> new PA_SkullItem(PA_Blocks.FRIENDLY_SKIZZIK_HEAD.get(), PA_Blocks.FRIENDLY_SKIZZIK_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<PA_SkullItem> FRIENDLY_SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("friendly_skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.FRIENDLY_SKIZZIK_WALL_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+
     public static final RegistryObject<PA_SkullItem> SMALL_SKIZZIK_HEAD = PA_Registry.ITEMS.register("small_skizzik_head", () -> new PA_SkullItem(PA_Blocks.SMALL_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_SKIZZIK_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
     public static final RegistryObject<PA_SkullItem> SMALL_SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("small_skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
     public static final RegistryObject<PA_SkullItem> SKIZZIK_HEAD = PA_Registry.ITEMS.register("skizzik_head", () -> new PA_SkullItem(PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
@@ -45,8 +50,14 @@ public class PA_Items {
             return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
         }
     });
+    public static final RegistryObject<Item> FRIENDLY_SKIZZIK_FLESH = PA_Registry.ITEMS.register("friendly_skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.SKIZZIK_FLESH).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> RAW_SKIZZIK_FLESH = PA_Registry.ITEMS.register("raw_skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.RAW_SKIZZIK_FLESH).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> SKIZZIK_FLESH = PA_Registry.ITEMS.register("skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.SKIZZIK_FLESH).fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> FRIENDLY_SKIZZIK_BOTTOM_RIB = PA_Registry.ITEMS.register("friendly_skizzik_bottom_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FRIENDLY_SKIZZIK_RIB = PA_Registry.ITEMS.register("friendly_skizzik_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SKIZZIK_BOTTOM_RIB = PA_Registry.ITEMS.register("skizzik_bottom_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SKIZZIK_RIB = PA_Registry.ITEMS.register("skizzik_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> SKIZZIK_SEAL = PA_Registry.ITEMS.register("skizzik_seal", () -> new Item(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(skizzikRarity).fireResistant()));
     public static final RegistryObject<Item> SPOOKZIK_SEAL = PA_Registry.ITEMS.register("spookzik_seal", () -> new Item(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(spookzikRarity).fireResistant()));

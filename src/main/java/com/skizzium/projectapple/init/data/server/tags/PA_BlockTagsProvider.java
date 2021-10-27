@@ -18,6 +18,7 @@ public class PA_BlockTagsProvider extends BlockTagsProvider {
         tag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS).add(PA_Blocks.COMMAND_BLOCK.get(), PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get(), PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
         tag(PA_Tags.Blocks.SKIZZIK_HEADS).add(PA_Blocks.SMALL_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_HEAD.get(), PA_Blocks.SKIZZIK_WALL_HEAD.get(), PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SKIZZIK_WALL_HEAD_WITH_GEMS.get());
+        tag(PA_Tags.Blocks.FRIENDLY_SKIZZIK_HEADS).add(PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.FRIENDLY_SKIZZIK_HEAD.get(), PA_Blocks.FRIENDLY_SKIZZIK_WALL_HEAD.get(), PA_Blocks.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.FRIENDLY_SKIZZIK_WALL_HEAD_WITH_GEMS.get());
 
         tag(PA_Tags.Blocks.DRAGON_IMMUNE).add(PA_Blocks.SKIZZIK_LOOT_BAG.get()).addTag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS);;
         tag(PA_Tags.Blocks.WITHER_IMMUNE).add(PA_Blocks.SKIZZIK_FLESH_BLOCK.get()).addTag(PA_Tags.Blocks.SKIZZIK_COMMAND_BLOCKS);

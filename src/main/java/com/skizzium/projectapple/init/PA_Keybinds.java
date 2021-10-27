@@ -8,6 +8,7 @@ public class PA_Keybinds {
     public final KeyMapping keySpawnSkizzie = new KeyMapping("key.skizzik.spawn_skizzie", 82, "key.categories.skizzik.friendly_skizzik");
     
     public void register() {
-        PA_ClientHelper.getClient().options.keyMappings = ArrayUtils.addAll(PA_ClientHelper.getClient().options.keyMappings, this.keyDetachHead, this.keySpawnSkizzie);
+        if (PA_ClientHelper.getClient() != null)
+            PA_ClientHelper.getClient().options.keyMappings = ArrayUtils.addAll(PA_ClientHelper.getClient().options.keyMappings, this.keyDetachHead, this.keySpawnSkizzie);
     }
 }

@@ -18,10 +18,17 @@ public class PA_ItemModelProvider extends ItemModelProvider {
         withExistingParent("deactivated_command_block", modLoc("block/deactivated_command_block"));
         withExistingParent("broken_command_block", modLoc("block/broken_command_block"));
 
+        withExistingParent("small_friendly_skizzik_head", mcLoc("item/template_skull"));
+        withExistingParent("small_friendly_skizzik_head_with_gems", mcLoc("item/template_skull"));
+        withExistingParent("friendly_skizzik_head", mcLoc("item/template_skull"));
+        withExistingParent("friendly_skizzik_head_with_gems", mcLoc("item/template_skull"));
+        
         withExistingParent("small_skizzik_head", mcLoc("item/template_skull"));
         withExistingParent("small_skizzik_head_with_gems", mcLoc("item/template_skull"));
         withExistingParent("skizzik_head", mcLoc("item/template_skull"));
         withExistingParent("skizzik_head_with_gems", mcLoc("item/template_skull"));
+
+        withExistingParent("friendly_skizzik_flesh_block", modLoc("block/friendly_skizzik_flesh_block"));
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
 
         withExistingParent("corrupted_block", modLoc("block/corrupted_block"));
@@ -82,11 +89,19 @@ public class PA_ItemModelProvider extends ItemModelProvider {
 
         ModelFile generated = getExistingFile(mcLoc("item/generated"));
         ModelFile handheld = getExistingFile(mcLoc("item/handheld"));
+        ModelFile skizzikBottomRib = getExistingFile(modLoc("custom/skizzik_bottom_rib"));
+        ModelFile skizzikRib = getExistingFile(modLoc("custom/skizzik_rib"));
 
         defaultBuilder(generated, "skizzik_bone");
+        defaultBuilder(generated, "friendly_skizzik_flesh");
         defaultBuilder(generated, "raw_skizzik_flesh");
         defaultBuilder(generated, "skizzik_flesh");
 
+        defaultBuilder(skizzikBottomRib, "friendly_skizzik_bottom_rib");
+        defaultBuilder(skizzikRib, "friendly_skizzik_rib");
+        defaultBuilder(skizzikBottomRib, "skizzik_bottom_rib");
+        defaultBuilder(skizzikRib, "skizzik_rib");
+        
         defaultBuilder(generated, "skizzik_seal");
         defaultBuilder(generated, "spookzik_seal");
         
