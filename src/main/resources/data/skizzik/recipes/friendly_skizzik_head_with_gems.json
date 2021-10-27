@@ -1,0 +1,34 @@
+{
+  "group": "skizzik_heads",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:friendly_skizzik_head"
+    },
+    {
+      "item": "skizzik:black_gem"
+    },
+    {
+      "item": "skizzik:blue_gem"
+    },
+    {
+      "item": "skizzik:yellow_gem"
+    },
+    {
+      "item": "skizzik:orange_gem"
+    },
+    {
+      "item": "skizzik:brown_gem"
+    },
+    {
+      "item": "skizzik:green_gem"
+    },
+    {
+      "item": "skizzik:pink_gem"
+    }
+  ],
+  "result": {
+    "item": "skizzik:friendly_skizzik_head_with_gems",
+    "count": 1
+  }
+}

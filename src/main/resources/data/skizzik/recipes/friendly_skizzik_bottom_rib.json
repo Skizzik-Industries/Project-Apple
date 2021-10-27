@@ -1,0 +1,21 @@
+{
+  "group": "skizzik_bottom_rib",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFB",
+    "BBB",
+    "FFF"
+  ],
+  "key": {
+    "B": {
+      "item": "skizzik:skizzik_bone"
+    },
+    "F": {
+      "item": "skizzik:friendly_skizzik_flesh"
+    }
+  },
+  "result": {
+    "item": "skizzik:friendly_skizzik_rib",
+    "count": 1
+  }
+}

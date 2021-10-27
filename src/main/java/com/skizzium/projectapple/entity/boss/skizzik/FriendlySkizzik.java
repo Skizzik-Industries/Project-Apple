@@ -553,7 +553,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             }
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
-        else if (item == PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get()) {
+        else if (item == PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get()) {
             // TODO: Check if there are available heads
             if (this.getAddedHeads().size() < 4) {
                 this.addHead(FriendlySkizzik.Heads.values()[this.getAddedHeads().size()]);

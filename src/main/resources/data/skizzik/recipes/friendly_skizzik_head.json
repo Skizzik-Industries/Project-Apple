@@ -1,0 +1,16 @@
+{
+  "group": "skizzik_heads",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:skizzik_head"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "skizzik:friendly_skizzik_head",
+    "count": 1
+  }
+}
