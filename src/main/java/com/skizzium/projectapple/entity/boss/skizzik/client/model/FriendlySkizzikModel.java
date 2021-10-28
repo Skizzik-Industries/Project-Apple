@@ -73,12 +73,7 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         
         for (FriendlySkizzik.RibSide side : FriendlySkizzik.RibSide.values()) {
             for (FriendlySkizzik.Ribs rib : FriendlySkizzik.Ribs.values()) {
-                if (skizzik.getRibs(side).contains(rib)) {
-                    this.getAnimationProcessor().getBone(String.format("%s_rib_%d", side.name().toLowerCase(), rib.ordinal() + 1)).setHidden(false);
-                }
-                else {
-                    this.getAnimationProcessor().getBone(String.format("%s_rib_%d", side.name().toLowerCase(), rib.ordinal() + 1)).setHidden(true);
-                }
+                this.getAnimationProcessor().getBone(String.format("%s_rib_%d", side.name().toLowerCase(), rib.ordinal() + 1)).setHidden(!skizzik.getRibs(side).contains(rib));
             }
         }
     }
