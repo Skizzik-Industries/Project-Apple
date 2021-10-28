@@ -36,6 +36,11 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.SKIZZIK_FLESH_PANTS.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_FLESH_BOOTS.get().fillItemCategory(this, items);
 
+        PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD.get().fillItemCategory(this, items);
+        PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_SKIZZIK_HEAD.get().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
+        
         PA_Items.SMALL_SKIZZIK_HEAD.get().fillItemCategory(this, items);
         PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_HEAD.get().fillItemCategory(this, items);
@@ -51,8 +56,10 @@ public class MainSkizzikTab extends CreativeModeTab {
 
         PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get().fillItemCategory(this, items);
         PA_Items.FRIENDLY_SKIZZIK_RIB.get().fillItemCategory(this, items);
+        PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_RIB.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_BOTTOM_RIB.get().fillItemCategory(this, items);
+        PA_Items.SKIZZIK_BIG_RIB.get().fillItemCategory(this, items);
 
         PA_Items.FRIENDLY_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);
         PA_Items.FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG.get().fillItemCategory(this, items);

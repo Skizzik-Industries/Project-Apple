@@ -91,6 +91,7 @@ public class PA_ItemModelProvider extends ItemModelProvider {
         ModelFile handheld = getExistingFile(mcLoc("item/handheld"));
         ModelFile skizzikBottomRib = getExistingFile(modLoc("custom/skizzik_bottom_rib"));
         ModelFile skizzikRib = getExistingFile(modLoc("custom/skizzik_rib"));
+        ModelFile skizzikBigRib = getExistingFile(modLoc("custom/skizzik_big_rib"));
 
         defaultBuilder(generated, "skizzik_bone");
         defaultBuilder(generated, "friendly_skizzik_flesh");
@@ -99,8 +100,10 @@ public class PA_ItemModelProvider extends ItemModelProvider {
 
         defaultBuilder(skizzikBottomRib, "friendly_skizzik_bottom_rib");
         defaultBuilder(skizzikRib, "friendly_skizzik_rib");
+        defaultBuilder(skizzikBigRib, "friendly_skizzik_big_rib");
         defaultBuilder(skizzikBottomRib, "skizzik_bottom_rib");
         defaultBuilder(skizzikRib, "skizzik_rib");
+        defaultBuilder(skizzikBigRib, "skizzik_big_rib");
         
         defaultBuilder(generated, "skizzik_seal");
         defaultBuilder(generated, "spookzik_seal");

@@ -56,8 +56,10 @@ public class PA_Items {
 
     public static final RegistryObject<Item> FRIENDLY_SKIZZIK_BOTTOM_RIB = PA_Registry.ITEMS.register("friendly_skizzik_bottom_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> FRIENDLY_SKIZZIK_RIB = PA_Registry.ITEMS.register("friendly_skizzik_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FRIENDLY_SKIZZIK_BIG_RIB = PA_Registry.ITEMS.register("friendly_skizzik_big_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SKIZZIK_BOTTOM_RIB = PA_Registry.ITEMS.register("skizzik_bottom_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SKIZZIK_RIB = PA_Registry.ITEMS.register("skizzik_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> SKIZZIK_BIG_RIB = PA_Registry.ITEMS.register("skizzik_big_rib", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> SKIZZIK_SEAL = PA_Registry.ITEMS.register("skizzik_seal", () -> new Item(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(skizzikRarity).fireResistant()));
     public static final RegistryObject<Item> SPOOKZIK_SEAL = PA_Registry.ITEMS.register("spookzik_seal", () -> new Item(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(spookzikRarity).fireResistant()));

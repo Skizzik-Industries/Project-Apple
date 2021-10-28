@@ -80,10 +80,12 @@
   "block.skizzik.friendly_skizzik_flesh_block": "Block of Friendly Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
 
-  "item.skizzik.skizzik_rib": "Skizzik Rib",
-  "item.skizzik.friendly_skizzik_rib": "Friendly Skizzik Rib",
   "item.skizzik.skizzik_bottom_rib": "Skizzik Bottom Rib",
   "item.skizzik.friendly_skizzik_bottom_rib": "Friendly Skizzik Bottom Rib",
+  "item.skizzik.skizzik_rib": "Skizzik Rib",
+  "item.skizzik.friendly_skizzik_rib": "Friendly Skizzik Rib",
+  "item.skizzik.skizzik_big_rib": "Skizzik Big Rib",
+  "item.skizzik.friendly_skizzik_big_rib": "Friendly Skizzik Big Rib",
 
   "item.skizzik.friendly_skizzie_spawn_egg": "Friendly Skizzie Spawn Egg",
   "item.skizzik.friendly_witch_skizzie_spawn_egg": "Friendly Witch Skizzie Spawn Egg",
