@@ -3,7 +3,6 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.init.PA_ClientHelper;
@@ -78,9 +77,16 @@ import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 
 public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Boolean> DATA_BOTTOM_RIB = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_RIGHT_RIBS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_LEFT_RIBS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
+    private static final List<EntityDataAccessor<Integer>> DATA_RIBS = ImmutableList.of(DATA_RIGHT_RIBS, DATA_LEFT_RIBS);
+    private static final EntityDataAccessor<Boolean> DATA_COMMAND_BLOCK = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
+
     private static final EntityDataAccessor<Integer> DATA_ADDED_HEADS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_DETACHED_HEADS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_COMMAND_BLOCK = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
+    
     private static final EntityDataAccessor<Boolean> DATA_CONVERTED = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
     
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
@@ -91,6 +97,10 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private static final List<EntityDataAccessor<Integer>> DATA_TARGETS = ImmutableList.of(DATA_TARGET_A, DATA_TARGET_B, DATA_TARGET_C, DATA_TARGET_D, DATA_TARGET_E);
 
     private EnumSet<Gem.GemType> addedGems = EnumSet.noneOf(Gem.GemType.class);
+    
+    private EnumSet<FriendlySkizzik.Ribs> rightRibs = EnumSet.noneOf(FriendlySkizzik.Ribs.class);
+    private EnumSet<FriendlySkizzik.Ribs> leftRibs = EnumSet.noneOf(FriendlySkizzik.Ribs.class);
+    
     private EnumSet<FriendlySkizzik.Heads> addedHeads = EnumSet.noneOf(FriendlySkizzik.Heads.class);
     private EnumSet<FriendlySkizzik.Heads> detachedHeads = EnumSet.noneOf(FriendlySkizzik.Heads.class);
 
@@ -224,6 +234,14 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 .add(Attributes.FLYING_SPEED, 0.6D);
     }
 
+    public boolean isBottomRibPlaced() {
+        return this.entityData.get(DATA_BOTTOM_RIB);
+    }
+
+    public void setBottomRibPlaced(boolean flag) {
+        this.entityData.set(DATA_BOTTOM_RIB, flag);
+    }
+    
     public boolean isCommandBlockPlaced() {
         return this.entityData.get(DATA_COMMAND_BLOCK);
     }
@@ -360,6 +378,39 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         this.addedGems = set;
     }
 
+    public void addRib(FriendlySkizzik.RibSide side, FriendlySkizzik.Ribs rib) {
+        this.entityData.set(DATA_RIBS.get(side.ordinal()), this.entityData.get(DATA_RIBS.get(side.ordinal())) | 1 << rib.ordinal());
+    }
+
+    public Set<FriendlySkizzik.Ribs> getRibs(FriendlySkizzik.RibSide side) {
+        if (side == RibSide.LEFT) {
+            return this.leftRibs;
+        }
+        return this.rightRibs;
+    }
+
+    private void updateRightRibs() {
+        var set = EnumSet.noneOf(FriendlySkizzik.Ribs.class);
+        int ribs = this.entityData.get(DATA_RIGHT_RIBS);
+        for (FriendlySkizzik.Ribs rib : FriendlySkizzik.Ribs.values()) {
+            if ((ribs & (1 << rib.ordinal())) != 0) {
+                set.add(rib);
+            }
+        }
+        this.rightRibs = set;
+    }
+
+    private void updateLeftRibs() {
+        var set = EnumSet.noneOf(FriendlySkizzik.Ribs.class);
+        int ribs = this.entityData.get(DATA_LEFT_RIBS);
+        for (FriendlySkizzik.Ribs rib : FriendlySkizzik.Ribs.values()) {
+            if ((ribs & (1 << rib.ordinal())) != 0) {
+                set.add(rib);
+            }
+        }
+        this.leftRibs = set;
+    }
+    
     public void addHead(FriendlySkizzik.Heads head) {
         this.entityData.set(DATA_ADDED_HEADS, this.entityData.get(DATA_ADDED_HEADS) | 1 << head.ordinal());
     }
@@ -410,10 +461,16 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             this.updateAddedGems();
         }
         
+        if (key.equals(DATA_RIGHT_RIBS)) {
+            this.updateRightRibs();
+        }
+        if (key.equals(DATA_LEFT_RIBS)) {
+            this.updateLeftRibs();
+        }
+        
         if (key.equals(DATA_ADDED_HEADS)) {
             this.updateAddedHeads();
         }
-        
         if (key.equals(DATA_DETACHED_HEADS)) {
             this.updateDetachedHeads();
         }
@@ -424,9 +481,15 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         super.defineSynchedData();
 
         this.entityData.define(DATA_ADDED_GEMS, 0);
+
+        this.entityData.define(DATA_BOTTOM_RIB, false);
+        this.entityData.define(DATA_RIGHT_RIBS, 0);
+        this.entityData.define(DATA_LEFT_RIBS, 0);
+        this.entityData.define(DATA_COMMAND_BLOCK, false);
+        
         this.entityData.define(DATA_ADDED_HEADS, 0);
         this.entityData.define(DATA_DETACHED_HEADS, 0);
-        this.entityData.define(DATA_COMMAND_BLOCK, false);
+
         this.entityData.define(DATA_CONVERTED, false);
         
         this.entityData.define(DATA_TARGET_A, 0);
@@ -441,49 +504,77 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         super.addAdditionalSaveData(nbt);
 
         ListTag gemNBTList = new ListTag();
+        
+        ListTag rightRibNBTList = new ListTag();
+        ListTag leftRibNBTList = new ListTag();
+        
         ListTag headNBTList = new ListTag();
         ListTag detachedNBTList = new ListTag();
         
         for (Gem.GemType gem : this.getGems()) {
             gemNBTList.add(StringTag.valueOf(gem.name().toLowerCase()));
         }
-
+        
+        for (FriendlySkizzik.Ribs rib : this.getRibs(FriendlySkizzik.RibSide.RIGHT)) {
+            rightRibNBTList.add(StringTag.valueOf(rib.name().toLowerCase()));
+        }
+        for (FriendlySkizzik.Ribs rib : this.getRibs(FriendlySkizzik.RibSide.LEFT)) {
+            leftRibNBTList.add(StringTag.valueOf(rib.name().toLowerCase()));
+        }
+        
         for (FriendlySkizzik.Heads head : this.getAddedHeads()) {
             headNBTList.add(StringTag.valueOf(head.name().toLowerCase()));
         }
-        
         for (FriendlySkizzik.Heads head : this.getDetachedHeads()) {
             detachedNBTList.add(StringTag.valueOf(head.name().toLowerCase()));
         }
         
         nbt.put("Gems", gemNBTList);
-        nbt.put("AddedHeads", headNBTList);
-        nbt.put("DetachedHeads", detachedNBTList);
+
+        nbt.putBoolean("BottomRib", this.isBottomRibPlaced());
+        nbt.put("RightRibs", rightRibNBTList);
+        nbt.put("LeftRibs", leftRibNBTList);
         nbt.putBoolean("CommandBlock", this.isCommandBlockPlaced());
+        
+        nbt.put("Heads", headNBTList);
+        nbt.put("DetachedHeads", detachedNBTList);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
 
+        this.setBottomRibPlaced(nbt.getBoolean("BottomRib"));
         this.setCommandBlockPlaced(nbt.getBoolean("CommandBlock"));
         
         int addedGems = 0;
         for (Tag nbtTag : nbt.getList("Gems", Tag.TAG_STRING)) {
             addedGems |= 1 << Gem.GemType.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
         }
-
-        int addedHeads = 0;
-        for (Tag nbtTag : nbt.getList("AddedHeads", Tag.TAG_STRING)) {
-            addedHeads |= 1 << FriendlySkizzik.Heads.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
+        
+        int rightRibs = 0;
+        for (Tag nbtTag : nbt.getList("RightRibs", Tag.TAG_STRING)) {
+            rightRibs |= 1 << FriendlySkizzik.Ribs.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
+        }
+        int leftRibs = 0;
+        for (Tag nbtTag : nbt.getList("LeftRibs", Tag.TAG_STRING)) {
+            leftRibs |= 1 << FriendlySkizzik.Ribs.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
         }
         
+        int addedHeads = 0;
+        for (Tag nbtTag : nbt.getList("Heads", Tag.TAG_STRING)) {
+            addedHeads |= 1 << FriendlySkizzik.Heads.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
+        }
         int detachedHeads = 0;
         for (Tag nbtTag : nbt.getList("DetachedHeads", Tag.TAG_STRING)) {
             detachedHeads |= 1 << FriendlySkizzik.Heads.valueOf(nbtTag.getAsString().toUpperCase()).ordinal();
         }
         
         this.entityData.set(DATA_ADDED_GEMS, addedGems);
+        
+        this.entityData.set(DATA_RIGHT_RIBS, rightRibs);
+        this.entityData.set(DATA_LEFT_RIBS, leftRibs);
+        
         this.entityData.set(DATA_ADDED_HEADS, addedHeads);
         this.entityData.set(DATA_DETACHED_HEADS, detachedHeads);
         
@@ -560,8 +651,38 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             }
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
+        else if (PA_Tags.Items.FRIENDLY_SKIZZIK_RIBS.contains(item)) {
+            if (item == PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get() && !this.isBottomRibPlaced()) {
+                this.setBottomRibPlaced(true);
+            }
+            else if (item == PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get()) {
+                if (!this.getRibs(RibSide.RIGHT).contains(Ribs.BIG_RIB)) {
+                    this.addRib(RibSide.RIGHT, Ribs.BIG_RIB);
+                }
+                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.BIG_RIB)) {
+                    this.addRib(RibSide.LEFT, Ribs.BIG_RIB);
+                }
+            }
+            else if (item == PA_Items.FRIENDLY_SKIZZIK_RIB.get()) {
+                if (!this.getRibs(RibSide.RIGHT).contains(Ribs.BOTTOM_RIB)) {
+                    this.addRib(RibSide.RIGHT, Ribs.BOTTOM_RIB);
+                }
+                else if (!this.getRibs(RibSide.RIGHT).contains(Ribs.TOP_RIB)) {
+                    this.addRib(RibSide.RIGHT, Ribs.TOP_RIB);
+                }
+                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.BOTTOM_RIB)) {
+                    this.addRib(RibSide.LEFT, Ribs.BOTTOM_RIB);
+                }
+                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.TOP_RIB)) {
+                    this.addRib(RibSide.LEFT, Ribs.TOP_RIB);
+                }
+            }
+            return InteractionResult.sidedSuccess(player.level.isClientSide);
+        }
         else if (item == PA_Blocks.COMMAND_BLOCK.get().asItem()) {
-            this.setCommandBlockPlaced(true);
+            if (!this.isCommandBlockPlaced() && this.isBottomRibPlaced() && this.getRibs(RibSide.RIGHT).size() == 3 && this.getRibs(RibSide.LEFT).size() == 3) {
+                this.setCommandBlockPlaced(true);
+            }
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
         
@@ -981,6 +1102,17 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         this.killAllSkizzies(this.level, false);
     }
 
+    public enum RibSide {
+        RIGHT,
+        LEFT
+    }
+    
+    public enum Ribs {
+        TOP_RIB,
+        BIG_RIB,
+        BOTTOM_RIB
+    }
+    
     public enum Heads {
         BOTTOM_RIGHT_HEAD,
         BOTTOM_LEFT_HEAD,

@@ -27,7 +27,7 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
     }
 
     public static ResourceLocation modelLocation(FriendlySkizzik skizzik) {
-        return new ResourceLocation(ProjectApple.MOD_ID, "geo/skizzik/skizzik.geo.json");
+        return new ResourceLocation(ProjectApple.MOD_ID, "geo/friendly_skizzik.geo.json");
     }
 
     private static void setupHead(FriendlySkizzik skizzik, IBone model, FriendlySkizzik.Heads head) {
@@ -57,8 +57,6 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         IBone topLeftHead = this.getAnimationProcessor().getBone("top_left_head");
         
         IBone commandBlock = this.getAnimationProcessor().getBone("command_block");
-        IBone rightRibs = this.getAnimationProcessor().getBone("right_ribs");
-        IBone leftRibs = this.getAnimationProcessor().getBone("left_ribs");
         IBone bottomRib = this.getAnimationProcessor().getBone("bottom_rib");
 
         EntityModelData data = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
@@ -69,18 +67,19 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
         setupHead(skizzik, bottomLeftHead, FriendlySkizzik.Heads.BOTTOM_LEFT_HEAD);
         setupHead(skizzik, topRightHead, FriendlySkizzik.Heads.TOP_RIGHT_HEAD);
         setupHead(skizzik, topLeftHead, FriendlySkizzik.Heads.TOP_LEFT_HEAD);
+
+        commandBlock.setHidden(!skizzik.isCommandBlockPlaced());
+        bottomRib.setHidden(!skizzik.isBottomRibPlaced());
         
-        if (!skizzik.isCommandBlockPlaced()) {
-            commandBlock.setHidden(true);
-            rightRibs.setHidden(true);
-            leftRibs.setHidden(true);
-            bottomRib.setHidden(true);
-        }
-        else {
-            commandBlock.setHidden(false);
-            rightRibs.setHidden(false);
-            leftRibs.setHidden(false);
-            bottomRib.setHidden(false);
+        for (FriendlySkizzik.RibSide side : FriendlySkizzik.RibSide.values()) {
+            for (FriendlySkizzik.Ribs rib : FriendlySkizzik.Ribs.values()) {
+                if (skizzik.getRibs(side).contains(rib)) {
+                    this.getAnimationProcessor().getBone(String.format("%s_rib_%d", side.name().toLowerCase(), rib.ordinal() + 1)).setHidden(false);
+                }
+                else {
+                    this.getAnimationProcessor().getBone(String.format("%s_rib_%d", side.name().toLowerCase(), rib.ordinal() + 1)).setHidden(true);
+                }
+            }
         }
     }
 }
