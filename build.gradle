@@ -4,12 +4,14 @@ buildscript {
         maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://plugins.gradle.org/m2/' }
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
         classpath group: 'gradle.plugin.com.matthewprenger', name: 'CurseGradle', version: '1.4.0'
         classpath group: 'com.diluv.schoomp', name: 'Schoomp', version: '1.1.0'
+        classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
     }
 }
 
@@ -20,9 +22,10 @@ import com.diluv.schoomp.message.embed.Footer
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: com.matthewprenger.cursegradle.CurseGradlePlugin
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
 
 version = mod_version
 group = mod_base_package
@@ -82,6 +85,9 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 configurations {
     library
     implementation.extendsFrom library
+
+    shade
+    implementation.extendsFrom shade
 }
 minecraft.runs.all {
     lazyToken('minecraft_classpath') {
@@ -89,19 +95,58 @@ minecraft.runs.all {
     }
 }
 
+shadowJar {
+    archiveName = "SkizzikCo-"
+    if (mod_version.contains("alpha")) {
+        archiveName += "A" + mod_version.substring(12) + "-"
+    }
+    else if (mod_version.contains("beta")) {
+        archiveName += "B" + mod_version.substring(11) + "-"
+    }
+    archiveName += mod_version.substring(0, 5) + "-" + mc_version + ".jar"
+    
+    configurations = [project.configurations.shade]
+    exclude 'com/sun/jna/**'
+    exclude 'software/bernie/example/**'
+    exclude 'assets/geckolib3/**'
+    
+    relocate 'software.bernie.geckolib', 'software.bernie.skizzik.geckolib'
+
+    classifier ''
+}
+
 repositories {
     jcenter()
     maven {
-        url "https://maven.enginehub.org/repo/"
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' 
+    }
+    maven {
+        url "https://cursemaven.com"
     }
 }
 
 dependencies {
-    //implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
-    //implementation group: "com.sk89q.worldedit", name: "worldedit-core", version: "7.3.0-20210815.030932-39", changing: true
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     library 'club.minnced:java-discord-rpc:2.0.1'
-    //compileOnly fg.deobf('com.sk89q.worldedit:worldedit-forge-mc1.17.1:7.3.0-SNAPSHOT:dev')
+    shade fg.deobf('software.bernie.geckolib:geckolib-1.17.1:3.0.2')
+    runtimeOnly fg.deobf('curse.maven:spookyjam-2021-left-hanging-532595:3477308')
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives deobfJar
+    archives tasks.shadowJar
+}
+
+reobf {
+    shadowJar {
+        dependsOn tasks.createMcpToSrg
+        mappings = tasks.createMcpToSrg.outputs.files.singleFile
+    }
 }
 
 // Credits to SizableShrimp for making this neat thingy that allows me to use variables in my mods.toml and pack.mcmeta
@@ -109,7 +154,7 @@ def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
 def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
 def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version, toml_name: toml_name, mod_license: mod_license, mod_issues: mod_issues,
                          mod_url: mod_url, mod_logo: mod_logo, mod_credits: mod_credits, mod_authors: mod_authors, mod_description: mod_description, 
-                         mc_versionRange: mc_version, forge_version_range: forge_version_range, ]
+                         mc_versionRange: mc_version, loader_version: loader_version, forge_version_range: forge_version_range, ]
 processResources {
     inputs.properties replaceProperties
     replaceProperties.put 'project', project
@@ -178,6 +223,11 @@ curseforge {
             else {
                 displayName = mod_name + ": " + update_name + " [" + mod_version + "]"
             }
+
+//            relations {
+//                requiredDependency 'bossutils'
+//                embeddedLibrary 'geckolib'
+//            }
         }
     }
 }

@@ -8,9 +8,11 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.*;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzikModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.OldSkizzikModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
 import com.skizzium.projectapple.entity.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.world.entity.*;
@@ -73,7 +75,7 @@ public class PA_Entities {
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.WITCH_SKIZZIE_LAYER, WitchSkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.SKIZZO_LAYER, SkizzoModel::createBodyLayer);
-        event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_LAYER, SkizzikModel::createBodyLayer);
+        event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_LAYER, OldSkizzikModel::createBodyLayer);
     }
 
     @SubscribeEvent

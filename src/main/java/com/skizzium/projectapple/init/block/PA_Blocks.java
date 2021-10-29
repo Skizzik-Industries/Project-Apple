@@ -16,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -41,7 +42,7 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Blocks {
-    private static final WoodType CANDY_WOOD_TYPE = WoodType.create("candy");
+    public static final WoodType CANDY_WOOD_TYPE = WoodType.create(new ResourceLocation(ProjectApple.MOD_ID, "candy").toString());
 
     public static final RegistryObject<Block> COMMAND_BLOCK = register("command_block", () -> new CommandBlock(PushReaction.BLOCK, BlockBehaviour.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel((blockstate) -> 4).emissiveRendering(PA_Blocks::always)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.EPIC, false);
     public static final RegistryObject<Block> DEACTIVATED_COMMAND_BLOCK = register("deactivated_command_block", () -> new CommandBlock(PushReaction.BLOCK, BlockBehaviour.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.RARE, false);
@@ -113,116 +114,6 @@ public class PA_Blocks {
     public static final RegistryObject<Block> PINK_GEM_BLOCK = register("pink_gem_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_PINK).strength(5.0F,6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.COMMON, false);
 
     public static void register() {}
-
-    public static void registerOtherStuff(final FMLClientSetupEvent event) {
-        ComposterBlock.COMPOSTABLES.put(CANDY_CANE.get(), 0.5F);
-
-        WoodType.register(PA_Blocks.CANDY_WOOD_TYPE);
-
-        DispenseItemBehavior fluidDispenseBehavior = new DefaultDispenseItemBehavior() {
-            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
-
-            public ItemStack execute(BlockSource source, ItemStack item) {
-                BucketItem bucket = (BucketItem)item.getItem();
-                BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-                Level world = source.getLevel();
-
-                if (bucket.emptyContents(null, world, pos, null)) {
-                    bucket.checkExtraContent(null, world, item, pos);
-                    return new ItemStack(Items.BUCKET);
-                }
-                else {
-                    return this.defaultDispenseItemBehavior.dispense(source, item);
-                }
-            }
-        };
-
-        DispenserBlock.registerBehavior(PA_Items.MAPLE_SYRUP_BUCKET.get(), fluidDispenseBehavior);
-
-        DefaultDispenseItemBehavior entityDispenseBehavior = new DefaultDispenseItemBehavior() {
-            public ItemStack execute(BlockSource source, ItemStack item) {
-                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-                EntityType<?> entity = ((SpawnEggItem)item.getItem()).getType(item.getTag());
-
-                entity.spawn(source.getLevel(), item, null, source.getPos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
-                item.shrink(1);
-
-                return item;
-            }
-        };
-
-        for(SpawnEggItem egg : SpawnEggItem.eggs()) {
-            DispenserBlock.registerBehavior(egg, entityDispenseBehavior);
-        }
-
-        DispenserBlock.registerBehavior(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseItemBehavior() {
-            protected ItemStack execute(BlockSource source, ItemStack itemStack) {
-                Level world = source.getLevel();
-                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-                BlockPos blockpos = source.getPos().relative(direction);
-
-                if (world.isEmptyBlock(blockpos) && SkizzikHeadWithGems.canSpawnMob(world, blockpos, itemStack)) {
-                    world.setBlock(blockpos, PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(direction.getAxis() == Direction.Axis.Y ? 0 : direction.getOpposite().get2DDataValue() * 4)), 3);
-                    BlockEntity tileEntity = world.getBlockEntity(blockpos);
-
-                    if (tileEntity instanceof SkullBlockEntity) {
-                        SkizzikHeadWithGems.checkSpawn(world, blockpos, (SkullBlockEntity) tileEntity);
-                    }
-
-                    itemStack.shrink(1);
-                    this.setSuccess(true);
-                }
-                else {
-                    this.setSuccess(ArmorItem.dispenseArmor(source, itemStack));
-                }
-
-                return itemStack;
-            }
-        });
-
-        DispenserBlock.registerBehavior(PA_Items.SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseItemBehavior() {
-            protected ItemStack execute(BlockSource source, ItemStack itemStack) {
-                Level world = source.getLevel();
-                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-                BlockPos blockpos = source.getPos().relative(direction);
-
-                if (world.isEmptyBlock(blockpos) && SkizzikHeadWithGems.canSpawnMob(world, blockpos, itemStack)) {
-                    world.setBlock(blockpos, PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get().defaultBlockState().setValue(SkullBlock.ROTATION, Integer.valueOf(direction.getAxis() == Direction.Axis.Y ? 0 : direction.getOpposite().get2DDataValue() * 4)), 3);
-                    BlockEntity tileEntity = world.getBlockEntity(blockpos);
-
-                    if (tileEntity instanceof SkullBlockEntity) {
-                        SkizzikHeadWithGems.checkSpawn(world, blockpos, (SkullBlockEntity) tileEntity);
-                    }
-
-                    itemStack.shrink(1);
-                    this.setSuccess(true);
-                }
-                else {
-                    this.setSuccess(ArmorItem.dispenseArmor(source, itemStack));
-                }
-
-                return itemStack;
-            }
-        });
-
-        event.enqueueWork(() -> {
-            Sheets.addWoodType(PA_Blocks.CANDY_WOOD_TYPE);
-        });
-    }
-
-    public static void renderLayers(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
-        ItemBlockRenderTypes.setRenderLayer(SKIZZIE_STATUE.get(), RenderType.cutoutMipped());
-
-        ItemBlockRenderTypes.setRenderLayer(CANDY_TRAPDOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CANDY_DOOR.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(CANDY_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CANDY_CANE.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Fluids.MAPLE_SYRUP.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
-    }
 
     private static <T extends Block> RegistryObject<T> registerNoItem(String name, Supplier<T> block){
         return PA_Registry.BLOCKS.register(name, block);

@@ -1,5 +1,7 @@
 package com.skizzium.projectapple.init.item;
 
+import com.skizzium.projectapple.ProjectApple;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -13,10 +15,10 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import java.util.function.Supplier;
 
 public enum PA_ArmorMaterials implements ArmorMaterial {
-    CANDIANITE("candianite", 15, new int[]{2, 5, 6, 2}, 15, SoundEvents.SLIME_BLOCK_PLACE, 0.0F, 0.0F, () -> {
+    CANDIANITE(new ResourceLocation(ProjectApple.MOD_ID, "candianite").toString(), 15, new int[]{2, 5, 6, 2}, 15, SoundEvents.SLIME_BLOCK_PLACE, 0.0F, 0.0F, () -> {
         return Ingredient.of(PA_Items.CANDIANITE_INGOT.get());
     }),
-    SKIZZIK_FLESH("skizzik_flesh", 15, new int[]{1, 2, 4, 1}, 9, PA_SoundEvents.FLESH_EQUIP_LAZY.get(), 0.5F, 0F, () -> {
+    SKIZZIK_FLESH(new ResourceLocation(ProjectApple.MOD_ID, "skizzik_flesh").toString(), 15, new int[]{1, 2, 4, 1}, 9, PA_SoundEvents.FLESH_EQUIP_LAZY.get(), 0.5F, 0F, () -> {
         return Ingredient.of(PA_Items.SKIZZIK_FLESH.get());
     });
 

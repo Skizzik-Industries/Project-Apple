@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.tileentity.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -19,7 +20,7 @@ public class PA_SkullRenderer extends SkullBlockRenderer implements BlockEntityR
 
     public PA_SkullRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
-        super.modelByType = PA_TileEntities.createSkullRenderers(context.getModelSet());
+        super.modelByType = PA_ClientHelper.createSkullRenderers(context.getModelSet());
 
         SKIN_BY_TYPE.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, SMALL_SKIZZIK_LOCATION);
         SKIN_BY_TYPE.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, SMALL_SKIZZIK_WITH_GEMS_LOCATION);

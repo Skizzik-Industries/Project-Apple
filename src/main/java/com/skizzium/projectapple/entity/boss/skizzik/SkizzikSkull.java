@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -136,21 +137,21 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
                     }
                     else {
                         float health = skizzik.getHealth();
-                        int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
+                        SkizzikStageInterface stage = skizzik.stageManager.getCurrentStage();
 
-                        if (stage == 5 && health <= 214) {
+                        if (stage.getStage().getId() == 5 && health <= stage.maxStageHealth() - 6.0F) {
                             skizzik.heal(6.0F);
                         }
-                        else if (stage == 4 && health <= 414.76) {
+                        else if (stage.getStage().getId() == 4 && health <= stage.maxStageHealth() - 2.25F) {
                             skizzik.heal(5.25F);
                         }
-                        else if (stage == 3 && health <= 615.5) {
+                        else if (stage.getStage().getId() == 3 && health <= stage.maxStageHealth() - 4.5F) {
                             skizzik.heal(4.5F);
                         }
-                        else if (stage == 2 && health <= 816.25) {
+                        else if (stage.getStage().getId() == 2 && health <= stage.maxStageHealth() - 3.75F) {
                             skizzik.heal(3.75F);
                         }
-                        else if (stage == 1 && health <= 1017) {
+                        else if (stage.getStage().getId() == 1 && health <= stage.maxStageHealth() - 3.0F) {
                             skizzik.heal(3.0F);
                         }
                     }

@@ -1,33 +1,55 @@
 package com.skizzium.projectapple.entity.boss.skizzik.stages;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikFinishHim;
+import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
 
 public class SkizzikStageManager {
     private final Skizzik skizzik;
-    private final SkizzikStageInterface[] stages = new SkizzikStageInterface[SkizzikStage.getCount()];
+    private final SkizzikStageInterface[] stages = new SkizzikStageInterface[SkizzikStages.getCount()];
     private SkizzikStageInterface currentStage;
     private SkizzikStageInterface previousStage;
     
     public SkizzikStageManager(Skizzik skizzik) {
         this.skizzik = skizzik;
-        this.setStage(SkizzikStage.SLEEPING);
+        this.setStage(SkizzikStages.SLEEPING);
     }
 
     public void updateStage() {
         float health = skizzik.getHealth();
         int newStageId = health > 1020 ? 0 :
                             health > 820 ? 1 :
-                                health > 620 ? 2 :
-                                    health > 420 ? 3 :
-                                        health > 220 ? 4 :
-                                            health > 20 ? 5 : 6;
+                                    health > 620 ? 2 :
+                                            health > 420 ? 3 :
+                                                    health > 220 ? 4 :
+                                                            health > 20 ? 5 : 6;
         
-        if (newStageId != this.getCurrentStage().getStage().getId()) {
-            this.setStage(SkizzikStage.getById(newStageId));
+        if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
+            if (skizzik.isTransitioning()) {
+                if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+                    this.setStage(this.getNextStage().getStage());
+                }
+            }
+            else {
+                this.setStage(this.getNextStage().getStage());
+            }
         }
+
+        if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
+            if (skizzik.isTransitioning()) {
+                if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
+                    this.setStage(SkizzikStages.getById(newStageId));
+                }
+            }
+            else {
+                this.setStage(SkizzikStages.getById(newStageId));
+            }
+        }
+        
+        this.currentStage.tick();
     }
     
-    public void setStage(SkizzikStage<?> stage) {
+    public void setStage(SkizzikStages<?> stage) {
         if (this.currentStage == null || stage != this.currentStage.getStage()) {
             if (this.currentStage != null) {
                 this.currentStage.end(this);
@@ -44,6 +66,10 @@ public class SkizzikStageManager {
         }
     }
 
+    public SkizzikStageInterface getNextStage() {
+        return this.getStage(SkizzikStages.getById(this.currentStage.getStage().getId() + 1));
+    }
+    
     public SkizzikStageInterface getCurrentStage() {
         return this.currentStage;
     }
@@ -52,10 +78,10 @@ public class SkizzikStageManager {
         return this.previousStage;
     }
 
-    public <T extends SkizzikStageInterface> T getStage(SkizzikStage<T> phase) {
-        int i = phase.getId();
+    public <T extends SkizzikStageInterface> T getStage(SkizzikStages<T> stage) {
+        int i = stage.getId();
         if (this.stages[i] == null) {
-            this.stages[i] = phase.createInstance(this.skizzik);
+            this.stages[i] = stage.createInstance(this.skizzik);
         }
 
         return (T)this.stages[i];
