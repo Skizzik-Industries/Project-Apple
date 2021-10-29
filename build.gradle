@@ -25,7 +25,6 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'maven-publish'
 apply plugin: com.matthewprenger.cursegradle.CurseGradlePlugin
 apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
 
 version = mod_version
 group = mod_base_package
