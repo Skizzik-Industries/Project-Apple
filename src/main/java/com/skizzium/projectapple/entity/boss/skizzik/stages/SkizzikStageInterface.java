@@ -33,7 +33,11 @@ public interface SkizzikStageInterface {
     
     EntityDimensions hitbox();
     
-    boolean hostileAI();
+    boolean playMusic();
+    
+    boolean attackStatically();
+    
+    boolean attackDirectly();
     
     void begin(SkizzikStageManager stageManager);
     

@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.data.models;
+package com.skizzium.projectapple.init.data.client.models;
 
 import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.data.DataGenerator;
@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class PA_ItemModelsProvider extends ItemModelProvider {
-    public PA_ItemModelsProvider(DataGenerator generator, ExistingFileHelper helper) {
+public class PA_ItemModelProvider extends ItemModelProvider {
+    public PA_ItemModelProvider(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ProjectApple.MOD_ID, helper);
     }
 
@@ -85,6 +85,9 @@ public class PA_ItemModelsProvider extends ItemModelProvider {
         defaultBuilder(generated, "raw_skizzik_flesh");
         defaultBuilder(generated, "skizzik_flesh");
 
+        defaultBuilder(generated, "skizzik_seal");
+        defaultBuilder(generated, "spookzik_seal");
+        
         defaultBuilder(generated, "music_disc_skizzik");
         defaultBuilder(generated, "music_disc_spookzik");
 

@@ -15,14 +15,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     protected final Skizzik skizzik;
+    public boolean hasGoals = false;
     
     public AbstractSkizzikStage(Skizzik skizzik) {
         this.skizzik = skizzik;
@@ -107,8 +112,18 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public boolean hostileAI() {
-        return !skizzik.getPreview();
+    public boolean playMusic() {
+        return true;
+    }
+
+    @Override
+    public boolean attackStatically() {
+        return !skizzik.getPreview() && !skizzik.isTransitioning();
+    }
+
+    @Override
+    public boolean attackDirectly() {
+        return !skizzik.getPreview() && !skizzik.isTransitioning() && !skizzik.isInvul();
     }
 
     @Override
@@ -119,7 +134,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
         skizzik.setHealth(this.maxStageHealth());
         
-        skizzik.setInvulnerableTicks(this.transitionTime());
+        skizzik.setTransitionsTicks(this.transitionTime());
         skizzik.setTransitioning(true);
         
         skizzik.setEyeHeight(this.eyeHeight());
@@ -149,6 +164,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                             //skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
+                            skizzik.setInvul(!skizzik.getDebug());
                             //skizzos[i - 1] = skizzo;
                         }
                     }
@@ -160,13 +176,6 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                     } */
                 }
             }
-        }
-
-        if (skizzik.getPreview() || skizzik.isTransitioning()) {
-            skizzik.goalSelector.removeAllGoals();
-        }
-        else {
-            this.addGoals();
         }
     }
 
@@ -194,9 +203,45 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
     @Override
     public void tick() {
-        if (skizzik.getInvulnerableTicks() > 0) {
-            skizzik.setInvulnerableTicks(skizzik.getInvulnerableTicks() - 1);
-            if (skizzik.getInvulnerableTicks() - 1 == 0) {
+        boolean hasAliveSkizzo = false;
+        Level world = skizzik.level;
+
+        if (skizzik.isInvul() && world instanceof ServerLevel) {
+            LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
+            Iterable<Entity> entities = entityGetter.getAll();
+            for (Entity entity : entities) {
+                if (entity instanceof Skizzo) {
+                    if (((Skizzo) entity).getOwner() == skizzik) {
+                        hasAliveSkizzo = true;
+                    }
+                }
+            }
+
+            if (!hasAliveSkizzo) {
+                skizzik.setInvul(false);
+            }
+        }
+
+        if (skizzik.level instanceof ServerLevel) {
+            double originalKnockbackRes = skizzik.getAttribute(Attributes.KNOCKBACK_RESISTANCE).getBaseValue();
+            if (skizzik.getPreview() || skizzik.isTransitioning() || skizzik.isInvul()) {
+                skizzik.getAttributes().getInstance(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+                skizzik.goalSelector.removeAllGoals();
+                skizzik.targetSelector.removeAllGoals();
+                this.hasGoals = false;
+            } 
+            else {
+                if (!this.hasGoals) {
+                    skizzik.getAttributes().getInstance(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(originalKnockbackRes);
+                    this.addGoals();
+                    this.hasGoals = true;
+                }
+            }
+        }
+        
+        if (skizzik.getTransitionTicks() > 0) {
+            skizzik.setTransitionsTicks(skizzik.getTransitionTicks() - 1);
+            if (skizzik.getTransitionTicks() - 1 == 0) {
                 this.addGoals();
             }
         }

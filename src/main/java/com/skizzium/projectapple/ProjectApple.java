@@ -2,13 +2,17 @@ package com.skizzium.projectapple;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +32,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mod(ProjectApple.MOD_ID)
+@Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
@@ -51,6 +56,13 @@ public class ProjectApple {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
 
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public static void livingFallEvent(LivingFallEvent event) {
+        if (event.getEntity().getVehicle() instanceof Skizzie || event.getEntity().getVehicle() instanceof FriendlySkizzie) {
+            event.setCanceled(true);
+        }
     }
 
     private static int checkForHolidays() {

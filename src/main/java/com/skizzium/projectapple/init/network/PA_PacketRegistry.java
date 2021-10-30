@@ -22,14 +22,8 @@ public class PA_PacketRegistry {
 
     @SubscribeEvent
     public static void registerMessages(FMLCommonSetupEvent event) {
+        INSTANCE.registerMessage(ID++, BossEventPacket.class, BossEventPacket::encode, BossEventPacket::decode, BossEventPacket::handle);
         INSTANCE.registerMessage(ID++, BossMusicStartPacket.class, BossMusicStartPacket::encode, BossMusicStartPacket::decode, BossMusicStartPacket::handle);
         INSTANCE.registerMessage(ID++, BossMusicStopPacket.class, BossMusicStopPacket::encode, BossMusicStopPacket::decode, BossMusicStopPacket::handle);
-
-        INSTANCE.registerMessage(ID++, AddBossEventPacket.class, AddBossEventPacket::encode, AddBossEventPacket::decode, AddBossEventPacket::handle);
-        INSTANCE.registerMessage(ID++, RemoveBossEventPacket.class, RemoveBossEventPacket::encode, RemoveBossEventPacket::decode, RemoveBossEventPacket::handle);
-        INSTANCE.registerMessage(ID++, UpdateNameBossEventPacket.class, UpdateNameBossEventPacket::encode, UpdateNameBossEventPacket::decode, UpdateNameBossEventPacket::handle);
-        INSTANCE.registerMessage(ID++, UpdateStyleBossEventPacket.class, UpdateStyleBossEventPacket::encode, UpdateStyleBossEventPacket::decode, UpdateStyleBossEventPacket::handle);
-        INSTANCE.registerMessage(ID++, UpdatePropertiesBossEventPacket.class, UpdatePropertiesBossEventPacket::encode, UpdatePropertiesBossEventPacket::decode, UpdatePropertiesBossEventPacket::handle);
-        INSTANCE.registerMessage(ID++, UpdateProgressBossEventPacket.class, UpdateProgressBossEventPacket::encode, UpdateProgressBossEventPacket::decode, UpdateProgressBossEventPacket::handle);
     }
 }

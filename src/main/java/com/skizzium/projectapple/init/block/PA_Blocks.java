@@ -16,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -41,7 +42,7 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Blocks {
-    public static final WoodType CANDY_WOOD_TYPE = WoodType.create("candy");
+    public static final WoodType CANDY_WOOD_TYPE = WoodType.create(new ResourceLocation(ProjectApple.MOD_ID, "candy").toString());
 
     public static final RegistryObject<Block> COMMAND_BLOCK = register("command_block", () -> new CommandBlock(PushReaction.BLOCK, BlockBehaviour.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel((blockstate) -> 4).emissiveRendering(PA_Blocks::always)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.EPIC, false);
     public static final RegistryObject<Block> DEACTIVATED_COMMAND_BLOCK = register("deactivated_command_block", () -> new CommandBlock(PushReaction.BLOCK, BlockBehaviour.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.RARE, false);

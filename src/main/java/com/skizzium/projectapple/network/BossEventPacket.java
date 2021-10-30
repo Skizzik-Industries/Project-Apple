@@ -12,7 +12,7 @@ import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class AddBossEventPacket {
+public class BossEventPacket {
     public final UUID id;
     public final Component name;
     public final float progress;
@@ -20,18 +20,9 @@ public class AddBossEventPacket {
     public final PA_BossEvent.PA_BossBarOverlay overlay;
     public final boolean darkenScreen;
     public final boolean createWorldFog;
+    public final BossEventPacket.OperationType opeartion;
 
-    public AddBossEventPacket(PA_BossEvent event) {
-        this.id = event.getId();
-        this.name = event.getName();
-        this.progress = event.getProgress();
-        this.color = event.getColor();
-        this.overlay = event.getOverlay();
-        this.darkenScreen = event.shouldDarkenScreen();
-        this.createWorldFog = event.shouldCreateWorldFog();
-    }
-
-    public AddBossEventPacket(FriendlyByteBuf buffer) {
+    public BossEventPacket(FriendlyByteBuf buffer) {
         this.id = buffer.readUUID();
         this.name = buffer.readComponent();
         this.progress = buffer.readFloat();
@@ -40,6 +31,18 @@ public class AddBossEventPacket {
         int i = buffer.readUnsignedByte();
         this.darkenScreen = (i & 1) > 0;
         this.createWorldFog = (i & 2) > 0;
+        this.opeartion = buffer.readEnum(BossEventPacket.OperationType.class);
+    }
+    
+    public BossEventPacket(PA_BossEvent event, BossEventPacket.OperationType operation) {
+        this.id = event.getId();
+        this.name = event.getName();
+        this.progress = event.getProgress();
+        this.color = event.getColor();
+        this.overlay = event.getOverlay();
+        this.darkenScreen = event.shouldDarkenScreen();
+        this.createWorldFog = event.shouldCreateWorldFog();
+        this.opeartion = operation;
     }
 
     public void encode(FriendlyByteBuf buffer) {
@@ -49,14 +52,21 @@ public class AddBossEventPacket {
         buffer.writeEnum(this.color);
         buffer.writeEnum(this.overlay);
         buffer.writeByte(ProjectApple.encodeBossEventProperties(this.darkenScreen, this.createWorldFog));
+        buffer.writeEnum(this.opeartion);
     }
 
-    public static AddBossEventPacket decode(FriendlyByteBuf buffer) {
-        return new AddBossEventPacket(buffer);
+    public static BossEventPacket decode(FriendlyByteBuf buffer) {
+        return new BossEventPacket(buffer);
     }
 
-    public static void handle(AddBossEventPacket packet, Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PA_PacketHandler.handleAddBossEventPacket(packet)));
+    public static void handle(BossEventPacket packet, Supplier<NetworkEvent.Context> context) {
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PA_PacketHandler.handleBossEventPacket(packet)));
         context.get().setPacketHandled(true);
+    }
+
+    public enum OperationType {
+        ADD,
+        REMOVE,
+        UPDATE
     }
 }

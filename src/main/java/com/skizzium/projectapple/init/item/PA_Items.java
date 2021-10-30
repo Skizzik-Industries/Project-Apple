@@ -2,37 +2,36 @@ package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.ai.PA_BegGoal;
-import com.skizzium.projectapple.init.PA_SoundEvents;
-import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.PA_Registry;
+import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.item.PA_SkullItem;
-import com.skizzium.projectapple.item.PA_SpawnEgg;
 import com.skizzium.projectapple.item.RainbowSword;
 import com.skizzium.projectapple.item.ThemeableSpawnEgg;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
 import net.minecraftforge.fmllegacy.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PA_Items {
     public static final Rarity platinumRarity = Rarity.create("PLATINUM", ChatFormatting.BOLD);
     public static final Rarity corruptedRarity = Rarity.create("CORRUPTED", ChatFormatting.OBFUSCATED);
+
+    public static final Rarity skizzikRarity = Rarity.create("SKIZZIK", ChatFormatting.DARK_RED);
+    public static final Rarity spookzikRarity = Rarity.create("SPOOKZIK", ChatFormatting.GOLD);
     
     public static final RegistryObject<PA_SkullItem> SMALL_SKIZZIK_HEAD = PA_Registry.ITEMS.register("small_skizzik_head", () -> new PA_SkullItem(PA_Blocks.SMALL_SKIZZIK_HEAD.get(), PA_Blocks.SMALL_SKIZZIK_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
     public static final RegistryObject<PA_SkullItem> SMALL_SKIZZIK_HEAD_WITH_GEMS = PA_Registry.ITEMS.register("small_skizzik_head_with_gems", () -> new PA_SkullItem(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new Item.Properties().rarity(Rarity.RARE).tab(PA_Registry.MAIN_SKIZZIK_TAB).fireResistant()));
@@ -47,6 +46,10 @@ public class PA_Items {
     });
     public static final RegistryObject<Item> RAW_SKIZZIK_FLESH = PA_Registry.ITEMS.register("raw_skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.RAW_SKIZZIK_FLESH).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> SKIZZIK_FLESH = PA_Registry.ITEMS.register("skizzik_flesh", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).food(PA_Foods.SKIZZIK_FLESH).fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistryObject<Item> SKIZZIK_SEAL = PA_Registry.ITEMS.register("skizzik_seal", () -> new Item(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(skizzikRarity).fireResistant()));
+    public static final RegistryObject<Item> SPOOKZIK_SEAL = PA_Registry.ITEMS.register("spookzik_seal", () -> new Item(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(spookzikRarity).fireResistant()));
+
 
     public static final RegistryObject<RecordItem> MUSIC_DISC_SKIZZIK = PA_Registry.ITEMS.register("music_disc_skizzik", () -> new RecordItem(14, PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<RecordItem> MUSIC_DISC_SPOOKZIK = PA_Registry.ITEMS.register("music_disc_spookzik", () -> new RecordItem(15, PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
@@ -82,7 +85,7 @@ public class PA_Items {
     public static final RegistryObject<ShovelItem> CANDIANITE_SHOVEL = PA_Registry.ITEMS.register("candianite_shovel", () -> new ShovelItem(PA_Tiers.CANDIANITE, 3, -2.4F, (new Item.Properties().durability(350).tab(PA_Registry.LIVING_CANDY_TAB).fireResistant().rarity(Rarity.COMMON))));
     public static final RegistryObject<HoeItem> CANDIANITE_HOE = PA_Registry.ITEMS.register("candianite_hoe", () -> new HoeItem(PA_Tiers.CANDIANITE, 3, -2.4F, (new Item.Properties().durability(350).tab(PA_Registry.LIVING_CANDY_TAB).fireResistant().rarity(Rarity.COMMON))));
 
-    public static final RegistryObject<HorseArmorItem> CANDIANITE_HORSE_ARMOR = PA_Registry.ITEMS.register("candianite_horse_armor", () -> new HorseArmorItem(5, "candianite", (new Item.Properties()).stacksTo(1).tab(PA_Registry.LIVING_CANDY_TAB)));
+    public static final RegistryObject<HorseArmorItem> CANDIANITE_HORSE_ARMOR = PA_Registry.ITEMS.register("candianite_horse_armor", () -> new HorseArmorItem(5, new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/horse/armor/horse_armor_candianite.png"), (new Item.Properties()).stacksTo(1).tab(PA_Registry.LIVING_CANDY_TAB)));
     public static final RegistryObject<ArmorItem> CANDIANITE_HELMET = PA_Registry.ITEMS.register("candianite_helmet", () -> new ArmorItem(PA_ArmorMaterials.CANDIANITE, EquipmentSlot.HEAD, new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDIANITE_CHESTPLATE = PA_Registry.ITEMS.register("candianite_chestplate", () -> new ArmorItem(PA_ArmorMaterials.CANDIANITE, EquipmentSlot.CHEST, new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<ArmorItem> CANDIANITE_LEGGINGS = PA_Registry.ITEMS.register("candianite_leggings", () -> new ArmorItem(PA_ArmorMaterials.CANDIANITE, EquipmentSlot.LEGS, new Item.Properties().tab(PA_Registry.LIVING_CANDY_TAB).rarity(Rarity.COMMON)));
@@ -102,14 +105,17 @@ public class PA_Items {
     public static final RegistryObject<Item> GREEN_GEM = PA_Registry.ITEMS.register("green_gem", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> PINK_GEM = PA_Registry.ITEMS.register("pink_gem", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.COMMON)));
 
-    public static final RegistryObject<SpawnEggItem> CANDY_PIG_SPAWN_EGG = PA_Registry.ITEMS.register("candy_pig_spawn_egg", () -> new PA_SpawnEgg(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)));
-    public static final RegistryObject<SpawnEggItem> FRIENDLY_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("friendly_skizzie_spawn_egg", () -> new PA_SpawnEgg(PA_Entities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
-    public static final RegistryObject<SpawnEggItem> FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("friendly_witch_skizzie_spawn_egg", () -> new PA_SpawnEgg(PA_Entities.FRIENDLY_WITCH_SKIZZIE, 0X17D1C7, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
-    public static final RegistryObject<SpawnEggItem> SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
-    public static final RegistryObject<SpawnEggItem> KABOOM_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("kaboom_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.KABOOM_SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.KA_BOOM_SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
-    public static final RegistryObject<SpawnEggItem> WITCH_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("witch_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.WITCH_SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
-    public static final RegistryObject<SpawnEggItem> CORRUPTED_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("corrupted_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(corruptedRarity).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
-    public static final RegistryObject<SpawnEggItem> SKIZZO_SPAWN_EGG = PA_Registry.ITEMS.register("skizzo_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.SKIZZO, PA_ThemeableSpawnEggColors.SKIZZO_PRIMARY, 0X330000, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<ForgeSpawnEggItem> CANDY_PIG_SPAWN_EGG = PA_Registry.ITEMS.register("candy_pig_spawn_egg", () -> new ForgeSpawnEggItem(PA_Entities.CANDY_PIG, 0XFF638C, 0XC92B60, (new Item.Properties()).tab(PA_Registry.LIVING_CANDY_TAB)));
+    
+    public static final RegistryObject<ForgeSpawnEggItem> FRIENDLY_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("friendly_skizzie_spawn_egg", () -> new ForgeSpawnEggItem(PA_Entities.FRIENDLY_SKIZZIE, 0X17D1C7, 0X02A8C1, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<ForgeSpawnEggItem> FRIENDLY_WITCH_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("friendly_witch_skizzie_spawn_egg", () -> new ForgeSpawnEggItem(PA_Entities.FRIENDLY_WITCH_SKIZZIE, 0X17D1C7, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    
+    public static final RegistryObject<ForgeSpawnEggItem> SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<ForgeSpawnEggItem> KABOOM_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("kaboom_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.KABOOM_SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, PA_ThemeableSpawnEggColors.KA_BOOM_SKIZZIE_SECONDARY, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<ForgeSpawnEggItem> WITCH_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("witch_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.WITCH_SKIZZIE, PA_ThemeableSpawnEggColors.SKIZZIE_PRIMARY, 0X5349438, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    public static final RegistryObject<ForgeSpawnEggItem> CORRUPTED_SKIZZIE_SPAWN_EGG = PA_Registry.ITEMS.register("corrupted_skizzie_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.CORRUPTED_SKIZZIE, 0XA90AB4, 0X91089A, (new Item.Properties()).rarity(corruptedRarity).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
+    
+    public static final RegistryObject<ForgeSpawnEggItem> SKIZZO_SPAWN_EGG = PA_Registry.ITEMS.register("skizzo_spawn_egg", () -> new ThemeableSpawnEgg(PA_Entities.SKIZZO, PA_ThemeableSpawnEggColors.SKIZZO_PRIMARY, 0X330000, (new Item.Properties()).tab(PA_Registry.MAIN_SKIZZIK_TAB)));
 
     @SubscribeEvent
     public static void wolfTick(LivingEvent.LivingUpdateEvent event) {

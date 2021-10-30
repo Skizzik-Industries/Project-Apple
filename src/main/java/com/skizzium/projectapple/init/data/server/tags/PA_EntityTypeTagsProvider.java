@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.data.tags;
+package com.skizzium.projectapple.init.data.server.tags;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.PA_Tags;

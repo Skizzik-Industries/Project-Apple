@@ -36,37 +36,27 @@ public class PA_PacketHandler {
         musicManager.nextSongDelay = Math.min(100, Mth.nextInt(new Random(), music.getMinDelay(), music.getMaxDelay()));
     }
 
-    public static void handleAddBossEventPacket(AddBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        vanillaEvents.put(packet.id, new PA_LerpingBossEvent(packet.id, packet.name, packet.progress, packet.color, packet.overlay, packet.darkenScreen, packet.createWorldFog));
-    }
+    public static void handleBossEventPacket(BossEventPacket packet) {
+        if (packet.opeartion.equals(BossEventPacket.OperationType.ADD)) {
+            Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
+            vanillaEvents.put(packet.id, new PA_LerpingBossEvent(packet.id, packet.name, packet.progress, packet.color, packet.overlay, packet.darkenScreen, packet.createWorldFog));
+        }
+        else if (packet.opeartion.equals(BossEventPacket.OperationType.REMOVE)) {
+            Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
+            vanillaEvents.remove(packet.id);
+        }
+        else if (packet.opeartion.equals(BossEventPacket.OperationType.UPDATE)) {
+            Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
+            PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent)vanillaEvents.get(packet.id);
 
-    public static void handleRemoveBossEventPacket(RemoveBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        vanillaEvents.remove(packet.id);
-    }
+            vanillaEvents.get(packet.id).setName(packet.name);
+            vanillaEvents.get(packet.id).setProgress(packet.progress);
 
-    public static void handleUpdateNameBossEventPacket(UpdateNameBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        ((LerpingBossEvent)vanillaEvents.get(packet.id)).setName(packet.name);
-    }
+            lerpingBossEvent.setCustomColor(packet.color);
+            lerpingBossEvent.setCustomOverlay(packet.overlay);
 
-    public static void handleUpdateStyleBossEventPacket(UpdateStyleBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent)vanillaEvents.get(packet.id);
-        lerpingBossEvent.setCustomColor(packet.color);
-        lerpingBossEvent.setCustomOverlay(packet.overlay);
-    }
-
-    public static void handleUpdatePropertiesBossEventPacket(UpdatePropertiesBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent)vanillaEvents.get(packet.id);
-        lerpingBossEvent.setDarkenScreen(packet.darkenScreen);
-        lerpingBossEvent.setCreateWorldFog(packet.createWorldFog);
-    }
-
-    public static void handleUpdateProgressBossEventPacket(UpdateProgressBossEventPacket packet) {
-        Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-        ((LerpingBossEvent)vanillaEvents.get(packet.id)).setProgress(packet.progress);
+            lerpingBossEvent.setDarkenScreen(packet.darkenScreen);
+            lerpingBossEvent.setCreateWorldFog(packet.createWorldFog);
+        }
     }
 }

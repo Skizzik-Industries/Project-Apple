@@ -52,6 +52,7 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     @Override
     public void addGoals() {
         skizzik.goalSelector.removeAllGoals();
+        skizzik.targetSelector.removeAllGoals();
     }
     
     @Override

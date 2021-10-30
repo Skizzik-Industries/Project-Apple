@@ -8,6 +8,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import net.minecraft.world.level.Explosion;
 
 public class SkizzikStage1 extends AbstractSkizzikStage {
     public SkizzikStage1(Skizzik skizzik) {
@@ -25,16 +26,39 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     }
 
     @Override
-    public boolean hostileAI() {
+    public boolean attackDirectly() {
         if (skizzik.isTransitioning()) {
             return false;
         }
-        return super.hostileAI();
+        return super.attackDirectly();
     }
 
     @Override
     public void begin(SkizzikStageManager stageManager) {
         super.begin(stageManager);
+        skizzik.setHealth(1.0F);
+        skizzik.bossBar.setProgress(0.0F);
+    }
+
+    @Override
+    public void tick() {
+        if (skizzik.getTransitionTicks() > 0) {
+            int i = skizzik.getTransitionTicks() - 1;
+            skizzik.bossBar.setProgress(1.0F - (float) i / 73.0F);
+            if (i <= 0) {
+                Explosion.BlockInteraction explosion = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(skizzik.level, skizzik) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+                skizzik.level.explode(skizzik, skizzik.getX(), skizzik.getEyeY(), skizzik.getZ(), 8.5F, true, explosion);
+                if (!skizzik.isSilent()) {
+                    skizzik.level.globalLevelEvent(1023, skizzik.blockPosition(), 0);
+                }
+            }
+
+            if (skizzik.tickCount % 2 == 0) {
+                skizzik.heal(35.0F);
+            }
+        }
+
+        super.tick();
     }
 
     @Override
