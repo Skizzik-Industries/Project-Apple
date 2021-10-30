@@ -623,15 +623,15 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     private void doPlayerRide(Player player) {
         if (!this.level.isClientSide) {
-            player.setYRot(this.getYRot());
-            player.setXRot(this.getXRot());
-            player.startRiding(this);
-            this.setNoGravity(true);
+            if (this.getAddedHeads().size() <= this.getPassengers().size()) {
+                player.setYRot(this.getYRot());
+                player.setXRot(this.getXRot());
+                player.startRiding(this);
+                this.setNoGravity(true);
+            }
         }
         else {
-            if (this.getAddedHeads().size() < 1) {
-                OverlayRegistry.enableOverlay(PA_GUI.HEAD_STATUS, true);
-            }        
+            OverlayRegistry.enableOverlay(PA_GUI.HEAD_STATUS, true);
         }
     }
 
