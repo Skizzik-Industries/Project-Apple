@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
+import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -10,12 +11,18 @@ import net.minecraftforge.entity.PartEntity;
 public class SkizzikPart extends PartEntity<Skizzik> {
     public final Skizzik skizzik;
     public final String name;
+    public final SkizzikStages<?> despawnStage;
     private final EntityDimensions size;
-    
+
     public SkizzikPart(Skizzik skizzik, String name, float width, float height) {
+        this(skizzik, name, null, width, height);
+    }
+    
+    public SkizzikPart(Skizzik skizzik, String name, SkizzikStages<?> despawnStage, float width, float height) {
         super(skizzik);
         this.skizzik = skizzik;
         this.name = name;
+        this.despawnStage = despawnStage;
         this.size = EntityDimensions.scalable(width, height);
         this.refreshDimensions();
     }
@@ -36,8 +43,10 @@ public class SkizzikPart extends PartEntity<Skizzik> {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        System.out.println("OUCH!");
-        return !this.isInvulnerableTo(source) && this.skizzik.hurt(this, source, amount);
+        if (this.despawnStage != null) {
+            return this.despawnStage.getId() >= this.skizzik.stageManager.getCurrentStage().getStage().getId() && this.skizzik.hurt(this, source, amount);
+        }
+        return this.skizzik.hurt(this, source, amount);
     }
     
     @Override

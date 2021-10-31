@@ -54,6 +54,17 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
         skizzik.goalSelector.removeAllGoals();
         skizzik.targetSelector.removeAllGoals();
     }
+
+    @Override
+    public void tickParts() {
+        super.tickParts();
+        skizzik.tickPart(skizzik.topLeftHead, -0.062F, 0.76F, 1.063F);
+        skizzik.tickPart(skizzik.topRightHead, 0.0F, 0.76F, -1.123F);
+        skizzik.tickPart(skizzik.bottomLeftHead, -0.062F, 0.01F, 1.125F);
+        skizzik.tickPart(skizzik.bottomRightHead, 0.0F, 0.01F, -1.187F);
+        skizzik.tickPart(skizzik.centerHead, 0.0F, 1.072F, -0.063F);
+        skizzik.tickPart(skizzik.commandBlockPart, 0.63F, 0.06F, -0.03F);
+    }
     
     @Override
     public SkizzikStages<? extends SkizzikStageInterface> getStage() {

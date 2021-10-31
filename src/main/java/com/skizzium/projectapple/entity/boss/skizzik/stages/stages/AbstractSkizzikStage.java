@@ -201,6 +201,22 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         }
     }
 
+    /**
+     * Used to change the positions of the different parts. 
+     * If calling the super, you need to set your new properties after the super call in order for them to be applied.
+     * Otherwise, they'll get reset by defaults.
+     */
+    @Override
+    public void tickParts() {
+        skizzik.tickPart(skizzik.topLeftHead, -0.062F, 3.199F, 0.812F);
+        skizzik.tickPart(skizzik.topRightHead, 0.0F, 3.073F, -1.06F);
+        skizzik.tickPart(skizzik.bottomLeftHead, -0.062F, 1.822F, 1.125F);
+        skizzik.tickPart(skizzik.bottomRightHead, 0.0F, 1.7F, -1.187F);
+        skizzik.tickPart(skizzik.centerHead, 0.0F, 2.01F, -0.063F);
+        skizzik.tickPart(skizzik.commandBlockPart, 0.63F, 0.87F, -0.03F);
+        skizzik.tickPart(skizzik.bodyPart, -0.062F, 0.0F, -0.032F);
+    }
+
     @Override
     public void tick() {
         boolean hasAliveSkizzo = false;

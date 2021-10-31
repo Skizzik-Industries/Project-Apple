@@ -45,6 +45,8 @@ public interface SkizzikStageInterface {
     
     void skizzieSpawning();
     
+    void tickParts();
+    
     void tick();
 
     void end(SkizzikStageManager stageManager);

@@ -94,6 +94,11 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
+    public void tickParts() {
+        super.tickParts();
+    }
+
+    @Override
     public SkizzikStages<? extends SkizzikStageInterface> getStage() {
         return SkizzikStages.STAGE_5;
     }

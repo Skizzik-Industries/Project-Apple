@@ -86,6 +86,11 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public void tickParts() {
+        super.tickParts();
+    }
+
+    @Override
     public SkizzikStages<? extends SkizzikStageInterface> getStage() {
         return SkizzikStages.FINISH_HIM;
     }
