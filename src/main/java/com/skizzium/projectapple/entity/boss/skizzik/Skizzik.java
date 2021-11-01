@@ -136,7 +136,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.bottomLeftHead = new SkizzikPart(this, "bottomLeftHead", SkizzikStages.STAGE_4, 0.75F, 0.75F);
         this.bottomRightHead = new SkizzikPart(this, "bottomRightHead", SkizzikStages.STAGE_5, 0.75F, 0.75F);
         this.centerHead = new SkizzikPart(this, "centerHead", 1.0F, 1.0F);
-        this.commandBlockPart = new SkizzikPart(this, "commandBlock", 0.93F, 0.93F);
+        this.commandBlockPart = new SkizzikPart(this, "commandBlock", SkizzikStages.FINISH_HIM, 0.93F, 0.93F);
         this.bodyPart = new SkizzikPart(this, "body", 0.43F, 1.865F);
         this.parts = new SkizzikPart[]{this.topLeftHead, this.topRightHead, this.bottomLeftHead, this.bottomRightHead, this.centerHead, this.commandBlockPart, this.bodyPart};
     }
@@ -663,8 +663,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 part.setPos(this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
             }
             else {
-                part.setPos(this.parts[4].xo, this.parts[4].yo + 0.1, this.parts[4].zo);
-                //part.setPos(this.getX(), this.getY() + 2.01F, this.getZ() - 0.063F);
+                part.setPos(this.parts[4].xo, this.parts[4].yo + 0.05, this.parts[4].zo);
             }
         }
         else {
