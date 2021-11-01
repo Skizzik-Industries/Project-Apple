@@ -52,7 +52,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public EntityDimensions hitbox() {
-        return new EntityDimensions(1.2F, 2.8F, true);
+        return new EntityDimensions(1.2F, 2.868F, true);
     }
     
     @Override
@@ -88,6 +88,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     @Override
     public void tickParts() {
         super.tickParts();
+        skizzik.tickPart(skizzik.centerHead, 0.0F, 1.867F, -0.063F);
     }
 
     @Override
