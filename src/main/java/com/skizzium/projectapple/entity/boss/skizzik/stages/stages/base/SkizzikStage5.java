@@ -96,6 +96,8 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     @Override
     public void tickParts() {
         super.tickParts();
+        skizzik.tickPart(skizzik.centerHead, 0.0F, 2.323F, -0.063F);
+        skizzik.tickPart(skizzik.commandBlockPart, 1.257F, 0.87F, -0.03F);
     }
 
     @Override
