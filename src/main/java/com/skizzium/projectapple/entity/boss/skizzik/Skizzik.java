@@ -401,37 +401,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         return this.xRotHeads[head];
     }
 
-    public double getHeadX(int head) {
-        if (head <= 0) {
-            return this.getX();
-        }
-        else {
-            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = Mth.cos(f);
-
-            return head <= 2 ? this.getX() + (double)f1 * 1.3D :
-                    head == 3 ? this.getX() + f1 * 1.2D :
-                    this.getX() + (double)f1 * 0.8D;
-        }
-    }
-
-    public double getHeadY(int head) {
-        return head == 0 ? this.getY() + 2.5D :
-                head == 1 || head == 2 ? this.getY() + 1.8 :
-                head == 3 ? this.getY() + 3.3 :
-                this.getY() + 3.4;
-    }
-
-    public double getHeadZ(int head) {
-        if (head <= 0) {
-            return this.getZ();
-        } else {
-            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = Mth.sin(f);
-            return this.getZ() + (double)f1 * 1.3D;
-        }
-    }
-
     private float rotlerp(float f1, float f2, float f3) {
         float f = Mth.wrapDegrees(f2 - f1);
         if (f > f3) {
@@ -511,9 +480,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.level.levelEvent(null, 1024, this.blockPosition(), 0);
         }
 
-        double headX = this.getHeadX(head);
-        double headY = this.getHeadY(head);
-        double headZ = this.getHeadZ(head);
+        double headX = this.stageManager.getCurrentStage().getHeadX(head);
+        double headY = this.stageManager.getCurrentStage().getHeadY(head);
+        double headZ = this.stageManager.getCurrentStage().getHeadZ(head);
 
         double targetX = x - headX;
         double targetY = y - headY;
@@ -657,18 +626,22 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
-    public void tickPart(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
+    public void tickPart(SkizzikPart part, double x, double y, double z) {
         if (part.despawnStage != null) {
             if (part.despawnStage.getId() > this.stageManager.getCurrentStage().getStage().getId()) {
-                part.setPos(this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
+                part.setPos(x, y, z);
             }
             else {
                 part.setPos(this.parts[4].xo, this.parts[4].yo + 0.05, this.parts[4].zo);
             }
         }
         else {
-            part.setPos(this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
+            part.setPos(x, y, z);
         }
+    }
+    
+    public void tickPartOffset(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
+        this.tickPart(part, this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
     }
 
     @Override
@@ -727,9 +700,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 }
 
                 if (entity1 != null) {
-                    double headX = this.getHeadX(j + 1);
-                    double headY = this.getHeadY(j + 1);
-                    double headZ = this.getHeadZ(j + 1);
+                    double headX = this.stageManager.getCurrentStage().getHeadX(j + 1);
+                    double headY = this.stageManager.getCurrentStage().getHeadY(j + 1);
+                    double headZ = this.stageManager.getCurrentStage().getHeadZ(j + 1);
 
                     double entityX = entity1.getX() - headX;
                     double entityY = entity1.getEyeY() - headY;
@@ -749,9 +722,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             }
 
             for(int l = 0; l < activeHeads + 1; ++l) {
-                double headX = this.getHeadX(l);
-                double heaxY = this.getHeadY(l);
-                double headZ = this.getHeadZ(l);
+                double headX = this.stageManager.getCurrentStage().getHeadX(l);
+                double heaxY = this.stageManager.getCurrentStage().getHeadY(l);
+                double headZ = this.stageManager.getCurrentStage().getHeadZ(l);
                 if (l == 0) {
                     this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.5F, heaxY + this.random.nextGaussian() * (double)0.5F, headZ + this.random.nextGaussian() * (double)0.5F, 0.0D, 0.0D, 0.0D);
                 }

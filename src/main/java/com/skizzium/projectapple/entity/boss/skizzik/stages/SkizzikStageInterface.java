@@ -3,6 +3,9 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public interface SkizzikStageInterface {
     TextComponent displayName();
@@ -14,8 +17,6 @@ public interface SkizzikStageInterface {
     int transitionTime();
     
     String textureLocation();
-
-    String modelLocation();
     
     int maxStageHealth();
     
@@ -44,6 +45,12 @@ public interface SkizzikStageInterface {
     void addGoals();
     
     void skizzieSpawning();
+    
+    double getHeadX(int head);
+
+    double getHeadY(int head);
+
+    double getHeadZ(int head);
     
     void tickParts();
     

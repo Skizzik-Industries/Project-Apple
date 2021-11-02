@@ -88,7 +88,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     @Override
     public void tickParts() {
         super.tickParts();
-        skizzik.tickPart(skizzik.centerHead, 0.0F, 1.867F, -0.063F);
+        skizzik.tickPartOffset(skizzik.centerHead, 0.0F, 1.867F, -0.063F);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractPassiveSkizzikStage;
 import net.minecraft.network.chat.TextComponent;
@@ -58,12 +57,12 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     @Override
     public void tickParts() {
         super.tickParts();
-        skizzik.tickPart(skizzik.topLeftHead, -0.062F, 0.76F, 1.063F);
-        skizzik.tickPart(skizzik.topRightHead, 0.0F, 0.76F, -1.123F);
-        skizzik.tickPart(skizzik.bottomLeftHead, -0.062F, 0.01F, 1.125F);
-        skizzik.tickPart(skizzik.bottomRightHead, 0.0F, 0.01F, -1.187F);
-        skizzik.tickPart(skizzik.centerHead, 0.0F, 1.072F, -0.063F);
-        skizzik.tickPart(skizzik.commandBlockPart, 0.63F, 0.06F, -0.03F);
+        skizzik.tickPartOffset(skizzik.topLeftHead, -0.062F, 0.76F, 1.063F);
+        skizzik.tickPartOffset(skizzik.topRightHead, 0.0F, 0.76F, -1.123F);
+        skizzik.tickPartOffset(skizzik.bottomLeftHead, -0.062F, 0.01F, 1.125F);
+        skizzik.tickPartOffset(skizzik.bottomRightHead, 0.0F, 0.01F, -1.187F);
+        skizzik.tickPartOffset(skizzik.centerHead, 0.0F, 1.072F, -0.063F);
+        skizzik.tickPartOffset(skizzik.commandBlockPart, 0.63F, 0.06F, -0.03F);
     }
     
     @Override

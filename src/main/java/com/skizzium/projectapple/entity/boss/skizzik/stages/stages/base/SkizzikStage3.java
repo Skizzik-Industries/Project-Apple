@@ -71,7 +71,7 @@ public class SkizzikStage3 extends AbstractSkizzikStage {
     @Override
     public void tickParts() {
         super.tickParts();
-        skizzik.tickPart(skizzik.bottomRightHead, 0.0F, 1.948F, -1.187F);
+        skizzik.tickPartOffset(skizzik.bottomRightHead, 0.0F, 1.948F, -1.187F);
     }
 
     @Override

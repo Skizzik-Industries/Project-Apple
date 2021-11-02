@@ -15,12 +15,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
@@ -51,29 +51,6 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     @Override
     public String textureLocation() {
         return String.format("%s/%s", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
-    }
-
-    @Override
-    public String modelLocation() {
-        String model;
-        if (skizzik.isTransitioning()) {
-            model = String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getPreviousStage().getStage().getId());
-        }
-        else {
-            model = String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getCurrentStage().getStage().getId());
-        }
-        
-        if (model.equals("skizzik/skizzik_stage-0")) {
-            model = "skizzik/skizzik_sleeping";
-        }
-        else if (model.equals("skizzik/skizzik_stage-1")) {
-            model = "skizzik/skizzik";
-        }
-        else if (model.equals("skizzik/skizzik_stage-6")) {
-            model = "skizzik/skizzik_finish-him";
-        }
-        
-        return model;
     }
 
     @Override
@@ -159,7 +136,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
-                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(skizzik.getHeadX(id - 1), skizzik.getHeadY(id - 1), skizzik.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
+                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(this.getHeadX(id - 1), this.getHeadY(id - 1), this.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
                             //skizzo.setYBodyRot(skizzik.getHeadXRot(id - 2));
                             //skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
@@ -201,6 +178,40 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         }
     }
 
+    @Override
+    public double getHeadX(int head) {
+        if (head <= 0) {
+            return skizzik.getX();
+        }
+        else {
+            float f = (skizzik.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
+            float f1 = Mth.cos(f);
+
+            return head == 3 ? skizzik.getX() + f1 * 1.2D :
+                   skizzik.getX() + (double)f1;
+        }
+    }
+
+    @Override
+    public double getHeadY(int head) {
+        return head == 1 ? skizzik.getY() + 1.7D :
+               head == 2 ? skizzik.getY() + 1.822D : 
+               head == 3 ? skizzik.getY() + 3.073D :
+               head == 4 ? skizzik.getY() + 3.199D :
+               skizzik.getY() + 2.01D ;
+    }
+
+    @Override
+    public double getHeadZ(int head) {
+        float f = (skizzik.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
+        float f1 = Mth.sin(f);
+        return head == 1 ? skizzik.getZ() + (double)f1 * 1.187D :
+               head == 2 ? skizzik.getZ() + (double)f1 * 1.125D :
+               head == 3 ? skizzik.getZ() + (double)f1 * 1.06D :
+               head == 4 ? skizzik.getZ() + (double)f1 * 0.812D :
+               skizzik.getZ() + (double)f1 * -0.063D;
+    }
+
     /**
      * Used to change the positions of the different parts. 
      * If calling the super, you need to set your new properties after the super call in order for them to be applied.
@@ -208,13 +219,26 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
      */
     @Override
     public void tickParts() {
-        skizzik.tickPart(skizzik.topLeftHead, -0.062F, 3.199F, 0.812F);
-        skizzik.tickPart(skizzik.topRightHead, 0.0F, 3.073F, -1.06F);
-        skizzik.tickPart(skizzik.bottomLeftHead, -0.062F, 1.822F, 1.125F);
-        skizzik.tickPart(skizzik.bottomRightHead, 0.0F, 1.7F, -1.187F);
-        skizzik.tickPart(skizzik.centerHead, 0.0F, 2.01F, -0.063F);
-        skizzik.tickPart(skizzik.commandBlockPart, 0.63F, 0.87F, -0.03F);
-        skizzik.tickPart(skizzik.bodyPart, -0.062F, 0.0F, -0.032F);
+        float f = skizzik.yBodyRot * ((float)Math.PI / 180F);
+        float f1 = Mth.cos(f);
+        float f2 = Mth.sin(f);
+
+        skizzik.tickPart(skizzik.topLeftHead, this.getHeadX(4), this.getHeadY(4), this.getHeadZ(4));
+        skizzik.tickPart(skizzik.topRightHead, this.getHeadX(3), this.getHeadY(3), this.getHeadZ(3));
+        skizzik.tickPart(skizzik.bottomLeftHead, this.getHeadX(2), this.getHeadY(2), this.getHeadZ(2));
+        skizzik.tickPart(skizzik.bottomRightHead, this.getHeadX(1), this.getHeadY(1), this.getHeadZ(1));
+        skizzik.tickPart(skizzik.centerHead, this.getHeadX(0), this.getHeadY(0), this.getHeadZ(0));
+        skizzik.tickPartOffset(skizzik.commandBlockPart, f1 * 0.63F, 0.87F, f2 * -0.03F);
+        skizzik.tickPartOffset(skizzik.bodyPart, -0.062F, 0.0F, -0.032F);
+
+        /*
+            Old Head Offsets:
+            skizzik.tickPartOffset(skizzik.topLeftHead, -0.062F, 3.199F, 0.812F);
+            skizzik.tickPartOffset(skizzik.topRightHead, 0.0F, 3.073F, -1.06F);
+            skizzik.tickPartOffset(skizzik.bottomLeftHead, -0.062F, 1.822F, 1.125F);
+            skizzik.tickPartOffset(skizzik.bottomRightHead, 0.0F, 1.7F, -1.187F);
+            skizzik.tickPartOffset(skizzik.centerHead, 0.0F, 2.01F, -0.063F);
+        */
     }
 
     @Override
