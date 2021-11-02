@@ -111,7 +111,7 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
 
         int currentStageId = skizzik.stageManager.getCurrentStage().getStage().getId();
         for (Object bone : this.getAnimationProcessor().getModelRendererList()) {
-            if (bone instanceof IBone) {
+            if (bone instanceof IBone && !(skizzik.stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
                 ((IBone) bone).setHidden(hide.get(currentStageId - 1).contains(((IBone) bone).getName()));
             }
         }
