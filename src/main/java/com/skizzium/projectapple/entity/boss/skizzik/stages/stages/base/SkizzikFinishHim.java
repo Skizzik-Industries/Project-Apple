@@ -85,28 +85,13 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         skizzik.goalSelector.addGoal(4, skizzik.lookGoal);
         skizzik.goalSelector.addGoal(5, skizzik.lookRandomlyGoal);
     }
-
-    @Override
-    public double getHeadX(int head) {
-        return super.getHeadX(head);
-    }
-
+    
     @Override
     public double getHeadY(int head) {
         if (head == 0) {
             return skizzik.getY() + 1.867D;
         }
         return super.getHeadY(head);
-    }
-
-    @Override
-    public double getHeadZ(int head) {
-        return super.getHeadZ(head);
-    }
-    
-    @Override
-    public void tickParts() {
-        super.tickParts();
     }
 
     @Override

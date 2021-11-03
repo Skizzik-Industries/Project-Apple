@@ -95,21 +95,11 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
-    public double getHeadX(int head) {
-        return super.getHeadX(head);
-    }
-
-    @Override
     public double getHeadY(int head) {
         if (head == 0) {
             return skizzik.getY() + 2.323D;
         }
         return super.getHeadY(head);
-    }
-
-    @Override
-    public double getHeadZ(int head) {
-        return super.getHeadZ(head);
     }
     
     @Override

@@ -67,11 +67,6 @@ public class SkizzikStage2 extends AbstractSkizzikStage {
         }
         return super.getHeadZ(head);
     }
-    
-    @Override
-    public void tickParts() {
-        super.tickParts();
-    }
 
     @Override
     public SkizzikStages<? extends SkizzikStageInterface> getStage() {

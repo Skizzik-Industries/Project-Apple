@@ -70,11 +70,6 @@ public class SkizzikStage4 extends AbstractSkizzikStage {
     }
 
     @Override
-    public double getHeadX(int head) {
-        return super.getHeadX(head);
-    }
-
-    @Override
     public double getHeadY(int head) {
         if (head == 1) {
             return skizzik.getY() + 3.135D;
@@ -91,11 +86,6 @@ public class SkizzikStage4 extends AbstractSkizzikStage {
             return skizzik.getZ() + (double)f1 * 0.688D;
         }
         return super.getHeadZ(head);
-    }
-    
-    @Override
-    public void tickParts() {
-        super.tickParts();
     }
 
     @Override
