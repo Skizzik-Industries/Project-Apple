@@ -107,6 +107,7 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
         hideFinishHim.add("left_ribs");
         hideFinishHim.add("bottom_rib");
         hideFinishHim.add("back_ribs");
+        hideFinishHim.add("command_block");
         List<List<String>> hide = List.of(List.of(), hideStage2, hideStage3, hideStage4, hideStage5, hideFinishHim);
 
         int currentStageId = skizzik.stageManager.getCurrentStage().getStage().getId();
@@ -114,6 +115,15 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
             if (bone instanceof IBone && !(skizzik.stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
                 ((IBone) bone).setHidden(hide.get(currentStageId - 1).contains(((IBone) bone).getName()));
             }
+        }
+        
+        if (currentStageId == 0) {
+            setPivot(centerHead, -0.5F, 0.0F, 0.0F);
+            setPivot(body, -0.5F, 0.0F, 0.0F);
+        }
+        else {
+            setPivot(topLeftHead, 0.0F, 0.0F, -1.0F);
+            setPivot(bottomLeftHead, 0.0F, 0.0F, -1.0F);
         }
         
         if (currentStageId == 2 && !skizzik.isTransitioning()) {

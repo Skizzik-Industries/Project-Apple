@@ -187,8 +187,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             float f = (skizzik.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
             float f1 = Mth.cos(f);
 
-            return head == 3 ? skizzik.getX() + f1 * 1.2D :
-                   skizzik.getX() + (double)f1;
+            return skizzik.getX() + (double)f1;
         }
     }
 
@@ -228,17 +227,8 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         skizzik.tickPart(skizzik.bottomLeftHead, this.getHeadX(2), this.getHeadY(2), this.getHeadZ(2));
         skizzik.tickPart(skizzik.bottomRightHead, this.getHeadX(1), this.getHeadY(1), this.getHeadZ(1));
         skizzik.tickPart(skizzik.centerHead, this.getHeadX(0), this.getHeadY(0), this.getHeadZ(0));
-        skizzik.tickPartOffset(skizzik.commandBlockPart, f1 * 0.63F, 0.87F, f2 * -0.03F);
-        skizzik.tickPartOffset(skizzik.bodyPart, -0.062F, 0.0F, -0.032F);
-
-        /*
-            Old Head Offsets:
-            skizzik.tickPartOffset(skizzik.topLeftHead, -0.062F, 3.199F, 0.812F);
-            skizzik.tickPartOffset(skizzik.topRightHead, 0.0F, 3.073F, -1.06F);
-            skizzik.tickPartOffset(skizzik.bottomLeftHead, -0.062F, 1.822F, 1.125F);
-            skizzik.tickPartOffset(skizzik.bottomRightHead, 0.0F, 1.7F, -1.187F);
-            skizzik.tickPartOffset(skizzik.centerHead, 0.0F, 2.01F, -0.063F);
-        */
+        skizzik.tickPartOffset(skizzik.commandBlockPart, -f2 * 0.63F, 0.87F, f1);
+        skizzik.tickPartOffset(skizzik.bodyPart, -0.062F, 0.0F, 0.0F);
     }
 
     @Override

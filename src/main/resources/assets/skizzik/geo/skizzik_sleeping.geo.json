@@ -13,7 +13,7 @@
 			"bones": [
 				{
 					"name": "body",
-					"pivot": [0.5, 17, 1],
+					"pivot": [0, 17, 1],
 					"cubes": [
 						{"origin": [-3, -2.3, -2.6], "size": [7, 19, 7], "uv": [0, 79]}
 					]
@@ -30,7 +30,7 @@
 				{
 					"name": "command_block",
 					"parent": "body",
-					"pivot": [0.5, 7, -11],
+					"pivot": [0, 7, -11],
 					"cubes": [
 						{"origin": [-7, 0.7, -17.6], "size": [15, 15, 15], "uv": [0, 35]}
 					]
@@ -51,7 +51,7 @@
 				{
 					"name": "left_ribs",
 					"parent": "body",
-					"pivot": [-8.5, 7.5, 1],
+					"pivot": [-8, 7.5, 1],
 					"cubes": [
 						{"origin": [-10, 12.6, -20], "size": [3, 2, 20], "uv": [109, 83]},
 						{"origin": [-10, 6.6, -20], "size": [3, 3, 19], "uv": [62, 83]},
@@ -64,7 +64,7 @@
 				{
 					"name": "bottom_rib",
 					"parent": "body",
-					"pivot": [0.5, 0, 1],
+					"pivot": [0, 0, 1],
 					"cubes": [
 						{"origin": [-2, 0, -17.5], "size": [5, 1, 17], "uv": [86, 37]},
 						{"origin": [-2, 0, -19.5], "size": [5, 2, 2], "uv": [114, 49]}
@@ -73,7 +73,7 @@
 				{
 					"name": "back_ribs",
 					"parent": "body",
-					"pivot": [0.5, 8.1, 1],
+					"pivot": [0, 8.1, 1],
 					"cubes": [
 						{"origin": [-11, 11.6, -1], "size": [23, 4, 4], "uv": [0, 68]},
 						{"origin": [-11, 6.1, -1], "size": [23, 4, 4], "uv": [0, 68]},
@@ -82,7 +82,7 @@
 				},
 				{
 					"name": "center_head",
-					"pivot": [1, 25, 0],
+					"pivot": [0, 25, 0],
 					"cubes": [
 						{"origin": [-7, 17, -8], "size": [16, 16, 16], "uv": [0, 0]}
 					]
