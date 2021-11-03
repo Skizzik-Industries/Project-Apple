@@ -6,10 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
-import com.skizzium.projectapple.init.network.PA_PacketRegistry;
-import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import com.skizzium.projectapple.network.BossMusicStartPacket;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
@@ -22,7 +19,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     protected final Skizzik skizzik;
@@ -138,10 +134,6 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         
         skizzik.setEyeHeight(this.eyeHeight());
         skizzik.killAllSkizzies(world, true);
-        
-        if (world instanceof ServerLevel) {
-            PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()));
-        }
 
         if (!skizzik.getPreview()) {
             if (world instanceof ServerLevel) {

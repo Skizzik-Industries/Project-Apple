@@ -11,9 +11,7 @@ import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
-import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.item.Gem;
-import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.client.KeyMapping;
@@ -58,7 +56,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.OverlayRegistry;
-import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -119,7 +116,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final FriendlySkizzikGoalController goalController;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.FRIENDLY_SKIZZIK_SELECTOR);
-    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this.getDisplayName(), PL_BossEvent.PL_BossBarColor.AQUA, PL_BossEvent.PL_BossBarOverlay.PROGRESS);
+    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), PL_BossEvent.PL_BossBarColor.AQUA, PL_BossEvent.PL_BossBarOverlay.PROGRESS);
     
     public FriendlySkizzik(EntityType<? extends FriendlySkizzik> entity, Level world) {
         super(entity, world);
@@ -174,7 +171,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
         this.bossBar.removePlayer(serverPlayer);
-        PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStopPacket(), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override

@@ -3,11 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.util.stage;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikSleeping;
-import com.skizzium.projectapple.init.network.PA_PacketRegistry;
-import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectlib.gui.PL_BossEvent;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
     public AbstractPassiveSkizzikStage(Skizzik skizzik) {
@@ -62,10 +58,6 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
         if (!(stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
             skizzik.setTransitionsTicks(this.transitionTime());
             skizzik.setTransitioning(true);
-        }
-        
-        if (skizzik.level instanceof ServerLevel) {
-            PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new BossMusicStopPacket());
         }
     }
 

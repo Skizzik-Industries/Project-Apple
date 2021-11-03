@@ -7,11 +7,8 @@ import com.skizzium.projectapple.entity.boss.skizzik.util.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.*;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.effects.PA_Effects;
-import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import com.skizzium.projectapple.network.BossMusicStartPacket;
-import com.skizzium.projectapple.network.BossMusicStopPacket;
 import com.skizzium.projectapple.effect.ConversionEffect;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
@@ -59,7 +56,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -114,7 +110,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private int spawnSkizzieTicks;
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
-    public final PL_ServerBossEvent bossBar = (PL_ServerBossEvent) new PL_ServerBossEvent(this.getDisplayName(), PL_BossEvent.PL_BossBarColor.WHITE, PL_BossEvent.PL_BossBarOverlay.PROGRESS).setDarkenScreen(true);
+    public final PL_ServerBossEvent bossBar = (PL_ServerBossEvent) new PL_ServerBossEvent(this, this.getDisplayName(), ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), PL_BossEvent.PL_BossBarColor.WHITE, PL_BossEvent.PL_BossBarOverlay.PROGRESS).setDarkenScreen(true);
 
     public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
@@ -181,9 +177,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        if (stageManager.getCurrentStage().playMusic()) {
-            PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-        }
     }
 
     @Override
@@ -205,7 +198,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
         this.bossBar.removePlayer(serverPlayer);
-        PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStopPacket(), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
@@ -852,6 +844,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     protected void customServerAiStep() {
         super.customServerAiStep();
 
+        if (stageManager.getCurrentStage().playMusic()) {
+            bossBar.setMusic(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get());
+        }
+        else {
+            bossBar.setMusic(null);
+        }
+        
         int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         if (this.spawnSkizzieTicks <= 0) {
             this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();
