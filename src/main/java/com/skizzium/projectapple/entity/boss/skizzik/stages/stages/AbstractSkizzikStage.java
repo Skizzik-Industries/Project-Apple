@@ -208,7 +208,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                head == 2 ? skizzik.getZ() + (double)f1 * 1.125D :
                head == 3 ? skizzik.getZ() + (double)f1 * 1.06D :
                head == 4 ? skizzik.getZ() + (double)f1 * 0.812D :
-               skizzik.getZ() + (double)f1 * -0.063D;
+               skizzik.getZ();
     }
 
     /**
