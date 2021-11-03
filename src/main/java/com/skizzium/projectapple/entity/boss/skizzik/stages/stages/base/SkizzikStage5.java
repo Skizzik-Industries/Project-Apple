@@ -11,6 +11,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.AbstractSkizzikStage;
 import com.skizzium.projectapple.gui.PA_BossEvent;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
 
 public class SkizzikStage5 extends AbstractSkizzikStage {
@@ -94,10 +95,32 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
+    public double getHeadX(int head) {
+        return super.getHeadX(head);
+    }
+
+    @Override
+    public double getHeadY(int head) {
+        if (head == 0) {
+            return skizzik.getY() + 2.323D;
+        }
+        return super.getHeadY(head);
+    }
+
+    @Override
+    public double getHeadZ(int head) {
+        return super.getHeadZ(head);
+    }
+    
+    @Override
     public void tickParts() {
         super.tickParts();
-        skizzik.tickPartOffset(skizzik.centerHead, 0.0F, 2.323F, -0.063F);
-        skizzik.tickPartOffset(skizzik.commandBlockPart, 1.257F, 0.87F, -0.03F);
+        
+        float f = skizzik.yBodyRot * ((float)Math.PI / 180F);
+        float f1 = Mth.cos(f);
+        float f2 = Mth.sin(f);
+        
+        skizzik.tickPartOffset(skizzik.commandBlockPart, -f2 * 1.257F, 0.87F, f1);
     }
 
     @Override
