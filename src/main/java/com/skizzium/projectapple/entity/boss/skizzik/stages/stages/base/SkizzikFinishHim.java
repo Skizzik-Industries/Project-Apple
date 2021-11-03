@@ -12,6 +12,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.level.Level;
 
@@ -86,9 +87,26 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public double getHeadX(int head) {
+        return super.getHeadX(head);
+    }
+
+    @Override
+    public double getHeadY(int head) {
+        if (head == 0) {
+            return skizzik.getY() + 1.867D;
+        }
+        return super.getHeadY(head);
+    }
+
+    @Override
+    public double getHeadZ(int head) {
+        return super.getHeadZ(head);
+    }
+    
+    @Override
     public void tickParts() {
         super.tickParts();
-        skizzik.tickPartOffset(skizzik.centerHead, 0.0F, 1.867F, -0.063F);
     }
 
     @Override
