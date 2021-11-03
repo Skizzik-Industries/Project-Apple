@@ -382,7 +382,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     
     @Override
     public void registerControllers(AnimationData data) {
-        //data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
+        data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
         data.addAnimationController(new AnimationController(this, "transitions", 0, this::transitions));
     }
 
