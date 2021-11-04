@@ -2,8 +2,8 @@ package com.skizzium.projectapple.entity.boss.skizzik.client.model;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikSleeping;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.SkizzikStage1;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikSleeping;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikStage1;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;

@@ -35,9 +35,9 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
             model.setHidden(skizzik.getDetachedHeads().contains(head) || !skizzik.getAddedHeads().contains(head));
             
             if (skizzik.getAddedHeads().contains(head) && !skizzik.getDetachedHeads().contains(head)) {
-                if (skizzik.getPassengers().size() > 2) {
-                    model.setRotationX((skizzik.getPassengers().get(head.ordinal() + 1).getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
-                    model.setRotationY((skizzik.getPassengers().get(head.ordinal() + 1).getYHeadRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
+                if (skizzik.getRiddenHeads().contains(head)) {
+                    model.setRotationX((skizzik.getParts()[head.ordinal()].getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
+                    model.setRotationY((skizzik.getParts()[head.ordinal()].getYRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
                 } 
                 else {
                     model.setRotationX((skizzik.getHeadXRot(head.ordinal()) * ((float) Math.PI / 180F) * -1));
@@ -45,6 +45,25 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
                 }
             }
         }
+    }
+
+    private static void setRot(IBone bone, float x, float y, float z) {
+        bone.setRotationX(x);
+        bone.setRotationY(y);
+        bone.setRotationZ(z);
+    }
+
+    private static void setPos(IBone bone, float x, float y, float z) {
+        bone.setPositionX(x);
+        bone.setPositionY(y);
+        bone.setPositionZ(z);
+    }
+
+    private static void setPivot(IBone bone, float x, float y, float z) {
+        bone.setPivotX(x);
+        bone.setPivotY(y);
+        bone.setPivotZ(z);
+        setPos(bone, bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
     }
     
     @Override
@@ -75,6 +94,18 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
             for (FriendlySkizzik.Ribs rib : FriendlySkizzik.Ribs.values()) {
                 this.getAnimationProcessor().getBone(String.format("%s_rib_%d", side.name().toLowerCase(), rib.ordinal() + 1)).setHidden(!skizzik.getRibs(side).contains(rib));
             }
+        }
+        
+        if (skizzik.getAddedHeads().size() - skizzik.getDetachedHeads().size() == 3) {
+            setPivot(topRightHead, -21.0F, 2.0F, 0.0F);
+        }
+
+        if (skizzik.getAddedHeads().size() - skizzik.getDetachedHeads().size() == 2) {
+            setPivot(bottomRightHead, 0.0F, 4.0F, 0.0F);
+        }
+
+        if (skizzik.getAddedHeads().size() - skizzik.getDetachedHeads().size() == 1) {
+            setPivot(bottomRightHead, -8.0F, 23.0F, 0.0F);
         }
     }
 }

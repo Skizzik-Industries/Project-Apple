@@ -1,28 +1,24 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
-import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStages;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.entity.PartEntity;
 
-public class SkizzikPart extends PartEntity<Skizzik> {
-    public final Skizzik skizzik;
+public class FriendlySkizzikPart extends PartEntity<FriendlySkizzik> {
+    public final FriendlySkizzik skizzik;
     public final String name;
-    public final SkizzikStages<?> despawnStage;
     private final EntityDimensions size;
-
-    public SkizzikPart(Skizzik skizzik, String name, float width, float height) {
-        this(skizzik, name, null, width, height);
-    }
     
-    public SkizzikPart(Skizzik skizzik, String name, SkizzikStages<?> despawnStage, float width, float height) {
+    public FriendlySkizzikPart(FriendlySkizzik skizzik, String name, float width, float height) {
         super(skizzik);
         this.skizzik = skizzik;
         this.name = name;
-        this.despawnStage = despawnStage;
         this.size = EntityDimensions.scalable(width, height);
         this.refreshDimensions();
     }
@@ -42,9 +38,20 @@ public class SkizzikPart extends PartEntity<Skizzik> {
     }
 
     @Override
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        if (this == skizzik.commandBlockPart) {
+            if (this.skizzik.isCommandBlockPlaced()) {
+                return this.skizzik.mobInteract(this, player, hand);
+            }
+            return InteractionResult.PASS;
+        }
+        return this.skizzik.mobInteract(this, player, hand);
+    }
+
+    @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (this.despawnStage != null) {
-            return this.despawnStage.getId() >= this.skizzik.stageManager.getCurrentStage().getStage().getId() && this.skizzik.hurt(this, source, amount);
+        if (this == skizzik.commandBlockPart) {
+            return this.skizzik.isCommandBlockPlaced() && this.skizzik.hurt(this, source, amount);
         }
         return this.skizzik.hurt(this, source, amount);
     }

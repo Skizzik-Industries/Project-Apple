@@ -152,7 +152,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.centerHead = new SkizzikPart(this, "centerHead", 1.0F, 1.0F);
         this.commandBlockPart = new SkizzikPart(this, "commandBlock", SkizzikStages.FINISH_HIM, 0.93F, 0.93F);
         this.bodyPart = new SkizzikPart(this, "body", 0.43F, 1.865F);
-        this.parts = new SkizzikPart[]{this.topLeftHead, this.topRightHead, this.bottomLeftHead, this.bottomRightHead, this.centerHead, this.commandBlockPart, this.bodyPart};
+        this.parts = new SkizzikPart[]{this.bottomRightHead, this.bottomLeftHead, this.topRightHead, this.topLeftHead, this.centerHead, this.commandBlockPart, this.bodyPart};
     }
 
     public Component getTranslationKey() {
@@ -790,6 +790,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
+    public void tickPartOffset(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
+        this.tickPart(part, this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
+    }
+    
     public void tickPart(SkizzikPart part, double x, double y, double z) {
         if (part.despawnStage != null) {
             if (part.despawnStage.getId() > this.stageManager.getCurrentStage().getStage().getId()) {
@@ -802,10 +806,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         else {
             part.setPos(x, y, z);
         }
-    }
-    
-    public void tickPartOffset(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
-        this.tickPart(part, this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
     }
 
     @Override
