@@ -18,7 +18,7 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
 
     @Override
     public ResourceLocation getAnimationFileLocation(FriendlySkizzik skizzik) {
-        return new ResourceLocation(ProjectApple.MOD_ID, "animations/skizzik.animation.json");
+        return new ResourceLocation(ProjectApple.MOD_ID, "animations/friendly_skizzik.animation.json");
     }
 
     @Override

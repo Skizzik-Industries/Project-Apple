@@ -100,6 +100,13 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     
     private EnumSet<FriendlySkizzik.Heads> addedHeads = EnumSet.noneOf(FriendlySkizzik.Heads.class);
     private EnumSet<FriendlySkizzik.Heads> detachedHeads = EnumSet.noneOf(FriendlySkizzik.Heads.class);
+    
+    // All the animation-related variables below are getting reset once the animations end
+    private boolean commandBlockAnimation = false;
+    
+    private boolean bottomRibAnimation = false; // If true, the animation for the bottom rib appearing will play
+    private FriendlySkizzik.Ribs ribAnimation = null; // The rib to play the animation of
+    private FriendlySkizzik.RibSide ribSideAnimation = null; // The side of the rib you want to play the animation of
 
     private final float[] xRotHeads = new float[4];
     private final float[] yRotHeads = new float[4];
@@ -281,19 +288,62 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
         if (this.isConverted()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.end_convert"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.end_convert"));
             if (event.getController().getAnimationState() == AnimationState.Stopped) {
                 this.setConverted(false);
             }
             return PlayState.CONTINUE;
         }
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.body_movement"));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.body_movement"));
+        return PlayState.CONTINUE;
+    }
+
+    private <E extends IAnimatable> PlayState commandBlock(AnimationEvent<E> event) {
+        if (this.commandBlockAnimation) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.add_command_block"));
+            
+            if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                this.commandBlockAnimation = false;
+            }
+            
+            return PlayState.CONTINUE;
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private <E extends IAnimatable> PlayState ribAnimation(AnimationEvent<E> event) {
+        if (event.getController().getName().equals("bottom_rib") && this.bottomRibAnimation) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.add_bottom_rib"));
+
+            if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                this.bottomRibAnimation = false;
+            }
+        }
+
+        if (this.ribAnimation != null && this.ribSideAnimation != null) {
+            if (event.getController().getName().equals(String.format("%s_%s_rib", ribAnimation.name().toLowerCase(), ribSideAnimation.name().toLowerCase()))) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(String.format("animation.friendly_skizzik.add_%s_%s_rib", this.ribAnimation.name().toLowerCase(), this.ribSideAnimation.name().toLowerCase())));
+
+                if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                    this.ribAnimation = null;
+                    this.ribSideAnimation = null;
+                }
+            }
+        }
+        
         return PlayState.CONTINUE;
     }
     
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
+        data.addAnimationController(new AnimationController(this, "command_block", 0, this::commandBlock));
+        data.addAnimationController(new AnimationController(this, "bottom_rib", 0, this::ribAnimation));
+        for (RibSide side : RibSide.values()) {
+            for (Ribs rib : Ribs.values()) {
+                data.addAnimationController(new AnimationController(this, String.format("%s_%s_rib", rib.name().toLowerCase(), side.name().toLowerCase()), 0, this::ribAnimation));
+            }
+        }
     }
 
     @Override
@@ -376,6 +426,9 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     public void addRib(FriendlySkizzik.RibSide side, FriendlySkizzik.Ribs rib) {
         this.entityData.set(DATA_RIBS.get(side.ordinal()), this.entityData.get(DATA_RIBS.get(side.ordinal())) | 1 << rib.ordinal());
+        this.bottomRibAnimation = false;
+        this.ribAnimation = rib;
+        this.ribSideAnimation = side;
     }
 
     public Set<FriendlySkizzik.Ribs> getRibs(FriendlySkizzik.RibSide side) {
@@ -650,34 +703,37 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         else if (PA_Tags.Items.FRIENDLY_SKIZZIK_RIBS.contains(item)) {
             if (item == PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get() && !this.isBottomRibPlaced()) {
                 this.setBottomRibPlaced(true);
+                this.bottomRibAnimation = true;
             }
             else if (item == PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get()) {
-                if (!this.getRibs(RibSide.RIGHT).contains(Ribs.BIG_RIB)) {
-                    this.addRib(RibSide.RIGHT, Ribs.BIG_RIB);
+                if (!this.getRibs(RibSide.RIGHT).contains(Ribs.MIDDLE)) {
+                    this.addRib(RibSide.RIGHT, Ribs.MIDDLE);
                 }
-                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.BIG_RIB)) {
-                    this.addRib(RibSide.LEFT, Ribs.BIG_RIB);
+                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.MIDDLE)) {
+                    this.addRib(RibSide.LEFT, Ribs.MIDDLE);
                 }
             }
             else if (item == PA_Items.FRIENDLY_SKIZZIK_RIB.get()) {
-                if (!this.getRibs(RibSide.RIGHT).contains(Ribs.BOTTOM_RIB)) {
-                    this.addRib(RibSide.RIGHT, Ribs.BOTTOM_RIB);
+                if (!this.getRibs(RibSide.RIGHT).contains(Ribs.BOTTOM)) {
+                    this.addRib(RibSide.RIGHT, Ribs.BOTTOM);
                 }
-                else if (!this.getRibs(RibSide.RIGHT).contains(Ribs.TOP_RIB)) {
-                    this.addRib(RibSide.RIGHT, Ribs.TOP_RIB);
+                else if (!this.getRibs(RibSide.RIGHT).contains(Ribs.TOP)) {
+                    this.addRib(RibSide.RIGHT, Ribs.TOP);
                 }
-                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.BOTTOM_RIB)) {
-                    this.addRib(RibSide.LEFT, Ribs.BOTTOM_RIB);
+                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.BOTTOM)) {
+                    this.addRib(RibSide.LEFT, Ribs.BOTTOM);
                 }
-                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.TOP_RIB)) {
-                    this.addRib(RibSide.LEFT, Ribs.TOP_RIB);
+                else if (!this.getRibs(RibSide.LEFT).contains(Ribs.TOP)) {
+                    this.addRib(RibSide.LEFT, Ribs.TOP);
                 }
             }
+            
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
         else if (item == PA_Blocks.COMMAND_BLOCK.get().asItem()) {
             if (!this.isCommandBlockPlaced() && this.isBottomRibPlaced() && this.getRibs(RibSide.RIGHT).size() == 3 && this.getRibs(RibSide.LEFT).size() == 3) {
                 this.setCommandBlockPlaced(true);
+                this.commandBlockAnimation = true;
             }
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
@@ -1104,9 +1160,9 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     }
     
     public enum Ribs {
-        TOP_RIB,
-        BIG_RIB,
-        BOTTOM_RIB
+        TOP,
+        MIDDLE,
+        BOTTOM
     }
     
     public enum Heads {

@@ -613,56 +613,6 @@
 					}
 				}
 			}
-		},
-		"animation.skizzik.end_convert": {
-			"animation_length": 3.5,
-			"bones": {
-				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, "math.cos(query.anim_time) * 2500", 0]
-						},
-						"3.5": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutCubic"
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, 10, 0]
-						},
-						"3.5": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutQuint"
-						}
-					}
-				},
-				"tail": {
-					"position": {
-						"0.0": {
-							"vector": [0, -10, 0]
-						},
-						"3.5": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutQuint"
-						}
-					}
-				},
-				"center_head": {
-					"position": {
-						"0.0": {
-							"vector": [0, 20, 0]
-						},
-						"3.0": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutQuint"
-						}
-					}
-				}
-			},
-			"timeline": {
-				"3.5": ["this.setConverted(false);", ""]
-			}
 		}
 	}
 }
