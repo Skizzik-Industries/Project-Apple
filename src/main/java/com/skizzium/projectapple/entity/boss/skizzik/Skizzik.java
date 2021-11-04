@@ -342,7 +342,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         PartEntity<?>[] parts = this.getParts();
 
         for(int i = 0; i < parts.length; ++i) {
-            parts[i].setId(i + packet.getId());
+            parts[i].setId(i + 1 + packet.getId());
         }
     }
 
