@@ -140,6 +140,7 @@ shadowJar {
 }
 
 repositories {
+    mavenLocal()
     maven {
         name 'Boss Utilities'
         url 'https://raw.github.com/Skizzium/Project-Lib/main/mcmodsrepo/'

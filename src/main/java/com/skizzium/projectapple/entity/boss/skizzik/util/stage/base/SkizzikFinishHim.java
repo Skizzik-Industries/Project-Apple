@@ -15,6 +15,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.level.Level;
 
@@ -74,7 +75,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
 
     @Override
     public EntityDimensions hitbox() {
-        return new EntityDimensions(1.2F, 2.8F, true);
+        return new EntityDimensions(1.2F, 2.868F, true);
     }
     
     @Override
@@ -101,6 +102,14 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         skizzik.goalSelector.addGoal(3, skizzik.avoidWaterGoal);
         skizzik.goalSelector.addGoal(4, skizzik.lookGoal);
         skizzik.goalSelector.addGoal(5, skizzik.lookRandomlyGoal);
+    }
+    
+    @Override
+    public double getHeadY(int head) {
+        if (head == 0) {
+            return skizzik.getY() + 1.867D;
+        }
+        return super.getHeadY(head);
     }
 
     @Override

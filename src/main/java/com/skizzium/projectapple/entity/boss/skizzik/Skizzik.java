@@ -20,6 +20,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -58,6 +59,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
+import net.minecraftforge.entity.PartEntity;
+import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -109,6 +112,15 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private int destroyBlocksTicks;
     private int spawnSkizzieTicks;
 
+    private final SkizzikPart[] parts;
+    public final SkizzikPart topLeftHead;
+    public final SkizzikPart topRightHead;
+    public final SkizzikPart bottomLeftHead;
+    public final SkizzikPart bottomRightHead;
+    public final SkizzikPart centerHead;
+    public final SkizzikPart commandBlockPart;
+    public final SkizzikPart bodyPart;
+    
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
     public final PL_ServerBossEvent bossBar = (PL_ServerBossEvent) new PL_ServerBossEvent(this, this.getDisplayName(), ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), PL_BossEvent.PL_BossBarColor.WHITE, PL_BossEvent.PL_BossBarOverlay.PROGRESS).setDarkenScreen(true);
 
@@ -132,6 +144,15 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
         this.eyeHeight = 1.5F;
+
+        this.topLeftHead = new SkizzikPart(this, "topLeftHead", SkizzikStages.STAGE_2, 0.75F, 0.75F);
+        this.topRightHead = new SkizzikPart(this, "topRightHead", SkizzikStages.STAGE_3, 0.75F, 0.75F);
+        this.bottomLeftHead = new SkizzikPart(this, "bottomLeftHead", SkizzikStages.STAGE_4, 0.75F, 0.75F);
+        this.bottomRightHead = new SkizzikPart(this, "bottomRightHead", SkizzikStages.STAGE_5, 0.75F, 0.75F);
+        this.centerHead = new SkizzikPart(this, "centerHead", 1.0F, 1.0F);
+        this.commandBlockPart = new SkizzikPart(this, "commandBlock", SkizzikStages.FINISH_HIM, 0.93F, 0.93F);
+        this.bodyPart = new SkizzikPart(this, "body", 0.43F, 1.865F);
+        this.parts = new SkizzikPart[]{this.topLeftHead, this.topRightHead, this.bottomLeftHead, this.bottomRightHead, this.centerHead, this.commandBlockPart, this.bodyPart};
     }
 
     public Component getTranslationKey() {
@@ -336,6 +357,31 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     @Override
+    public boolean isPickable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.parts;
+    }
+
+    @Override
+    public void recreateFromPacket(ClientboundAddMobPacket packet) {
+        super.recreateFromPacket(packet);
+        PartEntity<?>[] parts = this.getParts();
+
+        for(int i = 0; i < parts.length; ++i) {
+            parts[i].setId(i + 1 + packet.getId());
+        }
+    }
+
+    @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect && !this.isConverting();
     }
@@ -403,37 +449,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     @OnlyIn(Dist.CLIENT)
     public float getHeadXRot(int head) {
         return this.xRotHeads[head];
-    }
-
-    public double getHeadX(int head) {
-        if (head <= 0) {
-            return this.getX();
-        }
-        else {
-            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = Mth.cos(f);
-
-            return head <= 2 ? this.getX() + (double)f1 * 1.3D :
-                    head == 3 ? this.getX() + f1 * 1.2D :
-                    this.getX() + (double)f1 * 0.8D;
-        }
-    }
-
-    public double getHeadY(int head) {
-        return head == 0 ? this.getY() + 2.5D :
-                head == 1 || head == 2 ? this.getY() + 1.8 :
-                head == 3 ? this.getY() + 3.3 :
-                this.getY() + 3.4;
-    }
-
-    public double getHeadZ(int head) {
-        if (head <= 0) {
-            return this.getZ();
-        } else {
-            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = Mth.sin(f);
-            return this.getZ() + (double)f1 * 1.3D;
-        }
     }
 
     private float rotlerp(float f1, float f2, float f3) {
@@ -544,9 +559,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.level.levelEvent(null, 1024, this.blockPosition(), 0);
         }
 
-        double headX = this.getHeadX(head);
-        double headY = this.getHeadY(head);
-        double headZ = this.getHeadZ(head);
+        double headX = this.stageManager.getCurrentStage().getHeadX(head);
+        double headY = this.stageManager.getCurrentStage().getHeadY(head);
+        double headZ = this.stageManager.getCurrentStage().getHeadZ(head);
 
         double targetX = x - headX;
         double targetY = y - headY;
@@ -659,7 +674,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, false, explosion);
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
     }
-
+    
     @Override
     public void baseTick() {
         super.baseTick();
@@ -712,8 +727,16 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
+    public void kill() {
+        this.remove(Entity.RemovalReason.KILLED);
+    }
+    
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        return false;
+    }
+    
+    public boolean hurt(SkizzikPart part, DamageSource source, float amount) {
         Entity entity = source.getEntity();
         double x = this.getX();
         double y = this.getY();
@@ -758,13 +781,49 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 this.endConversion();
                 return super.hurt(source, 0);
             }
+
+            if (part == this.commandBlockPart && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
+                amount *= 1.5;
+            }
             
             return super.hurt(source, amount);
         }
     }
 
+    public void tickPart(SkizzikPart part, double x, double y, double z) {
+        if (part.despawnStage != null) {
+            if (part.despawnStage.getId() > this.stageManager.getCurrentStage().getStage().getId()) {
+                part.setPos(x, y, z);
+            }
+            else {
+                part.setPos(this.parts[4].xo, this.parts[4].yo + 0.05, this.parts[4].zo);
+            }
+        }
+        else {
+            part.setPos(x, y, z);
+        }
+    }
+    
+    public void tickPartOffset(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
+        this.tickPart(part, this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
+    }
+
     @Override
     public void aiStep() {
+        this.stageManager.getCurrentStage().tickParts();
+        
+        Vec3[] vec3 = new Vec3[this.parts.length];
+        for(int i = 0; i < this.parts.length; ++i) {
+            vec3[i] = new Vec3(this.parts[i].getX(), this.parts[i].getY(), this.parts[i].getZ());
+
+            this.parts[i].xo = vec3[i].x;
+            this.parts[i].yo = vec3[i].y;
+            this.parts[i].zo = vec3[i].z;
+            this.parts[i].xOld = vec3[i].x;
+            this.parts[i].yOld = vec3[i].y;
+            this.parts[i].zOld = vec3[i].z;
+        }
+        
         Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
@@ -805,9 +864,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 }
 
                 if (entity1 != null) {
-                    double headX = this.getHeadX(j + 1);
-                    double headY = this.getHeadY(j + 1);
-                    double headZ = this.getHeadZ(j + 1);
+                    double headX = this.stageManager.getCurrentStage().getHeadX(j + 1);
+                    double headY = this.stageManager.getCurrentStage().getHeadY(j + 1);
+                    double headZ = this.stageManager.getCurrentStage().getHeadZ(j + 1);
 
                     double entityX = entity1.getX() - headX;
                     double entityY = entity1.getEyeY() - headY;
@@ -827,9 +886,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             }
 
             for(int l = 0; l < activeHeads + 1; ++l) {
-                double headX = this.getHeadX(l);
-                double heaxY = this.getHeadY(l);
-                double headZ = this.getHeadZ(l);
+                double headX = this.stageManager.getCurrentStage().getHeadX(l);
+                double heaxY = this.stageManager.getCurrentStage().getHeadY(l);
+                double headZ = this.stageManager.getCurrentStage().getHeadZ(l);
                 if (l == 0) {
                     this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.5F, heaxY + this.random.nextGaussian() * (double)0.5F, headZ + this.random.nextGaussian() * (double)0.5F, 0.0D, 0.0D, 0.0D);
                 }

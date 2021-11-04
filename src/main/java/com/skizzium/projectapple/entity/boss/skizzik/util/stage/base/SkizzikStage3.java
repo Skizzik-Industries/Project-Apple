@@ -8,6 +8,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStages;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.AbstractSkizzikStage;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
 
 public class SkizzikStage3 extends AbstractSkizzikStage {
@@ -66,6 +67,14 @@ public class SkizzikStage3 extends AbstractSkizzikStage {
                 }
             }
         //}
+    }
+
+    @Override
+    public double getHeadY(int head) {
+        if (head == 1) {
+            return skizzik.getY() + 1.948D;
+        }
+        return super.getHeadY(head);
     }
 
     @Override

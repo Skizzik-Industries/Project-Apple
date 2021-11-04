@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,29 +47,6 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     @Override
     public String textureLocation() {
         return String.format("%s/%s", skizzik.getTranslationKey().getString().toLowerCase(), skizzik.getTranslationKey().getString().toLowerCase());
-    }
-
-    @Override
-    public String modelLocation() {
-        String model;
-        if (skizzik.isTransitioning()) {
-            model = String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getPreviousStage().getStage().getId());
-        }
-        else {
-            model = String.format("skizzik/skizzik_stage-%s", skizzik.stageManager.getCurrentStage().getStage().getId());
-        }
-        
-        if (model.equals("skizzik/skizzik_stage-0")) {
-            model = "skizzik/skizzik_sleeping";
-        }
-        else if (model.equals("skizzik/skizzik_stage-1")) {
-            model = "skizzik/skizzik";
-        }
-        else if (model.equals("skizzik/skizzik_stage-6")) {
-            model = "skizzik/skizzik_finish-him";
-        }
-        
-        return model;
     }
 
     @Override
@@ -150,7 +128,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
-                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(skizzik.getHeadX(id - 1), skizzik.getHeadY(id - 1), skizzik.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
+                            Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(this.getHeadX(id - 1), this.getHeadY(id - 1), this.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
                             //skizzo.setYBodyRot(skizzik.getHeadXRot(id - 2));
                             //skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
@@ -184,6 +162,59 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             entity.setOwner(skizzik);
             world.addFreshEntity(entity);
         }
+    }
+
+    @Override
+    public double getHeadX(int head) {
+        if (head <= 0) {
+            return skizzik.getX();
+        }
+        else {
+            float f = (skizzik.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
+            float f1 = Mth.cos(f);
+
+            return skizzik.getX() + (double)f1;
+        }
+    }
+
+    @Override
+    public double getHeadY(int head) {
+        return head == 1 ? skizzik.getY() + 1.7D :
+               head == 2 ? skizzik.getY() + 1.822D : 
+               head == 3 ? skizzik.getY() + 3.073D :
+               head == 4 ? skizzik.getY() + 3.199D :
+               skizzik.getY() + 2.01D ;
+    }
+
+    @Override
+    public double getHeadZ(int head) {
+        float f = (skizzik.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
+        float f1 = Mth.sin(f);
+        return head == 1 ? skizzik.getZ() + (double)f1 * 1.187D :
+               head == 2 ? skizzik.getZ() + (double)f1 * 1.125D :
+               head == 3 ? skizzik.getZ() + (double)f1 * 1.06D :
+               head == 4 ? skizzik.getZ() + (double)f1 * 0.812D :
+               skizzik.getZ();
+    }
+
+    /**
+     * Used to change the positions of the different parts. 
+     * If calling the super, you need to set your new properties after the super call in order for them to be applied.
+     * Otherwise, they'll get reset by defaults.
+     */
+    @Override
+    public void tickParts() {
+        float f = skizzik.yBodyRot * ((float)Math.PI / 180F);
+        float f1 = Mth.cos(f);
+        float f2 = Mth.sin(f);
+
+        skizzik.tickPart(skizzik.topLeftHead, this.getHeadX(4), this.getHeadY(4), this.getHeadZ(4));
+        skizzik.tickPart(skizzik.topRightHead, this.getHeadX(3), this.getHeadY(3), this.getHeadZ(3));
+        skizzik.tickPart(skizzik.bottomLeftHead, this.getHeadX(2), this.getHeadY(2), this.getHeadZ(2));
+        skizzik.tickPart(skizzik.bottomRightHead, this.getHeadX(1), this.getHeadY(1), this.getHeadZ(1));
+        skizzik.tickPart(skizzik.centerHead, this.getHeadX(0), this.getHeadY(0), this.getHeadZ(0));
+        skizzik.tickPartOffset(skizzik.commandBlockPart, -f2 * 0.63F, 0.87F, f1);
+        skizzik.tickPartOffset(skizzik.bodyPart, -0.062F, 0.0F, 0.0F);
     }
 
     @Override
