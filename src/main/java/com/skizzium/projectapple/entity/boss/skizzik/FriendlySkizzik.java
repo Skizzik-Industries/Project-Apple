@@ -1368,8 +1368,13 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
 
     @Override
     public void die(DamageSource source) {
-        super.die(source);
         this.killAllSkizzies(this.level, false);
+        for (Heads head : this.addedHeads) {
+            FriendlySkizzo skizzo = (FriendlySkizzo) PA_Entities.FRIENDLY_SKIZZO.get().spawn((ServerLevel) this.level, null, null, new BlockPos(this.getHeadX(head.ordinal() + 1), this.getHeadY(head.ordinal() + 1), this.getHeadZ(head.ordinal() + 1)), MobSpawnType.MOB_SUMMONED, true, true);
+            skizzo.setTarget((LivingEntity) this.level.getEntity(this.getAlternativeTarget(head.ordinal())));
+        }
+        
+        super.die(source);
     }
 
     @Override
