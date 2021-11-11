@@ -122,7 +122,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public final SkizzikPart bodyPart;
     
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
-    public final PL_ServerBossEvent bossBar = (PL_ServerBossEvent) new PL_ServerBossEvent(this, this.getDisplayName(), ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), PL_BossEvent.PL_BossBarColor.WHITE, PL_BossEvent.PL_BossBarOverlay.PROGRESS).setDarkenScreen(true);
+    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), new PL_BossEvent.BossEventProperties().music(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()).color(PL_BossEvent.PL_BossBarColor.WHITE).darkenScreen(true));
 
     public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);

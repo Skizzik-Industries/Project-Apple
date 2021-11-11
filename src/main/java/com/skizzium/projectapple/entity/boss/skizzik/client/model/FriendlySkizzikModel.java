@@ -35,14 +35,14 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
             model.setHidden(skizzik.getDetachedHeads().contains(head) || !skizzik.getAddedHeads().contains(head));
             
             if (skizzik.getAddedHeads().contains(head) && !skizzik.getDetachedHeads().contains(head)) {
-                if (skizzik.getRiddenHeads().contains(head)) {
-                    model.setRotationX((skizzik.getParts()[head.ordinal()].getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
-                    model.setRotationY((skizzik.getParts()[head.ordinal()].getYRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
-                } 
-                else {
+//                if (skizzik.getRiddenHeads().contains(head)) {
+//                    model.setRotationX((skizzik.getParts()[head.ordinal()].getXRot() * 0.5F) * ((float) Math.PI / 180F) * -1);
+//                    model.setRotationY((skizzik.getParts()[head.ordinal()].getYRot() - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1);
+//                } 
+//                else {
                     model.setRotationX((skizzik.getHeadXRot(head.ordinal()) * ((float) Math.PI / 180F) * -1));
                     model.setRotationY(((skizzik.getHeadYRot(head.ordinal()) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
-                }
+//                }
             }
         }
     }

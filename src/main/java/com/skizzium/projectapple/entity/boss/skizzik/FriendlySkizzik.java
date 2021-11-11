@@ -5,8 +5,6 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
-import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStages;
-import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikStage5;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
 import com.skizzium.projectapple.init.PA_Tags;
@@ -14,8 +12,11 @@ import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.item.Gem;
+import com.skizzium.projectlib.entity.BossEntity;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
+import com.skizzium.projectlib.gui.minibar.Minibar;
+import com.skizzium.projectlib.gui.minibar.ServerMinibar;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
@@ -70,13 +71,14 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 
-public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimatable {
+public class FriendlySkizzik extends Monster implements BossEntity, RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
 
     private static final EntityDataAccessor<Boolean> DATA_BOTTOM_RIB = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
@@ -129,16 +131,16 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     private final FriendlySkizzikGoalController goalController;
 
     private final FriendlySkizzikPart[] parts;
-    public final FriendlySkizzikPart topLeftHead;
-    public final FriendlySkizzikPart topRightHead;
-    public final FriendlySkizzikPart bottomLeftHead;
-    public final FriendlySkizzikPart bottomRightHead;
+    public final FriendlySkizzikHeadPart topLeftHead;
+    public final FriendlySkizzikHeadPart topRightHead;
+    public final FriendlySkizzikHeadPart bottomLeftHead;
+    public final FriendlySkizzikHeadPart bottomRightHead;
     public final FriendlySkizzikPart centerHead;
     public final FriendlySkizzikPart commandBlockPart;
     public final FriendlySkizzikPart bodyPart;
     
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.FRIENDLY_SKIZZIK_SELECTOR);
-    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), PL_BossEvent.PL_BossBarColor.AQUA, PL_BossEvent.PL_BossBarOverlay.PROGRESS);
+    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), new PL_BossEvent.BossEventProperties().updateProgressAutomatically(true).color(PL_BossEvent.PL_BossBarColor.AQUA));
     
     public FriendlySkizzik(EntityType<? extends FriendlySkizzik> entity, Level world) {
         super(entity, world);
@@ -195,13 +197,11 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
-        this.bossBar.addPlayer(serverPlayer);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
-        this.bossBar.removePlayer(serverPlayer);
     }
 
     @Override
@@ -254,7 +254,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 
     public static AttributeSupplier.Builder buildAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 1020.0D)
+                .add(Attributes.MAX_HEALTH, 1000.0D)
                 .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
@@ -537,6 +537,18 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         this.entityData.set(DATA_ADDED_HEADS, this.entityData.get(DATA_ADDED_HEADS) | 1 << head.ordinal());
     }
 
+    public void removeHead(FriendlySkizzik.Heads head) {
+        if (this.addedHeads.contains(head)) {
+            for (ServerMinibar bar : this.bossBar.getMinibars()) {
+                if (bar.getEntity() instanceof FriendlySkizzikHeadPart && ((FriendlySkizzikHeadPart) bar.getEntity()).head == head) {
+                    this.bossBar.removeMinibar(bar);
+                }
+            }
+            
+            this.entityData.set(DATA_ADDED_HEADS, this.entityData.get(DATA_ADDED_HEADS) & ~(1 << head.ordinal()));
+        }
+    }
+
     public Set<FriendlySkizzik.Heads> getAddedHeads() {
         return this.addedHeads;
     }
@@ -741,6 +753,11 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());
         }
+
+        for (FriendlySkizzikPart part : this.parts) {
+            if (part instanceof FriendlySkizzikHeadPart && this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).head) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).head))
+                this.bossBar.addMinibar(new ServerMinibar(part, new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
+        }
     }
 
     @Override
@@ -806,6 +823,15 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         }
     }
 
+    public FriendlySkizzikHeadPart getHeadFromEnum(Heads head) {
+        for (FriendlySkizzikPart part : this.parts) {
+            if (part instanceof FriendlySkizzikHeadPart && ((FriendlySkizzikHeadPart) part).head == head) {
+                return (FriendlySkizzikHeadPart) part;
+            }
+        }
+        return null;
+    }
+
     public InteractionResult mobInteract(FriendlySkizzikPart part,  Player player, InteractionHand hand) {
         Item item = player.getItemInHand(hand).getItem();
         if (part == this.centerHead && item instanceof Gem && PA_Tags.Items.SKIZZIK_BASE_GEMS.contains(item)) {
@@ -816,6 +842,7 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
         }
         else if (item == PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get()) {
             if (this.getAddedHeads().size() < 4) {
+                this.bossBar.addMinibar(new ServerMinibar(this.getHeadFromEnum(FriendlySkizzik.Heads.values()[this.getAddedHeads().size()]), new Minibar.MinibarProperties().color(PL_BossEvent.PL_BossBarColor.BLUE)));
                 this.addHead(FriendlySkizzik.Heads.values()[this.getAddedHeads().size()]);
             }
             return InteractionResult.sidedSuccess(player.level.isClientSide);
@@ -1095,10 +1122,6 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
 //            if (this.destroyBlocksTicks <= 0) {
 //                this.destroyBlocksTicks = 35;
 //            }
-
-            if (part instanceof FriendlySkizzikHeadPart) {
-                
-            }
         
             if (world instanceof ServerLevel) {
                 LightningBolt[] lightnings = {EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world), EntityType.LIGHTNING_BOLT.create(world)};
@@ -1114,6 +1137,9 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
                 }
             }
 
+            if (part instanceof FriendlySkizzikHeadPart && amount != 0.000042069F) {
+                return ((FriendlySkizzikHeadPart) part).damage(source, amount);
+            }
             return super.hurt(source, amount);
 //        }
     }
@@ -1332,13 +1358,23 @@ public class FriendlySkizzik extends Monster implements RangedAttackMob, IAnimat
             this.setAlternativeTarget(0, 0);
         }
 
-        this.bossBar.setProgress(this.getHealth() / this.getMaxHealth());
+        for (ServerMinibar bar : this.bossBar.getMinibars()) {
+            if (bar.getEntity() instanceof FriendlySkizzikHeadPart) {
+                if (this.getAddedHeads().contains(((FriendlySkizzikHeadPart) bar.getEntity()).head) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) bar.getEntity()).head))
+                    bar.setProgress(((FriendlySkizzikHeadPart) bar.getEntity()).getHealth() / 150.0F);
+            }
+        }
     }
 
     @Override
     public void die(DamageSource source) {
         super.die(source);
         this.killAllSkizzies(this.level, false);
+    }
+
+    @Override
+    public PL_ServerBossEvent getBossBar() {
+        return this.bossBar;
     }
 
     public enum RibSide {
