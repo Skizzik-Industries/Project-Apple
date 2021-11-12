@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;
@@ -32,6 +33,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 
@@ -125,11 +127,24 @@ public class FriendlySkizzo extends Monster {
 
     public static AttributeSupplier.Builder buildAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0D)
+                .add(Attributes.MAX_HEALTH, 150.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FLYING_SPEED, 0.2D);
+    }
+    
+    public static FriendlySkizzo getSkizzoWithHead(Level world, FriendlySkizzik.Heads head) {
+        if (world instanceof ServerLevel) {
+            LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();
+            Iterable<Entity> entities = entityGetter.getAll();
+            for (Entity entity : entities) {
+                if (entity instanceof FriendlySkizzo && ((FriendlySkizzo) entity).getHead() == head.ordinal()) {
+                    return (FriendlySkizzo) entity;
+                }
+            }
+        }
+        return null;
     }
 
     protected void registerGoals() {
@@ -275,5 +290,9 @@ public class FriendlySkizzo extends Monster {
         LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world);
         lightning.moveTo(Vec3.atCenterOf(new BlockPos(x, y, z)));
         world.addFreshEntity(lightning);
+        
+        if (this.getOwner() != null && this.getOwner() instanceof FriendlySkizzik) {
+            ((FriendlySkizzik) this.getOwner()).removeHead(FriendlySkizzik.Heads.values()[this.head]);
+        }
     }
 }

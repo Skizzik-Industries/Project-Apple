@@ -565,8 +565,15 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
     }
 
     public void reattachHead(FriendlySkizzik.Heads head) {
-        if (this.detachedHeads.contains(head))
+        if (this.detachedHeads.contains(head)) {
             this.entityData.set(DATA_DETACHED_HEADS, this.entityData.get(DATA_DETACHED_HEADS) & ~(1 << head.ordinal()));
+            
+            for (ServerMinibar minibar : this.bossBar.getMinibars()) {
+                if (minibar.getEntity() != this.getHeadFromEnum(head)) {
+                    minibar.setEntity(this.getHeadFromEnum(head));
+                }
+            }
+        }
     }
 
     public void detachHead(FriendlySkizzik.Heads head) {
@@ -755,8 +762,12 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
         }
 
         for (FriendlySkizzikPart part : this.parts) {
-            if (part instanceof FriendlySkizzikHeadPart && this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).head) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).head))
-                this.bossBar.addMinibar(new ServerMinibar(part, new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
+            if (part instanceof FriendlySkizzikHeadPart && this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).head)) {
+                if (!this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).head))
+                    this.bossBar.addMinibar(new ServerMinibar(part, new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
+                else
+                    this.bossBar.addMinibar(new ServerMinibar(FriendlySkizzo.getSkizzoWithHead(this.level, ((FriendlySkizzikHeadPart) part).head), new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
+            }
         }
     }
 
@@ -892,7 +903,6 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
     @Override
     public void travel(Vec3 pos) {
         if (this.isAlive()) {
-            
             if (this.isVehicle() && this.canBeControlledByRider()) {
                 LivingEntity livingentity = (LivingEntity)this.getControllingPassenger();
 
@@ -913,7 +923,6 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
 
                 this.flyingSpeed = this.getSpeed() * 0.5F;
                 if (this.isControlledByLocalInstance()) {
-                    Options options = PA_ClientHelper.getClient().options;
                     if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
                         moveY = 0.8F;
                     }
@@ -927,27 +936,6 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
                     this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
                     this.setDeltaMovement(this.getDeltaMovement().scale(0.9F));
                     super.travel(new Vec3(moveX, moveY, moveZ));
-
-                    if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
-                        this.performRangedAttack(PA_ClientHelper.getClient().player);
-                        skullCooldown = 0.5F;
-                    }
-
-                    if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
-                        int i = 0;
-                        for (KeyMapping key : options.keyHotbarSlots) {
-                            if (i < 4 && key.isDown()) {
-                                this.changeHeadAttachment(i);
-                                canDetach = false; // This is needed in order to prevent the user from holding the keybind
-                            }
-                            i += 1;
-                        }
-                    }
-                    else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
-                        this.canDetach = true;
-                    }
-
-                    skullCooldown -= 0.1F;
                 }
                 else if (livingentity instanceof Player) {
                     this.setDeltaMovement(Vec3.ZERO);
@@ -958,7 +946,6 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
             }
             else {
                 this.flyingSpeed = 0.02F;
-                this.goalController.addDefaultGoals();
                 super.travel(pos);
             }
         }
@@ -1040,6 +1027,11 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
                 skizzo.setTarget((LivingEntity) this.level.getEntity(this.getAlternativeTarget(index)));
                 skizzo.setOwner(this);
                 skizzo.setHead(index + 1);
+                for (ServerMinibar minibar : this.bossBar.getMinibars()) {
+                    if (minibar.getEntity() == this.getHeadFromEnum(FriendlySkizzik.Heads.values()[index])) {
+                        minibar.setEntity(skizzo);
+                    }
+                }
 
                 if (this.getPassengers().size() >= index + 2) {
                     Entity passanger = this.getPassengers().get(index + 1);
@@ -1306,6 +1298,33 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
 //        if (this.spawnSkizzieTicks <= 0) {
 //            this.spawnSkizzieTicks = 60;
 //        }
+
+        if (this.isVehicle()) {
+            this.goalController.addDefaultGoals();
+        }
+        else {
+            Options options = PA_ClientHelper.getClient().options;
+            if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
+                this.performRangedAttack(PA_ClientHelper.getClient().player);
+                skullCooldown = 0.5F;
+            }
+
+            if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+                int i = 0;
+                for (KeyMapping key : options.keyHotbarSlots) {
+                    if (i < 4 && key.isDown()) {
+                        this.changeHeadAttachment(i);
+                        canDetach = false; // This is needed in order to prevent the user from holding the keybind
+                    }
+                    i += 1;
+                }
+            }
+            else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+                this.canDetach = true;
+            }
+
+            skullCooldown -= 0.1F;
+        }
 
         for (int headIndex = 1; headIndex < this.getAddedHeads().size() + 1; ++headIndex) {
             if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
