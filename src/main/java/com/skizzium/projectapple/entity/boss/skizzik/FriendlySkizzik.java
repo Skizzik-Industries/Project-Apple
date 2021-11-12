@@ -892,6 +892,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
     @Override
     public void travel(Vec3 pos) {
         if (this.isAlive()) {
+            
             if (this.isVehicle() && this.canBeControlledByRider()) {
                 LivingEntity livingentity = (LivingEntity)this.getControllingPassenger();
 
@@ -912,6 +913,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
 
                 this.flyingSpeed = this.getSpeed() * 0.5F;
                 if (this.isControlledByLocalInstance()) {
+                    Options options = PA_ClientHelper.getClient().options;
                     if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
                         moveY = 0.8F;
                     }
@@ -925,6 +927,27 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
                     this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
                     this.setDeltaMovement(this.getDeltaMovement().scale(0.9F));
                     super.travel(new Vec3(moveX, moveY, moveZ));
+
+                    if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
+                        this.performRangedAttack(PA_ClientHelper.getClient().player);
+                        skullCooldown = 0.5F;
+                    }
+
+                    if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+                        int i = 0;
+                        for (KeyMapping key : options.keyHotbarSlots) {
+                            if (i < 4 && key.isDown()) {
+                                this.changeHeadAttachment(i);
+                                canDetach = false; // This is needed in order to prevent the user from holding the keybind
+                            }
+                            i += 1;
+                        }
+                    }
+                    else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+                        this.canDetach = true;
+                    }
+
+                    skullCooldown -= 0.1F;
                 }
                 else if (livingentity instanceof Player) {
                     this.setDeltaMovement(Vec3.ZERO);
@@ -935,6 +958,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
             }
             else {
                 this.flyingSpeed = 0.02F;
+                this.goalController.addDefaultGoals();
                 super.travel(pos);
             }
         }
@@ -1282,35 +1306,6 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
 //        if (this.spawnSkizzieTicks <= 0) {
 //            this.spawnSkizzieTicks = 60;
 //        }
-
-        if (this.getPassengers().isEmpty()) {
-            this.goalController.addDefaultGoals();
-        }
-        // TODO: Maybe move the controlling shit to the travel method to allow for input from other players
-        else {
-            Options options = PA_ClientHelper.getClient().options;
-            
-            if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
-                this.performRangedAttack(PA_ClientHelper.getClient().player);
-                skullCooldown = 0.5F;
-            }
-            
-            if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
-                int i = 0;
-                for(KeyMapping key : options.keyHotbarSlots) {
-                    if (i < 4 && key.isDown()) {
-                        this.changeHeadAttachment(i);
-                        canDetach = false; // This is needed in order to prevent the user from holding the keybind
-                    }
-                    i += 1;
-                }
-            }
-            else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
-                this.canDetach = true;
-            }
-
-            skullCooldown -= 0.1F;
-        }
 
         for (int headIndex = 1; headIndex < this.getAddedHeads().size() + 1; ++headIndex) {
             if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {

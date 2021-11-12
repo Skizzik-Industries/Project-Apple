@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.init;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class PA_Keybinds {
@@ -8,7 +9,7 @@ public class PA_Keybinds {
     public final KeyMapping keySpawnSkizzie = new KeyMapping("key.skizzik.spawn_skizzie", 82, "key.categories.skizzik.friendly_skizzik");
     
     public void register() {
-        if (PA_ClientHelper.getClient() != null)
-            PA_ClientHelper.getClient().options.keyMappings = ArrayUtils.addAll(PA_ClientHelper.getClient().options.keyMappings, this.keyDetachHead, this.keySpawnSkizzie);
+        ClientRegistry.registerKeyBinding(keyDetachHead);
+        ClientRegistry.registerKeyBinding(keySpawnSkizzie);
     }
 }
