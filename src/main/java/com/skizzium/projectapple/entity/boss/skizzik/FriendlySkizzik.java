@@ -525,14 +525,20 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    public float getHeadXRot(int head) {
+        return this.xRotHeads[head];
+    }
+    
     public float getHeadYRot(int head) {
         return this.yRotHeads[head];
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public float getHeadXRot(int head) {
-        return this.xRotHeads[head];
+    public void setHeadXRot(int head, float value) {
+        this.xRotHeads[head] = value;
+    }
+
+    public void setHeadYRot(int head, float value) {
+        this.yRotHeads[head] = value;
     }
 
     public double getHeadX(int head) {
