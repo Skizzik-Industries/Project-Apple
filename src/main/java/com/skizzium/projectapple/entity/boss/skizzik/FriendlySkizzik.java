@@ -5,13 +5,16 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
+import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
+import com.skizzium.projectapple.init.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.item.Gem;
+import com.skizzium.projectapple.network.FriendlySkizzikOpenScreenPacket;
 import com.skizzium.projectlib.entity.BossEntity;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
@@ -20,6 +23,7 @@ import com.skizzium.projectlib.gui.minibar.ServerMinibar;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -38,9 +42,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -51,6 +53,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -60,7 +64,14 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.entity.PartEntity;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
+import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -71,14 +82,14 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 
-public class FriendlySkizzik extends Monster implements BossEntity, RangedAttackMob, IAnimatable {
+public class FriendlySkizzik extends Monster implements BossEntity, ContainerListener, RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Integer> DATA_ADDED_GEMS = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.INT);
 
     private static final EntityDataAccessor<Boolean> DATA_BOTTOM_RIB = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.BOOLEAN);
@@ -142,6 +153,9 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.FRIENDLY_SKIZZIK_SELECTOR);
     public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), new PL_BossEvent.BossEventProperties().updateProgressAutomatically(true).color(PL_BossEvent.PL_BossBarColor.AQUA));
     
+    private SimpleContainer inventory;
+    private LazyOptional<?> itemHandler = null;
+    
     public FriendlySkizzik(EntityType<? extends FriendlySkizzik> entity, Level world) {
         super(entity, world);
         this.setHealth(this.getMaxHealth());
@@ -157,6 +171,8 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
         this.commandBlockPart = new FriendlySkizzikPart(this, "commandBlock", 0.93F, 0.93F);
         this.bodyPart = new FriendlySkizzikPart(this, "body", 0.43F, 1.865F);
         this.parts = new FriendlySkizzikPart[]{this.topLeftHead, this.topRightHead, this.bottomLeftHead, this.bottomRightHead, this.centerHead, this.commandBlockPart, this.bodyPart};
+
+        this.createInventory();
     }
 
     @Override
@@ -398,6 +414,115 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    protected int getInventorySize() {
+        return 2;
+    }
+
+    public boolean hasInventoryChanged(Container container) {
+        return this.inventory != container;
+    }
+
+    public void openInventory(Player player) {
+        if (!this.level.isClientSide && (!this.isVehicle() || this.hasPassenger(player))) {
+            ((ServerPlayer) player).nextContainerCounter();
+            PA_PacketRegistry.INSTANCE.sendTo(new FriendlySkizzikOpenScreenPacket(((ServerPlayer) player).containerCounter, this.inventory.getContainerSize(), this.getId()), ((ServerPlayer) player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+            
+            player.containerMenu = new FriendlySkizzikMenu(((ServerPlayer) player).containerCounter, player.getInventory(), this.inventory, this);
+            ((ServerPlayer) player).initMenu(player.containerMenu);
+            MinecraftForge.EVENT_BUS.post(new PlayerContainerEvent.Open(player, player.containerMenu));
+        }
+    }
+    
+    private SlotAccess createEquipmentSlotAccess(final int slot, final Predicate<ItemStack> predicate) {
+        return new SlotAccess() {
+            public ItemStack get() {
+                return FriendlySkizzik.this.inventory.getItem(slot);
+            }
+
+            public boolean set(ItemStack itemstack) {
+                if (!predicate.test(itemstack)) {
+                    return false;
+                } else {
+                    FriendlySkizzik.this.inventory.setItem(slot, itemstack);
+                    FriendlySkizzik.this.updateContainerEquipment();
+                    return true;
+                }
+            }
+        };
+    }
+
+    public SlotAccess getSlot(int slot) {
+        int i = slot - 400;
+        if (i >= 0 && i < 2 && i < this.inventory.getContainerSize()) {
+            if (i == 0) {
+                return this.createEquipmentSlotAccess(i, (predicate) -> predicate.isEmpty() || predicate.is(Items.SADDLE));
+            }
+
+//            if (i == 1) {
+//                if (!this.canWearArmor()) {
+//                    return SlotAccess.NULL;
+//                }
+//
+//                return this.createEquipmentSlotAccess(i, (predicate) -> predicate.isEmpty() || this.isArmor(predicate));
+//            }
+        }
+
+        int j = slot - 500 + 2;
+        return j >= 2 && j < this.inventory.getContainerSize() ? SlotAccess.forContainer(this.inventory, j) : super.getSlot(slot);
+    }
+    
+    protected void createInventory() {
+        SimpleContainer oldContainer = this.inventory;
+        this.inventory = new SimpleContainer(this.getInventorySize());
+        if (oldContainer != null) {
+            oldContainer.removeListener(this);
+            int i = Math.min(oldContainer.getContainerSize(), this.inventory.getContainerSize());
+
+            for(int j = 0; j < i; ++j) {
+                ItemStack itemstack = oldContainer.getItem(j);
+                if (!itemstack.isEmpty()) {
+                    this.inventory.setItem(j, itemstack.copy());
+                }
+            }
+        }
+
+        this.inventory.addListener(this);
+        this.updateContainerEquipment();
+        this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.inventory));
+    }
+
+    protected void updateContainerEquipment() {
+//        if (!this.level.isClientSide) {
+//            this.setFlag(4, !this.inventory.getItem(0).isEmpty());
+//        }
+    }
+
+    @Override
+    public void containerChanged(Container container) {
+//        boolean flag = this.isSaddled();
+        this.updateContainerEquipment();
+//        if (this.tickCount > 20 && !flag && this.isSaddled()) {
+//            this.playSound(SoundEvents.HORSE_SADDLE, 0.5F, 1.0F);
+//        }
+    }
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+        if (this.isAlive() && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && itemHandler != null)
+            return itemHandler.cast();
+        return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        if (itemHandler != null) {
+            LazyOptional<?> oldHandler = itemHandler;
+            itemHandler = null;
+            oldHandler.invalidate();
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -769,6 +894,8 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
                     this.bossBar.addMinibar(new ServerMinibar(FriendlySkizzo.getSkizzoWithHead(this.level, ((FriendlySkizzikHeadPart) part).head), new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
             }
         }
+
+        this.updateContainerEquipment();
     }
 
     @Override
@@ -845,6 +972,11 @@ public class FriendlySkizzik extends Monster implements BossEntity, RangedAttack
 
     public InteractionResult mobInteract(FriendlySkizzikPart part,  Player player, InteractionHand hand) {
         Item item = player.getItemInHand(hand).getItem();
+        if (player.isSecondaryUseActive()) {
+            this.openInventory(player);
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
+        }
+        
         if (part == this.centerHead && item instanceof Gem && PA_Tags.Items.SKIZZIK_BASE_GEMS.contains(item)) {
             if (!this.getGems().contains(((Gem) item).getType()) && !this.level.isClientSide) {
                 this.addGem(((Gem) item).getType());
