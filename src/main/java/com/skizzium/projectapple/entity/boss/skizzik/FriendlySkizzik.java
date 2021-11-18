@@ -61,8 +61,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -533,12 +531,12 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
         return this.yRotHeads[head];
     }
 
-    public void setHeadXRot(int head, float value) {
-        this.xRotHeads[head] = value;
+    public void setHeadXRot(Heads head, float value) {
+        this.xRotHeads[head.ordinal()] = value;
     }
 
-    public void setHeadYRot(int head, float value) {
-        this.yRotHeads[head] = value;
+    public void setHeadYRot(Heads head, float value) {
+        this.yRotHeads[head.ordinal()] = value;
     }
 
     public double getHeadX(int head) {
@@ -671,7 +669,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
     public void removeHead(FriendlySkizzik.Heads head) {
         if (this.addedHeads.contains(head)) {
             for (ServerMinibar bar : this.bossBar.getMinibars()) {
-                if (bar.getEntity() instanceof FriendlySkizzikHeadPart && ((FriendlySkizzikHeadPart) bar.getEntity()).head == head) {
+                if (bar.getEntity() instanceof FriendlySkizzikHeadPart && ((FriendlySkizzikHeadPart) bar.getEntity()).headType == head) {
                     this.bossBar.removeMinibar(bar);
                 }
             }
@@ -893,11 +891,11 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
         }
 
         for (FriendlySkizzikPart part : this.parts) {
-            if (part instanceof FriendlySkizzikHeadPart && this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).head)) {
-                if (!this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).head))
+            if (part instanceof FriendlySkizzikHeadPart && this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).headType)) {
+                if (!this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).headType))
                     this.bossBar.addMinibar(new ServerMinibar(part, new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
                 else
-                    this.bossBar.addMinibar(new ServerMinibar(FriendlySkizzo.getSkizzoWithHead(this.level, ((FriendlySkizzikHeadPart) part).head), new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
+                    this.bossBar.addMinibar(new ServerMinibar(FriendlySkizzo.getSkizzoWithHead(this.level, ((FriendlySkizzikHeadPart) part).headType), new Minibar.MinibarProperties().updateProgressAutomatically(false).color(PL_BossEvent.PL_BossBarColor.BLUE)));
             }
         }
 
@@ -949,7 +947,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
                     player.setYRot(part.getYRot());
                     player.setXRot(part.getXRot());
                     player.startRiding(part);
-                    this.rideHead(((FriendlySkizzikHeadPart) part).head);
+                    this.rideHead(((FriendlySkizzikHeadPart) part).headType);
                     this.setNoGravity(true);
                 }
             }
@@ -969,7 +967,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
 
     public FriendlySkizzikHeadPart getHeadFromEnum(Heads head) {
         for (FriendlySkizzikPart part : this.parts) {
-            if (part instanceof FriendlySkizzikHeadPart && ((FriendlySkizzikHeadPart) part).head == head) {
+            if (part instanceof FriendlySkizzikHeadPart && ((FriendlySkizzikHeadPart) part).headType == head) {
                 return (FriendlySkizzikHeadPart) part;
             }
         }
@@ -1304,7 +1302,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
 
     public void tickPart(FriendlySkizzikPart part, double x, double y, double z) {
         if (part instanceof FriendlySkizzikHeadPart) {
-            if (this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).head) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).head)) {
+            if (this.getAddedHeads().contains(((FriendlySkizzikHeadPart) part).headType) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) part).headType)) {
                 part.setPos(x, y, z);
             }
             else {
@@ -1512,7 +1510,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
 
         for (ServerMinibar bar : this.bossBar.getMinibars()) {
             if (bar.getEntity() instanceof FriendlySkizzikHeadPart) {
-                if (this.getAddedHeads().contains(((FriendlySkizzikHeadPart) bar.getEntity()).head) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) bar.getEntity()).head))
+                if (this.getAddedHeads().contains(((FriendlySkizzikHeadPart) bar.getEntity()).headType) && !this.getDetachedHeads().contains(((FriendlySkizzikHeadPart) bar.getEntity()).headType))
                     bar.setProgress(((FriendlySkizzikHeadPart) bar.getEntity()).getHealth() / 150.0F);
             }
         }

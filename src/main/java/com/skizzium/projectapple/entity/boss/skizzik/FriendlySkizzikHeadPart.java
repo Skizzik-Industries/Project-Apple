@@ -20,11 +20,11 @@ import javax.annotation.Nullable;
 
 public class FriendlySkizzikHeadPart extends FriendlySkizzikPart {
     private static final EntityDataAccessor<Float> DATA_HEALTH = SynchedEntityData.defineId(FriendlySkizzik.class, EntityDataSerializers.FLOAT);
-    public final FriendlySkizzik.Heads head;
+    public final FriendlySkizzik.Heads headType;
     
-    public FriendlySkizzikHeadPart(FriendlySkizzik skizzik, String name, @Nullable FriendlySkizzik.Heads head, float width, float height) {
+    public FriendlySkizzikHeadPart(FriendlySkizzik skizzik, String name, @Nullable FriendlySkizzik.Heads headType, float width, float height) {
         super(skizzik, name, width, height);
-        this.head = head;
+        this.headType = headType;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class FriendlySkizzikHeadPart extends FriendlySkizzikPart {
 
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-        if (this.skizzik.getAddedHeads().contains(this.head) && !this.skizzik.getDetachedHeads().contains(this.head)) {
+        if (this.skizzik.getAddedHeads().contains(this.headType) && !this.skizzik.getDetachedHeads().contains(this.headType)) {
             return this.skizzik.mobInteract(this, player, hand);
         }
         return InteractionResult.PASS;
@@ -55,7 +55,7 @@ public class FriendlySkizzikHeadPart extends FriendlySkizzikPart {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        return this.skizzik.getAddedHeads().contains(this.head) && !this.skizzik.getDetachedHeads().contains(this.head) && this.skizzik.hurt(this, source, amount);
+        return this.skizzik.getAddedHeads().contains(this.headType) && !this.skizzik.getDetachedHeads().contains(this.headType) && this.skizzik.hurt(this, source, amount);
     }
 
     public float getHealth() {
@@ -92,7 +92,7 @@ public class FriendlySkizzikHeadPart extends FriendlySkizzikPart {
             if (f != 0.0F) {
                 float f2 = this.getHealth();
                 if (f2 - f <= 0.0F) {
-                    this.skizzik.removeHead(this.head);
+                    this.skizzik.removeHead(this.headType);
                     this.setHealth(150.0F);
                     return true;
                 }
