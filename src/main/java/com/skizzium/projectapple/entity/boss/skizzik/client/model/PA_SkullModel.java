@@ -1,6 +1,5 @@
-package com.skizzium.projectapple.tileentity.model;
+package com.skizzium.projectapple.entity.boss.skizzik.client.model;
 
-import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
