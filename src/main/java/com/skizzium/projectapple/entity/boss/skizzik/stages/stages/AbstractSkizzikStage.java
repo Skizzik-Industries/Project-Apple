@@ -92,6 +92,16 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
+    public int safeLightningTicks() {
+        return 0;
+    }
+    
+    @Override
+    public int lightningTicks() {
+        return 0;
+    }
+
+    @Override
     public int skizzieSpawnTicks() {
         return 60;
     }

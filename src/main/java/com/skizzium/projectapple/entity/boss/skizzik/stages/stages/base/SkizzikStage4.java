@@ -36,6 +36,16 @@ public class SkizzikStage4 extends AbstractSkizzikStage {
     }
 
     @Override
+    public int safeLightningTicks() {
+        return 30;
+    }
+    
+    @Override
+    public int lightningTicks() {
+        return 100;
+    }
+    
+    @Override
     public int skizzieSpawnTicks() {
         return 40;
     }

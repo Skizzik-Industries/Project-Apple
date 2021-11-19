@@ -58,7 +58,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
@@ -96,6 +98,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     
     private int destroyBlocksTicks;
     private int spawnSkizzieTicks;
+    private int lightningTicks;
+    HashMap<UUID, BlockPos> strikeLocations = new HashMap<>();
 
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
     public final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS).setDarkenScreen(true);
@@ -602,7 +606,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public void aiStep() {
-        int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
@@ -687,7 +690,38 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();
         }
 
+        if (this.lightningTicks <= 0) {
+            this.lightningTicks = this.stageManager.getCurrentStage().lightningTicks();
+        }
+
         if (stageManager.getCurrentStage().attackStatically()) {
+            if (this.isInvul() && this.stageManager.getCurrentStage().getStage().getId() >= 3) {
+                if (this.lightningTicks > 0) {
+                    --this.lightningTicks;
+                    if (this.lightningTicks == 15 && this.level instanceof ServerLevel) {
+                        strikeLocations.clear();
+                        for (ServerPlayer player : bossBar.getPlayers()) {
+                            strikeLocations.put(player.getUUID(), player.blockPosition());
+                        }
+                    }
+                    
+                    if (this.lightningTicks == 0 && this.level instanceof ServerLevel) {
+                        for (ServerPlayer player : bossBar.getPlayers()) {
+                            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
+                            
+                            if (strikeLocations.containsKey(player.getUUID())) {
+                                lightning.moveTo(Vec3.atBottomCenterOf(strikeLocations.get(player.getUUID())));
+                            }
+                            else {
+                                lightning.moveTo(Vec3.atBottomCenterOf(new BlockPos(player.getX(), player.getY(), player.getZ())));
+                            }
+                            
+                            this.level.addFreshEntity(lightning);
+                        }
+                    }
+                }
+            }
+            
             for (int headIndex = 1; headIndex < activeHeads + 1; ++headIndex) {
                 if (this.tickCount >= this.nextHeadUpdate[headIndex - 1]) {
                     this.nextHeadUpdate[headIndex - 1] = this.tickCount + 10 + this.random.nextInt(10);

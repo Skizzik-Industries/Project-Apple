@@ -24,6 +24,10 @@ public interface SkizzikStageInterface {
     int maxHealth();
     
     int skullLevel();
+
+    int safeLightningTicks();
+    
+    int lightningTicks();
     
     int skizzieSpawnTicks();
     
