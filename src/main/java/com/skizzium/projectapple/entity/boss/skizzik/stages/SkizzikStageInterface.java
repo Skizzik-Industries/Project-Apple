@@ -35,6 +35,8 @@ public interface SkizzikStageInterface {
     
     float eyeHeight();
     
+    float floatY();
+    
     EntityDimensions hitbox();
     
     boolean playMusic();

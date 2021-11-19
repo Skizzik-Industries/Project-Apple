@@ -117,6 +117,11 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
+    public float floatY() {
+        return 0;
+    }
+
+    @Override
     public EntityDimensions hitbox() {
         return new EntityDimensions(2.5F, 4.0F, true);
     }

@@ -25,6 +25,11 @@ public class SkizzikStage2 extends AbstractSkizzikStage {
     }
 
     @Override
+    public float floatY() {
+        return 3.0F;
+    }
+
+    @Override
     public void skizzieSpawning() {
         if (Math.random() < 0.05) {
             spawnSkizzie(new WitchSkizzie(PA_Entities.WITCH_SKIZZIE.get(), this.skizzik.level), skizzik.getX(), skizzik.getY(), skizzik.getZ(), skizzik.level);

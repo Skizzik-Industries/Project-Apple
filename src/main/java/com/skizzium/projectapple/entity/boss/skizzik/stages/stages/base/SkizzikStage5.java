@@ -74,6 +74,11 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
+    public float floatY() {
+        return 6.5F;
+    }
+
+    @Override
     public EntityDimensions hitbox() {
         return new EntityDimensions(2.5F, 3.4F, true);
     }

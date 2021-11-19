@@ -56,6 +56,11 @@ public class SkizzikStage4 extends AbstractSkizzikStage {
     }
 
     @Override
+    public float floatY() {
+        return 5.0F;
+    }
+
+    @Override
     public void skizzieSpawning() {
         if (Math.random() < 0.05) {
             spawnSkizzie(new CorruptedSkizzie(PA_Entities.CORRUPTED_SKIZZIE.get(), this.skizzik.level), skizzik.getX(), skizzik.getY(), skizzik.getZ(), skizzik.level);

@@ -26,6 +26,11 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     }
 
     @Override
+    public float floatY() {
+        return 3.0F;
+    }
+    
+    @Override
     public boolean attackDirectly() {
         if (skizzik.isTransitioning()) {
             return false;

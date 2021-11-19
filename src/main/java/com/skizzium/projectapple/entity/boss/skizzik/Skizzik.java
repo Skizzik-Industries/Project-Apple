@@ -611,7 +611,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
             if (entity != null) {
                 double vectorY = vector.y;
-                if (this.getY() < entity.getY()) {
+                if (this.getY() < entity.getY() + this.stageManager.getCurrentStage().floatY()) {
                     vectorY = Math.max(0.0D, vectorY);
                     vectorY = vectorY + (0.3D - vectorY * (double)0.6F);
                 }
@@ -698,7 +698,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             if (this.isInvul() && this.stageManager.getCurrentStage().getStage().getId() >= 3) {
                 if (this.lightningTicks > 0) {
                     --this.lightningTicks;
-                    if (this.lightningTicks == 15 && this.level instanceof ServerLevel) {
+                    if (this.lightningTicks == this.stageManager.getCurrentStage().safeLightningTicks() && this.level instanceof ServerLevel) {
                         strikeLocations.clear();
                         for (ServerPlayer player : bossBar.getPlayers()) {
                             strikeLocations.put(player.getUUID(), player.blockPosition());
