@@ -707,16 +707,18 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                     
                     if (this.lightningTicks == 0 && this.level instanceof ServerLevel) {
                         for (ServerPlayer player : bossBar.getPlayers()) {
-                            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
-                            
-                            if (strikeLocations.containsKey(player.getUUID())) {
-                                lightning.moveTo(Vec3.atBottomCenterOf(strikeLocations.get(player.getUUID())));
+                            if (!player.getAbilities().invulnerable) {
+                                LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
+
+                                if (strikeLocations.containsKey(player.getUUID())) {
+                                    lightning.moveTo(Vec3.atBottomCenterOf(strikeLocations.get(player.getUUID())));
+                                }
+                                else {
+                                    lightning.moveTo(Vec3.atBottomCenterOf(new BlockPos(player.getX(), player.getY(), player.getZ())));
+                                }
+
+                                this.level.addFreshEntity(lightning);
                             }
-                            else {
-                                lightning.moveTo(Vec3.atBottomCenterOf(new BlockPos(player.getX(), player.getY(), player.getZ())));
-                            }
-                            
-                            this.level.addFreshEntity(lightning);
                         }
                     }
                 }
