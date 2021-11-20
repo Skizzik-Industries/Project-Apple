@@ -8,7 +8,6 @@ import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.skull.Frien
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.skull.SkizzikSkullRenderer;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.OldSkizzikModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
@@ -92,7 +91,6 @@ public class PA_Entities {
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.WITCH_SKIZZIE_LAYER, WitchSkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.SKIZZO_LAYER, SkizzoModel::createBodyLayer);
-        event.registerLayerDefinition(PA_ModelLayers.SKIZZIK_LAYER, OldSkizzikModel::createBodyLayer);
     }
 
     @SubscribeEvent

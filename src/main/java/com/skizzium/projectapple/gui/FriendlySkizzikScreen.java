@@ -58,6 +58,34 @@ public class FriendlySkizzikScreen extends AbstractContainerScreen<FriendlySkizz
         return super.mouseClicked(mouseX, mouseY, button);
     }
     
+    public int getHeadXOffset(FriendlySkizzik.Heads head) {
+        if (head.ordinal() == 0) {
+            return 59; 
+        }
+        return 0;
+    }
+
+    public int getHeadYOffset(FriendlySkizzik.Heads head) {
+        if (head.ordinal() == 0) {
+            return 132;
+        }
+        return 0;
+    }
+
+    public int getHeadXMouse(FriendlySkizzik.Heads head) {
+        if (head.ordinal() == 0) {
+            return 59;
+        }
+        return 0;
+    }
+
+    public int getHeadYMouse(FriendlySkizzik.Heads head) {
+        if (head.ordinal() == 0) {
+            return 132;
+        }
+        return 0;
+    }
+    
     @Override
     protected void renderBg(PoseStack pose, float partialTick, int x, int y) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -78,7 +106,7 @@ public class FriendlySkizzikScreen extends AbstractContainerScreen<FriendlySkizz
             renderSkizzikInInventory(i + 87, j + 73, 15, (float) (i + 85) - this.xMouse, (float) (j + 79 - 50) - this.yMouse, this.skizzik);
         }
         else {
-            renderHeadInInventory(i + 87, j + 73, 15, (float) (i + 85) - this.xMouse, (float) (j + 79 - 50) - this.yMouse, this.currentTab.head.headType, this.skizzik);
+            renderHeadInInventory(i + 87, j + 73, 15, (float) (i + 85) - this.xMouse, (float) (j + 79 - 50) - this.yMouse, currentTab.head.headType, this.skizzik);
         }
     }
 
@@ -100,10 +128,10 @@ public class FriendlySkizzikScreen extends AbstractContainerScreen<FriendlySkizz
     public static void renderHeadInInventory(int x, int y, int scale, float mouseX, float mouseY, FriendlySkizzik.Heads head, FriendlySkizzik parent) {
         float f = (float)Math.atan(mouseX / 40.0F);
         float f1 = (float)Math.atan(mouseY / 40.0F);
-        PoseStack pose = RenderSystem.getModelViewStack();
-        pose.pushPose();
-        pose.translate(x, y, 1050.0D);
-        pose.scale(1.0F, 1.0F, -1.0F);
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.pushPose();
+        posestack.translate(x, y, 1050.0D);
+        posestack.scale(1.0F, 1.0F, -1.0F);
 
         RenderSystem.applyModelViewMatrix();
         PoseStack posestack1 = new PoseStack();
@@ -114,29 +142,30 @@ public class FriendlySkizzikScreen extends AbstractContainerScreen<FriendlySkizz
         quaternion.mul(quaternion1);
         posestack1.mulPose(quaternion);
 
-        float oldYRot = parent.getHeadYRot(head.ordinal() + 1);
-        float oldXRot = parent.getHeadXRot(head.ordinal() + 1);
+        float oldYRot = parent.getHeadYRot(head.ordinal());
+        float oldXRot = parent.getHeadXRot(head.ordinal());
 
         parent.setHeadYRot(head, 180.0F + f * 40.0F);
         parent.setHeadXRot(head, -f1 * 20.0F);
+        
+        parent.renderHeadOnly = head;
 
         Lighting.setupForEntityInInventory();
         EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         quaternion1.conj();
-        
         entityrenderdispatcher.overrideCameraOrientation(quaternion1);
         entityrenderdispatcher.setRenderShadow(false);
-        
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        //RenderSystem.runAsFancy(() -> entityrenderdispatcher.render(parent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880));
-        
+        RenderSystem.runAsFancy(() -> entityrenderdispatcher.render(parent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880));
         multibuffersource$buffersource.endBatch();
         entityrenderdispatcher.setRenderShadow(true);
 
         parent.setHeadYRot(head, oldYRot);
         parent.setHeadXRot(head, oldXRot);
 
-        pose.popPose();
+        parent.renderHeadOnly = null;
+
+        posestack.popPose();
         RenderSystem.applyModelViewMatrix();
         Lighting.setupFor3DItems();
     }

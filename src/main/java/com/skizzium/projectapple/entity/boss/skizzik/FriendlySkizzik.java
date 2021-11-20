@@ -124,6 +124,8 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
     private boolean bottomRibAnimation = false; // If true, the animation for the bottom rib appearing will play
     private FriendlySkizzik.Ribs ribAnimation = null; // The rib to play the animation of
     private FriendlySkizzik.RibSide ribSideAnimation = null; // The side of the rib you want to play the animation of
+    
+    public Heads renderHeadOnly = null;
 
     private final float[] xRotHeads = new float[4];
     private final float[] yRotHeads = new float[4];
@@ -350,15 +352,20 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
     }
     
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
-        if (this.isConverted()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.end_convert"));
-            if (event.getController().getAnimationState() == AnimationState.Stopped) {
-                this.setConverted(false);
+        if (renderHeadOnly == null) {
+            if (this.isConverted()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.end_convert"));
+                if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                    this.setConverted(false);
+                }
+                return PlayState.CONTINUE;
             }
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.body_movement"));
             return PlayState.CONTINUE;
         }
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.friendly_skizzik.body_movement"));
-        return PlayState.CONTINUE;
+        else {
+            return PlayState.STOP;
+        }
     }
 
     private <E extends IAnimatable> PlayState commandBlock(AnimationEvent<E> event) {

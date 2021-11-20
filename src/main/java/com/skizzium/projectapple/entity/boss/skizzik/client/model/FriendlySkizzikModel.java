@@ -69,6 +69,10 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
     @Override
     public void setLivingAnimations(FriendlySkizzik skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
         super.setLivingAnimations(skizzik, uniqueID, customPredicate);
+        for (Object bone : this.getAnimationProcessor().getModelRendererList()) {
+            ((IBone) bone).setHidden(false);
+        }
+        
         IBone centerHead = this.getAnimationProcessor().getBone("center_head");
         IBone bottomRightHead = this.getAnimationProcessor().getBone("bottom_right_head");
         IBone bottomLeftHead = this.getAnimationProcessor().getBone("bottom_left_head");
@@ -106,6 +110,17 @@ public class FriendlySkizzikModel extends AnimatedGeoModel<FriendlySkizzik> {
 
         if (skizzik.getAddedHeads().size() - skizzik.getDetachedHeads().size() == 1) {
             setPivot(bottomRightHead, -8.0F, 23.0F, 0.0F);
+        }
+        
+        if (skizzik.renderHeadOnly != null) {
+            for (Object bone : this.getAnimationProcessor().getModelRendererList()) {
+                if (!((IBone) bone).getName().equals(skizzik.renderHeadOnly.name().toLowerCase())) {
+                    ((IBone) bone).setHidden(true);
+                }
+                else {
+                    ((IBone) bone).setHidden(false);
+                }
+            }
         }
     }
 }
