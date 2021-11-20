@@ -3,21 +3,24 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.*;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.stages.base.*;
-import com.skizzium.projectapple.gui.PA_BossEvent;
-import com.skizzium.projectapple.gui.PA_ServerBossEvent;
-import com.skizzium.projectapple.init.network.PA_PacketRegistry;
+import com.skizzium.projectapple.entity.boss.skizzik.util.*;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.*;
+import com.skizzium.projectapple.init.PA_Config;
+import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import com.skizzium.projectapple.network.BossMusicStartPacket;
-import com.skizzium.projectapple.network.BossMusicStopPacket;
+import com.skizzium.projectapple.effect.ConversionEffect;
+import com.skizzium.projectlib.gui.PL_BossEvent;
+import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -28,6 +31,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -40,14 +45,21 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.entity.LevelEntityGetter;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import software.bernie.geckolib3.core.AnimationState;
+import net.minecraftforge.entity.PartEntity;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -77,7 +89,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private static final EntityDataAccessor<Boolean> DATA_TRANSITIONING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_TRANSITION_TIME = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_INVUL = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
-
+    private static final EntityDataAccessor<Boolean> DATA_CONVERTING = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_INTERUPTED = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_WAS_INTERUPTED = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.BOOLEAN);
+    
     private int activeHeads = 4;
 
     private final float[] xRotHeads = new float[activeHeads];
@@ -101,13 +116,23 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     private int lightningTicks;
     HashMap<UUID, BlockPos> strikeLocations = new HashMap<>();
 
-    private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR).ignoreInvisibilityTesting();
-    public final PA_ServerBossEvent bossBar = (PA_ServerBossEvent) new PA_ServerBossEvent(this.getDisplayName(), PA_BossEvent.PA_BossBarColor.WHITE, PA_BossEvent.PA_BossBarOverlay.PROGRESS).setDarkenScreen(true);
+    private final SkizzikPart[] parts;
+    public final SkizzikPart topLeftHead;
+    public final SkizzikPart topRightHead;
+    public final SkizzikPart bottomLeftHead;
+    public final SkizzikPart bottomRightHead;
+    public final SkizzikPart centerHead;
+    public final SkizzikPart commandBlockPart;
+    public final SkizzikPart bodyPart;
+    
+    private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
+    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), new PL_BossEvent.BossEventProperties().music(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()).color(PL_BossEvent.PL_BossBarColor.WHITE).darkenScreen(true));
 
     public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
 
     public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
+    public NearestAttackableTargetGoal attackFSkizzikGoal = new NearestAttackableTargetGoal<>(this, FriendlySkizzik.class, false, false);
     public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
     public RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
     public WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
@@ -123,6 +148,15 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.getNavigation().setCanFloat(true);
         this.xpReward = 0;
         this.eyeHeight = 1.5F;
+
+        this.topLeftHead = new SkizzikPart(this, "topLeftHead", SkizzikStages.STAGE_2, 0.75F, 0.75F);
+        this.topRightHead = new SkizzikPart(this, "topRightHead", SkizzikStages.STAGE_3, 0.75F, 0.75F);
+        this.bottomLeftHead = new SkizzikPart(this, "bottomLeftHead", SkizzikStages.STAGE_4, 0.75F, 0.75F);
+        this.bottomRightHead = new SkizzikPart(this, "bottomRightHead", SkizzikStages.STAGE_5, 0.75F, 0.75F);
+        this.centerHead = new SkizzikPart(this, "centerHead", 1.0F, 1.0F);
+        this.commandBlockPart = new SkizzikPart(this, "commandBlock", SkizzikStages.FINISH_HIM, 0.93F, 0.93F);
+        this.bodyPart = new SkizzikPart(this, "body", 0.43F, 1.865F);
+        this.parts = new SkizzikPart[]{this.bottomRightHead, this.bottomLeftHead, this.topRightHead, this.topLeftHead, this.centerHead, this.commandBlockPart, this.bodyPart};
     }
 
     public Component getTranslationKey() {
@@ -141,7 +175,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean canBeLeashed(Player player) {
-        return false;
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim;
     }
 
     @Override
@@ -168,9 +202,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        if (stageManager.getCurrentStage().playMusic()) {
-            PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStartPacket(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-        }
     }
 
     @Override
@@ -182,7 +213,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean isPushable() {
-        if (this.getPreview() || this.isTransitioning() || this.isInvul() || this.stageManager.getCurrentStage() instanceof SkizzikSleeping) {
+        if (this.getPreview() || this.isTransitioning() || this.isInvul() || this.isConverting() || this.stageManager.getCurrentStage() instanceof SkizzikSleeping) {
             return false;
         }
         return super.isPushable();
@@ -192,7 +223,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
         this.bossBar.removePlayer(serverPlayer);
-        PA_PacketRegistry.INSTANCE.sendTo(new BossMusicStopPacket(), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
@@ -233,7 +263,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     @Override
     public boolean addEffect(MobEffectInstance effect, @Nullable Entity entity) {
-        return false;
+        super.addEffect(effect, entity);
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect && !this.isConverting();
     }
 
     @Override
@@ -267,6 +298,30 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+    }
+
+    public boolean isConverting() {
+        return this.entityData.get(DATA_CONVERTING);
+    }
+
+    public void setConverting(boolean converting) {
+        this.entityData.set(DATA_CONVERTING, converting);
+    }
+
+    public boolean isInterupted() {
+        return this.entityData.get(DATA_INTERUPTED);
+    }
+
+    public void setInterupted(boolean interupted) {
+        this.entityData.set(DATA_INTERUPTED, interupted);
+    }
+
+    public boolean wasInterupted() {
+        return this.entityData.get(DATA_WAS_INTERUPTED);
+    }
+
+    public void setWasInterupted(boolean interupted) {
+        this.entityData.set(DATA_WAS_INTERUPTED, interupted);
     }
 
     public void setEyeHeight(float height) {
@@ -306,12 +361,37 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     @Override
-    public boolean canBeAffected(MobEffectInstance effect) {
+    public boolean isPickable() {
         return false;
     }
 
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.parts;
+    }
+
+    @Override
+    public void recreateFromPacket(ClientboundAddMobPacket packet) {
+        super.recreateFromPacket(packet);
+        PartEntity<?>[] parts = this.getParts();
+
+        for(int i = 0; i < parts.length; ++i) {
+            parts[i].setId(i + 1 + packet.getId());
+        }
+    }
+
+    @Override
+    public boolean canBeAffected(MobEffectInstance effect) {
+        return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect && !this.isConverting();
+    }
+
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
-        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping)) {
+        if (!(this.stageManager.getCurrentStage() instanceof SkizzikSleeping) && !this.isConverting()) {
             if (this.isTransitioning() && this.stageManager.getCurrentStage() instanceof SkizzikStage1) {
                 return PlayState.STOP;
             }
@@ -335,6 +415,21 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(String.format("animation.skizzik.to_stage-%d", this.stageManager.getCurrentStage().getStage().getId())));
             }
+        }
+        else if (this.isConverting() && this.hasEffect(PA_Effects.CONVERSION.get())) {
+            if (this.getEffect(PA_Effects.CONVERSION.get()).getDuration() >= 11880) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.begin_convert"));
+            }
+            else {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.converting"));
+            }
+        }
+        else if (this.isInterupted()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzik.end_convert"));
+            if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                this.setInterupted(false);
+            }
+            return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
     }
@@ -360,37 +455,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         return this.xRotHeads[head];
     }
 
-    public double getHeadX(int head) {
-        if (head <= 0) {
-            return this.getX();
-        }
-        else {
-            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = Mth.cos(f);
-
-            return head <= 2 ? this.getX() + (double)f1 * 1.3D :
-                    head == 3 ? this.getX() + f1 * 1.2D :
-                    this.getX() + (double)f1 * 0.8D;
-        }
-    }
-
-    public double getHeadY(int head) {
-        return head == 0 ? this.getY() + 2.5D :
-                head == 1 || head == 2 ? this.getY() + 1.8 :
-                head == 3 ? this.getY() + 3.3 :
-                this.getY() + 3.4;
-    }
-
-    public double getHeadZ(int head) {
-        if (head <= 0) {
-            return this.getZ();
-        } else {
-            float f = (this.yBodyRot + (float)(180 * (head - 1))) * ((float)Math.PI / 180F);
-            float f1 = Mth.sin(f);
-            return this.getZ() + (double)f1 * 1.3D;
-        }
-    }
-
     private float rotlerp(float f1, float f2, float f3) {
         float f = Mth.wrapDegrees(f2 - f1);
         if (f > f3) {
@@ -405,6 +469,30 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     }
 
     @Override
+    protected void onEffectAdded(MobEffectInstance effect, @Nullable Entity entity) {
+        super.onEffectAdded(effect, entity);
+        if (!this.level.isClientSide()) {
+            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+        }
+    }
+
+    @Override
+    protected void onEffectUpdated(MobEffectInstance effect, boolean reapplyModifiers, @Nullable Entity entity) {
+        super.onEffectUpdated(effect, reapplyModifiers, entity);
+        if (!this.level.isClientSide()) {
+            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+        }
+    }
+
+    @Override
+    protected void onEffectRemoved(MobEffectInstance effect) {
+        super.onEffectRemoved(effect);
+        if (!this.level.isClientSide()) {
+            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundRemoveMobEffectPacket(this.getId(), effect.getEffect()));
+        }
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
 
@@ -412,6 +500,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.entityData.define(DATA_STAGE, 0);
         this.entityData.define(DATA_TRANSITIONING, false);
         this.entityData.define(DATA_INVUL, false);
+        this.entityData.define(DATA_CONVERTING, false);
+        this.entityData.define(DATA_INTERUPTED, false);
+        this.entityData.define(DATA_WAS_INTERUPTED, false);
 
         this.entityData.define(DATA_TARGET_A, 0);
         this.entityData.define(DATA_TARGET_B, 0);
@@ -438,6 +529,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         nbt.putBoolean("Preview", this.getPreview());
         nbt.putBoolean("Debug", this.getDebug());
         nbt.putBoolean("Invul", this.isInvul());
+        nbt.putBoolean("Converting", this.isConverting());
     }
 
     @Override
@@ -450,6 +542,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.setPreview(nbt.getBoolean("Preview"));
         this.setDebug(nbt.getBoolean("Debug"));
         this.setInvul(nbt.getBoolean("Invul"));
+        this.setConverting(nbt.getBoolean("Converting"));
 
         if (this.hasCustomName()) {
             this.bossBar.setName(this.getDisplayName());
@@ -470,9 +563,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             this.level.levelEvent(null, 1024, this.blockPosition(), 0);
         }
 
-        double headX = this.getHeadX(head);
-        double headY = this.getHeadY(head);
-        double headZ = this.getHeadZ(head);
+        double headX = this.stageManager.getCurrentStage().getHeadX(head);
+        double headY = this.stageManager.getCurrentStage().getHeadY(head);
+        double headZ = this.stageManager.getCurrentStage().getHeadZ(head);
 
         double targetX = x - headX;
         double targetY = y - headY;
@@ -510,14 +603,82 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
+    public void beginConversion() {
+        if (this.hasEffect(PA_Effects.CONVERSION.get())) {
+            this.removeAllEffects();
+            this.addEffect(new MobEffectInstance(PA_Effects.CONVERSION.get(), 12000));
+
+            this.setHealth(20.0F);
+
+            if (this.level instanceof ServerLevel) {
+                ((ServerLevel) this.level).setDayTime(18000);
+            }
+
+            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
+            lightning.moveTo(Vec3.atBottomCenterOf(this.blockPosition()));
+            lightning.setVisualOnly(true);
+            this.level.addFreshEntity(lightning);
+            
+            Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5.0F, false, explosion);
+            
+            this.setWasInterupted(false);
+            this.setConverting(true);
+        }
+    }
+
+    public void endConversion() {
+        this.setConverting(false);
+        
+        this.setInterupted(true);
+        this.setWasInterupted(true);
+
+        this.removeAllEffects();
+        
+        this.setHealth(20.0F);
+        if (this.level instanceof ServerLevel) {
+            ((ServerLevel) this.level).setDayTime(1000);
+        }
+
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level);
+        lightning.moveTo(Vec3.atBottomCenterOf(this.blockPosition()));
+        lightning.setVisualOnly(true);
+        this.level.addFreshEntity(lightning);
+        
+        Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5.0F, false, explosion);
+    }
+    
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack item = player.getItemInHand(hand);
+        Item requiredItem = this.wasInterupted() ? Items.NETHER_STAR : PA_Config.commonInstance.entities.convertWithDragonEgg.get() ? Items.DRAGON_EGG : Items.NETHER_STAR;
+        
+        if (item.is(requiredItem)) {
+            if (!this.isConverting() && !this.preview && this.hasEffect(PA_Effects.CONVERSION.get())) {
+                if (!player.getAbilities().instabuild) {
+                    item.shrink(1);
+                }
+
+                if (!this.level.isClientSide) {
+                    this.beginConversion();
+                }
+
+                this.gameEvent(GameEvent.MOB_INTERACT, this.eyeBlockPosition());
+                return InteractionResult.sidedSuccess(player.level.isClientSide);
+            }
+        }
+        return super.mobInteract(player, hand);
+    }
+
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         Explosion.BlockInteraction explosion = getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
-        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, explosion);
+        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, false, explosion);
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnData, nbt);
     }
-
+    
     @Override
     public void baseTick() {
         super.baseTick();
@@ -541,7 +702,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
         else {
             this.bossBar.setName(new TextComponent(String.format("%s - %s", this.getDisplayName().getString(), new TranslatableComponent("entity.skizzik.skizzik.invulnerable").getString())));
-            this.bossBar.setColor(PA_BossEvent.PA_BossBarColor.AQUA);
+            this.bossBar.setColor(PL_BossEvent.PL_BossBarColor.AQUA);
         }
         this.bossBar.setOverlay(this.stageManager.getCurrentStage().barOverlay());
         
@@ -555,6 +716,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                     ((ServerLevel) world).setDayTime(18000);
                 } 
                 else {
+//                    if (this.isConverting() && this.stageManager.getCurrentStage() instanceof SkizzikFinishHim) {
+//                        ((ServerLevel) world).setDayTime(world.getDayTime() + 10L);
+//                    }
+                    
                     if (this.stageManager.getCurrentStage() instanceof SkizzikStage3) {
                         ((ServerLevel) world).setDayTime(13000);
                     } 
@@ -566,18 +731,34 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
     }
 
+    public void kill() {
+        this.remove(Entity.RemovalReason.KILLED);
+    }
+    
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        return false;
+    }
+    
+    public boolean hurt(SkizzikPart part, DamageSource source, float amount) {
         Entity entity = source.getEntity();
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
         Level world = this.level;
         
-        if ((!(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) || SkizzikStages.isImmune(this, source)) {
+        if (!this.isConverting() && (!(entity instanceof Player) && entity instanceof LivingEntity)) {
+            return false;
+        }
+        
+        if (SkizzikStages.isImmune(this, source)) {
             return false;
         }
         else {
+            if (!this.isConverting() && !(entity instanceof Player) && entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == this.getMobType()) {
+                return false;
+            }
+            
             if (this.destroyBlocksTicks <= 0) {
                 this.destroyBlocksTicks = this.stageManager.getCurrentStage().destroyBlocksTick();
             }
@@ -600,12 +781,53 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 }
             }
 
+            if (this.isConverting()) {
+                this.endConversion();
+                return super.hurt(source, 0);
+            }
+
+            if (part == this.commandBlockPart && this.stageManager.getCurrentStage() instanceof SkizzikStage5) {
+                amount *= 1.5;
+            }
+            
             return super.hurt(source, amount);
+        }
+    }
+
+    public void tickPartOffset(SkizzikPart part, double offsetX, double offsetY, double offsetZ) {
+        this.tickPart(part, this.getX() + offsetX, this.getY() + offsetY, this.getZ() + offsetZ);
+    }
+    
+    public void tickPart(SkizzikPart part, double x, double y, double z) {
+        if (part.despawnStage != null) {
+            if (part.despawnStage.getId() > this.stageManager.getCurrentStage().getStage().getId()) {
+                part.setPos(x, y, z);
+            }
+            else {
+                part.setPos(this.parts[4].xo, this.parts[4].yo + 0.05, this.parts[4].zo);
+            }
+        }
+        else {
+            part.setPos(x, y, z);
         }
     }
 
     @Override
     public void aiStep() {
+        this.stageManager.getCurrentStage().tickParts();
+        
+        Vec3[] vec3 = new Vec3[this.parts.length];
+        for(int i = 0; i < this.parts.length; ++i) {
+            vec3[i] = new Vec3(this.parts[i].getX(), this.parts[i].getY(), this.parts[i].getZ());
+
+            this.parts[i].xo = vec3[i].x;
+            this.parts[i].yo = vec3[i].y;
+            this.parts[i].zo = vec3[i].z;
+            this.parts[i].xOld = vec3[i].x;
+            this.parts[i].yOld = vec3[i].y;
+            this.parts[i].zOld = vec3[i].z;
+        }
+        
         Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
         if (!this.level.isClientSide && this.getAlternativeTarget(0) > 0) {
             Entity entity = this.level.getEntity(this.getAlternativeTarget(0));
@@ -646,9 +868,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
                 }
 
                 if (entity1 != null) {
-                    double headX = this.getHeadX(j + 1);
-                    double headY = this.getHeadY(j + 1);
-                    double headZ = this.getHeadZ(j + 1);
+                    double headX = this.stageManager.getCurrentStage().getHeadX(j + 1);
+                    double headY = this.stageManager.getCurrentStage().getHeadY(j + 1);
+                    double headZ = this.stageManager.getCurrentStage().getHeadZ(j + 1);
 
                     double entityX = entity1.getX() - headX;
                     double entityY = entity1.getEyeY() - headY;
@@ -668,9 +890,9 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             }
 
             for(int l = 0; l < activeHeads + 1; ++l) {
-                double headX = this.getHeadX(l);
-                double heaxY = this.getHeadY(l);
-                double headZ = this.getHeadZ(l);
+                double headX = this.stageManager.getCurrentStage().getHeadX(l);
+                double heaxY = this.stageManager.getCurrentStage().getHeadY(l);
+                double headZ = this.stageManager.getCurrentStage().getHeadZ(l);
                 if (l == 0) {
                     this.level.addParticle(ParticleTypes.FLAME, headX + this.random.nextGaussian() * (double)0.5F, heaxY + this.random.nextGaussian() * (double)0.5F, headZ + this.random.nextGaussian() * (double)0.5F, 0.0D, 0.0D, 0.0D);
                 }
@@ -685,6 +907,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     protected void customServerAiStep() {
         super.customServerAiStep();
 
+        if (stageManager.getCurrentStage().playMusic()) {
+            bossBar.setMusic(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get());
+        }
+        else {
+            bossBar.setMusic(null);
+        }
+        
         int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
         if (this.spawnSkizzieTicks <= 0) {
             this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();

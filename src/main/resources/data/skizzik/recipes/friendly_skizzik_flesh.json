@@ -1,0 +1,16 @@
+{
+  "group": "skizzik_flesh",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:skizzik_flesh"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "skizzik:friendly_skizzik_flesh",
+    "count": 1
+  }
+}

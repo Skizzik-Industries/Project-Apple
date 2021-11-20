@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.stages.SkizzikStageInterface;
+import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -126,7 +126,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
             Entity target = entity.getEntity();
             Entity source = this.getOwner();
             boolean hurt;
-            if (source instanceof LivingEntity) {
+            if (source instanceof Skizzik) {
                 Skizzik skizzik = (Skizzik) source;
                 hurt = this.getLevel() == 1 ? target.hurt(skizzikSkull(this, skizzik), 8.0F)
                         : this.getLevel() == 2 ? target.hurt(skizzikSkull(this, skizzik), 10.0F)

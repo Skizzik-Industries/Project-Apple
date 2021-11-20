@@ -39,6 +39,12 @@ minecraft {
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
+        mainClient {
+            parent(null, "client")
+            args '--username', 'uSkizzik'
+            args '--uuid', '390ce263032d40ad8d0824ac54d60128'
+        }
+        
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
@@ -52,7 +58,25 @@ minecraft {
 
         client2 {
             parent(null, "client")
-            args '--username', 'Dev2'
+            args '--username', 'Dev'
+        }
+
+        client3 {
+            parent(null, "client")
+            args '--username', 'jeb_'
+            args '--uuid', '853c80ef3c3749fdaa49938b674adae6'
+        }
+
+        client4 {
+            parent(null, "client")
+            args '--username', 'deadmau5'
+            args '--uuid', '1e18d5ff643d45c8b50943b8461d8614'
+        }
+
+        client5 {
+            parent(null, "client")
+            args '--username', 'MumboJumbo'
+            args '--uuid', 'c7da90d56a054217b94a7d427cbbcad8'
         }
 
         server {
@@ -116,17 +140,27 @@ shadowJar {
 }
 
 repositories {
+    mavenLocal()
     maven {
+        name 'Boss Utilities'
+        url 'https://raw.github.com/Skizzium/Project-Lib/main/mcmodsrepo/'
+    }
+    maven {
+        name "GeckoLib"
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' 
     }
     maven {
+        name 'Curse Maven'
         url "https://cursemaven.com"
     }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    shade fg.deobf('software.bernie.geckolib:geckolib-1.17.1:3.0.2')
+    
+    implementation fg.deobf("com.skizzium.projectlib:BossUtilities-${mc_version}:${bossutils_version}")
+    shade fg.deobf("software.bernie.geckolib:geckolib-${mc_version}:${geckolib_version}")
+    
     runtimeOnly fg.deobf('curse.maven:spookyjam-2021-left-hanging-532595:3477308')
 }
 
@@ -152,7 +186,8 @@ def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
 def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
 def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version, toml_name: toml_name, mod_license: mod_license, mod_issues: mod_issues,
                          mod_url: mod_url, mod_logo: mod_logo, mod_credits: mod_credits, mod_authors: mod_authors, mod_description: mod_description, 
-                         mc_versionRange: mc_version, loader_version: loader_version, forge_version_range: forge_version_range, ]
+                         mc_versionRange: mc_version, loader_version: loader_version, forge_version_range: forge_version_range, 
+                         geckolib_version_range: geckolib_version_range, bossutils_version_range: bossutils_version_range, ]
 processResources {
     inputs.properties replaceProperties
     replaceProperties.put 'project', project
@@ -222,10 +257,10 @@ curseforge {
                 displayName = mod_name + ": " + update_name + " [" + mod_version + "]"
             }
 
-//            relations {
-//                requiredDependency 'bossutils'
-//                embeddedLibrary 'geckolib'
-//            }
+            relations {
+                requiredDependency 'bossutils'
+                embeddedLibrary 'geckolib'
+            }
         }
     }
 }

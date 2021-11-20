@@ -1,0 +1,16 @@
+{
+  "group": "skizzik_flesh",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:friendly_skizzik_flesh_block"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": {
+    "item": "skizzik:skizzik_flesh_block",
+    "count": 1
+  }
+}

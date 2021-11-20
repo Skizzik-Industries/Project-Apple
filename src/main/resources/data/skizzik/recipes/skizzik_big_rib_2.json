@@ -1,0 +1,16 @@
+{
+  "group": "skizzik_big_rib",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:friendly_skizzik_big_rib"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": {
+    "item": "skizzik:skizzik_big_rib",
+    "count": 1
+  }
+}

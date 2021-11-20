@@ -59,10 +59,17 @@ public class PA_LootTableProvider extends LootTableProvider {
             dropSelf(PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get());
             dropSelf(PA_Blocks.BROKEN_COMMAND_BLOCK.get());
 
+            dropSelf(PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD.get());
+            dropSelf(PA_Blocks.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get());
+            dropSelf(PA_Blocks.FRIENDLY_SKIZZIK_HEAD.get());
+            dropSelf(PA_Blocks.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get());
+            
             dropSelf(PA_Blocks.SMALL_SKIZZIK_HEAD.get());
             dropSelf(PA_Blocks.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
             dropSelf(PA_Blocks.SKIZZIK_HEAD.get());
             dropSelf(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
+            
+            dropSelf(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
             dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
             dropSelf(PA_Blocks.CORRUPTED_BLOCK.get());

@@ -214,7 +214,7 @@ public class Skizzie extends Monster {
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        return SkizzieConversion.convert(this, player);
+        return SkizzieConversion.convert(this, player, hand);
     }
 
     @Override

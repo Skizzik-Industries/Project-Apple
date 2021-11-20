@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly;
 
-import com.skizzium.projectapple.init.PA_Effects;
+import com.skizzium.projectapple.init.effects.PA_Effects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.server.level.ServerPlayer;

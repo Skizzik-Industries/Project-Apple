@@ -11,11 +11,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SkizzoModel<T extends Skizzo> extends EntityModel<T> {
+public class SkizzoModel<T extends LivingEntity> extends EntityModel<T> {
 	private final ModelPart head;
 
 	public SkizzoModel(ModelPart part) {
@@ -26,12 +27,12 @@ public class SkizzoModel<T extends Skizzo> extends EntityModel<T> {
 		MeshDefinition mesh = new MeshDefinition();
 		PartDefinition part = mesh.getRoot();
 
-		part.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -27.0F, -6.0F, 12.0F, 12.0F, 12.0F, false)
-																		.texOffs(71, 15).addBox(-4.0F, -15.0F, -4.0F, 8.0F, 1.0F, 8.0F, false)
-																		.texOffs(75, 5).addBox(-3.0F, -14.0F, -3.0F, 6.0F, 3.0F, 6.0F, false)
-																		.texOffs(54, 17).addBox(-2.0F, -11.0F, -2.0F, 4.0F, 3.0F, 4.0F, false)
-																		.texOffs(58, 11).addBox(-1.0F, -8.0F, -1.0F, 2.0F, 3.0F, 2.0F, false)
-																		.texOffs(49, 18).addBox(-1.0F, -5.0F, 0.0F, 1.0F, 5.0F, 1.0F, false), PartPose.offset(0.0F, 18.0F, 0.0F));
+		part.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, false)
+																		.texOffs(71, 15).addBox(-4.0F, 6.0F, -4.0F, 8.0F, 1.0F, 8.0F, false)
+																		.texOffs(75, 5).addBox(-3.0F, 7.0F, -3.0F, 6.0F, 3.0F, 6.0F, false)
+																		.texOffs(54, 17).addBox(-2.0F, 10.0F, -2.0F, 4.0F, 3.0F, 4.0F, false)
+																		.texOffs(58, 11).addBox(-1.0F, 13.0F, -1.0F, 2.0F, 3.0F, 2.0F, false)
+																		.texOffs(49, 18).addBox(-1.0F, 16.0F, 0.0F, 1.0F, 5.0F, 1.0F, false), PartPose.offset(0.0F, 3.0F, 0.0F));
 
 		return LayerDefinition.create(mesh, 103, 24);
 	}
