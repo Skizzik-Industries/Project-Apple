@@ -576,6 +576,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         skull.setLevel(level);
 
         skull.setPosRaw(headX, headY, headZ);
+        skull.setDeltaMovement(skull.getDeltaMovement().add(skull.xPower, skull.yPower, skull.zPower).scale(skull.getInertia()));
         this.level.addFreshEntity(skull);
     }
 
