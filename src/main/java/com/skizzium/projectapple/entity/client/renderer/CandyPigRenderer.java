@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.renderer;
+package com.skizzium.projectapple.entity.client.renderer;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.PigRenderer;

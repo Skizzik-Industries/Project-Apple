@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.gui;
 
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

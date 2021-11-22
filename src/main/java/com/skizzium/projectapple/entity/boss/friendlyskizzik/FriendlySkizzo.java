@@ -1,11 +1,8 @@
-package com.skizzium.projectapple.entity.boss.skizzik;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.entity.PA_Entities;
-import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

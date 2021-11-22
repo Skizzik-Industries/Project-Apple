@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.boss.skizzik.client.model;
+package com.skizzium.projectapple.entity.client.model;
 
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelPart;

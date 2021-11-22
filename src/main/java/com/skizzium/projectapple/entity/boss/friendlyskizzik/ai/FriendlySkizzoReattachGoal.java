@@ -1,7 +1,7 @@
-package com.skizzium.projectapple.entity.boss.skizzik.ai;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.ai;
 
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzo;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;

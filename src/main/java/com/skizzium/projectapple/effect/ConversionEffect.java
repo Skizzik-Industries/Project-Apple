@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.effect;
 
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikFinishHim;
 import com.skizzium.projectapple.init.entity.PA_Entities;

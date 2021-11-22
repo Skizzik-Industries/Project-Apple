@@ -1,6 +1,6 @@
-package com.skizzium.projectapple.entity.boss.skizzik.ai;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.ai;
 
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 

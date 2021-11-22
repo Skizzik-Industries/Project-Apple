@@ -1,11 +1,10 @@
-package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.skull;
+package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.AbstractSkizzikSkullRenderer;
 import com.skizzium.projectapple.entity.boss.skizzik.SkizzikSkull;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

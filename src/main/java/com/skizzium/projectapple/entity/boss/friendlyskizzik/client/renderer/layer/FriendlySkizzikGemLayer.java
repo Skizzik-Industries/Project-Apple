@@ -1,8 +1,8 @@
-package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.FriendlySkizzikModel;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.model.FriendlySkizzikModel;
 import com.skizzium.projectapple.item.Gem;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

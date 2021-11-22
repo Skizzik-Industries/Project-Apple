@@ -1,7 +1,7 @@
-package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzo;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.SkizzoGlowLayer;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;

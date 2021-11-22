@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlyWitchSkizzie;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

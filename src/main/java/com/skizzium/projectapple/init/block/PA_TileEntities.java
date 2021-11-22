@@ -5,7 +5,7 @@ import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.tileentity.PA_SignTileEntity;
 import com.skizzium.projectapple.tileentity.PA_Skull;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.PA_SkullModel;
+import com.skizzium.projectapple.entity.client.model.PA_SkullModel;
 import com.skizzium.projectapple.tileentity.renderer.PA_SkullRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;

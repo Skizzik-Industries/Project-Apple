@@ -1,10 +1,10 @@
-package com.skizzium.projectapple.entity.boss.skizzik;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.ai.FriendlySkizzoReattachGoal;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikGoalController;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.ai.FriendlySkizzoReattachGoal;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;

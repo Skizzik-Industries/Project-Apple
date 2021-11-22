@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.*;
@@ -60,7 +61,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import net.minecraftforge.entity.PartEntity;
-import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;

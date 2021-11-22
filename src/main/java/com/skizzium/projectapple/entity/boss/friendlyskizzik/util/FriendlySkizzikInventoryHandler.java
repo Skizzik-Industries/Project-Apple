@@ -1,7 +1,7 @@
-package com.skizzium.projectapple.entity.boss.skizzik.util;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.util;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
 import com.skizzium.projectapple.gui.FriendlySkizzikScreen;
 import com.skizzium.projectapple.init.PA_PacketRegistry;

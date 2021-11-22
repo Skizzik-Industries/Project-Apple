@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.network;
 
-import com.skizzium.projectapple.entity.boss.skizzik.util.FriendlySkizzikInventoryHandler;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.util.FriendlySkizzikInventoryHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;

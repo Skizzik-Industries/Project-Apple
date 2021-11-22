@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.boss.skizzik;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.init.entity.PA_Entities;

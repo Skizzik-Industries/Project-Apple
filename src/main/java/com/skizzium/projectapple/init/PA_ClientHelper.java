@@ -8,7 +8,7 @@ import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.init.item.PA_Items;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.PA_SkullModel;
+import com.skizzium.projectapple.entity.client.model.PA_SkullModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.SkullModelBase;

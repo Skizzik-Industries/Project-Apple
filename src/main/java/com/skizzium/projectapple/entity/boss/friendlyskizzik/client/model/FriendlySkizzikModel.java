@@ -1,7 +1,7 @@
-package com.skizzium.projectapple.entity.boss.skizzik.client.model;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.client.model;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;

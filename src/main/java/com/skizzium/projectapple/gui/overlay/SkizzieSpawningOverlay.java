@@ -3,7 +3,7 @@ package com.skizzium.projectapple.gui.overlay;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;

@@ -1,8 +1,8 @@
-package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer;
 
-import com.skizzium.projectapple.entity.boss.skizzik.FriendlySkizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.FriendlySkizzikModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.FriendlySkizzikGemLayer;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.model.FriendlySkizzikModel;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.layer.FriendlySkizzikGemLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;

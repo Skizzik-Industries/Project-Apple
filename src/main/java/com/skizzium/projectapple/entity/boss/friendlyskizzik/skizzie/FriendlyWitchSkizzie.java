@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie;
 
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import net.minecraft.client.Minecraft;

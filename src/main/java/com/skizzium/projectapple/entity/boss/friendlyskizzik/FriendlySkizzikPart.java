@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.entity.boss.skizzik;
+package com.skizzium.projectapple.entity.boss.friendlyskizzik;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
