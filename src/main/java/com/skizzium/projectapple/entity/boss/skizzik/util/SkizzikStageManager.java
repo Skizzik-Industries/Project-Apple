@@ -25,7 +25,7 @@ public class SkizzikStageManager {
                                             health > 220 ? 4 :
                                                     health > 20 ? 5 : 6;
 
-            if (skizzik.getHealth() != 0 && !skizzik.getDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
+            if (skizzik.getHealth() != 0 && !skizzik.getStageDebug() && !(this.currentStage instanceof SkizzikFinishHim) && skizzik.getHealth() <= this.getNextStage().maxStageHealth()) {
                 if (skizzik.isTransitioning()) {
                     if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
                         this.setStage(this.getNextStage().getStage());
@@ -35,7 +35,7 @@ public class SkizzikStageManager {
                 }
             }
 
-            if (skizzik.getDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
+            if (skizzik.getStageDebug() && newStageId != this.getCurrentStage().getStage().getId()) {
                 if (skizzik.isTransitioning()) {
                     if (!(skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1)) {
                         this.setStage(SkizzikStages.getById(newStageId));

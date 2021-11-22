@@ -108,7 +108,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
 
     public final SkizzikStageManager stageManager;
     private float eyeHeight;
-    private boolean debug;
+    private boolean stageDebug;
     private AnimationFactory factory = new AnimationFactory(this);
     
     private int destroyBlocksTicks;
@@ -292,12 +292,12 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.preview = flag;
     }
 
-    public boolean getDebug() {
-        return debug;
+    public boolean getStageDebug() {
+        return stageDebug;
     }
 
-    public void setDebug(boolean debug) {
-        this.debug = debug;
+    public void setStageDebug(boolean stageDebug) {
+        this.stageDebug = stageDebug;
     }
 
     public boolean isConverting() {
@@ -527,7 +527,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         nbt.putBoolean("Transitioning", this.isTransitioning());
         nbt.putInt("TransitionTime", this.getTransitionTicks());
         nbt.putBoolean("Preview", this.getPreview());
-        nbt.putBoolean("Debug", this.getDebug());
+        nbt.putBoolean("StageDebug", this.getStageDebug());
         nbt.putBoolean("Invul", this.isInvul());
         nbt.putBoolean("Converting", this.isConverting());
     }
@@ -540,7 +540,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         this.setTransitionsTicks(nbt.getInt("TransitionTime"));
         this.setTransitioning(nbt.getBoolean("Transitioning"));
         this.setPreview(nbt.getBoolean("Preview"));
-        this.setDebug(nbt.getBoolean("Debug"));
+        this.setStageDebug(nbt.getBoolean("StageDebug"));
         this.setInvul(nbt.getBoolean("Invul"));
         this.setConverting(nbt.getBoolean("Converting"));
 
