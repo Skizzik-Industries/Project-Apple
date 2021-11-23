@@ -32,7 +32,7 @@ public interface SkizzikStageInterface {
     
     int skizzieSpawnTicks();
     
-    int destroyBlocksTick();
+    int destroyBlocksTicks();
     
     float eyeHeight();
     

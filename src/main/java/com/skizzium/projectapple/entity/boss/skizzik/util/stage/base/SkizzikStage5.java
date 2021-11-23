@@ -65,7 +65,7 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
     
     @Override
-    public int destroyBlocksTick() {
+    public int destroyBlocksTicks() {
         return 10;
     }
 

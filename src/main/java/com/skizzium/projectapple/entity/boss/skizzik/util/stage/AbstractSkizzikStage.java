@@ -80,7 +80,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     }
 
     @Override
-    public int destroyBlocksTick() {
+    public int destroyBlocksTicks() {
         return 35;
     }
 

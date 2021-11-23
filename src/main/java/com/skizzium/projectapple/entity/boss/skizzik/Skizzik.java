@@ -761,7 +761,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
             }
             
             if (this.destroyBlocksTicks <= 0) {
-                this.destroyBlocksTicks = this.stageManager.getCurrentStage().destroyBlocksTick();
+                this.destroyBlocksTicks = this.stageManager.getCurrentStage().destroyBlocksTicks();
             }
 
             for (int i = 0; i < this.idleHeadUpdates.length; ++i) {
@@ -916,6 +916,10 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
         
         int currentStageId = this.stageManager.getCurrentStage().getStage().getId();
+        if (this.destroyBlocksTicks <= 0) {
+            this.destroyBlocksTicks = this.stageManager.getCurrentStage().destroyBlocksTicks();
+        }
+        
         if (this.spawnSkizzieTicks <= 0) {
             this.spawnSkizzieTicks = this.stageManager.getCurrentStage().skizzieSpawnTicks();
         }
@@ -1020,7 +1024,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
         }
 
         if (!this.preview) {
-            if (this.destroyBlocksTicks > 0) {
+            if (this.destroyBlocksTicks >= 0) {
                 if (stageManager.getCurrentStage().attackStatically()) {
                     --this.destroyBlocksTicks;
 
