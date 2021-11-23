@@ -1,6 +1,6 @@
 ---
 name: Balance Issue
-about: Suggest an idea for this project
+about: Give feedback on the balancing of different aspects of the mod
 title: Balance Issue
 labels: Balance Issue
 assignees: uSkizzik
