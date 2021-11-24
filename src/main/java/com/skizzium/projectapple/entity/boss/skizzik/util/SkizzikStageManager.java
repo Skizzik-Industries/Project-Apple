@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.util;
 
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikFinishHim;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikSleeping;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikStage1;
 
 public class SkizzikStageManager {
@@ -62,7 +63,9 @@ public class SkizzikStageManager {
                 this.skizzik.getEntityData().set(Skizzik.DATA_STAGE, stage.getId());
             }
             
-            this.currentStage.begin(this);
+            if (this.previousStage != null || this.currentStage instanceof SkizzikSleeping) {
+                this.currentStage.begin(this);
+            }
         }
     }
 
