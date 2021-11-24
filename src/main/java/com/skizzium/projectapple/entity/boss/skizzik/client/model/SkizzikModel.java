@@ -121,34 +121,32 @@ public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
             setPivot(centerHead, -0.5F, 0.0F, 0.0F);
             setPivot(body, -0.5F, 0.0F, 0.0F);
         }
-        else {
-            setPivot(topLeftHead, 0.0F, 0.0F, -1.0F);
-            setPivot(bottomLeftHead, 0.0F, 0.0F, -1.0F);
-        }
-        
-        if (currentStageId == 2 && !skizzik.isTransitioning()) {
-            setPivot(topRightHead, -21.0F, 2.0F, 0.0F);
-        }
 
-        if (currentStageId == 3 && !skizzik.isTransitioning()) {
-            setPivot(bottomRightHead, 0.0F, 4.0F, 0.0F);
-        }
+        if (!skizzik.isTransitioning()) {
+            if (currentStageId == 2) {
+                setPivot(topRightHead, -21.0F, 2.0F, 0.0F);
+            }
 
-        if (currentStageId == 4 && !skizzik.isTransitioning()) {
-            setPivot(bottomRightHead, -8.0F, 23.0F, 0.0F);
-        }
+            if (currentStageId == 3) {
+                setPivot(bottomRightHead, 0.0F, 4.0F, 0.0F);
+            }
 
-        if (currentStageId == 5 && !skizzik.isTransitioning()) {
-            setPivot(centerHead, 0.0F, 5.0F, 0.0F);
-            setPivot(commandBlock, 0.0F, 0.0F, -10.0F);
-            
-            setRot(rightRibs, 0.0F, -6.05352F, 0.0F);
-            setRot(leftRibs, 0.0F, 6.05352F, 0.0F);
-            setRot(bottomRib, -0.22394F, 0.0F, 0.0F);
-        }
+            if (currentStageId == 4) {
+                setPivot(bottomRightHead, -8.0F, 23.0F, 0.0F);
+            }
 
-        if (currentStageId == 6 && !skizzik.isTransitioning()) {
-            setPivot(centerHead, 0.0F, -2.3F, 0.0F);
+            if (currentStageId == 5) {
+                setPivot(centerHead, 0.0F, 5.0F, 0.0F);
+                setPivot(commandBlock, 0.0F, 0.0F, -10.0F);
+
+                setRot(rightRibs, 0.0F, -6.05352F, 0.0F);
+                setRot(leftRibs, 0.0F, 6.05352F, 0.0F);
+                setRot(bottomRib, -0.22394F, 0.0F, 0.0F);
+            }
+
+            if (currentStageId == 6) {
+                setPivot(centerHead, 0.0F, -2.3F, 0.0F);
+            }
         }
     }
 }
