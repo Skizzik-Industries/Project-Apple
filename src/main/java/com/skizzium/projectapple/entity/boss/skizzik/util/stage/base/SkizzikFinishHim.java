@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik.util.stage.base;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.block.SkizzikLootBag;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
@@ -18,6 +19,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
     public SkizzikFinishHim(Skizzik skizzik) {
@@ -78,13 +80,21 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         return new EntityDimensions(1.2F, 2.868F, true);
     }
     
+    private BlockState getBagState() {
+        BlockState state = PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState();
+        if (ProjectApple.holiday > 0) {
+            return state.setValue(SkizzikLootBag.HOLIDAY, ProjectApple.holiday);
+        }
+        return state;
+    }
+    
     @Override
     public void begin(SkizzikStageManager stageManager) {
         super.begin(stageManager);
 
         Level world = skizzik.level;
         if (world instanceof ServerLevel) {
-            world.setBlock(new BlockPos(skizzik.getX(), skizzik.getY(), skizzik.getZ()), PA_Blocks.SKIZZIK_LOOT_BAG.get().defaultBlockState(), 2);
+            world.setBlock(new BlockPos(skizzik.getX(), skizzik.getY(), skizzik.getZ()), this.getBagState(), 2);
             ((ServerLevel) world).setDayTime(1000);
         }
 

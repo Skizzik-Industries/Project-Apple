@@ -144,8 +144,9 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                     if (difference > 0) {
                         for (int i = 1; i <= difference; i++) {
                             Skizzo skizzo = (Skizzo) PA_Entities.SKIZZO.get().spawn((ServerLevel) world, null, null, new BlockPos(this.getHeadX(id - 1), this.getHeadY(id - 1), this.getHeadZ(id - 1)), MobSpawnType.MOB_SUMMONED, true, true);
-                            //skizzo.setYBodyRot(skizzik.getHeadXRot(id - 2));
-                            //skizzo.setYHeadRot(skizzik.getHeadYRot(id - 2));
+                            skizzo.setXRot(skizzik.getHeadXRot(id - 2));
+                            skizzo.setYRot(skizzik.getHeadYRot(id - 2));
+                            
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
                             skizzik.setInvul(!skizzik.getStageDebug());
