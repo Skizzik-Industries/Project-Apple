@@ -62,6 +62,7 @@ import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import net.minecraftforge.entity.PartEntity;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -77,7 +78,7 @@ import java.util.UUID;
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
 
-public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
+public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IAnimationTickable {
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_C = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
@@ -440,6 +441,11 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
         data.addAnimationController(new AnimationController(this, "transitions", 0, this::transitions));
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.tickCount;
     }
 
     @Override

@@ -8,13 +8,14 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkizzikModel extends AnimatedGeoModel<Skizzik> {
+public class SkizzikModel extends AnimatedTickingGeoModel<Skizzik> {
     @Override
     public ResourceLocation getTextureLocation(Skizzik skizzik) {
         if (ProjectApple.holiday > 0) {
