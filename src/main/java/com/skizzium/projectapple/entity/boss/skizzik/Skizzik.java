@@ -143,11 +143,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable {
     
     public Skizzik(EntityType<? extends Skizzik> entity, Level world) {
         super(entity, world);
-        this.stageManager = new SkizzikStageManager(this);
         this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanFloat(true);
+        
         this.xpReward = 0;
         this.eyeHeight = 1.5F;
+        
+        this.stageManager = new SkizzikStageManager(this);
 
         this.topLeftHead = new SkizzikPart(this, "topLeftHead", SkizzikStages.STAGE_2, 0.75F, 0.75F);
         this.topRightHead = new SkizzikPart(this, "topRightHead", SkizzikStages.STAGE_3, 0.75F, 0.75F);
