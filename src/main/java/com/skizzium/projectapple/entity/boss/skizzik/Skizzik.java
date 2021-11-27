@@ -534,7 +534,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
         nbt.putInt("Stage", this.stageManager.getCurrentStage().getStage().getId());
         nbt.putBoolean("Transitioning", this.isTransitioning());
         nbt.putInt("TransitionTime", this.getTransitionTicks());
-        nbt.putBoolean("Preview", this.getPreview());
+        //nbt.putBoolean("Preview", this.getPreview());
         nbt.putBoolean("StageDebug", this.getStageDebug());
         nbt.putBoolean("Invul", this.isInvul());
         nbt.putBoolean("Converting", this.isConverting());
@@ -547,7 +547,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
         this.stageManager.setStage(SkizzikStages.getById(nbt.getInt("Stage")));
         this.setTransitionsTicks(nbt.getInt("TransitionTime"));
         this.setTransitioning(nbt.getBoolean("Transitioning"));
-        this.setPreview(nbt.getBoolean("Preview"));
+        //this.setPreview(nbt.getBoolean("Preview"));
         this.setStageDebug(nbt.getBoolean("StageDebug"));
         this.setInvul(nbt.getBoolean("Invul"));
         this.setConverting(nbt.getBoolean("Converting"));
