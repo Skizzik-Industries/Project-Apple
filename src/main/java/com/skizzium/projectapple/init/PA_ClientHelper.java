@@ -125,7 +125,7 @@ public class PA_ClientHelper {
     }
 
     @SubscribeEvent
-    public static void registerOtherStuff(final FMLClientSetupEvent event) {
+    public static void registerOtherStuff(FMLClientSetupEvent event) {
         ComposterBlock.COMPOSTABLES.put(PA_Blocks.CANDY_CANE.get(), 0.5F);
 
         WoodType.register(PA_Blocks.CANDY_WOOD_TYPE);
@@ -166,6 +166,17 @@ public class PA_ClientHelper {
             DispenserBlock.registerBehavior(egg, entityDispenseBehavior);
         }
 
+        DispenseItemBehavior skullDispenseBehavior = new OptionalDispenseItemBehavior() {
+            protected ItemStack execute(BlockSource source, ItemStack stack) {
+                this.setSuccess(ArmorItem.dispenseArmor(source, stack));
+                return stack;
+            }
+        };
+
+        DispenserBlock.registerBehavior(PA_Items.FRIENDLY_SKIZZIK_HEAD.get(), skullDispenseBehavior);
+        DispenserBlock.registerBehavior(PA_Items.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), skullDispenseBehavior);
+        DispenserBlock.registerBehavior(PA_Items.SKIZZIK_HEAD.get(), skullDispenseBehavior);
+
         DispenserBlock.registerBehavior(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseItemBehavior() {
             protected ItemStack execute(BlockSource source, ItemStack itemStack) {
                 Level world = source.getLevel();
@@ -182,9 +193,6 @@ public class PA_ClientHelper {
 
                     itemStack.shrink(1);
                     this.setSuccess(true);
-                }
-                else {
-                    this.setSuccess(ArmorItem.dispenseArmor(source, itemStack));
                 }
 
                 return itemStack;
