@@ -29,51 +29,6 @@ public class SkizzikStages<T extends SkizzikStageInterface> {
         this.stageClass = clazz;
     }
     
-    public static boolean isImmune(Skizzik skizzik, DamageSource source) {
-        int stage = skizzik.stageManager.getCurrentStage().getStage().getId();
-
-        if (skizzik.wasInterupted() && PA_Config.commonInstance.entities.convertWithDragonEgg.get() && source != DamageSource.OUT_OF_WORLD) {
-            return true;
-        }
-        
-        if ((skizzik.getTransitionTicks() > 0 || skizzik.getPreview() || skizzik.isInvul()) && source != DamageSource.OUT_OF_WORLD) {
-            return true;
-        }
-        
-        if (source == DamageSource.LIGHTNING_BOLT ||
-                source == DamageSource.HOT_FLOOR ||
-                source == DamageSource.IN_FIRE ||
-                source == DamageSource.LAVA ||
-                source == DamageSource.ON_FIRE) {
-            return true;
-        }
-        
-        if (stage < 6) {
-            if (source == DamageSource.CACTUS ||
-                    source == DamageSource.FALL ||
-                    source.isExplosion() ||
-                    source == DamageSource.SWEET_BERRY_BUSH ||
-                    source == DamageSource.WITHER ||
-                    source == DamageSource.STALAGMITE) {
-                return true;
-            }
-            
-            if (stage >= 2 && source == DamageSource.ANVIL)
-                return true;
-
-            if (stage >= 3 && source.getDirectEntity() instanceof ThrownPotion)
-                return true;
-
-            if (stage >= 4 && source.getDirectEntity() instanceof ThrownTrident)
-                return true;
-            
-            if (stage == 5 && (source.getDirectEntity() instanceof Arrow) || source == DamageSource.DRAGON_BREATH)
-                return true;
-        }
-        
-        return false;
-    }
-    
     public SkizzikStageInterface createInstance(Skizzik skizzik) {
         try {
             Constructor<? extends SkizzikStageInterface> stageConstructor = this.getConstructor();

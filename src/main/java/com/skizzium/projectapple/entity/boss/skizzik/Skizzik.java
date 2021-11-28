@@ -47,6 +47,9 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -746,6 +749,56 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
         }
     }
 
+    @Override
+    public boolean isInvulnerableTo(DamageSource source) {
+        int stage = this.stageManager.getCurrentStage().getStage().getId();
+
+        if (super.isInvulnerableTo(source)) {
+            return true;
+        }
+        
+        if (this.wasInterupted() && PA_Config.commonInstance.entities.convertWithDragonEgg.get() && source != DamageSource.OUT_OF_WORLD) {
+            return true;
+        }
+
+        if ((this.getTransitionTicks() > 0 || this.getPreview() || this.isInvul()) && source != DamageSource.OUT_OF_WORLD) {
+            return true;
+        }
+
+        if (source == DamageSource.LIGHTNING_BOLT ||
+                source == DamageSource.HOT_FLOOR ||
+                source == DamageSource.IN_FIRE ||
+                source == DamageSource.LAVA ||
+                source == DamageSource.ON_FIRE) {
+            return true;
+        }
+
+        if (stage < 6) {
+            if (source == DamageSource.CACTUS ||
+                    source == DamageSource.FALL ||
+                    source.isExplosion() ||
+                    source == DamageSource.SWEET_BERRY_BUSH ||
+                    source == DamageSource.WITHER ||
+                    source == DamageSource.STALAGMITE) {
+                return true;
+            }
+
+            if (stage >= 2 && source == DamageSource.ANVIL)
+                return true;
+
+            if (stage >= 3 && source.getDirectEntity() instanceof ThrownPotion)
+                return true;
+
+            if (stage >= 4 && source.getDirectEntity() instanceof ThrownTrident)
+                return true;
+
+            if (stage == 5 && (source.getDirectEntity() instanceof Arrow) || source == DamageSource.DRAGON_BREATH)
+                return true;
+        }
+
+        return false;
+    }
+
     public void kill() {
         this.remove(Entity.RemovalReason.KILLED);
     }
@@ -766,7 +819,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
             return false;
         }
         
-        if (SkizzikStages.isImmune(this, source)) {
+        if (false) { //SkizzikStages.isImmune(this, source)) {
             return false;
         }
         else {
