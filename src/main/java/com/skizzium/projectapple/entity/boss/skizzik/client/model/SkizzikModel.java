@@ -7,7 +7,6 @@ import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikStag
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
@@ -15,9 +14,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkizzikModel extends AnimatedTickingGeoModel<Skizzik> {
+public class SkizzikModel<T extends Skizzik> extends AnimatedTickingGeoModel<T> {
     @Override
-    public ResourceLocation getTextureLocation(Skizzik skizzik) {
+    public ResourceLocation getTextureLocation(T skizzik) {
         if (ProjectApple.holiday > 0) {
             return new ResourceLocation(ProjectApple.MOD_ID, String.format("textures/entity/holidays/%s/%s.png", ProjectApple.holidayNames.get(ProjectApple.holiday), skizzik.stageManager.getCurrentStage().textureLocation()));
         }
@@ -25,12 +24,16 @@ public class SkizzikModel extends AnimatedTickingGeoModel<Skizzik> {
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(Skizzik skizzik) {
+    public ResourceLocation getAnimationFileLocation(T skizzik) {
         return new ResourceLocation(ProjectApple.MOD_ID, "animations/skizzik.animation.json");
     }
 
     @Override
-    public ResourceLocation getModelLocation(Skizzik skizzik) {
+    public ResourceLocation getModelLocation(T skizzik) {
+        return modelLocation(skizzik);
+    }
+    
+    public static ResourceLocation modelLocation(Skizzik skizzik) {
         String modelName = "skizzik";
         if (skizzik.stageManager.getCurrentStage() instanceof SkizzikSleeping) {
             modelName += "_sleeping";
@@ -38,11 +41,11 @@ public class SkizzikModel extends AnimatedTickingGeoModel<Skizzik> {
         else if (skizzik.isTransitioning() && skizzik.stageManager.getCurrentStage() instanceof SkizzikStage1) {
             modelName += "_sleeping";
         }
-        
+
         return new ResourceLocation(ProjectApple.MOD_ID, String.format("geo/%s.geo.json", modelName));
     }
 
-    private static <T extends Skizzik> void setupHeadRotation(Skizzik skizzik, IBone model, int head) {
+    private static void setupHeadRotation(Skizzik skizzik, IBone model, int head) {
         if (!skizzik.getPreview() && model != null) {
             model.setRotationX((skizzik.getHeadXRot(head) * ((float) Math.PI / 180F) * -1));
             model.setRotationY(((skizzik.getHeadYRot(head) - skizzik.yBodyRot) * ((float) Math.PI / 180F) * -1));
@@ -69,7 +72,7 @@ public class SkizzikModel extends AnimatedTickingGeoModel<Skizzik> {
     }
     
     @Override
-    public void setLivingAnimations(Skizzik skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
+    public void setLivingAnimations(T skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
         super.setLivingAnimations(skizzik, uniqueID, customPredicate);
         IBone centerHead = this.getAnimationProcessor().getBone("center_head");
         IBone bottomRightHead = this.getAnimationProcessor().getBone("bottom_right_head");

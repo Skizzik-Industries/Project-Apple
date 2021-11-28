@@ -11,7 +11,7 @@ public class SkizzikRenderer extends GeoEntityRenderer<Skizzik> {
     public SkizzikRenderer(EntityRendererProvider.Context renderer) {
         super(renderer, new SkizzikModel());
         this.shadowRadius = 1.0F;
-        //this.addLayer(new SkizzikGlowLayer(this));
+        this.addLayer(new SkizzikGlowLayer<>(this));
     }
 
     @Override
