@@ -2,7 +2,7 @@ package com.skizzium.projectapple.init;
 
 import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.block.SkizzikHeadWithGems;
+import com.skizzium.projectapple.block.heads.SkizzikHeadWithGems;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;

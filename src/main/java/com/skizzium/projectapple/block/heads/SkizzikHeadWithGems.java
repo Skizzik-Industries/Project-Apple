@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.block;
+package com.skizzium.projectapple.block.heads;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;

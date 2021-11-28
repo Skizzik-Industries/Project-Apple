@@ -560,7 +560,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     }
 
     public void performBeamAttack(LivingEntity entity, float distance) {
-        System.out.println("SUP NIGGER");
+        
     }
     
     @Override
