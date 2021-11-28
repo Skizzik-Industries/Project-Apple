@@ -3,6 +3,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.ai.SkizzikBeamAttackGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.*;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.*;
@@ -135,7 +136,8 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     public HurtByTargetGoal hurtGoal = new HurtByTargetGoal(this);
     public NearestAttackableTargetGoal attackFSkizzikGoal = new NearestAttackableTargetGoal<>(this, FriendlySkizzik.class, false, false);
     public NearestAttackableTargetGoal attackGoal = new NearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, PA_Entities.SKIZZIK_SELECTOR);
-    public RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 20.0F);
+    public RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1.0D, 40, 40, 20.0F);
+    public SkizzikBeamAttackGoal beamAttackGoal = new SkizzikBeamAttackGoal(this, 1.0D, 600, 1200, 20.0F);
     public WaterAvoidingRandomStrollGoal avoidWaterGoal = new WaterAvoidingRandomStrollGoal(this, 1.0D);
     public LookAtPlayerGoal lookGoal = new LookAtPlayerGoal(this, Player.class, 8.0F);
     public RandomLookAroundGoal lookRandomlyGoal = new RandomLookAroundGoal(this);
@@ -556,9 +558,13 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
             this.bossBar.setName(this.getDisplayName());
         }
     }
+
+    public void performBeamAttack(LivingEntity entity, float distance) {
+        System.out.println("SUP NIGGER");
+    }
     
     @Override
-    public void performRangedAttack(LivingEntity entity, float f) {
+    public void performRangedAttack(LivingEntity entity, float distance) {
         this.performRangedAttack(0, entity);
     }
 

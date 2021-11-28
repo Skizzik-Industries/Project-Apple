@@ -162,7 +162,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         skizzik.targetSelector.removeAllGoals();
 
         skizzik.targetSelector.addGoal(1, skizzik.hurtGoal);
-        skizzik.targetSelector.addGoal(2, skizzik.attackFSkizzikGoal);
+        //skizzik.targetSelector.addGoal(2, skizzik.attackFSkizzikGoal);
         skizzik.targetSelector.addGoal(3, skizzik.attackGoal);
         skizzik.goalSelector.addGoal(3, skizzik.rangedAttackGoal);
         skizzik.goalSelector.addGoal(5, skizzik.avoidWaterGoal);

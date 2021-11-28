@@ -116,7 +116,13 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
         }
         return super.getHeadY(head);
     }
-    
+
+    @Override
+    public void addGoals() {
+        super.addGoals();
+        skizzik.goalSelector.addGoal(2, skizzik.beamAttackGoal);
+    }
+
     @Override
     public void tickParts() {
         super.tickParts();
