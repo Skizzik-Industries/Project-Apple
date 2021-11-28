@@ -1,6 +1,5 @@
-package com.skizzium.projectapple.block;
+package com.skizzium.projectapple.item;
 
-import com.skizzium.projectapple.item.PA_SkullItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;

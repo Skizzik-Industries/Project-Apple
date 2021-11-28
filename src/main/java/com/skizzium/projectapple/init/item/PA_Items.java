@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.init.item;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.block.SmallSkullItem;
+import com.skizzium.projectapple.item.SmallSkullItem;
 import com.skizzium.projectapple.entity.ai.PA_BegGoal;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.PA_SoundEvents;
