@@ -2,10 +2,13 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
+import com.skizzium.projectapple.init.PA_PacketRegistry;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -13,6 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -34,6 +38,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -57,7 +62,7 @@ public class Skizzo extends Monster {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.75F;
+        return 1.38F;
     }
 
     @Override
@@ -186,6 +191,19 @@ public class Skizzo extends Monster {
                 world.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
             }
         } */
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        this.level.addParticle(ParticleTypes.DRIPPING_LAVA, this.getX() + this.random.nextGaussian() * (double)0.2F, this.getY() + this.getEyeHeight() + this.random.nextGaussian() * (double)0.2F, this.getZ() + this.random.nextGaussian() * (double)0.2F, 0.0D, 0.0D, 0.0D);
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        if (this.getOwner() != null && this.getOwner() instanceof Skizzik && this.distanceTo(this.getOwner()) < 25) {
+            PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new SkizzoConnectionParticlesPacket(this.getOwner().getId(), this.getId()));
+        }
     }
 
     @Override
