@@ -99,6 +99,11 @@ public class Skizzo extends Monster {
     }
 
     @Override
+    public boolean isInvulnerableTo(DamageSource source) {
+        return !(super.isInvulnerableTo(source) && source.getDirectEntity() instanceof Player && source == DamageSource.OUT_OF_WORLD);
+    }
+
+    @Override
     public boolean hurt(DamageSource source, float amount) {
         if (source == DamageSource.ANVIL ||
                 source.getDirectEntity() instanceof Arrow ||
