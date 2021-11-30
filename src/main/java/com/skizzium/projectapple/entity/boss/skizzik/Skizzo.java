@@ -103,28 +103,6 @@ public class Skizzo extends Monster {
         return !(super.isInvulnerableTo(source) && source.getDirectEntity() instanceof Player && source == DamageSource.OUT_OF_WORLD);
     }
 
-    @Override
-    public boolean hurt(DamageSource source, float amount) {
-        if (source == DamageSource.ANVIL ||
-                source.getDirectEntity() instanceof Arrow ||
-                source == DamageSource.CACTUS ||
-                source == DamageSource.DRAGON_BREATH ||
-                source == DamageSource.FALL ||
-                source.isExplosion() ||
-                source == DamageSource.LIGHTNING_BOLT ||
-                source == DamageSource.HOT_FLOOR ||
-                source == DamageSource.IN_FIRE ||
-                source == DamageSource.LAVA ||
-                source == DamageSource.ON_FIRE ||
-                source.getDirectEntity() instanceof ThrownPotion ||
-                source == DamageSource.SWEET_BERRY_BUSH ||
-                source.getDirectEntity() instanceof ThrownTrident ||
-                source == DamageSource.WITHER) {
-            return false;
-        }
-        return super.hurt(source, amount);
-    }
-
     public static AttributeSupplier.Builder buildAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
