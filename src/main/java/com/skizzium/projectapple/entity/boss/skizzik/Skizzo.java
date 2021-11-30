@@ -39,13 +39,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class Skizzo extends Monster {
+public class Skizzo extends Monster implements IAnimatable {
     private UUID ownerUUID;
     private int ownerNetworkId;
+    private AnimationFactory factory = new AnimationFactory(this);
 
     public Skizzo(EntityType<? extends Skizzo> entity, Level world) {
         super(entity, world);
@@ -152,6 +156,16 @@ public class Skizzo extends Monster {
         if (nbt.hasUUID("Owner")) {
             this.ownerUUID = nbt.getUUID("Owner");
         }
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
     }
 
     @Override

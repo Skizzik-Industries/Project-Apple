@@ -6,7 +6,6 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzikSkull;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.FriendlySkizzikRenderer;
-import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.FriendlySkizzoRenderer;
 import com.skizzium.projectapple.entity.boss.skizzik.*;
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.*;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.FriendlySkizzikSkullRenderer;
@@ -95,7 +94,6 @@ public class PA_Entities {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.WITCH_SKIZZIE_LAYER, WitchSkizzieModel::createBodyLayer);
-        event.registerLayerDefinition(PA_ModelLayers.SKIZZO_LAYER, SkizzoModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -106,7 +104,7 @@ public class PA_Entities {
         event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE.get(), WitchSkizzieRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIK_SKULL.get(), FriendlySkizzikSkullRenderer::new);
-        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZO.get(), FriendlySkizzoRenderer::new);
+        event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZO.get(), SkizzoRenderer::new);
         event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIK.get(), FriendlySkizzikRenderer::new);
 
         event.registerEntityRenderer(PA_Entities.SKIZZIE.get(), SkizzieRenderer::new);

@@ -1,44 +1,53 @@
 package com.skizzium.projectapple.entity.boss.skizzik.client.model;
 
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.LivingEntity;
+import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikSleeping;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.provider.data.EntityModelData;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class SkizzoModel<T extends LivingEntity> extends EntityModel<T> {
-	private final ModelPart head;
-
-	public SkizzoModel(ModelPart part) {
-		this.head = part.getChild("head");
-	}
-
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition part = mesh.getRoot();
-
-		part.addOrReplaceChild("head", CubeListBuilder.create().texOffs(67, 8).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, false), PartPose.offset(0.0F, 3.0F, 0.0F));
-		return LayerDefinition.create(mesh, 156, 106);
+public class SkizzoModel<T extends IAnimatable> extends AnimatedGeoModel<T> {
+	@Override
+	public ResourceLocation getTextureLocation(T skizzo) {
+		if (skizzo instanceof FriendlySkizzo) {
+			return new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/friendly_skizzik/friendly_skizzo.png");
+		}
+		return new ResourceLocation(ProjectApple.MOD_ID, "textures/entity/skizzik/skizzo.png");
 	}
 
 	@Override
-	public void setupAnim(T entity, float f, float f1, float f2, float f3, float f4) {
-		this.head.yRot = f3 / (180F / (float) Math.PI);
-		this.head.xRot = f4 / (180F / (float) Math.PI);
+	public ResourceLocation getAnimationFileLocation(T skizzo) {
+		return new ResourceLocation(ProjectApple.MOD_ID, "animations/skizzo.animation.json");
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrix, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
-		head.render(matrix, buffer, light, overlay);
+	public ResourceLocation getModelLocation(T skizzo) {
+		return new ResourceLocation(ProjectApple.MOD_ID, "geo/skizzo.geo.json");
+	}
+	
+	public static ResourceLocation modelLocation(IAnimatable skizzo) {
+		return new ResourceLocation(ProjectApple.MOD_ID, "geo/skizzo.geo.json");
+	}
+
+	@Override
+	public void setLivingAnimations(T skizzik, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
+		super.setLivingAnimations(skizzik, uniqueID, customPredicate);
+		IBone head = this.getAnimationProcessor().getBone("head");
+		
+		EntityModelData data = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+		head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
+		head.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
 	}
 }

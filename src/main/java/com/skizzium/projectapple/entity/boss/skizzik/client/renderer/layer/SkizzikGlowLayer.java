@@ -48,6 +48,5 @@ public class SkizzikGlowLayer<T extends Skizzik> extends GeoLayerRenderer<T> {
     public void render(PoseStack matrix, MultiBufferSource buffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float age, float headYaw, float headPitch) {
         RenderType texture = this.getRenderType(this.getTexture(entity));
         this.renderer.render(this.getEntityModel().getModel(SkizzikModel.modelLocation(entity)), entity, partialTicks, texture, matrix, buffer, buffer.getBuffer(texture), 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-
     }
 }

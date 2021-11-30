@@ -33,14 +33,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class FriendlySkizzo extends Monster {
+public class FriendlySkizzo extends Monster implements IAnimatable {
     private int head;
     private UUID ownerUUID;
     private int ownerNetworkId;
+    private AnimationFactory factory = new AnimationFactory(this);
 
     public FriendlySkizzo(EntityType<? extends FriendlySkizzo> entity, Level world) {
         super(entity, world);
@@ -101,25 +105,8 @@ public class FriendlySkizzo extends Monster {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        if (source == DamageSource.ANVIL ||
-                source.getDirectEntity() instanceof Arrow ||
-                source == DamageSource.CACTUS ||
-                source == DamageSource.DRAGON_BREATH ||
-                source == DamageSource.FALL ||
-                source.isExplosion() ||
-                source == DamageSource.LIGHTNING_BOLT ||
-                source == DamageSource.HOT_FLOOR ||
-                source == DamageSource.IN_FIRE ||
-                source == DamageSource.LAVA ||
-                source == DamageSource.ON_FIRE ||
-                source.getDirectEntity() instanceof ThrownPotion ||
-                source == DamageSource.SWEET_BERRY_BUSH ||
-                source.getDirectEntity() instanceof ThrownTrident ||
-                source == DamageSource.WITHER) {
-            return false;
-        }
-        return super.hurt(source, amount);
+    public boolean isInvulnerableTo(DamageSource source) {
+        return !(super.isInvulnerableTo(source) && source.getDirectEntity() instanceof Player && source == DamageSource.OUT_OF_WORLD);
     }
 
     public static AttributeSupplier.Builder buildAttributes() {
@@ -192,6 +179,16 @@ public class FriendlySkizzo extends Monster {
         if (nbt.hasUUID("Owner")) {
             this.ownerUUID = nbt.getUUID("Owner");
         }
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
     }
 
     @Nullable

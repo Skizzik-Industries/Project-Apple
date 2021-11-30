@@ -1,27 +1,36 @@
 package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
 
-import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
+import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 @OnlyIn(Dist.CLIENT)
-public class SkizzoGlowLayer<T extends LivingEntity> extends EyesLayer<T, SkizzoModel<T>> {
-    private static final RenderType SKIZZO_GLOW = RenderType.eyes(new ResourceLocation("skizzik:textures/entity/skizzik/skizzo_glow.png"));
-    private static final RenderType SPOOKZO_GLOW = RenderType.eyes(new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzo_glow.png"));
+public class SkizzoGlowLayer<T extends LivingEntity & IAnimatable> extends GeoLayerRenderer<T> {
+    private final IGeoRenderer<T> renderer;
+    private static final ResourceLocation SKIZZO_GLOW = new ResourceLocation("skizzik:textures/entity/skizzik/skizzo_glow.png");
+    private static final ResourceLocation SPOOKZO_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzo_glow.png");
 
-    public SkizzoGlowLayer(RenderLayerParent<T, SkizzoModel<T>> renderer) {
+    public SkizzoGlowLayer(IGeoRenderer<T> renderer) {
         super(renderer);
+        this.renderer = renderer;
+    }
+
+    private ResourceLocation getTexture(T entity) {
+        return SKIZZO_GLOW;
     }
 
     @Override
-    public RenderType renderType() {
-        return ProjectApple.holiday == 1 ? SPOOKZO_GLOW : SKIZZO_GLOW;
+    public void render(PoseStack matrix, MultiBufferSource buffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float age, float headYaw, float headPitch) {
+        RenderType texture = this.getRenderType(this.getTexture(entity));
+        this.renderer.render(this.getEntityModel().getModel(SkizzoModel.modelLocation(entity)), entity, partialTicks, texture, matrix, buffer, buffer.getBuffer(texture), 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 }
