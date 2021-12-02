@@ -19,14 +19,13 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlyWit
 import com.skizzium.projectapple.entity.client.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Predicate;
 
@@ -87,7 +86,7 @@ public class PA_Entities {
 
     @SubscribeEvent
     public static void registerSpawns(FMLCommonSetupEvent event) {
-        SpawnPlacements.register(CANDY_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
+        //SpawnPlacements.register(CANDY_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
     }
 
     @SubscribeEvent

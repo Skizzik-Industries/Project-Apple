@@ -29,7 +29,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 
@@ -65,7 +65,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
 
     @Override
     protected ParticleOptions getTrailParticle() {
-        return this.getLevel() <= 2 ? ParticleTypes.FLAME
+        return this.getSkullLevel() <= 2 ? ParticleTypes.FLAME
                 : ParticleTypes.SOUL_FIRE_FLAME;
     }
 
@@ -98,7 +98,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
         this.entityData.define(DATA_LEVEL, 1);
     }
 
-    public int getLevel() {
+    public int getSkullLevel() {
         return this.entityData.get(DATA_LEVEL);
     }
 
@@ -128,8 +128,8 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
             boolean hurt;
             if (source instanceof Skizzik) {
                 Skizzik skizzik = (Skizzik) source;
-                hurt = this.getLevel() == 1 ? target.hurt(skizzikSkull(this, skizzik), 8.0F)
-                        : this.getLevel() == 2 ? target.hurt(skizzikSkull(this, skizzik), 10.0F)
+                hurt = this.getSkullLevel() == 1 ? target.hurt(skizzikSkull(this, skizzik), 8.0F)
+                        : this.getSkullLevel() == 2 ? target.hurt(skizzikSkull(this, skizzik), 10.0F)
                         : target.hurt(skizzikSkull(this, skizzik), 15.0F);
                 if (hurt) {
                     if (target.isAlive()) {
@@ -162,7 +162,7 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
             }
 
             if (hurt && target instanceof LivingEntity) {
-                if (this.getLevel() >= 3) {
+                if (this.getSkullLevel() >= 3) {
                     ((LivingEntity)target).addEffect(new MobEffectInstance(MobEffects.WITHER, 400, 2));
                 }
                 else {

@@ -34,7 +34,7 @@ public class PA_Registry {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ProjectApple.MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, ProjectApple.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ProjectApple.MOD_ID);
-    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ProjectApple.MOD_ID);
+    //public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ProjectApple.MOD_ID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, ProjectApple.MOD_ID);
 
     public static final CreativeModeTab MAIN_SKIZZIK_TAB = new MainSkizzikTab("main_skizzik_tab");
@@ -49,7 +49,7 @@ public class PA_Registry {
         EFFECTS.register(modEventBus);
         FLUIDS.register(modEventBus);
         TILE_ENTITIES.register(modEventBus);
-        BIOMES.register(modEventBus);
+        //BIOMES.register(modEventBus);
         POTIONS.register(modEventBus);
 
         PA_Blocks.register();

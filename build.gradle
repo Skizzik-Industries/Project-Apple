@@ -31,7 +31,7 @@ version = mod_version
 group = mod_base_package
 archivesBaseName = mod_id
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -178,34 +178,6 @@ reobf {
     shadowJar {
         dependsOn tasks.createMcpToSrg
         mappings = tasks.createMcpToSrg.outputs.files.singleFile
-    }
-}
-
-// Credits to SizableShrimp for making this neat thingy that allows me to use variables in my mods.toml and pack.mcmeta
-def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
-def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
-def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version, toml_name: toml_name, mod_license: mod_license, mod_issues: mod_issues,
-                         mod_url: mod_url, mod_logo: mod_logo, mod_credits: mod_credits, mod_authors: mod_authors, mod_description: mod_description, 
-                         mc_versionRange: mc_version, loader_version: loader_version, forge_version_range: forge_version_range, 
-                         geckolib_version_range: geckolib_version_range, bossutils_version_range: bossutils_version_range, ]
-processResources {
-    inputs.properties replaceProperties
-    replaceProperties.put 'project', project
-
-    filesMatching(resourceTargets) {
-        expand replaceProperties
-    }
-
-    intoTargets.each { target ->
-        if (file(target).exists()) {
-            copy {
-                from(sourceSets.main.resources) {
-                    include resourceTargets
-                    expand replaceProperties
-                }
-                into target
-            }
-        }
     }
 }
 

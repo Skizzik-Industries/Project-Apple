@@ -40,47 +40,49 @@ public class CandyPlains implements PA_BiomeInterface {
 
     @Override
     public BiomeSpecialEffects getBiomeAmbience() {
-        BiomeSpecialEffects.Builder ambience = new BiomeSpecialEffects.Builder();
-        ambience.waterColor(-786388);
-        ambience.waterFogColor(-786388);
-        ambience.fogColor(12638463);
-        ambience.skyColor(12638463);
-        ambience.foliageColorOverride(-786388);
-        ambience.grassColorOverride(-786388);
-        ambience.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
-        return ambience.build();
+//        BiomeSpecialEffects.Builder ambience = new BiomeSpecialEffects.Builder();
+//        ambience.waterColor(-786388);
+//        ambience.waterFogColor(-786388);
+//        ambience.fogColor(12638463);
+//        ambience.skyColor(12638463);
+//        ambience.foliageColorOverride(-786388);
+//        ambience.grassColorOverride(-786388);
+//        ambience.ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS);
+//        return ambience.build();
+        return null;
     }
 
     @Override
     public MobSpawnSettings getMobSpawnSettings() {
         MobSpawnSettings.Builder mobSpawns = new MobSpawnSettings.Builder();
-        PA_Features.candyPlainsSpawns(mobSpawns);
-        mobSpawns.setPlayerCanSpawn();
+        //PA_Features.candyPlainsSpawns(mobSpawns);
+        //mobSpawns.setPlayerCanSpawn();
         return mobSpawns.build();
     }
 
     @Override
     public BiomeGenerationSettings getBiomeGenerationSettings() {
-        BiomeGenerationSettings.Builder settings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(PA_SurfaceBuilders.CANDY);
-        //settings.addStructureStart(StructureFeatures.VILLAGE_PLAINS).addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
-        settings.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
-
-        PA_Features.addCandyPlainsLakes(settings);
-        PA_Features.addCandyPlainVegetation(settings); // CUSTOM FOLIAGE
-        PA_Features.addCandyPlainsExtraVegetation(settings);
-
-        BiomeDefaultFeatures.addDefaultOverworldLandStructures(settings);
-        BiomeDefaultFeatures.addDefaultCarvers(settings);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(settings);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(settings);
-        BiomeDefaultFeatures.addPlainGrass(settings); // CUSTOM FOLIAGE
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(settings);
-        BiomeDefaultFeatures.addDefaultOres(settings);
-        BiomeDefaultFeatures.addDefaultSoftDisks(settings);
-        BiomeDefaultFeatures.addDefaultMushrooms(settings);
-        BiomeDefaultFeatures.addDefaultSprings(settings);
-        BiomeDefaultFeatures.addSurfaceFreezing(settings);
-
-        return settings.build();
+//        BiomeGenerationSettings.Builder settings = (new BiomeGenerationSettings.Builder()).surfaceBuilder(PA_SurfaceBuilders.CANDY);
+//        //settings.addStructureStart(StructureFeatures.VILLAGE_PLAINS).addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
+//        settings.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
+//
+//        PA_Features.addCandyPlainsLakes(settings);
+//        PA_Features.addCandyPlainVegetation(settings); // CUSTOM FOLIAGE
+//        PA_Features.addCandyPlainsExtraVegetation(settings);
+//
+//        BiomeDefaultFeatures.addDefaultOverworldLandStructures(settings);
+//        BiomeDefaultFeatures.addDefaultCarvers(settings);
+//        BiomeDefaultFeatures.addDefaultCrystalFormations(settings);
+//        BiomeDefaultFeatures.addDefaultMonsterRoom(settings);
+//        BiomeDefaultFeatures.addPlainGrass(settings); // CUSTOM FOLIAGE
+//        BiomeDefaultFeatures.addDefaultUndergroundVariety(settings);
+//        BiomeDefaultFeatures.addDefaultOres(settings);
+//        BiomeDefaultFeatures.addDefaultSoftDisks(settings);
+//        BiomeDefaultFeatures.addDefaultMushrooms(settings);
+//        BiomeDefaultFeatures.addDefaultSprings(settings);
+//        BiomeDefaultFeatures.addSurfaceFreezing(settings);
+//
+//        return settings.build();
+        return null;
     }
 }

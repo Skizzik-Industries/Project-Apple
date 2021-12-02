@@ -1,13 +1,5 @@
 <p style="text-align:center">
-<span style="font-size:24px"><strong>The <span style="font-size:24px;color:orange">Spooktober</span> Update</strong></span><br>
-<br>
-<span style="font-size:24px"><strong>Changelog:</strong></span><br>
-<p style="font-size:14px;text-align:center">
-Added Spooktober Reskins<br>
-Added Spookzie Statue<br>
-Added Spookzik Music Disc<br>
-Added the Holiday System<br>
-Skizzies are so evil (and dumb) that they now fight each other<br>
-Skizzik Music Disc is now fire resistant<br>
-</p>
+- Ported to 1.18
+- Updated Rainbow Ore Gen
+- Temporarily removed Candy Plains due to world-gen changes
 </p>

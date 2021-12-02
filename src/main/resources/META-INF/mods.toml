@@ -3,15 +3,14 @@ loaderVersion="${loader_version}"
 license="${mod_license}"
 issueTrackerURL="${mod_issues}"
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${toml_name}"
-#updateJSONURL=""
-displayURL="${mod_url}"
-logoFile="${mod_logo}"
-credits="${mod_credits}"
-authors="${mod_authors}"
-description='''${mod_description}'''
+modId="skizzik"
+version="2.0.0-beta.4.2"
+displayName="Skizzik & Co. [Project Apple]"
+displayURL="https://skizzium.com/"
+logoFile="logo.png"
+credits="Credits to diesieben07 (skulls and custom boss bar) and all the helpful people in the forge community for putting up with my stupidity and helping me out. \nAlso, Skizzik & Spookzik themes are both from the Terraria OST. Nightmare Spookzik's theme is the well-known Doom theme (The Only Thing they Fear is You). These are all temporary solutions until I finally make my own themes."
+authors="\n- Skizzium [Ownership], \n- uSkizzik [Coding & Concepts], \n- LazTheArtist [Assets & Coding], \n- PRO#6639 [Ukrainian Translations]"
+description='''From seemingly harmless candies and rainbows, to dark back stories, suffering mutants, distant Wither relatives and multiversal aliens, this mod adds a lot of dimensions, boss battles and structures.'''
 [[dependencies.skizzik]]
     modId="bossutils"
     mandatory=true
