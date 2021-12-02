@@ -13,11 +13,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Items {

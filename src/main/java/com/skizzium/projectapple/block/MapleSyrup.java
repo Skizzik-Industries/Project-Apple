@@ -1,20 +1,12 @@
 package com.skizzium.projectapple.block;
 
-import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.function.Supplier;
 
 public class MapleSyrup extends ForgeFlowingFluid {
     protected MapleSyrup(Properties properties) {

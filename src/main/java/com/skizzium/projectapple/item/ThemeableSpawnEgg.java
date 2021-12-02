@@ -2,7 +2,7 @@ package com.skizzium.projectapple.item;
 
 import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ThemeableSpawnEgg extends PA_SpawnEgg {
     public ThemeableSpawnEgg(RegistryObject<? extends EntityType<?>> entity, int defaultPrimaryColor, int defaultSecondaryColor, Properties itemProperties) {

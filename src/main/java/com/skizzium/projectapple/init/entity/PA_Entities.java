@@ -8,25 +8,16 @@ import com.skizzium.projectapple.entity.model.SkizzoModel;
 import com.skizzium.projectapple.entity.model.WitchSkizzieModel;
 import com.skizzium.projectapple.entity.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
-import com.skizzium.projectapple.init.item.PA_ThemeableSpawnEggColors;
-import com.skizzium.projectapple.item.ThemeableSpawnEgg;
-import net.minecraft.ChatFormatting;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Predicate;
-
-import static com.skizzium.projectapple.ProjectApple.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Entities {
@@ -69,7 +60,7 @@ public class PA_Entities {
 
     @SubscribeEvent
     public static void registerSpawns(FMLCommonSetupEvent event) {
-        SpawnPlacements.register(CANDY_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
+        //SpawnPlacements.register(CANDY_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
     }
 
     @SubscribeEvent
