@@ -19,6 +19,7 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlyWit
 import com.skizzium.projectapple.entity.client.renderer.*;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;

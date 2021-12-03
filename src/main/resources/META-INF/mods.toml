@@ -1,7 +1,7 @@
 modLoader="javafml"
-loaderVersion="${loader_version}"
-license="${mod_license}"
-issueTrackerURL="${mod_issues}"
+loaderVersion="[38,)"
+license="GPLv3"
+issueTrackerURL="https://github.com/Skizzium/Project-Apple/issues"
 [[mods]]
 modId="skizzik"
 version="2.0.0-beta.4.2"
@@ -14,24 +14,24 @@ description='''From seemingly harmless candies and rainbows, to dark back storie
 [[dependencies.skizzik]]
     modId="bossutils"
     mandatory=true
-    versionRange="${bossutils_version_range}"
+    versionRange="[1.0.0-beta.6.2,1.0.0)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
     modId="geckolib3"
     mandatory=true
-    versionRange="${geckolib_version_range}"
+    versionRange="[3.0.0,4.0.0)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
     modId="forge"
     mandatory=true
-    versionRange="${forge_version_range}"
+    versionRange="[38.0.0,39)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
     modId="minecraft"
     mandatory=true
-    versionRange="${mc_versionRange}"
+    versionRange="[1.18,1.19)"
     ordering="NONE"
     side="BOTH"

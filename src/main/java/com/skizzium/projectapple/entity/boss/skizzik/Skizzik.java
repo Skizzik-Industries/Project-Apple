@@ -62,7 +62,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import net.minecraftforge.entity.PartEntity;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -485,7 +485,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     protected void onEffectAdded(MobEffectInstance effect, @Nullable Entity entity) {
         super.onEffectAdded(effect, entity);
         if (!this.level.isClientSide()) {
-            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+            net.minecraftforge.network.PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
         }
     }
 
@@ -493,7 +493,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     protected void onEffectUpdated(MobEffectInstance effect, boolean reapplyModifiers, @Nullable Entity entity) {
         super.onEffectUpdated(effect, reapplyModifiers, entity);
         if (!this.level.isClientSide()) {
-            PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
+            net.minecraftforge.network.PacketDistributor.TRACKING_ENTITY.with(() -> this).send(new ClientboundUpdateMobEffectPacket(this.getId(), effect));
         }
     }
 

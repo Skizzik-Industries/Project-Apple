@@ -67,7 +67,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.entity.PartEntity;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
-import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import software.bernie.geckolib3.core.AnimationState;

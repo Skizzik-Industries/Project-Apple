@@ -143,7 +143,7 @@ repositories {
     mavenLocal()
     maven {
         name 'Boss Utilities'
-        url 'https://raw.github.com/Skizzium/Project-Lib/main/mcmodsrepo/'
+        url "https://raw.github.com/Skizzium/Project-Lib/Forge-${mc_version}/mcmodsrepo/"
     }
     maven {
         name "GeckoLib"
@@ -160,8 +160,6 @@ dependencies {
     
     implementation fg.deobf("com.skizzium.projectlib:BossUtilities-${mc_version}:${bossutils_version}")
     shade fg.deobf("software.bernie.geckolib:geckolib-${mc_version}:${geckolib_version}")
-    
-    runtimeOnly fg.deobf('curse.maven:spookyjam-2021-left-hanging-532595:3477308')
 }
 
 task deobfJar(type: Jar) {

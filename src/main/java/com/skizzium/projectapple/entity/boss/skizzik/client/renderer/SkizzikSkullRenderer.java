@@ -25,12 +25,12 @@ public class SkizzikSkullRenderer<T extends SkizzikSkull> extends AbstractSkizzi
    @Override
    public ResourceLocation getTextureLocation(T skull) {
       if (ProjectApple.holiday == 1) {
-         return skull.getLevel() == 1 ? SPOOKZIK_LEVEL_1
-                 : skull.getLevel() == 2 ? SPOOKZIK_LEVEL_2 : SPOOKZIK_LEVEL_3;
+         return skull.getSkullLevel() == 1 ? SPOOKZIK_LEVEL_1
+                 : skull.getSkullLevel() == 2 ? SPOOKZIK_LEVEL_2 : SPOOKZIK_LEVEL_3;
       }
 
-      return skull.getLevel() == 1 ? LEVEL_1
-              : skull.getLevel() == 2 ? LEVEL_2
+      return skull.getSkullLevel() == 1 ? LEVEL_1
+              : skull.getSkullLevel() == 2 ? LEVEL_2
               : LEVEL_3;
    }
 }

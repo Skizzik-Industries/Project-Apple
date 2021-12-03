@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.init.world;
 
+import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;

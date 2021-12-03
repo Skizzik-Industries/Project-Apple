@@ -1,13 +1,11 @@
 package com.skizzium.projectapple.init;
 
-import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.network.PA_BossEventPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.phys.Vec3;
 
 public class PA_PacketHandler {
     public static void handleSkizzoParticles(SkizzoConnectionParticlesPacket packet) {

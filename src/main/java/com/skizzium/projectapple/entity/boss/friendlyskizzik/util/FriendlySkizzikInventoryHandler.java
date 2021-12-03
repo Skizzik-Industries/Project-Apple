@@ -15,10 +15,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.ScreenOpenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -46,8 +46,8 @@ public class FriendlySkizzikInventoryHandler {
     }
     
     @SubscribeEvent
-    public static void changeInventory(GuiOpenEvent event) {
-        if (event.getGui() instanceof InventoryScreen && Minecraft.getInstance().player.getVehicle() != null && Minecraft.getInstance().player.getVehicle() instanceof FriendlySkizzik skizzik) {
+    public static void changeInventory(ScreenOpenEvent event) {
+        if (event.getScreen() instanceof InventoryScreen && Minecraft.getInstance().player.getVehicle() != null && Minecraft.getInstance().player.getVehicle() instanceof FriendlySkizzik skizzik) {
             event.setCanceled(true);
             Player player = Minecraft.getInstance().player;
             PA_PacketRegistry.INSTANCE.sendToServer(new FriendlySkizzikOpenMenuPacket(player.getVehicle().getId()));
