@@ -61,6 +61,5 @@ public class PA_Registry {
         PA_TileEntities.register();
         PA_Biomes.register();
         PA_Potions.register();
-        PA_ClientHelper.keybinds.register();
     }
 }
