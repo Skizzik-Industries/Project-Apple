@@ -4,7 +4,7 @@ license="GPLv3"
 issueTrackerURL="https://github.com/Skizzium/Project-Apple/issues"
 [[mods]]
 modId="skizzik"
-version="2.0.0-beta.4.2"
+version="2.0.0-beta.5"
 displayName="Skizzik & Co. [Project Apple]"
 displayURL="https://skizzium.com/"
 logoFile="logo.png"
@@ -14,7 +14,7 @@ description='''From seemingly harmless candies and rainbows, to dark back storie
 [[dependencies.skizzik]]
     modId="bossutils"
     mandatory=true
-    versionRange="[1.0.0-beta.6.2,1.0.0)"
+    versionRange="[1.0.0-beta.6.3,1.0.0)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
