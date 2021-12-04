@@ -69,6 +69,8 @@ public class PA_ClientHelper {
 
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.MAPLE_SYRUP.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
+        
+        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_LEAVES.get(), RenderType.cutoutMipped());
     }
     
     public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {

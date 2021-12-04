@@ -2,7 +2,9 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikFinishHim;
 import com.skizzium.projectapple.init.PA_PacketRegistry;
+import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import net.minecraft.client.Minecraft;
@@ -35,7 +37,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
@@ -100,7 +107,7 @@ public class Skizzo extends Monster implements IAnimatable {
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return !(super.isInvulnerableTo(source) && source.getDirectEntity() instanceof Player && source == DamageSource.OUT_OF_WORLD);
+        return !(source.getDirectEntity() instanceof Player) || super.isInvulnerableTo(source);
     }
 
     public static AttributeSupplier.Builder buildAttributes() {
@@ -154,9 +161,25 @@ public class Skizzo extends Monster implements IAnimatable {
         }
     }
 
+    private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
+        if (this.attackAnim > 0) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzo.attack"));
+        }
+        else if (event.getController().getAnimationState() == AnimationState.Stopped) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzo.ambient"));
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private <E extends IAnimatable> PlayState attack(AnimationEvent<E> event) {
+        
+        return PlayState.CONTINUE;
+    }
+
     @Override
     public void registerControllers(AnimationData data) {
-
+        data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
+        data.addAnimationController(new AnimationController(this, "attack", 0, this::attack));
     }
 
     @Override
