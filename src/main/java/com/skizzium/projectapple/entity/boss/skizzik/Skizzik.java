@@ -1032,14 +1032,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
                     int idleHeadUpdate = this.idleHeadUpdates[headIndex - 1];
                     this.idleHeadUpdates[head] = this.idleHeadUpdates[headIndex - 1] + 1;
 
+                    int skullLevel = currentStageId == 1 || currentStageId == 2 ? 1 : currentStageId == 3 || currentStageId == 4 ? 2 : 3;
+                    
                     if (idleHeadUpdate > 15) {
                         double x = Mth.nextDouble(this.random, this.getX() - 10.0D, this.getX() + 10.0D);
                         double y = Mth.nextDouble(this.random, this.getY() - 5.0D, this.getY() + 5.0D);
                         double z = Mth.nextDouble(this.random, this.getZ() - 10.0D, this.getZ() + 10.0D);
 
-                        this.performRangedAttack(headIndex + 1, x, y, z, currentStageId == 1 || currentStageId == 2 ? 1 :
-                                currentStageId == 3 || currentStageId == 4 ? 2 :
-                                        3);
+                        this.performRangedAttack(headIndex + 1, x, y, z, skullLevel);
                         this.idleHeadUpdates[headIndex - 1] = 0;
                     }
 
@@ -1051,9 +1051,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
                             if (target instanceof Player && ((Player) target).getAbilities().invulnerable) {
                                 this.setAlternativeTarget(headIndex, 0);
                             } else {
-                                this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ(), currentStageId == 1 || currentStageId == 2 ? 1 :
-                                        currentStageId == 3 || currentStageId == 4 ? 2 :
-                                                3);
+                                this.performRangedAttack(headIndex + 1, target.getX(), target.getY() + (double) target.getEyeHeight() * 0.5D, target.getZ(), skullLevel);
                                 this.nextHeadUpdate[headIndex - 1] = this.tickCount + 40 + this.random.nextInt(20);
                                 this.idleHeadUpdates[headIndex - 1] = 0;
                             }

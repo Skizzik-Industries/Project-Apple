@@ -107,7 +107,7 @@ public class Skizzo extends Monster implements IAnimatable {
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return !(source.getDirectEntity() instanceof Player) || super.isInvulnerableTo(source);
+        return super.isInvulnerableTo(source) || (!(source.getDirectEntity() instanceof Player) && source != DamageSource.OUT_OF_WORLD);
     }
 
     public static AttributeSupplier.Builder buildAttributes() {
