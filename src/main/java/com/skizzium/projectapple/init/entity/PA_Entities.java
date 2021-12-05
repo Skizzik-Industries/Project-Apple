@@ -63,7 +63,7 @@ public class PA_Entities {
     public static final RegistryObject<EntityType<CorruptedSkizzie>> CORRUPTED_SKIZZIE = PA_Registry.ENTITIES.register("corrupted_skizzie", () -> EntityType.Builder.of(CorruptedSkizzie::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.6F, 1.6F).clientTrackingRange(10).build("corrupted_skizzie"));
     
     public static final RegistryObject<EntityType<SkizzikSkull>> SKIZZIK_SKULL = PA_Registry.ENTITIES.register("skizzik_skull", () -> EntityType.Builder.<SkizzikSkull>of(SkizzikSkull::new, MobCategory.MISC).updateInterval(10).sized(0.3125F, 0.3125F).clientTrackingRange(4).setCustomClientFactory(((spawnEntity, world) -> new SkizzikSkull(world))).build("skizzik_skull"));
-    public static final RegistryObject<EntityType<Skizzo>> SKIZZO = PA_Registry.ENTITIES.register("skizzo", () -> EntityType.Builder.of(Skizzo::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.8F, 1.8F).clientTrackingRange(10).build("skizzo"));
+    public static final RegistryObject<EntityType<Skizzo>> SKIZZO = PA_Registry.ENTITIES.register("skizzo", () -> EntityType.Builder.of(Skizzo::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(0.8F, 1.02F).clientTrackingRange(10).build("skizzo"));
     public static final RegistryObject<EntityType<Skizzik>> SKIZZIK = PA_Registry.ENTITIES.register("skizzik", () -> EntityType.Builder.of(Skizzik::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).updateInterval(3).fireImmune().sized(2.5F, 4.0F).clientTrackingRange(10).build("skizzik"));
 
     @SubscribeEvent

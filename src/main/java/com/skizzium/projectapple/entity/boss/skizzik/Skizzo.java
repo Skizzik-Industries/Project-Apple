@@ -69,7 +69,7 @@ public class Skizzo extends Monster implements IAnimatable {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.38F;
+        return 0.65F;
     }
 
     @Override
@@ -178,7 +178,7 @@ public class Skizzo extends Monster implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
+        //data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
         data.addAnimationController(new AnimationController(this, "attack", 0, this::attack));
     }
 
@@ -220,6 +220,8 @@ public class Skizzo extends Monster implements IAnimatable {
         if (this.getOwner() != null && this.getOwner() instanceof Skizzik && this.distanceTo(this.getOwner()) < 25) {
             PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new SkizzoConnectionParticlesPacket(this.getOwner().getId(), this.getId()));
         }
+        
+        
     }
 
     @Override
