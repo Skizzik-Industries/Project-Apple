@@ -2,9 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikFinishHim;
 import com.skizzium.projectapple.init.PA_PacketRegistry;
-import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import net.minecraft.client.Minecraft;
@@ -34,8 +32,10 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -161,7 +161,7 @@ public class Skizzo extends Monster implements IAnimatable {
         }
     }
 
-    private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {
+    private <E extends IAnimatable> PlayState animations(AnimationEvent<E> event) {
         if (this.attackAnim > 0) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skizzo.attack"));
         }
@@ -171,15 +171,9 @@ public class Skizzo extends Monster implements IAnimatable {
         return PlayState.CONTINUE;
     }
 
-    private <E extends IAnimatable> PlayState attack(AnimationEvent<E> event) {
-        
-        return PlayState.CONTINUE;
-    }
-
     @Override
     public void registerControllers(AnimationData data) {
-        //data.addAnimationController(new AnimationController(this, "ambient", 0, this::ambient));
-        data.addAnimationController(new AnimationController(this, "attack", 0, this::attack));
+        data.addAnimationController(new AnimationController(this, "animations", 0, this::animations));
     }
 
     @Override
@@ -220,8 +214,32 @@ public class Skizzo extends Monster implements IAnimatable {
         if (this.getOwner() != null && this.getOwner() instanceof Skizzik && this.distanceTo(this.getOwner()) < 25) {
             PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new SkizzoConnectionParticlesPacket(this.getOwner().getId(), this.getId()));
         }
-        
-        
+
+        LivingEntity target = this.getTarget();
+        if (target != null) {
+            Vec3 vector = this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D);
+            double vectorY = vector.y;
+            if (this.getY() + this.getEyeHeight() < target.getY() + target.getEyeHeight()) {
+                vectorY = Math.max(0.0D, vectorY);
+                vectorY = vectorY + (0.3D - vectorY * (double)0.6F);
+            }
+
+            vector = new Vec3(vector.x, vectorY, vector.z);
+            Vec3 vector1 = new Vec3(target.getX() - this.getX(), 0.0D, target.getZ() - this.getZ());
+            if (vector1.horizontalDistanceSqr() > 9.0D) {
+                Vec3 vector2 = vector1.normalize();
+                vector = vector.add(vector2.x * 0.3D - vector.x * 0.6D, 0.0D, vector2.z * 0.3D - vector.z * 0.6D);
+            }
+            
+            this.setDeltaMovement(vector);
+        }
+        else {
+            BlockPos pos = this.blockPosition().below().below();
+            BlockState state = this.level.getBlockState(pos);
+            if (!state.getBlock().getCollisionShape(state, this.level, pos, CollisionContext.of(this)).isEmpty()) {
+                this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.004D, this.getDeltaMovement().z);
+            }
+        }
     }
 
     @Override
