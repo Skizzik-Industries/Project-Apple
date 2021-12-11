@@ -159,7 +159,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     
     implementation fg.deobf("com.skizzium.projectlib:BossUtilities-${mc_version}:${bossutils_version}")
-    shade fg.deobf("software.bernie.geckolib:geckolib-${mc_version}-forge:${geckolib_version}")
+    shade fg.deobf("software.bernie.geckolib:geckolib-1.18-forge:${geckolib_version}")
 }
 
 // Again, thanks to SizableShrimp for making this script. It swaps the variables in mods.toml and pack.mcmeta with the gradle.properties values
