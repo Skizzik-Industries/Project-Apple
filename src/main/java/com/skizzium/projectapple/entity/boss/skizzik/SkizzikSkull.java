@@ -120,6 +120,14 @@ public class SkizzikSkull extends AbstractHurtingProjectile {
     }
 
     @Override
+    protected boolean canHitEntity(Entity entity) {
+        if (entity instanceof SkizzikPart && ((SkizzikPart) entity).getParent() == this.getOwner()) {
+            return false;
+        }
+        return super.canHitEntity(entity);
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult entity) {
         super.onHitEntity(entity);
         if (!this.level.isClientSide) {
