@@ -12,6 +12,8 @@ import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.effect.ConversionEffect;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
+import com.skizzium.projectapple.network.ToggleRPC;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.core.BlockPos;
@@ -62,6 +64,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import net.minecraftforge.entity.PartEntity;
@@ -210,6 +213,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
+        PA_PacketRegistry.INSTANCE.sendTo(new ToggleRPC(true), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer serverPlayer) {
+        super.stopSeenByPlayer(serverPlayer);
+        this.bossBar.removePlayer(serverPlayer);
+        PA_PacketRegistry.INSTANCE.sendTo(new ToggleRPC(false), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
@@ -225,12 +236,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
             return false;
         }
         return super.isPushable();
-    }
-
-    @Override
-    public void stopSeenByPlayer(ServerPlayer serverPlayer) {
-        super.stopSeenByPlayer(serverPlayer);
-        this.bossBar.removePlayer(serverPlayer);
     }
 
     @Override

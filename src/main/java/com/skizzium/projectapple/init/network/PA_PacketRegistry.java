@@ -4,6 +4,7 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.network.FriendlySkizzikOpenMenuPacket;
 import com.skizzium.projectapple.network.FriendlySkizzikOpenScreenPacket;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
+import com.skizzium.projectapple.network.ToggleRPC;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,6 +25,7 @@ public class PA_PacketRegistry {
     
     @SubscribeEvent
     public static void registerMessages(FMLCommonSetupEvent event) {
+        INSTANCE.registerMessage(ID++, ToggleRPC.class, ToggleRPC::encode, ToggleRPC::decode, ToggleRPC::handle);
         INSTANCE.registerMessage(ID++, FriendlySkizzikOpenMenuPacket.class, FriendlySkizzikOpenMenuPacket::encode, FriendlySkizzikOpenMenuPacket::decode, FriendlySkizzikOpenMenuPacket::handle);
         INSTANCE.registerMessage(ID++, FriendlySkizzikOpenScreenPacket.class, FriendlySkizzikOpenScreenPacket::encode, FriendlySkizzikOpenScreenPacket::decode, FriendlySkizzikOpenScreenPacket::handle);
         INSTANCE.registerMessage(ID++, SkizzoConnectionParticlesPacket.class, SkizzoConnectionParticlesPacket::encode, SkizzoConnectionParticlesPacket::decode, SkizzoConnectionParticlesPacket::handle);

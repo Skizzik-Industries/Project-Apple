@@ -24,7 +24,7 @@ public class FriendlySkizzikOpenMenuPacket {
     }
 
     public static void handle(FriendlySkizzikOpenMenuPacket packet, Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FriendlySkizzikInventoryHandler.openMenu(packet.skizzikId, context)));
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> FriendlySkizzikInventoryHandler.openMenu(packet.skizzikId, context)));
         context.get().setPacketHandled(true);
     }
 }

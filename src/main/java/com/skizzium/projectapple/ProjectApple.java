@@ -6,6 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
+import com.skizzium.projectapple.rpc.IPCClient;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
 public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static IPCClient RPC;
 
     public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
     public static final Map<Integer, String> holidayNames = Util.make(Maps.newHashMap(), (builder) -> {
@@ -55,7 +57,7 @@ public class ProjectApple {
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
     }
-
+    
     @SubscribeEvent
     public static void livingFallEvent(LivingFallEvent event) {
         if (event.getEntity().getVehicle() instanceof Skizzie || event.getEntity().getVehicle() instanceof FriendlySkizzie) {

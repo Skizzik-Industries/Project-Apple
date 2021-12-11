@@ -139,7 +139,6 @@ shadowJar {
 }
 
 repositories {
-    jcenter()
     mavenLocal()
     maven {
         name 'Boss Utilities'
@@ -160,7 +159,6 @@ dependencies {
     
     implementation fg.deobf("com.skizzium.projectlib:BossUtilities-${mc_version}:${bossutils_version}")
     shade fg.deobf("software.bernie.geckolib:geckolib-1.18-forge:${geckolib_version}")
-    implementation 'com.jagrosh:DiscordIPC:0.4'
     
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:3559499")
 }
