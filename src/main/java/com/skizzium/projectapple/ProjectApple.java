@@ -1,8 +1,5 @@
 package com.skizzium.projectapple;
 
-import club.minnced.discord.rpc.DiscordEventHandlers;
-import club.minnced.discord.rpc.DiscordRPC;
-import club.minnced.discord.rpc.DiscordRichPresence;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
@@ -37,12 +34,6 @@ public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    DiscordRPC rpc = DiscordRPC.INSTANCE;
-    String applicationId = "";
-    String steamId = "";
-    DiscordEventHandlers handlers = new DiscordEventHandlers();
-    DiscordRichPresence presence = new DiscordRichPresence();
-
     public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
     public static final Map<Integer, String> holidayNames = Util.make(Maps.newHashMap(), (builder) -> {
         builder.put(1, "spooktober");
@@ -53,11 +44,6 @@ public class ProjectApple {
     private static List<ResourceLocation> rainbowSwordImmuneBlocksList;
 
     public ProjectApple() {
-        rpc.Discord_Initialize(applicationId, handlers, true, steamId);
-        presence.startTimestamp = System.currentTimeMillis() / 1000;
-        presence.details = "Testing RPC";
-        rpc.Discord_UpdatePresence(presence);
-        
         holiday = checkForHolidays();
         
         PA_Registry.register();
