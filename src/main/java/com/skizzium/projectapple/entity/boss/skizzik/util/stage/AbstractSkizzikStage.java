@@ -8,6 +8,8 @@ import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectlib.gui.PL_BossEvent;
+import com.skizzium.projectlib.gui.minibar.Minibar;
+import com.skizzium.projectlib.gui.minibar.ServerMinibar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -150,6 +152,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
                             skizzik.setInvul(!skizzik.getStageDebug());
+                            skizzik.bossBar.addMinibar(new ServerMinibar(skizzo, new Minibar.MinibarProperties().color(PL_BossEvent.PL_BossBarColor.RED)));
                         }
                     }
                 }

@@ -5,10 +5,12 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySki
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
+import com.skizzium.projectlib.gui.minibar.ServerMinibar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -81,6 +83,18 @@ public class Skizzo extends AbstractSkizzo {
         else {
             if (!player.fireImmune()) {
                 player.setSecondsOnFire(10);
+            }
+        }
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (this.getOwner() instanceof Skizzik && !((Skizzik) this.getOwner()).bossBar.getMinibars().isEmpty()) {
+            for (ServerMinibar minibar : ((Skizzik) this.getOwner()).bossBar.getMinibars()) {
+                if (minibar.getEntity() == this) {
+                    ((Skizzik) this.getOwner()).bossBar.removeMinibar(minibar);
+                }
             }
         }
     }
