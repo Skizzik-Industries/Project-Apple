@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.init;
+package com.skizzium.projectapple.init.network;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.network.FriendlySkizzikOpenMenuPacket;

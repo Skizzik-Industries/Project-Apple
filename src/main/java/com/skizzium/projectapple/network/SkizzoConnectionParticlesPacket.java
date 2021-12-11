@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.network;
 
-import com.skizzium.projectapple.init.PA_PacketHandler;
+import com.skizzium.projectapple.init.network.PA_PacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;

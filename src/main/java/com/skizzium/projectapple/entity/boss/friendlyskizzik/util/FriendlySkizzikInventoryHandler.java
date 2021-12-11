@@ -4,7 +4,7 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
 import com.skizzium.projectapple.gui.FriendlySkizzikScreen;
-import com.skizzium.projectapple.init.PA_PacketRegistry;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.FriendlySkizzikOpenMenuPacket;
 import com.skizzium.projectapple.network.FriendlySkizzikOpenScreenPacket;
 import net.minecraft.client.Minecraft;

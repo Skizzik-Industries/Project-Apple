@@ -8,7 +8,7 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.util.FriendlySkizzi
 import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
-import com.skizzium.projectapple.init.PA_PacketRegistry;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
