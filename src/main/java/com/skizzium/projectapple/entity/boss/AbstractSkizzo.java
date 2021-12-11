@@ -56,7 +56,7 @@ public abstract class AbstractSkizzo extends Monster implements IAnimatable {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.4F;
+        return 0.65F;
     }
 
     @Override
