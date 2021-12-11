@@ -20,6 +20,7 @@ public final class PA_Tags {
         public static final Tag.Named<Block> NEEDS_DIAMOND_TOOL = minecraft("needs_diamond_tool");
 
         public static final Tag.Named<Block> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
+        public static final Tag.Named<Block> FRIENDLY_SKIZZIK_HEADS = forge("skizzik_heads");
         public static final Tag.Named<Block> SKIZZIK_HEADS = forge("skizzik_heads");
 
         public static final Tag.Named<Block> RAINBOW_SWORD_IMMUNE = forge("skizzik_rainbow_sword_immune");
@@ -101,6 +102,8 @@ public final class PA_Tags {
     public static final class Items {
         public static final Tag.Named<Item> SKIZZIK_COMMAND_BLOCKS = forge("skizzik_command_blocks");
         public static final Tag.Named<Item> SKIZZIK_HEADS = forge("skizzik_heads");
+        
+        public static final Tag.Named<Item> FRIENDLY_SKIZZIK_RIBS = forge("friendly_skizzik_ribs");
 
         public static final Tag.Named<Item> SKIZZIK_PANCAKES = forge("skizzik_pancakes");
         public static final Tag.Named<Item> SKIZZIK_CHOCOLATE = forge("skizzik_chocolate");

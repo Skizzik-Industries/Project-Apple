@@ -41,7 +41,7 @@ public class CandyPig extends Pig {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
-    public static boolean canEntitySpawn(EntityType<? extends CandyPig> animal, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.below()).is(PA_Blocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos) && world.getBiome(pos).equals(PA_Biomes.CANDY_PLAINS.get());
-    }
+//    public static boolean canEntitySpawn(EntityType<? extends CandyPig> animal, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
+//        return world.getBlockState(pos.below()).is(PA_Blocks.CANDY_NYLIUM.get()) && world.getRawBrightness(pos, 0) > 8 && world.canSeeSky(pos) && world.getBiome(pos).equals(PA_Biomes.CANDY_PLAINS.get());
+//    }
 }

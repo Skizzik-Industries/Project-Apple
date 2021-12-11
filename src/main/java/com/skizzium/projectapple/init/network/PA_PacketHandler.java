@@ -1,62 +1,28 @@
 package com.skizzium.projectapple.init.network;
 
-import com.skizzium.projectapple.gui.PA_LerpingBossEvent;
-import com.skizzium.projectapple.network.*;
-import com.skizzium.projectapple.sound.BossMusic;
+import com.mojang.math.Vector3f;
+import com.skizzium.projectapple.entity.boss.AbstractSkizzo;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.LerpingBossEvent;
-import net.minecraft.client.sounds.MusicManager;
-import net.minecraft.sounds.Music;
-import net.minecraft.util.Mth;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
-
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
-import java.util.function.Supplier;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.phys.Vec3;
 
 public class PA_PacketHandler {
-    public static void handleBossMusicStartPacket(BossMusicStartPacket packet, Supplier<NetworkEvent.Context> context) {
-        Minecraft.getInstance().getMusicManager().stopPlaying();
-        if (!BossMusicStartPacket.isPlaying) {
-            BossMusicStartPacket.music = new BossMusic(packet.musicEvent, Minecraft.getInstance());
-            Minecraft.getInstance().getSoundManager().play(BossMusicStartPacket.music);
-            BossMusicStartPacket.isPlaying = true;
-        }
-    }
-
-    public static void handleBossMusicStopPacket(BossMusicStopPacket packet, Supplier<NetworkEvent.Context> context) {
-        //Minecraft.getInstance().getMusicManager().stopPlaying();
-
-        Minecraft.getInstance().getSoundManager().stop(BossMusicStartPacket.music);
-        BossMusicStartPacket.isPlaying = false;
-
-        Music music = Minecraft.getInstance().getSituationalMusic();
-        MusicManager musicManager = Minecraft.getInstance().getMusicManager();
-        musicManager.nextSongDelay = Math.min(100, Mth.nextInt(new Random(), music.getMinDelay(), music.getMaxDelay()));
-    }
-
-    public static void handleBossEventPacket(BossEventPacket packet) {
-        if (packet.opeartion.equals(BossEventPacket.OperationType.ADD)) {
-            Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-            vanillaEvents.put(packet.id, new PA_LerpingBossEvent(packet.id, packet.name, packet.progress, packet.color, packet.overlay, packet.darkenScreen, packet.createWorldFog));
-        }
-        else if (packet.opeartion.equals(BossEventPacket.OperationType.REMOVE)) {
-            Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-            vanillaEvents.remove(packet.id);
-        }
-        else if (packet.opeartion.equals(BossEventPacket.OperationType.UPDATE)) {
-            Map<UUID, LerpingBossEvent> vanillaEvents = Minecraft.getInstance().gui.getBossOverlay().events;
-            PA_LerpingBossEvent lerpingBossEvent = (PA_LerpingBossEvent)vanillaEvents.get(packet.id);
-
-            vanillaEvents.get(packet.id).setName(packet.name);
-            vanillaEvents.get(packet.id).setProgress(packet.progress);
-
-            lerpingBossEvent.setCustomColor(packet.color);
-            lerpingBossEvent.setCustomOverlay(packet.overlay);
-
-            lerpingBossEvent.setDarkenScreen(packet.darkenScreen);
-            lerpingBossEvent.setCreateWorldFog(packet.createWorldFog);
+    public static void handleSkizzoParticles(SkizzoConnectionParticlesPacket packet) {
+        Skizzik skizzik = (Skizzik) Minecraft.getInstance().level.getEntity(packet.skizzikId);
+        AbstractSkizzo skizzo = (AbstractSkizzo) Minecraft.getInstance().level.getEntity(packet.skizzoId);
+        
+        double distance = skizzo.distanceTo(skizzik);
+        Vec3 point1 = skizzo.position().add(0, skizzo.getEyeHeight(), 0);
+        Vec3 point2 = skizzik.position().add(0, skizzik.getEyeHeight(), 0);
+        Vec3 vector = new Vec3(point2.x, point2.y, point2.z).subtract(point1).normalize().scale(0.5);
+        
+        for (double length = 0; length < distance; length += 0.5) {
+            skizzo.level.addParticle(skizzo instanceof FriendlySkizzo ? new DustParticleOptions(new Vector3f(Vec3.fromRGB24(0x17D1C7)), 1.0F) : DustParticleOptions.REDSTONE, point1.x, point1.y, point1.z, 0.0D, 0.0D, 0.0D);
+            point1 = point1.add(vector);
         }
     }
 }

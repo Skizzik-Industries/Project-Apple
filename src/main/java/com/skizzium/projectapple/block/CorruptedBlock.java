@@ -16,7 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import com.skizzium.projectapple.init.PA_Effects;
+import com.skizzium.projectapple.init.effects.PA_Effects;
 
 public class CorruptedBlock extends Block {
     public CorruptedBlock(Properties properties) {

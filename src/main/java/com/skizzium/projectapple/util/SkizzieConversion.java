@@ -6,8 +6,8 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.CorruptedSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlyWitchSkizzie;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
@@ -87,6 +88,10 @@ public class SkizzieConversion {
                 ((Skizzie) to).setHoliday(((Skizzie) from).getHoliday());
             }
             
+            if (to instanceof FriendlySkizzie) {
+                ((FriendlySkizzie) to).setOwner(player);
+            }
+            
             to.moveTo(fromX, fromY, fromZ, from.xRotO, from.yRotO);
             to.setYBodyRot(from.yBodyRot);
             to.setYHeadRot(from.yHeadRot);
@@ -100,12 +105,12 @@ public class SkizzieConversion {
 
             from.discard();
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.sidedSuccess(!world.isClientSide);
     }
 
-    public static InteractionResult convert(LivingEntity skizzie, Player player) {
-        Item item = player.getMainHandItem().getItem();
-        ItemStack itemStack = player.getMainHandItem();
+    public static InteractionResult convert(LivingEntity skizzie, Player player, InteractionHand hand) {
+        Item item = player.getItemInHand(hand).getItem();
+        ItemStack itemStack = player.getItemInHand(hand);
         Level world = player.level;
 
         if (!world.isClientSide) {
@@ -143,10 +148,7 @@ public class SkizzieConversion {
             /*else if (!(skizzie instanceof FriendlySkizzie) && item == PA_Blocks.SMALL_SKIZZIK_HEAD.get().asItem()) {
                 return convert(skizzie, new Skizzie(PA_Entities.SKIZZIE, world), itemStack, player, world, false);
             }*/
-            return InteractionResult.PASS;
         }
-        else {
-            return InteractionResult.PASS;
-        }
+        return InteractionResult.PASS;
     }
 }

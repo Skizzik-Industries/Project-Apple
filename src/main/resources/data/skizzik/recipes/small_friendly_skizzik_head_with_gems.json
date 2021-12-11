@@ -1,0 +1,22 @@
+{
+  "group": "skizzik_heads",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:small_friendly_skizzik_head"
+    },
+    {
+      "item": "skizzik:brown_gem"
+    },
+    {
+      "item": "skizzik:green_gem"
+    },
+    {
+      "item": "skizzik:green_gem"
+    }
+  ],
+  "result": {
+    "item": "skizzik:small_friendly_skizzik_head_with_gems",
+    "count": 1
+  }
+}

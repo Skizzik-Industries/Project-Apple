@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.entity.boss.skizzik.client.renderer;
 
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlyWitchSkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlyWitchSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer.WitchSkizzieGlowLayer;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;

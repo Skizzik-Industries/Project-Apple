@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik.skizzie;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;
 import net.minecraft.client.Minecraft;
@@ -214,7 +214,7 @@ public class Skizzie extends Monster {
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        return SkizzieConversion.convert(this, player);
+        return SkizzieConversion.convert(this, player, hand);
     }
 
     @Override

@@ -11,12 +11,17 @@ public class SkizzikRenderer extends GeoEntityRenderer<Skizzik> {
     public SkizzikRenderer(EntityRendererProvider.Context renderer) {
         super(renderer, new SkizzikModel());
         this.shadowRadius = 1.0F;
-        //this.addLayer(new SkizzikGlowLayer(this));
+        this.addLayer(new SkizzikGlowLayer<>(this));
     }
 
     @Override
     protected int getBlockLightLevel(Skizzik entity, BlockPos pos) {
-        int stage = entity.stageManager.getCurrentStage().getStage().getId();
-        return stage <= 0 || stage >= 6 ? 0 : 15;
+        if (!entity.isConverting()) {
+            int stage = entity.stageManager.getCurrentStage().getStage().getId();
+            return stage <= 0 || stage >= 6 ? 0 : 15;
+        }
+        else {
+            return 15;
+        }
     }
 }

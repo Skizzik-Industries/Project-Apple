@@ -1,0 +1,16 @@
+{
+  "group": "skizzik_heads",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "skizzik:small_friendly_skizzik_head_with_gems"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": {
+    "item": "skizzik:small_skizzik_head_with_gems",
+    "count": 1
+  }
+}

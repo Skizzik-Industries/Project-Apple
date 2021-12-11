@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="${loader_version}"
+loaderVersion="${forge_version_range}"
 license="${mod_license}"
 issueTrackerURL="${mod_issues}"
 [[mods]]
@@ -12,6 +12,18 @@ logoFile="${mod_logo}"
 credits="${mod_credits}"
 authors="${mod_authors}"
 description='''${mod_description}'''
+[[dependencies.skizzik]]
+    modId="bossutils"
+    mandatory=true
+    versionRange="${bossutils_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.skizzik]]
+    modId="geckolib3"
+    mandatory=true
+    versionRange="${geckolib_version_range}"
+    ordering="NONE"
+    side="BOTH"
 [[dependencies.skizzik]]
     modId="forge"
     mandatory=true

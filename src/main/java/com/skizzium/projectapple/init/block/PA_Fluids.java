@@ -3,7 +3,7 @@ package com.skizzium.projectapple.init.block;
 import com.skizzium.projectapple.block.MapleSyrup;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 public class PA_Fluids {
     public static final RegistryObject<FlowingFluid> MAPLE_SYRUP = PA_Registry.FLUIDS.register("maple_syrup", () -> new MapleSyrup.Source(MapleSyrup.createProperties()));

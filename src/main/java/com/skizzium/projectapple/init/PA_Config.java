@@ -51,6 +51,7 @@ public class PA_Config {
         public final ForgeConfigSpec.BooleanValue allowSkizzieConversion;
         public final ForgeConfigSpec.IntValue skizzieStatueChances;
         public final ForgeConfigSpec.BooleanValue allowCorruptedSkizzieAbility;
+        public final ForgeConfigSpec.BooleanValue convertWithDragonEgg;
 
         Entities(ForgeConfigSpec.Builder builder) {
             builder.comment("Entity Settings").push("entities");
@@ -64,6 +65,9 @@ public class PA_Config {
             this.allowCorruptedSkizzieAbility = builder
                     .comment("Determines whether or not Corrupted Skizzies will turn blocks under them into Corrupted Blocks.")
                     .define("allowCorruptedSkizzieAbility", true);
+            this.convertWithDragonEgg = builder
+                    .comment("Determines whether the Skizzik will require a Dragon Egg when first converted. If disabled, a nether star will always be needed.")
+                    .define("convertWithDragonEgg", true);
 
             builder.pop();
         }

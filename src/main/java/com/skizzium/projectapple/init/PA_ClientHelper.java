@@ -2,14 +2,13 @@ package com.skizzium.projectapple.init;
 
 import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.block.SkizzikHeadWithGems;
+import com.skizzium.projectapple.block.heads.SkizzikHeadWithGems;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.init.item.PA_Items;
-import com.skizzium.projectapple.tileentity.model.PA_SkullModel;
-import com.skizzium.projectapple.tileentity.renderer.PA_SkullRenderer;
+import com.skizzium.projectapple.entity.client.model.PA_SkullModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.SkullModelBase;
@@ -51,12 +50,14 @@ import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_ClientHelper {
+    public static final PA_Keybinds keybinds = new PA_Keybinds();
+    
     public static Minecraft getClient() {
         return Minecraft.getInstance();
     }
     
     @SubscribeEvent
-    public static void renderLayers(final FMLClientSetupEvent event) {
+    public static void renderLayers(FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIE_STATUE.get(), RenderType.cutoutMipped());
 
@@ -68,6 +69,8 @@ public class PA_ClientHelper {
 
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.MAPLE_SYRUP.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
+        
+        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_LEAVES.get(), RenderType.cutoutMipped());
     }
     
     public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {
@@ -83,6 +86,11 @@ public class PA_ClientHelper {
         builder.put(SkullBlock.Types.CREEPER, new SkullModel(set.bakeLayer(ModelLayers.CREEPER_HEAD)));
         builder.put(SkullBlock.Types.DRAGON, new DragonHeadModel(set.bakeLayer(ModelLayers.DRAGON_SKULL)));
 
+        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_FRIENDLY_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.SMALL_FRIENDLY_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.FRIENDLY_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
+        builder.put(PA_TileEntities.CustomSkullTypes.FRIENDLY_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_WITH_GEMS_LAYER)));
+        
         builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_LAYER)));
         builder.put(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SMALL_SKIZZIK_HEAD_WITH_GEMS_LAYER)));
         builder.put(PA_TileEntities.CustomSkullTypes.SKIZZIK, new PA_SkullModel(set.bakeLayer(PA_ModelLayers.SKIZZIK_HEAD_LAYER)));
@@ -119,7 +127,7 @@ public class PA_ClientHelper {
     }
 
     @SubscribeEvent
-    public static void registerOtherStuff(final FMLClientSetupEvent event) {
+    public static void registerOtherStuff(FMLClientSetupEvent event) {
         ComposterBlock.COMPOSTABLES.put(PA_Blocks.CANDY_CANE.get(), 0.5F);
 
         WoodType.register(PA_Blocks.CANDY_WOOD_TYPE);
@@ -160,6 +168,17 @@ public class PA_ClientHelper {
             DispenserBlock.registerBehavior(egg, entityDispenseBehavior);
         }
 
+        DispenseItemBehavior skullDispenseBehavior = new OptionalDispenseItemBehavior() {
+            protected ItemStack execute(BlockSource source, ItemStack stack) {
+                this.setSuccess(ArmorItem.dispenseArmor(source, stack));
+                return stack;
+            }
+        };
+
+        DispenserBlock.registerBehavior(PA_Items.FRIENDLY_SKIZZIK_HEAD.get(), skullDispenseBehavior);
+        DispenserBlock.registerBehavior(PA_Items.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get(), skullDispenseBehavior);
+        DispenserBlock.registerBehavior(PA_Items.SKIZZIK_HEAD.get(), skullDispenseBehavior);
+
         DispenserBlock.registerBehavior(PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), new OptionalDispenseItemBehavior() {
             protected ItemStack execute(BlockSource source, ItemStack itemStack) {
                 Level world = source.getLevel();
@@ -176,9 +195,6 @@ public class PA_ClientHelper {
 
                     itemStack.shrink(1);
                     this.setSuccess(true);
-                }
-                else {
-                    this.setSuccess(ArmorItem.dispenseArmor(source, itemStack));
                 }
 
                 return itemStack;

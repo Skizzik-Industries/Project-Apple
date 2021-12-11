@@ -4,39 +4,31 @@ import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.CommandBlock;
 import com.skizzium.projectapple.block.*;
 import com.skizzium.projectapple.block.grower.CandyTreeGrower;
+import com.skizzium.projectapple.block.heads.*;
+import com.skizzium.projectapple.block.heads.small.SmallSkizzikHead;
+import com.skizzium.projectapple.block.heads.small.SmallSkizzikHeadWithGems;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.item.PA_Items;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
-import net.minecraft.core.Direction;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
-import net.minecraft.world.level.block.grower.OakTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
@@ -48,14 +40,23 @@ public class PA_Blocks {
     public static final RegistryObject<Block> DEACTIVATED_COMMAND_BLOCK = register("deactivated_command_block", () -> new CommandBlock(PushReaction.BLOCK, BlockBehaviour.Properties.of(Material.METAL).strength(65.0F,3_600_000.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.RARE, false);
     public static final RegistryObject<Block> BROKEN_COMMAND_BLOCK = register("broken_command_block", () -> new CommandBlock(PushReaction.NORMAL, BlockBehaviour.Properties.of(Material.METAL).strength(45.0F,1200.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.UNCOMMON, false);
 
+    public static final RegistryObject<Block> SMALL_FRIENDLY_SKIZZIK_HEAD = registerNoItem("small_friendly_skizzik_head", () -> new SmallSkizzikHead(PA_TileEntities.CustomSkullTypes.SMALL_FRIENDLY_SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+    public static final RegistryObject<Block> SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS = registerNoItem("small_friendly_skizzik_head_with_gems", () -> new SmallSkizzikHead(PA_TileEntities.CustomSkullTypes.SMALL_FRIENDLY_SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+
+    public static final RegistryObject<Block> FRIENDLY_SKIZZIK_HEAD = registerNoItem("friendly_skizzik_head", () -> new SkizzikHead(PA_TileEntities.CustomSkullTypes.FRIENDLY_SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+    public static final RegistryObject<Block> FRIENDLY_SKIZZIK_WALL_HEAD = registerNoItem("friendly_skizzik_wall_head", () -> new SkizzikWallHead(PA_TileEntities.CustomSkullTypes.FRIENDLY_SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).dropsLike(FRIENDLY_SKIZZIK_HEAD.get())));
+    public static final RegistryObject<Block> FRIENDLY_SKIZZIK_HEAD_WITH_GEMS = registerNoItem("friendly_skizzik_head_with_gems", () -> new SkizzikHead(PA_TileEntities.CustomSkullTypes.FRIENDLY_SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+    public static final RegistryObject<Block> FRIENDLY_SKIZZIK_WALL_HEAD_WITH_GEMS = registerNoItem("friendly_skizzik_wall_head_with_gems", () -> new SkizzikWallHead(PA_TileEntities.CustomSkullTypes.FRIENDLY_SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).dropsLike(FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get())));
+
     public static final RegistryObject<Block> SMALL_SKIZZIK_HEAD = registerNoItem("small_skizzik_head", () -> new SmallSkizzikHead(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
-    public static final RegistryObject<Block> SMALL_SKIZZIK_HEAD_WITH_GEMS = registerNoItem("small_skizzik_head_with_gems", () -> new SmallSkizzikHead(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
+    public static final RegistryObject<Block> SMALL_SKIZZIK_HEAD_WITH_GEMS = registerNoItem("small_skizzik_head_with_gems", () -> new SmallSkizzikHeadWithGems(PA_TileEntities.CustomSkullTypes.SMALL_SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
 
     public static final RegistryObject<Block> SKIZZIK_HEAD = registerNoItem("skizzik_head", () -> new SkizzikHead(PA_TileEntities.CustomSkullTypes.SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
     public static final RegistryObject<Block> SKIZZIK_WALL_HEAD = registerNoItem("skizzik_wall_head", () -> new SkizzikWallHead(PA_TileEntities.CustomSkullTypes.SKIZZIK, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).dropsLike(SKIZZIK_HEAD.get())));
     public static final RegistryObject<Block> SKIZZIK_HEAD_WITH_GEMS = registerNoItem("skizzik_head_with_gems", () -> new SkizzikHeadWithGems(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F)));
     public static final RegistryObject<Block> SKIZZIK_WALL_HEAD_WITH_GEMS = registerNoItem("skizzik_wall_head_with_gems", () -> new SkizzikWallHeadWithGems(PA_TileEntities.CustomSkullTypes.SKIZZIK_WITH_GEMS, BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).dropsLike(SKIZZIK_HEAD_WITH_GEMS.get())));
 
+    public static final RegistryObject<Block> FRIENDLY_SKIZZIK_FLESH_BLOCK = register("friendly_skizzik_flesh_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_BLUE).strength(0.8F,0.8F).sound(SoundType.SLIME_BLOCK).emissiveRendering(PA_Blocks::always)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.UNCOMMON, true);
     public static final RegistryObject<Block> SKIZZIK_FLESH_BLOCK = register("skizzik_flesh_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_RED).strength(0.8F,0.8F).sound(SoundType.SLIME_BLOCK).emissiveRendering(PA_Blocks::always)), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.UNCOMMON, true);
 
     public static final RegistryObject<SkizzieStatue> SKIZZIE_STATUE = register("skizzie_statue", () -> new SkizzieStatue(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).strength(1.5F,6.0F).noOcclusion().sound(SoundType.STONE).requiresCorrectToolForDrops()), PA_Registry.MAIN_SKIZZIK_TAB, Rarity.UNCOMMON, false);

@@ -5,17 +5,22 @@ import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -28,7 +33,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mod(ProjectApple.MOD_ID)
-@Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
@@ -63,17 +67,16 @@ public class ProjectApple {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
 
         MinecraftForge.EVENT_BUS.register(this);
-        
-        new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                rpc.Discord_RunCallbacks();
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ignored) {}
-            }
-        }, "Skizzik & Co. RPC").start();
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
     }
 
+    @SubscribeEvent
+    public static void livingFallEvent(LivingFallEvent event) {
+        if (event.getEntity().getVehicle() instanceof Skizzie || event.getEntity().getVehicle() instanceof FriendlySkizzie) {
+            event.setCanceled(true);
+        }
+    }
+    
     private static int checkForHolidays() {
         String currentDay = DateTimeFormatter.ofPattern("dd").format(LocalDateTime.now());
         String currentMonth = DateTimeFormatter.ofPattern("MM").format(LocalDateTime.now());

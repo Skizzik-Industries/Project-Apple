@@ -6,7 +6,7 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.CorruptedSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.friendly.FriendlySkizzie;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
