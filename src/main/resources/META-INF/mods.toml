@@ -1,37 +1,38 @@
 modLoader="javafml"
-loaderVersion="[38,)"
-license="GPLv3"
-issueTrackerURL="https://github.com/Skizzium/Project-Apple/issues"
+loaderVersion="${forge_version_range}"
+license="${mod_license}"
+issueTrackerURL="${mod_issues}"
 [[mods]]
-modId="skizzik"
-version="2.0.0-beta.5"
-displayName="Skizzik & Co. [Project Apple]"
-displayURL="https://skizzium.com/"
-logoFile="logo.png"
-credits="Credits to diesieben07 (skulls and custom boss bar) and all the helpful people in the forge community for putting up with my stupidity and helping me out. \nAlso, Skizzik & Spookzik themes are both from the Terraria OST. Nightmare Spookzik's theme is the well-known Doom theme (The Only Thing they Fear is You). These are all temporary solutions until I finally make my own themes."
-authors="\n- Skizzium [Ownership], \n- uSkizzik [Coding & Concepts], \n- LazTheArtist [Assets & Coding], \n- PRO#6639 [Ukrainian Translations]"
-description='''From seemingly harmless candies and rainbows, to dark back stories, suffering mutants, distant Wither relatives and multiversal aliens, this mod adds a lot of dimensions, boss battles and structures.'''
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${toml_name}"
+#updateJSONURL=""
+displayURL="${mod_url}"
+logoFile="${mod_logo}"
+credits="${mod_credits}"
+authors="${mod_authors}"
+description='''${mod_description}'''
 [[dependencies.skizzik]]
     modId="bossutils"
     mandatory=true
-    versionRange="[1.0.0-beta.6.3,1.0.0)"
+    versionRange="${bossutils_version_range}"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
     modId="geckolib3"
     mandatory=true
-    versionRange="[3.0.0,4.0.0)"
+    versionRange="${geckolib_version_range}"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
     modId="forge"
     mandatory=true
-    versionRange="[38.0.0,39)"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
 [[dependencies.skizzik]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.19)"
+    versionRange="${mc_versionRange}"
     ordering="NONE"
     side="BOTH"
