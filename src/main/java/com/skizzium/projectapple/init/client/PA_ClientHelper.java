@@ -1,6 +1,7 @@
-package com.skizzium.projectapple.init;
+package com.skizzium.projectapple.init.client;
 
 import com.google.common.collect.ImmutableMap;
+import com.skizzium.projectapple.init.PA_Keybinds;
 import com.skizzium.projectapple.rpc.IPCClient;
 import com.skizzium.projectapple.rpc.entities.DiscordBuild;
 import com.skizzium.projectapple.rpc.exceptions.NoDiscordClientException;
@@ -43,6 +44,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

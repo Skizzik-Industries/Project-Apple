@@ -1,6 +1,7 @@
 package com.skizzium.projectapple.entity.boss.skizzik.util.stage;
 
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.RPCBoss;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
 import com.skizzium.projectapple.entity.boss.skizzik.util.stage.base.SkizzikSleeping;
@@ -8,6 +9,7 @@ import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.network.RPCPacket;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import com.skizzium.projectlib.gui.PL_BossEvent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
@@ -62,9 +64,9 @@ public abstract class AbstractPassiveSkizzikStage extends AbstractSkizzikStage {
         skizzik.setHealth(this.maxStageHealth());
         skizzik.setEyeHeight(this.eyeHeight());
 
-        if (!this.skizzik.level.isClientSide) {
+        if (this.skizzik.level.isClientSide) {
             if (!(this instanceof SkizzikSleeping)) {
-                PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new RPCPacket(RPCPacket.RPCAction.RELOAD, this.skizzik.getId()));
+                ProjectApple.RPCListener.reloadRichPresence(this.skizzik);
             }
         }
         

@@ -261,7 +261,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
 
         if (!world.isClientSide && skizzik.tickCount % 100 == 0) {
             // The RPC needs to be reloaded every 5 seconds due to issues with the begin method, causing the RPC to not update / lack behind
-            PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new RPCPacket(RPCPacket.RPCAction.RELOAD, this.skizzik.getId()));
+            ProjectApple.RPCListener.reloadRichPresence(this.skizzik);
         }
 
         if (skizzik.isInvul() && world instanceof ServerLevel) {

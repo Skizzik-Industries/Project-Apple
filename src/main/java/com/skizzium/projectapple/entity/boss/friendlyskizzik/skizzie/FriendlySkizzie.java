@@ -2,7 +2,7 @@ package com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
-import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.init.client.PA_ClientHelper;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;

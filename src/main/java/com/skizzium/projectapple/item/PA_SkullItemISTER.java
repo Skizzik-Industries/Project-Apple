@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.init.client.PA_ClientHelper;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

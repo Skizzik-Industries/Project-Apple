@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.boss.friendlyskizzik;
 
 import com.skizzium.projectapple.entity.boss.AbstractSkizzo;
-import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.init.client.PA_ClientHelper;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;

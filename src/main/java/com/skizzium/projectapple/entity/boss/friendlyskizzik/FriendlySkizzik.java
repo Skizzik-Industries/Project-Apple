@@ -6,7 +6,7 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.ai.FriendlySkizzoRe
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
-import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.init.client.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_Tags;
