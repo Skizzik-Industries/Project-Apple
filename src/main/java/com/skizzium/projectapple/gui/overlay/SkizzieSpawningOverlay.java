@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
-import com.skizzium.projectapple.init.client.PA_ClientHelper;
+import com.skizzium.projectapple.init.events.PA_ModClientEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -32,7 +32,7 @@ public class SkizzieSpawningOverlay extends GuiComponent implements IIngameOverl
     
     @Override
     public void render(ForgeIngameGui gui, PoseStack matrix, float partialTicks, int width, int height) {
-        Minecraft minecraft = PA_ClientHelper.getClient();
+        Minecraft minecraft = PA_ModClientEvents.getClient();
         Entity vehicle = minecraft.player.getVehicle();
         if (vehicle instanceof FriendlySkizzik) {
             for (int i = 0; i < 2 ; i++) {

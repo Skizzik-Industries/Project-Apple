@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.init.client;
+package com.skizzium.projectapple.init.events;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.rpc.entities.pipe.PipeStatus;

@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.skizzium.projectapple.init.client.PA_ClientHelper;
+import com.skizzium.projectapple.init.events.PA_ModClientEvents;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -24,7 +24,7 @@ public class PA_SkullItemISTER extends BlockEntityWithoutLevelRenderer {
 
     public PA_SkullItemISTER(BlockEntityRenderDispatcher dispatcher, EntityModelSet set) {
         super(dispatcher, set);
-        skullModels = PA_ClientHelper.createSkullRenderers(set);
+        skullModels = PA_ModClientEvents.createSkullRenderers(set);
     }
 
     @Override

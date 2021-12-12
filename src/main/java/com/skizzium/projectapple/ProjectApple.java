@@ -8,11 +8,16 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySki
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
 import com.skizzium.projectapple.init.PA_RichPresenceListener;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
+import com.skizzium.projectapple.network.SaveMaxPlayers;
+import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import com.skizzium.projectapple.rpc.IPCClient;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -21,6 +26,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -39,6 +47,8 @@ public class ProjectApple {
     
     public static final IPCClient RPC = new IPCClient(878393951994929184L);
     public static PA_RichPresenceListener RPCListener = new PA_RichPresenceListener();
+    
+    public static int maxPlayers;
 
     public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
     public static final Map<Integer, String> holidayNames = Util.make(Maps.newHashMap(), (builder) -> {
@@ -69,6 +79,14 @@ public class ProjectApple {
     public static void livingFallEvent(LivingFallEvent event) {
         if (event.getEntity().getVehicle() instanceof Skizzie || event.getEntity().getVehicle() instanceof FriendlySkizzie) {
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void entityJoinWorldEvent(EntityJoinWorldEvent event) {
+        if (event.getEntity() instanceof ServerPlayer) {
+            // The max player count needs to be available to the client for RPC purposes. Here I'm sending a packet that updates the field in this class on the client-side.
+            PA_PacketRegistry.INSTANCE.sendTo(new SaveMaxPlayers(ServerLifecycleHooks.getCurrentServer().getMaxPlayers()), ((ServerPlayer) event.getEntity()).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
     

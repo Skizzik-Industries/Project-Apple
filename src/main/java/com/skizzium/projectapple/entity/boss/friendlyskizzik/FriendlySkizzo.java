@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.entity.boss.friendlyskizzik;
 
 import com.skizzium.projectapple.entity.boss.AbstractSkizzo;
-import com.skizzium.projectapple.init.client.PA_ClientHelper;
+import com.skizzium.projectapple.init.events.PA_ModClientEvents;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
@@ -125,10 +125,10 @@ public class FriendlySkizzo extends AbstractSkizzo {
 
                 this.flyingSpeed = this.getSpeed() * 0.05F;
                 if (this.isControlledByLocalInstance()) {
-                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                    if (PA_ModClientEvents.getClient().options.keyJump.isDown()) {
                         moveY = 0.35F;
                     }
-                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                    else if (PA_ModClientEvents.getClient().options.keySprint.isDown()) {
                         moveY = -0.35F;
                     }
                     else {

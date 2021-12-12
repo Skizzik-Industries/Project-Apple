@@ -6,7 +6,7 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.ai.FriendlySkizzoRe
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.util.FriendlySkizzikGoalController;
 import com.skizzium.projectapple.gui.FriendlySkizzikMenu;
-import com.skizzium.projectapple.init.client.PA_ClientHelper;
+import com.skizzium.projectapple.init.events.PA_ModClientEvents;
 import com.skizzium.projectapple.init.PA_GUI;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.PA_Tags;
@@ -1066,10 +1066,10 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
 
                 this.flyingSpeed = this.getSpeed() * 0.5F;
                 if (this.isControlledByLocalInstance()) {
-                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                    if (PA_ModClientEvents.getClient().options.keyJump.isDown()) {
                         moveY = 0.8F;
                     }
-                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                    else if (PA_ModClientEvents.getClient().options.keySprint.isDown()) {
                         moveY = -0.8F;
                     }
                     else {
@@ -1446,13 +1446,13 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
             this.goalController.addDefaultGoals();
         }
         else {
-            Options options = PA_ClientHelper.getClient().options;
+            Options options = PA_ModClientEvents.getClient().options;
             if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
-                this.performRangedAttack(PA_ClientHelper.getClient().player);
+                this.performRangedAttack(PA_ModClientEvents.getClient().player);
                 skullCooldown = 0.5F;
             }
 
-            if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+            if (canDetach && PA_ModClientEvents.keybinds.keyDetachHead.isDown()) {
                 int i = 0;
                 for (KeyMapping key : options.keyHotbarSlots) {
                     if (i < 4 && key.isDown()) {
@@ -1462,7 +1462,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
                     i += 1;
                 }
             }
-            else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
+            else if (!PA_ModClientEvents.keybinds.keyDetachHead.isDown()) {
                 this.canDetach = true;
             }
 

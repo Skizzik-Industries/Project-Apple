@@ -7,6 +7,7 @@ import com.skizzium.projectapple.entity.boss.RPCBoss;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.network.RPCPacket;
+import com.skizzium.projectapple.network.SaveMaxPlayers;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import com.skizzium.projectapple.rpc.entities.DiscordBuild;
 import com.skizzium.projectapple.rpc.exceptions.NoDiscordClientException;
@@ -16,6 +17,10 @@ import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.LogManager;
 
 public class PA_PacketHandler {
+    public static void saveMaxPlayersPacket(SaveMaxPlayers packet) {
+        ProjectApple.maxPlayers = packet.maxPlayers;
+    }
+    
     private static void connectRPC() {
         ProjectApple.RPC.setListener(ProjectApple.RPCListener);
         try {

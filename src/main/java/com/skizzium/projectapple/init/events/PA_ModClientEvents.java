@@ -1,10 +1,7 @@
-package com.skizzium.projectapple.init.client;
+package com.skizzium.projectapple.init.events;
 
 import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.init.PA_Keybinds;
-import com.skizzium.projectapple.rpc.IPCClient;
-import com.skizzium.projectapple.rpc.entities.DiscordBuild;
-import com.skizzium.projectapple.rpc.exceptions.NoDiscordClientException;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.heads.SkizzikHeadWithGems;
 import com.skizzium.projectapple.init.block.PA_Blocks;
@@ -44,18 +41,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class PA_ClientHelper {
+public class PA_ModClientEvents {
     public static final PA_Keybinds keybinds = new PA_Keybinds();
     
     public static Minecraft getClient() {

@@ -2,7 +2,7 @@ package com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie;
 
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
-import com.skizzium.projectapple.init.client.PA_ClientHelper;
+import com.skizzium.projectapple.init.events.PA_ModClientEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.util.SkizzieConversion;
@@ -261,10 +261,10 @@ public class FriendlySkizzie extends Monster {
 
                 this.flyingSpeed = this.getSpeed() * 0.3F;
                 if (this.isControlledByLocalInstance()) {
-                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                    if (PA_ModClientEvents.getClient().options.keyJump.isDown()) {
                         moveY = 0.5F;
                     }
-                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                    else if (PA_ModClientEvents.getClient().options.keySprint.isDown()) {
                         moveY = -0.5F;
                     }
                     else {

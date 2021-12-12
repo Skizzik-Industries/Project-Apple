@@ -23,6 +23,7 @@ public class PA_PacketRegistry {
     @SubscribeEvent
     public static void registerMessages(FMLCommonSetupEvent event) {
         INSTANCE.registerMessage(ID++, RPCPacket.class, RPCPacket::encode, RPCPacket::decode, RPCPacket::handle);
+        INSTANCE.registerMessage(ID++, SaveMaxPlayers.class, SaveMaxPlayers::encode, SaveMaxPlayers::decode, SaveMaxPlayers::handle);
         INSTANCE.registerMessage(ID++, FriendlySkizzikOpenMenuPacket.class, FriendlySkizzikOpenMenuPacket::encode, FriendlySkizzikOpenMenuPacket::decode, FriendlySkizzikOpenMenuPacket::handle);
         INSTANCE.registerMessage(ID++, FriendlySkizzikOpenScreenPacket.class, FriendlySkizzikOpenScreenPacket::encode, FriendlySkizzikOpenScreenPacket::decode, FriendlySkizzikOpenScreenPacket::handle);
         INSTANCE.registerMessage(ID++, SkizzoConnectionParticlesPacket.class, SkizzoConnectionParticlesPacket::encode, SkizzoConnectionParticlesPacket::decode, SkizzoConnectionParticlesPacket::handle);
