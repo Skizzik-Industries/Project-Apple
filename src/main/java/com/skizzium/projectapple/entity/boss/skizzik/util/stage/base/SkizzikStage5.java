@@ -25,6 +25,21 @@ public class SkizzikStage5 extends AbstractSkizzikStage {
     }
 
     @Override
+    public String rpcStageDetails() {
+        return "Final Stage";
+    }
+
+    @Override
+    public String rpcImageKey() {
+        return "skizzik_stage_5";
+    }
+
+    @Override
+    public String rpcImageText() {
+        return "Skizzik (Overpowered)";
+    }
+    
+    @Override
     public int transitionTime() {
         return 41;
     }

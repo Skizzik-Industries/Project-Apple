@@ -7,6 +7,8 @@ import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageInterface;
 import com.skizzium.projectapple.entity.boss.skizzik.util.SkizzikStageManager;
 import com.skizzium.projectapple.init.entity.PA_Entities;
+import com.skizzium.projectapple.init.network.PA_PacketRegistry;
+import com.skizzium.projectapple.network.RPCPacket;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.minibar.Minibar;
 import com.skizzium.projectlib.gui.minibar.ServerMinibar;
@@ -22,6 +24,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
+import net.minecraftforge.network.PacketDistributor;
 
 public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     protected final Skizzik skizzik;
@@ -44,6 +47,21 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     @Override
     public PL_BossEvent.PL_BossBarOverlay barOverlay() {
         return PL_BossEvent.PL_BossBarOverlay.NOTCHED_5;
+    }
+
+    @Override
+    public String rpcStageDetails() {
+        return String.format("Stage %s of 5", skizzik.stageManager.getCurrentStage().getStage().getId());
+    }
+
+    @Override
+    public String rpcImageKey() {
+        return "skizzik";
+    }
+
+    @Override
+    public String rpcImageText() {
+        return "Skizzik";
     }
 
     @Override
@@ -121,7 +139,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
         int id = this.getStage().getId();
         int previousId = stageManager.getPreviousStage().getStage().getId();
         Level world = skizzik.level;
-
+        
         skizzik.setHealth(this.maxStageHealth());
         
         skizzik.setTransitionsTicks(this.transitionTime());
@@ -240,6 +258,11 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
     public void tick() {
         boolean hasAliveSkizzo = false;
         Level world = skizzik.level;
+
+        if (!world.isClientSide && skizzik.tickCount % 100 == 0) {
+            // The RPC needs to be reloaded every 5 seconds due to issues with the begin method, causing the RPC to not update / lack behind
+            PA_PacketRegistry.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.skizzik), new RPCPacket(RPCPacket.RPCAction.RELOAD, this.skizzik.getId()));
+        }
 
         if (skizzik.isInvul() && world instanceof ServerLevel) {
             LevelEntityGetter<Entity> entityGetter = ((ServerLevel) world).getEntities();

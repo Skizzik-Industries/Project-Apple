@@ -2,10 +2,12 @@ package com.skizzium.projectapple;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.skizzium.projectapple.entity.boss.RPCBoss;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.PA_Registry;
+import com.skizzium.projectapple.init.PA_RichPresenceListener;
 import com.skizzium.projectapple.rpc.IPCClient;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +36,9 @@ import java.util.stream.Collectors;
 public class ProjectApple {
     public static final String MOD_ID = "skizzik";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static IPCClient RPC;
+    
+    public static final IPCClient RPC = new IPCClient(878393951994929184L);
+    public static PA_RichPresenceListener RPCListener = new PA_RichPresenceListener();
 
     public static int holiday; // 0 - None, 1 - Spooktober, 2 - Halloween (Nightmare Day in the files to avoid confusion)
     public static final Map<Integer, String> holidayNames = Util.make(Maps.newHashMap(), (builder) -> {

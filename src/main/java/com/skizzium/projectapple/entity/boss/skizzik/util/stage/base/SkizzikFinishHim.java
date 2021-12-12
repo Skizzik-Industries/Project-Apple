@@ -46,6 +46,21 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         }
         return super.barColor();
     }
+
+    @Override
+    public String rpcStageDetails() {
+        return "FINISH HIM!";
+    }
+
+    @Override
+    public String rpcImageKey() {
+        return "skizzik_finish_him";
+    }
+
+    @Override
+    public String rpcImageText() {
+        return "Skizzik (Weak)";
+    }
     
     @Override
     public int transitionTime() {

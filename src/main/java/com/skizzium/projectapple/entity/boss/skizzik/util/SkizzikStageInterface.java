@@ -14,6 +14,12 @@ public interface SkizzikStageInterface {
 
     PL_BossEvent.PL_BossBarOverlay barOverlay();
 
+    String rpcStageDetails();
+    
+    String rpcImageKey();
+    
+    String rpcImageText();
+    
     int transitionTime();
     
     String textureLocation();

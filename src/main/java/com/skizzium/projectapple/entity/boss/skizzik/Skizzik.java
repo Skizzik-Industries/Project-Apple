@@ -2,6 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik;
 
 import com.google.common.collect.ImmutableList;
 import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.RPCBoss;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.skizzik.ai.SkizzikBeamAttackGoal;
 import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
@@ -13,7 +14,8 @@ import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.effect.ConversionEffect;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
-import com.skizzium.projectapple.network.ToggleRPC;
+import com.skizzium.projectapple.network.RPCPacket;
+import com.skizzium.projectapple.rpc.entities.RichPresence;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.core.BlockPos;
@@ -85,7 +87,7 @@ import java.util.UUID;
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
 
-public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IAnimationTickable {
+public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IAnimationTickable, RPCBoss {
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_C = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
@@ -213,14 +215,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossBar.addPlayer(serverPlayer);
-        PA_PacketRegistry.INSTANCE.sendTo(new ToggleRPC(true), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        PA_PacketRegistry.INSTANCE.sendTo(new RPCPacket(RPCPacket.RPCAction.INITIALIZE, this.getId()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
         this.bossBar.removePlayer(serverPlayer);
-        PA_PacketRegistry.INSTANCE.sendTo(new ToggleRPC(false), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        PA_PacketRegistry.INSTANCE.sendTo(new RPCPacket(RPCPacket.RPCAction.DISCONNECT, this.getId()), serverPlayer.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
@@ -401,6 +403,14 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return this.stageManager.getCurrentStage() instanceof SkizzikFinishHim && effect.getEffect() instanceof ConversionEffect && !this.isConverting();
+    }
+
+    @Override
+    public RichPresence.Builder getRichPresence() {
+        RichPresence.Builder presence = new RichPresence.Builder()
+                .setDetails(String.format("Fighting Skizzik (%s)", this.stageManager.getCurrentStage().rpcStageDetails()))
+                .setLargeImage(this.stageManager.getCurrentStage().rpcImageKey(), this.stageManager.getCurrentStage().rpcImageText());
+        return presence;
     }
 
     private <E extends IAnimatable> PlayState ambient(AnimationEvent<E> event) {

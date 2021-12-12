@@ -59,18 +59,6 @@ public class PA_ClientHelper {
     public static Minecraft getClient() {
         return Minecraft.getInstance();
     }
-
-    public static void connectRPC() {
-        ProjectApple.RPC = new IPCClient(878393951994929184L);
-        ProjectApple.RPC.setListener(new PA_RichPresence());
-        try {
-            ProjectApple.RPC.connect(DiscordBuild.ANY);
-            LogManager.getLogger().info("Skizzik & Co. RPC Connected!");
-        }
-        catch (NoDiscordClientException e) {
-            LogManager.getLogger().info("No Discord client found! Skipping RPC.");
-        }
-    }
     
     @SubscribeEvent
     public static void renderLayers(FMLClientSetupEvent event) {

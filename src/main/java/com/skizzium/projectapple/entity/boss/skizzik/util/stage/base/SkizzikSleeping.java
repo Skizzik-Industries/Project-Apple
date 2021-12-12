@@ -20,6 +20,21 @@ public class SkizzikSleeping extends AbstractPassiveSkizzikStage {
     }
 
     @Override
+    public String rpcStageDetails() {
+        return "Sleeping";
+    }
+
+    @Override
+    public String rpcImageKey() {
+        return "skizzik_sleeping";
+    }
+
+    @Override
+    public String rpcImageText() {
+        return "Skizzik (Sleeping)";
+    }
+
+    @Override
     public int transitionTime() {
         return 0;
     }

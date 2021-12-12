@@ -3,23 +3,43 @@ package com.skizzium.projectapple.init.network;
 import com.mojang.math.Vector3f;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.entity.boss.AbstractSkizzo;
+import com.skizzium.projectapple.entity.boss.RPCBoss;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
-import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
-import com.skizzium.projectapple.init.PA_ClientHelper;
+import com.skizzium.projectapple.network.RPCPacket;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
-import com.skizzium.projectapple.network.ToggleRPC;
+import com.skizzium.projectapple.rpc.entities.DiscordBuild;
+import com.skizzium.projectapple.rpc.exceptions.NoDiscordClientException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.phys.Vec3;
+import org.apache.logging.log4j.LogManager;
 
 public class PA_PacketHandler {
-    public static void handleToggleRPC(ToggleRPC packet) {
-        if (packet.status) {
-            PA_ClientHelper.connectRPC();
+    private static void connectRPC() {
+        ProjectApple.RPC.setListener(ProjectApple.RPCListener);
+        try {
+            ProjectApple.RPC.connect(DiscordBuild.ANY);
+            LogManager.getLogger().info("Skizzik & Co. RPC Connected!");
         }
-        else {
+        catch (NoDiscordClientException e) {
+            LogManager.getLogger().info("No Discord client found! Skipping RPC.");
+        }
+    }
+    
+    public static void handleRPCPacket(RPCPacket packet) {
+        if (packet.action == RPCPacket.RPCAction.CONNECT) {
+            connectRPC();
+        }
+        else if (packet.action == RPCPacket.RPCAction.DISCONNECT) {
             ProjectApple.RPC.close();
+        }
+        else if (packet.action == RPCPacket.RPCAction.INITIALIZE) {
+            connectRPC();
+            ProjectApple.RPCListener.initialRichPresence();
+        }
+        else if (packet.action == RPCPacket.RPCAction.RELOAD) {
+            ProjectApple.RPCListener.reloadRichPresence((RPCBoss) Minecraft.getInstance().level.getEntity(packet.bossId));
         }
     }
     
