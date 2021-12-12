@@ -56,7 +56,10 @@ public class ProjectApple {
         
         GeckoLib.hasInitialized = true;
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ResourceListener::registerReloadListener);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, PA_Config.clientSpec);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PA_Config.commonSpec);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, PA_Config.serverSpec);
 
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().register(this);

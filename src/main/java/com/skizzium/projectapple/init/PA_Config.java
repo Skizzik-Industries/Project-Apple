@@ -12,6 +12,20 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PA_Config {
+    public static class ClientOptions {
+        public final ForgeConfigSpec.BooleanValue discordRPC;
+
+        ClientOptions(ForgeConfigSpec.Builder builder) {
+            builder.comment("Client Options").push("worldGen");
+
+            this.discordRPC = builder
+                    .comment("Determines whether or not to display information about your current boss fight via Discord's rich presence (DiscordRPC).")
+                    .define("enableDiscordRPC", true);
+
+            builder.pop();
+        }
+    }
+    
     public static class Blocks {
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> corruptionImmuneBlocks;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> rainbowSwordImmuneBlocks;
@@ -87,6 +101,18 @@ public class PA_Config {
         }
     }
 
+    public static class Client {
+        public final ClientOptions clientOptions;
+
+        public Client(ForgeConfigSpec.Builder builder) {
+            builder.push("client");
+
+            this.clientOptions = new ClientOptions(builder);
+
+            builder.pop();
+        }
+    }
+
     public static class Common {
         public final Blocks blocks;
         public final Entities entities;
@@ -103,12 +129,38 @@ public class PA_Config {
         }
     }
 
+    public static class Server {
+        public final WorldGen worldGen;
+
+        public Server(ForgeConfigSpec.Builder builder) {
+            builder.push("server");
+
+            this.worldGen = new WorldGen(builder);
+
+            builder.pop();
+        }
+    }
+
+    public static final ForgeConfigSpec clientSpec;
+    public static final Client clientInstance;
+
     public static final ForgeConfigSpec commonSpec;
     public static final Common commonInstance;
 
+    public static final ForgeConfigSpec serverSpec;
+    public static final Server serverInstance;
+
     static {
+        final Pair<Client, ForgeConfigSpec> clientPair = new ForgeConfigSpec.Builder().configure(Client::new);
+        clientSpec = clientPair.getRight();
+        clientInstance = clientPair.getLeft();
+        
         final Pair<Common, ForgeConfigSpec> commonPair = new ForgeConfigSpec.Builder().configure(Common::new);
         commonSpec = commonPair.getRight();
         commonInstance = commonPair.getLeft();
+
+        final Pair<Server, ForgeConfigSpec> serverPair = new ForgeConfigSpec.Builder().configure(Server::new);
+        serverSpec = serverPair.getRight();
+        serverInstance = serverPair.getLeft();
     }
 }
