@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.skizzium.projectapple.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "refmap": "${mod_id}.refmap.json",
+  "mixins": [
+    "CapeLayerMixin"
+  ],
+  "client": [],
+  "minVersion": "0.8.5"
+}
