@@ -1,14 +1,11 @@
-package com.skizzium.projectapple.init;
+package com.skizzium.projectapple.init.data.server.tags;
 
-import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.tags.*;
 import net.minecraft.resources.ResourceLocation;
-
-import net.minecraft.server.players.ServerOpList;
 
 public final class PA_Tags {
     public static final class Blocks {
@@ -104,6 +101,8 @@ public final class PA_Tags {
         public static final Tag.Named<Item> SKIZZIK_HEADS = forge("skizzik_heads");
         
         public static final Tag.Named<Item> FRIENDLY_SKIZZIK_RIBS = forge("friendly_skizzik_ribs");
+        
+        public static final Tag.Named<Item> CURIOS_BACK = curios("back");
 
         public static final Tag.Named<Item> SKIZZIK_PANCAKES = forge("skizzik_pancakes");
         public static final Tag.Named<Item> SKIZZIK_CHOCOLATE = forge("skizzik_chocolate");
@@ -146,6 +145,10 @@ public final class PA_Tags {
 
         private static Tag.Named<Item> forge(String path) {
             return ItemTags.bind(new ResourceLocation("forge", path).toString());
+        }
+
+        private static Tag.Named<Item> curios(String path) {
+            return ItemTags.bind(new ResourceLocation("curios", path).toString());
         }
     }
 }

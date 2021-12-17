@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.init.data.server.tags;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.tags.BlockTagsProvider;

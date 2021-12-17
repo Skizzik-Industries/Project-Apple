@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.block;
 
-import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.data.server.tags.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -3,7 +3,7 @@ package com.skizzium.projectapple.init.item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.util.LazyLoadedValue;
-import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.data.server.tags.PA_Tags;
 
 import java.util.function.Supplier;
 

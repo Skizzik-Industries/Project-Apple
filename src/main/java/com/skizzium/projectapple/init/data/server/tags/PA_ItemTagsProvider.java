@@ -1,7 +1,7 @@
 package com.skizzium.projectapple.init.data.server.tags;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.item.PA_Items;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -47,6 +47,8 @@ public class PA_ItemTagsProvider extends ItemTagsProvider {
 
         copy(PA_Tags.Blocks.BEACON_BASE_BLOCKS, PA_Tags.Items.BEACON_BASE_BLOCKS);
 
+        tag(PA_Tags.Items.CURIOS_BACK).add(PA_Blocks.SKIZZIK_LOOT_BAG.get().asItem());
+        
         tag(PA_Tags.Items.SKIZZIK_HEADS).add(PA_Items.SMALL_SKIZZIK_HEAD.get(), PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get(), PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
         tag(PA_Tags.Items.FRIENDLY_SKIZZIK_RIBS).add(PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get());
         

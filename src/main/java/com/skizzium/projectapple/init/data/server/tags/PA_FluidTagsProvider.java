@@ -1,7 +1,6 @@
 package com.skizzium.projectapple.init.data.server.tags;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.init.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Fluids;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;

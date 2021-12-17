@@ -2,7 +2,7 @@ package com.skizzium.projectapple.entity.boss.skizzik.skizzie;
 
 import com.skizzium.projectapple.init.PA_Config;
 import com.skizzium.projectapple.init.effects.PA_Effects;
-import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.data.server.tags.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;

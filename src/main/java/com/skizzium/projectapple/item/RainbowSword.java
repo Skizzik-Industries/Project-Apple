@@ -1,6 +1,6 @@
 package com.skizzium.projectapple.item;
 
-import com.skizzium.projectapple.init.PA_Tags;
+import com.skizzium.projectapple.init.data.server.tags.PA_Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
