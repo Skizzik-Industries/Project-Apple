@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.item;
+package com.skizzium.projectapple.item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.skizzium.projectapple.init.PA_ClientHelper;
@@ -19,10 +19,10 @@ import net.minecraft.world.level.block.SkullBlock;
 
 import java.util.Map;
 
-public class PA_SkullItemISTER extends BlockEntityWithoutLevelRenderer {
+public class PA_SkullItemBEWLR extends BlockEntityWithoutLevelRenderer {
     private Map<SkullBlock.Type, SkullModelBase> skullModels;
 
-    public PA_SkullItemISTER(BlockEntityRenderDispatcher dispatcher, EntityModelSet set) {
+    public PA_SkullItemBEWLR(BlockEntityRenderDispatcher dispatcher, EntityModelSet set) {
         super(dispatcher, set);
         skullModels = PA_ClientHelper.createSkullRenderers(set);
     }

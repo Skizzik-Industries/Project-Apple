@@ -1,5 +1,6 @@
 package com.skizzium.projectapple.item;
 
+import com.skizzium.projectapple.item.renderer.PA_SkullItemBEWLR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -32,6 +33,6 @@ class Renderer implements IItemRenderProperties{
 
     @Override
     public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-        return new PA_SkullItemISTER(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+        return new PA_SkullItemBEWLR(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
     }
 }
