@@ -5,7 +5,6 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
-import com.skizzium.projectapple.tileentity.PA_Skull;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,7 +32,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public class SkizzikHeadWithGems extends SkullBlock {
+public class SkizzikHeadWithGems extends SkizzikHead {
     @Nullable
     private static BlockPattern skizzikPatternFull;
     @Nullable
@@ -41,16 +40,6 @@ public class SkizzikHeadWithGems extends SkullBlock {
 
     public SkizzikHeadWithGems(SkullBlock.Type skull, BlockBehaviour.Properties properties) {
         super(skull, properties);
-    }
-
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new PA_Skull(pos, state);
-    }
-
-    @Override
-    public String getDescriptionId() {
-        return ProjectApple.getThemedDescriptionId(super.getDescriptionId());
     }
 
     @Override

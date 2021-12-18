@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SkizzikHead extends SkullBlock {
-    public SkizzikHead(Type skull, BlockBehaviour.Properties properties) {
+    public SkizzikHead(SkullBlock.Type skull, BlockBehaviour.Properties properties) {
         super(skull, properties);
     }
 
