@@ -1,5 +1,5 @@
 # Skizzik & Co. [Project Apple]
-[![CurseForge](http://cf.way2muchnoise.eu/versions/bossutils.svg)](https://www.curseforge.com/minecraft/mc-mods/skizzik)
+[![CurseForge](http://cf.way2muchnoise.eu/versions/skizzik.svg)](https://www.curseforge.com/minecraft/mc-mods/skizzik)
 [![Discord Server](https://img.shields.io/discord/591914197219016707.svg?color=7289da&label=Skizzium%20Server&logo=discord&style=flat-square)](https://discord.gg/5rjBEzT9Bm)
 
 From seemingly harmless candies and rainbows, to dark back stories and multiversal aliens, this mod adds a lot of dimensions, boss battles and structures.
