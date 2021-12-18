@@ -6,17 +6,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.WallSkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SmallSkizzikHead extends SkullBlock {
+public class SmallSkizzikWallHead extends WallSkullBlock {
     protected static final VoxelShape CUSTOM_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
-
-    public SmallSkizzikHead(SkullBlock.Type skull, BlockBehaviour.Properties properties) {
-        super(skull, properties);
+    
+    public SmallSkizzikWallHead(SkullBlock.Type type, Properties properties) {
+        super(type, properties);
     }
 
     @Override
