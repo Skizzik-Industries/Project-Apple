@@ -13,15 +13,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SmallSkizzikHead extends SkullBlock {
-    protected static final VoxelShape CUSTOM_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
-
     public SmallSkizzikHead(SkullBlock.Type skull, BlockBehaviour.Properties properties) {
         super(skull, properties);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
-        return CUSTOM_SHAPE;
+        return Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
     }
 
     @Override
