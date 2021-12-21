@@ -5,6 +5,7 @@ import com.skizzium.projectapple.init.data.client.PA_SoundDefinitionsProvider;
 import com.skizzium.projectapple.init.data.client.models.PA_BlockStateProvider;
 import com.skizzium.projectapple.init.data.client.models.PA_ItemModelProvider;
 import com.skizzium.projectapple.init.data.server.PA_LootTableProvider;
+import com.skizzium.projectapple.init.data.server.recipes.PA_RecipeProvider;
 import com.skizzium.projectapple.init.data.server.tags.PA_BlockTagsProvider;
 import com.skizzium.projectapple.init.data.server.tags.PA_EntityTypeTagsProvider;
 import com.skizzium.projectapple.init.data.server.tags.PA_FluidTagsProvider;
@@ -32,6 +33,7 @@ public final class PA_DataGenerators {
 
         // Server Data
         generator.addProvider(new PA_LootTableProvider(generator));
+        generator.addProvider(new PA_RecipeProvider(generator));
         
         PA_BlockTagsProvider blockTags = new PA_BlockTagsProvider(generator, helper);
         generator.addProvider(blockTags);
