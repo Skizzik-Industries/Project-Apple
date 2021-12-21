@@ -41,11 +41,6 @@ public class PA_RecipeBuilders {
         return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
     }
     
-    public static void doorSet(Consumer<FinishedRecipe> recipe, ItemLike planks, ItemLike trapdoor, ItemLike door) {
-        ShapedRecipeBuilder.shaped(trapdoor, 2).define('#', planks).pattern("###").pattern("###").group("wooden_trapdoor").unlockedBy(getHasName(planks), has(planks)).save(recipe);
-        ShapedRecipeBuilder.shaped(door, 3).define('#', planks).pattern("##").pattern("##").pattern("##").group("wooden_door").unlockedBy(getHasName(planks), has(planks)).save(recipe);
-    }
-    
     public static void gemRecipe(Consumer<FinishedRecipe> recipe, ItemLike output) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(PA_Items.RAINBOW_GEM.get()), output, 3).unlockedBy(getHasName(PA_Items.RAINBOW_GEM.get()), has(PA_Items.RAINBOW_GEM.get())).save(recipe);
     }
@@ -53,10 +48,6 @@ public class PA_RecipeBuilders {
     public static void gemBlockRecipes(Consumer<FinishedRecipe> recipe, ItemLike item, ItemLike block) {
         nineBlockStorageRecipes(recipe, item, block, getItemName(block), "gem_blocks", getItemName(item) + "_from_block", "gems");
     }
-
-//    public static void nuggetRecipes(Consumer<FinishedRecipe> recipe, Ingredient smeltables, ItemLike nugget, ItemLike ingot) {
-//        nuggetRecipes(recipe, smeltables, nugget, ingot, 200, 100, 0.1F);
-//    }
 
     public static void nuggetRecipes(Consumer<FinishedRecipe> recipe, ItemLike nugget, ItemLike ingot) {
         nineBlockStorageRecipesWithCustomPacking(recipe, nugget, ingot, getItemName(ingot) + "_from_nuggets", getItemName(ingot));

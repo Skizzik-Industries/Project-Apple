@@ -73,31 +73,15 @@ public class PA_Config {
         }
     }
 
-    public static class WorldGen {
-        public final ForgeConfigSpec.BooleanValue generateCandyPlains;
-
-        WorldGen(ForgeConfigSpec.Builder builder) {
-            builder.comment("REQUIRES RESTART!", "World Generation Settings").push("worldGen");
-
-            this.generateCandyPlains = builder
-                    .comment("Determines whether or not Candy Plains will generate.")
-                    .define("generateCandyPlains", true);
-
-            builder.pop();
-        }
-    }
-
     public static class Common {
         public final Blocks blocks;
         public final Entities entities;
-        public final WorldGen worldGen;
 
         public Common(ForgeConfigSpec.Builder builder) {
             builder.push("common");
 
             this.blocks = new Blocks(builder);
             this.entities = new Entities(builder);
-            this.worldGen = new WorldGen(builder);
 
             builder.pop();
         }

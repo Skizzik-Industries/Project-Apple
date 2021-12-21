@@ -1,31 +1,33 @@
 package com.skizzium.projectapple.init.entity;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.entity.*;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzikSkull;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.FriendlySkizzikRenderer;
-import com.skizzium.projectapple.entity.boss.skizzik.*;
-import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.*;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.client.renderer.FriendlySkizzikSkullRenderer;
-import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.SkizzikSkullRenderer;
-import com.skizzium.projectapple.entity.boss.skizzik.skizzie.*;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
-import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlySkizzie;
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.skizzie.FriendlyWitchSkizzie;
-import com.skizzium.projectapple.entity.client.renderer.*;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzik;
+import com.skizzium.projectapple.entity.boss.skizzik.SkizzikSkull;
+import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.model.WitchSkizzieModel;
+import com.skizzium.projectapple.entity.boss.skizzik.client.renderer.*;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.CorruptedSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.KaboomSkizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.Skizzie;
+import com.skizzium.projectapple.entity.boss.skizzik.skizzie.WitchSkizzie;
 import com.skizzium.projectapple.init.PA_Registry;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Predicate;
@@ -48,8 +50,6 @@ public class PA_Entities {
                                                                                         !(entity instanceof FriendlySkizzik) &&
                                                                                         entity.attackable();
 
-    public static final RegistryObject<EntityType<CandyPig>> CANDY_PIG = PA_Registry.ENTITIES.register("candy_pig", () -> EntityType.Builder.of(CandyPig::new, MobCategory.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10).build("candy_pig"));
-    
     public static final RegistryObject<EntityType<FriendlySkizzie>> FRIENDLY_SKIZZIE = PA_Registry.ENTITIES.register("friendly_skizzie", () -> EntityType.Builder.of(FriendlySkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10).build("friendly_skizzie"));
     public static final RegistryObject<EntityType<FriendlyWitchSkizzie>> FRIENDLY_WITCH_SKIZZIE = PA_Registry.ENTITIES.register("friendly_witch_skizzie", () -> EntityType.Builder.of(FriendlyWitchSkizzie::new, MobCategory.CREATURE).setShouldReceiveVelocityUpdates(true).updateInterval(3).sized(0.6F, 1.6F).clientTrackingRange(10).build("friendly_witch_skizzie"));
 
@@ -68,8 +68,6 @@ public class PA_Entities {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(CANDY_PIG.get(), CandyPig.buildAttributes().build());
-
         event.put(FRIENDLY_SKIZZIE.get(), FriendlySkizzie.buildAttributes().build());
         event.put(FRIENDLY_WITCH_SKIZZIE.get(), FriendlyWitchSkizzie.buildAttributes().build());
 
@@ -86,11 +84,6 @@ public class PA_Entities {
     }
 
     @SubscribeEvent
-    public static void registerSpawns(FMLCommonSetupEvent event) {
-        //SpawnPlacements.register(CANDY_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CandyPig::canEntitySpawn);
-    }
-
-    @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(PA_ModelLayers.SKIZZIE_LAYER, SkizzieModel::createBodyLayer);
         event.registerLayerDefinition(PA_ModelLayers.WITCH_SKIZZIE_LAYER, WitchSkizzieModel::createBodyLayer);
@@ -98,8 +91,6 @@ public class PA_Entities {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(PA_Entities.CANDY_PIG.get(), CandyPigRenderer::new);
-
         event.registerEntityRenderer(PA_Entities.FRIENDLY_SKIZZIE.get(), SkizzieRenderer::new);
         event.registerEntityRenderer(PA_Entities.FRIENDLY_WITCH_SKIZZIE.get(), WitchSkizzieRenderer::new);
 

@@ -46,36 +46,6 @@ public class PA_ItemModelProvider extends ItemModelProvider {
 
         withExistingParent("skizzo_spawn_egg", mcLoc("item/template_spawn_egg"));
 
-        withExistingParent("candy_pig_spawn_egg", mcLoc("item/template_spawn_egg"));
-
-        withExistingParent("white_chocolate_block", modLoc("block/white_chocolate_block"));
-        withExistingParent("chocolate_block", modLoc("block/chocolate_block"));
-        withExistingParent("dark_chocolate_block", modLoc("block/dark_chocolate_block"));
-        withExistingParent("waffle_block", modLoc("block/waffle_block"));
-
-        withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
-        withExistingParent("candianite_ore", modLoc("block/candianite_ore"));
-
-        withExistingParent("candy_button", modLoc("block/candy_button_inventory"));
-        withExistingParent("candy_pressure_plate", modLoc("block/candy_pressure_plate"));
-
-        withExistingParent("candy_planks", modLoc("block/candy_planks"));
-        withExistingParent("candy_slab", modLoc("block/candy_slab"));
-        withExistingParent("candy_stairs", modLoc("block/candy_stairs"));
-
-        withExistingParent("candy_trapdoor", modLoc("block/candy_trapdoor_bottom"));
-        withExistingParent("candy_fence", modLoc("block/candy_fence_inventory"));
-        withExistingParent("candy_fence_gate", modLoc("block/candy_fence_gate"));
-
-        withExistingParent("candy_log", modLoc("block/candy_log"));
-        withExistingParent("stripped_candy_log", modLoc("block/stripped_candy_log"));
-        withExistingParent("candy_wood", modLoc("block/candy_wood"));
-        withExistingParent("stripped_candy_wood", modLoc("block/stripped_candy_wood"));
-
-        withExistingParent("candy_leaves", modLoc("block/candy_leaves"));
-        withExistingParent("candy_nylium", modLoc("block/candy_nylium"));
-        withExistingParent("candyrack", modLoc("block/candyrack"));
-
         withExistingParent("rainbow_ore", modLoc("block/rainbow_ore"));
 
         withExistingParent("rainbow_gem_block", modLoc("block/rainbow_gem_block"));
@@ -115,40 +85,6 @@ public class PA_ItemModelProvider extends ItemModelProvider {
         defaultBuilder(generated, "skizzik_flesh_tunic");
         defaultBuilder(generated, "skizzik_flesh_pants");
         defaultBuilder(generated, "skizzik_flesh_boots");
-
-        defaultBuilder(generated, "salt");
-        defaultBuilder(generated, "butter");
-
-        defaultBuilder(generated, "candy_cane");
-        defaultBuilder(generated, "maple_syrup_bucket");
-        defaultBuilder(generated, "waffle");
-
-        defaultBuilder(generated, "pancakes");
-        defaultBuilder(generated, "syrup_pancakes");
-
-        defaultBuilder(generated, "chocolate_bar_wrap");
-        defaultBuilder(generated, "white_chocolate_bar");
-        defaultBuilder(generated, "chocolate_bar");
-        defaultBuilder(generated, "dark_chocolate_bar");
-
-        defaultBuilder(generated, "candy_sign");
-
-        defaultBuilder(generated, "candy_door");
-
-        defaultBuilder(generated, "candianite_nugget");
-        defaultBuilder(generated, "candianite_ingot");
-
-        defaultBuilder(handheld, "candianite_sword");
-        defaultBuilder(handheld, "candianite_pickaxe");
-        defaultBuilder(handheld, "candianite_axe");
-        defaultBuilder(handheld, "candianite_shovel");
-        defaultBuilder(handheld, "candianite_hoe");
-
-        defaultBuilder(generated, "candianite_horse_armor");
-        defaultBuilder(generated, "candianite_helmet");
-        defaultBuilder(generated, "candianite_chestplate");
-        defaultBuilder(generated, "candianite_leggings");
-        defaultBuilder(generated, "candianite_boots");
 
         defaultBuilder(generated, "platinum_nugget");
         defaultBuilder(generated, "platinum_ingot");

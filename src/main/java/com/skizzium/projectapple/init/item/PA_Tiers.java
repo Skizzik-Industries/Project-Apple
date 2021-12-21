@@ -8,9 +8,6 @@ import com.skizzium.projectapple.init.data.server.tags.PA_Tags;
 import java.util.function.Supplier;
 
 public enum PA_Tiers implements Tier {
-    CANDIANITE(2, 350, 7.0F, 2.5F, 15, () -> {
-        return Ingredient.of(PA_Items.CANDIANITE_INGOT.get());
-    }),
     RAINBOW(5, 2100, 18.0F, 5.5F, 22, () -> {
         return Ingredient.of(PA_Tags.Items.SKIZZIK_ALL_GEMS);
     });

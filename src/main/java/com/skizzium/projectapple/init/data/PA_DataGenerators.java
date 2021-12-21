@@ -8,7 +8,6 @@ import com.skizzium.projectapple.init.data.server.PA_LootTableProvider;
 import com.skizzium.projectapple.init.data.server.recipes.PA_RecipeProvider;
 import com.skizzium.projectapple.init.data.server.tags.PA_BlockTagsProvider;
 import com.skizzium.projectapple.init.data.server.tags.PA_EntityTypeTagsProvider;
-import com.skizzium.projectapple.init.data.server.tags.PA_FluidTagsProvider;
 import com.skizzium.projectapple.init.data.server.tags.PA_ItemTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -39,7 +38,6 @@ public final class PA_DataGenerators {
         generator.addProvider(blockTags);
         
         generator.addProvider(new PA_EntityTypeTagsProvider(generator, helper));
-        generator.addProvider(new PA_FluidTagsProvider(generator, helper));
         generator.addProvider(new PA_ItemTagsProvider(generator, blockTags, helper));
     }
 }

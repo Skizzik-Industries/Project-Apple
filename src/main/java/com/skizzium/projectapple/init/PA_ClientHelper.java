@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.heads.SkizzikHeadWithGems;
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.init.item.PA_Items;
@@ -60,17 +59,6 @@ public class PA_ClientHelper {
     public static void renderLayers(FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIE_STATUE.get(), RenderType.cutoutMipped());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_TRAPDOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_DOOR.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_CANE.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Fluids.MAPLE_SYRUP.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
-        
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_LEAVES.get(), RenderType.cutoutMipped());
     }
     
     public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {
@@ -128,30 +116,6 @@ public class PA_ClientHelper {
 
     @SubscribeEvent
     public static void registerOtherStuff(FMLClientSetupEvent event) {
-        ComposterBlock.COMPOSTABLES.put(PA_Blocks.CANDY_CANE.get(), 0.5F);
-
-        WoodType.register(PA_Blocks.CANDY_WOOD_TYPE);
-
-        DispenseItemBehavior fluidDispenseBehavior = new DefaultDispenseItemBehavior() {
-            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
-
-            public ItemStack execute(BlockSource source, ItemStack item) {
-                BucketItem bucket = (BucketItem)item.getItem();
-                BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-                Level world = source.getLevel();
-
-                if (bucket.emptyContents(null, world, pos, null)) {
-                    bucket.checkExtraContent(null, world, item, pos);
-                    return new ItemStack(Items.BUCKET);
-                }
-                else {
-                    return this.defaultDispenseItemBehavior.dispense(source, item);
-                }
-            }
-        };
-
-        DispenserBlock.registerBehavior(PA_Items.MAPLE_SYRUP_BUCKET.get(), fluidDispenseBehavior);
-
         DefaultDispenseItemBehavior entityDispenseBehavior = new DefaultDispenseItemBehavior() {
             public ItemStack execute(BlockSource source, ItemStack item) {
                 Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
@@ -224,10 +188,6 @@ public class PA_ClientHelper {
 
                 return itemStack;
             }
-        });
-
-        event.enqueueWork(() -> {
-            Sheets.addWoodType(PA_Blocks.CANDY_WOOD_TYPE);
         });
     }
 }
