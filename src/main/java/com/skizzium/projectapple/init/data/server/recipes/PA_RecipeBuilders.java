@@ -11,8 +11,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
@@ -41,6 +39,11 @@ public class PA_RecipeBuilders {
 
     public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate... predicates) {
         return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
+    }
+    
+    public static void doorSet(Consumer<FinishedRecipe> recipe, ItemLike planks, ItemLike trapdoor, ItemLike door) {
+        ShapedRecipeBuilder.shaped(trapdoor, 2).define('#', planks).pattern("###").pattern("###").group("wooden_trapdoor").unlockedBy(getHasName(planks), has(planks)).save(recipe);
+        ShapedRecipeBuilder.shaped(door, 3).define('#', planks).pattern("##").pattern("##").pattern("##").group("wooden_door").unlockedBy(getHasName(planks), has(planks)).save(recipe);
     }
     
     public static void gemRecipe(Consumer<FinishedRecipe> recipe, ItemLike output) {
