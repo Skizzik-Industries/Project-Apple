@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "side": "skizzik:block/stripped_candy_log",
-    "end": "skizzik:block/stripped_candy_log"
-  }
-}
