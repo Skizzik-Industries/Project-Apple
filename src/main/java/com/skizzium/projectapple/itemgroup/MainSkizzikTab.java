@@ -51,6 +51,7 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Items.RAW_SKIZZIK_FLESH.get().fillItemCategory(this, items);
         PA_Items.SKIZZIK_FLESH.get().fillItemCategory(this, items);
 
+        PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
         PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
         PA_Blocks.SKIZZIK_FLESH_BLOCK.get().fillItemCategory(this, items);
 

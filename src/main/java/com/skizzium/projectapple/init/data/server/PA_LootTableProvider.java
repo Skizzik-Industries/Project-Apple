@@ -69,6 +69,7 @@ public class PA_LootTableProvider extends LootTableProvider {
             dropSelf(PA_Blocks.SKIZZIK_HEAD.get());
             dropSelf(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
             
+            dropSelf(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get());
             dropSelf(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
             dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 

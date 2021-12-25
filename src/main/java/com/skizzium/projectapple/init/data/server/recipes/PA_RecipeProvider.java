@@ -27,6 +27,7 @@ public class PA_RecipeProvider extends RecipeProvider {
         PA_RecipeBuilders.ribRecipes(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), PA_Items.FRIENDLY_SKIZZIK_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get(), "friendly_skizzik_rib");
         PA_RecipeBuilders.ribRecipes(recipe, PA_Items.SKIZZIK_FLESH.get(), PA_Items.SKIZZIK_RIB.get(), PA_Items.SKIZZIK_BOTTOM_RIB.get(), PA_Items.SKIZZIK_BIG_RIB.get(), "skizzik_rib");
 
+        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.RAW_SKIZZIK_FLESH.get(), PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get());
         PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
         PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.SKIZZIK_FLESH.get(), PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 

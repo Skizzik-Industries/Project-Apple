@@ -17,8 +17,7 @@ public class PA_BlockStateProvider extends BlockStateProvider {
     
     @Override
     protected void registerStatesAndModels() {
-        ResourceLocation candyPlanks = new ResourceLocation(ProjectApple.MOD_ID, "block/candy_planks");
-        
+        simpleBlock(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get());
         simpleBlock(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
         simpleBlock(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 

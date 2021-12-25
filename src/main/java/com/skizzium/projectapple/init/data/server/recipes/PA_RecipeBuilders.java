@@ -53,7 +53,7 @@ public class PA_RecipeBuilders {
     }
 
     public static void fleshBlockRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike block) {
-        ShapelessRecipeBuilder.shapeless(flesh, 9).requires(block).unlockedBy(getHasName(block), has(block)).save(recipe);
+        ShapelessRecipeBuilder.shapeless(flesh, 9).requires(block).unlockedBy(getHasName(block), has(block)).save(recipe, getFinalName(getItemName(flesh) + "_from_block"));
         ShapedRecipeBuilder.shaped(block).define('F', flesh).define('N', PA_Items.PLATINUM_NUGGET.get()).define('P', ItemTags.PLANKS).pattern("NFN").pattern("FPF").pattern("NFN").unlockedBy(getHasName(flesh), has(flesh)).save(recipe);
     }
 

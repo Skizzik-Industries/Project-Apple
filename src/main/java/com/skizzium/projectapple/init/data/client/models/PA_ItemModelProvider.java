@@ -28,6 +28,7 @@ public class PA_ItemModelProvider extends ItemModelProvider {
         withExistingParent("skizzik_head", mcLoc("item/template_skull"));
         withExistingParent("skizzik_head_with_gems", mcLoc("item/template_skull"));
 
+        withExistingParent("raw_skizzik_flesh_block", modLoc("block/raw_skizzik_flesh_block"));
         withExistingParent("friendly_skizzik_flesh_block", modLoc("block/friendly_skizzik_flesh_block"));
         withExistingParent("skizzik_flesh_block", modLoc("block/skizzik_flesh_block"));
 
