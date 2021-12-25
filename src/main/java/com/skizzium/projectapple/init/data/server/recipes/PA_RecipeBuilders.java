@@ -9,6 +9,7 @@ import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -40,13 +41,44 @@ public class PA_RecipeBuilders {
     public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate... predicates) {
         return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
     }
+
+    public static void ribRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike rib, ItemLike bottomRib, ItemLike bigRib, String group) {
+        baseRibRecipe(flesh, rib, group).pattern("BBF").pattern("FBF").pattern("FBF").save(recipe);
+        baseRibRecipe(flesh, bottomRib, group).pattern("FFB").pattern("BBB").pattern("FFF").save(recipe);
+        baseRibRecipe(flesh, bigRib, group).pattern("BBB").pattern("FBB").pattern("FBB").save(recipe);
+    }
+
+    public static ShapedRecipeBuilder baseRibRecipe(ItemLike flesh, ItemLike rib, String group) {
+        return ShapedRecipeBuilder.shaped(rib).define('B', PA_Items.SKIZZIK_BONE.get()).define('F', flesh).group(group).unlockedBy(getHasName(flesh), has(flesh));
+    }
+
+    public static void fleshBlockRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike block) {
+        ShapelessRecipeBuilder.shapeless(flesh, 9).requires(block).unlockedBy(getHasName(block), has(block)).save(recipe);
+        ShapedRecipeBuilder.shaped(block).define('F', flesh).define('N', PA_Items.PLATINUM_NUGGET.get()).define('P', ItemTags.PLANKS).pattern("NFN").pattern("FPF").pattern("NFN").unlockedBy(getHasName(flesh), has(flesh)).save(recipe);
+    }
+
+    public static void smallHeadWithGemsRecipe(Consumer<FinishedRecipe> recipe, ItemLike head, ItemLike result) {
+        ShapelessRecipeBuilder.shapeless(result, 1).requires(head).requires(PA_Items.BROWN_GEM.get()).requires(PA_Items.GREEN_GEM.get(), 2).group("skizzik_head").unlockedBy(getHasName(head), has(head)).save(recipe);
+    }
+
+    public static void headWithGemsRecipe(Consumer<FinishedRecipe> recipe, ItemLike head, ItemLike result) {
+        ShapelessRecipeBuilder.shapeless(result, 1)
+                .requires(head)
+                .requires(PA_Items.BLACK_GEM.get())
+                .requires(PA_Items.BLUE_GEM.get())
+                .requires(PA_Items.YELLOW_GEM.get())
+                .requires(PA_Items.ORANGE_GEM.get())
+                .requires(PA_Items.GREEN_GEM.get())
+                .requires(PA_Items.PINK_GEM.get())
+                .group("skizzik_head").unlockedBy(getHasName(head), has(head)).save(recipe);
+    }
     
     public static void gemRecipe(Consumer<FinishedRecipe> recipe, ItemLike output) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(PA_Items.RAINBOW_GEM.get()), output, 3).unlockedBy(getHasName(PA_Items.RAINBOW_GEM.get()), has(PA_Items.RAINBOW_GEM.get())).save(recipe);
     }
 
     public static void gemBlockRecipes(Consumer<FinishedRecipe> recipe, ItemLike item, ItemLike block) {
-        nineBlockStorageRecipes(recipe, item, block, getItemName(block), "gem_blocks", getItemName(item) + "_from_block", "gems");
+        nineBlockStorageRecipes(recipe, item, block, getItemName(block), "gem_block", getItemName(item) + "_from_block", "gem");
     }
 
     public static void nuggetRecipes(Consumer<FinishedRecipe> recipe, ItemLike nugget, ItemLike ingot) {
