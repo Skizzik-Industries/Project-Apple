@@ -16,7 +16,6 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
@@ -24,25 +23,26 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -115,7 +115,53 @@ public class PA_ClientHelper {
     }
 
     @SubscribeEvent
-    public static void registerOtherStuff(FMLClientSetupEvent event) {
+    public static void registerCauldronInteraction(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            CauldronInteraction RAW_SKIZZIK_FLESH = (state, level, pos, player, hand, itemstack) -> {
+                if (!level.isClientSide) {
+                    if (!player.getAbilities().instabuild) {
+                        itemstack.shrink(1);
+                    }
+                    ItemStack flesh = new ItemStack(PA_Items.RAW_SKIZZIK_FLESH.get());
+                    player.addItem(flesh);
+                    LayeredCauldronBlock.lowerFillLevel(state, level, pos);
+                }
+
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            };
+            
+            CauldronInteraction.POWDER_SNOW.put(PA_Items.SKIZZIK_FLESH.get(), RAW_SKIZZIK_FLESH);
+            CauldronInteraction.POWDER_SNOW.put(PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), RAW_SKIZZIK_FLESH);
+            
+            CauldronInteraction.WATER.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> {
+                if (!level.isClientSide) {
+                    if (!player.getAbilities().instabuild) {
+                        itemstack.shrink(1);
+                    }
+                    ItemStack flesh = new ItemStack(PA_Items.FRIENDLY_SKIZZIK_FLESH.get());
+                    player.addItem(flesh);
+                    LayeredCauldronBlock.lowerFillLevel(state, level, pos);
+                }
+
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            });
+
+            CauldronInteraction.LAVA.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> {
+                if (!level.isClientSide) {
+                    if (!player.getAbilities().instabuild) {
+                        itemstack.shrink(1);
+                    }
+                    ItemStack flesh = new ItemStack(PA_Items.SKIZZIK_FLESH.get());
+                    player.addItem(flesh);
+                }
+
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            });
+        });
+    }
+    
+    @SubscribeEvent
+    public static void registerDisepnserBehavior(FMLClientSetupEvent event) {
         DefaultDispenseItemBehavior entityDispenseBehavior = new DefaultDispenseItemBehavior() {
             public ItemStack execute(BlockSource source, ItemStack item) {
                 Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
