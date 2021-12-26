@@ -24,18 +24,23 @@ public class PA_RecipeProvider extends RecipeProvider {
         UpgradeRecipeBuilder.smithing(Ingredient.of(Items.BONE), Ingredient.of(PA_Items.PLATINUM_NUGGET.get()), PA_Items.SKIZZIK_BONE.get()).unlocks(PA_RecipeBuilders.getHasName(Items.BONE), PA_RecipeBuilders.has(Items.BONE)).save(recipe, PA_RecipeBuilders.getFinalName("skizzik_bone"));
         ShapedRecipeBuilder.shaped(PA_Items.RAW_SKIZZIK_FLESH.get()).define('H', Items.RABBIT_HIDE).define('B', PA_Items.SKIZZIK_BONE.get()).define('L', Items.LEATHER).pattern("HBH").pattern("LBL").pattern("HBH").unlockedBy(PA_RecipeBuilders.getHasName(PA_Items.SKIZZIK_BONE.get()), PA_RecipeBuilders.has(PA_Items.SKIZZIK_BONE.get())).save(recipe);
         
-        PA_RecipeBuilders.ribRecipes(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), PA_Items.FRIENDLY_SKIZZIK_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get(), "friendly_skizzik_rib");
-        PA_RecipeBuilders.ribRecipes(recipe, PA_Items.SKIZZIK_FLESH.get(), PA_Items.SKIZZIK_RIB.get(), PA_Items.SKIZZIK_BOTTOM_RIB.get(), PA_Items.SKIZZIK_BIG_RIB.get(), "skizzik_rib");
-
-        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.RAW_SKIZZIK_FLESH.get(), PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get());
-        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
-        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.SKIZZIK_FLESH.get(), PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
+        PA_RecipeBuilders.headRecipe(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), Items.SKELETON_SKULL, PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD.get());
+        PA_RecipeBuilders.headRecipe(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), Items.WITHER_SKELETON_SKULL, PA_Items.FRIENDLY_SKIZZIK_HEAD.get());
+        PA_RecipeBuilders.headRecipe(recipe, PA_Items.SKIZZIK_FLESH.get(), Items.SKELETON_SKULL, PA_Items.SMALL_SKIZZIK_HEAD.get());
+        PA_RecipeBuilders.headRecipe(recipe, PA_Items.SKIZZIK_FLESH.get(), Items.WITHER_SKELETON_SKULL, PA_Items.SKIZZIK_HEAD.get());
 
         PA_RecipeBuilders.smallHeadWithGemsRecipe(recipe, PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD.get(), PA_Items.SMALL_FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get());
         PA_RecipeBuilders.smallHeadWithGemsRecipe(recipe, PA_Items.SMALL_SKIZZIK_HEAD.get(), PA_Items.SMALL_SKIZZIK_HEAD_WITH_GEMS.get());
 
         PA_RecipeBuilders.headWithGemsRecipe(recipe, PA_Items.FRIENDLY_SKIZZIK_HEAD.get(), PA_Items.FRIENDLY_SKIZZIK_HEAD_WITH_GEMS.get());
         PA_RecipeBuilders.headWithGemsRecipe(recipe, PA_Items.SKIZZIK_HEAD.get(), PA_Items.SKIZZIK_HEAD_WITH_GEMS.get());
+        
+        PA_RecipeBuilders.ribRecipes(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), PA_Items.FRIENDLY_SKIZZIK_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BOTTOM_RIB.get(), PA_Items.FRIENDLY_SKIZZIK_BIG_RIB.get(), "friendly_skizzik_rib");
+        PA_RecipeBuilders.ribRecipes(recipe, PA_Items.SKIZZIK_FLESH.get(), PA_Items.SKIZZIK_RIB.get(), PA_Items.SKIZZIK_BOTTOM_RIB.get(), PA_Items.SKIZZIK_BIG_RIB.get(), "skizzik_rib");
+
+        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.RAW_SKIZZIK_FLESH.get(), PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get());
+        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
+        PA_RecipeBuilders.fleshBlockRecipes(recipe, PA_Items.SKIZZIK_FLESH.get(), PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
         
         ShapelessRecipeBuilder.shapeless(PA_Items.RAINBOW_GEM.get()).requires(Ingredient.of(PA_Tags.Items.SKIZZIK_BASE_GEMS), 3).group("skizzik_gem")
                 .unlockedBy(PA_RecipeBuilders.getHasName(PA_Items.BLACK_GEM.get()), PA_RecipeBuilders.has(PA_Items.BLACK_GEM.get()))

@@ -42,19 +42,8 @@ public class PA_RecipeBuilders {
         return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
     }
 
-    public static void ribRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike rib, ItemLike bottomRib, ItemLike bigRib, String group) {
-        baseRibRecipe(flesh, rib, group).pattern("BBF").pattern("FBF").pattern("FBF").save(recipe);
-        baseRibRecipe(flesh, bottomRib, group).pattern("FFB").pattern("BBB").pattern("FFF").save(recipe);
-        baseRibRecipe(flesh, bigRib, group).pattern("BBB").pattern("FBB").pattern("FBB").save(recipe);
-    }
-
-    public static ShapedRecipeBuilder baseRibRecipe(ItemLike flesh, ItemLike rib, String group) {
-        return ShapedRecipeBuilder.shaped(rib).define('B', PA_Items.SKIZZIK_BONE.get()).define('F', flesh).group(group).unlockedBy(getHasName(flesh), has(flesh));
-    }
-
-    public static void fleshBlockRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike block) {
-        ShapelessRecipeBuilder.shapeless(flesh, 9).requires(block).unlockedBy(getHasName(block), has(block)).save(recipe, getFinalName(getItemName(flesh) + "_from_block"));
-        ShapedRecipeBuilder.shaped(block).define('F', flesh).define('N', PA_Items.PLATINUM_NUGGET.get()).define('P', ItemTags.PLANKS).pattern("NFN").pattern("FPF").pattern("NFN").unlockedBy(getHasName(flesh), has(flesh)).save(recipe);
+    public static void headRecipe(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike skull, ItemLike result) {
+        ShapedRecipeBuilder.shaped(result).define('S', skull).define('F', flesh).pattern("FFF").pattern("FSF").pattern("FFF").unlockedBy(getHasName(flesh), has(flesh)).save(recipe);
     }
 
     public static void smallHeadWithGemsRecipe(Consumer<FinishedRecipe> recipe, ItemLike head, ItemLike result) {
@@ -71,6 +60,21 @@ public class PA_RecipeBuilders {
                 .requires(PA_Items.GREEN_GEM.get())
                 .requires(PA_Items.PINK_GEM.get())
                 .group("skizzik_head").unlockedBy(getHasName(head), has(head)).save(recipe);
+    }
+
+    public static void ribRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike rib, ItemLike bottomRib, ItemLike bigRib, String group) {
+        baseRibRecipe(flesh, rib, group).pattern("BBF").pattern("FBF").pattern("FBF").save(recipe);
+        baseRibRecipe(flesh, bottomRib, group).pattern("FFB").pattern("BBB").pattern("FFF").save(recipe);
+        baseRibRecipe(flesh, bigRib, group).pattern("BBB").pattern("FBB").pattern("FBB").save(recipe);
+    }
+
+    public static ShapedRecipeBuilder baseRibRecipe(ItemLike flesh, ItemLike rib, String group) {
+        return ShapedRecipeBuilder.shaped(rib).define('B', PA_Items.SKIZZIK_BONE.get()).define('F', flesh).group(group).unlockedBy(getHasName(flesh), has(flesh));
+    }
+
+    public static void fleshBlockRecipes(Consumer<FinishedRecipe> recipe, ItemLike flesh, ItemLike block) {
+        ShapelessRecipeBuilder.shapeless(flesh, 9).requires(block).unlockedBy(getHasName(block), has(block)).save(recipe, getFinalName(getItemName(flesh) + "_from_block"));
+        ShapedRecipeBuilder.shaped(block).define('F', flesh).define('N', PA_Items.PLATINUM_NUGGET.get()).define('P', ItemTags.PLANKS).pattern("NFN").pattern("FPF").pattern("NFN").unlockedBy(getHasName(flesh), has(flesh)).save(recipe);
     }
     
     public static void gemRecipe(Consumer<FinishedRecipe> recipe, ItemLike output) {
