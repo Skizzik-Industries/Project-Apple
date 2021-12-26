@@ -120,7 +120,11 @@ public class PA_ClientHelper {
             if (!player.getAbilities().instabuild) {
                 input.shrink(1);
             }
-            player.addItem(new ItemStack(result));
+            
+            ItemStack itemstack = new ItemStack(result);
+            if (!player.getInventory().add(itemstack)) {
+                player.drop(itemstack, false);
+            }
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
@@ -128,14 +132,10 @@ public class PA_ClientHelper {
 
     private static InteractionResult convertFleshAndLower(Item result, BlockState state, Level level, BlockPos pos, Player player, ItemStack input) {
         if (!level.isClientSide) {
-            if (!player.getAbilities().instabuild) {
-                input.shrink(1);
-            }
-            player.addItem(new ItemStack(result));
             LayeredCauldronBlock.lowerFillLevel(state, level, pos);
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return convertFlesh(result, level, player, input);
     }
     
     @SubscribeEvent
