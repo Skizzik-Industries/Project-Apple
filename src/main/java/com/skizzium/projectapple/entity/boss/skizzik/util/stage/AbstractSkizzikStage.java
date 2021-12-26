@@ -151,6 +151,10 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                             
                             skizzo.setTarget((LivingEntity) skizzik.level.getEntity(skizzik.getAlternativeTarget(id - 1)));
                             skizzo.setOwner(skizzik);
+
+                            skizzo.setSilent(skizzik.isSilent());
+                            skizzo.setInvulnerable(skizzik.isInvulnerable());
+                            
                             skizzik.setInvul(!skizzik.getStageDebug());
                             skizzik.bossBar.addMinibar(new ServerMinibar(skizzo, new Minibar.MinibarProperties().color(PL_BossEvent.PL_BossBarColor.RED)));
                         }
@@ -179,6 +183,10 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
             entity.moveTo(x, y, z);
             entity.finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
             entity.setOwner(skizzik);
+            
+            entity.setSilent(skizzik.isSilent());
+            entity.setInvulnerable(skizzik.isInvulnerable());
+            
             world.addFreshEntity(entity);
         }
     }
