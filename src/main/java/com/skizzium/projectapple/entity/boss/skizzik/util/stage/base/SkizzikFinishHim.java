@@ -18,6 +18,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
@@ -112,9 +113,13 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
                 }
             }
         }
+        else {
+            for (Player player : skizzik.level.players()) {
+                player.level.playLocalSound(skizzik.getX(), skizzik.getY(), skizzik.getZ(), PA_SoundEvents.FINISH_HIM.get(), SoundSource.HOSTILE, 1.0F, 1.0F, false);
+            }
+        }
 
         skizzik.killAllSkizzies(world, false);
-        skizzik.level.playSound(null, skizzik.getX(), skizzik.getY(), skizzik.getZ(), PA_SoundEvents.FINISH_HIM_LAZY.get(), SoundSource.HOSTILE, 10000.0F, 1.0F);
     }
 
     @Override
