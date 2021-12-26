@@ -5,7 +5,6 @@ import com.skizzium.projectapple.init.PA_Keybinds;
 import com.skizzium.projectapple.ProjectApple;
 import com.skizzium.projectapple.block.heads.SkizzikHeadWithGems;
 import com.skizzium.projectapple.init.block.PA_Blocks;
-import com.skizzium.projectapple.init.block.PA_Fluids;
 import com.skizzium.projectapple.init.block.PA_TileEntities;
 import com.skizzium.projectapple.init.entity.PA_ModelLayers;
 import com.skizzium.projectapple.init.item.PA_Items;
@@ -18,7 +17,6 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
@@ -26,25 +24,27 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
-import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -61,17 +61,6 @@ public class PA_ModClientEvents {
     public static void renderLayers(FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIK_LOOT_BAG.get(), RenderType.cutoutMipped());
         ItemBlockRenderTypes.setRenderLayer(PA_Blocks.SKIZZIE_STATUE.get(), RenderType.cutoutMipped());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_TRAPDOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_DOOR.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_CANE.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(PA_Fluids.MAPLE_SYRUP.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(PA_Fluids.FLOWING_MAPLE_SYRUP.get(), RenderType.translucent());
-        
-        ItemBlockRenderTypes.setRenderLayer(PA_Blocks.CANDY_LEAVES.get(), RenderType.cutoutMipped());
     }
     
     public static Map<SkullBlock.Type, SkullModelBase> createSkullRenderers(EntityModelSet set) {
@@ -127,32 +116,49 @@ public class PA_ModClientEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void registerOtherStuff(FMLClientSetupEvent event) {
-        ComposterBlock.COMPOSTABLES.put(PA_Blocks.CANDY_CANE.get(), 0.5F);
-
-        WoodType.register(PA_Blocks.CANDY_WOOD_TYPE);
-
-        DispenseItemBehavior fluidDispenseBehavior = new DefaultDispenseItemBehavior() {
-            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
-
-            public ItemStack execute(BlockSource source, ItemStack item) {
-                BucketItem bucket = (BucketItem)item.getItem();
-                BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-                Level world = source.getLevel();
-
-                if (bucket.emptyContents(null, world, pos, null)) {
-                    bucket.checkExtraContent(null, world, item, pos);
-                    return new ItemStack(Items.BUCKET);
-                }
-                else {
-                    return this.defaultDispenseItemBehavior.dispense(source, item);
-                }
+    private static InteractionResult convertFlesh(Item result, Level level, Player player, ItemStack input) {
+        if (!level.isClientSide) {
+            if (!player.getAbilities().instabuild) {
+                input.shrink(1);
             }
-        };
+            player.addItem(new ItemStack(result));
+        }
 
-        DispenserBlock.registerBehavior(PA_Items.MAPLE_SYRUP_BUCKET.get(), fluidDispenseBehavior);
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
 
+    private static InteractionResult convertFleshAndLower(Item result, BlockState state, Level level, BlockPos pos, Player player, ItemStack input) {
+        if (!level.isClientSide) {
+            if (!player.getAbilities().instabuild) {
+                input.shrink(1);
+            }
+            player.addItem(new ItemStack(result));
+            LayeredCauldronBlock.lowerFillLevel(state, level, pos);
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+    
+    @SubscribeEvent
+    public static void registerCauldronInteraction(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            CauldronInteraction RAW_SKIZZIK_FLESH = (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Items.RAW_SKIZZIK_FLESH.get(), state, level, pos, player, itemstack);
+            CauldronInteraction RAW_SKIZZIK_FLESH_BLOCK = (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().asItem(), state, level, pos, player, itemstack);
+            
+            CauldronInteraction.POWDER_SNOW.put(PA_Items.SKIZZIK_FLESH.get(), RAW_SKIZZIK_FLESH);
+            CauldronInteraction.POWDER_SNOW.put(PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), RAW_SKIZZIK_FLESH);
+            CauldronInteraction.POWDER_SNOW.put(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get().asItem(), RAW_SKIZZIK_FLESH_BLOCK);
+            CauldronInteraction.POWDER_SNOW.put(PA_Blocks.SKIZZIK_FLESH_BLOCK.get().asItem(), RAW_SKIZZIK_FLESH_BLOCK);
+            
+            CauldronInteraction.WATER.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), state, level, pos, player, itemstack));
+            CauldronInteraction.LAVA.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> convertFlesh(PA_Items.SKIZZIK_FLESH.get(), level, player, itemstack));
+            CauldronInteraction.WATER.put(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().asItem(), (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get().asItem(), state, level, pos, player, itemstack));
+            CauldronInteraction.LAVA.put(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().asItem(), (state, level, pos, player, hand, itemstack) -> convertFlesh(PA_Blocks.SKIZZIK_FLESH_BLOCK.get().asItem(), level, player, itemstack));
+        });
+    }
+    
+    @SubscribeEvent
+    public static void registerDisepnserBehavior(FMLClientSetupEvent event) {
         DefaultDispenseItemBehavior entityDispenseBehavior = new DefaultDispenseItemBehavior() {
             public ItemStack execute(BlockSource source, ItemStack item) {
                 Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
@@ -225,10 +231,6 @@ public class PA_ModClientEvents {
 
                 return itemStack;
             }
-        });
-
-        event.enqueueWork(() -> {
-            Sheets.addWoodType(PA_Blocks.CANDY_WOOD_TYPE);
         });
     }
 }

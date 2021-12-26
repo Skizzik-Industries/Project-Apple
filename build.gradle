@@ -3,6 +3,7 @@ buildscript {
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://plugins.gradle.org/m2/' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
         gradlePluginPortal()
     }
@@ -12,6 +13,7 @@ buildscript {
         classpath group: 'gradle.plugin.com.matthewprenger', name: 'CurseGradle', version: '1.4.0'
         classpath group: 'com.diluv.schoomp', name: 'Schoomp', version: '1.1.0'
         classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 
@@ -22,6 +24,7 @@ import com.diluv.schoomp.message.embed.Footer
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
 apply plugin: com.matthewprenger.cursegradle.CurseGradlePlugin
 apply plugin: 'com.github.johnrengelman.shadow'
@@ -141,35 +144,49 @@ shadowJar {
 repositories {
     mavenLocal()
     maven {
-        name 'Boss Utilities'
+        name "Boss Utilities"
         url "https://raw.github.com/Skizzium/Project-Lib/Forge-${mc_version}/mcmodsrepo/"
     }
     maven {
         name "GeckoLib"
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' 
+        url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" 
     }
     maven {
-        name 'Curse Maven'
+        name "Curse Maven"
         url "https://cursemaven.com/"
     }
+    maven {
+        name "Curios"
+        url "https://maven.theillusivec4.top/"
+    }
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+    debug.export = true
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     
     implementation fg.deobf("com.skizzium.projectlib:BossUtilities-${mc_version}:${bossutils_version}")
     shade fg.deobf("software.bernie.geckolib:geckolib-1.18-forge:${geckolib_version}")
     
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:3559499")
+
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curios_version}:api")
 }
 
 // Again, thanks to SizableShrimp for making this script. It swaps the variables in mods.toml and pack.mcmeta with the gradle.properties values
-def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta', "${mod_id}.mixins.json".toString()]
 def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
 def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version, toml_name: toml_name, mod_license: mod_license, mod_issues: mod_issues,
                                                  mod_url: mod_url, mod_logo: mod_logo, mod_credits: mod_credits, mod_authors: mod_authors, mod_description: mod_description,
                                                  mc_versionRange: mc_version, loader_version: loader_version, forge_version_range: forge_version_range,
-                                                 geckolib_version_range: geckolib_version_range, bossutils_version_range: bossutils_version_range, ]
+                                                 geckolib_version_range: geckolib_version_range, bossutils_version_range: bossutils_version_range, curios_version_range: curios_version_range, ]
 processResources {
     inputs.properties replaceProperties
     replaceProperties.put 'project', project

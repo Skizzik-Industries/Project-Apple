@@ -1,9 +1,6 @@
 {
   "itemGroup.main_skizzik_tab": "Skizzik & Co.: Main",
-  "itemGroup.living_candy_tab": "Skizzik & Co.: Living Candy",
-
   "spooktober.itemGroup.main_skizzik_tab": "Spookzik & Co.: Main",
-  "spooktober.itemGroup.living_candy_tab": "Spookzik & Co.: Living Candy",
 
   "block.skizzik.command_block": "Command Block",
   "block.skizzik.deactivated_command_block": "Deactivated Command Block",
@@ -77,6 +74,7 @@
   "item.skizzik.raw_skizzik_flesh": "Raw Skizzik Flesh",
   "item.skizzik.skizzik_flesh": "Skizzik Flesh",
 
+  "block.skizzik.raw_skizzik_flesh_block": "Block of Raw Skizzik Flesh",
   "block.skizzik.friendly_skizzik_flesh_block": "Block of Friendly Skizzik Flesh",
   "block.skizzik.skizzik_flesh_block": "Block of Skizzik Flesh",
 
@@ -165,80 +163,12 @@
 
   "spooktober.death.attack.skizzikSkull": "%1$s was shot by a pumpkin from %2$s",
 
-  "item.skizzik.salt": "Salt",
-  "item.skizzik.butter": "Butter",
-
-  "block.skizzik.candy_cane": "Candy Cane",
-  "item.skizzik.candy_pig_spawn_egg": "Candy Pig Spawn Egg",
-  "entity.skizzik.candy_pig": "Candy Pig",
-
-  "item.skizzik.maple_syrup_bucket": "Maple Syrup Bucket",
-  "block.skizzik.maple_syrup": "Maple Syrup",
-
-  "item.skizzik.waffle": "Waffle",
-  "block.skizzik.waffle_block": "Waffle Block",
-
-  "item.skizzik.pancakes": "Pancakes",
-  "item.skizzik.syrup_pancakes": "Pancakes with Maple Syrup",
-
-  "item.skizzik.chocolate_bar_wrap": "Chocolate Bar Wrap",
-  "item.skizzik.white_chocolate_bar": "White Chocolate Bar",
-  "item.skizzik.chocolate_bar": "Chocolate Bar",
-  "item.skizzik.dark_chocolate_bar": "Dark Chocolate Bar",
-
-  "block.skizzik.white_chocolate_block": "White Chocolate Block",
-  "block.skizzik.chocolate_block": "Chocolate Block",
-  "block.skizzik.dark_chocolate_block": "Dark Chocolate Block",
-
-  "item.skizzik.candianite_nugget": "Candianite Nugget",
-  "item.skizzik.candianite_ingot": "Candianite Ingot",
-  "block.skizzik.candianite_ore": "Candianite Ore",
-
-  "item.skizzik.candianite_sword": "Candianite Sword",
-  "item.skizzik.candianite_pickaxe": "Candianite Pickaxe",
-  "item.skizzik.candianite_axe": "Candianite Axe",
-  "item.skizzik.candianite_shovel": "Candianite Shovel",
-  "item.skizzik.candianite_hoe": "Candianite Hoe",
-
-  "item.skizzik.candianite_horse_armor": "Candianite Horse Armor",
-  "item.skizzik.candianite_helmet": "Candianite Helmet",
-  "item.skizzik.candianite_chestplate": "Candianite Chestplate",
-  "item.skizzik.candianite_leggings": "Candianite Leggings",
-  "item.skizzik.candianite_boots": "Candianite Boots",
-
   "block.skizzik.corrupted_block": "Corrupted Block",
   "effect.skizzik.corruption": "§kCorruption",
   "death.attack.corrupted": "%1$s got §kcorrupted",
 
   "item.skizzik.platinum_nugget": "Platinum Nugget",
   "item.skizzik.platinum_ingot": "Platinum Ingot",
-
-  "block.skizzik.candy_button": "Candy Button",
-  "block.skizzik.candy_pressure_plate": "Candy Pressure Plate",
-  "block.skizzik.candy_sign": "Candy Sign",
-
-  "block.skizzik.candy_planks": "Candy Planks",
-  "block.skizzik.candy_slab": "Candy Slab",
-  "block.skizzik.candy_stairs": "Candy Stairs",
-
-  "block.skizzik.candy_fence": "Candy Fence",
-  "block.skizzik.candy_fence_gate": "Candy Fence Gate",
-
-  "block.skizzik.candy_trapdoor": "Candy Trapdoor",
-  "block.skizzik.candy_door": "Candy Door",
-
-  "block.skizzik.candy_sapling": "Candy Sapling",
-
-  "block.skizzik.candy_log": "Candy Log",
-  "block.skizzik.stripped_candy_log": "Stripped Candy Log",
-  "block.skizzik.candy_wood": "Candy Wood",
-  "block.skizzik.stripped_candy_wood": "Stripped Candy Wood",
-
-  "block.skizzik.candy_leaves": "Candy Leaves",
-  "block.skizzik.candy_nylium": "Candy Nylium",
-  "block.skizzik.candyrack": "Candyrack",
-
-  "biome.skizzik.candy_plains": "Candy Plains",
 
   "item.skizzik.rainbow_sword": "Rainbow Sword",
 

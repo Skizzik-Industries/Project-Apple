@@ -69,6 +69,7 @@ public class PA_LootTableProvider extends LootTableProvider {
             dropSelf(PA_Blocks.SKIZZIK_HEAD.get());
             dropSelf(PA_Blocks.SKIZZIK_HEAD_WITH_GEMS.get());
             
+            dropSelf(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get());
             dropSelf(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get());
             dropSelf(PA_Blocks.SKIZZIK_FLESH_BLOCK.get());
 
@@ -108,41 +109,7 @@ public class PA_LootTableProvider extends LootTableProvider {
                                                                                            .setRolls(ConstantValue.exactly(1))
                                                                                            .add(LootItem.lootTableItem(ProjectApple.holiday == 1 ? Blocks.SPRUCE_PLANKS.asItem() : PA_Items.SKIZZIK_FLESH.get()))
                                                                                            .apply(SetItemCountFunction.setCount(ProjectApple.holiday == 1 ? UniformGenerator.between(2, 3) : UniformGenerator.between(5, 15)))));
-
-            dropSelf(PA_Blocks.CANDY_CANE.get());
-            dropSelf(PA_Blocks.CANDY_SIGN.get());
-            dropSelf(PA_Blocks.WAFFLE_BLOCK.get());
-
-            dropSelf(PA_Blocks.WHITE_CHOCOLATE_BLOCK.get());
-            dropSelf(PA_Blocks.CHOCOLATE_BLOCK.get());
-            dropSelf(PA_Blocks.DARK_CHOCOLATE_BLOCK.get());
-
-            dropSelf(PA_Blocks.CANDIANITE_ORE.get());
-
-            dropSelf(PA_Blocks.CANDY_PRESSURE_PLATE.get());
-            dropSelf(PA_Blocks.CANDY_BUTTON.get());
-
-            dropSelf(PA_Blocks.CANDY_PLANKS.get());
-            dropSelf(PA_Blocks.CANDY_SLAB.get());
-            dropSelf(PA_Blocks.CANDY_STAIRS.get());
-
-            dropSelf(PA_Blocks.CANDY_FENCE.get());
-            dropSelf(PA_Blocks.CANDY_FENCE_GATE.get());
-
-            dropSelf(PA_Blocks.CANDY_TRAPDOOR.get());
-            add(PA_Blocks.CANDY_DOOR.get(), BlockLoot::createDoorTable);
-
-            dropSelf(PA_Blocks.CANDY_SAPLING.get());
-
-            dropSelf(PA_Blocks.CANDY_LOG.get());
-            dropSelf(PA_Blocks.STRIPPED_CANDY_LOG.get());
-            dropSelf(PA_Blocks.CANDY_WOOD.get());
-            dropSelf(PA_Blocks.STRIPPED_CANDY_WOOD.get());
-
-            add(PA_Blocks.CANDY_LEAVES.get(), (drops) -> createLeavesDrops(drops, PA_Blocks.CANDY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-            add(PA_Blocks.CANDY_NYLIUM.get(), (drops) -> createSingleItemTableWithSilkTouch(drops, PA_Blocks.CANDYRACK.get()));
-            dropSelf(PA_Blocks.CANDYRACK.get());
-
+            
             add(PA_Blocks.RAINBOW_ORE.get(), (drops) -> createOreDrop(drops, PA_Items.RAINBOW_GEM.get()));
 
             dropSelf(PA_Blocks.RAINBOW_GEM_BLOCK.get());
