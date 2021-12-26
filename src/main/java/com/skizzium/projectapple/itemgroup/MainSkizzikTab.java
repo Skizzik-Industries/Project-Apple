@@ -25,6 +25,8 @@ public class MainSkizzikTab extends CreativeModeTab {
         PA_Blocks.DEACTIVATED_COMMAND_BLOCK.get().fillItemCategory(this, items);
         PA_Blocks.BROKEN_COMMAND_BLOCK.get().fillItemCategory(this, items);
 
+        PA_Items.LOOT_BAG_LOCATOR.get().fillItemCategory(this, items);
+        
         PA_Items.SKIZZIK_SEAL.get().fillItemCategory(this, items);
         PA_Items.SPOOKZIK_SEAL.get().fillItemCategory(this, items);
 

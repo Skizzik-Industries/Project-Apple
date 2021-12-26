@@ -2,6 +2,8 @@ package com.skizzium.projectapple.init.data.client.models;
 
 import com.skizzium.projectapple.ProjectApple;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -100,6 +102,12 @@ public class PA_ItemModelProvider extends ItemModelProvider {
         defaultBuilder(generated, "orange_gem");
         defaultBuilder(generated, "green_gem");
         defaultBuilder(generated, "pink_gem");
+
+        for(int j = 0; j < 32; ++j) {
+            if (j != 16) {
+                defaultBuilder(generated, String.format("loot_bag_locator_%02d", j));
+            }
+        }
     }
 
     private ItemModelBuilder defaultBuilder(ModelFile generated, String name) {
