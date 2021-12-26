@@ -37,6 +37,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -114,49 +115,44 @@ public class PA_ClientHelper {
         }
     }
 
+    private static InteractionResult convertFlesh(Item result, Level level, Player player, ItemStack input) {
+        if (!level.isClientSide) {
+            if (!player.getAbilities().instabuild) {
+                input.shrink(1);
+            }
+            player.addItem(new ItemStack(result));
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private static InteractionResult convertFleshAndLower(Item result, BlockState state, Level level, BlockPos pos, Player player, ItemStack input) {
+        if (!level.isClientSide) {
+            if (!player.getAbilities().instabuild) {
+                input.shrink(1);
+            }
+            player.addItem(new ItemStack(result));
+            LayeredCauldronBlock.lowerFillLevel(state, level, pos);
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+    
     @SubscribeEvent
     public static void registerCauldronInteraction(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            CauldronInteraction RAW_SKIZZIK_FLESH = (state, level, pos, player, hand, itemstack) -> {
-                if (!level.isClientSide) {
-                    if (!player.getAbilities().instabuild) {
-                        itemstack.shrink(1);
-                    }
-                    ItemStack flesh = new ItemStack(PA_Items.RAW_SKIZZIK_FLESH.get());
-                    player.addItem(flesh);
-                    LayeredCauldronBlock.lowerFillLevel(state, level, pos);
-                }
-
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            };
+            CauldronInteraction RAW_SKIZZIK_FLESH = (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Items.RAW_SKIZZIK_FLESH.get(), state, level, pos, player, itemstack);
+            CauldronInteraction RAW_SKIZZIK_FLESH_BLOCK = (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().asItem(), state, level, pos, player, itemstack);
             
             CauldronInteraction.POWDER_SNOW.put(PA_Items.SKIZZIK_FLESH.get(), RAW_SKIZZIK_FLESH);
             CauldronInteraction.POWDER_SNOW.put(PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), RAW_SKIZZIK_FLESH);
+            CauldronInteraction.POWDER_SNOW.put(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get().asItem(), RAW_SKIZZIK_FLESH_BLOCK);
+            CauldronInteraction.POWDER_SNOW.put(PA_Blocks.SKIZZIK_FLESH_BLOCK.get().asItem(), RAW_SKIZZIK_FLESH_BLOCK);
             
-            CauldronInteraction.WATER.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> {
-                if (!level.isClientSide) {
-                    if (!player.getAbilities().instabuild) {
-                        itemstack.shrink(1);
-                    }
-                    ItemStack flesh = new ItemStack(PA_Items.FRIENDLY_SKIZZIK_FLESH.get());
-                    player.addItem(flesh);
-                    LayeredCauldronBlock.lowerFillLevel(state, level, pos);
-                }
-
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            });
-
-            CauldronInteraction.LAVA.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> {
-                if (!level.isClientSide) {
-                    if (!player.getAbilities().instabuild) {
-                        itemstack.shrink(1);
-                    }
-                    ItemStack flesh = new ItemStack(PA_Items.SKIZZIK_FLESH.get());
-                    player.addItem(flesh);
-                }
-
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            });
+            CauldronInteraction.WATER.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Items.FRIENDLY_SKIZZIK_FLESH.get(), state, level, pos, player, itemstack));
+            CauldronInteraction.LAVA.put(PA_Items.RAW_SKIZZIK_FLESH.get(), (state, level, pos, player, hand, itemstack) -> convertFlesh(PA_Items.SKIZZIK_FLESH.get(), level, player, itemstack));
+            CauldronInteraction.WATER.put(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().asItem(), (state, level, pos, player, hand, itemstack) -> convertFleshAndLower(PA_Blocks.FRIENDLY_SKIZZIK_FLESH_BLOCK.get().asItem(), state, level, pos, player, itemstack));
+            CauldronInteraction.LAVA.put(PA_Blocks.RAW_SKIZZIK_FLESH_BLOCK.get().asItem(), (state, level, pos, player, hand, itemstack) -> convertFlesh(PA_Blocks.SKIZZIK_FLESH_BLOCK.get().asItem(), level, player, itemstack));
         });
     }
     
