@@ -10,14 +10,19 @@ import com.skizzium.projectapple.entity.boss.skizzik.util.stage.AbstractPassiveS
 import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.block.PA_Blocks;
+import com.skizzium.projectapple.init.item.PA_Items;
+import com.skizzium.projectapple.item.LootBagLocator;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -96,6 +101,16 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
         if (world instanceof ServerLevel) {
             world.setBlock(new BlockPos(skizzik.getX(), skizzik.getY(), skizzik.getZ()), this.getBagState(), 2);
             ((ServerLevel) world).setDayTime(1000);
+            
+            for (ServerPlayer player : skizzik.bossBar.getPlayers()) {
+                if (!skizzik.level.isClientSide) {
+                    ItemStack itemstack = new ItemStack(PA_Items.LOOT_BAG_LOCATOR.get());
+                    LootBagLocator.bindLootBag(true, skizzik.getLevel().dimension(), skizzik.blockPosition(), itemstack.getOrCreateTag());
+                    if (!player.getInventory().add(itemstack)) {
+                        player.drop(itemstack, false);
+                    }
+                }
+            }
         }
 
         skizzik.killAllSkizzies(world, false);

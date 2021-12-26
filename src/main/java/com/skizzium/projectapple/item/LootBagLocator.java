@@ -14,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
@@ -46,16 +45,20 @@ public class LootBagLocator extends Item {
                     BlockPos pos = NbtUtils.readBlockPos(tag.getCompound("LootBagPos"));
                     if (!level.isInWorldBounds(pos) || !((ServerLevel)level).getPoiManager().existsAtPosition(PA_PoiTypes.SKIZZIK_LOOT_BAG.get(), pos)) {
                         tag.remove("LootBagPos");
+                        if (tag.getBoolean("ShouldDisappear")) {
+                            stack.shrink(1);
+                        }
                     }
                 }
             }
         }
     }
 
-    public void bindLootBag(ResourceKey<Level> dimension, BlockPos pos, CompoundTag nbt) {
+    public static void bindLootBag(boolean shouldDisappear, ResourceKey<Level> dimension, BlockPos pos, CompoundTag nbt) {
         nbt.put("LootBagPos", NbtUtils.writeBlockPos(pos));
         Level.RESOURCE_KEY_CODEC.encodeStart(NbtOps.INSTANCE, dimension).result().ifPresent((result) -> nbt.put("LootBagDimension", result));
         nbt.putBoolean("LootBagTracked", true);
+        nbt.putBoolean("ShouldDisappear", shouldDisappear);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class LootBagLocator extends Item {
         BlockPos blockpos = pContext.getClickedPos();
         Level level = pContext.getLevel();
         if (level.getBlockState(blockpos).is(PA_Blocks.SKIZZIK_LOOT_BAG.get()) && pContext.getPlayer().getAbilities().instabuild) {
-            bindLootBag(pContext.getLevel().dimension(), pContext.getClickedPos(), pContext.getItemInHand().getOrCreateTag());
+            bindLootBag(false, pContext.getLevel().dimension(), pContext.getClickedPos(), pContext.getItemInHand().getOrCreateTag());
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
