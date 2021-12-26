@@ -251,32 +251,32 @@ jar {
 }
 
 curseforge {
-    apiKey = cf_token
+    if (project.hasProperty('cf_token')) {
+        apiKey = cf_token
 
-    project {
-        id = cf_id
-        releaseType = mod_version.contains("alpha") ? "alpha" : mod_version.contains("beta") ? "beta" : "release"
-        
-        changelog = file('changelog.txt')
-        changelogType = 'html'
-        
-        addGameVersion mc_version
-        addGameVersion 'Forge'
-        
-        mainArtifact(jar) {
-            if (mod_version.contains("alpha")) {
-                displayName = mod_name + ": " + update_name + " [" + mod_version.substring(0, 5) + " - Alpha #" + mod_version.substring(12) + "]"
-            }
-            else if (mod_version.contains("beta")) {
-                displayName = mod_name + ": " + update_name + " [" + mod_version.substring(0, 5) + " - Beta #" + mod_version.substring(11) + "]"
-            }
-            else {
-                displayName = mod_name + ": " + update_name + " [" + mod_version + "]"
-            }
+        project {
+            id = cf_id
+            releaseType = mod_version.contains("alpha") ? "alpha" : mod_version.contains("beta") ? "beta" : "release"
 
-            relations {
-                requiredDependency 'bossutils'
-                embeddedLibrary 'geckolib'
+            changelog = file('changelog.txt')
+            changelogType = 'html'
+
+            addGameVersion mc_version
+            addGameVersion 'Forge'
+
+            mainArtifact(jar) {
+                if (mod_version.contains("alpha")) {
+                    displayName = mod_name + ": " + update_name + " [" + mod_version.substring(0, 5) + " - Alpha #" + mod_version.substring(12) + "]"
+                } else if (mod_version.contains("beta")) {
+                    displayName = mod_name + ": " + update_name + " [" + mod_version.substring(0, 5) + " - Beta #" + mod_version.substring(11) + "]"
+                } else {
+                    displayName = mod_name + ": " + update_name + " [" + mod_version + "]"
+                }
+
+                relations {
+                    requiredDependency 'bossutils'
+                    embeddedLibrary 'geckolib'
+                }
             }
         }
     }
