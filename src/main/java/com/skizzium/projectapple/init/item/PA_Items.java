@@ -30,8 +30,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PA_Items {
-    public static final Rarity platinumRarity = Rarity.create("PLATINUM", ChatFormatting.BOLD);
-    public static final Rarity corruptedRarity = Rarity.create("CORRUPTED", ChatFormatting.OBFUSCATED);
+    public static final Rarity platinumRarity = Rarity.create("SKIZZIK_PLATINUM", ChatFormatting.BOLD);
+    public static final Rarity corruptedRarity = Rarity.create("SKIZZIK_CORRUPTED", ChatFormatting.OBFUSCATED);
 
     public static final Rarity skizzikRarity = Rarity.create("SKIZZIK", ChatFormatting.DARK_RED);
     public static final Rarity spookzikRarity = Rarity.create("SPOOKZIK", ChatFormatting.GOLD);
