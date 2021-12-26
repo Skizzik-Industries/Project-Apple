@@ -42,14 +42,14 @@ public class SkizzikStage1 extends AbstractSkizzikStage {
     public void begin(SkizzikStageManager stageManager) {
         super.begin(stageManager);
         skizzik.setHealth(1.0F);
-        skizzik.bossBar.setProgress(0.0F);
+        skizzik.getBossBar().setProgress(0.0F);
     }
 
     @Override
     public void tick() {
         if (skizzik.getTransitionTicks() > 0) {
             int i = skizzik.getTransitionTicks() - 1;
-            skizzik.bossBar.setProgress(1.0F - (float) i / 73.0F);
+            skizzik.getBossBar().setProgress(1.0F - (float) i / 73.0F);
             if (i <= 0) {
                 Explosion.BlockInteraction explosion = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(skizzik.level, skizzik) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
                 skizzik.level.explode(skizzik, skizzik.getX(), skizzik.getEyeY(), skizzik.getZ(), 8.5F, true, explosion);

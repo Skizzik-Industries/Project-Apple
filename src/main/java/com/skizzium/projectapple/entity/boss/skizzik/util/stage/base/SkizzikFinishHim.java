@@ -103,7 +103,7 @@ public class SkizzikFinishHim extends AbstractPassiveSkizzikStage {
             world.setBlock(new BlockPos(skizzik.getX(), skizzik.getY(), skizzik.getZ()), this.getBagState(), 2);
             ((ServerLevel) world).setDayTime(1000);
             
-            for (ServerPlayer player : skizzik.bossBar.getPlayers()) {
+            for (ServerPlayer player : skizzik.getBossBar().getPlayers()) {
                 if (!skizzik.level.isClientSide) {
                     ItemStack itemstack = new ItemStack(PA_Items.LOOT_BAG_LOCATOR.get());
                     LootBagLocator.bindLootBag(true, skizzik.getLevel().dimension(), skizzik.blockPosition(), itemstack.getOrCreateTag());

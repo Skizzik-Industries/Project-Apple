@@ -156,7 +156,7 @@ public abstract class AbstractSkizzikStage implements SkizzikStageInterface {
                             skizzo.setInvulnerable(skizzik.isInvulnerable());
                             
                             skizzik.setInvul(!skizzik.getStageDebug());
-                            skizzik.bossBar.addMinibar(new ServerMinibar(skizzo, new Minibar.MinibarProperties().color(PL_BossEvent.PL_BossBarColor.RED)));
+                            skizzik.getBossBar().addMinibar(new ServerMinibar(skizzo, new Minibar.MinibarProperties().color(PL_BossEvent.PL_BossBarColor.RED)));
                         }
                     }
                 }

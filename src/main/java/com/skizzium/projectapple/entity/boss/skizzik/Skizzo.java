@@ -90,10 +90,10 @@ public class Skizzo extends AbstractSkizzo {
     @Override
     public void die(DamageSource source) {
         super.die(source);
-        if (this.getOwner() instanceof Skizzik && !((Skizzik) this.getOwner()).bossBar.getMinibars().isEmpty()) {
-            for (ServerMinibar minibar : ((Skizzik) this.getOwner()).bossBar.getMinibars()) {
+        if (this.getOwner() instanceof Skizzik && !((Skizzik) this.getOwner()).getBossBar().getMinibars().isEmpty()) {
+            for (ServerMinibar minibar : ((Skizzik) this.getOwner()).getBossBar().getMinibars()) {
                 if (minibar.getEntity() == this) {
-                    ((Skizzik) this.getOwner()).bossBar.removeMinibar(minibar);
+                    ((Skizzik) this.getOwner()).getBossBar().removeMinibar(minibar);
                 }
             }
         }

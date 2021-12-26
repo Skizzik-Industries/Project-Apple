@@ -12,6 +12,7 @@ import com.skizzium.projectapple.init.effects.PA_Effects;
 import com.skizzium.projectapple.init.PA_SoundEvents;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.effect.ConversionEffect;
+import com.skizzium.projectlib.entity.BossEntity;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import net.minecraft.core.BlockPos;
@@ -82,7 +83,7 @@ import java.util.UUID;
 import static net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent;
 import static net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock;
 
-public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IAnimationTickable {
+public class Skizzik extends Monster implements BossEntity, RangedAttackMob, IAnimatable, IAnimationTickable {
     private static final EntityDataAccessor<Integer> DATA_TARGET_A = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_B = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_TARGET_C = SynchedEntityData.defineId(Skizzik.class, EntityDataSerializers.INT);
@@ -131,7 +132,7 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     public final SkizzikPart bodyPart;
     
     private static final TargetingConditions TARGETING_CONDITIONS = TargetingConditions.forCombat().range(20.0D).selector(PA_Entities.SKIZZIK_SELECTOR);
-    public final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), new PL_BossEvent.BossEventProperties().music(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()).color(PL_BossEvent.PL_BossBarColor.WHITE).darkenScreen(true));
+    private final PL_ServerBossEvent bossBar = new PL_ServerBossEvent(this, this.getDisplayName(), new PL_BossEvent.BossEventProperties().music(ProjectApple.holiday == 1 ? PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get() : PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get()).color(PL_BossEvent.PL_BossBarColor.WHITE).renderAutomatically(true).darkenScreen(true));
 
     public AvoidEntityGoal avoidPlayerGoal = new AvoidEntityGoal<>(this, Player.class, 25, 1.2D, 1.7D);
     public PanicGoal panicGoal = new PanicGoal(this, 1.5D);
@@ -175,7 +176,12 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     protected Component getTypeName() {
         return new TranslatableComponent(ProjectApple.getThemedDescriptionId(super.getType().getDescriptionId()));
     }
-    
+
+    @Override
+    public PL_ServerBossEvent getBossBar() {
+        return this.bossBar;
+    }
+
     @Override
     public boolean requiresCustomPersistence() {
         return true;
@@ -207,12 +213,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
     }
 
     @Override
-    public void startSeenByPlayer(ServerPlayer serverPlayer) {
-        super.startSeenByPlayer(serverPlayer);
-        this.bossBar.addPlayer(serverPlayer);
-    }
-
-    @Override
     protected void doPush(Entity entity) {
         if (this.isPushable()) {
             super.doPush(entity);
@@ -225,12 +225,6 @@ public class Skizzik extends Monster implements RangedAttackMob, IAnimatable, IA
             return false;
         }
         return super.isPushable();
-    }
-
-    @Override
-    public void stopSeenByPlayer(ServerPlayer serverPlayer) {
-        super.stopSeenByPlayer(serverPlayer);
-        this.bossBar.removePlayer(serverPlayer);
     }
 
     @Override
