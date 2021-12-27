@@ -1,4 +1,4 @@
-package com.skizzium.projectapple.gui;
+package com.skizzium.projectapple.gui.friendlyskizzik;
 
 import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzik;
 import net.minecraft.world.Container;

@@ -1,8 +1,8 @@
 package com.skizzium.projectapple.init;
 
 import com.skizzium.projectapple.ProjectApple;
-import com.skizzium.projectapple.gui.overlay.HeadStatusOverlay;
-import com.skizzium.projectapple.gui.overlay.SkizzieSpawningOverlay;
+import com.skizzium.projectapple.gui.friendlyskizzik.overlay.HeadStatusOverlay;
+import com.skizzium.projectapple.gui.friendlyskizzik.overlay.SkizzieSpawningOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.IIngameOverlay;

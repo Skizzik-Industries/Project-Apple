@@ -24,6 +24,8 @@ import net.minecraftforge.fml.common.Mod;
 
 import net.minecraftforge.registries.RegistryObject;
 
+import java.awt.*;
+
 @Mod.EventBusSubscriber(modid = ProjectApple.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PA_Items {
     public static final Rarity platinumRarity = Rarity.create("SKIZZIK_PLATINUM", ChatFormatting.BOLD);
@@ -61,8 +63,8 @@ public class PA_Items {
 
     public static final RegistryObject<LootBagLocator> LOOT_BAG_LOCATOR = PA_Registry.ITEMS.register("loot_bag_locator", () -> new LootBagLocator(new Item.Properties().stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> SKIZZIK_SEAL = PA_Registry.ITEMS.register("skizzik_seal", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(skizzikRarity).fireResistant()));
-    public static final RegistryObject<Item> SPOOKZIK_SEAL = PA_Registry.ITEMS.register("spookzik_seal", () -> new Item(new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(spookzikRarity).fireResistant()));
+    public static final RegistryObject<Item> SKIZZIK_SEAL = PA_Registry.ITEMS.register("skizzik_seal", () -> new Seal(new Color(180, 10, 26), new Color(154, 8, 15), new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(skizzikRarity).fireResistant()));
+    public static final RegistryObject<Item> SPOOKZIK_SEAL = PA_Registry.ITEMS.register("spookzik_seal", () -> new Seal(new Color(255, 136, 20), new Color(205, 62, 0), new Item.Properties().tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(spookzikRarity).fireResistant()));
 
     public static final RegistryObject<RecordItem> MUSIC_DISC_SKIZZIK = PA_Registry.ITEMS.register("music_disc_skizzik", () -> new RecordItem(14, PA_SoundEvents.MUSIC_SKIZZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<RecordItem> MUSIC_DISC_SPOOKZIK = PA_Registry.ITEMS.register("music_disc_spookzik", () -> new RecordItem(15, PA_SoundEvents.MUSIC_SPOOKZIK_LAZY.get(), (new Item.Properties()).stacksTo(1).tab(PA_Registry.MAIN_SKIZZIK_TAB).rarity(Rarity.EPIC).fireResistant()));
