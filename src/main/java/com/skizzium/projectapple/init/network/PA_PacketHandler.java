@@ -8,11 +8,12 @@ import com.skizzium.projectapple.entity.boss.skizzik.Skizzo;
 import com.skizzium.projectapple.network.SkizzoConnectionParticlesPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
 public class PA_PacketHandler {
     public static void handleSkizzoParticles(SkizzoConnectionParticlesPacket packet) {
-        Skizzik skizzik = (Skizzik) Minecraft.getInstance().level.getEntity(packet.skizzikId);
+        LivingEntity skizzik = (LivingEntity) Minecraft.getInstance().level.getEntity(packet.skizzikId);
         AbstractSkizzo skizzo = (AbstractSkizzo) Minecraft.getInstance().level.getEntity(packet.skizzoId);
         
         double distance = skizzo.distanceTo(skizzik);
