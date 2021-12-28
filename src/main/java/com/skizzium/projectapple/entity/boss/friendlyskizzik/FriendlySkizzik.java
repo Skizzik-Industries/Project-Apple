@@ -8,19 +8,24 @@ import com.skizzium.projectapple.entity.boss.friendlyskizzik.util.FriendlySkizzi
 import com.skizzium.projectapple.gui.friendlyskizzik.FriendlySkizzikMenu;
 import com.skizzium.projectapple.init.PA_ClientHelper;
 import com.skizzium.projectapple.init.PA_GUI;
+import com.skizzium.projectapple.init.PA_Keybinds;
 import com.skizzium.projectapple.init.network.PA_PacketRegistry;
 import com.skizzium.projectapple.init.data.server.tags.PA_Tags;
 import com.skizzium.projectapple.init.block.PA_Blocks;
 import com.skizzium.projectapple.init.entity.PA_Entities;
 import com.skizzium.projectapple.init.item.PA_Items;
 import com.skizzium.projectapple.item.Gem;
+import com.skizzium.projectapple.network.FriendlySkizzikHeadAttachmentPacket;
+import com.skizzium.projectapple.network.FriendlySkizzikOpenMenuPacket;
 import com.skizzium.projectapple.network.FriendlySkizzikOpenScreenPacket;
+import com.skizzium.projectapple.network.FriendlySkizzikRangedAttackPacket;
 import com.skizzium.projectlib.entity.BossEntity;
 import com.skizzium.projectlib.gui.PL_BossEvent;
 import com.skizzium.projectlib.gui.PL_ServerBossEvent;
 import com.skizzium.projectlib.gui.minibar.Minibar;
 import com.skizzium.projectlib.gui.minibar.ServerMinibar;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -1065,11 +1070,13 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
                 }
 
                 this.flyingSpeed = this.getSpeed() * 0.5F;
-                if (this.isControlledByLocalInstance()) {
-                    if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
+                if (this.isControlledByLocalInstance() && this.level.isClientSide) {
+                    Options options = Minecraft.getInstance().options;
+                    
+                    if (options.keyJump.isDown()) {
                         moveY = 0.8F;
                     }
-                    else if (PA_ClientHelper.getClient().options.keySprint.isDown()) {
+                    else if (options.keySprint.isDown()) {
                         moveY = -0.8F;
                     }
                     else {
@@ -1079,6 +1086,27 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
                     this.setSpeed((float)this.getAttributeValue(Attributes.MOVEMENT_SPEED));
                     this.setDeltaMovement(this.getDeltaMovement().scale(0.9F));
                     super.travel(new Vec3(moveX, moveY, moveZ));
+                    
+                    if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
+                        PA_PacketRegistry.INSTANCE.sendToServer(new FriendlySkizzikRangedAttackPacket(this.getId()));
+                        skullCooldown = 0.5F;
+                    }
+
+                    if (canDetach && PA_Keybinds.keyDetachHead.isDown()) {
+                        int i = 0;
+                        for (KeyMapping key : options.keyHotbarSlots) {
+                            if (i < 4 && key.isDown()) {
+                                PA_PacketRegistry.INSTANCE.sendToServer(new FriendlySkizzikHeadAttachmentPacket(i, this.getId()));
+                                canDetach = false; // This is needed in order to prevent the user from holding the keybind
+                            }
+                            i += 1;
+                        }
+                    }
+                    else if (!PA_Keybinds.keyDetachHead.isDown()) {
+                        this.canDetach = true;
+                    }
+
+                    skullCooldown -= 0.1F;
                 }
                 else if (livingentity instanceof Player) {
                     this.setDeltaMovement(Vec3.ZERO);
@@ -1122,7 +1150,7 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
         this.level.addFreshEntity(skull);
     }
 
-    private void performRangedAttack(Player player) {
+    public void performRangedAttack(Player player) {
         if (!this.isSilent()) {
             this.level.levelEvent(null, 1024, this.blockPosition(), 0);
         }
@@ -1442,31 +1470,8 @@ public class FriendlySkizzik extends Monster implements BossEntity, ContainerLis
 //            this.spawnSkizzieTicks = 60;
 //        }
 
-        if (this.isVehicle()) {
+        if (!this.isVehicle()) {
             this.goalController.addDefaultGoals();
-        }
-        else {
-            Options options = PA_ClientHelper.getClient().options;
-            if (skullCooldown <= 0.0F && options.keyUse.isDown()) {
-                this.performRangedAttack(PA_ClientHelper.getClient().player);
-                skullCooldown = 0.5F;
-            }
-
-            if (canDetach && PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
-                int i = 0;
-                for (KeyMapping key : options.keyHotbarSlots) {
-                    if (i < 4 && key.isDown()) {
-                        this.changeHeadAttachment(i);
-                        canDetach = false; // This is needed in order to prevent the user from holding the keybind
-                    }
-                    i += 1;
-                }
-            }
-            else if (!PA_ClientHelper.keybinds.keyDetachHead.isDown()) {
-                this.canDetach = true;
-            }
-
-            skullCooldown -= 0.1F;
         }
 
         for (int headIndex = 1; headIndex < this.getAddedHeads().size() + 1; ++headIndex) {

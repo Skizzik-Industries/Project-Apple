@@ -15,7 +15,7 @@ public class PA_Keybinds {
     
     @SubscribeEvent
     public static void registerKeybinds(FMLClientSetupEvent event) {
-        net.minecraftforge.client.ClientRegistry.registerKeyBinding(keyDetachHead);
+        ClientRegistry.registerKeyBinding(keyDetachHead);
         ClientRegistry.registerKeyBinding(keySpawnSkizzie);
     }
 }
