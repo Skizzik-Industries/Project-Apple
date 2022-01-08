@@ -1,6 +1,8 @@
 package com.skizzium.projectapple.entity.boss.skizzik.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.skizzium.projectapple.ProjectApple;
+import com.skizzium.projectapple.entity.boss.friendlyskizzik.FriendlySkizzo;
 import com.skizzium.projectapple.entity.boss.skizzik.client.model.SkizzoModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -16,8 +18,11 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 @OnlyIn(Dist.CLIENT)
 public class SkizzoGlowLayer<T extends LivingEntity & IAnimatable> extends GeoLayerRenderer<T> {
     private final IGeoRenderer<T> renderer;
+    
     private static final ResourceLocation SKIZZO_GLOW = new ResourceLocation("skizzik:textures/entity/skizzik/skizzo_glow.png");
     private static final ResourceLocation SPOOKZO_GLOW = new ResourceLocation("skizzik:textures/entity/holidays/spooktober/spookzik/spookzo_glow.png");
+
+    private static final ResourceLocation FRIENDLY_SKIZZO_GLOW = new ResourceLocation("skizzik:textures/entity/friendly_skizzik/friendly_skizzo_glow.png");
 
     public SkizzoGlowLayer(IGeoRenderer<T> renderer) {
         super(renderer);
@@ -25,6 +30,9 @@ public class SkizzoGlowLayer<T extends LivingEntity & IAnimatable> extends GeoLa
     }
 
     private ResourceLocation getTexture(T entity) {
+        if (entity instanceof FriendlySkizzo) {
+            return FRIENDLY_SKIZZO_GLOW;
+        }
         return SKIZZO_GLOW;
     }
 
