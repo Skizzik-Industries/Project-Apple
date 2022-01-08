@@ -124,7 +124,7 @@ public class FriendlySkizzo extends AbstractSkizzo {
                 }
 
                 this.flyingSpeed = this.getSpeed() * 0.05F;
-                if (this.isControlledByLocalInstance()) {
+                if (this.isControlledByLocalInstance() && this.level.isClientSide) {
                     if (PA_ClientHelper.getClient().options.keyJump.isDown()) {
                         moveY = 0.35F;
                     }
