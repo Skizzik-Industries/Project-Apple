@@ -2,101 +2,25 @@
   "block.skizzik.command_block": "Командний блок",
   "block.skizzik.deactivated_command_block": "Деактивований командний блок",
   "block.skizzik.broken_command_block": "Зламаний командний блок",
-
-  "subtitles.entity.skizzik_flesh.equip" : "Шурхіт обладунків зі шкіри Скіззіка",
+  "subtitles.entity.skizzik_flesh.equip": "Шурхіт обладунків зі шкіри Скіззіка",
   "item.skizzik.skizzik_flesh_cap": "Шапка зі шкіри Скіззіка",
   "item.skizzik.skizzik_flesh_tunic": "Туніка зі шкіри Скіззіка",
   "item.skizzik.skizzik_flesh_pants": "Штани зі шкіри Скіззіка",
   "item.skizzik.skizzik_flesh_boots": "Чоботи зі шкіри Скіззіка",
-
   "block.skizzik.skizzie_statue": "Статуя Скіззі",
   "block.skizzik.skizzik_loot_bag": "Сумка з лутом Скіззіка",
-
   "block.skizzik.small_skizzik_head": "Маленька голова Скіззіка",
-  "block.skizzik.small_skizzik_head_gems": "Маленька голова Скіззіка зі самоцвітами",
   "block.skizzik.skizzik_head": "Голова Скіззіка",
-  "block.skizzik.skizzik_head_gems": "Голова Скіззіка зі самоцвітами",
-
   "item.skizzik.skizzik_bone": "Скіззік кістка",
   "item.skizzik.raw_skizzik_flesh": "Сира шкіра Скіззіка",
   "item.skizzik.skizzik_flesh": "Шкіра Скіззіка",
   "block.skizzik.skizzik_flesh_block": "Блок шкіри Скіззіка",
-
-  "item.skizzik.salt": "Сіль",
-  "item.skizzik.butter": "Масло",
-
-  "block.skizzik.candy_cane": "Карамельна паличка",
-
-  "item.skizzik.maple_syrup_bucket": "Відро кленового сиропу",
-  "block.skizzik.maple_syrup": "Кленовий сироп",
-
-  "item.skizzik.waffle": "Вафлі",
-  "block.skizzik.waffle_block": "Вафельний блок",
-
-  "item.skizzik.pancakes": "Млинці",
-  "item.skizzik.syrup_pancakes": "Млинці з кленовим сиропом",
-
-  "item.skizzik.chocolate_bar_wrap": "Обгортка плитки шоколаду",
-  "item.skizzik.white_chocolate_bar": "Плитка білого шоколаду",
-  "item.skizzik.chocolate_bar": "Плитка шоколаду",
-  "item.skizzik.dark_chocolate_bar": "Плитка темного шоколаду",
-
-  "block.skizzik.white_chocolate_block": "Блок білого шоколаду",
-  "block.skizzik.chocolate_block": "Блок шоколаду",
-  "block.skizzik.dark_chocolate_block": "Блок темного шоколаду",
-
-  "item.skizzik.candianite_nugget": "Цукерконітовий самородок",
-  "item.skizzik.candianite_ingot": "Цукерконітовий злиток",
-  "block.skizzik.candianite_ore": "Цукерконітова руда",
-
-  "item.skizzik.candianite_sword": "Цукерконітовий меч",
-  "item.skizzik.candianite_pickaxe": "Цукерконітове кайло",
-  "item.skizzik.candianite_axe": "Цукерконітова сокира",
-  "item.skizzik.candianite_shovel": "Цукерконітова лопата",
-  "item.skizzik.candianite_hoe": "Цукерконітова мотика",
-
-  "item.skizzik.candianite_horse_armor": "Цукерконітова кінська броня",
-  "item.skizzik.candianite_helmet": "Цукерконітовий шолом",
-  "item.skizzik.candianite_chestplate": "Цукерконітовий нагрудник",
-  "item.skizzik.candianite_leggings": "Цукерконітові наголінники",
-  "item.skizzik.candianite_boots": "Цукерконітові чоботи",
-
   "block.skizzik.corrupted_block": "Пошкоджений блок",
   "effect.skizzik.corruption": "§kРоз'їдання",
   "death.attack.corrupted": "%1$s був §kроз'їжджений",
-
   "item.skizzik.platinum_nugget": "Платиновий самородок",
   "item.skizzik.platinum_ingot": "Платиновий злиток",
-
-  "block.skizzik.candy_pressure_plate": "Цукеркова натискна плита",
-  "block.skizzik.candy_button": "Цукеркова кнопка",
-
-  "block.skizzik.candy_planks": "Цукеркові дошки",
-  "block.skizzik.candy_slab": "Цукеркова плита",
-  "block.skizzik.candy_stairs": "Цукеркові сходи",
-
-  "block.skizzik.candy_fence": "Цукерковий паркан",
-  "block.skizzik.candy_fence_gate": "Цукеркова хвіртка",
-
-  "block.skizzik.candy_trapdoor": "Цукерковий люк",
-  "block.skizzik.candy_door": "Цукеркові двері",
-
-
-  "block.skizzik.candy_sapling": "Candy Sapling",
-
-  "block.skizzik.candy_log": "Цукеркова колода",
-  "block.skizzik.stripped_candy_log": "Обтесана цукеркова колода",
-  "block.skizzik.candy_wood": "Цукеркове дерево",
-  "block.skizzik.stripped_candy_wood": "Обтесане цукеркове дерево",
-
-  "block.skizzik.candy_leaves": "Листя цукеркового дерева",
-  "block.skizzik.candy_nylium": "Цукерковий ніліум",
-  "block.skizzik.candyrack": "Цукеррак",
-
-  "biome.skizzik.candy_plains": "Candy Plains",
-
   "item.skizzik.rainbow_sword": "Веселковий меч",
-
   "item.skizzik.rainbow_gem": "Веселковий самоцвіт",
   "item.skizzik.black_gem": "Чорний самоцвіт",
   "item.skizzik.blue_gem": "Блакитний самоцвіт",
@@ -105,9 +29,7 @@
   "item.skizzik.orange_gem": "Помаранчевий самоцвіт",
   "item.skizzik.green_gem": "Зелений самоцвіт",
   "item.skizzik.pink_gem": "Рожевий самоцвіт",
-
   "block.skizzik.rainbow_ore": "Веселкова руда",
-
   "block.skizzik.rainbow_gem_block": "Блок веселкових самоцвітів",
   "block.skizzik.black_gem_block": "Блок чорних самоцвітів",
   "block.skizzik.blue_gem_block": "Блок блакитних самоцвітів",
